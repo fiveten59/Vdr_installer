@@ -45,9 +45,9 @@ while :
                                           #          Caricamento dal cloud                 #
                                           ##################################################
 
-a)
-cd /home/`logname`/; mkdir -p sifinstallrepo;
-cd sifinstallrepo;
+a) clear; cd /home/`logname`; mkdir -p sifinstallrepo;
+    chmod -R 777 sifinstallrepo;
+    cd sifinstallrepo;
 
 if [ -s /home/`logname`/sifinstallrepo/icone.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";

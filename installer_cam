@@ -46,7 +46,8 @@ while :
                                           ##################################################
 
 a)
-cd /home/`logname`/sifinstallrepo;
+cd /home/`logname`/; mkdir -p sifinstallrepo;
+cd sifinstallrepo;
 
 if [ -s /home/`logname`/sifinstallrepo/icone.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";

@@ -20,11 +20,6 @@ SRC='/usr/local/src';
 Remind2='è già installata'
 Remind3='è già installato'
 
-cd $SRC
-#wget https://www.dropbox.com/s/dhap4gmzd2q77ug/vdr.jpeg.tar.gz;
-cp -rf /home/`logname`/sifinstallrepo/icone.tar.gz /usr/local/src/;
-tar -zxvf icone.tar.gz; rm -r icone.tar.gz;
-
 #############################################################################################################################  
 #############################################################################################################################
 
@@ -104,6 +99,9 @@ fi
 
 
 chmod -R 777 *;
+
+cp -rf /home/`logname`/sifinstallrepo/icone.tar.gz /usr/local/src/; cd $SRC;
+tar -zxvf icone.tar.gz; rm -r icone.tar.gz;
 
     echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
 

@@ -2,7 +2,7 @@
 ############################## !!! IMPORTANTE !!! #######################################
 #                                                                                       #
 # Nome Script : light_installer_2.3.4                                                   #
-# Versione: Github Repository Master (https://github.com/fiveten59/Vdr_installer)                                                    #
+# Versione: Github Repository Master (https://github.com/fiveten59/Vdr_installer)       #
 #                                                                                       #
 # date il comando sudo chmod 755 light_installer_2.3.4                                  #
 # avviate lo script con il comando: sudo sh ./light_installer_2.3.4                     #
@@ -559,13 +559,6 @@ else
     wget https://www.dropbox.com/s/1ujtklnct0nqq6q/iptv_conf.tar.gz;
 fi
 
-if [ -s /home/`logname`/sifinstallrepo/vdr-plugin-femon ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    git clone https://github.com/rofafor/vdr-plugin-femon.git;
-  fi
-
 if [ -s /home/`logname`/sifinstallrepo/vdr-plugin-weatherforecast ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
@@ -774,6 +767,8 @@ chmod -R 777 *;;
     hg clone http://hg.videolan.org/x265;
     git clone https://chromium.googlesource.com/webm/libvpx
     git clone https://git.ffmpeg.org/ffmpeg.git;
+    git clone https://github.com/OpenELEC/eventlircd.git;
+    wget https://www.dropbox.com/s/cqwpl0w4cyqhrux/eventlircd.conf.tar.gz;
 
 ############################ caricamento vdr e plugin ################################
 
@@ -785,13 +780,13 @@ chmod -R 777 *;;
     wget https://www.dropbox.com/s/bubiwhxlgqujr88/patch_tvguide-vdr-2.3.1.tar.gz;
     git clone git://projects.vdr-developer.org/vdr-plugin-tvguideng.git;
     git clone https://github.com/rofafor/vdr-plugin-osdteletext.git;
+    wget https://www.dropbox.com/s/ncb0gnw9pkee83d/patch_osdteletext.tar.gz;
     git clone https://github.com/rofafor/vdr-plugin-softhddevice.git;
     wget https://www.dropbox.com/s/ba5njlguttwlvao/patch_softhddevice_4.tar.gz;
     git clone http://projects.vdr-developer.org/git/vdr-plugin-epgsearch.git;
     wget https://www.dropbox.com/s/s9vggu8mil8ss7t/patch_epgsearch.tar.gz;
     git clone git://github.com/manio/vdr-plugin-dvbapi.git;
     wget https://www.dropbox.com/s/5tyvqkbhohbbju2/dvbapi.patch.tar.gz;
-    git clone https://github.com/rofafor/vdr-plugin-femon.git;
     git clone git://projects.vdr-developer.org/vdr-plugin-weatherforecast.git;
     wget https://www.dropbox.com/s/v0ipkt6x3bfbbs8/patch_weatherforecast.tar.gz;
     git clone https://github.com/rofafor/vdr-plugin-iptv.git; 

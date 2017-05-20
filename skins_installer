@@ -1,0 +1,99 @@
+  #!/bin/bash
+############################## !!! IMPORTANTE !!! #######################################
+#                                                                                       #
+# Nome Script : Skin_installer                                                          #
+# Versione: Github Repository Master (https://github.com/fiveten59/skin_installer)      #
+#                                                                                       #
+# date il comando sudo chmod 755 plugins_installer                                      #
+# avviate lo script con il comando: sudo sh ./skin_installer                            #
+#                                                                                       #
+#########################################################################################
+#                                                                                                                  
+#
+#REPO='home/'logname'/sifinstallrepo'
+ETC='/usr/local/etc'
+SRC='/usr/local/src'
+SRCVDR='/usr/local/src/vdr-2.3.4'
+VDRSRC=''$SRC'/vdr/PLUGINS/src'
+LIB='/usr/local/lib/vdr/plugins'
+VDR='vdr-2.3.4'
+SHARE='/usr/local/share/vdr/plugins'
+PLUGINS='/etc/vdr/plugins'
+SKIN='/etc/vdr/plugins/text2skin'
+SKINS='/usr/local/share/vdr/plugins/skindesigner/skins/'
+SHARE='/usr/local/share/vdr/plugins'
+TIMESTAMP=`date +%Y%m%d.%R`
+Remind='è già installato... avete dimenticato di aggiungere il comando al vdrrun?'
+Remind5='non è installato'
+ALLOWED="#
+# allowed_hosts.conf  This file describes a number of host addresses that
+#                     are allowed to connect to the streamdev/vn****rver/xvdr/xinelioutput server running 
+#                     with the Video Disk Recorder (VDR) on this system.
+# Syntax:
+#
+# IP-Address[/Netmask]
+#
+127.0.0.1             # always accept localhost
+192.168.1.0/24        # any host on the local net
+192.168.0.0/24        # any host on the local net
+#204.152.189.113      # a specific host
+#0.0.0.0/0            # any host on any net (USE THIS WITH CARE!)
+#
+#
+# SE LA VOSTRA CONFIGURAZIONE DI RETE E' QUESTA NON TOCCATELA!!!
+# ESCI CON CTRL+X
+#
+# SE LA VOSTRA CONFIGURAZIONE DI RETE E' DIVERSA MODIFICALA
+# SALVA CON CTRL+O ED ESCI CON CTRL+X "
+#
+#
+
+                                          ###############################################
+                                          #        Installazione altre Skins          #
+                                          ###############################################
+
+
+    
+    clear        
+    dialog --title "   ** Installazione altri Plugins di VDR **   " --infobox "
+   ----------------------------------------------
+    Installazione altre Skins di VDR             
+   ----------------------------------------------
+
+        Skinsoppalusikka
+   ---------------------------------------------- " 0 0                 
+echo "     premere il tasto [Invio] per continuare. . .    " ;read enterKey
+
+
+
+#
+#echo "*** Skinsoppalusikka  (Skin) ***"; 
+    clear
+    dialog --title "   ** VDR-Plugins-Skinsoppalusikka **   " --infobox "
+   ----------------------------------------------
+                Che cosa vuoi fare ?
+   ----------------------------------------------
+        [a]    Installare la Skin Skinsoppalusikka
+        [b]    Rimuovere la Skin Skinsoppalusikka                
+        [c]    Skip             
+                                       
+   ---------------------------------------------- " 0 0
+    echo -n "        Scegli  [a-c]:      "
+    read yourch
+    case $yourch in 
+a) cd $VDRSRC  && if [ -f skinsoppalusikka/Makefile ];
+  		then  echo "Skinsoppalusikka $Remind"
+			else git clone https://github.com/rofafor/vdr-plugin-skinsoppalusikka.git && cp -rf vdr-plugin-skinsoppalusikka /home/`logname`/sifinstallrepo/ && mv vdr-plugin-skinsoppalusikka skinsoppalusikka && cd ../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'skinsoppalusikka'|" /usr/local/bin/vdrrun
+	fi;;
+b) cd $VDRSRC && if [ -f skinsoppalusikka/Makefile ];
+  then rm -r $VDRSRC/skinsoppalusikka && rm -r /etc/vdr/plugins/skinsoppalusikka && rm -r $LIB/libvdr-skinsoppalusikka.* && sed -e "s|-P'skinsoppalusikka'||" /usr/local/bin/vdrrun
+  else echo "La Skin Skinsoppalusikka $Remind5" 
+fi;
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+c) ;;
+esac
+#
+#
+cd /home/`logname`/sifinstallrepo/; chmod -R 777 *;
+#
+cd $SRC/vdr; make plugins install;

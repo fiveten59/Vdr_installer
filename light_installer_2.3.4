@@ -2,7 +2,7 @@
 ############################## !!! IMPORTANTE !!! #######################################
 #                                                                                       #
 # Nome Script : light_installer_2.3.4                                                   #
-# Versione: Github Repository Master (https://github.com/fiveten59/Vdr_installer)       #
+# Versione: Github Repository Master (https://github.com/fiveten59/Vdr_installer)                                                    #
 #                                                                                       #
 # date il comando sudo chmod 755 light_installer_2.3.4                                  #
 # avviate lo script con il comando: sudo sh ./light_installer_2.3.4                     #
@@ -517,11 +517,11 @@ else
     git clone git://projects.vdr-developer.org/vdr-plugin-tvguide.git;
   fi
 
-if [ -s /home/`logname`/sifinstallrepo/patch_tvguide-vdr-2.3.1.tar.gz ]; then
+if [ -s /home/`logname`/sifinstallrepo/patch_tvguide.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/bubiwhxlgqujr88/patch_tvguide-vdr-2.3.1.tar.gz;
+    wget https://www.dropbox.com/s/xkax9z6qumb76dj/patch_tvguide.tar.gz;
 fi
 
 if [ -s /home/`logname`/sifinstallrepo/vdr-plugin-tvguideng ]; then
@@ -558,6 +558,13 @@ else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"; 
     wget https://www.dropbox.com/s/1ujtklnct0nqq6q/iptv_conf.tar.gz;
 fi
+
+if [ -s /home/`logname`/sifinstallrepo/vdr-plugin-femon ]; then
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+else
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    git clone https://github.com/rofafor/vdr-plugin-femon.git;
+  fi
 
 if [ -s /home/`logname`/sifinstallrepo/vdr-plugin-weatherforecast ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
@@ -767,8 +774,6 @@ chmod -R 777 *;;
     hg clone http://hg.videolan.org/x265;
     git clone https://chromium.googlesource.com/webm/libvpx
     git clone https://git.ffmpeg.org/ffmpeg.git;
-    git clone https://github.com/OpenELEC/eventlircd.git;
-    wget https://www.dropbox.com/s/cqwpl0w4cyqhrux/eventlircd.conf.tar.gz;
 
 ############################ caricamento vdr e plugin ################################
 
@@ -777,16 +782,16 @@ chmod -R 777 *;;
     wget https://www.dropbox.com/s/v55zf6cdrauxe3e/Make.config.2.3.4;
     wget https://www.dropbox.com/s/bx97ikp7c1h2qj2/vdrsymbols.tar.gz;
     git clone git://projects.vdr-developer.org/vdr-plugin-tvguide.git;
-    wget https://www.dropbox.com/s/bubiwhxlgqujr88/patch_tvguide-vdr-2.3.1.tar.gz;
+    wget https://www.dropbox.com/s/xkax9z6qumb76dj/patch_tvguide.tar.gz;
     git clone git://projects.vdr-developer.org/vdr-plugin-tvguideng.git;
     git clone https://github.com/rofafor/vdr-plugin-osdteletext.git;
-    wget https://www.dropbox.com/s/ncb0gnw9pkee83d/patch_osdteletext.tar.gz;
     git clone https://github.com/rofafor/vdr-plugin-softhddevice.git;
     wget https://www.dropbox.com/s/ba5njlguttwlvao/patch_softhddevice_4.tar.gz;
     git clone http://projects.vdr-developer.org/git/vdr-plugin-epgsearch.git;
     wget https://www.dropbox.com/s/s9vggu8mil8ss7t/patch_epgsearch.tar.gz;
     git clone git://github.com/manio/vdr-plugin-dvbapi.git;
     wget https://www.dropbox.com/s/5tyvqkbhohbbju2/dvbapi.patch.tar.gz;
+    git clone https://github.com/rofafor/vdr-plugin-femon.git;
     git clone git://projects.vdr-developer.org/vdr-plugin-weatherforecast.git;
     wget https://www.dropbox.com/s/v0ipkt6x3bfbbs8/patch_weatherforecast.tar.gz;
     git clone https://github.com/rofafor/vdr-plugin-iptv.git; 
@@ -915,7 +920,7 @@ a)                                        ######################################
     echo "                    Adesso Installo X264 - Git"; sleep 4
     cd /usr/local/src;
     rm -Rf $SRC/x264;
-    cp -r /home/`logname`/sifinstallrepo/x264 /usr/local/src/;
+    cp -rf /home/`logname`/sifinstallrepo/x264 /usr/local/src/;
     cd x264; git checkout stable;
     ./configure --enable-pic --enable-shared --extra-cflags="-mtune=native -march=native -mfpmath=sse -O4 -pipe"
     make -j4
@@ -958,7 +963,7 @@ b)                                        ######################################
     cd /usr/local/src
     rm -Rf $SRC/x265
     #hg clone https://bitbucket.org/multicoreware/x265
-    cp -r /home/`logname`/sifinstallrepo/x265 /usr/local/src/;
+    cp -rf /home/`logname`/sifinstallrepo/x265 /usr/local/src/;
     cd x265/build/linux;
     ./make-Makefiles.bash
     make -j4
@@ -980,7 +985,7 @@ b1)                                       ######################################
 
     clear
     echo "                    Adesso Rimuovo X265 - Git"; sleep 4
-    apt-get -y purge x265; rm -r /usr/local/src/x265; rm /usr/local/src/packages/x265*;;
+    apt-get -y purge x265; rm -r /usr/local/src/x265; rm -r /usr/local/src/packages/x265*;;
 
     
     
@@ -1021,7 +1026,7 @@ c1)                                       ######################################
 
     clear
     echo "                    Adesso Rimuovo Fdk-aac - Git"; sleep 4
-    apt-get -y purge fdk-aac; rm -r /usr/local/src/fdk-aac; rm /usr/local/src/packages/fdk-aac*;;
+    apt-get -y purge fdk-aac; rm -r /usr/local/src/fdk-aac; rm -r /usr/local/src/packages/fdk-aac*;;
 
     
 
@@ -1088,10 +1093,7 @@ e)                                        ######################################
     apt-get -y install mercurial cvs subversion git-core libncurses-dev autoconf autopoint libtool automake  gettext nasm liba52-0.7.4-dev libpng12-dev libxt-dev libxv-dev libxvmc-dev libasound2-dev libmpcdec-dev libxvidcore-dev
     clear
     echo "                    Adesso Installo Libvpx "; sleep 4
-    cd /usr/local/src
-    rm -R libvpx
-    cp -r /home/`logname`/sifinstallrepo/libvpx /usr/local/src/;
-    #tar xjf libvpx-1.4.0.tar.bz2; mv libvpx-1.4.0 libvpx; rm -r libvpx-1.4.0.tar.bz2; 
+    cd /usr/local/src; rm -R libvpx; cp -rf /home/`logname`/sifinstallrepo/libvpx /usr/local/src/;
     cd libvpx
     ./configure --enable-pic --enable-shared --enable-runtime_cpu_detect
     make -j4
@@ -1112,7 +1114,7 @@ e1)                                       ######################################
 
     clear
     echo "                    Adesso Rimuovo Libvpx "; sleep 4
-    apt-get -y purge libvpx; rm -r /usr/local/src/libvpx; rm /usr/local/src/packages/libvpx*;;
+    apt-get -y purge libvpx; rm -r /usr/local/src/libvpx; rm -r /usr/local/src/packages/libvpx*;;
 
 
 #############################################################################################################################  
@@ -1268,11 +1270,9 @@ a)                                        ######################################
     apt-get -y install libpcre++0v5
     clear    
     echo "               Adesso Installo VDR 2.3.4      "; sleep 4 
-    cp /home/`logname`/sifinstallrepo/$VDR.tar.bz2 $SRC/; tar xivf $VDR.tar.bz2;
+    cp -rf /home/`logname`/sifinstallrepo/$VDR.tar.bz2 $SRC/; tar xivf $VDR.tar.bz2;
     ln -s $VDR vdr; rm -r $VDR.tar.bz2
-    cd vdr/PLUGINS; mkdir lib; cd ..;
-    cp /home/`logname`/sifinstallrepo/vdr-patches.2.3.4.tar.gz $SRC/vdr/;
-    tar -zxvf vdr-patches.2.3.4.tar.gz; rm -r vdr-patches.2.3.4.tar.gz; sleep 1;
+    cd vdr; cp -rf /home/`logname`/sifinstallrepo/vdr-patches.2.3.4.tar.gz $SRC/vdr/; tar -zxvf vdr-patches.2.3.4.tar.gz; rm -r vdr-patches.2.3.4.tar.gz; sleep 1;
 echo "*** zapcockpit ***"
     patch -p1 < 02_vdr_zapcockpit.patch; sleep 1;
 echo "*** getbitmap ***"
@@ -1383,88 +1383,66 @@ echo "                 premere il tasto [Invio] per continuare "; read enterKey
 cd $SRC;
 mkdir -p /usr/local/lib/vdr/plugins; mkdir -p /usr/local/lib/vdr/scripts; mkdir -p /etc/vdr/plugins; mkdir -p /etc/vdr/themes; cd $PLUGINS; mkdir -p tvguide;
 #
-apt-get -y install graphicsmagick-libmagick-dev-compat;
-apt-get -y install imagemagick;
-apt-get -y install libmagick++-6.q16-dev;
+apt-get -y install graphicsmagick-libmagick-dev-compat; apt-get -y install imagemagick; apt-get -y install libmagick++-6.q16-dev; apt-get -y install git-core; apt-get -y install libjansson4 libjansson-dev;
+apt-get -y install lm-sensors librsvg2-dev libxml2-dev libcairo2-dev; apt-get -y install vlc;
 #
 clear
 echo ""; echo "               *** OSDTeletext ***"; echo ""; sleep 3
-apt-get -y install git-core;
-cd $VDRSRC; 
-cp -r /home/`logname`/sifinstallrepo/vdr-plugin-osdteletext /$VDRSRC/;
-mv vdr-plugin-osdteletext osdteletext; cd osdteletext;
-cp /home/`logname`/sifinstallrepo/patch_osdteletext.tar.gz /$VDRSRC/osdteletext/;
-tar -zxvf patch_osdteletext.tar.gz; rm -r patch_osdteletext.tar.gz;
-#patch -p1 < 01_osdteletext_vdr233.patch; sleep 1;
-#patch -p1 < 10_osdteletext_ttf.patch; sleep 1;
-cd ../../..; make plugins; mkdir -p /vtx
+cd $VDRSRC;  cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-osdteletext /$VDRSRC/; mv vdr-plugin-osdteletext osdteletext; cd osdteletext; cp -rf /home/`logname`/sifinstallrepo/patch_osdteletext.tar.gz /$VDRSRC/osdteletext/; tar -zxvf patch_osdteletext.tar.gz; rm -r patch_osdteletext.tar.gz; cd ../../..; make plugins; mkdir -p /vtx
 #
 #
 clear
 echo ""; echo "               *** Dvbapi ***"; echo ""; sleep 3
 cd $VDRSRC; 
-cp -r /home/`logname`/sifinstallrepo/vdr-plugin-dvbapi /$VDRSRC/;
-mv vdr-plugin-dvbapi dvbapi;
-cd dvbapi;
-cp /home/`logname`/sifinstallrepo/dvbapi.patch.tar.gz /$VDRSRC/dvbapi/
-tar -zxvf dvbapi.patch.tar.gz; rm -r dvbapi.patch.tar.gz;
-patch -p1 < vdr-plugin-dvbapi-01_crosscompiling.patch; sleep 1;
+cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-dvbapi /$VDRSRC/; mv vdr-plugin-dvbapi dvbapi; cd dvbapi; cp -rf /home/`logname`/sifinstallrepo/dvbapi.patch.tar.gz /$VDRSRC/dvbapi/; tar -zxvf dvbapi.patch.tar.gz; rm -r dvbapi.patch.tar.gz; patch -p1 < vdr-plugin-dvbapi-01_crosscompiling.patch; sleep 1;
 cd ../../..; make plugins
 #
 #
 clear
 echo ""; echo "               *** Softhddevice ***"; echo ""; sleep 3
 cd $VDRSRC; 
-cp -r /home/`logname`/sifinstallrepo/vdr-plugin-softhddevice /$VDRSRC/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice; cp -r /home/`logname`/sifinstallrepo/patch_softhddevice_4.tar.gz /$VDRSRC/softhddevice; tar -zxvf patch_softhddevice_4.tar.gz; rm -r patch_softhddevice_4.tar.gz; patch -p1 < 03_LanguageIT.patch; patch -p1 < 10_softhddevice_trusty.patch; patch -p1 < 11_softhddevice_Makefile.patch; patch -p1 < 15_fsigned_char.patch.bpi; make ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1; make install;
+cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-softhddevice /$VDRSRC/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice; cp -rf /home/`logname`/sifinstallrepo/patch_softhddevice_4.tar.gz /$VDRSRC/softhddevice; tar -zxvf patch_softhddevice_4.tar.gz; rm -r patch_softhddevice_4.tar.gz; patch -p1 < 03_LanguageIT.patch; patch -p1 < 10_softhddevice_trusty.patch; patch -p1 < 11_softhddevice_Makefile.patch; patch -p1 < 15_fsigned_char.patch.bpi; make ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1; make install;
 #
 #
 clear
 echo ""; echo "               *** Epgsearch ***"; echo ""; sleep 3
 cd $VDRSRC;
-cp -r /home/`logname`/sifinstallrepo/vdr-plugin-epgsearch /$VDRSRC/;
-mv vdr-plugin-epgsearch epgsearch; cd epgsearch;
-cp /home/`logname`/sifinstallrepo/patch_epgsearch.tar.gz /$VDRSRC/epgsearch/
-tar -zxvf patch_epgsearch.tar.gz; rm -r patch_epgsearch.tar.gz;
-patch -p1 < 10_langinfo-include.diff; sleep 1;
-patch -p1 < 10_epgsearch_Makefile.patch; sleep 1;
-patch -p1 < 11_epgsearch_menue.patch; sleep 1;
-patch -p1 < 12_epgsearch_README.patch; sleep 1;
-cd ../../..; make plugins; 
+cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-epgsearch /$VDRSRC/; mv vdr-plugin-epgsearch epgsearch; cd epgsearch; cp -rf /home/`logname`/sifinstallrepo/patch_epgsearch.tar.gz /$VDRSRC/epgsearch/; tar -zxvf patch_epgsearch.tar.gz; rm -r patch_epgsearch.tar.gz; patch -p1 < 10_langinfo-include.diff; sleep 1; patch -p1 < 10_epgsearch_Makefile.patch; sleep 1; patch -p1 < 11_epgsearch_menue.patch; sleep 1; patch -p1 < 12_epgsearch_README.patch; sleep 1; cd ../../..; make plugins; 
 #
 #
 clear
 echo ""; echo "               *** Skindesigner ***"; echo ""; sleep 3
-cd $VDRSRC; sudo apt-get -y install lm-sensors librsvg2-dev libxml2-dev libcairo2-dev;
-cp -r /home/`logname`/sifinstallrepo/vdr-plugin-skindesigner /$VDRSRC/ && mv vdr-plugin-skindesigner skindesigner && cp -rf /$SRC/traduzioni/metrixhd/*.xml /$VDRSRC/skindesigner/skins/metrixhd/ && cd skindesigner && make install && cd /usr/local/lib/vdr/plugins/skindesigner/scripts/ && ln -s temperatures.default temperatures && ln -s vdrstats.default vdrstats; 
+cd $VDRSRC; 
+cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-skindesigner /$VDRSRC/ && mv vdr-plugin-skindesigner skindesigner && cp -rf /$SRC/traduzioni/metrixhd/*.xml /$VDRSRC/skindesigner/skins/metrixhd/ && cd skindesigner && make install && cd /usr/local/lib/vdr/plugins/skindesigner/scripts/ && ln -s temperatures.default temperatures && ln -s vdrstats.default vdrstats; 
 #
 clear
 echo ""; echo "               *** TvGuideng ***"; echo ""; sleep 3
-cd $VDRSRC; cp -r /home/`logname`/sifinstallrepo/vdr-plugin-tvguideng /$VDRSRC; mv vdr-plugin-tvguideng tvguideng; cp -r /$SRC/traduzioni/tvguideng_it_IT.po /$VDRSRC/tvguideng/po/; cd tvguideng/po/; mv tvguideng_it_IT.po it_IT.po; cd ../../../..; make plugins;
+cd $VDRSRC; cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-tvguideng /$VDRSRC; mv vdr-plugin-tvguideng tvguideng; cp -rf /$SRC/traduzioni/tvguideng_it_IT.po /$VDRSRC/tvguideng/po/; cd tvguideng/po/; mv tvguideng_it_IT.po it_IT.po; cd ../../../..; make plugins;
 #
 #
 clear
 echo ""; echo "               *** Weatherforecast ***";  sleep 3
-cd $VDRSRC; apt-get -y install libjansson4 libjansson-dev; cp -r /home/`logname`/sifinstallrepo/vdr-plugin-weatherforecast /$VDRSRC; mv vdr-plugin-weatherforecast weatherforecast; cd weatherforecast; cp /home/`logname`/sifinstallrepo/patch_weatherforecast.tar.gz /$VDRSRC/weatherforecast/; tar -zxvf patch_weatherforecast.tar.gz; rm -r patch_weatherforecast.tar.gz; patch -p1 < 10_weatherforecast_debug.patch; sleep 1; patch -p1 < 11_weatherforecast_i18n-it.patch; cd ../../..; make plugins; 
+cd $VDRSRC; cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-weatherforecast /$VDRSRC; mv vdr-plugin-weatherforecast weatherforecast; cd weatherforecast; cp -rf /home/`logname`/sifinstallrepo/patch_weatherforecast.tar.gz /$VDRSRC/weatherforecast/; tar -zxvf patch_weatherforecast.tar.gz; rm -rf patch_weatherforecast.tar.gz; patch -p1 < 10_weatherforecast_debug.patch; sleep 1; patch -p1 < 11_weatherforecast_i18n-it.patch; cd ../../..; make plugins; 
 #
 #
 clear
 echo "               *** Skin Flatplus ***"; echo ""; sleep 3
 cd $VDRSRC;
-cp -r /home/`logname`/sifinstallrepo/skin-flatplus /$VDRSRC/ && cd skin-flatplus && make install && cd /usr/local/lib/vdr/plugins/skinflatplus/widgets/temperatures/ && ln -s temperatures.default temperatures && cd ../system_information && ln -s system_information.ubuntu system_information  && cp -rf /home/`logname`/sifinstallrepo/flat_weather.tar.gz ../weather/ && cd ../weather && tar -zxvf flat_weather.tar.gz && rm -r flat_weather.tar.gz;
+cp -rf /home/`logname`/sifinstallrepo/skin-flatplus /$VDRSRC/ && cd skin-flatplus && make install && cd /usr/local/lib/vdr/plugins/skinflatplus/widgets/temperatures/ && ln -s temperatures.default temperatures && cd ../system_information && ln -s system_information.ubuntu system_information  && cp -rf /home/`logname`/sifinstallrepo/flat_weather.tar.gz ../weather/ && cd ../weather && tar -zxvf flat_weather.tar.gz && rm -r flat_weather.tar.gz;
 # qui sopra c'è da mettere le icone di menù mancanti che sono dentro le skin del Skin Flatplus traducendole e comprimendole
 #
 clear
 echo ""; echo "               *** Tvguide ***";  sleep 3
-cd $VDRSRC; cp -r /home/`logname`/sifinstallrepo/vdr-plugin-tvguide /$VDRSRC; mv vdr-plugin-tvguide tvguide; cd tvguide; cp /home/`logname`/sifinstallrepo/patch_tvguide.tar.gz /$VDRSRC/tvguide/; tar -zxvf patch_tvguide.tar.gz; rm -r patch_tvguide.tar.gz; patch -p1 < 10_tvguide_lib_Magick.patch; sleep 1; patch -p1 < 11_tvguide_i18n-it.patch; sleep 1; cp /home/`logname`/sifinstallrepo/patch_tvguide-vdr-2.3.1.tar.gz /$VDRSRC/tvguide/; tar -zxvf patch_tvguide-vdr-2.3.1.tar.gz; rm -r patch_tvguide-vdr-2.3.1.tar.gz; patch -p1 < tvguide-patch-vdr-2.3.1.diff; cd ../../..; make plugins; cp $VDRSRC/tvguide/themes/* /etc/vdr/themes/;
+cd $VDRSRC; cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-tvguide /$VDRSRC; mv vdr-plugin-tvguide tvguide; cd tvguide; cp -rf /home/`logname`/sifinstallrepo/patch_tvguide.tar.gz /$VDRSRC/tvguide/; tar -zxvf patch_tvguide.tar.gz; rm -r patch_tvguide.tar.gz; patch -p1 < 10_tvguide_lib_Magick.patch; sleep 1; patch -p1 < 11_tvguide_i18n-it.patch; sleep 1; patch -p1 < tvguide-patch-vdr-2.3.1.diff; make; cd ../../..; make plugins; cp -rf $VDRSRC/tvguide/themes/* /etc/vdr/themes/;
 #
 #
 echo "               *** Iptv ***"; echo ""; sleep 3
-cd $VDRSRC && apt-get -y install vlc && cp -r /home/`logname`/sifinstallrepo/vdr-plugin-iptv /$VDRSRC && mv vdr-plugin-iptv iptv && cd iptv && cp -r /home/`logname`/sifinstallrepo/patch_iptv.tar.gz /$VDRSRC/iptv && tar -zxvf patch_iptv.tar.gz && rm -r patch_iptv.tar.gz && patch -p1 < iptv.patch && make && cd ../../.. && make plugins && mkdir -p /etc/vdr/plugins/iptv/vlcinput && cp -r /home/`logname`/sifinstallrepo/iptv_conf.tar.gz /$PLUGINS/iptv/vlcinput/ && cd $PLUGINS/iptv/vlcinput && tar -zxvf iptv_conf.tar.gz && rm -r iptv_conf.tar.gz 
+cd $VDRSRC && cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-iptv /$VDRSRC && mv vdr-plugin-iptv iptv && cd iptv && cp -rf /home/`logname`/sifinstallrepo/patch_iptv.tar.gz /$VDRSRC/iptv && tar -zxvf patch_iptv.tar.gz && rm -r patch_iptv.tar.gz && patch -p1 < iptv.patch && make && cd ../../.. && make plugins && mkdir -p /etc/vdr/plugins/iptv/vlcinput && cp -rf /home/`logname`/sifinstallrepo/iptv_conf.tar.gz /$PLUGINS/iptv/vlcinput/ && cd $PLUGINS/iptv/vlcinput && tar -zxvf iptv_conf.tar.gz && rm -r iptv_conf.tar.gz 
 #
 #
 clear
 echo ""; echo "               *** Externalplayer ***";  sleep 3
-cd $VDRSRC; cp -r /home/`logname`/sifinstallrepo/vdr-plugin-externalplayer /$VDRSRC && mv vdr-plugin-externalplayer externalplayer && cp -r /$SRC/traduzioni/external_it_IT.po /$VDRSRC/externalplayer/po/ && cd externalplayer/po/ && mv external_it_IT.po it_IT.po && cd ../../../.. && make plugins && cp -r /home/`logname`/sifinstallrepo/externalplayer.conf.tar.gz /etc/vdr/plugins/ && cd /etc/vdr/plugins && tar -zxvf externalplayer.conf.tar.gz && rm -r externalplayer.conf.tar.gz;
+cd $VDRSRC; cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-externalplayer /$VDRSRC && mv vdr-plugin-externalplayer externalplayer && cp -rf /$SRC/traduzioni/external_it_IT.po /$VDRSRC/externalplayer/po/ && cd externalplayer/po/ && mv external_it_IT.po it_IT.po && cd ../../../.. && make plugins && cp -rf /home/`logname`/sifinstallrepo/externalplayer.conf.tar.gz /etc/vdr/plugins/ && cd /etc/vdr/plugins && tar -zxvf externalplayer.conf.tar.gz && rm -r externalplayer.conf.tar.gz;
 clear
 
 
@@ -1505,14 +1483,12 @@ b)                                        ######################################
 
 clear
 echo "                    Adesso Configuro VDR 2.3.x"; sleep 3
+clear
 echo "                    Installazione true type"; sleep 1
-apt-get -y install lirc lirc-x liblircclient-dev
+apt-get -y install lirc lirc-x liblircclient-dev;
 if [ -d /usr/share/fonts/truetype/vdrsymbols ];
 then echo " I font $Remind4"; sleep 3;
-else
-cp /home/`logname`/sifinstallrepo/vdrsymbols.tar.gz /usr/share/fonts/truetype/;
-cd /usr/share/fonts/truetype/
-tar -zxvf vdrsymbols.tar.gz;
+else cp -rf /home/`logname`/sifinstallrepo/vdrsymbols.tar.gz /usr/share/fonts/truetype/; cd /usr/share/fonts/truetype/; tar -zxvf vdrsymbols.tar.gz;
 fc-cache -fv
 fi;
 
@@ -1527,10 +1503,7 @@ fi;
 
 clear
 echo "                    Installazione Icone Vdr"; sleep 1
-cd $SRC
-#wget https://www.dropbox.com/s/dhap4gmzd2q77ug/vdr.jpeg.tar.gz;
-cp /home/`logname`/sifinstallrepo/icone.tar.gz /usr/local/src/;
-tar -zxvf icone.tar.gz; rm -r icone.tar.gz;
+cd $SRC; cp -rf /home/`logname`/sifinstallrepo/icone.tar.gz /usr/local/src/; tar -zxvf icone.tar.gz; rm -r icone.tar.gz;
 
 #############################################################################################################################
 #############################################################################################################################
@@ -1543,7 +1516,7 @@ tar -zxvf icone.tar.gz; rm -r icone.tar.gz;
 							
 clear
 echo "                    Creazione comando d'avvio Vdr"; sleep 1
-rm -r /usr/local/bin/vdrrun; touch /usr/local/bin/vdrrun;
+rm -rf /usr/local/bin/vdrrun; touch /usr/local/bin/vdrrun;
 
 echo '#!/bin/bash
 
@@ -1552,7 +1525,7 @@ echo '#!/bin/bash
 #   Permessi per eseguire Vdr       
 echo "%`logname` ALL=NOPASSWD: /etc/init.d/vdr" >> /etc/sudoers
 #    Creazione /usr/local/bin/vdrpoweroff    
-rm -r /usr/local/bin/vdrpoweroff; touch /usr/local/bin/vdrpoweroff
+rm -rf /usr/local/bin/vdrpoweroff; touch /usr/local/bin/vdrpoweroff
 echo '#!/bin/sh
 #nome file : arresto di xine-vdr "vdrpoweroff"
 killall -9 vdrrun & killall -9 vdr & killall -9 vdr-sxfe & killall -9 vlc 
@@ -1563,7 +1536,7 @@ killall -9 vdrrun & killall -9 vdr & killall -9 vdr-sxfe & killall -9 vlc
 chmod 755 /usr/local/bin/vdrpoweroff
 #
 #  Creazione /etc/init.d/vdr           
-rm -r /etc/init.d/vdr; touch /etc/init.d/vdr 
+rm -rf /etc/init.d/vdr; touch /etc/init.d/vdr 
 echo '
 #!/bin/sh
 #
@@ -1636,13 +1609,8 @@ chmod 755 /etc/init.d/vdr
     read yourch
     case $yourch in
     
-a) cd /etc/vdr; rm -r setup.conf;
-cp /home/`logname`/sifinstallrepo/setup16.tar.gz /etc/vdr/;
-tar -zxvf setup16.tar.gz;; # rm -r setup16.tar.gz;;   
-b) cd /etc/vdr; rm -r setup.conf;
-#wget https://www.dropbox.com/s/81fd2z1ye192lnx/setup43.tar.gz
-cp /home/`logname`/sifinstallrepo/setup43.tar.gz /etc/vdr/;
-tar -zxvf setup43.tar.gz;;  # rm -r setup43.tar.gz;;    
+a) cd /etc/vdr; rm -rf setup.conf; cp -rf /home/`logname`/sifinstallrepo/setup16.tar.gz /etc/vdr/; tar -zxvf setup16.tar.gz; rm -r setup16.tar.gz;;   
+b) cd /etc/vdr; rm -rf setup.conf; cp -rf /home/`logname`/sifinstallrepo/setup43.tar.gz /etc/vdr/; tar -zxvf setup43.tar.gz; rm -r setup43.tar.gz;;    
 esac
     
 #############################################################################################################################  
@@ -1706,17 +1674,17 @@ case "$1" in
         ;;
 esac
 exit 0
-' >> /etc/init.d/oscam; chmod 755 /etc/init.d/oscam; echo "%`logname` ALL=NOPASSWD: /etc/init.d/oscam" >> /etc/sudoers; cd $SRC; mkdir -p oscam; cd oscam; cp -r /home/`logname`/sifinstallrepo/oscam.tar.gz /$SRC/oscam; tar -zxvf oscam.tar.gz; rm -rf oscam.tar.gz;
-cp -r * /usr/local/etc/;
+' >> /etc/init.d/oscam; chmod 755 /etc/init.d/oscam; echo "%`logname` ALL=NOPASSWD: /etc/init.d/oscam" >> /etc/sudoers; cd $SRC; mkdir -p oscam; cd oscam; cp -rf /home/`logname`/sifinstallrepo/oscam.tar.gz /$SRC/oscam; tar -zxvf oscam.tar.gz; rm -rf oscam.tar.gz;
+cp -rf * /usr/local/etc/;
 fi
    
 if uname -m  | grep "x86_64"; then
     echo "64bit detected"; cp -r /home/`logname`/sifinstallrepo/oscam64.tar.gz /usr/local/bin/; cd /usr/local/bin; tar -zxvf oscam64.tar.gz; rm -rf oscam64.tar.gz;
     else echo "32bit detected"
-        cp -r /home/`logname`/sifinstallrepo/oscam32.tar.gz /usr/local/bin/; cd /usr/local/bin; tar -zxvf oscam32.tar.gz; rm -rf oscam32.tar.gz;
+        cp -rf /home/`logname`/sifinstallrepo/oscam32.tar.gz /usr/local/bin/; cd /usr/local/bin; tar -zxvf oscam32.tar.gz; rm -rf oscam32.tar.gz;
 fi
 chmod 777 oscam;
- 
+
 
 
 #############################################################################################################################  
@@ -1887,7 +1855,7 @@ d) echo "$TRIAL" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /e
 e) echo "$TRIAL2 devi caricarti un channels.conf" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf;;
 f) echo "$QUADRI devi caricarti un channels.conf" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf;;
 g) echo "$QUADRI2 devi caricarti un channels.conf" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf;;
-h) cd /etc/vdr && cp /home/`logname`/sifinstallrepo/channels.conf.terr.tar.gz /etc/vdr/ && cd /etc/vdr/ && tar -zxvf channels.conf.terr.tar.gz && rm -r channels.conf.terr.tar.gz && mv channels.conf.terr channels.conf;;
+h) cd /etc/vdr && cp -rf /home/`logname`/sifinstallrepo/channels.conf.terr.tar.gz /etc/vdr/ && cd /etc/vdr/ && tar -zxvf channels.conf.terr.tar.gz && rm -rf channels.conf.terr.tar.gz && mv channels.conf.terr channels.conf;;
 esac
 
 
@@ -1905,9 +1873,7 @@ esac
 #wget https://www.dropbox.com/s/806odyj5vyco3dg/lcars_pack.tar.gz;
 if [ -f /etc/vdr/themes/checklcars ];
 then echo " I temi Lcars $Remind4"
-else
-cp /home/`logname`/sifinstallrepo/lcars_pack.tar.gz /etc/vdr/themes; cd /etc/vdr/themes
-tar -zxvf lcars_pack.tar.gz; rm -r lcars_pack.tar.gz;
+else cp -rf /home/`logname`/sifinstallrepo/lcars_pack.tar.gz /etc/vdr/themes; cd /etc/vdr/themes; tar -zxvf lcars_pack.tar.gz; rm -r lcars_pack.tar.gz;
 fi
 
 #############################################################################################################################  
@@ -1929,7 +1895,6 @@ cp -rf /home/`logname`/sifinstallrepo/logos.tar.gz /etc/vdr/; cd /etc/vdr/; tar 
 fi
 sleep 1
 ln -s /etc/vdr/plugins/picon liquid-logos4anthra_HD;
-
 
 
 #############################################################################################################################  
@@ -1955,15 +1920,8 @@ clear
     echo -n "        Scegli  [a-c]:      "
     read yourch
     case $yourch in
-a) cd /etc/vdr; mv remote.conf remote.conf.xineliboutput; 
-#wget https://www.dropbox.com/s/hsp66258srhwa1d/mce-remote.conf.tar.gz; 
-cp /home/`logname`/sifinstallrepo/mce-remote.conf.tar.gz /etc/vdr/;
-tar -zxvf mce-remote.conf.tar.gz; rm -r mce-remote.conf.tar.gz;;
-
-b) cd /etc/vdr; mv remote.conf remote.conf.xineliboutput; 
-# wget https://www.dropbox.com/s/gvel64ykd3eyx07/hauppauge-remote.conf.tar.gz;
-cp /home/`logname`/sifinstallrepo/hauppauge-remote.conf.tar.gz /etc/vdr/;
-tar -zxvf hauppauge-remote.conf.tar.gz; rm -r hauppauge-remote.conf.tar.gz;;
+a) cd /etc/vdr; mv remote.conf remote.conf.xineliboutput; cp -rf /home/`logname`/sifinstallrepo/mce-remote.conf.tar.gz /etc/vdr/; tar -zxvf mce-remote.conf.tar.gz; rm -r mce-remote.conf.tar.gz;;
+b) cd /etc/vdr; mv remote.conf remote.conf.xineliboutput; cp -rf /home/`logname`/sifinstallrepo/hauppauge-remote.conf.tar.gz /etc/vdr/;tar -zxvf hauppauge-remote.conf.tar.gz; rm -rf hauppauge-remote.conf.tar.gz;;
 
 esac
 
@@ -1991,9 +1949,7 @@ cd /usr/local/src;
 if [ -f /$SRC/w_scan/Makefile ];
   then  echo "W_scan $Remind3"
 else
-cp /home/`logname`/sifinstallrepo/w_scan-20161022.tar.bz2 $SRC/; 
-tar xivf w_scan-20161022.tar.bz2; mv w_scan-20161022 w_scan; rm -r w_scan-20161022.tar.bz2; 
-cd w_scan; ./configure; make; make install;
+cp /home/`logname`/sifinstallrepo/w_scan-20161022.tar.bz2 $SRC/; tar xivf w_scan-20161022.tar.bz2; mv w_scan-20161022 w_scan; rm -rf w_scan-20161022.tar.bz2; cd w_scan; ./configure; make; make install;
 fi
 
     clear        

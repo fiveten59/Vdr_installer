@@ -49,27 +49,83 @@ ALLOWED="#
 #
 
                                           ###############################################
-                                          #        Installazione altre Skins          #
+                                          #        Installazione altre Skins            #
                                           ###############################################
 
 
     
+# Installazione librerie
+apt-get -y install build-essential checkinstall libfreetype6-dev libfontconfig1-dev libjpeg62-dev libcap-dev libfribidi-dev libncurses5-dev libncursesw5-dev git-core gettext
+apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev
+apt-get -y install libpcre++0 libpcre++-dev python-libxml2 python-libxslt1 python-pycurl python-simplejson mimms libxml2-dev python-all-dev python-central cdbs libglib2.0-dev debhelper txt2man
+apt-get -y install libcurl3 libcurl4-gnutls-dev cvs libxcb-icccm4 libxcb-icccm4-dev libx11-xcb-dev libxcb-screensaver0-dev libxcb-dpms0-dev libmagick++-dev
+###
+   
     clear        
-    dialog --title "   ** Installazione altri Plugins di VDR **   " --infobox "
+    dialog --title "   ** Installazione altre skins di VDR **   " --infobox "
    ----------------------------------------------
     Installazione altre Skins di VDR             
    ----------------------------------------------
 
+        Basic_skin/CoolHD/Anthra/NarrowHD
         Skinsoppalusikka
+        Skin NarrowHD
+        Skin Enigma
+        Skin EgalT2
+
    ---------------------------------------------- " 0 0                 
 echo "     premere il tasto [Invio] per continuare. . .    " ;read enterKey
+#
+#echo "*** Basic_skin/CoolHD/Anthra necessita di Vdr-Plugin-Text2skin ***"; 
+    clear
+    dialog --title "   ** Basic_skin/CoolHD/Anthra necessita di Vdr-Plugin-Text2skin **   " --infobox "
+   ----------------------------------------------
+                Che cosa vuoi fare ?
+   ----------------------------------------------
+        [a]    Installare le skin Basic_skin/CoolHD/Anthra 
+        [b]    Rimuovere le skin Basic_skin/CoolHD/Anthra            
+        [c]    Skip 
 
+   ---------------------------------------------- " 0 0  
 
-
+    echo -n "        Scegli  [a-c]:      "
+    read yourch
+    case $yourch in               
+a) cd $VDRSRC && if [ -f text2skin/Makefile ];
+  then  echo "Text2skin $Remind"
+  else apt-get -y install libgraphicsmagick++1-dev && git clone git://projects.vdr-developer.org/vdr-plugin-text2skin.git && cp -rf vdr-plugin-text2skin /home/`logname`/sifinstallrepo/ && mv vdr-plugin-text2skin text2skin && cd text2skin && wget https://www.dropbox.com/s/h2114fton87spyh/patch_text2skin.tar.gz && cp -rf patch_text2skin.tar.gz /home/`logname`/sifinstallrepo/ && tar -zxvf patch_text2skin.tar.gz && rm -r patch_text2skin.tar.gz && patch -p1 < 10_text2skin_livebuffer.patch && patch -p1 < 17_text2skin_graphicsmagick.patch && cd ../../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'text2skin'|" /usr/local/bin/vdrrun
+    fi
+mkdir -p /etc/vdr/plugins/text2skin;
+cd /etc/vdr/themes;
+if [ -f /etc/vdr/themes/checkthemes ];
+	then echo " I temi Anthra $Remind4"
+		else wget https://www.dropbox.com/s/m32a4s23h7r00mg/themes.tar.gz && cp -rf themes.tar.gz /home/`logname`/sifinstallrepo/ && tar -zxvf themes.tar.gz && rm -r themes.tar.gz
+fi
+cd /etc/vdr/plugins/text2skin; 
+if [ -f /etc/vdr/plugins/text2skin/checkanthra ];
+	then echo " Il pacchetto Anthra $Remind3"
+		else wget https://www.dropbox.com/s/zwb0vp6gfwh7d4y/anthra_pack.tar.gz && cp -rf anthra_pack.tar.gz /home/`logname`/sifinstallrepo/ && tar -zxvf anthra_pack.tar.gz && rm -r anthra_pack.tar.gz
+fi
+#;
+if [ -f /etc/vdr/plugins/text2skin/checkcool ];
+	then echo " La CoolHD Skin $Remind2"
+		else wget https://www.dropbox.com/s/66eowrn57bj74du/coolHD_0.2.tar.gz && cp -rf coolHD_0.2.tar.gz /home/`logname`/sifinstallrepo/ && tar -zxvf coolHD_0.2.tar.gz && rm -r coolHD_0.2.tar.gz
+fi
+#
+if [ -f /etc/vdr/plugins/text2skin/Basic ];
+	then echo " La Basic Skin $Remind2"
+		else wget https://www.dropbox.com/s/y4jiosfxinkh2e1/Basic_skin.tar.gz && cp -rf Basic_skin.tar.gz /home/`logname`/sifinstallrepo/ && tar -zxvf Basic_skin.tar.gz && rm -r Basic_skin.tar.gz
+fi
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
+b) cd $VDRSRC && rm -r text2skin && cd $PLUGINS && rm -r text2skin && sed -i "s|-P'text2skin'||" /usr/local/bin/vdrrun;;
+c) ;;
+#        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+esac
+#
 #
 #echo "*** Skinsoppalusikka  (Skin) ***"; 
     clear
-    dialog --title "   ** VDR-Plugins-Skinsoppalusikka **   " --infobox "
+    dialog --title "   ** Skinsoppalusikka **   " --infobox "
    ----------------------------------------------
                 Che cosa vuoi fare ?
    ----------------------------------------------
@@ -86,14 +142,93 @@ a) cd $VDRSRC  && if [ -f skinsoppalusikka/Makefile ];
 			else git clone https://github.com/rofafor/vdr-plugin-skinsoppalusikka.git && cp -rf vdr-plugin-skinsoppalusikka /home/`logname`/sifinstallrepo/ && mv vdr-plugin-skinsoppalusikka skinsoppalusikka && cd ../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'skinsoppalusikka'|" /usr/local/bin/vdrrun
 	fi;;
 b) cd $VDRSRC && if [ -f skinsoppalusikka/Makefile ];
-  then rm -r $VDRSRC/skinsoppalusikka && rm -r /etc/vdr/plugins/skinsoppalusikka && rm -r $LIB/libvdr-skinsoppalusikka.* && sed -e "s|-P'skinsoppalusikka'||" /usr/local/bin/vdrrun
-  else echo "La Skin Skinsoppalusikka $Remind5" 
-fi;
+  	then rm -r $VDRSRC/skinsoppalusikka && rm -r /etc/vdr/plugins/skinsoppalusikka && rm -r $LIB/libvdr-skinsoppalusikka.* && sed -e "s|-P'skinsoppalusikka'||" /usr/local/bin/vdrrun
+  		else echo "La Skin Skinsoppalusikka $Remind5" 
+fi
         echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
 c) ;;
 esac
 #
 #
+#echo "*** NarrowHD  (Skin) ***"; 
+    clear
+    dialog --title "   ** NarrowHD **   " --infobox "
+   ----------------------------------------------
+                Che cosa vuoi fare ?
+   ----------------------------------------------
+        [a]    Installare la Skin NarrowHD
+        [b]    Rimuovere la Skin NarrowHD                
+        [c]    Skip             
+                                       
+   ---------------------------------------------- " 0 0
+    echo -n "        Scegli  [a-c]:      "
+    read yourch
+    case $yourch in 
+a) cd $VDRSRC && if [ -f narrowhd/Makefile ];
+  	then  echo "NarrowHD $Remind1"
+  		else     git clone git://projects.vdr-developer.org/skin-narrowhd.git && cp -rf skin-narrowhd /home/`logname`/sifinstallrepo/ && mv skin-narrowhd narrowhd && cd narrowhd && make && make install && cd /etc/vdr/plugins/text2skin/NarrowHD/logos/ && rm -r * && ln -s /etc/vdr/logos $SKIN/NarrowHD/logos  
+fi
+      echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
+b) cd $VDRSRC && if [ -f narrowhd/Makefile ];
+  	then rm -r $VDRSRC/narrowhd && rm -r $SKIN/NarrowHD 
+		else echo "La Skin NarrowHD $Remind5" 
+fi
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+c) ;;
+esac
+#
+#
+#echo "*** Enigma  (Skin) ***"; 
+    clear
+    dialog --title "   ** Enigma **   " --infobox "
+   ----------------------------------------------
+                Che cosa vuoi fare ?
+   ----------------------------------------------
+        [a]    Installare la Skin Enigma
+        [b]    Rimuovere la Skin Enigma                
+        [c]    Skip             
+                                       
+   ---------------------------------------------- " 0 0
+    echo -n "        Scegli  [a-c]:      "
+    read yourch
+    case $yourch in 
+a) cd $VDRSRC && if [ -f skinenigmang/Makefile ];
+  	then  echo "Skin Enigma $Remind1"
+  		else git clone http://projects.vdr-developer.org/git/vdr-plugin-skinenigmang.git && cp -rf vdr-plugin-skinenigmang /home/`logname`/sifinstallrepo/ && mv vdr-plugin-skinenigmang skinenigmang && cd skinenigmang && cp -df themes/*.theme /etc/vdr/themes/ && cd ../../.. && make plugins && cd /etc/vdr/plugins && mkdir -p skinenigmang && cd skinenigmang && wget https://www.dropbox.com/s/odv30s0a22mau60/skinenigmang-logos-xpm-hi-20070702.tgz && cp -rf skinenigmang-logos-xpm-hi-20070702.tgz /home/`logname`/sifinstallrepo/ && wget https://www.dropbox.com/s/weh6c53bg9363ey/skinenigmang-channellogos-xpm-hi-20070702.tgz && cp -rf skinenigmang-channellogos-xpm-hi-20070702.tgz /home/`logname`/sifinstallrepo/ && wget https://www.dropbox.com/s/pydva1r0iafh5hy/skinenigmang-fonts-20080225.tgz && cp -rf skinenigmang-fonts-20080225.tgz /home/`logname`/sifinstallrepo/ && tar xzvf skinenigmang-channellogos-xpm-hi-20070702.tgz && tar xzvf skinenigmang-fonts-20080225.tgz && tar xzvf skinenigmang-fonts-20080225.tgz && rm -r skinenigmang-channellogos-xpm-hi-20070702.tgz && rm -r skinenigmang-fonts-20080225.tgz && rm -r skinenigmang-logos-xpm-hi-20070702.tgz && sed -i "s|-P'dvbapi'|& -P'skinenigmang'|" /usr/local/bin/vdrrun 
+fi
+      echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
+b) 
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+c) ;;
+esac
+#    
+#    
+#echo "*** EgalT2  (Skin) ***"; 
+    clear
+    dialog --title "   ** EgalT2 **   " --infobox "
+   ----------------------------------------------
+                Che cosa vuoi fare ?
+   ----------------------------------------------
+        [a]    Installare la Skin EgalT2
+        [b]    Rimuovere la Skin EgalT2                
+        [c]    Skip             
+                                       
+   ---------------------------------------------- " 0 0
+    echo -n "        Scegli  [a-c]:      "
+    read yourch
+    case $yourch in 
+a) cd $VDRSRC && if [ -f EgalT2/Makefile ];
+  	then  echo "EgalT2 $Remind1"
+  		else wget https://www.dropbox.com/s/knps7b8q2udary6/vdr-text2skin-EgalT2-0.3.3.tar.gz && cp -rf vdr-text2skin-EgalT2-0.3.3.tar.gz /home/`logname`/sifinstallrepo/ && tar -zxvf vdr-text2skin-EgalT2-0.3.3.tar.gz && rm -r vdr-text2skin-EgalT2-0.3.3.tar.gz && cd EgalT2 && make install && cd .. 
+fi
+      echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
+b) 
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+c) ;;
+esac
+#
+#
+apt-get -y install libgraphicsmagick++1-dev
 cd /home/`logname`/sifinstallrepo/; chmod -R 777 *;
 #
 cd $SRC/vdr; make plugins install;

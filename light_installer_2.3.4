@@ -1949,7 +1949,7 @@ cd /usr/local/src;
 if [ -f /$SRC/w_scan/Makefile ];
   then  echo "W_scan $Remind3"
 else
-cp /home/`logname`/sifinstallrepo/w_scan-20161022.tar.bz2 $SRC/; tar xivf w_scan-20161022.tar.bz2; mv w_scan-20161022 w_scan; rm -rf w_scan-20161022.tar.bz2; cd w_scan; ./configure; make; make install;
+cp -rf /home/`logname`/sifinstallrepo/w_scan-20161022.tar.bz2 $SRC/; tar xivf w_scan-20161022.tar.bz2; mv w_scan-20161022 w_scan; rm -rf w_scan-20161022.tar.bz2; cd w_scan; ./configure; make; make install;
 fi
 
     clear        

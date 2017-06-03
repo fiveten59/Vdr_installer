@@ -1,7 +1,7 @@
   #!/bin/bash
 ############################## !!! IMPORTANTE !!! #######################################
 #                                                                                       #
-# Nome Script : plugins_installer                                                       #
+# Nome Script : plugins_installer (solo per vdr 2.3.4)                                  #
 # Versione: Github Repository Master (https://github.com/fiveten59/plugins_installer)   #
 #                                                                                       #
 # date il comando sudo chmod 755 plugins_installer                                      #
@@ -13,7 +13,7 @@
 #REPO='home/'logname'/sifinstallrepo'
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
-SRCVDR='/usr/local/src/vdr-2.3.4'
+SRCVDR='/usr/local/src/vdr-2.3.5'
 VDRSRC=''$SRC'/vdr/PLUGINS/src'
 LIB='/usr/local/lib/vdr/plugins'
 VDR='vdr-2.3.4'
@@ -60,6 +60,7 @@ ALLOWED="#
         Femon                   
         Live                   
         Satip
+        Channelscan
         Image (non va)
         Mpv
         Radio
@@ -69,6 +70,9 @@ ALLOWED="#
         Manager
         Yaepghd (non va)
         Wirbelscan
+        Neutrinoepg
+        Systeminfo
+
    ---------------------------------------------- " 0 0                 
 echo "     premere il tasto [Invio] per continuare. . .    " ;read enterKey
 #
@@ -94,7 +98,7 @@ echo "     premere il tasto [Invio] per continuare. . .    " ;read enterKey
     case $yourch in
 
 	a) apt-get -y install libextractor-dev libmagick++-dev; apt-get -y install libtntnet-dev tntnet libxml++2.6-2 libglibmm-2.4-1c2a libxml++2.6-dev libglibmm-2.4-dev; apt-get -y install uuid-dev libmysql++-dev libimlib2-dev libssl-dev; apt-get -y install libpugixml1 libpugixml-dev; apt-get install -y libsndfile1 libsndfile-dev libid3tag0 libid3tag0-dev libmad0-dev mplayer2; apt-get -y install libssl-dev subversion libdvbcsa-dev; apt-get install -y libmysqlclient-dev libmysqlclient18 libimlib2; apt-get install -y libupnp6-dev libtntdb-dev libsqlite3-dev libboost1.55-dev tntdb-sqlite4; apt-get -y install libcec-dev cec-utils libarchive-dev; apt-get install -y cmake libudev-dev libxrandr-dev python-dev swig; apt-get -y install libglew1.10 libglew-dev libglm-dev;;
-	b) apt-get -y install libextractor-dev libmagick++-dev; apt-get -y install libtntnet-dev tntnet; apt-get -y install libxml++2.6-2v5 libglibmm-2.4-1v5 libxml++2.6-dev libglibmm-2.4-dev; apt-get -y install uuid-dev libmysql++-dev libimlib2-dev libssl-dev; apt-get -y install libpugixml1v5 libpugixml-dev; apt-get install -y libsndfile1 libsndfile1-dev libid3tag0 libid3tag0-dev libmad0-dev mplayer; apt-get install -y mpv libmpv1 libmpv-dev; apt-get -y install subversion libdvbcsa-dev; apt-get install -y libmysqlclient-dev libmysqlclient20 libimlib2; apt-get install -y libupnp6-dev libtntdb-dev libsqlite3-dev libboost1.58-dev tntdb-sqlite4v5; apt-get -y install libcec-dev cec-utils; apt-get install -y libxslt1-dev libarchive-dev; apt-get install -y cmake; apt-get install -y  libudev-dev libxrandr-dev python-dev swig; apt-get -y install graphicsmagick-libmagick-dev-compat; apt-get -y install imagemagick; apt-get -y install libmagick++-6.q16-dev libexif-dev; apt-get -y install libglew1.10 libglew-dev libglm-dev libzvbi-dev;;
+	b) apt-get -y install libextractor-dev libmagick++-dev; apt-get -y install libtntnet-dev tntnet; apt-get -y install libxml++2.6-2v5 libglibmm-2.4-1v5 libxml++2.6-dev libglibmm-2.4-dev; apt-get -y install uuid-dev libmysql++-dev libimlib2-dev libssl-dev; apt-get -y install libpugixml1v5 libpugixml-dev; apt-get install -y libsndfile1 libsndfile1-dev libid3tag0 libid3tag0-dev libmad0-dev mplayer; apt-get install -y mpv libmpv1 libmpv-dev; apt-get -y install subversion libdvbcsa-dev; apt-get install -y libmysqlclient-dev libmysqlclient20 libimlib2; apt-get install -y libupnp6-dev libtntdb-dev libsqlite3-dev libboost1.58-dev tntdb-sqlite4v5; apt-get -y install libcec-dev cec-utils; apt-get install -y libxslt1-dev libarchive-dev; apt-get install -y cmake; apt-get install -y  libudev-dev libxrandr-dev python-dev swig; apt-get -y install graphicsmagick-libmagick-dev-compat; apt-get -y install imagemagick; apt-get -y install libmagick++-6.q16-dev libexif-dev; apt-get -y install libglew1.10 libglew-dev libglm-dev libzvbi-dev; apt-get -y install libboost-iostreams-dev;;
 	c) ;;
 esac
 #
@@ -211,6 +215,38 @@ c) ;;
 esac 
 #
 #
+#echo "*** Channelscan ***"; 
+    clear
+    dialog --title "   ** Vdr-Plugins-Channelscan **   " --infobox "
+   ----------------------------------------------
+                Che cosa vuoi fare ?
+   ----------------------------------------------
+        [a]    Installare Vdr-Plugins-Channelscan
+        [b]    Rimuovere Vdr-Plugin-Channelscan                
+        [c]    Skip             
+                                       
+   ---------------------------------------------- " 0 0
+    echo -n "        Scegli  [a-c]:      "
+    read yourch
+    case $yourch in 
+a) cd $PLUGINS; mkdir channelsann; cd channelsann; wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz; tar -zxvf satellite_pack.tar.gz; cp -rf satellite_pack.tar.gz /home/`logname`/sifinstallrepo/; rm -rf satellite_pack.tar.gz;
+cd $VDRSRC; if [ -f channelscan/Makefile ];
+  		then  echo "Channelscan $Remind"
+			else git clone https://bitbucket.org/ua0lnj/channelscan.git; cp -rf channelscan /home/`logname`/sifinstallrepo/; cd channelscan; git clone https://bitbucket.org/ua0lnj/vdr-dvbchan-patch.git; mv $VDRSRC/channelscan/vdr-dvbchan-patch/*.patch $VDRSRC/channelscan/; cp -r $VDRSRC/channelscan/script/* /usr/local/bin
+	fi;
+				if [ -d $SRC/vdr-2.3.5 ]; then patch -p1 < vdr-2.3.5-dvbchan.patch; cd ../../..make plugins; sed -i "s|-P'externalplayer'|& -P'channelscan'|" /usr/local/bin/vdrrun
+					 elif [ -d $SRC/vdr-2.3.4 ]; then patch -p1 < vdr-2.3.4-dvbchan.patch; cd ../../..make plugins; sed -i "s|-P'externalplayer'|& -P'channelscan'|" /usr/local/bin/vdrrun
+						else cd ../../..; make plugins; sed -i "s|-P'externalplayer'|& -P'channelscan'|" /usr/local/bin/vdrrun 
+	 fi;;
+b) cd $VDRSRC && if [ -f channelscan/Makefile ];
+  		then rm -r channelscan && rm -rf $PLUGINS/channelscan && rm -r $LIB/libvdr-channelscan.* && sed -i "s|-P'channelscan'||" /usr/local/bin/vdrrun
+  			else echo "Channelscan $Remind5" 
+      fi;
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+c) ;;
+esac 
+#
+#
 #echo "*** Image ***"; echo "";
     clear
     dialog --title "   ** VDR-Plugin-Image **   " --infobox "
@@ -281,8 +317,9 @@ esac
     case $yourch in 
 a) cd $VDRSRC && if [ -f radio/Makefile ];
   		then  echo "Radio $Remind"
-			else git clone https://projects.vdr-developer.org/git/vdr-plugin-radio.git && cp -rf vdr-plugin-radio -rf /home/`logname`/sifinstallrepo/ && mv vdr-plugin-radio radio && cd ../.. && make && make plugins && cd /etc/vdr/plugins && mkdir -p radio && cp -r /$VDRSRC/radio/config/* $PLUGINS/radio/ && sed -i "s|-P'dvbapi'|& -P'radio'|" /usr/local/bin/vdrrun
-fi;;
+			else git clone https://projects.vdr-developer.org/git/vdr-plugin-radio.git && cp -rf vdr-plugin-radio -rf /home/`logname`/sifinstallrepo/ && mv vdr-plugin-radio radio && cd ../.. && make && make plugins && cd /etc/vdr/plugins && mkdir -p radio && cp -r /$VDRSRC/radio/config/* $PLUGINS/radio/ && sed -i "s|-P'externalplayer'|& -P'radio'|" /usr/local/bin/vdrrun
+fi;
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
 b) cd $VDRSRC && if [ -f radio/Makefile ];
    		then rm -r radio && rm -r $LIB/libvdr-radio.* && rm -r $PLUGINS/radio && sed -i "s|-P'radio'||" /usr/local/bin/vdrrun
    			else echo "Radio $Remind5" 
@@ -308,7 +345,7 @@ esac
     case $yourch in 
 a) cd $VDRSRC && if [ -f scraper2vdr/Makefile ];
   		then  echo "Scraper2vdr $Remind"
-  			else git clone https://github.com/horchi/scraper2vdr.git && cp -rf scraper2vdr /home/`logname`/sifinstallrepo/ && cd scraper2vdr && wget https://www.dropbox.com/s/rqm9w3n85igu5p0/patch_scraper2vdr.tar.gz && tar -zxvf patch_scraper2vdr.tar.gz && mv -f patch_scraper2vdr.tar.gz /home/`logname`/sifinstallrepo/ && patch -p1 < 11_scraper2vdr_i18n-it.patch && patch -p1 < 10_scraper2vdr_common.patch && cd $PLUGINS && mkdir -p scraper2vdr && cd $VDRSRC/scraper2vdr && make  && cp -rf $VDRSRC/scraper2vdr/configs/epg.dat $PLUGINS/scraper2vdr/ && sed -i "s|-P'dvbapi'|& -P'scraper2vdr'|" /usr/local/bin/vdrrun
+  			else git clone https://github.com/horchi/scraper2vdr.git && cp -rf scraper2vdr /home/`logname`/sifinstallrepo/ && cd scraper2vdr && wget https://www.dropbox.com/s/rqm9w3n85igu5p0/patch_scraper2vdr.tar.gz && tar -zxvf patch_scraper2vdr.tar.gz && mv -f patch_scraper2vdr.tar.gz /home/`logname`/sifinstallrepo/ && patch -p1 < 11_scraper2vdr_i18n-it.patch && patch -p1 < 10_scraper2vdr_common.patch && cd $PLUGINS && mkdir -p scraper2vdr && cd $VDRSRC/scraper2vdr && make  && cp -rf $VDRSRC/scraper2vdr/configs/epg.dat $PLUGINS/scraper2vdr/ && sed -i "s|-P'externalplayer'|& -P'scraper2vdr'|" /usr/local/bin/vdrrun
 fi;;
 b) cd $VDRSRC && if [ -f scraper2vdr/Makefile ];
   		then rm -r scraper2vdr && rm -rf $PLUGINS/scraper2vdr && rm -r $LIB/libvdr-scraper2vdr.* && sed -i "s|-P'scraper2vdr'||" /usr/local/bin/vdrrun
@@ -335,8 +372,9 @@ esac
     case $yourch in
 a) cd $VDRSRC && if [ -f vnsiserver/Makefile ];
 then  echo "Vnsiserver $Remind"
- else git clone https://github.com/FernetMenta/vdr-plugin-vnsiserver && cp -rf vdr-plugin-vnsiserver /home/`logname`/sifinstallrepo/ && mv vdr-plugin-vnsiserver vnsiserver && cd vnsiserver && make && make install && sed -i "s|-P'dvbapi'|& -P'vnsiserver'|" /usr/local/bin/vdrrun 
-fi;;
+ else git clone https://github.com/FernetMenta/vdr-plugin-vnsiserver && cp -rf vdr-plugin-vnsiserver /home/`logname`/sifinstallrepo/ && mv vdr-plugin-vnsiserver vnsiserver && cd vnsiserver && make && make install && sed -i "s|-P'externalplayer'|& -P'vnsiserver'|" /usr/local/bin/vdrrun 
+fi;
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
 b) cd $VDRSRC && if [ -f vnsiserver/Makefile ];
   then rm -r vnsiserver && rm -r $LIB/libvdr-vnsiserver.* && sed -i "s|-P'vnsiserver'||" /usr/local/bin/vdrrun
   else echo "Vnsiserver $Remind5" 
@@ -362,7 +400,7 @@ c) ;;
     case $yourch in
 a) cd $VDRSRC && if [ -f streamdev/Makefile ];
   		then  echo "StreamDev $Remind"
-  			else git clone git://projects.vdr-developer.org/vdr-plugin-streamdev.git && cp -rf vdr-plugin-streamdev /home/`logname`/sifinstallrepo/ && mv vdr-plugin-streamdev streamdev &&  mkdir -p $PLUGINS/streamdev-server && cd streamdev && cp streamdev-server/*  $PLUGINS/streamdev-server/ && wget https://www.dropbox.com/s/kr9vfw39cq0dcke/patch_streamdev.tar.gz && tar -zxvf patch_streamdev.tar.gz && mv -f patch_streamdev.tar.gz /home/`logname`/sifinstallrepo/ && patch -p1 < 10_streamdev_HEVC.patch && cd ../../../ && make plugins && make install && echo "*** streamdevhosts.conf setup ***" && rm -r $PLUGINS/streamdev-server/streamdevhosts.conf && touch $PLUGINS/streamdev-server/streamdevhosts.conf && echo "$ALLOWED" >> $PLUGINS/streamdev-server/streamdevhosts.conf && sed -i "s|-P'dvbapi'|& -P'streamdev-server'|" /usr/local/bin/vdrrun 
+  			else git clone git://projects.vdr-developer.org/vdr-plugin-streamdev.git && cp -rf vdr-plugin-streamdev /home/`logname`/sifinstallrepo/ && mv vdr-plugin-streamdev streamdev &&  mkdir -p $PLUGINS/streamdev-server && cd streamdev && cp streamdev-server/*  $PLUGINS/streamdev-server/ && wget https://www.dropbox.com/s/kr9vfw39cq0dcke/patch_streamdev.tar.gz && tar -zxvf patch_streamdev.tar.gz && mv -f patch_streamdev.tar.gz /home/`logname`/sifinstallrepo/ && patch -p1 < 10_streamdev_HEVC.patch && cd ../../../ && make plugins && make install && echo "*** streamdevhosts.conf setup ***" && rm -r $PLUGINS/streamdev-server/streamdevhosts.conf && touch $PLUGINS/streamdev-server/streamdevhosts.conf && echo "$ALLOWED" >> $PLUGINS/streamdev-server/streamdevhosts.conf && sed -i "s|-P'externalplayer'|& -P'streamdev-server'|" /usr/local/bin/vdrrun 
     fi;;
 b) cd $VDRSRC && if [ -f streamdev/Makefile ];
   		then rm -r streamdev && rm -rf $PLUGINS/streamdev-server && rm -r $LIB/libvdr-streamdev-* && sed -i "s|-P'streamdev-server'||" /usr/local/bin/vdrrun
@@ -389,8 +427,9 @@ c) ;;
     case $yourch in 
 a) cd $VDRSRC && if [ -f vdrmanager/Makefile ];
 		then  echo "VDR-Manager $Remind"
-			else git clone git://projects.vdr-developer.org/vdr-manager.git && cp -rf vdr-manager /home/`logname`/sifinstallrepo/ && mv vdr-vdrmanager vdrmanager && cd ../.. && make plugins && make install && echo "*** vdrmanager.conf setup ***" && cp $VDRSRC/vdrmanager/examples/*.conf $PLUGINS/ && sed -i "s|-P'dvbapi'|& -P'vdrmanager -p 6420 -P change'|" /usr/local/bin/vdrrun
-    fi;;
+			else git clone git://projects.vdr-developer.org/vdr-manager.git && cp -rf vdr-manager /home/`logname`/sifinstallrepo/ && mv vdr-vdrmanager vdrmanager && cd ../.. && make plugins && make install && echo "*** vdrmanager.conf setup ***" && cp $VDRSRC/vdrmanager/examples/*.conf $PLUGINS/ && sed -i "s|-P'externalplayer'|& -P'vdrmanager -p 6420 -P change'|" /usr/local/bin/vdrrun
+    fi;
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
 b) cd $VDRSRC && if [ -f vdrmanager/Makefile ];
   	then rm -r vdrmanager && rm -r $LIB/libvdr-vdrmanager.* && sed -i "s|-P'vdrmanager -p 6420 -P change'||" /usr/local/bin/vdrrun
   			else echo "VDR-Manager $Remind5" 
@@ -416,8 +455,9 @@ esac
     case $yourch in 
 a) cd $VDRSRC && if [ -f yaepghd/Makefile ];
   then  echo "YaepgHd $Remind"
-		else git clone https://github.com/lucianm/vdr-plugin-yaepghd.git && cp -rf vdr-plugin-yaepghd /home/`logname`/sifinstallrepo/  && mv vdr-plugin-yaepghd yaepghd && cp -R $VDRSRC/yaepghd/yaepghd /etc/vdr/plugins/ && cd ../.. && make plugins && sed -i "s|-P'dvbapi'|& -P'yaepghd'|" /usr/local/bin/vdrrun
-  fi;;
+		else git clone https://github.com/lucianm/vdr-plugin-yaepghd.git && cp -rf vdr-plugin-yaepghd /home/`logname`/sifinstallrepo/  && mv vdr-plugin-yaepghd yaepghd && cp -R $VDRSRC/yaepghd/yaepghd /etc/vdr/plugins/ && cd ../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'yaepghd'|" /usr/local/bin/vdrrun
+  fi;
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
 b) cd $VDRSRC && if [ -f yaepghd/Makefile ];
    		then rm -r yaepghd && cd $PLUGINS && rm -r yaepghd && rm -r $LIB/libvdr-yaepghd.* && sed -i "s|-P'yaepghd'||" /usr/local/bin/vdrrun
    			else echo "YaepgHd $Remind5" 
@@ -443,11 +483,68 @@ esac
     case $yourch in 
 a) cd $VDRSRC && if [ -f wirbelscan/Makefile ];
 		then  echo "VDR-Wirbelscan $Remind"
-			else wget http://wirbel.htpc-forum.de/wirbelscan/vdr-wirbelscan-dev-2016.08.14.tgz && cp -rf vdr-wirbelscan-dev-2016.08.14.tgz /home/`logname`/sifinstallrepo/ && tar xzvf vdr-wirbelscan-dev-2016.08.14.tgz && mv vdr-wirbelscan-dev-2016.08.14.tgz /home/`logname`/sifinstallrepo/ && mv wirbelscan-2016.08.14 wirbelscan && cd ../.. && make plugins && sed -i "s|-P'dvbapi'|& -P 'wirbelscan'|" /usr/local/bin/vdrrun 
-    fi;;
+			else wget http://wirbel.htpc-forum.de/wirbelscan/vdr-wirbelscan-dev-2016.08.14.tgz && tar xzvf vdr-wirbelscan-dev-2016.08.14.tgz && mv vdr-wirbelscan-dev-2016.08.14.tgz /home/`logname`/sifinstallrepo/ && mv wirbelscan-2016.08.14 wirbelscan && cd wirbelscan && wget https://www.dropbox.com/s/kvrqjg3mkyq2ke8/patch_wirbelscan.tar.gz && tar -zxvf patch_wirbelscan.tar.gz && cp -rf patch_wirbelscan.tar.gz /home/`logname`/sifinstallrepo/ && patch -p1 < 01_wirbelscan_min_max_from_stl.patch && cd ../../.. && make plugins && sed -i "s|-P'externalplayer'|& -P 'wirbelscan'|" /usr/local/bin/vdrrun 
+    fi;
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
 b) cd $VDRSRC && if [ -f wirbelscan/Makefile ];
   	then rm -r wirbelscan && rm -r $LIB/libvdr-wirbelscan.* && sed -i "s|-P'wirbelscan'||" /usr/local/bin/vdrrun
   			else echo "VDR-Wirbelscan $Remind5" 
+    fi;
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+c) ;;
+esac
+#
+#
+#echo "*** Neutrinoepg ***"; 
+    clear
+    dialog --title "   ** VDR-Plugin-Neutrinoepg **   " --infobox "
+   ----------------------------------------------
+                Che cosa vuoi fare ?
+   ----------------------------------------------
+        [a]    Installare Vdr-Plugins-Neutrinoepg
+        [b]    Rimuovere Vdr-Plugins-Neutrinoepg
+        [c]    Skip
+                                       
+   ---------------------------------------------- " 0 0
+    echo -n "        Scegli  [a-c]:      "
+    read yourch
+    case $yourch in 
+a) cd $VDRSRC && if [ -f neutrinoepg/Makefile ];
+		then  echo "VDR-Neutrinoepg $Remind"
+			else git clone https://projects.vdr-developer.org/git/vdr-plugin-neutrinoepg.git && cp -rf vdr-plugin-neutrinoepg /home/`logname`/sifinstallrepo/ && mv vdr-plugin-neutrinoepg neutrinoepg && cd neutrinoepg && wget https://www.dropbox.com/s/qsidsy7xxqhexzv/patch_neutrinoepg.tar.gz && tar -zxvf patch_neutrinoepg.tar.gz && mv -f patch_neutrinoepg.tar.gz /home/`logname`/sifinstallrepo/ && patch -p1 < 10_neutrinoepg_min_max_from_stl.patch && cd ../../.. && make plugins && sed -i "s|-P'externalplayer'|& -P 'neutrinoepg'|" /usr/local/bin/vdrrun 
+    fi;
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+b) cd $VDRSRC && if [ -f neutrinoepg/Makefile ];
+  	then rm -r neutrinoepg && rm -r $LIB/libvdr-neutrinoepg.* && sed -i "s|-P'neutrinoepg'||" /usr/local/bin/vdrrun
+  			else echo "VDR-Neutrinoepg $Remind5" 
+    fi;
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+c) ;;
+esac
+#
+#
+#echo "*** Systeminfo ***"; 
+    clear
+    dialog --title "   ** VDR-Plugin-Systeminfo **   " --infobox "
+   ----------------------------------------------
+                Che cosa vuoi fare ?
+   ----------------------------------------------
+        [a]    Installare Vdr-Plugins-Systeminfo
+        [b]    Rimuovere Vdr-Plugins-Systeminfo
+        [c]    Skip 
+                                       
+   ---------------------------------------------- " 0 0
+    echo -n "        Scegli  [a-c]:      "
+    read yourch
+    case $yourch in 
+a) cd $VDRSRC && if [ -f systeminfo/Makefile ];
+		then  echo "VDR-Systeminfo $Remind"
+			else wget http://firefly.vdr-developer.org/systeminfo/vdr-systeminfo-0.1.4.tar.bz2 && tar xjf vdr-systeminfo-0.1.4.tar.bz2 && mv -f vdr-systeminfo-0.1.4.tar.bz2 /home/`logname`/sifinstallrepo/ &&  mv systeminfo-0.1.4 systeminfo && cd systeminfo && wget https://www.dropbox.com/s/ruu24dr1juuvjbu/systeminfo.tar.gz && tar -zxvf systeminfo.tar.gz && cp -rf systeminfo.tar.gz /home/`logname`/sifinstallrepo/ && mv $VDRSRC/systeminfo/systeminfo.sh /usr/local/bin/ && cd ../../.. && make plugins && sed -i "s|-P'externalplayer'|& -P 'systeminfo'|" /usr/local/bin/vdrrun 
+    fi;
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+b) cd $VDRSRC && if [ -f systeminfo/Makefile ];
+  	then rm -r systeminfo && rm -r /usr/local/bin/systeminfo.sh && rm -r $LIB/libvdr-systeminfo.* && sed -i "s|-P'systeminfo'||" /usr/local/bin/vdrrun
+  			else echo "VDR-Systeminfo $Remind5" 
     fi;
         echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
 c) ;;

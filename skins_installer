@@ -1,4 +1,4 @@
-  #!/bin/bash
+#!/bin/bash
 ############################## !!! IMPORTANTE !!! #######################################
 #                                                                                       #
 # Nome Script : Skin_installer                                                          #
@@ -13,10 +13,10 @@
 #REPO='home/'logname'/sifinstallrepo'
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
-SRCVDR='/usr/local/src/vdr-2.3.4'
+SRCVDR='/usr/local/src/vdr-2.3.5'
 VDRSRC=''$SRC'/vdr/PLUGINS/src'
 LIB='/usr/local/lib/vdr/plugins'
-VDR='vdr-2.3.4'
+VDR='vdr-2.3.5'
 SHARE='/usr/local/share/vdr/plugins'
 PLUGINS='/etc/vdr/plugins'
 SKIN='/etc/vdr/plugins/text2skin'
@@ -72,6 +72,7 @@ apt-get -y install libcurl3 libcurl4-gnutls-dev cvs libxcb-icccm4 libxcb-icccm4-
         Skin NarrowHD
         Skin Enigma
         Skin EgalT2
+        Skin Elchi
 
    ---------------------------------------------- " 0 0                 
 echo "     premere il tasto [Invio] per continuare. . .    " ;read enterKey
@@ -93,7 +94,7 @@ echo "     premere il tasto [Invio] per continuare. . .    " ;read enterKey
     case $yourch in               
 a) cd $VDRSRC && if [ -f text2skin/Makefile ];
   then  echo "Text2skin $Remind"
-  else apt-get -y install libgraphicsmagick++1-dev && git clone git://projects.vdr-developer.org/vdr-plugin-text2skin.git && cp -rf vdr-plugin-text2skin /home/`logname`/sifinstallrepo/ && mv vdr-plugin-text2skin text2skin && cd text2skin && wget https://www.dropbox.com/s/h2114fton87spyh/patch_text2skin.tar.gz && cp -rf patch_text2skin.tar.gz /home/`logname`/sifinstallrepo/ && tar -zxvf patch_text2skin.tar.gz && rm -r patch_text2skin.tar.gz && patch -p1 < 10_text2skin_livebuffer.patch && patch -p1 < 17_text2skin_graphicsmagick.patch && cd ../../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'text2skin'|" /usr/local/bin/vdrrun
+  else apt-get -y install libgraphicsmagick++1-dev && git clone git://projects.vdr-developer.org/vdr-plugin-text2skin.git && cp -rf vdr-plugin-text2skin /home/`logname`/sifinstallrepo/ && mv vdr-plugin-text2skin text2skin && cd text2skin && wget https://www.dropbox.com/s/h2114fton87spyh/patch_text2skin.tar.gz && cp -rf patch_text2skin.tar.gz /home/`logname`/sifinstallrepo/ && tar -zxvf patch_text2skin.tar.gz && rm -r patch_text2skin.tar.gz && patch -p1 < 10_text2skin_livebuffer.patch && patch -p1 < 11_text2skin_render.patch && patch -p1 < 17_text2skin_graphicsmagick.patch && cd ../../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'text2skin'|" /usr/local/bin/vdrrun
     fi
 mkdir -p /etc/vdr/plugins/text2skin;
 cd /etc/vdr/themes;
@@ -194,10 +195,13 @@ esac
     case $yourch in 
 a) cd $VDRSRC && if [ -f skinenigmang/Makefile ];
   	then  echo "Skin Enigma $Remind1"
-  		else git clone http://projects.vdr-developer.org/git/vdr-plugin-skinenigmang.git && cp -rf vdr-plugin-skinenigmang /home/`logname`/sifinstallrepo/ && mv vdr-plugin-skinenigmang skinenigmang && cd skinenigmang && cp -df themes/*.theme /etc/vdr/themes/ && cd ../../.. && make plugins && cd /etc/vdr/plugins && mkdir -p skinenigmang && cd skinenigmang && wget https://www.dropbox.com/s/odv30s0a22mau60/skinenigmang-logos-xpm-hi-20070702.tgz && cp -rf skinenigmang-logos-xpm-hi-20070702.tgz /home/`logname`/sifinstallrepo/ && wget https://www.dropbox.com/s/weh6c53bg9363ey/skinenigmang-channellogos-xpm-hi-20070702.tgz && cp -rf skinenigmang-channellogos-xpm-hi-20070702.tgz /home/`logname`/sifinstallrepo/ && wget https://www.dropbox.com/s/pydva1r0iafh5hy/skinenigmang-fonts-20080225.tgz && cp -rf skinenigmang-fonts-20080225.tgz /home/`logname`/sifinstallrepo/ && tar xzvf skinenigmang-channellogos-xpm-hi-20070702.tgz && tar xzvf skinenigmang-fonts-20080225.tgz && tar xzvf skinenigmang-fonts-20080225.tgz && rm -r skinenigmang-channellogos-xpm-hi-20070702.tgz && rm -r skinenigmang-fonts-20080225.tgz && rm -r skinenigmang-logos-xpm-hi-20070702.tgz && sed -i "s|-P'dvbapi'|& -P'skinenigmang'|" /usr/local/bin/vdrrun 
+  		else git clone http://projects.vdr-developer.org/git/vdr-plugin-skinenigmang.git && cp -rf vdr-plugin-skinenigmang /home/`logname`/sifinstallrepo/ && mv vdr-plugin-skinenigmang skinenigmang && cd skinenigmang && cp -rf themes/*.theme /etc/vdr/themes/ && wget https://www.dropbox.com/s/3ba9ryxvctmfqty/patch_skinenigmang.tar.gz && tar -zxvf patch_skinenigmang && cp -rf patch_skinenigmang.tar.gz /home/`logname`/sifinstallrepo/ && rm -r patch_skinenigmang && patch -p1 < 01_skinenigmang_Makefile.patch && patch -p1 < 02_skinenigmang_min_max_from_stl.patch && cd ../../.. && make plugins && cd /etc/vdr/plugins && mkdir -p skinenigmang && cd skinenigmang && wget https://www.dropbox.com/s/odv30s0a22mau60/skinenigmang-logos-xpm-hi-20070702.tgz && cp -rf skinenigmang-logos-xpm-hi-20070702.tgz /home/`logname`/sifinstallrepo/ && wget https://www.dropbox.com/s/weh6c53bg9363ey/skinenigmang-channellogos-xpm-hi-20070702.tgz && cp -rf skinenigmang-channellogos-xpm-hi-20070702.tgz /home/`logname`/sifinstallrepo/ && wget https://www.dropbox.com/s/pydva1r0iafh5hy/skinenigmang-fonts-20080225.tgz && cp -rf skinenigmang-fonts-20080225.tgz /home/`logname`/sifinstallrepo/ && tar xzvf skinenigmang-channellogos-xpm-hi-20070702.tgz && tar xzvf skinenigmang-fonts-20080225.tgz && tar xzvf skinenigmang-fonts-20080225.tgz && rm -r skinenigmang-channellogos-xpm-hi-20070702.tgz && rm -r skinenigmang-fonts-20080225.tgz && rm -r skinenigmang-logos-xpm-hi-20070702.tgz && sed -i "s|-P'dvbapi'|& -P'skinenigmang'|" /usr/local/bin/vdrrun 
 fi
       echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
-b) 
+b) cd $VDRSRC && if [ -f skinenigmang/Makefile ];
+  	then rm -r $VDRSRC/skinenigmang && sed -e "s|-P'skinenigmang'||" /usr/local/bin/vdrrun
+		else echo "La Skin Enigma $Remind5" 
+fi
         echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
 c) ;;
 esac
@@ -222,11 +226,70 @@ a) cd $VDRSRC && if [ -f EgalT2/Makefile ];
   		else wget https://www.dropbox.com/s/knps7b8q2udary6/vdr-text2skin-EgalT2-0.3.3.tar.gz && cp -rf vdr-text2skin-EgalT2-0.3.3.tar.gz /home/`logname`/sifinstallrepo/ && tar -zxvf vdr-text2skin-EgalT2-0.3.3.tar.gz && rm -r vdr-text2skin-EgalT2-0.3.3.tar.gz && cd EgalT2 && make install && cd .. 
 fi
       echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
-b) 
+b) cd $VDRSRC && if [ -f EgalT2/Makefile ];
+  	then rm -r $VDRSRC/EgalT2 
+		else echo "La Skin EgalT2 $Remind5" 
+fi
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;; 
+c) ;;
+esac
+#
+#
+#    
+#    
+#echo "*** Skin-Nopacity***"; 
+    clear
+    dialog --title "   ** Skin-Nopacity **   " --infobox "
+   ----------------------------------------------
+                Che cosa vuoi fare ?
+   ----------------------------------------------
+        [a]    Installare la Skin-Nopacity
+        [b]    Rimuovere la Skin-Nopacity                
+        [c]    Skip             
+                                       
+   ---------------------------------------------- " 0 0
+    echo -n "        Scegli  [a-c]:      "
+    read yourch
+    case $yourch in 
+a) cd $VDRSRC && if [ -f skin-nopacity/Makefile ];
+  	then  echo "Skin-Nopacity $Remind1"
+  		else git clone https://projects.vdr-developer.org/git/skin-nopacity.git && cp -rf skin-nopacity /home/`logname`/sifinstallrepo/ && cd skin-nopacity && wget https://www.dropbox.com/s/hegz319loovpb4r/patch_skinnopacity.tar.gz && tar -zxvf patch_skinnopacity.tar.gz && cp -rf patch_skinnopacity.tar.gz /home/`logname`/sifinstallrepo/ && rm -r patch_skinnopacity.tar.gz && patch -p1 < 11_skinnopacity_displaychannel.c.patch && patch -p1 < 12_skinnopacity_lib_Magick.patch && patch -p1 < 12_skinnopacity_vdr233.patch && patch -p1 < 13_skinnopacity_min_max_from_stl.patch && cd ../../.. && make install && sed -e "s|-P'externalplayer'||-P'skin-nopacity -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun 
+fi
+      echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
+b) cd $VDRSRC && if [ -f skin-nopacity/Makefile ];
+  	then rm -r $VDRSRC/skin-nopacity && sed -e "s|-P'skin-nopacity -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun
+		else echo "La Skin Nopacity $Remind5" 
+fi
         echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
 c) ;;
 esac
 #
+#    
+#echo "*** SkinElchi ***"; 
+    clear
+    dialog --title "   ** SkinElchi **   " --infobox "
+   ----------------------------------------------
+                Che cosa vuoi fare ?
+   ----------------------------------------------
+        [a]    Installare la SkinElchi
+        [b]    Rimuovere la SkinElchi               
+        [c]    Skip             
+                                       
+   ---------------------------------------------- " 0 0
+    echo -n "        Scegli  [a-c]:      "
+    read yourch
+    case $yourch in 
+a) cd $VDRSRC && if [ -f skinelchi/Makefile ];
+  	then  echo "SkinElchi $Remind1"
+  		else wget http://firefly.vdr-developer.org/skinelchi/vdr-skinelchi-0.3.0.tar.bz2 && cp -rf vdr-skinelchi-0.3.0.tar.bz2 /home/`logname`/sifinstallrepo/ && tar xjf vdr-skinelchi-0.3.0.tar.bz2 && rm -r vdr-skinelchi-0.3.0.tar.bz2 && mv skinelchi-0.3.0 skinelchi && cd skinelchi && wget https://www.dropbox.com/s/ya24b0m7est22lx/patch_skinelchi.tar.gz && tar -zxvf patch_skinelchi.tar.gz && cp -rf patch_skinelchi.tar.gz /home/`logname`/sifinstallrepo/ && patch -p1 < vdr-plugin-skinelchi_min_max_from_stl.diff && ../../.. && make plugins 
+fi
+      echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
+b) cd $VDRSRC && if [ -f skinelchi/Makefile ];
+  	then rm -r $VDRSRC/skinelchi 
+		else echo "La SkinElchi $Remind5" 
+fi
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;; 
+c) ;;
 #
 apt-get -y install libgraphicsmagick++1-dev
 cd /home/`logname`/sifinstallrepo/; chmod -R 777 *;

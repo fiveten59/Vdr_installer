@@ -1456,7 +1456,7 @@ cp -rf /home/`logname`/sifinstallrepo/skin-flatplus /$VDRSRC/ && cd skin-flatplu
 #
 clear
 echo ""; echo "               *** Tvguide ***";  sleep 3
-cd $VDRSRC; cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-tvguide /$VDRSRC; mv vdr-plugin-tvguide tvguide; cd tvguide; cp -rf /home/`logname`/sifinstallrepo/patch_tvguide.tar.gz /$VDRSRC/tvguide/; tar -zxvf patch_tvguide.tar.gz; rm -r patch_tvguide.tar.gz; patch -p1 < 10_tvguide_lib_Magick.patch; sleep 1; patch -p1 < 11_tvguide_i18n-it.patch; sleep 1; patch -p1 < tvguide-patch-vdr-2.3.1.diff; make; cd ../../..; make plugins; cp -rf $VDRSRC/tvguide/themes/* /etc/vdr/themes/;
+cd $VDRSRC; cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-tvguide /$VDRSRC; mv vdr-plugin-tvguide tvguide; cd tvguide; cp -rf /home/`logname`/sifinstallrepo/patch_tvguide.tar.gz /$VDRSRC/tvguide/; tar -zxvf patch_tvguide.tar.gz; rm -r patch_tvguide.tar.gz; patch -p1 < 10_tvguide_lib_Magick.patch; sleep 1; patch -p1 < 11_tvguide_i18n-it.patch; sleep 1; patch -p1 < tvguide-patch-vdr-2.3.1.diff; patch -p1 < tvguide-for-vdr-2.3.5.diff ; make; cd ../../..; make plugins; cp -rf $VDRSRC/tvguide/themes/* /etc/vdr/themes/;
 #
 #
 echo "               *** Iptv ***"; echo ""; sleep 3

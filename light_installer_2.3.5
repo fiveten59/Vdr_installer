@@ -9,7 +9,8 @@
 #                                                                                       #
 #########################################################################################
 #
-PLUGIN="--lirc -P'softhddevice -f' -P'dvbapi' -P'skindesigner -l /etc/vdr/logos/ -i /usr/local/share/vdr/plugins/skindesigner/skins/' -P'skinflatplus -l /etc/vdr/logos/' -P'weatherforecast' -P'iptv' -P'osdteletext' -P'tvguide' -P'tvguideng' -P'epgsearch' -P'externalplayer'"
+PLUGIN="--lirc -P'softhddevice -f' -P'dvbapi' -P'skindesigner -l /etc/vdr/logos/ -i /usr/local/share/vdr/plugins/skindesigner/skins/' -P'skinflatplus -l /etc/vdr/logos/' -P'weatherforecast' -P'iptv' -P'tvguideng' -P'tvguide' -P'epgsearch' -P'externalplayer'"
+# 
 #REPO='home/'logname'/sifinstallrepo'
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
@@ -409,7 +410,6 @@ else
     git clone https://github.com/libass/libass.git;
 fi
 
-
 if [ -s /home/`logname`/sifinstallrepo/eventlircd ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
@@ -528,14 +528,14 @@ if [ -s /home/`logname`/sifinstallrepo/vdr-plugin-tvguideng ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/qjmzsml13sdhk0u/patch_tvguideng.tar.gz;
+    git clone git://projects.vdr-developer.org/vdr-plugin-tvguideng.git;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/patch_tvguideng.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    git clone git://projects.vdr-developer.org/patch_tvguideng.tar.gz;
+    wget https://www.dropbox.com/s/qjmzsml13sdhk0u/patch_tvguideng.tar.gz;
   fi
 
  if [ -s /home/`logname`/sifinstallrepo/01_Add_language_It.patch.tar.gz ]; then
@@ -599,6 +599,13 @@ if [ -s /home/`logname`/sifinstallrepo/externalplayer.conf.tar.gz ]; then
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/vhz1fz68159s0qg/externalplayer.conf.tar.gz;
+fi
+
+if [ -s /home/`logname`/sifinstallrepo/satellite_pack.tar.gz ]; then
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+else
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz;    
 fi
 
 ################################# caricamento skin ########################################
@@ -805,7 +812,7 @@ chmod -R 777 *;;
     git clone git://projects.vdr-developer.org/vdr-plugin-tvguide.git;
     wget https://www.dropbox.com/s/xkax9z6qumb76dj/patch_tvguide.tar.gz;
     git clone git://projects.vdr-developer.org/vdr-plugin-tvguideng.git;
-    git clone git://projects.vdr-developer.org/patch_tvguideng.tar.gz;
+    wget https://www.dropbox.com/s/qjmzsml13sdhk0u/patch_tvguideng.tar.gz;
     git clone https://github.com/rofafor/vdr-plugin-osdteletext.git;
     git clone https://github.com/rofafor/vdr-plugin-softhddevice.git;
     wget https://www.dropbox.com/s/ba5njlguttwlvao/patch_softhddevice_4.tar.gz;
@@ -821,6 +828,7 @@ chmod -R 777 *;;
     wget https://www.dropbox.com/s/1ujtklnct0nqq6q/iptv_conf.tar.gz;
     git clone https://git.uli-eckhardt.de/vdr-plugin-externalplayer.git;
     wget https://www.dropbox.com/s/vhz1fz68159s0qg/externalplayer.conf.tar.gz;
+    wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz    
 
 
 ############################ caricamento skin ########################################
@@ -1320,6 +1328,8 @@ echo "*** maxdevice ***"
     patch -p1 < 23_vdr_maxdevice.patch; sleep 1;
 echo "*** dvb_power_saving ***"
     patch -p1 < 24_vdr_dvb_power_saving_feature.patch; sleep 1;
+echo "*** dvbchan ***"
+    patch -p1 < vdr-2.3.5-dvbchan.patch
 echo "*** ci_debug ***"
     patch -p1 < 99_vdr_ci_debug.patch; sleep 1;
 echo "*** menuorg ***"
@@ -1337,11 +1347,6 @@ echo "*** 99_yaepghd ***"
     cp /home/`logname`/sifinstallrepo/Make.config.2.3.5 $SRC/vdr/; mv Make.config.2.3.5 Make.config; sleep 1;
     sed -i 's/|| DVB_API_VERSION_MINOR != 0//' dvbdevice.h
     #
-    mv /$VDRSRC/dvbsddevice /$VDRSRC/dvbsddevice.ori
-    mv /$VDRSRC/dvbhddevice /$VDRSRC/dvbhddevice.ori
-    mv /$VDRSRC/pictures /$VDRSRC/pictures.ori 
-    mv /$VDRSRC/rcu /$VDRSRC/rcu.ori
-    mv /$VDRSRC/skincurses /$VDRSRC/skincurses.ori
     #
     make && make plugins
     exit_status_check;
@@ -1354,23 +1359,7 @@ echo "*** 99_yaepghd ***"
     mkdir -p /etc/vdr/plugins; cp *.conf /etc/vdr; mkdir -p /usr/local/lib/vdr/plugins;
     clear    
     echo "*** keymacros.conf setup ***";
-    rm /etc/vdr/keymacros.conf; cd $SRCVDR; cp vdr /usr/local/bin/; touch /etc/vdr/keymacros.conf
-    clear
-    echo "# Remote control key macros for VDR
-#
-# Format:
-#
-# macrokey  key1 key2 key3...
-# macrokey  @plugin key1 key2 key3...
-#
-# See man vdr(5)
-
-Red       Recordings
-Green     @tvguide
-Yellow    Info
-Blue      @tvguideng
-Ok        Channels" >> /etc/vdr/keymacros.conf
-
+    rm -r /etc/vdr/keymacros.conf; cd $SRCVDR; cp -rf vdr /usr/local/bin/; touch /etc/vdr/keymacros.conf
     clear
     echo "# Remote control key macros for VDR
 #
@@ -1401,17 +1390,13 @@ clear
 echo "                        "
 echo "                        "
 echo "                        "
-echo "Ora installo i Plugins base (OSDTeletext - Dvbapi - Softhddevice - Epgsearch - Skindesigner - TvGuideng - Weatherforecast - Skinflatplus - TvGuide - Iptv - ExternalPlayer)"
+echo "Ora installo i Plugins base ( Dvbapi - Softhddevice - Epgsearch - Skindesigner - TvGuideng - Weatherforecast - Skinflatplus - TvGuide - Iptv - ExternalPlayer )"
 echo "                 premere il tasto [Invio] per continuare "; read enterKey
 cd $SRC;
 mkdir -p /usr/local/lib/vdr/plugins; mkdir -p /usr/local/lib/vdr/scripts; mkdir -p /etc/vdr/plugins; mkdir -p /etc/vdr/themes; cd $PLUGINS; mkdir -p tvguide;
 #
 apt-get -y install graphicsmagick-libmagick-dev-compat; apt-get -y install imagemagick; apt-get -y install libmagick++-6.q16-dev; apt-get -y install git-core; apt-get -y install libjansson4 libjansson-dev;
 apt-get -y install lm-sensors librsvg2-dev libxml2-dev libcairo2-dev; apt-get -y install vlc;
-#
-clear
-echo ""; echo "               *** OSDTeletext ***"; echo ""; sleep 3
-cd $VDRSRC;  cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-osdteletext /$VDRSRC/; mv vdr-plugin-osdteletext osdteletext; cd osdteletext; cp -rf /home/`logname`/sifinstallrepo/patch_osdteletext.tar.gz /$VDRSRC/osdteletext/; tar -zxvf patch_osdteletext.tar.gz; rm -r patch_osdteletext.tar.gz; cd ../../..; make plugins; mkdir -p /vtx
 #
 #
 clear
@@ -1440,7 +1425,7 @@ cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-skindesigner /$VDRSRC/ && mv vd
 #
 clear
 echo ""; echo "               *** TvGuideng ***"; echo ""; sleep 3
-cd $VDRSRC; cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-tvguideng /$VDRSRC; mv vdr-plugin-tvguideng tvguideng; cd tvguideng; cp -rf  cp -rf /home/`logname`/sifinstallrepo/patch_tvguideng.tar.gz; tar -zxvf patch_tvguideng.tar.gz; rm -r patch_tvguideng.tar.gz; patch -p1 < tvguideng_235.diff; cp -rf /$SRC/traduzioni/tvguideng_it_IT.po /$VDRSRC/tvguideng/po/; cd po/; mv tvguideng_it_IT.po it_IT.po; cd ../../../..; make plugins;
+cd $VDRSRC; cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-tvguideng /$VDRSRC; mv vdr-plugin-tvguideng tvguideng; cd tvguideng; cp -rf /home/`logname`/sifinstallrepo/patch_tvguideng.tar.gz /$VDRSRC/tvguideng/; tar -zxvf patch_tvguideng.tar.gz; rm -r patch_tvguideng.tar.gz; patch -p1 < tvguideng_235.diff; cp -rf /$SRC/traduzioni/tvguideng_it_IT.po /$VDRSRC/tvguideng/po/; cd po/; mv tvguideng_it_IT.po it_IT.po; cd ../../../..; make plugins;
 #
 #
 clear
@@ -1451,13 +1436,13 @@ cd $VDRSRC; cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-weatherforecast /$V
 clear
 echo "               *** Skin Flatplus ***"; echo ""; sleep 3
 cd $VDRSRC;
-cp -rf /home/`logname`/sifinstallrepo/skin-flatplus /$VDRSRC/ && cd skin-flatplus &&  cp -rf /home/`logname`/sifinstallrepo/patch_skinflatplus.tar.gz && tar -zxvf patch_skinflatplus.tar.gz && rm -rf patch_skinflatplus.tar.gz &&  patch -p1 < 10-skinflatplus_minmaxvdr235.diff && make install && cd /usr/local/lib/vdr/plugins/skinflatplus/widgets/temperatures/ && ln -s temperatures.default temperatures && cd ../system_information && ln -s system_information.ubuntu system_information  && cp -rf /home/`logname`/sifinstallrepo/flat_weather.tar.gz ../weather/ && cd ../weather && tar -zxvf flat_weather.tar.gz && rm -r flat_weather.tar.gz;
+cp -rf /home/`logname`/sifinstallrepo/skin-flatplus /$VDRSRC/ && cd skin-flatplus &&  cp -rf /home/`logname`/sifinstallrepo/patch_skinflatplus.tar.gz /$VDRSRC/skin-flatplus/ && tar -zxvf patch_skinflatplus.tar.gz && rm -rf patch_skinflatplus.tar.gz &&  patch -p1 < 10-skinflatplus_minmaxvdr235.diff && make install && cd /usr/local/lib/vdr/plugins/skinflatplus/widgets/temperatures/ && ln -s temperatures.default temperatures && cd ../system_information && ln -s system_information.ubuntu system_information  && cp -rf /home/`logname`/sifinstallrepo/flat_weather.tar.gz ../weather/ && cd ../weather && tar -zxvf flat_weather.tar.gz && rm -r flat_weather.tar.gz;
 # qui sopra c'è da mettere le icone di menù mancanti che sono dentro le skin del Skin Flatplus traducendole e comprimendole
 #
 clear
 echo ""; echo "               *** Tvguide ***";  sleep 3
-cd $VDRSRC; cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-tvguide /$VDRSRC; mv vdr-plugin-tvguide tvguide; cd tvguide; cp -rf /home/`logname`/sifinstallrepo/patch_tvguide.tar.gz /$VDRSRC/tvguide/; tar -zxvf patch_tvguide.tar.gz; rm -r patch_tvguide.tar.gz; patch -p1 < 10_tvguide_lib_Magick.patch; sleep 1; patch -p1 < 11_tvguide_i18n-it.patch; sleep 1; patch -p1 < tvguide-patch-vdr-2.3.1.diff; patch -p1 < tvguide-for-vdr-2.3.5.diff ; make; cd ../../..; make plugins; cp -rf $VDRSRC/tvguide/themes/* /etc/vdr/themes/;
-#
+cd $VDRSRC; cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-tvguide /$VDRSRC; mv vdr-plugin-tvguide tvguide; cd tvguide; cp -rf /home/`logname`/sifinstallrepo/patch_tvguide.tar.gz /$VDRSRC/tvguide/; tar -zxvf patch_tvguide.tar.gz; rm -r patch_tvguide.tar.gz; patch -p1 < 10_tvguide_lib_Magick.patch; patch -p1 < 11_tvguide_i18n-it.patch; patch -p1 < 12_tvguide_VDR235.patch; patch -p1 < 13_tvguide_comp_with_last_tvscraper.patch; make; cd ../../..; make plugins; cp -rf $VDRSRC/tvguide/themes/* /etc/vdr/themes/;
+#  
 #
 echo "               *** Iptv ***"; echo ""; sleep 3
 cd $VDRSRC && cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-iptv /$VDRSRC && mv vdr-plugin-iptv iptv && cd iptv && cp -rf /home/`logname`/sifinstallrepo/patch_iptv.tar.gz /$VDRSRC/iptv && tar -zxvf patch_iptv.tar.gz && rm -r patch_iptv.tar.gz && patch -p1 < iptv.patch && make && cd ../../.. && make plugins && mkdir -p /etc/vdr/plugins/iptv/vlcinput && cp -rf /home/`logname`/sifinstallrepo/iptv_conf.tar.gz /$PLUGINS/iptv/vlcinput/ && cd $PLUGINS/iptv/vlcinput && tar -zxvf iptv_conf.tar.gz && rm -r iptv_conf.tar.gz 
@@ -1467,8 +1452,8 @@ clear
 echo ""; echo "               *** Externalplayer ***";  sleep 3
 cd $VDRSRC; cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-externalplayer /$VDRSRC && mv vdr-plugin-externalplayer externalplayer && cp -rf /$SRC/traduzioni/external_it_IT.po /$VDRSRC/externalplayer/po/ && cd externalplayer/po/ && mv external_it_IT.po it_IT.po && cd ../../../.. && make plugins && cp -rf /home/`logname`/sifinstallrepo/externalplayer.conf.tar.gz /etc/vdr/plugins/ && cd /etc/vdr/plugins && tar -zxvf externalplayer.conf.tar.gz && rm -r externalplayer.conf.tar.gz;
 clear
-
-
+#
+#
 cd /usr/local/src/vdr; make plugins install;
 
     echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
@@ -1488,7 +1473,7 @@ a1)                                       ######################################
 
     clear
     echo "                    Adesso Rimuovo VDR 2.3.x"; sleep 4
-dpkg -r vdr; rm -rf /etc/vdr; rm -rf /usr/local/share/vdr; rm -rf /usr/local/lib/vdr; cd $SRC; rm -r vdr vdr-*; cd packages; rm -r vdr*.deb; rm -r /usr/local/bin/vdrpoweroff; rm -r /usr/local/bin/vdrrun;  rm -rf /usr/local/bin/start-vdr-xine.sh; rm -rf /usr/local/bin/start-xinelib-vdr.sh; rm -rf /usr/local/share/vdr; rm -rf /usr/local/bin/start-softhddevice-vdr.sh; rm -rf /home/`logname`/Scrivania/Xinelib.desktop; rm -rf /home/`logname`/Scrivania/Vdr-Xine.desktop; rm -rf /home/`logname`/Scrivania/Vdr-Softhddevice.desktop; rm -r /usr/bin/mplayer.sh; rm -rf /home/`logname`/Scrivania/KillVdr.desktop; cd $PACKAGES; rm -rf vdr*.deb; rm -rf /usr/share/applications/Xinelib.desktop; rm -rf /usr/share/applications/Vdr-Xine.desktop; rm -rf /usr/share/applications/Vdr-Softhddevice.desktop; rm -rf /usr/share/applications/KillVdr.desktop;
+dpkg -r vdr; rm -rf /etc/vdr; rm -rf /usr/local/share/vdr; rm -rf /usr/local/lib/vdr; rm -rf /var/cache/vdr; cd $SRC; rm -r vdr vdr-*; cd packages; rm -r vdr*.deb; rm -r /usr/local/bin/vdrpoweroff; rm -r /usr/local/bin/vdrrun;  rm -rf /usr/local/bin/start-vdr-xine.sh; rm -rf /usr/local/bin/start-xinelib-vdr.sh; rm -rf /usr/local/share/vdr; rm -rf /usr/local/bin/start-softhddevice-vdr.sh; rm -rf /home/`logname`/Scrivania/Xinelib.desktop; rm -rf /home/`logname`/Scrivania/Vdr-Xine.desktop; rm -rf /home/`logname`/Scrivania/Vdr-Softhddevice.desktop; rm -r /usr/bin/mplayer.sh; rm -rf /home/`logname`/Scrivania/KillVdr.desktop; cd $PACKAGES; rm -rf vdr*.deb; rm -rf /usr/share/applications/Xinelib.desktop; rm -rf /usr/share/applications/Vdr-Xine.desktop; rm -rf /usr/share/applications/Vdr-Softhddevice.desktop; rm -rf /usr/share/applications/KillVdr.desktop;
     echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
 
     
@@ -1522,7 +1507,7 @@ fi;
 #                                                                                                                           #
 					  #########################################	
 					  #      Installazione Icone Vdr          #
-                                          #########################################
+                      #########################################
 
 clear
 echo "                    Installazione Icone Vdr"; sleep 1
@@ -1972,7 +1957,7 @@ cd /usr/local/src;
 if [ -f /$SRC/w_scan/Makefile ];
   then  echo "W_scan $Remind3"
 else
-cp -rf /home/`logname`/sifinstallrepo/w_scan-20161022.tar.bz2 $SRC/; tar xivf w_scan-20161022.tar.bz2; mv w_scan-20161022 w_scan; rm -rf w_scan-20161022.tar.bz2; cd w_scan; cp -rf /home/`logname`/sifinstallrepo/patch_w_scan.tar.gz; ; tar -zxvf patch_w_scan.tar.gz; rm -rf patch_w_scan.tar.gz; patch -p1 10_w-scan_dvb-t2.patch; ./configure; make; make install;
+cp -rf /home/`logname`/sifinstallrepo/w_scan-20161022.tar.bz2 $SRC/; tar xivf w_scan-20161022.tar.bz2; mv w_scan-20161022 w_scan; rm -rf w_scan-20161022.tar.bz2; cd w_scan; cp -rf /home/`logname`/sifinstallrepo/patch_w_scan.tar.gz $SRC/w_scan/; tar -zxvf patch_w_scan.tar.gz; rm -rf patch_w_scan.tar.gz; patch -p1 < 10_w-scan_dvb-t2.patch; ./configure; make; make install;
 fi
 
     clear        
@@ -2222,7 +2207,7 @@ echo "     premere il tasto [Invio] per continuare. . .    " ;read enterKey
     echo -n "        Scegli  [a-b]:      "
     read yourch
     case $yourch in
-a)  dpkg -r vdr; rm -rf /etc/vdr; rm -rf /usr/local/share/vdr; rm -rf /usr/local/lib/vdr; cd $SRC; rm -r vdr vdr-*; cd packages; rm -r vdr*.deb; rm -r /usr/local/bin/vdrpoweroff; rm -r /usr/local/bin/vdrrun;  rm -rf /usr/local/bin/start-vdr-xine.sh; rm -rf /usr/local/bin/start-xinelib-vdr.sh; rm -rf /usr/local/share/vdr; rm -rf /usr/local/bin/start-softhddevice-vdr.sh; rm -rf /home/`logname`/Scrivania/Xinelib.desktop; rm -rf /home/`logname`/Scrivania/Vdr-Xine.desktop; rm -rf /home/`logname`/Scrivania/Vdr-Softhddevice.desktop; rm -r /usr/bin/mplayer.sh; rm -rf /home/`logname`/Scrivania/KillVdr.desktop; cd $PACKAGES; rm -rf vdr*.deb; rm -rf /usr/share/applications/Xinelib.desktop; rm -rf /usr/share/applications/Vdr-Xine.desktop; rm -rf /usr/share/applications/Vdr-Softhddevice.desktop; rm -rf /usr/share/applications/KillVdr.desktop;;
+a)  dpkg -r vdr; rm -rf /etc/vdr; rm -rf /usr/local/share/vdr; rm -rf /var/cache/vdr; rm -rf /usr/local/lib/vdr; cd $SRC; rm -r vdr vdr-*; cd packages; rm -r vdr*.deb; rm -r /usr/local/bin/vdrpoweroff; rm -r /usr/local/bin/vdrrun;  rm -rf /usr/local/bin/start-vdr-xine.sh; rm -rf /usr/local/bin/start-xinelib-vdr.sh; rm -rf /usr/local/share/vdr; rm -rf /usr/local/bin/start-softhddevice-vdr.sh; rm -rf /home/`logname`/Scrivania/Xinelib.desktop; rm -rf /home/`logname`/Scrivania/Vdr-Xine.desktop; rm -rf /home/`logname`/Scrivania/Vdr-Softhddevice.desktop; rm -r /usr/bin/mplayer.sh; rm -rf /home/`logname`/Scrivania/KillVdr.desktop; cd $PACKAGES; rm -rf vdr*.deb; rm -rf /usr/share/applications/Xinelib.desktop; rm -rf /usr/share/applications/Vdr-Xine.desktop; rm -rf /usr/share/applications/Vdr-Softhddevice.desktop; rm -rf /usr/share/applications/KillVdr.desktop;;
 b) ;;
 esac
 #

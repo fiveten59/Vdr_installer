@@ -1,7 +1,7 @@
   #!/bin/bash
 ############################## !!! IMPORTANTE !!! #######################################
 #                                                                                       #
-# Nome Script : plugins_installer (solo per vdr 2.3.4)                                  #
+# Nome Script : plugins_installer (solo per vdr 2.3.5)                                  #
 # Versione: Github Repository Master (https://github.com/fiveten59/plugins_installer)   #
 #                                                                                       #
 # date il comando sudo chmod 755 plugins_installer                                      #
@@ -61,6 +61,7 @@ ALLOWED="#
         Live                   
         Satip
         Channelscan
+        Osdteletext
         Image (non va)
         Mpv
         Radio
@@ -229,15 +230,11 @@ esac
     echo -n "        Scegli  [a-c]:      "
     read yourch
     case $yourch in 
-a) cd $PLUGINS; mkdir channelsann; cd channelsann; wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz; tar -zxvf satellite_pack.tar.gz; cp -rf satellite_pack.tar.gz /home/`logname`/sifinstallrepo/; rm -rf satellite_pack.tar.gz;
+a) cd $PLUGINS; mkdir channelscan; cd channelscan; wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz; tar -zxvf satellite_pack.tar.gz; cp -rf satellite_pack.tar.gz /home/`logname`/sifinstallrepo/; rm -rf satellite_pack.tar.gz;
 cd $VDRSRC; if [ -f channelscan/Makefile ];
   		then  echo "Channelscan $Remind"
-			else git clone https://bitbucket.org/ua0lnj/channelscan.git; cp -rf channelscan /home/`logname`/sifinstallrepo/; cd channelscan; git clone https://bitbucket.org/ua0lnj/vdr-dvbchan-patch.git; mv $VDRSRC/channelscan/vdr-dvbchan-patch/*.patch $VDRSRC/channelscan/; cp -r $VDRSRC/channelscan/script/* /usr/local/bin
-	fi;
-				if [ -d $SRC/vdr-2.3.5 ]; then patch -p1 < vdr-2.3.5-dvbchan.patch; cd ../../..make plugins; sed -i "s|-P'externalplayer'|& -P'channelscan'|" /usr/local/bin/vdrrun
-					 elif [ -d $SRC/vdr-2.3.4 ]; then patch -p1 < vdr-2.3.4-dvbchan.patch; cd ../../..make plugins; sed -i "s|-P'externalplayer'|& -P'channelscan'|" /usr/local/bin/vdrrun
-						else cd ../../..; make plugins; sed -i "s|-P'externalplayer'|& -P'channelscan'|" /usr/local/bin/vdrrun 
-	 fi;;
+			else git clone https://bitbucket.org/ua0lnj/channelscan.git; cp -rf channelscan /home/`logname`/sifinstallrepo/; cd channelscan; cp -r $VDRSRC/channelscan/script/* /usr/local/bin; cd ../../..; make plugins; sed -i "s|-P'externalplayer'|& -P'channelscan'|" /usr/local/bin/vdrrun 
+	fi;;
 b) cd $VDRSRC && if [ -f channelscan/Makefile ];
   		then rm -r channelscan && rm -rf $PLUGINS/channelscan && rm -r $LIB/libvdr-channelscan.* && sed -i "s|-P'channelscan'||" /usr/local/bin/vdrrun
   			else echo "Channelscan $Remind5" 
@@ -245,6 +242,34 @@ b) cd $VDRSRC && if [ -f channelscan/Makefile ];
         echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
 c) ;;
 esac 
+#
+#
+#echo "*** Osdteletext ***"; 
+    clear
+    dialog --title "   ** VDR-Plugin-Osdteletext **   " --infobox "
+   ----------------------------------------------
+                Che cosa vuoi fare ?
+   ----------------------------------------------
+        [a]    Installare Vdr-Plugins-Osdteletext
+        [b]    Rimuovere Vdr-Plugins-Osdteletext
+        [c]    Skip 
+                                       
+   ---------------------------------------------- " 0 0
+    echo -n "        Scegli  [a-c]:      "
+    read yourch
+    case $yourch in 
+a) cd $VDRSRC && if [ -f osdteletext/Makefile ];
+		then  echo "VDR-Osdteletext $Remind"
+			else git clone https://github.com/rofafor/vdr-plugin-osdteletext.git && cp -rf vdr-plugin-osdteletext /home/`logname`/sifinstallrepo/ &&  mv vdr-plugin-osdteletext osdteletext && cd osdteletext && wget https://www.dropbox.com/s/ncb0gnw9pkee83d/patch_osdteletext.tar.gz && tar -zxvf patch_osdteletext.tar.gz && cp -rf patch_osdteletext.tar.gz /home/`logname`/sifinstallrepo/ && rm -r patch_osdteletext.tar.gz && cd ../../.. && make plugins && sed -i "s|-P'externalplayer'|& -P 'osdteletext'|" /usr/local/bin/vdrrun 
+    fi;
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+b) cd $VDRSRC && if [ -f osdteletext/Makefile ];
+  	then rm -r osdteletext && rm -r /var/cache/vdr/vtx && rm -r $LIB/libvdr-osdteletext.* && sed -i "s|-P'osdteletext'||" /usr/local/bin/vdrrun
+  			else echo "VDR-Osdteletext $Remind5" 
+    fi;
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+c) ;;
+esac
 #
 #
 #echo "*** Image ***"; echo "";

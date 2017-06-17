@@ -1,11 +1,11 @@
 #!/bin/bash
 ############################## !!! IMPORTANTE !!! #######################################
 #                                                                                       #
-# Nome Script : light_installer_2.3.6                                                  #
+# Nome Script : light_installer_2.3.7                                                  #
 # Versione: Github Repository Master (https://github.com/fiveten59/Vdr_installer)       #
 #                                                                                       #
-# date il comando sudo chmod 755 light_installer_2.3.6                                  #
-# avviate lo script con il comando: sudo sh ./light_installer_2.3.6                     #
+# date il comando sudo chmod 755 light_installer_2.3.7                                  #
+# avviate lo script con il comando: sudo sh ./light_installer_2.3.7                     #
 #                                                                                       #
 #########################################################################################
 #
@@ -14,10 +14,10 @@ PLUGIN="--lirc -P'softhddevice -f' -P'dvbapi' -P'skindesigner -l /etc/vdr/logos/
 #REPO='home/'logname'/sifinstallrepo'
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
-SRCVDR='/usr/local/src/vdr-2.3.6'
+SRCVDR='/usr/local/src/vdr-2.3.7'
 VDRSRC=''$SRC'/vdr/PLUGINS/src'
 LIB='/usr/local/lib/vdr/plugins'
-VDR='vdr-2.3.6'
+VDR='vdr-2.3.7'
 PACKAGES=""$SRC"/packages"
 ARCHIVES=""$SRC"/archives"
 SCRIPTS=""$SRC"/archives/scripts"
@@ -268,11 +268,11 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
     dialog --title " VDR Light Installer Github Repository " --infobox "Copyright (C) 2017
     
 
-	Nome Script : light_installer_2.3.6                                                  
+	Nome Script : light_installer_2.3.7                                                  
 	Versione: Github Repository Master  (https://github.com/fiveten59/Vdr_installer)                                                     
                                                                                               
-	date il comando sudo chmod 755 light_installer_2.3.6                                  
-	avviate lo script con il comando: sudo sh ./light_installer_2.3.6                     
+	date il comando sudo chmod 755 light_installer_2.3.7                                  
+	avviate lo script con il comando: sudo sh ./light_installer_2.3.7                     
                                                                                        
                                                                " 0 0
 
@@ -284,7 +284,7 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
     #
     clear
     echo ""
-    dialog --title "   ♦♦♦♦♦  Script Installazione VDR 2.3.6 - Light version - Librerie & Codec  ♦♦♦♦♦   " --infobox "
+    dialog --title "   ♦♦♦♦♦  Script Installazione VDR 2.3.7 - Light version - Librerie & Codec  ♦♦♦♦♦   " --infobox "
           ╭===========================================================================================╮    
           |   ................♦♦♦   Download & Aggiornamento Repository Locale  ♦♦♦...................  |
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
@@ -296,7 +296,7 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
           |   =======================================================================================   |
           |   .............♦♦♦                        VDR - Plugins  - Skin               ♦♦♦.........  |
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
-          |   [3]    +[Submenu] ~~  VDR 2.3.6 & Plugins ................................................ |     
+          |   [3]    +[Submenu] ~~  VDR 2.3.7 & Plugins ................................................ |     
           |   =======================================================================================   |
           |   .............♦♦♦                    Lista Canali - Creazione                 ♦♦♦........  |
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
@@ -426,25 +426,25 @@ else
 
 ################################ caricamento vdr e plugin ##############################
 
-if [ -s /home/`logname`/sifinstallrepo/vdr-2.3.6.tar.bz2 ]; then
+if [ -s /home/`logname`/sifinstallrepo/vdr-2.3.7.tar.bz2 ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget ftp://ftp.tvdr.de/vdr/Developer/vdr-2.3.6.tar.bz2;
+    wget ftp://ftp.tvdr.de/vdr/Developer/vdr-2.3.7.tar.bz2;
   fi
 
-if [ -s /home/`logname`/sifinstallrepo/vdr-patches.2.3.6.tar.gz ]; then
+if [ -s /home/`logname`/sifinstallrepo/vdr-patches.2.3.7.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/4bztmzxxg6xjxg3/vdr-patches.2.3.6.tar.gz;
+    wget https://www.dropbox.com/s/9ewx7vriddfcxc7/vdr-patches.2.3.7.tar.gz;
   fi
 
-if [ -s /home/`logname`/sifinstallrepo/Make.config.2.3.6 ]; then
+if [ -s /home/`logname`/sifinstallrepo/Make.config.2.3.7 ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/vrlz9s48xi5o2db/Make.config.2.3.6;
+    wget https://www.dropbox.com/s/el76ioots63nq07/Make.config.2.3.7;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/vdrsymbols.tar.gz ]; then
@@ -779,7 +779,7 @@ chmod -R 777 *;;
     git clone https://github.com/mstorsjo/fdk-aac.git;
     git clone git://git.videolan.org/x264.git;
     hg clone http://hg.videolan.org/x265;
-    git clone https://chromium.googlesource.com/webm/libvpx
+    git clone https://chromium.googlesource.com/webm/libvpx;
     git clone https://git.ffmpeg.org/ffmpeg.git;
     wget http://developer.download.nvidia.com/assets/cuda/files/nvidia_video_sdk_6.0.1.zip;
     git clone https://github.com/OpenELEC/eventlircd.git;
@@ -787,9 +787,9 @@ chmod -R 777 *;;
 
 ############################ caricamento vdr e plugin ################################
 
-    wget ftp://ftp.tvdr.de/vdr/Developer/vdr-2.3.6.tar.bz2;
-    wget https://www.dropbox.com/s/4bztmzxxg6xjxg3/vdr-patches.2.3.6.tar.gz;
-    wget https://www.dropbox.com/s/vrlz9s48xi5o2db/Make.config.2.3.6;
+    wget ftp://ftp.tvdr.de/vdr/Developer/vdr-2.3.7.tar.bz2;
+    wget https://www.dropbox.com/s/9ewx7vriddfcxc7/vdr-patches.2.3.7.tar.gz;
+    wget https://www.dropbox.com/s/el76ioots63nq07/Make.config.2.3.7;
     wget https://www.dropbox.com/s/bx97ikp7c1h2qj2/vdrsymbols.tar.gz;
     git clone git://projects.vdr-developer.org/vdr-plugin-tvguide.git;
     wget https://www.dropbox.com/s/xkax9z6qumb76dj/patch_tvguide.tar.gz;
@@ -808,7 +808,7 @@ chmod -R 777 *;;
     wget https://www.dropbox.com/s/1ujtklnct0nqq6q/iptv_conf.tar.gz;
     git clone https://git.uli-eckhardt.de/vdr-plugin-externalplayer.git;
     wget https://www.dropbox.com/s/vhz1fz68159s0qg/externalplayer.conf.tar.gz;
-    wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz    
+    wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz;   
 
 
 ############################ caricamento skin ########################################
@@ -1267,7 +1267,7 @@ z) ;;
 #                                                                                                                           #
                                                                                                                           #
 a)                                        #########################################
-                                          #        VDR-2.3.6 & Plugins Base       #
+                                          #        VDR-2.3.7 & Plugins Base       #
                                           #########################################
 
 
@@ -1280,12 +1280,10 @@ a)                                        ######################################
     apt-get -y install libcurl3 libcurl4-gnutls-dev cvs libxcb-icccm4 libx11-xcb-dev  libxcb-ewmh-dev 
     apt-get -y install libpcre++0v5
     clear    
-    echo "               Adesso Installo VDR 2.3.6      "; sleep 4 
+    echo "               Adesso Installo VDR 2.3.7      "; sleep 4 
     cp -rf /home/`logname`/sifinstallrepo/$VDR.tar.bz2 $SRC/; tar xivf $VDR.tar.bz2;
     ln -s $VDR vdr; rm -r $VDR.tar.bz2
-    cd vdr; cp -rf /home/`logname`/sifinstallrepo/vdr-patches.2.3.6.tar.gz $SRC/vdr/; tar -zxvf vdr-patches.2.3.6.tar.gz; rm -r vdr-patches.2.3.6.tar.gz; sleep 1;
-echo "*** 01_vdr_fixstatelocking_vdr236 ***"
-    patch -p1 < 01_vdr_fixstatelocking_vdr236.patch
+    cd vdr; cp -rf /home/`logname`/sifinstallrepo/vdr-patches.2.3.7.tar.gz $SRC/vdr/; tar -zxvf vdr-patches.2.3.7.tar.gz; rm -r vdr-patches.2.3.7.tar.gz; sleep 1;
 echo "*** zapcockpit ***"
     patch -p1 < 02_vdr_zapcockpit.patch; sleep 1;
 echo "*** getbitmap ***"
@@ -1297,7 +1295,7 @@ echo "*** editrecording ***"
 echo "*** avcdescriptor ***"
     patch -p1 < 06_vdr_avcdescriptor.patch; sleep 1;
 echo "*** epgsearch ***"
-    patch -p1 < 10_vdr_epgsearch_exttimeredit.patch; sleep 1;
+    patch -p1 < 10_vdr_epgsearch_exttimeredit_vdr-2.3.5.patch; sleep 1;
 echo "*** pin ***"
     patch -p1 < 12_vdr_pin.patch; sleep 1;
 echo "*** mainmenuhooks ***"
@@ -1326,7 +1324,7 @@ echo "*** 99_yaepghd ***"
     patch -p1 < 99_yaepghd.patch; sleep 1;    
     rm -r *.patch; sleep 3;
     # 
-    cp /home/`logname`/sifinstallrepo/Make.config.2.3.6 $SRC/vdr/; mv Make.config.2.3.6 Make.config; sleep 1;
+    cp /home/`logname`/sifinstallrepo/Make.config.2.3.7 $SRC/vdr/; mv Make.config.2.3.7 Make.config; sleep 1;
     sed -i 's/|| DVB_API_VERSION_MINOR != 0//' dvbdevice.h
     #
     #
@@ -1336,7 +1334,7 @@ echo "*** 99_yaepghd ***"
     echo ""; echo "*** Final compilation ***"; echo ""
     cd /usr/local/src/vdr
     apt-get -y purge vdr
-    checkinstall --fstrans=no --install=yes --pkgname=vdr --pkgversion "2.3.6-git" --pakdir=$PACKAGES --default
+    checkinstall --fstrans=no --install=yes --pkgname=vdr --pkgversion "2.3.7-git" --pakdir=$PACKAGES --default
     rm -r /media/video; mkdir /media/video; mkdir -p /usr/local/lib/vdr/scripts;
     mkdir -p /etc/vdr/plugins; cp *.conf /etc/vdr; mkdir -p /usr/local/lib/vdr/plugins;
     clear    

@@ -13,54 +13,45 @@
 #REPO='home/'logname'/sifinstallrepo'
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
-SRCVDR='/usr/local/src/vdr-2.3.5'
 VDRSRC=''$SRC'/vdr/PLUGINS/src'
 LIB='/usr/local/lib/vdr/plugins'
-VDR='vdr-2.3.5'
-SHARE='/usr/local/share/vdr/plugins'
 PLUGINS='/etc/vdr/plugins'
 SKIN='/etc/vdr/plugins/text2skin'
-SKINS='/usr/local/share/vdr/plugins/skindesigner/skins/'
-SHARE='/usr/local/share/vdr/plugins'
-TIMESTAMP=`date +%Y%m%d.%R`
 Remind='è già installato... avete dimenticato di aggiungere il comando al vdrrun?'
+Remind1='Ho rimosso'
 Remind5='non è installato'
-ALLOWED="#
-# allowed_hosts.conf  This file describes a number of host addresses that
-#                     are allowed to connect to the streamdev/vn****rver/xvdr/xinelioutput server running 
-#                     with the Video Disk Recorder (VDR) on this system.
-# Syntax:
-#
-# IP-Address[/Netmask]
-#
-127.0.0.1             # always accept localhost
-192.168.1.0/24        # any host on the local net
-192.168.0.0/24        # any host on the local net
-#204.152.189.113      # a specific host
-#0.0.0.0/0            # any host on any net (USE THIS WITH CARE!)
-#
-#
-# SE LA VOSTRA CONFIGURAZIONE DI RETE E' QUESTA NON TOCCATELA!!!
-# ESCI CON CTRL+X
-#
-# SE LA VOSTRA CONFIGURAZIONE DI RETE E' DIVERSA MODIFICALA
-# SALVA CON CTRL+O ED ESCI CON CTRL+X "
 #
 #
 
                                           ###############################################
                                           #        Installazione altre Skins            #
                                           ###############################################
+    clear        
+    dialog --title "   ** Installazione librerie necessarie per le skins  **   " --infobox "
+   ----------------------------------------------
+    Installazione altri Plugins & Skin di VDR             
+   ---------------------------------------------- " 0 0 
 
+#echo "*** Installazione librerie ***"; 
+    clear
+    dialog --title "   ** Installazione librerie **   " --infobox "
+   ----------------------------------------------
+                Che cosa vuoi fare ?
+   ----------------------------------------------
 
-    
-# Installazione librerie
-apt-get -y install build-essential checkinstall libfreetype6-dev libfontconfig1-dev libjpeg62-dev libcap-dev libfribidi-dev libncurses5-dev libncursesw5-dev git-core gettext
-apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev
-apt-get -y install libpcre++0 libpcre++-dev python-libxml2 python-libxslt1 python-pycurl python-simplejson mimms libxml2-dev python-all-dev python-central cdbs libglib2.0-dev debhelper txt2man
-apt-get -y install libcurl3 libcurl4-gnutls-dev cvs libxcb-icccm4 libxcb-icccm4-dev libx11-xcb-dev libxcb-screensaver0-dev libxcb-dpms0-dev libmagick++-dev
-###
-   
+        [a]    S.O. Ubuntu 16.04  
+        [b]    Sono già installate - Skip                               
+                                       
+   ---------------------------------------------- " 0 0
+    echo -n "        Scegli  [a-c]:      "
+    read yourch
+    case $yourch in
+a) apt-get -y install build-essential checkinstall libfreetype6-dev libfontconfig1-dev libjpeg62-dev libcap-dev libfribidi-dev libncurses5-dev libncursesw5-dev git-core gettext; apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev; apt-get -y install libpcre++0 libpcre++-dev python-libxml2 python-libxslt1 python-pycurl python-simplejson mimms libxml2-dev python-all-dev python-central cdbs libglib2.0-dev debhelper txt2man;apt-get -y install libcurl3 libcurl4-gnutls-dev cvs libxcb-icccm4 libxcb-icccm4-dev libx11-xcb-dev libxcb-screensaver0-dev libxcb-dpms0-dev libmagick++-dev;;
+b) ;;
+esac
+#
+#
+# echo  "   ** Installazione altre skins di VDR **   "  
     clear        
     dialog --title "   ** Installazione altre skins di VDR **   " --infobox "
    ----------------------------------------------
@@ -73,6 +64,7 @@ apt-get -y install libcurl3 libcurl4-gnutls-dev cvs libxcb-icccm4 libxcb-icccm4-
         Skin Enigma
         Skin EgalT2
         Skin Elchi
+        YaepgHD
 
    ---------------------------------------------- " 0 0                 
 echo "     premere il tasto [Invio] per continuare. . .    " ;read enterKey
@@ -118,9 +110,8 @@ if [ -f /etc/vdr/plugins/text2skin/Basic ];
 		else wget https://www.dropbox.com/s/y4jiosfxinkh2e1/Basic_skin.tar.gz && cp -rf Basic_skin.tar.gz /home/`logname`/sifinstallrepo/ && tar -zxvf Basic_skin.tar.gz && rm -r Basic_skin.tar.gz
 fi
         echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
-b) cd $VDRSRC && rm -r text2skin && cd $PLUGINS && rm -r text2skin && sed -i "s|-P'text2skin'||" /usr/local/bin/vdrrun;;
+b) cd $VDRSRC && rm -r text2skin && cd $PLUGINS && rm -r text2skin && sed -i "s|-P'text2skin'||" /usr/local/bin/vdrrun && echo "$Remind1 Vdr-Plugin-Text2skin e le Skin Basic/CoolHD/Anthra" ;;
 c) ;;
-#        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
 esac
 #
 #
@@ -143,7 +134,7 @@ a) cd $VDRSRC  && if [ -f skinsoppalusikka/Makefile ];
 			else git clone https://github.com/rofafor/vdr-plugin-skinsoppalusikka.git && cp -rf vdr-plugin-skinsoppalusikka /home/`logname`/sifinstallrepo/ && mv vdr-plugin-skinsoppalusikka skinsoppalusikka && cd ../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'skinsoppalusikka'|" /usr/local/bin/vdrrun
 	fi;;
 b) cd $VDRSRC && if [ -f skinsoppalusikka/Makefile ];
-  	then rm -r $VDRSRC/skinsoppalusikka && rm -r /etc/vdr/plugins/skinsoppalusikka && rm -r $LIB/libvdr-skinsoppalusikka.* && sed -e "s|-P'skinsoppalusikka'||" /usr/local/bin/vdrrun
+  	then rm -r $VDRSRC/skinsoppalusikka && rm -r /etc/vdr/plugins/skinsoppalusikka && sed -e "s|-P'skinsoppalusikka'||" /usr/local/bin/vdrrun && echo "$Remind1 la Skin Skinsoppalusikka"
   		else echo "La Skin Skinsoppalusikka $Remind5" 
 fi
         echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
@@ -171,7 +162,7 @@ a) cd $VDRSRC && if [ -f narrowhd/Makefile ];
 fi
       echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
 b) cd $VDRSRC && if [ -f narrowhd/Makefile ];
-  	then rm -r $VDRSRC/narrowhd && rm -r $SKIN/NarrowHD 
+  	then rm -r $VDRSRC/narrowhd && rm -r $SKIN/NarrowHD && echo "$Remind1 la Skin NarrowHD" 
 		else echo "La Skin NarrowHD $Remind5" 
 fi
         echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
@@ -195,11 +186,11 @@ esac
     case $yourch in 
 a) cd $VDRSRC && if [ -f skinenigmang/Makefile ];
   	then  echo "Skin Enigma $Remind1"
-  		else git clone http://projects.vdr-developer.org/git/vdr-plugin-skinenigmang.git && cp -rf vdr-plugin-skinenigmang /home/`logname`/sifinstallrepo/ && mv vdr-plugin-skinenigmang skinenigmang && cd skinenigmang && cp -rf themes/*.theme /etc/vdr/themes/ && wget https://www.dropbox.com/s/3ba9ryxvctmfqty/patch_skinenigmang.tar.gz && tar -zxvf patch_skinenigmang && cp -rf patch_skinenigmang.tar.gz /home/`logname`/sifinstallrepo/ && rm -r patch_skinenigmang && patch -p1 < 01_skinenigmang_Makefile.patch && patch -p1 < 02_skinenigmang_min_max_from_stl.patch && cd ../../.. && make plugins && cd /etc/vdr/plugins && mkdir -p skinenigmang && cd skinenigmang && wget https://www.dropbox.com/s/odv30s0a22mau60/skinenigmang-logos-xpm-hi-20070702.tgz && cp -rf skinenigmang-logos-xpm-hi-20070702.tgz /home/`logname`/sifinstallrepo/ && wget https://www.dropbox.com/s/weh6c53bg9363ey/skinenigmang-channellogos-xpm-hi-20070702.tgz && cp -rf skinenigmang-channellogos-xpm-hi-20070702.tgz /home/`logname`/sifinstallrepo/ && wget https://www.dropbox.com/s/pydva1r0iafh5hy/skinenigmang-fonts-20080225.tgz && cp -rf skinenigmang-fonts-20080225.tgz /home/`logname`/sifinstallrepo/ && tar xzvf skinenigmang-channellogos-xpm-hi-20070702.tgz && tar xzvf skinenigmang-fonts-20080225.tgz && tar xzvf skinenigmang-fonts-20080225.tgz && rm -r skinenigmang-channellogos-xpm-hi-20070702.tgz && rm -r skinenigmang-fonts-20080225.tgz && rm -r skinenigmang-logos-xpm-hi-20070702.tgz && sed -i "s|-P'dvbapi'|& -P'skinenigmang'|" /usr/local/bin/vdrrun 
+  		else git clone http://projects.vdr-developer.org/git/vdr-plugin-skinenigmang.git && cp -rf vdr-plugin-skinenigmang /home/`logname`/sifinstallrepo/ && mv vdr-plugin-skinenigmang skinenigmang && cd skinenigmang && cp -rf themes/*.theme /etc/vdr/themes/ && wget https://www.dropbox.com/s/3ba9ryxvctmfqty/patch_skinenigmang.tar.gz && tar -zxvf patch_skinenigmang.tar.gz && cp -rf patch_skinenigmang.tar.gz /home/`logname`/sifinstallrepo/ && rm -rf patch_skinenigmang.tar.gz && patch -p1 < 01_skinenigmang_Makefile.patch && patch -p1 < 02_skinenigmang_min_max_from_stl.patch && cd ../../.. && make plugins && cd /etc/vdr/plugins && mkdir -p skinenigmang && cd skinenigmang && wget https://www.dropbox.com/s/odv30s0a22mau60/skinenigmang-logos-xpm-hi-20070702.tgz && cp -rf skinenigmang-logos-xpm-hi-20070702.tgz /home/`logname`/sifinstallrepo/ && wget https://www.dropbox.com/s/weh6c53bg9363ey/skinenigmang-channellogos-xpm-hi-20070702.tgz && cp -rf skinenigmang-channellogos-xpm-hi-20070702.tgz /home/`logname`/sifinstallrepo/ && wget https://www.dropbox.com/s/pydva1r0iafh5hy/skinenigmang-fonts-20080225.tgz && cp -rf skinenigmang-fonts-20080225.tgz /home/`logname`/sifinstallrepo/ && tar xzvf skinenigmang-channellogos-xpm-hi-20070702.tgz && tar xzvf skinenigmang-fonts-20080225.tgz && tar xzvf skinenigmang-fonts-20080225.tgz && rm -r skinenigmang-channellogos-xpm-hi-20070702.tgz && rm -r skinenigmang-fonts-20080225.tgz && rm -r skinenigmang-logos-xpm-hi-20070702.tgz && sed -i "s|-P'dvbapi'|& -P'skinenigmang'|" /usr/local/bin/vdrrun 
 fi
       echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
 b) cd $VDRSRC && if [ -f skinenigmang/Makefile ];
-  	then rm -r $VDRSRC/skinenigmang && sed -e "s|-P'skinenigmang'||" /usr/local/bin/vdrrun
+  	then rm -r $VDRSRC/skinenigmang && sed -e "s|-P'skinenigmang'||" /usr/local/bin/vdrrun && echo "$Remind1 la Skin Enigma"
 		else echo "La Skin Enigma $Remind5" 
 fi
         echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
@@ -227,7 +218,7 @@ a) cd $VDRSRC && if [ -f EgalT2/Makefile ];
 fi
       echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
 b) cd $VDRSRC && if [ -f EgalT2/Makefile ];
-  	then rm -r $VDRSRC/EgalT2 
+  	then rm -r $VDRSRC/EgalT2 && echo "$Remind1 la Skin EgalT2" 
 		else echo "La Skin EgalT2 $Remind5" 
 fi
         echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;; 
@@ -257,7 +248,7 @@ a) cd $VDRSRC && if [ -f skin-nopacity/Makefile ];
 fi
       echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
 b) cd $VDRSRC && if [ -f skin-nopacity/Makefile ];
-  	then rm -r $VDRSRC/skin-nopacity && sed -e "s|-P'skin-nopacity -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun
+  	then rm -r $VDRSRC/skin-nopacity && sed -e "s|-P'skin-nopacity -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun && echo "$Remind1 la Skin Nopacity"
 		else echo "La Skin Nopacity $Remind5" 
 fi
         echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
@@ -285,11 +276,41 @@ a) cd $VDRSRC && if [ -f skinelchi/Makefile ];
 fi
       echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
 b) cd $VDRSRC && if [ -f skinelchi/Makefile ];
-  	then rm -r $VDRSRC/skinelchi 
+  	then rm -r $VDRSRC/skinelchi && echo "$Remind1 la Skin Elchi" 
 		else echo "La SkinElchi $Remind5" 
 fi
         echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;; 
 c) ;;
+esac
+#
+#
+#echo "*** YaepgHd ***"; 
+    clear
+    dialog --title "   ** VDR-Plugin-YaepgHd **   " --infobox "
+   ----------------------------------------------
+                Che cosa vuoi fare ?
+   ----------------------------------------------
+        [a]    Installare Vdr-Plugins-YaepgHd
+        [b]    Rimuovere Vdr-Plugins-YaepgHd
+        [c]    Skip
+                                       
+   ---------------------------------------------- " 0 0
+    echo -n "        Scegli  [a-c]:      "
+    read yourch
+    case $yourch in 
+a) cd $VDRSRC && if [ -f yaepghd/Makefile ];
+  then  echo "YaepgHd $Remind"
+		else git clone https://github.com/lucianm/vdr-plugin-yaepghd.git && cp -rf vdr-plugin-yaepghd /home/`logname`/sifinstallrepo/  && mv -f vdr-plugin-yaepghd yaepghd && cp -R $VDRSRC/yaepghd/yaepghd /etc/vdr/plugins/ && cd ../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'yaepghd'|" /usr/local/bin/vdrrun
+  fi;
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+b) cd $VDRSRC && if [ -f yaepghd/Makefile ];
+   		then rm -rf yaepghd && cd $PLUGINS && rm -rf yaepghd && rm -r $LIB/libvdr-yaepghd.* && sed -i "s|-P'yaepghd'||" /usr/local/bin/vdrrun && echo "$Remind1 Vdr-plugin-YaepgHd"
+   			else echo "YaepgHd $Remind5" 
+   fi;
+        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+c) ;;
+esac
+#
 #
 apt-get -y install libgraphicsmagick++1-dev
 cd /home/`logname`/sifinstallrepo/; chmod -R 777 *;

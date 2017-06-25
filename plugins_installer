@@ -173,10 +173,10 @@ esac
     case $yourch in
 a) cd $VDRSRC && if [ -f live/Makefile ]; 
   		then  echo "Live $Remind"
-			else git clone http://projects.vdr-developer.org/git/vdr-plugin-live.git; && cp -rf vdr-plugin-live /home/`logname`/sifinstallrepo/ && mv -f vdr-plugin-live live && cd live && wget https://www.dropbox.com/s/z3rre1qcet9qvoa/patch_live.tar.gz && tar -zxvf patch_live.tar.gz && mv -f patch_live.tar.gz /home/`logname`/sifinstallrepo/ && patch -p1 < timeformat-it_IT-fix.patch && patch -p1 < 12_live_set_mld_theme_to_default.patch && patch -p1 < 15_live_folderstatecookieV2.patch && patch -p1 < 17_live_Timer_Crash.patch && patch -p1 < 18_live_compile.patch && make plugins && cd $PLUGINS && mkdir -p live && cp -a $VDRSRC/live/live/* /etc/vdr/plugins/live/ && cd /etc/vdr/plugins/live/themes && wget https://www.dropbox.com/s/58uo8u742whd19w/live-themes.tar.gz && tar -zxvf live-themes.tar.gz && mv -f live-themes.tar.gz /home/`logname`/sifinstallrepo/ && sed -i "s|-P'externalplayer'|& -P'live'|" /usr/local/bin/vdrrun;
+			else git clone http://projects.vdr-developer.org/git/vdr-plugin-live.git && cp -rf vdr-plugin-live /home/`logname`/sifinstallrepo/ && mv -f vdr-plugin-live live && cd live && wget https://www.dropbox.com/s/z3rre1qcet9qvoa/patch_live.tar.gz && tar -zxvf patch_live.tar.gz && mv -f patch_live.tar.gz /home/`logname`/sifinstallrepo/ && patch -p1 < timeformat-it_IT-fix.patch && patch -p1 < 17_live_Timer_Crash.patch && patch -p1 < 18_live_compile.patch && cd ../../.. && make plugins && cd $PLUGINS && mkdir -p live && cp -a $VDRSRC/live/live/* /etc/vdr/plugins/live/ && cd /etc/vdr/plugins/live/themes && wget https://www.dropbox.com/s/58uo8u742whd19w/live-themes.tar.gz && tar -zxvf live-themes.tar.gz && mv -f live-themes.tar.gz /home/`logname`/sifinstallrepo/ && sed -i "s|-P'externalplayer'|& -P'live'|" /usr/local/bin/vdrrun;
 		fi;;
 b) cd $VDRSRC && if [ -f live/Makefile ];
-  		then rm -rf live && rm -r $PLUGINS/live && rm -rf $LIB/libvdr-live.* && rm -r $SHARE/live && sed -i "s|-P'live'||" /usr/local/bin/vdrrun && echo "$Remind1 Vdr-Plugin-Live"
+  		then rm -rf live && rm -rf $PLUGINS/live && rm -rf $LIB/libvdr-live.* && rm -rf $SHARE/live && sed -i "s|-P'live'||" /usr/local/bin/vdrrun && echo "$Remind1 Vdr-Plugin-Live"
  			 else echo "Live $Remind5" 
       	fi;
         echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
@@ -255,11 +255,11 @@ esac
     case $yourch in 
 a) cd $VDRSRC && if [ -f osdteletext/Makefile ];
 		then  echo "VDR-Osdteletext $Remind"
-			else git clone https://github.com/rofafor/vdr-plugin-osdteletext.git && cp -rf vdr-plugin-osdteletext /home/`logname`/sifinstallrepo/ &&  mv -f vdr-plugin-osdteletext osdteletext && cd osdteletext && wget https://www.dropbox.com/s/ncb0gnw9pkee83d/patch_osdteletext.tar.gz && tar -zxvf patch_osdteletext.tar.gz && cp -rf patch_osdteletext.tar.gz /home/`logname`/sifinstallrepo/ && rm -r patch_osdteletext.tar.gz && cd ../../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'osdteletext'|" /usr/local/bin/vdrrun && cd /var/cache/vdr && mkdir -p vtx 
+			else git clone https://github.com/rofafor/vdr-plugin-osdteletext.git && cp -rf vdr-plugin-osdteletext /home/`logname`/sifinstallrepo/ &&  mv -f vdr-plugin-osdteletext osdteletext && cd osdteletext && wget https://www.dropbox.com/s/ncb0gnw9pkee83d/patch_osdteletext.tar.gz && tar -zxvf patch_osdteletext.tar.gz && cp -rf patch_osdteletext.tar.gz /home/`logname`/sifinstallrepo/ && rm -r patch_osdteletext.tar.gz && patch -p1 < 10_osdteletext_ttf.patch && cd ../../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'osdteletext'|" /usr/local/bin/vdrrun && cd /var/cache/vdr && mkdir -p vtx 
     fi;
         echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
 b) cd $VDRSRC && if [ -f osdteletext/Makefile ];
-  	then rm -rf osdteletext && rm -r /var/cache/vdr/vtx && rm -rf $LIB/libvdr-osdteletext.* && sed -i "s|-P'osdteletext'||" /usr/local/bin/vdrrun && echo "$Remind1 Vdr-Plugins-Osdteletext"
+  	then rm -rf osdteletext && rm -rf /var/cache/vdr/vtx && rm -rf $LIB/libvdr-osdteletext.* && sed -i "s|-P'osdteletext'||" /usr/local/bin/vdrrun && echo "$Remind1 Vdr-Plugins-Osdteletext"
   			else echo "VDR-Osdteletext $Remind5" 
     fi;
         echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  

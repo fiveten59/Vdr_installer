@@ -1,11 +1,11 @@
 #!/bin/bash
 ############################## !!! IMPORTANTE !!! #######################################
 #                                                                                       #
-# Nome Script : light_installer_2.3.7                                                  #
-# Versione: Github Repository Master (https://github.com/fiveten59/Vdr_installer)       #
+# Script name: light_installer_2.3.7                                                    #
+# Version: Github Repository Master (https://github.com/fiveten59/Vdr_installer)        #
 #                                                                                       #
-# date il comando sudo chmod 755 light_installer_2.3.7                                  #
-# avviate lo script con il comando: sudo sh ./light_installer_2.3.7                     #
+# To be put in your /usr/local/bin                                                      #
+# chmod the script, then load it simply typing: sudo ./light_installer_2.3.7            #
 #                                                                                       #
 #########################################################################################
 #
@@ -170,15 +170,15 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
     {
     if [ $? -ne 0 ]; then
     echo "Install did not run successfully";
-    echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey; exit 1
+    echo "                    Press Enter to continue ...               "; read enterKey; exit 1
    else
-   echo "OK abbiamo installato vdr ... ora vai con i plugin e le skin"
+   echo "Install successful"
     fi   
     }
 
     press_enter()
     {
-     echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey; exit 0
+     echo "                    Press Enter to continue ...               "; read enterKey; exit 0
     }
 
     timer_start()
@@ -261,36 +261,35 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
     il Team Mld e tanti ... tanti altri.                             
                                                                               
     =====================================                     " 0 0
-    echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey
+    echo "                    Press Enter to continue ...               "; read enterKey
     
     #
     #    
     dialog --title " VDR Light Installer Github Repository " --infobox "Copyright (C) 2017
     
 
-	Nome Script : light_installer_2.3.7                                                  
-	Versione: Github Repository Master  (https://github.com/fiveten59/Vdr_installer)                                                     
+	Script name: light_installer_2.3.7                                                  
+	Version: Github Repository Master  (https://github.com/fiveten59/Vdr_installer)                                                     
                                                                                               
-	date il comando sudo chmod 755 light_installer_2.3.7                                  
-	avviate lo script con il comando: sudo sh ./light_installer_2.3.7                     
+	To be put in your /usr/local/bin                                                      
+	chmod the script, then load it simply typing: sudo ./light_installer_2.3.7            
                                                                                        
                                                                " 0 0
 
 ###########################################################################################################
 
-
-    echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey
+    echo "                    Press Enter to continue ...               "; read enterKey
     #
     #
     clear
     echo ""
-    dialog --title "   ♦♦♦♦♦  Script Installazione VDR 2.3.7 - Light version - Librerie & Codec  ♦♦♦♦♦   " --infobox "
+    dialog --title "   ♦♦♦♦♦   VDR 2.3.7 Light Version Installer Script - Libraries & Codec  ♦♦♦♦♦   " --infobox "
           ╭===========================================================================================╮    
-          |   ................♦♦♦   Download & Aggiornamento Repository Locale  ♦♦♦...................  |
+          |   ................♦♦♦   Download & Upgrade Local Repository   ♦♦♦...................  |
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
-          |   [1]    +[Submenu] ~~  Directory Repository Locale ~  Creazione - Rimozione  .............  |              
+          |   [1]    +[Submenu] ~~  Local Repository Directory ~  Install - Upgrade  .............  |              
           |   =======================================================================================   |
-          |   ........♦♦♦   Librerie Di Supporto Audio Video & Codec - Installa & Rimuove  ♦♦♦........  |
+          |   ..........♦♦♦   Audio Video & Codec Libraries - Install & Uninstall  ♦♦♦........  |
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
           |   [2]    +[Submenu] ~~  X264 git ~ X265 hg ~ Fdk-aac git ~ Libvpx git ~ FFmpeg git  .......  |         
           |   =======================================================================================   |
@@ -298,28 +297,24 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
           |   [3]    +[Submenu] ~~  VDR 2.3.7 & Plugins ................................................ |     
           |   =======================================================================================   |
-          |   .............♦♦♦                    Lista Canali - Creazione                 ♦♦♦........  |
+          |   .............♦♦♦                    Channells Lists Setup                 ♦♦♦........  |
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
-          |   [4]    +[Submenu] ~~  Lista Canali ~ Creazione ~ Rimozione  .............................  |     
+          |   [4]    +[Submenu] ~~  Channells Lists ~ Install ~ Uninstall  .............................  |     
           |   =======================================================================================   |
-          |   .............................♦♦♦   Installazione  KODI   ♦♦♦.............................  |
+          |   .............................♦♦♦  KODI Setup  ♦♦♦.............................  |
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
-          |   [5]    +[Submenu] ~~  Kodi ~ Media Center ~ Installa ~ Rimozione  .......................  |          
+          |   [5]    +[Submenu] ~~  Kodi ~ Media Center ~ Install ~ Uninstall  .......................  |          
           |   =======================================================================================   |
-          |   .............................♦♦♦   Installazione Utility   ♦♦♦...........................  |
+          |   .............................♦♦♦   Utility Setup  ♦♦♦...........................  |
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |    
-          |   [6]    +[Submenu] ~~  Verifica File Configurazione  .....................................  |          
+          |   [6]    +[Submenu] ~~  Check Configuration Files  .....................................  |          
           |   =======================================================================================   |
-          |   .............................♦♦♦   Rimuovere Componenti   ♦♦♦............................  |
-          |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |    
-          |   [7]    +[Submenu] ~~  VDR - Kodi - Oscam  .............................................. |          
-          |   =======================================================================================   |
-          |   .........................♦♦♦   Uscire Dal Menu Installazione   ♦♦♦.......................  |          
+          |   .............................♦♦♦   Exit Setup Menu   ♦♦♦.......................  |          
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |              
-          |   [8]   Esci  ............................................................................  |  
+          |   [7]   Exit  ............................................................................  |  
           ╰===========================================================================================╯" 0 0
 
-    echo -n "              Scegli = Submenu [1~7] -- Esci [8] :        "
+    echo -n "              Enter your menu choice = Submenu [1~6] -- Exit [7] :        "
     read yourch
     case $yourch in
 
@@ -330,439 +325,434 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
 ##                                                                                                                         ##
 #                                                                                                                           #
 1)                                        #########################################
-                                          #      CREAZIONE REPOSITORY LOCALE      #
+                                          #            Local Repository           #
                                           #########################################
 
 
     clear
-    dialog --title "   ** Download & Update Repository Locale **   " --infobox "
+    dialog --title "   ** Download & Upgrade Local Repository **   " --infobox "
    ---------------------------------------------------------------------------------------------
-       Creazione ~ Aggiornamento ~ Rimozione ~ Cartella Repository Locale Sifinstallrepo 
+       Install ~ Upgrade ~ Remove ~ Local Repository 
    ---------------------------------------------------------------------------------------------
         
         *****  Crea  ***** 
-        [a]  Creazione ~ (Se Non Presente) ............ [b]  Aggiornamento ~ (Rimuove e Aggiorna Tutto)
+        [a]  Install ~ (If Not Exist) ............ [b]  Remove & Upgrade 
         
         [z]  Skip      
         
-   ---------------------------------------------------------------------------------------------
-        Note:
-        - [a]  Creazione  -  Scarica il File Se Non Presente.
-        - [b]  Aggiornamento  -  Funzione Tradizionale - Rimuove e Aggiorna Tutto.
-        
    ---------------------------------------------------------------------------------------------" 0 0
-    echo -n "        Scegli = Crea [a-b] ~~ Rimuove [c-r] ~~ Esci [z]:      "
+    echo -n "        Enter your menu choice = Install [a] ~~ Remove & Upgrade [b] ~~ Exit [z]:      "
     read yourch
     case $yourch in
     a) clear; cd /home/`logname`; mkdir -p sifinstallrepo;
     chmod -R 777 sifinstallrepo;
     cd sifinstallrepo;
     
-############################### caricamento librerie ###################################
+############################### Download libraries on local repo ################################### 
 
 
 if [ -s /home/`logname`/sifinstallrepo/x264 ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone git://git.videolan.org/x264.git;
   fi 
 
 if [ -s /home/`logname`/sifinstallrepo/x265 ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     hg clone http://hg.videolan.org/x265;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/fdk-aac ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone https://github.com/mstorsjo/fdk-aac.git;
   fi
 
 if [ -d /home/`logname`/sifinstallrepo/libvpx ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone https://chromium.googlesource.com/webm/libvpx
 fi
 
 if [ -s /home/`logname`/sifinstallrepo/nvidia_video_sdk_6.0.1.zip ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget http://developer.download.nvidia.com/assets/cuda/files/nvidia_video_sdk_6.0.1.zip;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/ffmpeg ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone https://git.ffmpeg.org/ffmpeg.git;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/libass ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone https://github.com/libass/libass.git;
 fi
 
 if [ -s /home/`logname`/sifinstallrepo/eventlircd ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone https://github.com/OpenELEC/eventlircd.git;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/eventlircd.conf.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/cqwpl0w4cyqhrux/eventlircd.conf.tar.gz;
   fi
 
-################################ caricamento vdr e plugin ##############################
+################################ Download Vdr and Plugins on local repo ##############################
 
 if [ -s /home/`logname`/sifinstallrepo/vdr-2.3.7.tar.bz2 ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget ftp://ftp.tvdr.de/vdr/Developer/vdr-2.3.7.tar.bz2;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/vdr-patches.2.3.7.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/9ewx7vriddfcxc7/vdr-patches.2.3.7.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/Make.config.2.3.7 ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/el76ioots63nq07/Make.config.2.3.7;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/vdrsymbols.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/bx97ikp7c1h2qj2/vdrsymbols.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/vdr-plugin-epgsearch ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone http://projects.vdr-developer.org/git/vdr-plugin-epgsearch.git;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/patch_epgsearch.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/s9vggu8mil8ss7t/patch_epgsearch.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/vdr-plugin-dvbapi ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone git://github.com/manio/vdr-plugin-dvbapi.git; 
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/dvbapi.patch.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/5tyvqkbhohbbju2/dvbapi.patch.tar.gz;
   fi  
   
 if [ -s /home/`logname`/sifinstallrepo/vdr-plugin-softhddevice ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone https://github.com/rofafor/vdr-plugin-softhddevice.git;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/patch_softhddevice_4.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/ba5njlguttwlvao/patch_softhddevice_4.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/vdr-plugin-tvguide ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone git://projects.vdr-developer.org/vdr-plugin-tvguide.git;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/patch_tvguide.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/xkax9z6qumb76dj/patch_tvguide.tar.gz;
 fi
 
 if [ -s /home/`logname`/sifinstallrepo/vdr-plugin-tvguideng ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone git://projects.vdr-developer.org/vdr-plugin-tvguideng.git;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/patch_tvguideng.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/qjmzsml13sdhk0u/patch_tvguideng.tar.gz;
   fi
 
  if [ -s /home/`logname`/sifinstallrepo/01_Add_language_It.patch.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/jrizzen5q8o07uv/01_Add_language_It.patch.tar.gz;
   fi 
 
 if [ -s /home/`logname`/sifinstallrepo/vdr-plugin-iptv ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone https://github.com/rofafor/vdr-plugin-iptv.git; 
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/patch_iptv.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"; 
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"; 
     wget https://www.dropbox.com/s/nof5ydmxrplw2b0/patch_iptv.tar.gz;
 fi
 
 if [ -s /home/`logname`/sifinstallrepo/iptv_conf.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"; 
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"; 
     wget https://www.dropbox.com/s/1ujtklnct0nqq6q/iptv_conf.tar.gz;
 fi
 
 if [ -s /home/`logname`/sifinstallrepo/vdr-plugin-weatherforecast ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone git://projects.vdr-developer.org/vdr-plugin-weatherforecast.git  
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/patch_weatherforecast.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/v0ipkt6x3bfbbs8/patch_weatherforecast.tar.gz;
 fi
 
 if [ -s /home/`logname`/sifinstallrepo/vdr-plugin-externalplayer ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone https://git.uli-eckhardt.de/vdr-plugin-externalplayer.git;
 fi
 
 if [ -s /home/`logname`/sifinstallrepo/externalplayer.conf.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/vhz1fz68159s0qg/externalplayer.conf.tar.gz;
 fi
 
 if [ -s /home/`logname`/sifinstallrepo/satellite_pack.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz;    
 fi
 
-################################# caricamento skin ########################################
+################################# Download skins ########################################
 
 if [ -s /home/`logname`/sifinstallrepo/logos.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/omrs8wwh5jbz46e/logos.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/skin-flatplus ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone http://projects.vdr-developer.org/git/skin-flatplus.git;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/patch_skinflatplus.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/gpsnxpj4kellu5d/patch_skinflatplus.tar.gz;
   fi
    
 if [ -s /home/`logname`/sifinstallrepo/icone.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/5uvx468b4b87auy/icone.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/lcars_pack.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/806odyj5vyco3dg/lcars_pack.tar.gz;
   fi 
 
 if [ -s /home/`logname`/sifinstallrepo/picon.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/hb2mv9ytz5q6yz7/picon.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/vdr-plugin-skindesigner ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
      git clone git://projects.vdr-developer.org/vdr-plugin-skindesigner.git;
   fi   
 
 if [ -s /home/`logname`/sifinstallrepo/themes.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/m32a4s23h7r00mg/themes.tar.gz;
   fi
 
-############################# caricamento varie ##############################
+############################# Download others ##############################
 
 if [ -s /home/`logname`/sifinstallrepo/traduzioni.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/6hzpdx9yv5ypzxv/traduzioni.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/getchannels.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/os0dz379o9rdtk3/getchannels.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/vdr-getchannels-0.7.2.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/tqua9jro2touw8c/vdr-getchannels-0.7.2.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/channels.conf.terr.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/4jmjiurewriu1sh/channels.conf.terr.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/channels.conf.dual.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/z3czcyw5za82utc/channels.conf.dual.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/channels.conf.astra.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/vt0wxz86c3x6y1n/channels.conf.astra.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/channels.conf.trial.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/reovn22nauzb2se/channels.conf.trial.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/hauppauge-remote.conf.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/gvel64ykd3eyx07/hauppauge-remote.conf.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/mce-remote.conf.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/hsp66258srhwa1d/mce-remote.conf.tar.gz;
   fi  
   
 if [ -s /home/`logname`/sifinstallrepo/oscam.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/56oomdr58os7msa/oscam.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/oscam32.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/2unpbn5x3vz0te4/oscam32.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/oscam64.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/lvs3eb7q64ericc/oscam64.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/setup16.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/setup43.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/81fd2z1ye192lnx/setup43.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/w_scan-20170107.tar.bz2 ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget http://wirbel.htpc-forum.de/w_scan/w_scan-20170107.tar.bz2;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/patch_w_scan.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/omt6155y22a5ft3/patch_w_scan.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/flat_weather.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/v6o2zsjt7yvascy/flat_weather.tar.gz;
   fi
 
@@ -773,7 +763,7 @@ chmod -R 777 *;;
     b) clear; cd /home/`logname`/sifinstallrepo; rm -rf *;
 
 ######################################################################################  
-############################ caricamento librerie ####################################
+############################ Download libraries on local repo ####################################
 
     git clone https://github.com/libass/libass.git;
     git clone https://github.com/mstorsjo/fdk-aac.git;
@@ -785,7 +775,7 @@ chmod -R 777 *;;
     git clone https://github.com/OpenELEC/eventlircd.git;
     wget https://www.dropbox.com/s/cqwpl0w4cyqhrux/eventlircd.conf.tar.gz;
 
-############################ caricamento vdr e plugin ################################
+############################ Download Vdr and Plugins on local repo ################################
 
     wget ftp://ftp.tvdr.de/vdr/Developer/vdr-2.3.7.tar.bz2;
     wget https://www.dropbox.com/s/9ewx7vriddfcxc7/vdr-patches.2.3.7.tar.gz;
@@ -811,7 +801,7 @@ chmod -R 777 *;;
     wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz;   
 
 
-############################ caricamento skin ########################################
+############################ Download skins ########################################
 
     wget https://www.dropbox.com/s/zwb0vp6gfwh7d4y/anthra_pack.tar.gz;
     git clone git://projects.vdr-developer.org/vdr-plugin-skindesigner.git;
@@ -819,7 +809,7 @@ chmod -R 777 *;;
     wget https://www.dropbox.com/s/gpsnxpj4kellu5d/patch_skinflatplus.tar.gz;
     wget https://www.dropbox.com/s/806odyj5vyco3dg/lcars_pack.tar.gz;
 
-############################ caricamento varie #######################################      
+############################ Download others #######################################      
     wget https://www.dropbox.com/s/6hzpdx9yv5ypzxv/traduzioni.tar.gz;
     wget https://www.dropbox.com/s/os0dz379o9rdtk3/getchannels.tar.gz;
     wget https://www.dropbox.com/s/tqua9jro2touw8c/vdr-getchannels-0.7.2.tar.gz;
@@ -844,7 +834,7 @@ chmod -R 777 *;;
     wget https://www.dropbox.com/s/v6o2zsjt7yvascy/flat_weather.tar.gz;
     #
     chmod -R 777 *;;
-    #echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;
+    #echo "                    Press Enter to continue ...               "; read enterKey;
     
     
     
@@ -853,7 +843,7 @@ chmod -R 777 *;;
 
     z) ;;
     esac
-    echo " Premere il tasto [Invio] per continuare. . . "; read enterKey;;
+    echo " Press Enter to continue ... "; read enterKey;;
     
     
 #############################################################################################################################  
@@ -867,12 +857,12 @@ chmod -R 777 *;;
                                           #######################################################
                   
     clear        
-    dialog --title "   ** Supporto Librerie & Codec - X264 - X265 - FDK-AAC - LIBVPX - FFMPEG **   " --infobox "
+    dialog --title "   ** Install Libraries & Codec - X264 - X265 - FDK-AAC - LIBVPX - FFMPEG **   " --infobox "
    --------------------------------------------------------------------------------------------------------------------
-                                     Installa o Rimuove Librerie di Supporto
+                                     Install or Remove Libraries
    --------------------------------------------------------------------------------------------------------------------
         
-        *****  Installa  *****  ...........................  *****  Rimuove  *****
+        *****  Install  *****  ............................  *****  Remove  *****
         [a]    X264 26.09.2015 Git  .......................  [a1]    X264 26.09.2015 Git
         [b]    X265 HG  ...................................  [b1]    X265 HG
         [c]    FDK-AAC Git  ...............................  [c1]    FDK-AAC Git
@@ -883,25 +873,21 @@ chmod -R 777 *;;
         [z]    Skip
 
    -------------------------------------------------------------------------------------------------------------------- 
-        Note:
-        Per chi vuole utilizzare libvdpau1 installato dai Repository Ufficiali Ubuntu
-        Non Deve Installare libvdpau1 al Punto 2 / F - Nella Sezione dello Script-VDR 
-        il Pacchetto libvdpau1 1.1.1 Viene Sviluppato e Distribuito da Repository Non Ufficiali
-        
-        Note:
-        Per reinstallare o aggiornare x264 e x265 si deve rimuovere 
-        libx264-dev - x264 - ffmpeg - dal sistema con il comando:
+
+        Info:
+        For reinstalling or upgrading x264 and x265 pls remove 
+        libx264-dev - x264 - ffmpeg typing:
         ~$ sudo apt-get purge x264 libx264-dev ffmpeg
         
-        Note:
-        - FFMPEG - Si puo' selezionare il supporto per X264 & X265 - Supporto per NVENC
+        Info:
+        - FFMPEG - Choice between X264 & X265 Support for NVENC
         
-        Note:
+        Info:
         - NVIDIA Video Codec 6.1 SDK --- NVENC Hardware Accelerated Video Encoding Decoding ~ H.264 and H.265 (HEVC)
         
 
    -------------------------------------------------------------------------------------------------------------------- " 0 0
-    echo -n "        Scegli = Installa [a-g] ~~ Rimuove [a1-g1] ~~ Esci [z]:      "
+    echo -n "        Enter your menu choice = Install [a-g] ~~ Remove [a1-g1] ~~ Exit [z]:      "
     read yourch
     case $yourch in
     
@@ -928,7 +914,7 @@ a)                                        ######################################
     apt-get -y install mercurial cvs subversion git-core libncurses-dev autoconf autopoint libtool automake  gettext nasm liba52-0.7.4-dev libpng12-dev libxt-dev libxv-dev libxvmc-dev libasound2-dev libmpcdec-dev libxvidcore-dev libfaad-dev libx264-dev
     apt-get -y install cmake cmake-curses-gui
     clear
-    echo "                    Adesso Installo X264 - Git"; sleep 4
+    echo "                    Installing X264 - Git"; sleep 4
     cd /usr/local/src;
     rm -Rf $SRC/x264;
     cp -rf /home/`logname`/sifinstallrepo/x264 /usr/local/src/;
@@ -947,12 +933,12 @@ a)                                        ######################################
 ##                                                                                                                         ##
 #                                                                                                                           #
 a1)                                       #########################################
-                                          #             Rimozione X264            #
+                                          #               Remove X264             #
                                           #########################################
 
 
     clear
-    echo "                    Adesso Rimuovo X264 - Git"; sleep 4
+    echo "                    Removing X264 - Git"; sleep 4
     apt-get -y purge x264; rm -r /usr/local/src/x264; rm /usr/local/src/packages/x264*;;
 
     
@@ -970,7 +956,7 @@ b)                                        ######################################
 
     apt-get -y remove x265
     clear
-    echo "                    Adesso Installo X265 - Git"; sleep 4
+    echo "                    Installing X265 - Git"; sleep 4
     cd /usr/local/src
     rm -Rf $SRC/x265
     #hg clone https://bitbucket.org/multicoreware/x265
@@ -990,12 +976,12 @@ b)                                        ######################################
 ##                                                                                                                         ##
 #                                                                                                                           #
 b1)                                       #########################################
-                                          #             Rimozione X265            #
+                                          #               Remove X265             #
                                           #########################################
 
 
     clear
-    echo "                    Adesso Rimuovo X265 - Git"; sleep 4
+    echo "                    Removing X265 - Git"; sleep 4
     apt-get -y purge x265; rm -r /usr/local/src/x265; rm -r /usr/local/src/packages/x265*;;
 
     
@@ -1013,7 +999,7 @@ c)                                        ######################################
 
     apt-get -y remove fdk-aac
     clear
-    echo "                    Adesso Installo Fdk-aac - Git"; sleep 4
+    echo "                    Installing Fdk-aac - Git"; sleep 4
     cd /usr/local/src
     rm -Rf fdk-aac
     cp -Rf /home/`logname`/sifinstallrepo/fdk-aac /usr/local/src/; cd fdk-aac;  
@@ -1031,12 +1017,12 @@ c)                                        ######################################
 ##                                                                                                                         ##
 #                                                                                                                           #
 c1)                                       #########################################
-                                          #             Rimozione FDK-AAC         #
+                                          #               Remove FDK-AAC          #
                                           #########################################
 
 
     clear
-    echo "                    Adesso Rimuovo Fdk-aac - Git"; sleep 4
+    echo "                    Removing Fdk-aac - Git"; sleep 4
     apt-get -y purge fdk-aac; rm -r /usr/local/src/fdk-aac; rm -r /usr/local/src/packages/fdk-aac*;;
 
     
@@ -1052,7 +1038,7 @@ d)                                        ######################################
                                           #########################################    
     
     clear
-    echo "                    Adesso Installo NVIDIA Video Codec 6.1 SDK"; sleep 4
+    echo "                    Installing NVIDIA Video Codec 6.1 SDK"; sleep 4
     apt-get -y install unzip libxmu-dev freeglut3 freeglut3-dev; clear;
     cd /usr/local/src
     rm -R nvidia_sdk
@@ -1072,12 +1058,12 @@ d)                                        ######################################
 ##                                                                                                                         ##
 #                                                                                                                           #
 d1)                                       ##########################################
-                                          #  Rimozione NVIDIA Video Codec 6.1 SDK  #
+                                          #   Remove NVIDIA Video Codec 6.1 SDK    #
                                           ##########################################
 
 
     clear
-    echo "                    Adesso Rimuovo NVIDIA Video Codec 6.1 SDK"; sleep 4
+    echo "                    Removing NVIDIA Video Codec 6.1 SDK"; sleep 4
     rm -r /usr/local/src/nvidia_sdk;;
 
 
@@ -1103,7 +1089,7 @@ e)                                        ######################################
     apt-get -y install libtheora-dev libva-dev libvorbis-dev libx11-dev libxfixes-dev pkg-config texi2html yasm zlib1g-dev
     apt-get -y install mercurial cvs subversion git-core libncurses-dev autoconf autopoint libtool automake  gettext nasm liba52-0.7.4-dev libpng12-dev libxt-dev libxv-dev libxvmc-dev libasound2-dev libmpcdec-dev libxvidcore-dev
     clear
-    echo "                    Adesso Installo Libvpx "; sleep 4
+    echo "                    Installing Libvpx "; sleep 4
     cd /usr/local/src; rm -R libvpx; cp -rf /home/`logname`/sifinstallrepo/libvpx /usr/local/src/;
     cd libvpx
     ./configure --enable-pic --enable-shared --enable-runtime_cpu_detect
@@ -1119,12 +1105,12 @@ e)                                        ######################################
 ##                                                                                                                         ##
 #                                                                                                                           #
 e1)                                       #########################################
-                                          #       Rimozione LIBVPX                #
+                                          #            Remove LIBVPX              #
                                           #########################################
 
 
     clear
-    echo "                    Adesso Rimuovo Libvpx "; sleep 4
+    echo "                    Removing Libvpx "; sleep 4
     apt-get -y purge libvpx; rm -r /usr/local/src/libvpx; rm -r /usr/local/src/packages/libvpx*;;
 
 
@@ -1155,42 +1141,39 @@ f)                                        ######################################
     apt-get -y install libass-dev libspeex-dev libmp3lame-dev libfaac-dev librtmp-dev libopencore-amrnb-dev libopencore-amrwb-dev  libiso9660-dev libvcdinfo-dev libjpeg-dev
     apt-get -y install libvorbis-dev libxvidcore-dev
     clear
-    dialog --title "   ** Installazione FFmpeg 3.2.4 **   " --infobox "
-   ----------------------------------------------------
-          Seleziona il Tipo di Configurazione ...            
+    dialog --title "   ** Installing FFmpeg 3.2.4 **   " --infobox "
    ----------------------------------------------------
    
-   [a]  Installa FFmpeg con supporto X264 MPEG-4 AVC Encoder
+   [a]  Install FFmpeg with X264 MPEG-4 AVC Encoder support
    
-   [b]  Installa FFmpeg con supporto X264 & X265 HEVC Encoder
-   
+   [b]  Install FFmpeg with X264 & X265 HEVC Encoder support 
   
       
    ----------------------------------------------------" 0 0    
-    echo -n "        Scegli  [a-b]:      "
+    echo -n "        Enter your menu choice  [a-b]:      "
     read yourch
     case $yourch in
 
     a) clear
-    echo "                    Attendere qualche secondo la configurazione ...";
+    echo "                    Wait for a few seconds ...";
     cd /usr/local/src;
     rm -R ffmpeg
     cp -r /home/`logname`/sifinstallrepo/ffmpeg /usr/local/src/; cd ffmpeg
     ./configure  --extra-libs="-ldl" --enable-gpl --enable-libass --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-nonfree --enable-nvenc --enable-libxvid --enable-libxcb --enable-vdpau --enable-vaapi --enable-pic --enable-shared --disable-doc
-    echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;
+    echo "                    Press Enter to continue ...               "; read enterKey;
     make -j4
     checkinstall --pkgname=ffmpeg --pkgversion="3.3.x-git" --backup=no --deldoc=yes --fstrans=no --default --pakdir=$PACKAGES
     hash -r
     ldconfig -v
-    echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
+    echo "                    Press Enter to continue ...               "; read enterKey;;
 
     b) clear
-    echo "                    Attendere qualche secondo la configurazione ...";
+    echo "                    Wait for a few seconds ...";
     cd /usr/local/src;
     rm -R ffmpeg
     cp -r /home/`logname`/sifinstallrepo/ffmpeg /usr/local/src/; cd ffmpeg 
     ./configure  --extra-libs="-ldl" --enable-gpl --enable-libass --enable-libfdk-aac --enable-libfreetype --enable-libxcb --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libx265 --enable-nonfree --enable-nvenc --enable-libxvid --enable-vdpau --enable-vaapi --enable-pic --enable-shared --disable-doc
-    echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;
+    echo "                    Press Enter to continue ...               "; read enterKey;
     make -j4
     checkinstall --pkgname=ffmpeg --pkgversion="3.3.x-git" --backup=no --deldoc=yes --fstrans=no --default --pakdir=$PACKAGES
     hash -r
@@ -1206,15 +1189,15 @@ f)                                        ######################################
 ##                                                                                                                         ##
 #                                                                                                                           #
 f1)                                       ####################################################
-                                          #             Rimozione FFmpeg (Git Version)       #
+                                          #                Remove FFmpeg (Git Version)       #
                                           ####################################################
 
 
     clear
-    echo "                    Adesso Rimuovo FFmpeg "; sleep 4
+    echo "                    Removing FFmpeg "; sleep 4
     apt-get -y purge ffmpeg; rm -r /usr/local/src/ffmpeg; rm /usr/local/src/packages/ffmpeg*;; 
     #esac
-    #echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
+    #echo "                    Press Enter to continue ...               "; read enterKey;;
 
 
 
@@ -1227,7 +1210,7 @@ f1)                                       ######################################
 
 z) ;;
     esac
-    echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
+    echo "                    Press Enter to continue ...               "; read enterKey;;
 
     
     
@@ -1244,18 +1227,16 @@ z) ;;
     clear        
     dialog --title "   ** Installazione VDR - Plugins   **   " --infobox "
    ---------------------------------------------------------------------------------------------
-                              Installa o Rimuove Librerie di supporto
-   ---------------------------------------------------------------------------------------------
         
-        *****  Installa  *****  .....................  *****  Rimuove  *****
+        *****  Install  *****  .....................  *****  Remove  *****
    
-        [a]    VDR-2.3.x & Plugins Base  ..............  [a1]    VDR-2.3.x & Plugins Base
+        [a]    Install VDR-2.3.x & Basic plugins ..............  [a1]    Remove VDR-2.3.x & Basic plugins
         [b]    Prima Configurazione VDR  ..............  [b1]    Rimozione Configurazione VDR
         
         [z]    Skip
    
    --------------------------------------------------------------------------------------------- " 0 0
-    echo -n "        Scegli = Installa [a-b] ~~ Rimuove [a1-b1] ~~ Esci [z]:      "
+    echo -n "        Enter your menu choice = Install [a-b] ~~ Remove [a1-b1] ~~ Exit [z]:      "
     read yourch
     case $yourch in
     
@@ -1265,22 +1246,22 @@ z) ;;
 ###                                                                                                                       ###
 ##                                                                                                                         ##
 #                                                                                                                           #
-                                                                                                                          #
+                                                                                                                          
 a)                                        #########################################
-                                          #        VDR-2.3.7 & Plugins Base       #
+                                          #        VDR-2.3.7 & Basic plugins      #
                                           #########################################
 
 
     clear
     echo "vdr ALL=(ALL) ALL" >> /etc/sudoers; 
-    echo "*** Installazione librerie ***"; sleep 4 
+    echo "*** Install libraries ***"; sleep 4 
     cd $SRC; apt-get -y install build-essential checkinstall libfreetype6-dev libfontconfig1-dev libjpeg62-dev libcap-dev libfribidi-dev libncurses5-dev libncursesw5-dev git-core gettext
     apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
     apt-get -y install libpcre++0v5 libpcre++0 libpcre++-dev python-libxml2 python-libxslt1 python-pycurl python-simplejson mimms libxml2-dev python-all-dev python-central cdbs libglib2.0-dev debhelper txt2man
     apt-get -y install libcurl3 libcurl4-gnutls-dev cvs libxcb-icccm4 libx11-xcb-dev  libxcb-ewmh-dev 
     apt-get -y install libpcre++0v5
     clear    
-    echo "               Adesso Installo VDR 2.3.7      "; sleep 4 
+    echo "               Installing VDR 2.3.7      "; sleep 4 
     cp -rf /home/`logname`/sifinstallrepo/$VDR.tar.bz2 $SRC/; tar xivf $VDR.tar.bz2;
     ln -s $VDR vdr; rm -r $VDR.tar.bz2
     cd vdr; cp -rf /home/`logname`/sifinstallrepo/vdr-patches.2.3.7.tar.gz $SRC/vdr/; tar -zxvf vdr-patches.2.3.7.tar.gz; rm -r vdr-patches.2.3.7.tar.gz; sleep 1;
@@ -1364,16 +1345,17 @@ Ok        Channels" >> /etc/vdr/keymacros.conf
 cd $SRC; mkdir -p traduzioni; cd traduzioni;
 cp /home/`logname`/sifinstallrepo/traduzioni.tar.gz /$SRC/traduzioni/;
 tar -zxvf traduzioni.tar.gz; rm -r traduzioni.tar.gz;
-###########################################################
-# Ora installo i Plugins base
+######################################################################
+# Install Basic plugins
 clear
 echo "                        "
 echo "                        "
 echo "                        "
-echo "Ora installo i Plugins base ( Dvbapi - Softhddevice - Epgsearch - Skindesigner - TvGuideng - Weatherforecast - Skinflatplus - TvGuide - Iptv - ExternalPlayer )"
-echo "                 premere il tasto [Invio] per continuare "; read enterKey
+echo "Install Basic plugins  ( Dvbapi - Softhddevice - Epgsearch - Skindesigner - TvGuideng - Weatherforecast - Skinflatplus - TvGuide - Iptv - ExternalPlayer )"
+echo "                 Press Enter to continue ...         "; read enterKey
 cd $SRC;
 mkdir -p /usr/local/lib/vdr/plugins; mkdir -p /usr/local/lib/vdr/scripts; mkdir -p /etc/vdr/plugins; mkdir -p /etc/vdr/themes; cd $PLUGINS; mkdir -p tvguide;
+#
 #
 apt-get -y install graphicsmagick-libmagick-dev-compat; apt-get -y install imagemagick; apt-get -y install libmagick++-6.q16-dev; apt-get -y install git-core; apt-get -y install libjansson4 libjansson-dev;
 apt-get -y install lm-sensors librsvg2-dev libxml2-dev libcairo2-dev; apt-get -y install vlc;
@@ -1414,7 +1396,7 @@ cd $VDRSRC; cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-weatherforecast /$V
 #
 #
 clear
-echo "               *** Skin Flatplus ***"; echo ""; sleep 3
+echo ""; echo "               *** Skin Flatplus ***"; echo ""; sleep 3
 cd $VDRSRC;
 cp -rf /home/`logname`/sifinstallrepo/skin-flatplus /$VDRSRC/ && cd skin-flatplus &&  cp -rf /home/`logname`/sifinstallrepo/patch_skinflatplus.tar.gz /$VDRSRC/skin-flatplus/ && tar -zxvf patch_skinflatplus.tar.gz && rm -rf patch_skinflatplus.tar.gz &&  patch -p1 < 10-skinflatplus_minmaxvdr235.diff && make install && cd /usr/local/lib/vdr/plugins/skinflatplus/widgets/temperatures/ && ln -s temperatures.default temperatures && cd ../system_information && ln -s system_information.ubuntu system_information  && cp -rf /home/`logname`/sifinstallrepo/flat_weather.tar.gz ../weather/ && cd ../weather && tar -zxvf flat_weather.tar.gz && rm -r flat_weather.tar.gz;
 # qui sopra c'è da mettere le icone di menù mancanti che sono dentro le skin del Skin Flatplus traducendole e comprimendole
@@ -1424,7 +1406,7 @@ echo ""; echo "               *** Tvguide ***";  sleep 3
 cd $VDRSRC; cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-tvguide /$VDRSRC; mv vdr-plugin-tvguide tvguide; cd tvguide; cp -rf /home/`logname`/sifinstallrepo/patch_tvguide.tar.gz /$VDRSRC/tvguide/; tar -zxvf patch_tvguide.tar.gz; rm -r patch_tvguide.tar.gz; patch -p1 < 10_tvguide_lib_Magick.patch; patch -p1 < 11_tvguide_i18n-it.patch; patch -p1 < 12_tvguide_VDR235.patch; patch -p1 < 13_tvguide_comp_with_last_tvscraper.patch; make; cd ../../..; make plugins; cp -rf $VDRSRC/tvguide/themes/* /etc/vdr/themes/;
 #  
 #
-echo "               *** Iptv ***"; echo ""; sleep 3
+echo ""; echo "               *** Iptv ***"; echo ""; sleep 3
 cd $VDRSRC && cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-iptv /$VDRSRC && mv vdr-plugin-iptv iptv && cd iptv && cp -rf /home/`logname`/sifinstallrepo/patch_iptv.tar.gz /$VDRSRC/iptv && tar -zxvf patch_iptv.tar.gz && rm -r patch_iptv.tar.gz && patch -p1 < iptv.patch && make && cd ../../.. && make plugins && mkdir -p /etc/vdr/plugins/iptv/vlcinput && cp -rf /home/`logname`/sifinstallrepo/iptv_conf.tar.gz /$PLUGINS/iptv/vlcinput/ && cd $PLUGINS/iptv/vlcinput && tar -zxvf iptv_conf.tar.gz && rm -r iptv_conf.tar.gz 
 #
 #
@@ -1436,10 +1418,8 @@ clear
 #
 cd /usr/local/src/vdr; make plugins install;
 
-    echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
-     
-
-     
+    echo "                    Press Enter to continue ...               "; read enterKey;;
+        
      
 #############################################################################################################################  
 #############################################################################################################################
@@ -1452,12 +1432,10 @@ a1)                                       ######################################
 
 
     clear
-    echo "                    Adesso Rimuovo VDR 2.3.x"; sleep 4
+    echo "                    Removing VDR 2.3.x"; sleep 4
 dpkg -r vdr; rm -rf /etc/vdr; rm -rf /usr/local/share/vdr; rm -rf /usr/local/lib/vdr; rm -rf /var/cache/vdr; cd $SRC; rm -r vdr vdr-*; cd packages; rm -r vdr*.deb; rm -r /usr/local/bin/vdrpoweroff; rm -r /usr/local/bin/vdrrun;  rm -rf /usr/local/bin/start-vdr-xine.sh; rm -rf /usr/local/bin/start-xinelib-vdr.sh; rm -rf /usr/local/share/vdr; rm -rf /usr/local/bin/start-softhddevice-vdr.sh; rm -rf /home/`logname`/Scrivania/Xinelib.desktop; rm -rf /home/`logname`/Scrivania/Vdr-Xine.desktop; rm -rf /home/`logname`/Scrivania/Vdr-Softhddevice.desktop; rm -r /usr/bin/mplayer.sh; rm -rf /home/`logname`/Scrivania/KillVdr.desktop; cd $PACKAGES; rm -rf vdr*.deb; rm -rf /usr/share/applications/Xinelib.desktop; rm -rf /usr/share/applications/Vdr-Xine.desktop; rm -rf /usr/share/applications/Vdr-Softhddevice.desktop; rm -rf /usr/share/applications/KillVdr.desktop;
-    echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
+    echo "                    Press Enter to continue ...               "; read enterKey;;
 
-    
-    
 
 #############################################################################################################################  
 #############################################################################################################################
@@ -1465,14 +1443,14 @@ dpkg -r vdr; rm -rf /etc/vdr; rm -rf /usr/local/share/vdr; rm -rf /usr/local/lib
 ##                                                                                                                         ##
 #                                                                                                                           #
 b)                                        #########################################
-                                          #        Configurazione VDR-2.3.x       #
+                                          #          Configuring VDR-2.3.x        #
                                           #########################################
 
 
 clear
-echo "                    Adesso Configuro VDR 2.3.x"; sleep 3
+echo "                    Configuring VDR 2.3.x"; sleep 3
 clear
-echo "                    Installazione true type"; sleep 1
+echo "                    Installing true type"; sleep 1
 apt-get -y install lirc lirc-x liblircclient-dev;
 if [ -d /usr/share/fonts/truetype/vdrsymbols ];
 then echo " I font $Remind4"; sleep 3;
@@ -1486,11 +1464,11 @@ fi;
 ##                                                                                                                         ##
 #                                                                                                                           #
 					  #########################################	
-					  #      Installazione Icone Vdr          #
-                      #########################################
+					  #         Installing Icone Vdr          #
+                                          #########################################
 
 clear
-echo "                    Installazione Icone Vdr"; sleep 1
+echo "                    Installing Vdr Icons"; sleep 1
 cd $SRC; cp -rf /home/`logname`/sifinstallrepo/icone.tar.gz /usr/local/src/; tar -zxvf icone.tar.gz; rm -r icone.tar.gz;
 
 #############################################################################################################################
@@ -1518,7 +1496,6 @@ echo '#!/bin/sh
 #nome file : arresto di xine-vdr "vdrpoweroff"
 killall -9 vdrrun & killall -9 vdr & killall -9 vdr-sxfe & killall -9 vlc 
 # & killall -9 oscam & shutdown -h now '  >> /usr/local/bin/vdrpoweroff
-# per spegnere pc affiungere al vdrpoweroff
 # & shutdown -h now 
 #
 chmod 755 /usr/local/bin/vdrpoweroff
@@ -1587,13 +1564,13 @@ chmod 755 /etc/init.d/vdr
     clear
     dialog --title "   ** monitor setup **   " --infobox "
    ----------------------------------------------
-                 Che monitor hai ?             
+                 Monitor setup             
    ----------------------------------------------          
 	[a]  16:9	
 	[b]  4:3   
           
    ---------------------------------------------- " 0 0
-    echo -n "        Scegli  [a-b]:      "
+    echo -n "        Enter your menu choice  [a-b]:      "
     read yourch
     case $yourch in
     
@@ -1605,14 +1582,14 @@ esac
 #############################################################################################################################
 ###                                                                                                                       ###
 ##                                                                                                                         ##
-                                                                                                                          #
+#                                                                                                                           #
                                           ##################################################
-                                          #                  Avvio Oscam                   #
+                                          #                  Oscam Setup                   #
                                           ##################################################
                                           
 cd /usr/local; mkdir -p etc;                                          
 if [ -f /usr/local/etc/oscam.check ];
-  then  echo "Oscam $Remind3"
+  then  echo "Oscam is already installed"
 else
 echo "oscam ALL=(ALL) ALL" >> /etc/sudoers; 
 apt-get install libssl0.9.8 ; rm -r /etc/init.d/oscam; touch /etc/init.d/oscam; 
@@ -1681,11 +1658,11 @@ chmod 777 oscam;
 ##                                                                                                                         ##
 #                                                                                                                           #
                                           ##################################################
-                                          #  Creazione icona avvio vdr con softhddevice    #
+                                          #           Setup Vdr & Oscam icons              #
                                           ##################################################
 
 
-echo "               *** Creazione icone ***"; sleep 3
+					echo "               *** Setup icons  ***"; sleep 3
 rm -r /home/`logname`/Scrivania/Vdr-Softhddevice.desktop; rm -rf /usr/share/applications/Vdr-Softhddevice.desktop;
 if [ -s $VDRSRC/softhddevice ];
    then
@@ -1695,7 +1672,7 @@ if [ -s $VDRSRC/softhddevice ];
  Encoding=UTF-8
  Type=Application
  Name=Vdr-Softhddevice
- Description=avvio di Vdr-Softhddevice
+ Description=Start of Vdr-Softhddevice
  Icon=/usr/local/src/icone/softhddevice.png
  Exec=/usr/local/bin/start-softhddevice-vdr.sh
  ">> /home/`logname`/Scrivania/Vdr-Softhddevice.desktop;
@@ -1711,16 +1688,8 @@ else echo " Softhddevice $remind5"
 fi
 
 
-
 #############################################################################################################################  
-#############################################################################################################################
-###                                                                                                                       ###
-##                                                                                                                         ##
-#                                                                                                                           #
-                                          ##################################################
-                                          #            Creazione icona kill vdr            #
-                                          ##################################################
-                                          
+                                         
                                           
 rm -rf /home/`logname`/Scrivania/KillVdr.desktop; rm -rf /usr/share/applications/KillVdr.desktop;
 touch /home/`logname`/Scrivania/KillVdr.desktop; 
@@ -1730,7 +1699,7 @@ Version=1.0
 Encoding=UTF-8
 Type=Application
 Name=KillVdr
-Description=Killa Vdr
+Description=Kill Vdr
 Icon=/usr/local/src/icone/killvdr.png
 Exec=/usr/local/bin/KillVdr.sh
 " >> /home/`logname`/Scrivania/KillVdr.desktop; sudo chmod 777 /home/`logname`/Scrivania/KillVdr.desktop; cp /home/`logname`/Scrivania/KillVdr.desktop /usr/share/applications/KillVdr.desktop;
@@ -1745,13 +1714,6 @@ chmod a+x /usr/local/bin/KillVdr.sh;
 
 
 #############################################################################################################################  
-#############################################################################################################################
-###                                                                                                                       ###
-##                                                                                                                         ##
-#                                                                                                                           #
-                                          ##################################################
-                                          #             creazione icona oscam              #
-                                          ##################################################
                                           
                                           
 rm -rf /home/`logname`/Scrivania/Oscam.desktop; rm -rf /usr/share/applications/Oscam.desktop;
@@ -1760,7 +1722,7 @@ Version=1.0
 Encoding=UTF-8
 Type=Application
 Name=Oscam
-Description=avvio di Oscam
+Description=Start of Oscam
 Icon=/usr/local/src/icone/Oscam.png
 Exec=/usr/local/bin/start-oscam.sh
 " >> /home/`logname`/Scrivania/Oscam.desktop; sudo chmod 777 /home/`logname`/Scrivania/Oscam.desktop; cp /home/`logname`/Scrivania/Oscam.desktop /usr/share/applications/Oscam.desktop;
@@ -1770,16 +1732,8 @@ sudo /etc/init.d/oscam start > /dev/null 2>&1
 ' >> /usr/local/bin/start-oscam.sh; chmod a+x /usr/local/bin/start-oscam.sh;
 
 
-
 #############################################################################################################################  
-#############################################################################################################################
-###                                                                                                                       ###
-##                                                                                                                         ##
-#                                                                                                                           #
-                                          ##################################################
-                                          #           creazione icona kill oscam           #
-                                          ##################################################
-                                          
+                                         
                                           
 rm -rf /home/`logname`/Scrivania/KillOscam.desktop; rm -rf /usr/share/applications/KillOscam.desktop;
 touch /home/`logname`/Scrivania/KillOscam.desktop; 
@@ -1789,7 +1743,7 @@ Version=1.0
 Encoding=UTF-8
 Type=Application
 Name=KillOscam
-Description=Killa Oscam
+Description=Kill Oscam
 Icon=/usr/local/src/icone/killoscam.png
 Exec=/usr/local/bin/KillOscam.sh
 " >> /home/`logname`/Scrivania/KillOscam.desktop; sudo chmod 777 /home/`logname`/Scrivania/KillOscam.desktop; cp /home/`logname`/Scrivania/KillOscam.desktop /usr/share/applications/KillOscam.desktop;
@@ -1809,7 +1763,7 @@ chmod a+x /usr/local/bin/KillOscam.sh;
 ##                                                                                                                         ##
 #                                                                                                                           #
                                           ##################################################
-                                          #                  Creazione diseqc              #
+                                          #                  Diseqc setup                  #
                                           ##################################################
                                           
                                           
@@ -1819,7 +1773,7 @@ rm -r /etc/vdr/channels.conf;
     clear        
     dialog --title "   ** diseqc.conf setup **   " --infobox "
    ----------------------------------------------
-                Che impianto hai?             
+                Diseqc setup             
    ----------------------------------------------
         [a]    Hot Bird 13°E                    
         [b]    Astra 19.2°E                    
@@ -1828,21 +1782,21 @@ rm -r /etc/vdr/channels.conf;
         [e]    Trial 13, 16, 19°E               
         [f]    Quadri 13, 19, 23.5, 28.2°E      
         [g]    Quadri 9, 13, 16, 19°E           
-        [h]    Terrestre                  
+        [h]    Terrestrial                  
         
         [z]    Skip                             
         
    ---------------------------------------------- " 0 0
-    echo -n "        Scegli  [a-z]:      "
+    echo -n "        Enter your menu choice  [a-z]:      "
     read yourch
     case $yourch in
 a) echo "$MONO13" >> /etc/vdr/diseqc.conf && cd /etc/vdr/ && wget http://www.vdr-italia.org/channels/17x/channels_tivusat_skyitalia_17x.conf && mv channels_tivusat_skyitalia_17x.conf channels.conf;;
 b) echo "$MONO19" >> /etc/vdr/diseqc.conf && cp /home/`logname`/sifinstallrepo/channels.conf.astra.tar.gz /etc/vdr/ && cd /etc/vdr/ && tar -zxvf channels.conf.astra.tar.gz && rm -r channels.conf.astra.tar.gz;;
 c) echo "$DUAL" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf && cp /home/`logname`/sifinstallrepo/channels.conf.dual.tar.gz /etc/vdr/ && cd /etc/vdr/ && tar -zxvf channels.conf.dual.tar.gz && rm -r channels.conf.dual.tar.gz;;
 d) echo "$TRIAL" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf && cp /home/`logname`/sifinstallrepo/channels.conf.trial.tar.gz /etc/vdr/ && cd /etc/vdr/ && tar -zxvf channels.conf.trial.tar.gz && rm -r channels.conf.trial.tar.gz;;
-e) echo "$TRIAL2 devi caricarti un channels.conf" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf;;
-f) echo "$QUADRI devi caricarti un channels.conf" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf;;
-g) echo "$QUADRI2 devi caricarti un channels.conf" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf;;
+e) echo "$TRIAL2 Load a channels.conf" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf;;
+f) echo "$QUADRI Load a channels.conf" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf;;
+g) echo "$QUADRI2 Load a channels.conf" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf;;
 h) cd /etc/vdr && cp -rf /home/`logname`/sifinstallrepo/channels.conf.terr.tar.gz /etc/vdr/ && cd /etc/vdr/ && tar -zxvf channels.conf.terr.tar.gz && rm -rf channels.conf.terr.tar.gz && mv channels.conf.terr channels.conf;;
 esac
 
@@ -1853,14 +1807,14 @@ esac
 ##                                                                                                                         ##
 #                                                                                                                           #
                                           ##################################################
-                                          #      Installazione Skin di default per Vdr     #
+                                          #      Install default Skin for Vdr     #
                                           ##################################################
                                           
                                           
 
 #wget https://www.dropbox.com/s/806odyj5vyco3dg/lcars_pack.tar.gz;
 if [ -f /etc/vdr/themes/checklcars ];
-then echo " I temi Lcars $Remind4"
+then echo " Lcars theme is already installed"
 else cp -rf /home/`logname`/sifinstallrepo/lcars_pack.tar.gz /etc/vdr/themes; cd /etc/vdr/themes; tar -zxvf lcars_pack.tar.gz; rm -r lcars_pack.tar.gz;
 fi
 
@@ -1870,16 +1824,16 @@ fi
 ##                                                                                                                         ##
 #                                                                                                                           #
                                           ##################################################
-                                          #           Installazione logos per Vdr          #
+                                          #               Install Channels logos           #
                                           ##################################################
 
                             
-cd /etc/vdr/plugins/; mkdir picon;
+cd /etc/vdr/plugins/; mkdir -p picon;
 #
 if [ -f /etc/vdr/logos/2be.png ];
-then echo " I logos $Remind4"
+then echo " Logos are already installed"
 else
-cp -rf /home/`logname`/sifinstallrepo/logos.tar.gz /etc/vdr/; cd /etc/vdr/; tar -zxvf logos.tar.gz; rm -r logos.tar.gz;
+cp -rf /home/`logname`/sifinstallrepo/logos.tar.gz /etc/vdr/; cd /etc/vdr/; tar -zxvf logos.tar.gz; rm -rf logos.tar.gz;
 fi
 sleep 1
 ln -s /etc/vdr/plugins/picon liquid-logos4anthra_HD;
@@ -1891,25 +1845,25 @@ ln -s /etc/vdr/plugins/picon liquid-logos4anthra_HD;
 ##                                                                                                                         ##
 #                                                                                                                           #
                                           ##################################################
-                                          #                Gestione telecomando            # 
+                                          #                   Setup remote                 # 
                                           ##################################################
                                           
 
 clear        
-    dialog --title "   ** Setup telecomando con xine-ui **   " --infobox "
+    dialog --title "   ** Setup remote **   " --infobox "
    ----------------------------------------------
-                Che telecomando hai?             
+                Setup remote             
    ----------------------------------------------
         [a]    Mce                   
         [b]    Hauppauge                   
         [c]    Skip                             
         
    ---------------------------------------------- " 0 0
-    echo -n "        Scegli  [a-c]:      "
+    echo -n "        Enter your menu choice  [a-c]:      "
     read yourch
     case $yourch in
-a) cd /etc/vdr; mv remote.conf remote.conf.xineliboutput; cp -rf /home/`logname`/sifinstallrepo/mce-remote.conf.tar.gz /etc/vdr/; tar -zxvf mce-remote.conf.tar.gz; rm -r mce-remote.conf.tar.gz;;
-b) cd /etc/vdr; mv remote.conf remote.conf.xineliboutput; cp -rf /home/`logname`/sifinstallrepo/hauppauge-remote.conf.tar.gz /etc/vdr/;tar -zxvf hauppauge-remote.conf.tar.gz; rm -rf hauppauge-remote.conf.tar.gz;;
+a) cd /etc/vdr; cp -rf /home/`logname`/sifinstallrepo/mce-remote.conf.tar.gz /etc/vdr/; tar -zxvf mce-remote.conf.tar.gz; rm -r mce-remote.conf.tar.gz;;
+b) cd /etc/vdr; cp -rf /home/`logname`/sifinstallrepo/hauppauge-remote.conf.tar.gz /etc/vdr/;tar -zxvf hauppauge-remote.conf.tar.gz; rm -rf hauppauge-remote.conf.tar.gz;;
 
 esac
 
@@ -1927,45 +1881,45 @@ esac
 ##                                                                                                                         ##
 #                                                                                                                           #
 4)                                        #########################################
-                                          #         Creazione lista canali        #
+                                          #     Install && Upgrade Settings       #
                                           #########################################
 
 
-#echo "               *** Caricamento W_scan ***"; sleep 3
+#echo "               *** Install W_scan ***"; sleep 3
 cd /usr/local/src; 
 # wget http://wirbel.htpc-forum.de/w_scan/w_scan-20141122.tar.bz2;
 if [ -f /$SRC/w_scan/Makefile ];
-  then  echo "W_scan $Remind3"
+  then  echo "W_scan is already installed"
 else
 cp -rf /home/`logname`/sifinstallrepo/w_scan-20170107.tar.bz2 $SRC/; tar xivf w_scan-20170107.tar.bz2; mv w_scan-20170107 w_scan; rm -rf w_scan-20170107.tar.bz2; cd w_scan; cp -rf /home/`logname`/sifinstallrepo/patch_w_scan.tar.gz $SRC/w_scan/; tar -zxvf patch_w_scan.tar.gz; rm -rf patch_w_scan.tar.gz; patch -p1 < 10_w-scan_dvb-t2.patch; ./configure; make; make install;
 fi
 
     clear        
-    dialog --title "   ** Creazione && Aggiornamento Settings **   " --infobox "
+    dialog --title "   ** Install && Upgrade Settings **   " --infobox "
    --------------------------------------------------------------
                      Creazione lista canali
    --------------------------------------------------------------
    
-        ****  Sezione Vdr-Getchannels 0.7.0 (Old) ****
-        [a]    Creazione Settings da Kingofsat  9.0E 
-        [b]    Creazione Settings da Kingofsat 13.0E         
-        [c]    Creazione Settings da Kingofsat 19.2E 
+        ****   Vdr-Getchannels 0.7.0 (Old)   ****
+        [a]    Install Settings from Kingofsat  9.0E 
+        [b]    Install Settings from Kingofsat 13.0E         
+        [c]    Install Settings from Kingofsat 19.2E 
                 
         
         ****  Sezione W_Scan  ****
-        [d]    Creazione Settings  E9.0 - utilizzo W_scan                   
-        [e]    Creazione Settings 13.0E - utilizzo W_scan              
-        [f]    Creazione Settings 19.2E - utilizzo W_scan             
-        [g]    Creazione Settings Digitale - utilizzo W_scan
+        [d]    Install Settings 9.0E - using W_scan                   
+        [e]    Install Settings 13.0E - using W_scan              
+        [f]    Install Settings 19.2E - using W_scan             
+        [g]    Install Terrestrial Settings - using W_scan
 
-        [h]    Scarico da repo trial 
+        [h]    Download from repo (only trial 9 - 13 -19.2E) 
         
 
             
         [z]    Skip 
         
    -------------------------------------------------------------- " 0 0
-    echo -n "        Scegli  [a-z]:      "
+    echo -n "        Enter your menu choice  [a-z]:      "
     read yourch
     case $yourch in
     
@@ -2013,21 +1967,19 @@ fi
                                           ##########################################################
                   
     clear        
-    dialog --title "   ** Configurazione & Installazione KODI **   " --infobox "
+    dialog --title "   ** Install & Setup KODI **   " --infobox "
    --------------------------------------------------------------
-                         Installa o Rimuove
+                         Install/Remove Kodi
    --------------------------------------------------------------
         
-        *****  Installa  *****  ..........  *****  Rimuove  *****
-        [a]    Installare KODI  ............  [a1]    Rimozione KODI  
+        *****  Install  *****  ..........  *****  Remove  *****
+        [a]    Install  ............  [a1]    Remove KODI  
         
         [z]    Skip
-        
-        
-
-           
+      
+                   
    -------------------------------------------------------------- " 0 0
-    echo -n "        Scegli = Installa [a] ~~ Rimuove [a1] ~~ Esci [z]:      "
+    echo -n "        Enter your menu choice = Install [a] ~~ Remove [a1] ~~ Exit [z]:      "
     read yourch
     case $yourch in
 
@@ -2040,7 +1992,7 @@ Version=1.0
 Encoding=UTF-8
 Type=Application
 Name=Kodi
-Description=avvio di Kodi
+Description=Start of Kodi
 Icon=/usr/local/src/icone/kodi.png
 Exec=/usr/local/bin/start-kodi-vdr.sh
 " >> /home/`logname`/Scrivania/Kodi.desktop; cp /home/`logname`/Scrivania/Kodi.desktop /usr/share/applications/Kodi.desktop;
@@ -2063,20 +2015,20 @@ apt-get -y install python-software-properties pkg-config; apt-get -y install sof
 ##                                                                                                                         ##
 #                                                                                                                           #
                                           ##########################################################
-                                          #                      Installazione - KODI              #
+                                          #                      Install  KODI                     #
                                           ##########################################################
      
     clear
     dialog --title "   ** KODI **   " --infobox "
    ----------------------------------------------
-                Che versione vuoi installare ?
+                KODI versions
    ----------------------------------------------
-        [a]    Kodi versione stabile
-        [b]    Kodi versione Release Candidate                                
-        [c]    Kodi versione di sviluppo            
+        [a]    Kodi Stable version 
+        [b]    Kodi Release Candidate version                                
+        [c]    Kodi Development version             
                                      
    ---------------------------------------------- " 0 0
-    echo -n "        Scegli  [a-c]:      "
+    echo -n "        Enter your menu choice  [a-c]:      "
     read yourch
     case $yourch in
 
@@ -2084,7 +2036,7 @@ a)   sudo add-apt-repository ppa:team-xbmc/ppa; sudo apt-get update; sudo apt-ge
 b)   sudo add-apt-repository ppa:team-xbmc/unstable; sudo apt-get update; sudo apt-get -y install kodi kodi-pvr-iptvsimple;;
 c)   sudo add-apt-repository ppa:team-xbmc/xbmc-nightly; sudo apt-get update; sudo apt-get -y install kodi kodi-pvr-iptvsimple;;
  esac    
-     echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
+     echo "                    Press Enter to continue ...               "; read enterKey;;
 
  
     
@@ -2095,12 +2047,12 @@ c)   sudo add-apt-repository ppa:team-xbmc/xbmc-nightly; sudo apt-get update; su
 ##                                                                                                                         ##
 #                                                                                                                           #
 a1)                                       #########################################
-                                          #             Rimozione KODI            #
+                                          #               Remove KODI             #
                                           #########################################
 
 
     clear
-    echo "                    Adesso Rimuovo KODI"; sleep 4
+    echo "                    Remove KODI"; sleep 4
     apt-get remove kodi*; apt-get purge kodi*; rm -rf ~/.kodi/; sudo add-apt-repository --remove ppa:team-xbmc/xbmc-nightly; sudo add-apt-repository --remove ppa:team-xbmc/ppa; sudo add-apt-repository --remove ppa:team-xbmc/unstable; rm -rf /home/`logname`/Scrivania/Kodi.desktop; rm -rf /usr/share/applications/Kodi.desktop;;
     esac
 ;;
@@ -2121,17 +2073,17 @@ a1)                                       ######################################
                 Utility
    ----------------------------------------------
 
-        [a]    Modifica Vdrrun               
-        [b]    Modifica lista canali           
-        [c]    Modifica setup.conf    
-        [d]    Modifica oscam              
-        [e]    Riconfigura lirc                        
+        [a]    Change Vdrrun               
+        [b]    Change channell list            
+        [c]    Change setup.conf    
+        [d]    Change oscam              
+        [e]    Reconfigure lirc                        
         [f]    Nautilus  
         
         [z]    Skip    
         
    ---------------------------------------------- " 0 0
-    echo -n "        Scegli  [a-z]:      " 
+    echo -n "        Enter your menu choice  [a-z]:      " 
     read yourch
     case $yourch in
 
@@ -2140,7 +2092,7 @@ b) gedit /etc/vdr/channels.conf;;
 c) gedit /etc/vdr/setup.conf;;
 d) if [ -f /usr/local/etc/oscam.server ];
 then gedit /usr/local/etc/oscam.server; gedit /usr/local/etc/oscam.conf; gedit /usr/local/etc/oscam.user;
-else echo "L'osso $Remind5"
+else echo "Oscam is not installed"
 fi;;
 e) dpkg-reconfigure lirc;;
 f) nautilus;;
@@ -2148,93 +2100,13 @@ z) ;;
 esac
 ;;
 
-    
-    
-
+   
 #############################################################################################################################  
 #############################################################################################################################
 ###                                                                                                                       ###
 ##                                                                                                                         ##
 #                                                                                                                           #
 7)                                        #########################################
-                                          #          RIMUOVERE COMPONENTI         #
-                                          #########################################
-
-
-    clear        
-    dialog --title "   ** RIMUOVERE COMPONENTI **   " --infobox "
-   ----------------------------------------------
-                Che cosa vuoi fare ?             
-   ----------------------------------------------
-
-        Vdr               
-        Kodi              
-        Oscam              
-
-   ---------------------------------------------- " 0 0                 
-echo "     premere il tasto [Invio] per continuare. . .    " ;read enterKey
-#
-#
-    clear
-    dialog --title "   ** Rimozione Vdr **   " --infobox "
-   ----------------------------------------------------------
-                Sei proprio sicuro di rimuovere Vdr?
-   ----------------------------------------------------------
-        [a]    Si rimuovilo           
-        [b]    No non rimuoverlo             
-                                       
-   ---------------------------------------------- " 0 0
-    echo -n "        Scegli  [a-b]:      "
-    read yourch
-    case $yourch in
-a)  dpkg -r vdr; rm -rf /etc/vdr; rm -rf /usr/local/share/vdr; rm -rf /var/cache/vdr; rm -rf /usr/local/lib/vdr; cd $SRC; rm -r vdr vdr-*; cd packages; rm -r vdr*.deb; rm -r /usr/local/bin/vdrpoweroff; rm -r /usr/local/bin/vdrrun;  rm -rf /usr/local/bin/start-vdr-xine.sh; rm -rf /usr/local/bin/start-xinelib-vdr.sh; rm -rf /usr/local/share/vdr; rm -rf /usr/local/bin/start-softhddevice-vdr.sh; rm -rf /home/`logname`/Scrivania/Xinelib.desktop; rm -rf /home/`logname`/Scrivania/Vdr-Xine.desktop; rm -rf /home/`logname`/Scrivania/Vdr-Softhddevice.desktop; rm -r /usr/bin/mplayer.sh; rm -rf /home/`logname`/Scrivania/KillVdr.desktop; cd $PACKAGES; rm -rf vdr*.deb; rm -rf /usr/share/applications/Xinelib.desktop; rm -rf /usr/share/applications/Vdr-Xine.desktop; rm -rf /usr/share/applications/Vdr-Softhddevice.desktop; rm -rf /usr/share/applications/KillVdr.desktop;;
-b) ;;
-esac
-#
-#
-    clear
-    dialog --title "   ** Rimozione KODI **   " --infobox "
-   ----------------------------------------------------------
-                Sei proprio sicuro di rimuovere KODI?
-   ----------------------------------------------------------
-        [a]    Si rimuovilo           
-        [b]    No non rimuoverlo             
-                                       
-   ---------------------------------------------- " 0 0
-    echo -n "        Scegli  [a-b]:      "
-    read yourch
-    case $yourch in
-a) apt-get remove kodi*; apt-get purge kodi*; rm -rf ~/.kodi; rm -rf xbmc; rm -rf /usr/local/bin/kodi; rm -rf /usr/local/bin/kodi-standalone; rm -rf /home/`logname`/start-kodi-vdr.sh; rm -rf /home/`logname`/Scrivania/Kodi.desktop; rm -rf /usr/share/applications/Kodi.desktop; sudo add-apt-repository --remove ppa:team-xbmc/xbmc-nightly; sudo add-apt-repository --remove ppa:team-xbmc/ppa; sudo add-apt-repository --remove ppa:team-xbmc/unstable;;
-b) ;;
-esac
-#
-#
-    clear
-    dialog --title "   ** Rimozione Oscam **   " --infobox "
-   ----------------------------------------------------------
-                Sei proprio sicuro di rimuovere Oscam?
-   ----------------------------------------------------------
-        [a]    Si rimuovilo           
-        [b]    No non rimuoverlo             
-                                       
-   ---------------------------------------------- " 0 0
-    echo -n "        Scegli  [a-b]:      "
-    read yourch
-    case $yourch in
-a) cd /usr/local/bin; rm -r oscam; cd /usr/local/etc; rm -r oscam.*; rm -rf /home/`logname`/Scrivania/Oscam.desktop; rm -rf /home/`logname`/Scrivania/KillOscam.desktop; rm -rf /usr/share/applications/Oscam.desktop; rm -rf /usr/share/applications/KillOscam.desktop; rm -rf /home/`logname`/start-oscam.sh; rm -rf /home/`logname`/killOscam.sh;;
-b) ;;
-esac
-;;
-
-
-
-    
-#############################################################################################################################  
-#############################################################################################################################
-###                                                                                                                       ###
-##                                                                                                                         ##
-#                                                                                                                           #
-8)                                        #########################################
                                           #                Exit/Stop              #
                                           #########################################
 
@@ -2251,8 +2123,8 @@ esac
     echo "                                              ',  by fiveten_59 ® and knap ®    ,'"
     echo "                                              ,'   2013 ~ 2014 ~ 2015 ~ 2016      ',"
     echo "                                             '           Light version           '"
-    echo "                                              ',     Revision by fiveten_59 ®   '"
-    echo "                                              ',          & knap ® ~ 2017     ,'"
+    echo "                                              ',        by fiveten_59 ®         '"
+    echo "                                              ',               2017           ,'"
     echo "                                                '----,      ,----,       ,----'"
     echo "                                                      '----'      '-----'"
     echo "                                                                O"
@@ -2288,7 +2160,7 @@ esac
     echo "                                                     '':::_:' -- '' -'-' '':_::::''          "
     echo ""
     echo "                                                     Grazie a tutti e buon divertimento"
-    echo ""
+    echo "                                                               Have fun :-)"
     echo ""
     exit 0
 

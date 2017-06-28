@@ -1,11 +1,11 @@
 #!/bin/bash
 ############################## !!! IMPORTANTE !!! #######################################
 #                                                                                       #
-# Nome Script : Skin_installer                                                          #
-# Versione: Github Repository Master (https://github.com/fiveten59/skin_installer)      #
+# Script name : Skin_installer                                                          #
+# Version: Github Repository Master (https://github.com/fiveten59/skin_installer)       #
 #                                                                                       #
-# date il comando sudo chmod 755 plugins_installer                                      #
-# avviate lo script con il comando: sudo sh ./skin_installer                            #
+# chmod the script                                                                      #
+# then load it simply typing: sudo ./skin_installer                                     #
 #                                                                                       #
 #########################################################################################
 #                                                                                                                  
@@ -17,45 +17,41 @@ VDRSRC=''$SRC'/vdr/PLUGINS/src'
 LIB='/usr/local/lib/vdr/plugins'
 PLUGINS='/etc/vdr/plugins'
 SKIN='/etc/vdr/plugins/text2skin'
-Remind='è già installato... avete dimenticato di aggiungere il comando al vdrrun?'
-Remind1='Ho rimosso'
-Remind5='non è installato'
+Remind='is already installed'
+Remind1='Removed'
+Remind5='is not installed'
 #
 #
 
                                           ###############################################
                                           #        Installazione altre Skins            #
                                           ###############################################
-    clear        
-    dialog --title "   ** Installazione librerie necessarie per le skins  **   " --infobox "
-   ----------------------------------------------
-    Installazione altri Plugins & Skin di VDR             
-   ---------------------------------------------- " 0 0 
+
 
 #echo "*** Installazione librerie ***"; 
     clear
-    dialog --title "   ** Installazione librerie **   " --infobox "
-   ----------------------------------------------
-                Che cosa vuoi fare ?
+    dialog --title "   ** Install libraries **   " --infobox "
    ----------------------------------------------
 
-        [a]    S.O. Ubuntu 16.04  
-        [b]    Sono già installate - Skip                               
+        [a]    O.S. Ubuntu 16.04                
+        [b]    Libraries are already installed 
+        [c]    Skip                                               
                                        
    ---------------------------------------------- " 0 0
-    echo -n "        Scegli  [a-c]:      "
+    echo -n "        Enter your menu choice  [a-c]:      "
     read yourch
     case $yourch in
-a) apt-get -y install build-essential checkinstall libfreetype6-dev libfontconfig1-dev libjpeg62-dev libcap-dev libfribidi-dev libncurses5-dev libncursesw5-dev git-core gettext; apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev; apt-get -y install libpcre++0 libpcre++-dev python-libxml2 python-libxslt1 python-pycurl python-simplejson mimms libxml2-dev python-all-dev python-central cdbs libglib2.0-dev debhelper txt2man;apt-get -y install libcurl3 libcurl4-gnutls-dev cvs libxcb-icccm4 libxcb-icccm4-dev libx11-xcb-dev libxcb-screensaver0-dev libxcb-dpms0-dev libmagick++-dev;;
-b) ;;
+	a) apt-get -y install build-essential checkinstall libfreetype6-dev libfontconfig1-dev libjpeg62-dev libcap-dev libfribidi-dev libncurses5-dev libncursesw5-dev git-core gettext; apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev; apt-get -y install libpcre++0 libpcre++-dev python-libxml2 python-libxslt1 python-pycurl python-simplejson mimms libxml2-dev python-all-dev python-central cdbs libglib2.0-dev debhelper txt2man;apt-get -y install libcurl3 libcurl4-gnutls-dev cvs libxcb-icccm4 libxcb-icccm4-dev libx11-xcb-dev libxcb-screensaver0-dev libxcb-dpms0-dev libmagick++-dev;;
+	b) ;;
+	c) ;;
 esac
 #
 #
-# echo  "   ** Installazione altre skins di VDR **   "  
+# echo  "   ** Install VDR skins **   "  
     clear        
-    dialog --title "   ** Installazione altre skins di VDR **   " --infobox "
+    dialog --title "   ** Install VDR skins  **   " --infobox "
    ----------------------------------------------
-    Installazione altre Skins di VDR             
+    Install VDR skins             
    ----------------------------------------------
 
         Basic_skin/CoolHD/Anthra/NarrowHD
@@ -67,21 +63,21 @@ esac
         YaepgHD
 
    ---------------------------------------------- " 0 0                 
-echo "     premere il tasto [Invio] per continuare. . .    " ;read enterKey
+echo "     Press Enter to continue ...    " ;read enterKey
 #
-#echo "*** Basic_skin/CoolHD/Anthra necessita di Vdr-Plugin-Text2skin ***"; 
+#echo "*** Basic_skin/CoolHD/Anthra need Vdr-Plugin-Text2skin ***";
+# 
     clear
-    dialog --title "   ** Basic_skin/CoolHD/Anthra necessita di Vdr-Plugin-Text2skin **   " --infobox "
+    dialog --title "   ** Basic_skin/CoolHD/Anthra need Vdr-Plugin-Text2skin **   " --infobox "
    ----------------------------------------------
-                Che cosa vuoi fare ?
-   ----------------------------------------------
-        [a]    Installare le skin Basic_skin/CoolHD/Anthra 
-        [b]    Rimuovere le skin Basic_skin/CoolHD/Anthra            
+
+        [a]    Install Basic_skin/CoolHD/Anthra skins
+        [b]    Remove Basic_skin/CoolHD/Anthra skins            
         [c]    Skip 
 
    ---------------------------------------------- " 0 0  
 
-    echo -n "        Scegli  [a-c]:      "
+    echo -n "        Enter your menu choice  [a-c]:      "
     read yourch
     case $yourch in               
 a) cd $VDRSRC && if [ -f text2skin/Makefile ];
@@ -109,7 +105,7 @@ if [ -f /etc/vdr/plugins/text2skin/Basic ];
 	then echo " La Basic Skin $Remind2"
 		else wget https://www.dropbox.com/s/y4jiosfxinkh2e1/Basic_skin.tar.gz && cp -rf Basic_skin.tar.gz /home/`logname`/sifinstallrepo/ && tar -zxvf Basic_skin.tar.gz && rm -r Basic_skin.tar.gz
 fi
-        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
+        echo "                    Press Enter to continue ...               "; read enterKey;;
 b) cd $VDRSRC && rm -r text2skin && cd $PLUGINS && rm -r text2skin && sed -i "s|-P'text2skin'||" /usr/local/bin/vdrrun && echo "$Remind1 Vdr-Plugin-Text2skin e le Skin Basic/CoolHD/Anthra" ;;
 c) ;;
 esac
@@ -119,109 +115,106 @@ esac
     clear
     dialog --title "   ** Skinsoppalusikka **   " --infobox "
    ----------------------------------------------
-                Che cosa vuoi fare ?
-   ----------------------------------------------
-        [a]    Installare la Skin Skinsoppalusikka
-        [b]    Rimuovere la Skin Skinsoppalusikka                
+
+        [a]    Install Skinsoppalusikka Skin
+        [b]    Remove Skinsoppalusikka Skin                
         [c]    Skip             
                                        
    ---------------------------------------------- " 0 0
-    echo -n "        Scegli  [a-c]:      "
+    echo -n "        Enter your menu choice  [a-c]:      "
     read yourch
     case $yourch in 
 a) cd $VDRSRC  && if [ -f skinsoppalusikka/Makefile ];
   		then  echo "Skinsoppalusikka $Remind"
 			else git clone https://github.com/rofafor/vdr-plugin-skinsoppalusikka.git && cp -rf vdr-plugin-skinsoppalusikka /home/`logname`/sifinstallrepo/ && mv vdr-plugin-skinsoppalusikka skinsoppalusikka && cd ../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'skinsoppalusikka'|" /usr/local/bin/vdrrun
-	fi;;
+	fi;
+        echo "                    Press Enter to continue ...               "; read enterKey;;  
 b) cd $VDRSRC && if [ -f skinsoppalusikka/Makefile ];
   	then rm -r $VDRSRC/skinsoppalusikka && rm -r /etc/vdr/plugins/skinsoppalusikka && sed -e "s|-P'skinsoppalusikka'||" /usr/local/bin/vdrrun && echo "$Remind1 la Skin Skinsoppalusikka"
   		else echo "La Skin Skinsoppalusikka $Remind5" 
 fi
-        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+        echo "                    Press Enter to continue ...               "; read enterKey;;  
 c) ;;
 esac
 #
 #
-#echo "*** NarrowHD  (Skin) ***"; 
+#echo "*** NarrowHD Skin ***"; 
     clear
-    dialog --title "   ** NarrowHD **   " --infobox "
+    dialog --title "   ** NarrowHD Skin **   " --infobox "
    ----------------------------------------------
-                Che cosa vuoi fare ?
-   ----------------------------------------------
-        [a]    Installare la Skin NarrowHD
-        [b]    Rimuovere la Skin NarrowHD                
+ 
+        [a]    Install NarrowHD Skin
+        [b]    Remove NarrowHD Skin                
         [c]    Skip             
                                        
    ---------------------------------------------- " 0 0
-    echo -n "        Scegli  [a-c]:      "
+    echo -n "        Enter your menu choice  [a-c]:      "
     read yourch
     case $yourch in 
 a) cd $VDRSRC && if [ -f narrowhd/Makefile ];
   	then  echo "NarrowHD $Remind1"
   		else     git clone git://projects.vdr-developer.org/skin-narrowhd.git && cp -rf skin-narrowhd /home/`logname`/sifinstallrepo/ && mv skin-narrowhd narrowhd && cd narrowhd && make && make install && cd /etc/vdr/plugins/text2skin/NarrowHD/logos/ && rm -r * && ln -s /etc/vdr/logos $SKIN/NarrowHD/logos  
-fi
-      echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
+fi;
+      echo "                    Press Enter to continue ...               "; read enterKey;;
 b) cd $VDRSRC && if [ -f narrowhd/Makefile ];
   	then rm -r $VDRSRC/narrowhd && rm -r $SKIN/NarrowHD && echo "$Remind1 la Skin NarrowHD" 
 		else echo "La Skin NarrowHD $Remind5" 
-fi
-        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+fi;
+      echo "                    Press Enter to continue ...               "; read enterKey;;  
 c) ;;
 esac
 #
 #
-#echo "*** Enigma  (Skin) ***"; 
+#echo "*** Enigma Skin ***"; 
     clear
-    dialog --title "   ** Enigma **   " --infobox "
+    dialog --title "   ** Enigma Skin **   " --infobox "
    ----------------------------------------------
-                Che cosa vuoi fare ?
-   ----------------------------------------------
-        [a]    Installare la Skin Enigma
-        [b]    Rimuovere la Skin Enigma                
+
+        [a]    Install Enigma Skin
+        [b]    Remove Enigma Skin                
         [c]    Skip             
                                        
    ---------------------------------------------- " 0 0
-    echo -n "        Scegli  [a-c]:      "
+    echo -n "        Enter your menu choice  [a-c]:      "
     read yourch
     case $yourch in 
 a) cd $VDRSRC && if [ -f skinenigmang/Makefile ];
   	then  echo "Skin Enigma $Remind1"
   		else git clone http://projects.vdr-developer.org/git/vdr-plugin-skinenigmang.git && cp -rf vdr-plugin-skinenigmang /home/`logname`/sifinstallrepo/ && mv vdr-plugin-skinenigmang skinenigmang && cd skinenigmang && cp -rf themes/*.theme /etc/vdr/themes/ && wget https://www.dropbox.com/s/3ba9ryxvctmfqty/patch_skinenigmang.tar.gz && tar -zxvf patch_skinenigmang.tar.gz && cp -rf patch_skinenigmang.tar.gz /home/`logname`/sifinstallrepo/ && rm -rf patch_skinenigmang.tar.gz && patch -p1 < 01_skinenigmang_Makefile.patch && patch -p1 < 02_skinenigmang_min_max_from_stl.patch && cd ../../.. && make plugins && cd /etc/vdr/plugins && mkdir -p skinenigmang && cd skinenigmang && wget https://www.dropbox.com/s/odv30s0a22mau60/skinenigmang-logos-xpm-hi-20070702.tgz && cp -rf skinenigmang-logos-xpm-hi-20070702.tgz /home/`logname`/sifinstallrepo/ && wget https://www.dropbox.com/s/weh6c53bg9363ey/skinenigmang-channellogos-xpm-hi-20070702.tgz && cp -rf skinenigmang-channellogos-xpm-hi-20070702.tgz /home/`logname`/sifinstallrepo/ && wget https://www.dropbox.com/s/pydva1r0iafh5hy/skinenigmang-fonts-20080225.tgz && cp -rf skinenigmang-fonts-20080225.tgz /home/`logname`/sifinstallrepo/ && tar xzvf skinenigmang-channellogos-xpm-hi-20070702.tgz && tar xzvf skinenigmang-fonts-20080225.tgz && tar xzvf skinenigmang-fonts-20080225.tgz && rm -r skinenigmang-channellogos-xpm-hi-20070702.tgz && rm -r skinenigmang-fonts-20080225.tgz && rm -r skinenigmang-logos-xpm-hi-20070702.tgz && sed -i "s|-P'dvbapi'|& -P'skinenigmang'|" /usr/local/bin/vdrrun 
-fi
-      echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
+fi;
+      echo "                    Press Enter to continue ...               "; read enterKey;;
 b) cd $VDRSRC && if [ -f skinenigmang/Makefile ];
   	then rm -r $VDRSRC/skinenigmang && sed -e "s|-P'skinenigmang'||" /usr/local/bin/vdrrun && echo "$Remind1 la Skin Enigma"
 		else echo "La Skin Enigma $Remind5" 
-fi
-        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+fi;
+      echo "                    Press Enter to continue ...               "; read enterKey;;  
 c) ;;
 esac
 #    
 #    
-#echo "*** EgalT2  (Skin) ***"; 
+#echo "*** EgalT2 Skin ***"; 
     clear
-    dialog --title "   ** EgalT2 **   " --infobox "
+    dialog --title "   ** EgalT2 Skin **   " --infobox "
    ----------------------------------------------
-                Che cosa vuoi fare ?
-   ----------------------------------------------
-        [a]    Installare la Skin EgalT2
-        [b]    Rimuovere la Skin EgalT2                
+
+        [a]    Install EgalT2 Skin
+        [b]    Remove EgalT2 Skin                
         [c]    Skip             
                                        
    ---------------------------------------------- " 0 0
-    echo -n "        Scegli  [a-c]:      "
+    echo -n "        Enter your menu choice  [a-c]:      "
     read yourch
     case $yourch in 
 a) cd $VDRSRC && if [ -f EgalT2/Makefile ];
   	then  echo "EgalT2 $Remind1"
   		else wget https://www.dropbox.com/s/knps7b8q2udary6/vdr-text2skin-EgalT2-0.3.3.tar.gz && cp -rf vdr-text2skin-EgalT2-0.3.3.tar.gz /home/`logname`/sifinstallrepo/ && tar -zxvf vdr-text2skin-EgalT2-0.3.3.tar.gz && rm -r vdr-text2skin-EgalT2-0.3.3.tar.gz && cd EgalT2 && make install && cd .. 
-fi
-      echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
+fi;
+      echo "                    Press Enter to continue ...               "; read enterKey;;
 b) cd $VDRSRC && if [ -f EgalT2/Makefile ];
   	then rm -r $VDRSRC/EgalT2 && echo "$Remind1 la Skin EgalT2" 
 		else echo "La Skin EgalT2 $Remind5" 
-fi
-        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;; 
+fi;
+      echo "                    Press Enter to continue ...               "; read enterKey;; 
 c) ;;
 esac
 #
@@ -232,26 +225,25 @@ esac
     clear
     dialog --title "   ** Skin-Nopacity **   " --infobox "
    ----------------------------------------------
-                Che cosa vuoi fare ?
-   ----------------------------------------------
-        [a]    Installare la Skin-Nopacity
-        [b]    Rimuovere la Skin-Nopacity                
+
+        [a]    Install Skin-Nopacity
+        [b]    Remove Skin-Nopacity                
         [c]    Skip             
                                        
    ---------------------------------------------- " 0 0
-    echo -n "        Scegli  [a-c]:      "
+    echo -n "        Enter your menu choice  [a-c]:      "
     read yourch
     case $yourch in 
 a) cd $VDRSRC && if [ -f skin-nopacity/Makefile ];
   	then  echo "Skin-Nopacity $Remind1"
   		else git clone https://projects.vdr-developer.org/git/skin-nopacity.git && cp -rf skin-nopacity /home/`logname`/sifinstallrepo/ && cd skin-nopacity && wget https://www.dropbox.com/s/hegz319loovpb4r/patch_skinnopacity.tar.gz && tar -zxvf patch_skinnopacity.tar.gz && cp -rf patch_skinnopacity.tar.gz /home/`logname`/sifinstallrepo/ && rm -r patch_skinnopacity.tar.gz && patch -p1 < 11_skinnopacity_displaychannel.c.patch && patch -p1 < 12_skinnopacity_lib_Magick.patch && patch -p1 < 12_skinnopacity_vdr233.patch && patch -p1 < 13_skinnopacity_min_max_from_stl.patch && cd ../../.. && make install && sed -e "s|-P'externalplayer'||-P'skin-nopacity -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun 
-fi
-      echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
+fi;
+      echo "                    Press Enter to continue ...               "; read enterKey;;
 b) cd $VDRSRC && if [ -f skin-nopacity/Makefile ];
   	then rm -r $VDRSRC/skin-nopacity && sed -e "s|-P'skin-nopacity -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun && echo "$Remind1 la Skin Nopacity"
 		else echo "La Skin Nopacity $Remind5" 
-fi
-        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+fi;
+      echo "                    Press Enter to continue ...               "; read enterKey;;  
 c) ;;
 esac
 #
@@ -260,54 +252,52 @@ esac
     clear
     dialog --title "   ** SkinElchi **   " --infobox "
    ----------------------------------------------
-                Che cosa vuoi fare ?
-   ----------------------------------------------
-        [a]    Installare la SkinElchi
-        [b]    Rimuovere la SkinElchi               
+
+        [a]    Install SkinElchi
+        [b]    Remove SkinElchi               
         [c]    Skip             
                                        
    ---------------------------------------------- " 0 0
-    echo -n "        Scegli  [a-c]:      "
+    echo -n "        Enter your menu choice  [a-c]:      "
     read yourch
     case $yourch in 
 a) cd $VDRSRC && if [ -f skinelchi/Makefile ];
   	then  echo "SkinElchi $Remind1"
   		else wget http://firefly.vdr-developer.org/skinelchi/vdr-skinelchi-0.3.0.tar.bz2 && cp -rf vdr-skinelchi-0.3.0.tar.bz2 /home/`logname`/sifinstallrepo/ && tar xjf vdr-skinelchi-0.3.0.tar.bz2 && rm -r vdr-skinelchi-0.3.0.tar.bz2 && mv skinelchi-0.3.0 skinelchi && cd skinelchi && wget https://www.dropbox.com/s/ya24b0m7est22lx/patch_skinelchi.tar.gz && tar -zxvf patch_skinelchi.tar.gz && cp -rf patch_skinelchi.tar.gz /home/`logname`/sifinstallrepo/ && patch -p1 < vdr-plugin-skinelchi_min_max_from_stl.diff && ../../.. && make plugins 
-fi
-      echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;
+fi;
+      echo "                    Press Enter to continue ...               "; read enterKey;;
 b) cd $VDRSRC && if [ -f skinelchi/Makefile ];
   	then rm -r $VDRSRC/skinelchi && echo "$Remind1 la Skin Elchi" 
 		else echo "La SkinElchi $Remind5" 
-fi
-        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;; 
+fi;
+      echo "                    Press Enter to continue ...               "; read enterKey;; 
 c) ;;
 esac
 #
 #
-#echo "*** YaepgHd ***"; 
+#echo "***  ***"; 
     clear
-    dialog --title "   ** VDR-Plugin-YaepgHd **   " --infobox "
+    dialog --title "   **  **   " --infobox "
    ----------------------------------------------
-                Che cosa vuoi fare ?
-   ----------------------------------------------
-        [a]    Installare Vdr-Plugins-YaepgHd
-        [b]    Rimuovere Vdr-Plugins-YaepgHd
+
+        [a]    Install
+        [b]    Remove
         [c]    Skip
                                        
    ---------------------------------------------- " 0 0
-    echo -n "        Scegli  [a-c]:      "
+    echo -n "        Enter your menu choice  [a-c]:      "
     read yourch
     case $yourch in 
 a) cd $VDRSRC && if [ -f yaepghd/Makefile ];
-  then  echo "YaepgHd $Remind"
+  then  echo " $Remind"
 		else git clone https://github.com/lucianm/vdr-plugin-yaepghd.git && cp -rf vdr-plugin-yaepghd /home/`logname`/sifinstallrepo/  && mv -f vdr-plugin-yaepghd yaepghd && cp -R $VDRSRC/yaepghd/yaepghd /etc/vdr/plugins/ && cd ../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'yaepghd'|" /usr/local/bin/vdrrun
-  fi;
-        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+fi;
+        echo "                    Press Enter to continue ...               "; read enterKey;;  
 b) cd $VDRSRC && if [ -f yaepghd/Makefile ];
    		then rm -rf yaepghd && cd $PLUGINS && rm -rf yaepghd && rm -r $LIB/libvdr-yaepghd.* && sed -i "s|-P'yaepghd'||" /usr/local/bin/vdrrun && echo "$Remind1 Vdr-plugin-YaepgHd"
-   			else echo "YaepgHd $Remind5" 
-   fi;
-        echo "                    Premere il tasto [Invio] per continuare. . .               "; read enterKey;;  
+   			else echo " $Remind5" 
+fi;
+        echo "                    Press Enter to continue ...               "; read enterKey;;  
 c) ;;
 esac
 #
@@ -316,3 +306,57 @@ apt-get -y install libgraphicsmagick++1-dev
 cd /home/`logname`/sifinstallrepo/; chmod -R 777 *;
 #
 cd $SRC/vdr; make plugins install;
+
+    
+
+    clear
+    echo ""
+    echo ""
+    echo ""
+    echo ""
+    echo "                                                       .-----,        ,.----."
+    echo "                                                .-----'       '------'       ',"
+    echo "                                              ,'                              ',"
+    echo "                                              '                             ,"
+    echo "                                              ',             First ed.        ,'"
+    echo "                                              ,'          by fiveten_59 ®      ',"
+    echo "                                             '                 2017           ,"
+    echo "                                              ',                               ,'"
+    echo "                                              ',                                ,'"
+    echo "                                                '----,      ,----,       ,----'"
+    echo "                                                      '----'      '-----'"
+    echo "                                                                O"
+    echo "                                                                 o "
+    echo "                                                                  o  "
+    echo "                                                                   °"
+    echo "                                                                    °"
+    echo "                                                                .88888888:.          "
+    echo "                                                              88888888.88888.          "
+    echo "                                                            .8888888888888888.          "
+    echo "                                                            888888888888888888          "
+    echo "                                                            88'..'888'..'88888          "
+    echo "                                                            88'  '888'  '88888          "
+    echo "                                                            88'..':::'..':8888          "
+    echo "                                                            88:::,::,:::::8888          "
+    echo "                                                            88':::::::::''8888          "
+    echo "                                                           .88  '::::'    8:88.          "
+    echo "                                                          8888            '8:888.          "
+    echo "                                                        .8888'             '888888.          "
+    echo "                                                       .8888:..  .::.  ...:'8888888:.          "
+    echo "                                                      .8888.'     :'     ''::'88:88888          "
+    echo "                                                     .8888        '         '.888:8888.          "
+    echo "                                                    888:8         .           888:88888          "
+    echo "                                                  .888:88        .:           888:88888:          "
+    echo "                                                  8888888.       ::           88:888888          "
+    echo "                                                  '.::.888.      ::          .88888888          "
+    echo "                                                 .::::::.888.    ::         :::'8888'.:.          "
+    echo "                                                ::::::::::.888   '         .::::::::::::          "
+    echo "                                                ::::::::::::.8    '      .:8::::::::::::.          "
+    echo "                                              .::::::::::::::.        .:888:::::::::::::          "
+    echo "                                              :::::::::::::::88:.__..:88888:::::::::::'          "
+    echo "                                               ''.:::::::::::88888888888.88:::::::::'          "
+    echo "                                                     '':::_:' -- '' -'-' '':_::::''          "
+    echo ""
+    echo "                                                     Grazie a tutti e buon divertimento"
+    echo "                                                               Have fun :-)"
+    echo ""

@@ -1,11 +1,11 @@
 #!/bin/bash
 ############################## !!! IMPORTANTE !!! #######################################
 #                                                                                       #
-# Script name: light_installer_2.3.7                                                    #
+# Script name: light_installer_2.3.8                                                    #
 # Version: Github Repository Master (https://github.com/fiveten59/Vdr_installer)        #
 #                                                                                       #
-# To be put in your /usr/local/bin                                                      #
-# chmod the script, then load it simply typing: sudo ./light_installer_2.3.7            #
+# chmod the script                                                                      #
+# then load it simply typing: sudo ./light_installer_2.3.8                              #
 #                                                                                       #
 #########################################################################################
 #
@@ -14,10 +14,10 @@ PLUGIN="--lirc -P'softhddevice -f' -P'dvbapi' -P'skindesigner -l /etc/vdr/logos/
 #REPO='home/'logname'/sifinstallrepo'
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
-SRCVDR='/usr/local/src/vdr-2.3.7'
+SRCVDR='/usr/local/src/vdr-2.3.8'
 VDRSRC=''$SRC'/vdr/PLUGINS/src'
 LIB='/usr/local/lib/vdr/plugins'
-VDR='vdr-2.3.7'
+VDR='vdr-2.3.8'
 PACKAGES=""$SRC"/packages"
 ARCHIVES=""$SRC"/archives"
 SCRIPTS=""$SRC"/archives/scripts"
@@ -27,6 +27,8 @@ SKIN='/etc/vdr/plugins/text2skin'
 SKINS='/usr/local/share/vdr/plugins/skindesigner/skins/'
 SHARE='/usr/local/share/vdr/plugins'
 PLUGINS='/etc/vdr/plugins'
+Remind4='are already installed'
+Remind5='is not installed'
 TIMESTAMP=`date +%Y%m%d.%R`
 ALLOWED="#
 # allowed_hosts.conf  This file describes a number of host addresses that
@@ -43,11 +45,11 @@ ALLOWED="#
 #0.0.0.0/0            # any host on any net (USE THIS WITH CARE!)
 #
 #
-# SE LA VOSTRA CONFIGURAZIONE DI RETE E' QUESTA NON TOCCATELA!!!
-# ESCI CON CTRL+X
+# If your network setup is correct pls don't touch
+# exit with CTRL+X
 #
-# SE LA VOSTRA CONFIGURAZIONE DI RETE E' DIVERSA MODIFICALA
-# SALVA CON CTRL+O ED ESCI CON CTRL+X "
+# If your network setup is diiferent change it and
+# Save it with CTRL+O and exit with CTRL+X "
 #
 MONO13="#
 # Full DiSEqC sequence:
@@ -268,11 +270,11 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
     dialog --title " VDR Light Installer Github Repository " --infobox "Copyright (C) 2017
     
 
-	Script name: light_installer_2.3.7                                                  
+	Script name: light_installer_2.3.8                                                  
 	Version: Github Repository Master  (https://github.com/fiveten59/Vdr_installer)                                                     
                                                                                               
 	To be put in your /usr/local/bin                                                      
-	chmod the script, then load it simply typing: sudo ./light_installer_2.3.7            
+	chmod the script, then load it simply typing: sudo ./light_installer_2.3.8            
                                                                                        
                                                                " 0 0
 
@@ -283,7 +285,7 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
     #
     clear
     echo ""
-    dialog --title "   ♦♦♦♦♦   VDR 2.3.7 Light Version Installer Script - Libraries & Codec  ♦♦♦♦♦   " --infobox "
+    dialog --title "   ♦♦♦♦♦   VDR 2.3.8 Light Version Installer Script - Libraries & Codec  ♦♦♦♦♦   " --infobox "
           ╭===========================================================================================╮    
           |   ................♦♦♦   Download & Upgrade Local Repository   ♦♦♦...................  |
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
@@ -295,7 +297,7 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
           |   =======================================================================================   |
           |   .............♦♦♦                        VDR - Plugins  - Skin               ♦♦♦.........  |
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
-          |   [3]    +[Submenu] ~~  VDR 2.3.7 & Plugins ................................................ |     
+          |   [3]    +[Submenu] ~~  VDR 2.3.8 & Plugins ................................................ |     
           |   =======================================================================================   |
           |   .............♦♦♦                    Channells Lists Setup                 ♦♦♦........  |
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
@@ -416,25 +418,25 @@ else
 
 ################################ Download Vdr and Plugins on local repo ##############################
 
-if [ -s /home/`logname`/sifinstallrepo/vdr-2.3.7.tar.bz2 ]; then
+if [ -s /home/`logname`/sifinstallrepo/vdr-2.3.8.tar.bz2 ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget ftp://ftp.tvdr.de/vdr/Developer/vdr-2.3.7.tar.bz2;
+    wget ftp://ftp.tvdr.de/vdr/Developer/vdr-2.3.8.tar.bz2;
   fi
 
-if [ -s /home/`logname`/sifinstallrepo/vdr-patches.2.3.7.tar.gz ]; then
+if [ -s /home/`logname`/sifinstallrepo/vdr-patches.2.3.8.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/9ewx7vriddfcxc7/vdr-patches.2.3.7.tar.gz;
+    wget https://www.dropbox.com/s/03b62kcf2kj4ctw/vdr-patches.2.3.8.tar.gz;
   fi
 
-if [ -s /home/`logname`/sifinstallrepo/Make.config.2.3.7 ]; then
+if [ -s /home/`logname`/sifinstallrepo/Make.config.2.3.8 ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/el76ioots63nq07/Make.config.2.3.7;
+    wget https://www.dropbox.com/s/eowlruz11ksa9b4/Make.config.2.3.8;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/vdrsymbols.tar.gz ]; then
@@ -626,6 +628,13 @@ if [ -s /home/`logname`/sifinstallrepo/vdr-plugin-skindesigner ]; then
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
      git clone git://projects.vdr-developer.org/vdr-plugin-skindesigner.git;
+  fi
+
+if [ -s /home/`logname`/sifinstallrepo/patch_skindesigner.tar.gz ]; then
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+else
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    wget https://www.dropbox.com/s/8uiizh0d3t706ll/patch_skindesigner.tar.gz;
   fi   
 
 if [ -s /home/`logname`/sifinstallrepo/themes.tar.gz ]; then
@@ -777,9 +786,9 @@ chmod -R 777 *;;
 
 ############################ Download Vdr and Plugins on local repo ################################
 
-    wget ftp://ftp.tvdr.de/vdr/Developer/vdr-2.3.7.tar.bz2;
-    wget https://www.dropbox.com/s/9ewx7vriddfcxc7/vdr-patches.2.3.7.tar.gz;
-    wget https://www.dropbox.com/s/el76ioots63nq07/Make.config.2.3.7;
+    wget ftp://ftp.tvdr.de/vdr/Developer/vdr-2.3.8.tar.bz2;
+    wget https://www.dropbox.com/s/03b62kcf2kj4ctw/vdr-patches.2.3.8.tar.gz;
+    wget https://www.dropbox.com/s/eowlruz11ksa9b4/Make.config.2.3.8;
     wget https://www.dropbox.com/s/bx97ikp7c1h2qj2/vdrsymbols.tar.gz;
     git clone git://projects.vdr-developer.org/vdr-plugin-tvguide.git;
     wget https://www.dropbox.com/s/xkax9z6qumb76dj/patch_tvguide.tar.gz;
@@ -805,6 +814,7 @@ chmod -R 777 *;;
 
     wget https://www.dropbox.com/s/zwb0vp6gfwh7d4y/anthra_pack.tar.gz;
     git clone git://projects.vdr-developer.org/vdr-plugin-skindesigner.git;
+    wget https://www.dropbox.com/s/8uiizh0d3t706ll/patch_skindesigner.tar.gz;
     git clone http://projects.vdr-developer.org/git/skin-flatplus.git;
     wget https://www.dropbox.com/s/gpsnxpj4kellu5d/patch_skinflatplus.tar.gz;
     wget https://www.dropbox.com/s/806odyj5vyco3dg/lcars_pack.tar.gz;
@@ -1221,17 +1231,17 @@ z) ;;
 ##                                                                                                                         ##
 #                                                                                                                           #
 3)                                        ##########################################################
-                                          #  Submenu -         VDR - Plugins                       #
+                                          #        Submenu - VDR-2.3.x & Basic plugins             #
                                           ##########################################################
                   
     clear        
-    dialog --title "   ** Installazione VDR - Plugins   **   " --infobox "
+    dialog --title "   ** Install VDR-2.3.x & Basic plugins   **   " --infobox "
    ---------------------------------------------------------------------------------------------
         
         *****  Install  *****  .....................  *****  Remove  *****
    
-        [a]    Install VDR-2.3.x & Basic plugins ..............  [a1]    Remove VDR-2.3.x & Basic plugins
-        [b]    Prima Configurazione VDR  ..............  [b1]    Rimozione Configurazione VDR
+        [a]    Install VDR-2.3.x & Basic plugins ........  [a1]    Remove VDR-2.3.x & Basic plugins
+        [b]    First VDR Setup ..........................  [b1]    Remove VDR Setup
         
         [z]    Skip
    
@@ -1248,7 +1258,7 @@ z) ;;
 #                                                                                                                           #
                                                                                                                           
 a)                                        #########################################
-                                          #        VDR-2.3.7 & Basic plugins      #
+                                          #        VDR-2.3.8 & Basic plugins      #
                                           #########################################
 
 
@@ -1261,10 +1271,10 @@ a)                                        ######################################
     apt-get -y install libcurl3 libcurl4-gnutls-dev cvs libxcb-icccm4 libx11-xcb-dev  libxcb-ewmh-dev 
     apt-get -y install libpcre++0v5
     clear    
-    echo "               Installing VDR 2.3.7      "; sleep 4 
+    echo "               Installing VDR 2.3.8      "; sleep 4 
     cp -rf /home/`logname`/sifinstallrepo/$VDR.tar.bz2 $SRC/; tar xivf $VDR.tar.bz2;
     ln -s $VDR vdr; rm -r $VDR.tar.bz2
-    cd vdr; cp -rf /home/`logname`/sifinstallrepo/vdr-patches.2.3.7.tar.gz $SRC/vdr/; tar -zxvf vdr-patches.2.3.7.tar.gz; rm -r vdr-patches.2.3.7.tar.gz; sleep 1;
+    cd vdr; cp -rf /home/`logname`/sifinstallrepo/vdr-patches.2.3.8.tar.gz $SRC/vdr/; tar -zxvf vdr-patches.2.3.8.tar.gz; rm -r vdr-patches.2.3.8.tar.gz; sleep 1;
 echo "*** zapcockpit ***"
     patch -p1 < 02_vdr_zapcockpit.patch; sleep 1;
 echo "*** getbitmap ***"
@@ -1290,22 +1300,15 @@ echo "*** maxdevice ***"
 echo "*** dvb_power_saving ***"
     patch -p1 < 24_vdr_dvb_power_saving_feature.patch; sleep 1;
 echo "*** dvbchan ***"
-    patch -p1 < vdr-2.3.5-dvbchan.patch
+    patch -p1 < vdr-dvbchan.patch; sleep 1;
 echo "*** ci_debug ***"
     patch -p1 < 99_vdr_ci_debug.patch; sleep 1;
 echo "*** menuorg ***"
     patch -p1 < vdr-menuorg-2.3.x.diff; sleep 1;
-####################################################
-#echo "*** 84 ***"
-#    patch -p1 < 84_reelchannels.patch; sleep 1;
-#echo "*** doubleChannels ***"
-#    patch -p1 < 91_doubleChannels.patch; sleep 1;
-####################################################
-echo "*** 99_yaepghd ***"
-    patch -p1 < 99_yaepghd.patch; sleep 1;    
-    rm -r *.patch; sleep 3;
+    #
+    rm -rf *.patch; sleep 3;
     # 
-    cp /home/`logname`/sifinstallrepo/Make.config.2.3.7 $SRC/vdr/; mv Make.config.2.3.7 Make.config; sleep 1;
+    cp /home/`logname`/sifinstallrepo/Make.config.2.3.8 $SRC/vdr/; mv Make.config.2.3.8 Make.config; sleep 1;
     sed -i 's/|| DVB_API_VERSION_MINOR != 0//' dvbdevice.h
     #
     #
@@ -1315,7 +1318,7 @@ echo "*** 99_yaepghd ***"
     echo ""; echo "*** Final compilation ***"; echo ""
     cd /usr/local/src/vdr
     apt-get -y purge vdr
-    checkinstall --fstrans=no --install=yes --pkgname=vdr --pkgversion "2.3.7-git" --pakdir=$PACKAGES --default
+    checkinstall --fstrans=no --install=yes --pkgname=vdr --pkgversion "2.3.8-git" --pakdir=$PACKAGES --default
     rm -r /media/video; mkdir /media/video; mkdir -p /usr/local/lib/vdr/scripts;
     mkdir -p /etc/vdr/plugins; cp *.conf /etc/vdr; mkdir -p /usr/local/lib/vdr/plugins;
     clear    
@@ -1332,7 +1335,7 @@ echo "*** 99_yaepghd ***"
 # See man vdr(5)
 
 Red       Recordings
-Green     @tvguide
+Green     @weatherforecast
 Yellow    Info
 Blue      @tvguideng
 Ok        Channels" >> /etc/vdr/keymacros.conf
@@ -1383,7 +1386,7 @@ cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-epgsearch /$VDRSRC/; mv vdr-plu
 clear
 echo ""; echo "               *** Skindesigner ***"; echo ""; sleep 3
 cd $VDRSRC; 
-cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-skindesigner /$VDRSRC/ && mv vdr-plugin-skindesigner skindesigner && cp -rf /$SRC/traduzioni/metrixhd/*.xml /$VDRSRC/skindesigner/skins/metrixhd/ && cd skindesigner && make install && cd /usr/local/lib/vdr/plugins/skindesigner/scripts/ && ln -s temperatures.default temperatures && ln -s vdrstats.default vdrstats; 
+cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-skindesigner /$VDRSRC/ && mv vdr-plugin-skindesigner skindesigner && cp -rf /$SRC/traduzioni/metrixhd/*.xml /$VDRSRC/skindesigner/skins/metrixhd/ && cd skindesigner && cp -rf /home/`logname`/sifinstallrepo/patch_skindesigner.tar.gz /$VDRSRC/skindesigner && tar -zxvf patch_skindesigner.tar.gz && rm -rf patch_skindesigner.tar.gz && patch -p1 < 00_skindesigner_timer.patch && patch -p1 < 10_skindesigner_scriptsdir.patch && make install && cd /$SHARE/skindesigner/scripts/ && ln -s temperatures.default temperatures && ln -s vdrstats.default vdrstats; 
 #
 clear
 echo ""; echo "               *** TvGuideng ***"; echo ""; sleep 3
@@ -1398,7 +1401,7 @@ cd $VDRSRC; cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-weatherforecast /$V
 clear
 echo ""; echo "               *** Skin Flatplus ***"; echo ""; sleep 3
 cd $VDRSRC;
-cp -rf /home/`logname`/sifinstallrepo/skin-flatplus /$VDRSRC/ && cd skin-flatplus &&  cp -rf /home/`logname`/sifinstallrepo/patch_skinflatplus.tar.gz /$VDRSRC/skin-flatplus/ && tar -zxvf patch_skinflatplus.tar.gz && rm -rf patch_skinflatplus.tar.gz &&  patch -p1 < 10-skinflatplus_minmaxvdr235.diff && make install && cd /usr/local/lib/vdr/plugins/skinflatplus/widgets/temperatures/ && ln -s temperatures.default temperatures && cd ../system_information && ln -s system_information.ubuntu system_information  && cp -rf /home/`logname`/sifinstallrepo/flat_weather.tar.gz ../weather/ && cd ../weather && tar -zxvf flat_weather.tar.gz && rm -r flat_weather.tar.gz;
+cp -rf /home/`logname`/sifinstallrepo/skin-flatplus /$VDRSRC/ && cd skin-flatplus &&  cp -rf /home/`logname`/sifinstallrepo/patch_skinflatplus.tar.gz /$VDRSRC/skin-flatplus/ && tar -zxvf patch_skinflatplus.tar.gz && rm -rf patch_skinflatplus.tar.gz &&  patch -p1 < 10-skinflatplus_minmaxvdr235.diff && patch -p1 < skinflatplus_setitemevent.patch && make install && cd /usr/local/lib/vdr/plugins/skinflatplus/widgets/temperatures/ && ln -s temperatures.default temperatures && cd ../system_information && ln -s system_information.ubuntu system_information  && cp -rf /home/`logname`/sifinstallrepo/flat_weather.tar.gz ../weather/ && cd ../weather && tar -zxvf flat_weather.tar.gz && rm -r flat_weather.tar.gz;
 # qui sopra c'è da mettere le icone di menù mancanti che sono dentro le skin del Skin Flatplus traducendole e comprimendole
 #
 clear
@@ -1427,13 +1430,13 @@ cd /usr/local/src/vdr; make plugins install;
 ##                                                                                                                         ##
 #                                                                                                                           #
 a1)                                       #########################################
-                                          #           Rimozione VDR-2.3.x         #
+                                          #              Remove VDR-2.3.x         #
                                           #########################################
 
 
     clear
     echo "                    Removing VDR 2.3.x"; sleep 4
-dpkg -r vdr; rm -rf /etc/vdr; rm -rf /usr/local/share/vdr; rm -rf /usr/local/lib/vdr; rm -rf /var/cache/vdr; cd $SRC; rm -r vdr vdr-*; cd packages; rm -r vdr*.deb; rm -r /usr/local/bin/vdrpoweroff; rm -r /usr/local/bin/vdrrun;  rm -rf /usr/local/bin/start-vdr-xine.sh; rm -rf /usr/local/bin/start-xinelib-vdr.sh; rm -rf /usr/local/share/vdr; rm -rf /usr/local/bin/start-softhddevice-vdr.sh; rm -rf /home/`logname`/Scrivania/Xinelib.desktop; rm -rf /home/`logname`/Scrivania/Vdr-Xine.desktop; rm -rf /home/`logname`/Scrivania/Vdr-Softhddevice.desktop; rm -r /usr/bin/mplayer.sh; rm -rf /home/`logname`/Scrivania/KillVdr.desktop; cd $PACKAGES; rm -rf vdr*.deb; rm -rf /usr/share/applications/Xinelib.desktop; rm -rf /usr/share/applications/Vdr-Xine.desktop; rm -rf /usr/share/applications/Vdr-Softhddevice.desktop; rm -rf /usr/share/applications/KillVdr.desktop;
+dpkg -r vdr; rm -rf /etc/vdr; rm -rf /usr/local/share/vdr; rm -rf /usr/local/lib/vdr; rm -rf /var/cache/vdr; cd $SRC; rm -r vdr vdr-*; cd packages; rm -r vdr*.deb; rm -r /usr/local/bin/vdrpoweroff; rm -rf /usr/local/bin/vdrrun;  rm -rf /usr/local/bin/start-vdr-xine.sh; rm -rf /usr/local/bin/start-xinelib-vdr.sh; rm -rf /usr/local/share/vdr; rm -rf /usr/local/bin/start-softhddevice-vdr.sh; rm -rf /home/`logname`/Scrivania/Xinelib.desktop; rm -rf /home/`logname`/Scrivania/Vdr-Xine.desktop; rm -rf /home/`logname`/Scrivania/Vdr-Softhddevice.desktop; rm -rf /home/`logname`/Scrivania/KillVdr.desktop; cd $PACKAGES; rm -rf vdr*.deb; rm -rf /usr/share/applications/Xinelib.desktop; rm -rf /usr/share/applications/Vdr-Xine.desktop; rm -rf /usr/share/applications/Vdr-Softhddevice.desktop; rm -rf /usr/share/applications/KillVdr.desktop;
     echo "                    Press Enter to continue ...               "; read enterKey;;
 
 
@@ -1453,7 +1456,7 @@ clear
 echo "                    Installing true type"; sleep 1
 apt-get -y install lirc lirc-x liblircclient-dev;
 if [ -d /usr/share/fonts/truetype/vdrsymbols ];
-then echo " I font $Remind4"; sleep 3;
+then echo " Fonts $Remind4"; sleep 3;
 else cp -rf /home/`logname`/sifinstallrepo/vdrsymbols.tar.gz /usr/share/fonts/truetype/; cd /usr/share/fonts/truetype/; tar -zxvf vdrsymbols.tar.gz;
 fc-cache -fv
 fi;
@@ -1464,7 +1467,7 @@ fi;
 ##                                                                                                                         ##
 #                                                                                                                           #
 					  #########################################	
-					  #         Installing Icone Vdr          #
+					  #         Installing Vdr Icons          #
                                           #########################################
 
 clear
@@ -1493,7 +1496,7 @@ echo "%`logname` ALL=NOPASSWD: /etc/init.d/vdr" >> /etc/sudoers
 #    Creazione /usr/local/bin/vdrpoweroff    
 rm -rf /usr/local/bin/vdrpoweroff; touch /usr/local/bin/vdrpoweroff
 echo '#!/bin/sh
-#nome file : arresto di xine-vdr "vdrpoweroff"
+#file name: Kill Vdr "vdrpoweroff"
 killall -9 vdrrun & killall -9 vdr & killall -9 vdr-sxfe & killall -9 vlc 
 # & killall -9 oscam & shutdown -h now '  >> /usr/local/bin/vdrpoweroff
 # & shutdown -h now 

@@ -53,6 +53,7 @@ esac
         Skinsoppalusikka
         Skin Enigma
         Skin EgalT2
+        Skin-Nopacity
         Skin Elchi
 
    ---------------------------------------------- " 0 0                 
@@ -206,7 +207,7 @@ esac
     case $yourch in 
 a) cd $VDRSRC && if [ -f skin-nopacity/Makefile ];
   	then  echo "Skin-Nopacity $Remind"
-  		else git clone https://projects.vdr-developer.org/git/skin-nopacity.git && cp -rf skin-nopacity /home/`logname`/sifinstallrepo/ && cd skin-nopacity && wget https://www.dropbox.com/s/hegz319loovpb4r/patch_skinnopacity.tar.gz && tar -zxvf patch_skinnopacity.tar.gz && cp -rf patch_skinnopacity.tar.gz /home/`logname`/sifinstallrepo/ && rm -r patch_skinnopacity.tar.gz && patch -p1 < 11_skinnopacity_displaychannel.c.patch && patch -p1 < 12_skinnopacity_lib_Magick.patch && patch -p1 < 12_skinnopacity_vdr233.patch && patch -p1 < 13_skinnopacity_min_max_from_stl.patch && make install && cd ../../.. && make plugins && sed -i "s|-P'externalplayer'||-P'skinnopacity -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun 
+  		else git clone https://projects.vdr-developer.org/git/skin-nopacity.git && cp -rf skin-nopacity /home/`logname`/sifinstallrepo/ && cd skin-nopacity && wget https://www.dropbox.com/s/hegz319loovpb4r/patch_skinnopacity.tar.gz && tar -zxvf patch_skinnopacity.tar.gz && cp -rf patch_skinnopacity.tar.gz /home/`logname`/sifinstallrepo/ && rm -r patch_skinnopacity.tar.gz && patch -p1 < 11_skinnopacity_displaychannel.c.patch && patch -p1 < 12_skinnopacity_lib_Magick.patch && patch -p1 < 12_skinnopacity_vdr233.patch && patch -p1 < 13_skinnopacity_min_max_from_stl.patch && patch -p1 < skinnopacity_vdr-2.3.8.patch && make install && cd ../../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'skinnopacity -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun 
 fi;
       echo "                    Press Enter to continue ...               "; read enterKey;;
 b) cd $VDRSRC && if [ -f skin-nopacity/Makefile ];

@@ -80,7 +80,8 @@ esac
         Satip
         Channelscan
         Osdteletext
-        Image (non va)
+        Ttxsubs (only Vdr 2.2.0)
+        Image (only Vdr 2.2.0)
         Mpv
         Radio
         Scraper2Vdr
@@ -247,7 +248,7 @@ esac
     case $yourch in 
 a) cd $PLUGINS; if [ -f $PLUGINS/channelscan/0130.ini ];
   		then  echo "Vdr-Plugin-Channelscan $Remind"
-	  else cd $VDRSRC; git clone https://bitbucket.org/ua0lnj/channelscan.git; cp -rf channelscan /home/`logname`/sifinstallrepo/; cd channelscan; cp -r $VDRSRC/channelscan/script/* /usr/local/bin; cd ../../..; make plugins; sed -i "s|-P'externalplayer'|& -P'channelscan'|" /usr/local/bin/vdrrun; cd $PLUGINS; mkdir -p channelscan; cd channelscan; wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz; tar -zxvf satellite_pack.tar.gz; cp -rf satellite_pack.tar.gz /home/`logname`/sifinstallrepo/; rm -rf satellite_pack.tar.gz; 
+	  else cd $VDRSRC; git clone https://bitbucket.org/ua0lnj/channelscan.git; cp -rf channelscan /home/`logname`/sifinstallrepo/; cd channelscan; cp -r $VDRSRC/channelscan/script/* /usr/local/bin; cd ../../..; make plugins; sed -i "s|-P'externalplayer'|& -P'channelscan'|" /usr/local/bin/vdrrun; cd $PLUGINS; mkdir -p transponders; cd transponders; wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz; tar -zxvf satellite_pack.tar.gz; cp -rf satellite_pack.tar.gz /home/`logname`/sifinstallrepo/; rm -rf satellite_pack.tar.gz; 
 	fi;
         echo "                    Press Enter to continue ...               "; read enterKey;;  
 b) cd $VDRSRC && if [ -f channelscan/Makefile ];
@@ -287,12 +288,40 @@ c) ;;
 esac
 #
 #
+#echo "*** T ***"; 
+    clear
+    dialog --title "   ** VDR-Plugin-Ttxsubs **   " --infobox "
+   ----------------------------------------------
+
+        [a]    Install Vdr-Plugin-Ttxsubs (only Vdr 2.2.0)
+        [b]    Remove Vdr-Plugin-Ttxsubs
+        [c]    Skip 
+                                       
+   ---------------------------------------------- " 0 0
+    echo -n "        Enter your menu choice  [a-c]:      "
+    read yourch
+    case $yourch in 
+a) cd $VDRSRC && if [ -f ttxsubs/Makefile ];
+		then  echo "Vdr-Plugin-Ttxsubs $Remind"
+			else git clone https://projects.vdr-developer.org/git/vdr-plugin-ttxtsubs.git/ && cp -rf vdr-plugin-ttxsubs /home/`logname`/sifinstallrepo/ &&  mv -f vdr-plugin-ttxsubs ttxsubs && cd ../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'ttxsubs'|" /usr/local/bin/vdrrun 
+    fi;
+        echo "                    Press Enter to continue ...               "; read enterKey;; 
+# && patch -p1 < 01_osdteletext_ttf.patch  
+b) cd $VDRSRC && if [ -f ttxsubs/Makefile ];
+  	then rm -rf ttxsubs && rm -rf $LIB/libvdr-ttxsubs.* && sed -i "s|-P'ttxsubs'||" /usr/local/bin/vdrrun && echo "Vdr-Plugin-Ttxsubs $Remind1"
+  			else echo "Vdr-Plugin-Ttxsubs $Remind5" 
+    fi;
+        echo "                    Press Enter to continue ...               "; read enterKey;;  
+c) ;;
+esac
+#
+#
 #echo "*** Image ***"; echo "";
     clear
     dialog --title "   ** VDR-Plugin-Image **   " --infobox "
    ----------------------------------------------
 
-        [a]    Install Vdr-Plugin-Image
+        [a]    Install Vdr-Plugin-Image (only Vdr 2.2.0)
         [b]    Remove Vdr-Plugin-Image                  
         [c]    Skip             
                                        

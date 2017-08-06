@@ -331,11 +331,11 @@ esac
     case $yourch in
 a) cd $VDRSRC && if [ -f image/Makefile ];
   		then  echo "Vdr-Plugin-Image $Remind"
-			else git clone https://projects.vdr-developer.org/git/vdr-plugin-image.git && cp -rf vdr-plugin-image /home/`logname`/sifinstallrepo/ && mv -f vdr-plugin-image image && cd ../.. && make plugins && cp -rf $VDRSRC/image/scripts/imageplugin.sh /usr/local/bin/ && sed -i "s|-P'externalplayer'|& -P'image'|" /usr/local/bin/vdrrun
+			else git clone https://projects.vdr-developer.org/git/vdr-plugin-image.git && cp -rf vdr-plugin-image /home/`logname`/sifinstallrepo/ && mv -f vdr-plugin-image image && cd ../.. && make plugins && cp -rf $VDRSRC/image/scripts/imageplugin.sh /usr/local/bin/ && cp -rf $VDRSRC/image/scripts/magickplugin.sh /usr/local/bin/ && sed -i "s|-P'externalplayer'|& -P'image'|" /usr/local/bin/vdrrun
 	fi;
         echo "                    Press Enter to continue ...               "; read enterKey;;  
 b) cd $VDRSRC && if [ -f image/Makefile ];
-  		then rm -rf image && rm -rf $LIB/libvdr-image.* && sed -i "s|-P'image'||" /usr/local/bin/vdrrun && echo "Vdr-Plugin-Image $Remind1 "
+  		then rm -rf image && rm -rf $LIB/libvdr-image.* && rm -rf /usr/local/bin/imageplugin.sh && rm -rf /usr/local/bin/magickplugin.sh && sed -i "s|-P'image'||" /usr/local/bin/vdrrun && echo "Vdr-Plugin-Image $Remind1 "
   		else echo "Vdr-Plugin-Image $Remind5" 
     fi;
         echo "                    Press Enter to continue ...               "; read enterKey;;  

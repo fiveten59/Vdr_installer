@@ -1,5 +1,5 @@
 #!/bin/bash
-############################## !!! IMPORTANTE !!! #######################################
+################################## !!! README !!! #######################################
 #                                                                                       #
 # Script name: light_installer_2.3.8                                                    #
 # Version: Github Repository Master (https://github.com/fiveten59/Vdr_installer)        #
@@ -208,7 +208,7 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
     exit 1
     fi
     # User
-    useradd vdr -g video -d /home/vdr -s /bin/bash -m
+    # useradd vdr -g video -d /home/vdr -s /bin/bash -m
     # Some folders
     
     
@@ -251,16 +251,15 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
     con l'aiuto di tutta la comunità vdr che conosco e tutta la loro esperienza   
     percio e' molto importante dare a loro credito          
 
+    A special thanks goes to Klaus Schmidinger Vdr Developer     
+
     Ringraziamenti :                             
     a tutti gli user del sifteam forum e di vdritalia
-    
-    Ringraziamento Speciale :
-    Klaus Schmidinger Sviluppatore VDR e Team 
     
     IN PARTICOLARE :                                
     Mona, Unixer, fiveten_59, Grazymax, Knap, jackblow33, Alez, Shalafi, Homer314, 
     Mr Cool Span, fusibile73, ceo16, Asgarot, Armando Basile, daredavil87, 
-    il Team Mld e tanti ... tanti altri.                             
+    Mld Team and many ... many oyhers.                             
                                                                               
     =====================================                     " 0 0
     echo "                    Press Enter to continue ...               "; read enterKey
@@ -273,8 +272,8 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
 	Script name: light_installer_2.3.8                                                  
 	Version: Github Repository Master  (https://github.com/fiveten59/Vdr_installer)                                                     
                                                                                               
-	To be put in your /usr/local/bin                                                      
-	chmod the script, then load it simply typing: sudo ./light_installer_2.3.8            
+	chmod the script
+        then load it simply typing: sudo ./light_installer_2.3.8            
                                                                                        
                                                                " 0 0
 
@@ -313,7 +312,7 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
           |   =======================================================================================   |
           |   .............................♦♦♦   Exit Setup Menu   ♦♦♦.......................  |          
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |              
-          |   [7]   Exit  ............................................................................  |  
+          |   [7]     Exit  ..........................................................................  |  
           ╰===========================================================================================╯" 0 0
 
     echo -n "              Enter your menu choice = Submenu [1~6] -- Exit [7] :        "
@@ -1308,9 +1307,10 @@ echo "*** menuorg ***"
     #
     rm -rf *.patch; sleep 3;
     # 
-    cp /home/`logname`/sifinstallrepo/Make.config.2.3.8 $SRC/vdr/; mv Make.config.2.3.8 Make.config; sleep 1;
+    cp -rf /home/`logname`/sifinstallrepo/Make.config.2.3.8 $SRC/vdr/; mv Make.config.2.3.8 Make.config; sleep 1;
     sed -i 's/|| DVB_API_VERSION_MINOR != 0//' dvbdevice.h
     #
+    cp -rf $VDRSRC/pictures/pic2mpg /usr/local/bin/;
     #
     make && make plugins
     exit_status_check;
@@ -1321,6 +1321,7 @@ echo "*** menuorg ***"
     checkinstall --fstrans=no --install=yes --pkgname=vdr --pkgversion "2.3.8-git" --pakdir=$PACKAGES --default
     rm -r /media/video; mkdir /media/video; mkdir -p /usr/local/lib/vdr/scripts;
     mkdir -p /etc/vdr/plugins; cp *.conf /etc/vdr; mkdir -p /usr/local/lib/vdr/plugins;
+
     clear    
     echo "*** keymacros.conf setup ***";
     rm -r /etc/vdr/keymacros.conf; cd $SRCVDR; cp -rf vdr /usr/local/bin/; touch /etc/vdr/keymacros.conf
@@ -1480,11 +1481,11 @@ cd $SRC; cp -rf /home/`logname`/sifinstallrepo/icone.tar.gz /usr/local/src/; tar
 ##                                                                                                                         ##
 #                                                                                                                           #
 					  #########################################	
-					  #     Creazione comando d'avvio Vdr     #
+					  #     Create start Vdr command line     #
 					  #########################################
 							
 clear
-echo "                    Creazione comando d'avvio Vdr"; sleep 1
+echo "                    Create start Vdr command line"; sleep 1
 rm -rf /usr/local/bin/vdrrun; touch /usr/local/bin/vdrrun;
 
 echo '#!/bin/bash
@@ -1503,7 +1504,7 @@ killall -9 vdrrun & killall -9 vdr & killall -9 vdr-sxfe & killall -9 vlc
 #
 chmod 755 /usr/local/bin/vdrpoweroff
 #
-#  Creazione /etc/init.d/vdr           
+#  Create /etc/init.d/vdr           
 rm -rf /etc/init.d/vdr; touch /etc/init.d/vdr 
 echo '
 #!/bin/sh
@@ -1528,19 +1529,19 @@ set -e
 echo "Vdr init.d script using: $1" >> /var/log/vdr.log &
 case "$1" in
     start)
-        echo -n "Avvio VDR "
+        echo -n "Start VDR "
        /usr/local/bin/vdrrun >> /var/log/vdr.log &
         # Remember status and be verbose
         ;;
     stop)
-        echo -n "Chiusura di VDR "
+        echo -n "Stop VDR "
        killall vdrrun
        killall vdr
        killall vdr-sxfe
         # Remember status and be verbose
         ;;
     restart)
-        echo -n "Riavvio di VDR "
+        echo -n "Restart VDR "
         $0 stop
         $0 start
 
@@ -1620,17 +1621,17 @@ set -e
 echo "Vdr init.d script using: $1" >> /var/log/oscam.log &
 case "$1" in
     start)
-        echo -n "Avvio Oscam "
+        echo -n "Start Oscam "
        /usr/local/bin/oscam >> /var/log/oscam.log &
         # Remember status and be verbose
         ;;
     stop)
-        echo -n "Chiusura di Oscam "
+        echo -n "Kill Oscam "
        killall -9 oscam
         # Remember status and be verbose
         ;;
     restart)
-        echo -n "Riavvio di Oscam "
+        echo -n "Restart Oscam "
         $0 stop
         $0 start
 
@@ -1725,7 +1726,7 @@ Version=1.0
 Encoding=UTF-8
 Type=Application
 Name=Oscam
-Description=Start of Oscam
+Description=Oscam Start 
 Icon=/usr/local/src/icone/Oscam.png
 Exec=/usr/local/bin/start-oscam.sh
 " >> /home/`logname`/Scrivania/Oscam.desktop; sudo chmod 777 /home/`logname`/Scrivania/Oscam.desktop; cp /home/`logname`/Scrivania/Oscam.desktop /usr/share/applications/Oscam.desktop;
@@ -1995,7 +1996,7 @@ Version=1.0
 Encoding=UTF-8
 Type=Application
 Name=Kodi
-Description=Start of Kodi
+Description=Kodi Start
 Icon=/usr/local/src/icone/kodi.png
 Exec=/usr/local/bin/start-kodi-vdr.sh
 " >> /home/`logname`/Scrivania/Kodi.desktop; cp /home/`logname`/Scrivania/Kodi.desktop /usr/share/applications/Kodi.desktop;

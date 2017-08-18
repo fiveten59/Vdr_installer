@@ -27,6 +27,7 @@ SKIN='/etc/vdr/plugins/text2skin'
 SKINS='/usr/local/share/vdr/plugins/skindesigner/skins/'
 SHARE='/usr/local/share/vdr/plugins'
 PLUGINS='/etc/vdr/plugins'
+Remind3='is already installed'
 Remind4='are already installed'
 Remind5='is not installed'
 TIMESTAMP=`date +%Y%m%d.%R`
@@ -334,9 +335,9 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
     dialog --title "   ** Download & Upgrade Local Repository **   " --infobox "
    ---------------------------------------------------------------------------------------------
        Install ~ Upgrade ~ Remove ~ Local Repository 
+        *****  Crea  ***** 
    ---------------------------------------------------------------------------------------------
         
-        *****  Crea  ***** 
         [a]  Install ~ (If Not Exist) ............ [b]  Remove & Upgrade 
         
         [z]  Skip      
@@ -652,20 +653,6 @@ else
     wget https://www.dropbox.com/s/6hzpdx9yv5ypzxv/traduzioni.tar.gz;
   fi
 
-if [ -s /home/`logname`/sifinstallrepo/getchannels.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/os0dz379o9rdtk3/getchannels.tar.gz;
-  fi
-
-if [ -s /home/`logname`/sifinstallrepo/vdr-getchannels-0.7.2.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/tqua9jro2touw8c/vdr-getchannels-0.7.2.tar.gz;
-  fi
-
 if [ -s /home/`logname`/sifinstallrepo/channels.conf.terr.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
@@ -743,20 +730,6 @@ else
     wget https://www.dropbox.com/s/81fd2z1ye192lnx/setup43.tar.gz;
   fi
 
-if [ -s /home/`logname`/sifinstallrepo/w_scan-20170107.tar.bz2 ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget http://wirbel.htpc-forum.de/w_scan/w_scan-20170107.tar.bz2;
-  fi
-
-if [ -s /home/`logname`/sifinstallrepo/patch_w_scan.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/omt6155y22a5ft3/patch_w_scan.tar.gz;
-  fi
-
 if [ -s /home/`logname`/sifinstallrepo/flat_weather.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
@@ -820,8 +793,6 @@ chmod -R 777 *;;
 
 ############################ Download others #######################################      
     wget https://www.dropbox.com/s/6hzpdx9yv5ypzxv/traduzioni.tar.gz;
-    wget https://www.dropbox.com/s/os0dz379o9rdtk3/getchannels.tar.gz;
-    wget https://www.dropbox.com/s/tqua9jro2touw8c/vdr-getchannels-0.7.2.tar.gz;
     wget https://www.dropbox.com/s/jrizzen5q8o07uv/01_Add_language_It.patch.tar.gz;
     wget https://www.dropbox.com/s/z3czcyw5za82utc/channels.conf.dual.tar.gz;
     wget https://www.dropbox.com/s/reovn22nauzb2se/channels.conf.trial.tar.gz;
@@ -837,8 +808,6 @@ chmod -R 777 *;;
     wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16.tar.gz;
     wget https://www.dropbox.com/s/81fd2z1ye192lnx/setup43.tar.gz;
     wget https://www.dropbox.com/s/m32a4s23h7r00mg/themes.tar.gz;
-    wget http://wirbel.htpc-forum.de/w_scan/w_scan-20170107.tar.bz2
-    wget https://www.dropbox.com/s/omt6155y22a5ft3/patch_w_scan.tar.gz;
     wget https://www.dropbox.com/s/omrs8wwh5jbz46e/logos.tar.gz; 
     wget https://www.dropbox.com/s/v6o2zsjt7yvascy/flat_weather.tar.gz;
     #
@@ -872,7 +841,7 @@ chmod -R 777 *;;
    --------------------------------------------------------------------------------------------------------------------
         
         *****  Install  *****  ............................  *****  Remove  *****
-        [a]    X264 26.09.2015 Git  .......................  [a1]    X264 26.09.2015 Git
+        [a]    X264 Git ...................................  [a1]    X264 Git
         [b]    X265 HG  ...................................  [b1]    X265 HG
         [c]    FDK-AAC Git  ...............................  [c1]    FDK-AAC Git
         [d]    NVIDIA Video Codec 6.1 SDK .................  [d1]    NVIDIA Video Codec 6.1 SDK
@@ -1103,7 +1072,7 @@ e)                                        ######################################
     cd libvpx
     ./configure --enable-pic --enable-shared --enable-runtime_cpu_detect
     make -j4
-    checkinstall --pkgname=libvpx --pkgversion="1.6.0-git" --backup=no --deldoc=yes --fstrans=no --default --pakdir=$PACKAGES;;
+    checkinstall --pkgname=libvpx --pkgversion="1.6.1-git" --backup=no --deldoc=yes --fstrans=no --default --pakdir=$PACKAGES;;
 
 
 
@@ -1150,7 +1119,7 @@ f)                                        ######################################
     apt-get -y install libass-dev libspeex-dev libmp3lame-dev libfaac-dev librtmp-dev libopencore-amrnb-dev libopencore-amrwb-dev  libiso9660-dev libvcdinfo-dev libjpeg-dev
     apt-get -y install libvorbis-dev libxvidcore-dev
     clear
-    dialog --title "   ** Installing FFmpeg 3.2.4 **   " --infobox "
+    dialog --title "   ** Installing FFmpeg Git Version **   " --infobox "
    ----------------------------------------------------
    
    [a]  Install FFmpeg with X264 MPEG-4 AVC Encoder support
@@ -1344,7 +1313,7 @@ Ok        Channels" >> /etc/vdr/keymacros.conf
 /usr/local/bin/vdr --help; exit_status_check
 #
 ###########################################################
-#    Creazione cartella temp per plugin non tradotti      #
+#        Italian translation for some plugins             #
 ###########################################################
 cd $SRC; mkdir -p traduzioni; cd traduzioni;
 cp /home/`logname`/sifinstallrepo/traduzioni.tar.gz /$SRC/traduzioni/;
@@ -1889,14 +1858,30 @@ esac
                                           #########################################
 
 
-#echo "               *** Install W_scan ***"; sleep 3
-cd /usr/local/src; 
-if [ -f /$SRC/w_scan/Makefile ];
-  then  echo "W_scan is already installed"
-else
-cp -rf /home/`logname`/sifinstallrepo/w_scan-20170107.tar.bz2 $SRC/; tar xivf w_scan-20170107.tar.bz2; mv w_scan-20170107 w_scan; rm -rf w_scan-20170107.tar.bz2; cd w_scan; cp -rf /home/`logname`/sifinstallrepo/patch_w_scan.tar.gz $SRC/w_scan/; tar -zxvf patch_w_scan.tar.gz; rm -rf patch_w_scan.tar.gz; patch -p1 < 10_w-scan_dvb-t2.patch; ./configure; make; make install;
-fi
 
+
+apt-get -y install unzip;
+echo "               *** Install W_scan ***"; sleep 3
+cd $SRC; 
+if [ -f /$SRC/w_scan/Makefile ];
+  then  echo "W_scan $Remind3"
+else wget http://wirbel.htpc-forum.de/w_scan/w_scan-20170107.tar.bz2; tar xivf w_scan-20170107.tar.bz2; cp -rf w_scan-20170107.tar.bz2 /home/`logname`/sifinstallrepo/; mv w_scan-20170107 w_scan; rm -rf w_scan-20170107.tar.bz2; cd w_scan; wget https://www.dropbox.com/s/omt6155y22a5ft3/patch_w_scan.tar.gz; tar -zxvf patch_w_scan.tar.gz; cp -rf patch_w_scan.tar.gz home/`logname`/sifinstallrepo/; rm -rf patch_w_scan.tar.gz; patch -p1 < 10_w-scan_dvb-t2.patch; ./configure; make; make install;
+fi
+#
+echo "               *** Install Getchannels-0.7.0  ***"; sleep 3
+cd $SRC; mkdir -p setting; cd setting;
+if [ -f /$SRC/setting/getchannels/getchannels.py ];
+  then  echo "Getchannels $Remind3"
+else wget https://www.dropbox.com/s/os0dz379o9rdtk3/getchannels.tar.gz; tar -zxvf getchannels.tar.gz; cp -rf getchannels.tar.gz /home/`logname`/sifinstallrepo/; rm -rf getchannels.tar.gz;
+fi
+#
+echo "               *** Install Vdr-getchannels-0.7.2 ***"; sleep 3
+cd $SRC; mkdir -p e2settings; cd e2settings; 
+if [ -f $SRC/e2settings/vdr-getchannels-0.7.2.pyc ];
+  then  echo "vdr-getchannels-0.7.2 $Remind3"
+else wget https://www.dropbox.com/s/tqua9jro2touw8c/vdr-getchannels-0.7.2.tar.gz; tar -zxvf vdr-getchannels-0.7.2.tar.gz; cp -rf vdr-getchannels-0.7.2.tar.gz /home/`logname`/sifinstallrepo/; rm -rf vdr-getchannels-0.7.2.tar.gz;
+fi
+#
     clear        
     dialog --title "   ** Install && Upgrade Settings **   " --infobox "
    --------------------------------------------------------------
@@ -1908,14 +1893,19 @@ fi
         [b]    Install Settings from Kingofsat 13.0E         
         [c]    Install Settings from Kingofsat 19.2E 
                 
-        
+        ****   Vdr-Getchannels 0.7.2 (New)   ****
+        [d]    Install Settings from Kingofsat  9.0E 
+        [e]    Install Settings from Kingofsat 13.0E         
+        [f]    Install Settings from Kingofsat 19.2E 
+                        
         ****  Sezione W_Scan  ****
-        [d]    Install Settings 9.0E - using W_scan                   
-        [e]    Install Settings 13.0E - using W_scan              
-        [f]    Install Settings 19.2E - using W_scan             
-        [g]    Install Terrestrial Settings - using W_scan
+        [g]    Install Settings 9.0E - using W_scan                   
+        [h]    Install Settings 13.0E - using W_scan              
+        [i]    Install Settings 19.2E - using W_scan             
+        [l]    Install Terrestrial Settings - using W_scan
 
-        [h]    Download from repo (only trial 9 - 13 -19.2E) 
+        [m]    Download from repo (trial 9 - 13 -19.2E)
+        [n]    Download from repo (dual 13 -19.2E)  
         
 
             
@@ -1926,30 +1916,24 @@ fi
     read yourch
     case $yourch in
     
-    ###
-    a) apt-get -y install unzip; clear; 
-    cd $SRC; rm -rf setting; rm -rf getchannels; mkdir setting; cd setting; mkdir e2setting;
-    cp -rf /home/`logname`/sifinstallrepo/getchannels.tar.gz $SRC/setting; tar -zxvf getchannels.tar.gz; #rm -rf getchannels.tar.gz; 
-    cd $SRC/setting/getchannels && python getchannels.py  --list 09.0E --output output/channels09.conf; sleep  4; cp $SRC/setting/getchannels/output/channels09.conf /etc/vdr/;;
+    ##### Vdr-Getchannels 0.7.0 (Old) #####
+    a) rm -rf $SRC/setting/getchannels/output/channels09.conf && cd $SRC/setting/getchannels && python getchannels.py  --list 9.0E --output output/channels09.conf && cp -rf $SRC/setting/getchannels/output/channels09.conf /etc/vdr/;;
+    b) rm -rf $SRC/setting/getchannels/output/channels13.conf && cd $SRC/setting/getchannels && python getchannels.py  --list 13.0E --output output/channels13.conf && cp -rf $SRC/setting/getchannels/output/channels13.conf /etc/vdr/;;
+    c) rm -rf $SRC/setting/getchannels/output/channels19.conf && cd $SRC/setting/getchannels && python getchannels.py  --list 19.2E --output output/channels19.conf && cp -rf $SRC/setting/getchannels/output/channels19.conf /etc/vdr/;;
 
-
-    b) apt-get -y install unzip; clear; 
-    cd $SRC; rm -rf setting; rm -rf getchannels; mkdir setting; cd setting; mkdir e2setting;
-    cp -rf /home/`logname`/sifinstallrepo/getchannels.tar.gz $SRC/setting; tar -zxvf getchannels.tar.gz; #rm -rf getchannels.tar.gz; 
-    cd $SRC/setting/getchannels && python getchannels.py  --list 13.0E --output output/channels13.conf; sleep  4; cp $SRC/setting/getchannels/output/channels13.conf /etc/vdr/;;
-
-    c) apt-get -y install unzip; clear; 
-    cd $SRC; rm -rf setting; rm -rf getchannels; mkdir setting; cd setting; mkdir e2setting;
-    cp -rf /home/`logname`/sifinstallrepo/getchannels.tar.gz $SRC/setting; tar -zxvf getchannels.tar.gz; #rm -rf getchannels.tar.gz; 
-    cd $SRC/setting/getchannels && python getchannels.py  --list 19.2E --output output/channels19.conf; sleep  4; cp $SRC/setting/getchannels/output/channels19.conf /etc/vdr/;;
+    ##### Vdr-Getchannels 0.7.2 (New) #####
+    d) rm -rf $SRC/e2settings/channels_9.0E.conf && cd $SRC/e2settings && python vdr-getchannels-0.7.2.pyc -l 9.0E -o $SRC/e2settings/channels_9.0E.conf && cp $SRC/e2settings/channels_9.0E.conf /etc/vdr/channels_9.0E.conf;;
+    e) rm -rf $SRC/e2settings/channels_13.0E.conf && cd $SRC/e2settings && python vdr-getchannels-0.7.2.pyc -l 13.0E -o $SRC/e2settings/channels_13.0E.conf && cp $SRC/e2settings/channels_13.0E.conf /etc/vdr/channels_13.0E.conf;;
+    f) rm -rf $SRC/e2settings/channels_19.2E.conf && cd $SRC/e2settings && python vdr-getchannels-0.7.2.pyc -l 13.0E -o $SRC/e2settings/channels_19.2E.conf && cp $SRC/e2settings/channels_19.2E.conf /etc/vdr/channels_19.2E.conf;;
   
-    ##### Sezione W_Scan #####
-    d) rm -rf /etc/vdr/channels-w_scan-9E0.conf; w_scan -fs -s S9E0 -D0c -o2 >> /etc/vdr/channels-w_scan-9E0.conf;; 
-    e) rm -rf /etc/vdr/channels-w_scan-13E0.conf; w_scan -fs -s S13E0 -D1c -o2 >> /etc/vdr/channels-w_scan-13E0.conf;;
-    f) rm -rf /etc/vdr/channels-w_scan-19E2.conf; w_scan -fs -s S19E2 -D2c -o2 >> /etc/vdr/channels-w_scan-19E2.conf;;
-    g) rm -rf /etc/vdr/channels-dtt.conf; w_scan -ft -c IT >> /etc/vdr/channels-dtt.conf;;
+    ##### W_Scan #####
+    g) rm -rf /etc/vdr/channels-w_scan-9E0.conf; w_scan -fs -s S9E0 -D0c -o2 >> /etc/vdr/channels-w_scan-9E0.conf;; 
+    h) rm -rf /etc/vdr/channels-w_scan-13E0.conf; w_scan -fs -s S13E0 -D1c -o2 >> /etc/vdr/channels-w_scan-13E0.conf;;
+    i) rm -rf /etc/vdr/channels-w_scan-19E2.conf; w_scan -fs -s S19E2 -D2c -o2 >> /etc/vdr/channels-w_scan-19E2.conf;;
+    l) rm -rf /etc/vdr/channels-dtt.conf; w_scan -ft -c IT >> /etc/vdr/channels-dtt.conf;;
 
-    h) cp -rf /home/`logname`/sifinstallrepo/channels.conf.trial.tar.gz /etc/vdr/;;
+    m) cp -rf /home/`logname`/sifinstallrepo/channels.conf.trial.tar.gz /etc/vdr/;;
+    n) cp -rf /home/`logname`/sifinstallrepo/channels.conf.dual.tar.gz /etc/vdr/;;
     
    ###
     

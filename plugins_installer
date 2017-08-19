@@ -171,34 +171,39 @@ b) cd $VDRSRC && if [ -f xineliboutput/Makefile ];
 c) ;;
     esac
 #
-#  https://github.com/rofafor/vdr-plugin-femon.git
 #
 #echo "*** Vdr-plugin-femon ***"; 
     clear
     dialog --title "   ** Vdr-Plugin-Femon **   " --infobox "
    ----------------------------------------------
 
-        [a]    Install Vdr-Plugin-Femon                
-        [b]    Remove Vdr-Plugin-Femon 
-        [c]    Skip                               
+        [a]    Install Vdr-Plugin-Femon (Vdr 2.3.x) 
+        [b]    Install Vdr-Plugin-Femon (Vdr 2.2.0)                           
+        [c]    Remove Vdr-Plugin-Femon 
+        [d]    Skip                               
                                        
    ---------------------------------------------- " 0 0
-    echo -n "        Enter your menu choice  [a-c]:      "
+    echo -n "        Enter your menu choice  [a-d]:      "
     read yourch
     case $yourch in
 a) cd $VDRSRC && if [ -f femon/Makefile ];
   		then  echo "Vdr-Plugin-Femon $Remind"
-			else git clone https://github.com/rofafor/vdr-plugin-femon.git && mv vdr-plugin-femon femon && cd ../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'femon'|" /usr/local/bin/vdrrun;
+			else git clone https://github.com/rofafor/vdr-plugin-femon.git && cp -rf vdr-plugin-femon /home/`logname`/sifinstallrepo/ && mv vdr-plugin-femon femon && cd ../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'femon'|" /usr/local/bin/vdrrun;
 	fi;
-        echo "                    Press Enter to continue ...               "; read enterKey;;  
+        echo "                    Press Enter to continue ...               "; read enterKey;;
 b) cd $VDRSRC && if [ -f femon/Makefile ];
+  		then  echo "Vdr-Plugin-Femon $Remind"
+			else wget http://www.saunalahti.fi/rahrenbe/vdr/femon/files/vdr-femon-2.2.1.tgz && tar xzvf vdr-femon-2.2.1.tgz && mv -f vdr-femon-2.2.1.tgz /home/`logname`/sifinstallrepo/ && mv femon-2.2.1 femon && cd ../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'femon'|" /usr/local/bin/vdrrun;
+	fi;
+        echo "                    Press Enter to continue ...               "; read enterKey;; 
+c) cd $VDRSRC && if [ -f femon/Makefile ];
    		then rm -rf femon && rm -rf $LIB/libvdr-femon.* && sed -i "s|-P'femon'||" /usr/local/bin/vdrrun && echo "Vdr-Plugin-Femon $Remind1"
    			else echo "Vdr-Plugin-Femon $Remind5" 
       	fi;
         echo "                    Press Enter to continue ...               "; read enterKey;;  
-c) ;;
+d) ;;
 esac
-#  https://github.com/rofafor/vdr-plugin-femon.git
+#  
 #
 #echo "*** Vdr-plugin-live ***"; 
     clear
@@ -254,30 +259,36 @@ c) ;;
 esac
 # 
 #
-#echo "*** Satip ***"; 
+#echo "*** Satip ***";     
     clear
     dialog --title "   ** Vdr-Plugin-Satip **   " --infobox "
    ----------------------------------------------
 
-        [a]    Install Vdr-Plugin-Satip
-        [b]    Remove Vdr-Plugin-Satip                
-        [c]    Skip             
+        [a]    Install Vdr-Plugin-Satip (Vdr 2.3.x)
+        [b]    Install Vdr-Plugin-Satip (Vdr 2.2.0)                           
+        [c]    Remove Vdr-Plugin-Satip                
+        [d]    Skip             
                                        
    ---------------------------------------------- " 0 0
-    echo -n "        Enter your menu choice  [a-c]:      "
+    echo -n "        Enter your menu choice  [a-d]:      "
     read yourch
     case $yourch in 
 a) cd $VDRSRC && if [ -f satip/Makefile ];
   		then  echo "Vdr-Plugin-Satip $Remind"
 			else git clone https://github.com/rofafor/vdr-plugin-satip.git && cp -rf vdr-plugin-satip /home/`logname`/sifinstallrepo/ && mv -f vdr-plugin-satip satip && cd ../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'satip'|" /usr/local/bin/vdrrun
 	fi;
-        echo "                    Press Enter to continue ...               "; read enterKey;;  
+        echo "                    Press Enter to continue ...               "; read enterKey;;
 b) cd $VDRSRC && if [ -f satip/Makefile ];
+  		then  echo "Vdr-Plugin-Satip $Remind"
+			else wget http://www.saunalahti.fi/rahrenbe/vdr/satip/files/vdr-satip-2.2.1.tgz && tar xzvf vdr-satip-2.2.1.tgz && mv -f vdr-satip-2.2.1.tgz /home/`logname`/sifinstallrepo/ && mv satip-2.2.1 satip && cd ../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'satip'|" /usr/local/bin/vdrrun;
+	fi;
+        echo "                    Press Enter to continue ...               "; read enterKey;;   
+c) cd $VDRSRC && if [ -f satip/Makefile ];
   		then rm -rf satip && rm -rf $LIB/libvdr-satip.* && sed -i "s|-P'satip'||" /usr/local/bin/vdrrun && echo "Vdr-Plugin-Satip $Remind1"
   			else echo "Vdr-Plugin-Sat-Ip $Remind5" 
       fi;
         echo "                    Press Enter to continue ...               "; read enterKey;;  
-c) ;;
+d) ;;
 esac 
 #
 #

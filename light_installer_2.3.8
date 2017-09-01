@@ -1371,7 +1371,7 @@ cd $VDRSRC; cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-weatherforecast /$V
 clear
 echo ""; echo "               *** Skin Flatplus ***"; echo ""; sleep 3
 cd $VDRSRC;
-cp -rf /home/`logname`/sifinstallrepo/skin-flatplus /$VDRSRC/ && cd skin-flatplus &&  cp -rf /home/`logname`/sifinstallrepo/patch_skinflatplus.tar.gz /$VDRSRC/skin-flatplus/ && tar -zxvf patch_skinflatplus.tar.gz && rm -rf patch_skinflatplus.tar.gz &&  patch -p1 < 10-skinflatplus_minmaxvdr235.diff && patch -p1 < skinflatplus_setitemevent.patch && make install && cd /usr/local/lib/vdr/plugins/skinflatplus/widgets/temperatures/ && ln -s temperatures.default temperatures && cd ../system_information && ln -s system_information.ubuntu system_information  && cp -rf /home/`logname`/sifinstallrepo/flat_weather.tar.gz ../weather/ && cd ../weather && tar -zxvf flat_weather.tar.gz && rm -rf flat_weather.tar.gz;
+cp -rf /home/`logname`/sifinstallrepo/skin-flatplus /$VDRSRC/ && cd skin-flatplus && make install && cd /usr/local/lib/vdr/plugins/skinflatplus/widgets/temperatures/ && ln -s temperatures.default temperatures && cd ../system_information && ln -s system_information.ubuntu system_information  && cp -rf /home/`logname`/sifinstallrepo/flat_weather.tar.gz ../weather/ && cd ../weather && tar -zxvf flat_weather.tar.gz && rm -rf flat_weather.tar.gz;
 # qui sopra c'è da mettere le icone di menù mancanti che sono dentro le skin del Skin Flatplus traducendole e comprimendole
 #
 clear

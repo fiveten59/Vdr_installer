@@ -40,7 +40,7 @@ ALLOWED="#
 # If your network setup is correct pls don't touch
 # exit with CTRL+X
 #
-# If your network setup is diiferent change it and
+# If your network setup is different change it and
 # Save it with CTRL+O and exit with CTRL+X "
 
 #
@@ -608,7 +608,7 @@ esac
     case $yourch in 
 a) cd $VDRSRC && if [ -f neutrinoepg/Makefile ];
 		then  echo "Vdr-Plugin-Neutrinoepg $Remind"
-			else git clone https://projects.vdr-developer.org/git/vdr-plugin-neutrinoepg.git && cp -rf vdr-plugin-neutrinoepg /home/`logname`/sifinstallrepo/ && mv -f vdr-plugin-neutrinoepg neutrinoepg && cd neutrinoepg && wget https://www.dropbox.com/s/qsidsy7xxqhexzv/patch_neutrinoepg.tar.gz && tar -zxvf patch_neutrinoepg.tar.gz && mv -f patch_neutrinoepg.tar.gz /home/`logname`/sifinstallrepo/ && patch -p1 < 10_neutrinoepg_min_max_from_stl.patch && patch -p1 < 11_neutrinoepg_fixed_compilation_for_vdr-2.3.7.patch && cd ../../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'neutrinoepg'|" /usr/local/bin/vdrrun 
+			else git clone https://projects.vdr-developer.org/git/vdr-plugin-neutrinoepg.git && cp -rf vdr-plugin-neutrinoepg /home/`logname`/sifinstallrepo/ && mv -f vdr-plugin-neutrinoepg neutrinoepg && cd ../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'neutrinoepg'|" /usr/local/bin/vdrrun 
     fi;
         echo "                    Press Enter to continue ...               "; read enterKey;;  
 b) cd $VDRSRC && if [ -f neutrinoepg/Makefile ];

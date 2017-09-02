@@ -83,7 +83,6 @@ esac
         Xineliboutput
         Femon                   
         Live
-        Osd2web                                      
         Satip
         Channelscan
         Osdteletext
@@ -230,34 +229,7 @@ b) cd $VDRSRC && if [ -f live/Makefile ];
         echo "                    Press Enter to continue ...               "; read enterKey;;  
 c) ;;
 esac
-# && patch -p1 < 11_live_osd.patch && patch -p1 < 16_live_recimagesV3.patch.disabled
 #
-#echo "        ***                Vdr-Plugin-Osd2web                ***" 
-    clear
-    dialog --title "   ** Vdr-Plugin-Osd2web **   " --infobox "
-   ----------------------------------------------
-
-        [a]    Install Vdr-Plugin-Osd2web
-        [b]    Remove Vdr-Plugin-Osd2web
-        [c]    Skip
-                                       
-   ---------------------------------------------- " 0 0
-    echo -n "        Enter your menu choice  [a-c]:      "
-    read yourch
-    case $yourch in 
-a) cd $VDRSRC && if [ -f osd2web/Makefile ];
-  then  echo "Vdr-Plugin-Osd2web $Remind"
-		else cd $VDRSRC && git clone https://github.com/horchi/vdr-plugin-osd2web.git && cp -rf vdr-plugin-osd2web /home/`logname`/sifinstallrepo/ && mv -f vdr-plugin-osd2web osd2web && cd osd2web && wget https://www.dropbox.com/s/9m11810xk497wik/patch_osd2web.tar.gz && tar -zxvf patch_osd2web.tar.gz && mv -f patch_osd2web.tar.gz /home/`logname`/sifinstallrepo/ && patch -p1 < osd2web_vdr-2.3.8_compat.diff && make install && cd ../../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'osd2web -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
-fi;
-        echo "                    Press Enter to continue ...               "; read enterKey;;  
-b) cd $VDRSRC && if [ -f osd2web/Makefile ];
-   		then rm -rf osd2web && cd $PLUGINS && rm -rf osd2web && rm -rf $LIB/libvdr-osd2web.* && sed -i "s|-P'osd2web -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun && echo "Vdr-Plugin-Osd2web $Remind1"
-   			else echo "Vdr-Plugin-Osd2web $Remind5" 
-fi;
-        echo "                    Press Enter to continue ...               "; read enterKey;;  
-c) ;;
-esac
-# 
 #
 #echo "*** Satip ***";     
     clear
@@ -305,13 +277,13 @@ esac
     echo -n "        Enter your menu choice  [a-c]:      "
     read yourch
     case $yourch in 
-a) cd $PLUGINS; if [ -f $PLUGINS/channelscan/0130.ini ];
+a) cd $PLUGINS && if [ -f $PLUGINS/transponders/0130.ini ];
   		then  echo "Vdr-Plugin-Channelscan $Remind"
-	  else cd $VDRSRC; git clone https://bitbucket.org/ua0lnj/channelscan.git; cp -rf channelscan /home/`logname`/sifinstallrepo/; cd channelscan; cp -r $VDRSRC/channelscan/script/* /usr/local/bin; cd ../../..; make plugins; sed -i "s|-P'externalplayer'|& -P'channelscan'|" /usr/local/bin/vdrrun; cd $PLUGINS; mkdir -p transponders; cd transponders; wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz; tar -zxvf satellite_pack.tar.gz; cp -rf satellite_pack.tar.gz /home/`logname`/sifinstallrepo/; rm -rf satellite_pack.tar.gz; 
+	  else cd $VDRSRC; git clone https://bitbucket.org/ua0lnj/channelscan.git && cp -rf channelscan /home/`logname`/sifinstallrepo/ && cd channelscan && cp -r $VDRSRC/channelscan/script/* /usr/local/bin && cd ../../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'channelscan'|" /usr/local/bin/vdrrun && cd $PLUGINS && mkdir -p transponders && cd transponders && wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz && tar -zxvf satellite_pack.tar.gz && cp -rf satellite_pack.tar.gz /home/`logname`/sifinstallrepo/ && rm -rf satellite_pack.tar.gz; 
 	fi;
         echo "                    Press Enter to continue ...               "; read enterKey;;  
 b) cd $VDRSRC && if [ -f channelscan/Makefile ];
-  		then rm -rf channelscan && rm -rf $PLUGINS/channelscan && rm -rf $LIB/libvdr-channelscan.* && sed -i "s|-P'channelscan'||" /usr/local/bin/vdrrun && echo "Vdr-Plugin-Channelscan $Remind1"
+  		then rm -rf channelscan && rm -rf $PLUGINS/transponders && rm -rf $LIB/libvdr-channelscan.* && sed -i "s|-P'channelscan'||" /usr/local/bin/vdrrun && echo "Vdr-Plugin-Channelscan $Remind1"
   			else echo "Vdr-Plugin-Channelscan $Remind5" 
       fi;
         echo "                    Press Enter to continue ...               "; read enterKey;;  

@@ -55,6 +55,7 @@ esac
         Skin EgalT2
         Skin-Nopacity
         Skin Elchi
+        Skin Osd2web
 
    ---------------------------------------------- " 0 0                 
 echo "     Press Enter to continue ...    " ;read enterKey
@@ -242,6 +243,32 @@ b) cd $VDRSRC && if [ -f skinelchi/Makefile ];
 		else echo "SkinElchi $Remind5" 
 fi;
       echo "                    Press Enter to continue ...               "; read enterKey;; 
+c) ;;
+esac
+#
+#echo "        ***                Vdr-Plugin-Osd2web                ***" 
+    clear
+    dialog --title "   ** Vdr-Plugin-Osd2web **   " --infobox "
+   ----------------------------------------------
+
+        [a]    Install Vdr-Plugin-Osd2web
+        [b]    Remove Vdr-Plugin-Osd2web
+        [c]    Skip
+                                       
+   ---------------------------------------------- " 0 0
+    echo -n "        Enter your menu choice  [a-c]:      "
+    read yourch
+    case $yourch in 
+a) cd $VDRSRC && if [ -f osd2web/Makefile ];
+  then  echo "Vdr-Plugin-Osd2web $Remind"
+		else cd $VDRSRC && git clone https://github.com/horchi/vdr-plugin-osd2web.git && cp -rf vdr-plugin-osd2web /home/`logname`/sifinstallrepo/ && mv -f vdr-plugin-osd2web osd2web && cd osd2web && make install && cd ../../.. && make plugins && sed -i "s|-P'externalplayer'|& -P'osd2web -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
+fi;
+        echo "                    Press Enter to continue ...               "; read enterKey;;  
+b) cd $VDRSRC && if [ -f osd2web/Makefile ];
+   		then rm -rf osd2web && cd $PLUGINS && rm -rf osd2web && rm -rf $LIB/libvdr-osd2web.* && rm -rf /etc/vdr/plugins/osd2web && sed -i "s|-P'osd2web -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun && echo "Vdr-Plugin-Osd2web $Remind1"
+   			else echo "Vdr-Plugin-Osd2web $Remind5" 
+fi;
+        echo "                    Press Enter to continue ...               "; read enterKey;;  
 c) ;;
 esac
 #

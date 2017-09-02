@@ -1861,21 +1861,21 @@ esac
 
 
 apt-get -y install unzip;
-echo "               *** Install W_scan ***"; sleep 3
+echo "               *** Install W_scan ***"; sleep 1
 cd $SRC; 
 if [ -f /$SRC/w_scan/Makefile ];
   then  echo "W_scan $Remind3"
 else wget http://wirbel.htpc-forum.de/w_scan/w_scan-20170107.tar.bz2; tar xivf w_scan-20170107.tar.bz2; cp -rf w_scan-20170107.tar.bz2 /home/`logname`/sifinstallrepo/; mv w_scan-20170107 w_scan; rm -rf w_scan-20170107.tar.bz2; cd w_scan; wget https://www.dropbox.com/s/omt6155y22a5ft3/patch_w_scan.tar.gz; tar -zxvf patch_w_scan.tar.gz; cp -rf patch_w_scan.tar.gz home/`logname`/sifinstallrepo/; rm -rf patch_w_scan.tar.gz; patch -p1 < 10_w-scan_dvb-t2.patch; ./configure; make; make install;
 fi
 #
-echo "               *** Install Getchannels-0.7.0  ***"; sleep 3
+echo "               *** Install Getchannels-0.7.0  ***"; sleep 1
 cd $SRC; mkdir -p setting; cd setting;
 if [ -f /$SRC/setting/getchannels/getchannels.py ];
   then  echo "Getchannels $Remind3"
 else wget https://www.dropbox.com/s/os0dz379o9rdtk3/getchannels.tar.gz; tar -zxvf getchannels.tar.gz; cp -rf getchannels.tar.gz /home/`logname`/sifinstallrepo/; rm -rf getchannels.tar.gz;
 fi
 #
-echo "               *** Install Vdr-getchannels-0.7.2 ***"; sleep 3
+echo "               *** Install Vdr-getchannels-0.7.2 ***"; sleep 1
 cd $SRC; mkdir -p e2settings; cd e2settings; 
 if [ -f $SRC/e2settings/vdr-getchannels-0.7.2.pyc ];
   then  echo "vdr-getchannels-0.7.2 $Remind3"
@@ -1924,7 +1924,7 @@ fi
     ##### Vdr-Getchannels 0.7.2 (New) #####
     d) rm -rf $SRC/e2settings/channels_9.0E.conf && cd $SRC/e2settings && python vdr-getchannels-0.7.2.pyc -l 9.0E -o $SRC/e2settings/channels_9.0E.conf && cp $SRC/e2settings/channels_9.0E.conf /etc/vdr/channels_9.0E.conf;;
     e) rm -rf $SRC/e2settings/channels_13.0E.conf && cd $SRC/e2settings && python vdr-getchannels-0.7.2.pyc -l 13.0E -o $SRC/e2settings/channels_13.0E.conf && cp $SRC/e2settings/channels_13.0E.conf /etc/vdr/channels_13.0E.conf;;
-    f) rm -rf $SRC/e2settings/channels_19.2E.conf && cd $SRC/e2settings && python vdr-getchannels-0.7.2.pyc -l 13.0E -o $SRC/e2settings/channels_19.2E.conf && cp $SRC/e2settings/channels_19.2E.conf /etc/vdr/channels_19.2E.conf;;
+    f) rm -rf $SRC/e2settings/channels_19.2E.conf && cd $SRC/e2settings && python vdr-getchannels-0.7.2.pyc -l 19.2E -o $SRC/e2settings/channels_19.2E.conf && cp $SRC/e2settings/channels_19.2E.conf /etc/vdr/channels_19.2E.conf;;
   
     ##### W_Scan #####
     g) rm -rf /etc/vdr/channels-w_scan-9E0.conf; w_scan -fs -s S9E0 -D0c -o2 >> /etc/vdr/channels-w_scan-9E0.conf;; 

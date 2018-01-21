@@ -9,7 +9,7 @@
 #                                                                                       #
 #########################################################################################
 #
-PLUGIN="--lirc -P'softhddevice -f' -P'dvbapi' -P'skindesigner -l /etc/vdr/logos/ -i /usr/local/share/vdr/plugins/skindesigner/skins/' -P'skinflatplus -l /etc/vdr/logos/' -P'weatherforecast' -P'iptv' -P'tvguideng' -P'tvguide' -P'epgsearch' -P'externalplayer'"
+PLUGIN="--lirc -P'softhddevice -f' -P'dvbapi' -P'skindesigner -l /etc/vdr/logos/ -i /usr/local/share/vdr/plugins/skindesigner/skins/' -P'skinflatplus -l /etc/vdr/logos/' -P'weatherforecast' -P'iptv' -P'tvguideng' -P'tvguide' -P'epgsearch' -P'externalplayer' -P'channelscan'"
 # 
 #REPO='home/'logname'/sifinstallrepo'
 ETC='/usr/local/etc'
@@ -23,7 +23,6 @@ ARCHIVES=""$SRC"/archives"
 SCRIPTS=""$SRC"/archives/scripts"
 MANUALS=""$SRC"/READ_THIS"
 TEMP='/tmp'
-SKIN='/etc/vdr/plugins/text2skin'
 SKINS='/usr/local/share/vdr/plugins/skindesigner/skins/'
 SHARE='/usr/local/share/vdr/plugins'
 PLUGINS='/etc/vdr/plugins'
@@ -425,11 +424,11 @@ else
     wget ftp://ftp.tvdr.de/vdr/Developer/vdr-2.3.8.tar.bz2;
   fi
 
-if [ -s /home/`logname`/sifinstallrepo/vdr-patches.2.3.8.tar.gz ]; then
+if [ -s /home/`logname`/sifinstallrepo/vdr-patches.2.3.8_1.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/03b62kcf2kj4ctw/vdr-patches.2.3.8.tar.gz;
+    wget https://www.dropbox.com/s/r3gg9yy14iut1qw/vdr-patches.2.3.8_1.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/Make.config.2.3.8 ]; then
@@ -481,11 +480,25 @@ else
     git clone https://github.com/rofafor/vdr-plugin-softhddevice.git;
   fi
 
+if [ -s /home/`logname`/sifinstallrepo/softhddevice-openglosd-jinx.tar.gz ]; then
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+else
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    wget https://www.dropbox.com/s/u2p1m2fgg6so5yc/softhddevice-openglosd-jinx.tar.gz;
+  fi
+
 if [ -s /home/`logname`/sifinstallrepo/patch_softhddevice_4.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/ba5njlguttwlvao/patch_softhddevice_4.tar.gz;
+  fi
+
+if [ -s /home/`logname`/sifinstallrepo/patch_softhddevice_5.tar.gz ]; then
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+else
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    wget https://www.dropbox.com/s/qwi8p6ieb5z86gr/patch_softhddevice_5.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/vdr-plugin-tvguide ]; then
@@ -572,6 +585,13 @@ else
     wget https://www.dropbox.com/s/vhz1fz68159s0qg/externalplayer.conf.tar.gz;
 fi
 
+if [ -s /home/`logname`/sifinstallrepo/channelscan ]; then
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+else
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    git clone https://bitbucket.org/ua0lnj/channelscan.git;    
+fi
+
 if [ -s /home/`logname`/sifinstallrepo/satellite_pack.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
@@ -594,14 +614,7 @@ else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone http://projects.vdr-developer.org/git/skin-flatplus.git;
   fi
-
-if [ -s /home/`logname`/sifinstallrepo/patch_skinflatplus.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/gpsnxpj4kellu5d/patch_skinflatplus.tar.gz;
-  fi
-   
+  
 if [ -s /home/`logname`/sifinstallrepo/icone.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
@@ -759,7 +772,7 @@ chmod -R 777 *;;
 ############################ Download Vdr and Plugins on local repo ################################
 
     wget ftp://ftp.tvdr.de/vdr/Developer/vdr-2.3.8.tar.bz2;
-    wget https://www.dropbox.com/s/03b62kcf2kj4ctw/vdr-patches.2.3.8.tar.gz;
+    wget https://www.dropbox.com/s/r3gg9yy14iut1qw/vdr-patches.2.3.8_1.tar.gz;
     wget https://www.dropbox.com/s/eowlruz11ksa9b4/Make.config.2.3.8;
     wget https://www.dropbox.com/s/bx97ikp7c1h2qj2/vdrsymbols.tar.gz;
     git clone git://projects.vdr-developer.org/vdr-plugin-tvguide.git;
@@ -767,7 +780,9 @@ chmod -R 777 *;;
     git clone git://projects.vdr-developer.org/vdr-plugin-tvguideng.git;
     wget https://www.dropbox.com/s/qjmzsml13sdhk0u/patch_tvguideng.tar.gz;
     git clone https://github.com/rofafor/vdr-plugin-softhddevice.git;
+    wget https://www.dropbox.com/s/u2p1m2fgg6so5yc/softhddevice-openglosd-jinx.tar.gz;
     wget https://www.dropbox.com/s/ba5njlguttwlvao/patch_softhddevice_4.tar.gz;
+    wget https://www.dropbox.com/s/qwi8p6ieb5z86gr/patch_softhddevice_5.tar.gz;
     git clone http://projects.vdr-developer.org/git/vdr-plugin-epgsearch.git;
     wget https://www.dropbox.com/s/s9vggu8mil8ss7t/patch_epgsearch.tar.gz;
     git clone git://github.com/manio/vdr-plugin-dvbapi.git;
@@ -779,6 +794,7 @@ chmod -R 777 *;;
     wget https://www.dropbox.com/s/1ujtklnct0nqq6q/iptv_conf.tar.gz;
     git clone https://git.uli-eckhardt.de/vdr-plugin-externalplayer.git;
     wget https://www.dropbox.com/s/vhz1fz68159s0qg/externalplayer.conf.tar.gz;
+    git clone https://bitbucket.org/ua0lnj/channelscan.git;   
     wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz;   
 
 
@@ -788,7 +804,6 @@ chmod -R 777 *;;
     git clone git://projects.vdr-developer.org/vdr-plugin-skindesigner.git;
     wget https://www.dropbox.com/s/8uiizh0d3t706ll/patch_skindesigner.tar.gz;
     git clone http://projects.vdr-developer.org/git/skin-flatplus.git;
-    wget https://www.dropbox.com/s/gpsnxpj4kellu5d/patch_skinflatplus.tar.gz;
     wget https://www.dropbox.com/s/806odyj5vyco3dg/lcars_pack.tar.gz;
 
 ############################ Download others #######################################      
@@ -1242,7 +1257,9 @@ a)                                        ######################################
     echo "               Installing VDR 2.3.8      "; sleep 4 
     cp -rf /home/`logname`/sifinstallrepo/$VDR.tar.bz2 $SRC/; tar xivf $VDR.tar.bz2;
     ln -s $VDR vdr; rm -rf $VDR.tar.bz2
-    cd vdr; cp -rf /home/`logname`/sifinstallrepo/vdr-patches.2.3.8.tar.gz $SRC/vdr/; tar -zxvf vdr-patches.2.3.8.tar.gz; rm -rf vdr-patches.2.3.8.tar.gz; sleep 1;
+    cd vdr; cp -rf /home/`logname`/sifinstallrepo/vdr-patches.2.3.8_1.tar.gz $SRC/vdr/; tar -zxvf vdr-patches.2.3.8_1.tar.gz; rm -rf vdr-patches.2.3.8_1.tar.gz; sleep 1;
+echo "*** KLS ***"
+    patch -p1 < 00_vdr_KLS_fixdetachlock-2.patch.x86; sleep 1;
 echo "*** zapcockpit ***"
     patch -p1 < 02_vdr_zapcockpit.patch; sleep 1;
 echo "*** getbitmap ***"
@@ -1259,6 +1276,8 @@ echo "*** pin ***"
     patch -p1 < 12_vdr_pin.patch; sleep 1;
 echo "*** mainmenuhooks ***"
     patch -p1 < 15_vdr_mainmenuhooks_vdr234.patch; sleep 1;
+echo "*** wareagleicon ***"
+    patch -p1 < 16_vdr_wareagleicon.patch; sleep 1;
 echo "*** config ***"
     patch -p1 < 20_vdr_config.patch; sleep 1;
 echo "*** svdrphosts ***"
@@ -1267,12 +1286,14 @@ echo "*** maxdevice ***"
     patch -p1 < 23_vdr_maxdevice.patch; sleep 1;
 echo "*** dvb_power_saving ***"
     patch -p1 < 24_vdr_dvb_power_saving_feature.patch; sleep 1;
-echo "*** dvbchan ***"
-    patch -p1 < vdr-dvbchan.patch; sleep 1;
+echo "*** gcc7 ***"
+    patch -p1 < 25_vdr_gcc7.patch; sleep 1;
+echo "*** menuorg ***"
+    patch -p1 < 26_vdr_menuorg.patch; sleep 1;
+echo "*** permashift ***"
+    patch -p1 < 27_vdr_permashift.patch.x86; sleep 1;
 echo "*** ci_debug ***"
     patch -p1 < 99_vdr_ci_debug.patch; sleep 1;
-echo "*** menuorg ***"
-    patch -p1 < vdr-menuorg-2.3.x.diff; sleep 1;
     #
     rm -rf *.patch; sleep 3;
     # 
@@ -1324,7 +1345,7 @@ clear
 echo "                        "
 echo "                        "
 echo "                        "
-echo "Install Basic plugins  ( Dvbapi - Softhddevice - Epgsearch - Skindesigner - TvGuideng - Weatherforecast - Skinflatplus - TvGuide - Iptv - ExternalPlayer )"
+echo "Install Basic plugins  ( Dvbapi - Softhddevice - Epgsearch - Skindesigner - TvGuideng - Weatherforecast - Skinflatplus - TvGuide - Iptv - ExternalPlayer - Channelscan )"
 echo "                 Press Enter to continue ...         "; read enterKey
 cd $SRC;
 mkdir -p /usr/local/lib/vdr/plugins; mkdir -p /usr/local/lib/vdr/scripts; mkdir -p /etc/vdr/plugins; mkdir -p /etc/vdr/themes; cd $PLUGINS; mkdir -p tvguide;
@@ -1340,6 +1361,11 @@ cd $VDRSRC;
 cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-dvbapi /$VDRSRC/; mv vdr-plugin-dvbapi dvbapi; cd dvbapi; cp -rf /home/`logname`/sifinstallrepo/dvbapi.patch.tar.gz /$VDRSRC/dvbapi/; tar -zxvf dvbapi.patch.tar.gz; rm -rf dvbapi.patch.tar.gz; patch -p1 < vdr-plugin-dvbapi-01_crosscompiling.patch; sleep 1;
 cd ../../..; make plugins
 #
+#
+#clear
+#echo ""; echo "               *** Softhddevice-openglosd***"; echo ""; sleep 3
+#cd $VDRSRC; 
+#cp -rf /home/`logname`/sifinstallrepo/softhddevice-openglosd-jinx.tar.gz /$VDRSRC/; tar -zxvf softhddevice-openglosd-jinx.tar.gz; rm -rf softhddevice-openglosd-jinx.tar.gz; mv softhddevice-openglosd-jinx softhddevice; cd softhddevice; cp -rf /home/`logname`/sifinstallrepo/patch_softhddevice_5.tar.gz /$VDRSRC/softhddevice; tar -zxvf patch_softhddevice_5.tar.gz; rm -rf patch_softhddevice_5.tar.gz; patch -p1 < 03_LanguageIT.patch; patch -p1 < 10_softhddevice_trusty.patch; patch -p1 < 11_softhddevice_Makefile.patch; patch -p1 < 13_softhddevice_fixmemleakvaapi.patch; patch -p1 < 14_softhddevice_vaapi100.patch; patch -p1 < 16_softhddevice_no-inactive-reset-on-attache.patch; make ALSA=1 OSS=0 VDPAU=1 VAAPI=1 SCREENSAVER=0 SWRESAMPLE=1; make install;
 #
 clear
 echo ""; echo "               *** Softhddevice ***"; echo ""; sleep 3
@@ -1387,6 +1413,11 @@ clear
 echo ""; echo "               *** Externalplayer ***";  sleep 3
 cd $VDRSRC; cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-externalplayer /$VDRSRC && mv vdr-plugin-externalplayer externalplayer && cp -rf /$SRC/traduzioni/external_it_IT.po /$VDRSRC/externalplayer/po/ && cd externalplayer/po/ && mv external_it_IT.po it_IT.po && cd ../../../.. && make plugins && cp -rf /home/`logname`/sifinstallrepo/externalplayer.conf.tar.gz /etc/vdr/plugins/ && cd /etc/vdr/plugins && tar -zxvf externalplayer.conf.tar.gz && rm -rf externalplayer.conf.tar.gz;
 clear
+#
+#
+clear
+echo ""; echo "               *** Channelscan ***";  sleep 3
+cd $VDRSRC; cp -rf /home/`logname`/sifinstallrepo/channelscan /$VDRSRC && cp -rf $VDRSRC/channelscan/script/* /usr/local/bin && cd ../.. && make plugins && cd $PLUGINS && mkdir -p transponders && cp -rf /home/`logname`/sifinstallrepo/satellite_pack.tar.gz  $PLUGINS/transponders && cd transponders && tar -zxvf satellite_pack.tar.gz && rm -rf satellite_pack.tar.gz;
 #
 #
 cd /usr/local/src/vdr; make plugins install;
@@ -1868,18 +1899,11 @@ if [ -f /$SRC/w_scan/Makefile ];
 else wget http://wirbel.htpc-forum.de/w_scan/w_scan-20170107.tar.bz2; tar xivf w_scan-20170107.tar.bz2; cp -rf w_scan-20170107.tar.bz2 /home/`logname`/sifinstallrepo/; mv w_scan-20170107 w_scan; rm -rf w_scan-20170107.tar.bz2; cd w_scan; wget https://www.dropbox.com/s/omt6155y22a5ft3/patch_w_scan.tar.gz; tar -zxvf patch_w_scan.tar.gz; cp -rf patch_w_scan.tar.gz home/`logname`/sifinstallrepo/; rm -rf patch_w_scan.tar.gz; patch -p1 < 10_w-scan_dvb-t2.patch; ./configure; make; make install;
 fi
 #
-echo "               *** Install Getchannels-0.7.0  ***"; sleep 1
-cd $SRC; mkdir -p setting; cd setting;
-if [ -f /$SRC/setting/getchannels/getchannels.py ];
-  then  echo "Getchannels $Remind3"
-else wget https://www.dropbox.com/s/os0dz379o9rdtk3/getchannels.tar.gz; tar -zxvf getchannels.tar.gz; cp -rf getchannels.tar.gz /home/`logname`/sifinstallrepo/; rm -rf getchannels.tar.gz;
-fi
-#
-echo "               *** Install Vdr-getchannels-0.7.2 ***"; sleep 1
+echo "               *** Install Vdr-getchannels-0.7.0 ***"; sleep 1
 cd $SRC; mkdir -p e2settings; cd e2settings; 
-if [ -f $SRC/e2settings/vdr-getchannels-0.7.2.pyc ];
-  then  echo "vdr-getchannels-0.7.2 $Remind3"
-else wget https://www.dropbox.com/s/tqua9jro2touw8c/vdr-getchannels-0.7.2.tar.gz; tar -zxvf vdr-getchannels-0.7.2.tar.gz; cp -rf vdr-getchannels-0.7.2.tar.gz /home/`logname`/sifinstallrepo/; rm -rf vdr-getchannels-0.7.2.tar.gz;
+if [ -f $SRC/e2settings/vdr-getchannels/getchannels.py ];
+  then  echo "vdr-getchannels-0.7.0 $Remind3"
+else git clone https://github.com/fiveten59/vdr-getchannels.git; cp -rf vdr-getchannels /home/`logname`/sifinstallrepo/; 
 fi
 #
     clear        
@@ -1888,24 +1912,20 @@ fi
                      Creazione lista canali
    --------------------------------------------------------------
    
+              
         ****   Vdr-Getchannels 0.7.0 (Old)   ****
         [a]    Install Settings from Kingofsat  9.0E 
         [b]    Install Settings from Kingofsat 13.0E         
         [c]    Install Settings from Kingofsat 19.2E 
-                
-        ****   Vdr-Getchannels 0.7.2 (New)   ****
-        [d]    Install Settings from Kingofsat  9.0E 
-        [e]    Install Settings from Kingofsat 13.0E         
-        [f]    Install Settings from Kingofsat 19.2E 
                         
-        ****  Sezione W_Scan  ****
-        [g]    Install Settings 9.0E - using W_scan                   
-        [h]    Install Settings 13.0E - using W_scan              
-        [i]    Install Settings 19.2E - using W_scan             
-        [l]    Install Terrestrial Settings - using W_scan
+        ****   Sezione W_Scan  ****
+        [d]    Install Settings 9.0E - using W_scan                   
+        [e]    Install Settings 13.0E - using W_scan              
+        [f]    Install Settings 19.2E - using W_scan             
+        [g]    Install Terrestrial Settings - using W_scan
 
-        [m]    Download from repo (trial 9 - 13 -19.2E)
-        [n]    Download from repo (dual 13 -19.2E)  
+        [h]    Download from repo (trial 9 - 13 -19.2E)
+        [i]    Download from repo (dual 13 -19.2E)  
         
 
             
@@ -1916,24 +1936,20 @@ fi
     read yourch
     case $yourch in
     
-    ##### Vdr-Getchannels 0.7.0 (Old) #####
-    a) rm -rf $SRC/setting/getchannels/output/channels09.conf && cd $SRC/setting/getchannels && python getchannels.py  --list 9.0E --output output/channels09.conf && cp -rf $SRC/setting/getchannels/output/channels09.conf /etc/vdr/;;
-    b) rm -rf $SRC/setting/getchannels/output/channels13.conf && cd $SRC/setting/getchannels && python getchannels.py  --list 13.0E --output output/channels13.conf && cp -rf $SRC/setting/getchannels/output/channels13.conf /etc/vdr/;;
-    c) rm -rf $SRC/setting/getchannels/output/channels19.conf && cd $SRC/setting/getchannels && python getchannels.py  --list 19.2E --output output/channels19.conf && cp -rf $SRC/setting/getchannels/output/channels19.conf /etc/vdr/;;
 
-    ##### Vdr-Getchannels 0.7.2 (New) #####
-    d) rm -rf $SRC/e2settings/channels_9.0E.conf && cd $SRC/e2settings && python vdr-getchannels-0.7.2.pyc -l 9.0E -o $SRC/e2settings/channels_9.0E.conf && cp $SRC/e2settings/channels_9.0E.conf /etc/vdr/channels_9.0E.conf;;
-    e) rm -rf $SRC/e2settings/channels_13.0E.conf && cd $SRC/e2settings && python vdr-getchannels-0.7.2.pyc -l 13.0E -o $SRC/e2settings/channels_13.0E.conf && cp $SRC/e2settings/channels_13.0E.conf /etc/vdr/channels_13.0E.conf;;
-    f) rm -rf $SRC/e2settings/channels_19.2E.conf && cd $SRC/e2settings && python vdr-getchannels-0.7.2.pyc -l 19.2E -o $SRC/e2settings/channels_19.2E.conf && cp $SRC/e2settings/channels_19.2E.conf /etc/vdr/channels_19.2E.conf;;
+    ##### Vdr-Getchannels 0.7.0 (Old) #####
+    a) rm -rf $SRC/e2settings/channels_9.0E.conf && cd $SRC/e2settings/vdr-getchannels && python getchannels.py -l 9.0E -ot channels_9.0E.conf > $SRC/e2settings/channels_9.0E.conf && cp $SRC/e2settings/channels_9.0E.conf /etc/vdr/channels_9.0E.conf;;
+    b) rm -rf $SRC/e2settings/channels_13.0E.conf && cd $SRC/e2settings/vdr-getchannels && python getchannels.py -l 13.0E -ot channels_13.0E.conf > $SRC/e2settings/channels_13.0E.conf && cp $SRC/e2settings/channels_13.0E.conf /etc/vdr/channels_13.0E.conf;;
+    c) rm -rf $SRC/e2settings/channels_19.2E.conf && cd $SRC/e2settings/vdr-getchannels && python getchannels.py -l 19.2E -ot channels_19.2E.conf > $SRC/e2settings/channels_19.2E.conf && cp $SRC/e2settings/channels_19.2E.conf /etc/vdr/channels_19.2E.conf;;
   
     ##### W_Scan #####
-    g) rm -rf /etc/vdr/channels-w_scan-9E0.conf; w_scan -fs -s S9E0 -D0c -o2 >> /etc/vdr/channels-w_scan-9E0.conf;; 
-    h) rm -rf /etc/vdr/channels-w_scan-13E0.conf; w_scan -fs -s S13E0 -D1c -o2 >> /etc/vdr/channels-w_scan-13E0.conf;;
-    i) rm -rf /etc/vdr/channels-w_scan-19E2.conf; w_scan -fs -s S19E2 -D2c -o2 >> /etc/vdr/channels-w_scan-19E2.conf;;
-    l) rm -rf /etc/vdr/channels-dtt.conf; w_scan -ft -c IT >> /etc/vdr/channels-dtt.conf;;
+    d) rm -rf /etc/vdr/channels-w_scan-9E0.conf; w_scan -fs -s S9E0 -D0c -o2 >> /etc/vdr/channels-w_scan-9E0.conf;; 
+    e) rm -rf /etc/vdr/channels-w_scan-13E0.conf; w_scan -fs -s S13E0 -D1c -o2 >> /etc/vdr/channels-w_scan-13E0.conf;;
+    f) rm -rf /etc/vdr/channels-w_scan-19E2.conf; w_scan -fs -s S19E2 -D2c -o2 >> /etc/vdr/channels-w_scan-19E2.conf;;
+    g) rm -rf /etc/vdr/channels-dtt.conf; w_scan -ft -c IT >> /etc/vdr/channels-dtt.conf;;
 
-    m) cp -rf /home/`logname`/sifinstallrepo/channels.conf.trial.tar.gz /etc/vdr/;;
-    n) cp -rf /home/`logname`/sifinstallrepo/channels.conf.dual.tar.gz /etc/vdr/;;
+    h) cp -rf /home/`logname`/sifinstallrepo/channels.conf.trial.tar.gz /etc/vdr/;;
+    i) cp -rf /home/`logname`/sifinstallrepo/channels.conf.dual.tar.gz /etc/vdr/;;
     
    ###
     
@@ -1982,7 +1998,7 @@ Name=Kodi
 Description=Kodi Start
 Icon=/usr/local/src/icone/kodi.png
 Exec=/usr/local/bin/start-kodi-vdr.sh
-" >> /home/`logname`/Scrivania/Kodi.desktop; cp /home/`logname`/Scrivania/Kodi.desktop /usr/share/applications/Kodi.desktop;
+" >> /home/`logname`/Scrivania/Kodi.desktop; cp -r /home/`logname`/Scrivania/Kodi.desktop /usr/share/applications/Kodi.desktop;
 rm -rf /usr/local/bin/start-kodi-vdr.sh;
 touch /usr/local/bin/start-kodi-vdr.sh
 echo '#!/bin/sh

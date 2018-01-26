@@ -691,7 +691,7 @@ if [ -s /home/`logname`/sifinstallrepo/channels.conf.trial.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/reovn22nauzb2se/channels.conf.trial.tar.gz;
+    wget https://www.dropbox.com/s/oebo5gddykvxng4/channels.conf.trial.tar.gz;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/hauppauge-remote.conf.tar.gz ]; then
@@ -810,7 +810,7 @@ chmod -R 777 *;;
     wget https://www.dropbox.com/s/6hzpdx9yv5ypzxv/traduzioni.tar.gz;
     wget https://www.dropbox.com/s/jrizzen5q8o07uv/01_Add_language_It.patch.tar.gz;
     wget https://www.dropbox.com/s/z3czcyw5za82utc/channels.conf.dual.tar.gz;
-    wget https://www.dropbox.com/s/reovn22nauzb2se/channels.conf.trial.tar.gz;
+    wget https://www.dropbox.com/s/oebo5gddykvxng4/channels.conf.trial.tar.gz;
     wget https://www.dropbox.com/s/4jmjiurewriu1sh/channels.conf.terr.tar.gz;
     wget https://www.dropbox.com/s/vt0wxz86c3x6y1n/channels.conf.astra.tar.gz;
     wget https://www.dropbox.com/s/hsp66258srhwa1d/mce-remote.conf.tar.gz;
@@ -827,7 +827,7 @@ chmod -R 777 *;;
     wget https://www.dropbox.com/s/v6o2zsjt7yvascy/flat_weather.tar.gz;
     #
     chmod -R 777 *;;
-    #echo "                    Press Enter to continue ...               "; read enterKey;
+    #echo "                    Press Enter to continue ...               "; 
     
     
     
@@ -1370,8 +1370,8 @@ cd ../../..; make plugins
 clear
 echo ""; echo "               *** Softhddevice ***"; echo ""; sleep 3
 cd $VDRSRC; 
-cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-softhddevice /$VDRSRC/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice; cp -rf /home/`logname`/sifinstallrepo/patch_softhddevice_4.tar.gz /$VDRSRC/softhddevice; tar -zxvf patch_softhddevice_4.tar.gz; rm -rf patch_softhddevice_4.tar.gz; patch -p1 < 03_LanguageIT.patch; patch -p1 < 10_softhddevice_trusty.patch; patch -p1 < 11_softhddevice_Makefile.patch; patch -p1 < 15_fsigned_char.patch.bpi; make ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1; make install;
-#
+cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-softhddevice /$VDRSRC/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice; cp -rf /home/`logname`/sifinstallrepo/patch_softhddevice_4.tar.gz /$VDRSRC/softhddevice; tar -zxvf patch_softhddevice_4.tar.gz; rm -rf patch_softhddevice_4.tar.gz; patch -p1 < 03_LanguageIT.patch; patch -p1 < 10_softhddevice_trusty.patch; patch -p1 < 11_softhddevice_Makefile.patch; patch -p1 < 15_fsigned_char.patch.bpi; make; make install;
+#ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1
 #
 clear
 echo ""; echo "               *** Epgsearch ***"; echo ""; sleep 3
@@ -1795,9 +1795,9 @@ rm -rf /etc/vdr/channels.conf;
     read yourch
     case $yourch in
 a) echo "$MONO13" >> /etc/vdr/diseqc.conf && cd /etc/vdr/ && wget http://www.vdr-italia.org/channels/17x/channels_tivusat_skyitalia_17x.conf && mv channels_tivusat_skyitalia_17x.conf channels.conf;;
-b) echo "$MONO19" >> /etc/vdr/diseqc.conf && cp /home/`logname`/sifinstallrepo/channels.conf.astra.tar.gz /etc/vdr/ && cd /etc/vdr/ && tar -zxvf channels.conf.astra.tar.gz && rm -rf channels.conf.astra.tar.gz;;
-c) echo "$DUAL" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf && cp /home/`logname`/sifinstallrepo/channels.conf.dual.tar.gz /etc/vdr/ && cd /etc/vdr/ && tar -zxvf channels.conf.dual.tar.gz && rm -rf channels.conf.dual.tar.gz;;
-d) echo "$TRIAL" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf && cp /home/`logname`/sifinstallrepo/channels.conf.trial.tar.gz /etc/vdr/ && cd /etc/vdr/ && tar -zxvf channels.conf.trial.tar.gz && rm -rf channels.conf.trial.tar.gz;;
+b) echo "$MONO19" >> /etc/vdr/diseqc.conf && cp -rf /home/`logname`/sifinstallrepo/channels.conf.astra.tar.gz /etc/vdr/ && cd /etc/vdr/ && tar -zxvf channels.conf.astra.tar.gz && rm -rf channels.conf.astra.tar.gz;;
+c) echo "$DUAL" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf && cp -rf /home/`logname`/sifinstallrepo/channels.conf.dual.tar.gz /etc/vdr/ && cd /etc/vdr/ && tar -zxvf channels.conf.dual.tar.gz && rm -rf channels.conf.dual.tar.gz;;
+d) echo "$TRIAL" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf && cp -rf /home/`logname`/sifinstallrepo/channels.conf.trial.tar.gz /etc/vdr/ && cd /etc/vdr/ && tar -zxvf channels.conf.trial.tar.gz && rm -rf channels.conf.trial.tar.gz;;
 e) echo "$TRIAL2 Load a channels.conf" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf;;
 f) echo "$QUADRI Load a channels.conf" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf;;
 g) echo "$QUADRI2 Load a channels.conf" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf;;

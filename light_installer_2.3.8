@@ -391,7 +391,7 @@ if [ -s /home/`logname`/sifinstallrepo/ffmpeg ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    git clone https://git.ffmpeg.org/ffmpeg.git;
+    git clone https://github.com/FFmpeg/FFmpeg.git;
   fi
 
 if [ -s /home/`logname`/sifinstallrepo/libass ]; then
@@ -764,7 +764,7 @@ chmod -R 777 *;;
     git clone git://git.videolan.org/x264.git;
     hg clone http://hg.videolan.org/x265;
     git clone https://chromium.googlesource.com/webm/libvpx;
-    git clone https://git.ffmpeg.org/ffmpeg.git;
+    git clone https://github.com/FFmpeg/FFmpeg.git;
     wget http://developer.download.nvidia.com/assets/cuda/files/nvidia_video_sdk_6.0.1.zip;
     git clone https://github.com/OpenELEC/eventlircd.git;
     wget https://www.dropbox.com/s/cqwpl0w4cyqhrux/eventlircd.conf.tar.gz;
@@ -1151,8 +1151,8 @@ f)                                        ######################################
     echo "                    Wait for a few seconds ...";
     cd /usr/local/src;
     rm -Rf ffmpeg
-    cp -rf /home/`logname`/sifinstallrepo/ffmpeg /usr/local/src/; cd ffmpeg
-    ./configure  --extra-libs="-ldl" --enable-gpl --enable-libass --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-nonfree --enable-nvenc --enable-libxvid --enable-libxcb --enable-vdpau --enable-vaapi --enable-pic --enable-shared --disable-doc
+    cp -rf /home/`logname`/sifinstallrepo/FFmpeg /usr/local/src/; cd FFmpeg
+    ./configure  --extra-libs="-ldl" --enable-gpl --enable-libass --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libxcb --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-nonfree --enable-nvenc --enable-libxvid --enable-vdpau --enable-vaapi --enable-pic --enable-shared --disable-doc
     echo "                    Press Enter to continue ...               "; read enterKey;
     make -j4
     checkinstall --pkgname=ffmpeg --pkgversion="3.3.x-git" --backup=no --deldoc=yes --fstrans=no --default --pakdir=$PACKAGES
@@ -1164,8 +1164,8 @@ f)                                        ######################################
     echo "                    Wait for a few seconds ...";
     cd /usr/local/src;
     rm -Rf ffmpeg
-    cp -rf /home/`logname`/sifinstallrepo/ffmpeg /usr/local/src/; cd ffmpeg 
-    ./configure  --extra-libs="-ldl" --enable-gpl --enable-libass --enable-libfdk-aac --enable-libfreetype --enable-libxcb --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libx265 --enable-nonfree --enable-nvenc --enable-libxvid --enable-vdpau --enable-vaapi --enable-pic --enable-shared --disable-doc
+    cp -rf /home/`logname`/sifinstallrepo/FFmpeg /usr/local/src/; cd FFmpeg 
+    ./configure  --extra-libs="-ldl" --enable-gpl --enable-libass --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libxcb --enable-libopus --enable-libtheora --enable-libvorbis --enable-libvpx --enable-libx264 --enable-libx265 --enable-nonfree --enable-nvenc --enable-libxvid --enable-vdpau --enable-vaapi --enable-pic --enable-shared --disable-doc
     echo "                    Press Enter to continue ...               "; read enterKey;
     make -j4
     checkinstall --pkgname=ffmpeg --pkgversion="3.3.x-git" --backup=no --deldoc=yes --fstrans=no --default --pakdir=$PACKAGES
@@ -1370,7 +1370,7 @@ cd ../../..; make plugins
 clear
 echo ""; echo "               *** Softhddevice ***"; echo ""; sleep 3
 cd $VDRSRC; 
-cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-softhddevice /$VDRSRC/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice; cp -rf /home/`logname`/sifinstallrepo/patch_softhddevice_4.tar.gz /$VDRSRC/softhddevice; tar -zxvf patch_softhddevice_4.tar.gz; rm -rf patch_softhddevice_4.tar.gz; patch -p1 < 03_LanguageIT.patch; patch -p1 < 10_softhddevice_trusty.patch; patch -p1 < 11_softhddevice_Makefile.patch; patch -p1 < 15_fsigned_char.patch.bpi; make; make install;
+cp -rf /home/`logname`/sifinstallrepo/vdr-plugin-softhddevice /$VDRSRC/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice; cp -rf /home/`logname`/sifinstallrepo/patch_softhddevice_4.tar.gz /$VDRSRC/softhddevice; tar -zxvf patch_softhddevice_5.tar.gz; rm -rf patch_softhddevice_4.tar.gz; patch -p1 < 03_LanguageIT.patch; patch -p1 < 11_softhddevice_Makefile.patch; patch -p1 < 15_fsigned_char.patch.bpi; patch -p1 < 16_softhddevice_no-inactive-reset-on-attache.patch; make ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1; make install;
 #ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1
 #
 clear

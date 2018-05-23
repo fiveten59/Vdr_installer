@@ -517,6 +517,13 @@ else
     wget https://www.dropbox.com/s/pxjx9wnb71f2am4/patch_softhddevice_no_openglosd.tar.gz;
   fi
 
+if [ -s /home/`logname`/Vdrrepo/vdr-plugin-xineliboutput ]; then
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+else
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    git clone https://github.com/vdr-projects/vdr-plugin-xineliboutput.git
+  fi
+
 if [ -s /home/`logname`/Vdrrepo/vdr-plugin-tvguide ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
@@ -766,6 +773,13 @@ else
     wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_vaapidevice.tar.gz;
   fi
 
+if [ -s /home/`logname`/Vdrrepo/setup16_xineliboutput.tar.gz ]; then
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+else
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_xineliboutput.tar.gz;
+fi
+
 if [ -s /home/`logname`/Vdrrepo/flat_weather.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
@@ -809,6 +823,7 @@ chmod -R 777 *;;
     wget https://github.com/rellla/softhddevice-openglosd/archive/jinx.tar.gz;
     wget https://www.dropbox.com/s/qwi8p6ieb5z86gr/patch_softhddevice_5.tar.gz;
     wget https://www.dropbox.com/s/pxjx9wnb71f2am4/patch_softhddevice_no_openglosd.tar.gz;
+    git clone https://github.com/vdr-projects/vdr-plugin-xineliboutput.git
     git clone http://projects.vdr-developer.org/git/vdr-plugin-epgsearch.git;
     wget https://www.dropbox.com/s/s9vggu8mil8ss7t/patch_epgsearch.tar.gz;
     git clone git://github.com/manio/vdr-plugin-dvbapi.git;
@@ -850,6 +865,7 @@ chmod -R 777 *;;
     wget https://www.dropbox.com/s/omrs8wwh5jbz46e/logos.tar.gz;
     wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz;
     wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_vaapidevice.tar.gz;
+    wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_xineliboutput.tar.gz;
     wget https://www.dropbox.com/s/v6o2zsjt7yvascy/flat_weather.tar.gz;
     #
     chmod -R 777 *;;
@@ -1384,7 +1400,7 @@ clear
 echo "                        "
 echo "                        "
 echo "                        "
-echo "Install Basic plugins  ( Dvbapi - Vdaapidevice / Softhddevice - Epgsearch  - TvGuide - Iptv - ExternalPlayer - Channelscan - Skinflatplus - Skindesigner - TvGuideng - Weatherforecast)"
+echo "Install Basic plugins  ( Dvbapi - Vdaapidevice / Softhddevice / Xineliboutput - Epgsearch  - TvGuide - Iptv - ExternalPlayer - Channelscan - Skinflatplus - Skindesigner - TvGuideng - Weatherforecast)"
 echo "                 Press Enter to continue ...         "; read enterKey
 cd $SRC;
 mkdir -p /usr/local/lib/vdr/plugins; mkdir -p /usr/local/lib/vdr/scripts; mkdir -p /etc/vdr/plugins; mkdir -p /etc/vdr/themes; cd $PLUGINS; mkdir -p tvguide;
@@ -1398,7 +1414,7 @@ cp -rf /home/`logname`/Vdrrepo/vdr-plugin-dvbapi /$VDRSRC/; mv vdr-plugin-dvbapi
 #
 					echo "               *** Setup remote  ***"; sleep 1
 clear        
-    				dialog --title "   ** Setup Vaapidevice / Softhddevice **   " --infobox "
+    				dialog --title "   ** Setup Vaapidevice / Softhddevice / Xineliboutput **   " --infobox "
    				-------------------------------------------------------------------------
                 				Setup Vaapidevice only for Intel graphic cards             
   				-------------------------------------------------------------------------
@@ -1407,10 +1423,15 @@ clear
                 				Setup Softhddevice only for Nvidia graphic cards             
   				-------------------------------------------------------------------------     
 			        [b]    Softhddevice openglosd                  
-			        [c]    Softhddevice no openglosd                            
+			        [c]    Softhddevice no openglosd 
+
+   				-------------------------------------------------------------------------
+                				Setup Xineliboutput Intel/Nvidia graphic cards             
+  				------------------------------------------------------------------------- 
+			        [d]    Xineliboutput                                         
         
    				------------------------------------------------------------------------- " 0 0
-    echo -n "        Enter your menu choice  [a-c]:      "
+    echo -n "        Enter your menu choice  [a-d]:      "
     read yourch
     case $yourch in
     
@@ -1436,6 +1457,15 @@ apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasou
 apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxext-dev
 cd $VDRSRC; 
 cp -rf /home/`logname`/Vdrrepo/jinx.tar.gz /$VDRSRC/; tar -zxvf jinx.tar.gz; rm -rf jinx.tar.gz; mv softhddevice-openglosd-jinx softhddevice; cd softhddevice; cp -rf /home/`logname`/Vdrrepo/patch_softhddevice_no_openglosd.tar.gz /$VDRSRC/softhddevice; tar -zxvf patch_softhddevice_no_openglosd.tar.gz; rm -rf patch_softhddevice_no_openglosd.tar.gz; patch -p1 < 03_LanguageIT.patch; patch -p1 < 10_softhddevice_trusty.patch; patch -p1 < Makefile_noopenglosd.patch; patch -p1 < 13_softhddevice_fixmemleakvaapi.patch; patch -p1 < 14_softhddevice_vaapi100.patch; patch -p1 < 16_softhddevice_no-inactive-reset-on-attache.patch; make ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1; make install;;
+
+d) echo ""; echo "               *** Xineliboutput***"; echo ""; sleep 3      
+cd $VDRSRC; apt-get -y install autopoint libxine2-dev libxrender-dev libextractor-dev libxrandr-dev libxine2-ffmpeg mjpegtools;
+if [ -f $PACKAGES/libxine2*.deb ]; then
+    echo "Xine-lib $Remind"; 
+    	else cd $SRC; wget http://sourceforge.net/projects/xine/files/xine-lib/1.2.9/xine-lib-1.2.9.tar.xz; tar -xJf xine-lib-1.2.9.tar.xz; mv xine-lib-1.2.9 xine-lib; rm -rf xine-lib-1.2.9.tar.xz; cd xine-lib; export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH; ./autogen.sh --disable-dxr3 --enable-w32dll --with-pic --with-w32-path=/usr/local/lib/win32; make -j4; checkinstall --fstrans=no --install=yes --pkgname=libxine2 --pkgversion "1.2.9-git" --pakdir=$PACKAGES --default
+	fi
+cd $VDRSRC; 
+cp -rf /home/`logname`/Vdrrepo/vdr-plugin-xineliboutput /$VDRSRC/; mv -f vdr-plugin-xineliboutput xineliboutput; cd xineliboutput; make; make install; cd ../../..; make plugins; mkdir -p /etc/vdr/plugins/xineliboutput; cp -rf /usr/local/src/vdr/PLUGINS/src/xineliboutput/*.mpg /etc/vdr/plugins/xineliboutput; cp -rf /usr/local/src/vdr/PLUGINS/src/xineliboutput/examples/remote.conf.example /etc/vdr/plugins/xineliboutput/remote.conf; echo "*** allowed_hosts.conf setup ***";;
 esac
 # 
 #
@@ -1550,13 +1580,27 @@ rm -rf /usr/local/bin/vdrrun; touch /usr/local/bin/vdrrun;
 echo '#!/bin/bash
 
 /usr/local/bin/vdr -c /etc/vdr -E /var/vdr -l 3 -u root '$PLUGIN' -s /usr/local/bin/vdrpoweroff ' >> /usr/local/bin/vdrrun && chmod a+x /usr/local/bin/vdrrun
-# choice between vaapidevice and softhddevice
-if [ -s $VDRSRC/vaapidevice ];
-	then sed -i "s|-P'dvbapi'|& -P'vaapidevice -f -a pulse'|" /usr/local/bin/vdrrun;
-		else if [ -s $VDRSRC/softhddevice ];
-			then sed -i "s|-P'dvbapi'|& -P'softhddevice -f -v vdpau -w no-hw-decoder'|" /usr/local/bin/vdrrun;
-fi
-fi 
+#
+					echo "   *** Create start Vdr command line  ***"; sleep 1
+clear        
+    dialog --title "   ** Create start Vdr command line **   " --infobox "
+   ----------------------------------------------
+          Create start Vdr command line             
+   ----------------------------------------------
+        [a]    Vaapidevice                   
+        [b]    Softhddevice                   
+        [c]    Xineliboutput Nvidia graphic card                             
+        [d]    Xineliboutput Intel graphic card 
+                                    
+   ---------------------------------------------- " 0 0
+    echo -n "        Enter your menu choice  [a-d]:      "
+    read yourch
+    case $yourch in
+a) sed -i "s|-P'dvbapi'|& -P'vaapidevice -f -a pulse'|" /usr/local/bin/vdrrun && cp -rf /home/`logname`/Vdrrepo/setup16_vaapidevice.tar.gz /etc/vdr/; tar -zxvf setup16_vaapidevice.tar.gz; rm -rf setup16_vaapidevice.tar.gz;;
+b) sed -i "s|-P'dvbapi'|& -P'softhddevice -f -v vdpau -w no-hw-decoder'|" /usr/local/bin/vdrrun && cp -rf /home/`logname`/Vdrrepo/setup16_softhddevice.tar.gz /etc/vdr/; tar -zxvf setup16_softhddevice.tar.gz; rm -rf setup16_softhddevice.tar.gz;;
+c) sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --video=vdpau --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun ;; # && cp -rf /home/`logname`/Vdrrepo/setup16_xineliboutput.tar.gz /etc/vdr/; tar -zxvf setup16_xineliboutput.tar.gz; rm -rf setup16_xineliboutput.tar.gz;;
+d) sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --video=vaapi --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun ;; # && cp -rf /home/`logname`/Vdrrepo/setup16_xineliboutput.tar.gz /etc/vdr/; tar -zxvf setup16_xineliboutput.tar.gz; rm -rf setup16_xineliboutput.tar.gz;;
+esac
 #   Permission to execute Vdr       
 echo "%`logname` ALL=NOPASSWD: /etc/init.d/vdr" >> /etc/sudoers
 #    Creazione /usr/local/bin/vdrpoweroff    
@@ -1806,22 +1850,6 @@ sudo /etc/init.d/oscam stop > /dev/null 2>&1
 chmod 777 /usr/local/bin/KillOscam.sh;
 
 
-#############################################################################################################################
-#############################################################################################################################
-
-					  #########################################
-					  #             Monitor setup             #			
-					  #########################################	
-
-					echo "               *** Monitor setup  ***"; sleep 1
-
-if [ -s $VDRSRC/vaapidevice ];
-	then cp -rf /home/`logname`/Vdrrepo/setup16_vaapidevice.tar.gz /etc/vdr/; tar -zxvf setup16_vaapidevice.tar.gz; rm -rf setup16_vaapidevice.tar.gz;
-		else if [ -s $VDRSRC/softhddevice ];
-			then cp -rf /home/`logname`/Vdrrepo/setup16_softhddevice.tar.gz /etc/vdr/; tar -zxvf setup16_softhddevice.tar.gz; rm -rf setup16_softhddevice.tar.gz;
-fi
-fi 
-
 #############################################################################################################################  
 #############################################################################################################################
 
@@ -1922,7 +1950,7 @@ clear
     case $yourch in
 a) cd /etc/vdr; cp -rf /home/`logname`/Vdrrepo/mce-remote.conf.tar.gz /etc/vdr/; tar -zxvf mce-remote.conf.tar.gz; rm -rf mce-remote.conf.tar.gz;;
 b) cd /etc/vdr; cp -rf /home/`logname`/Vdrrepo/hauppauge-remote.conf.tar.gz /etc/vdr/;tar -zxvf hauppauge-remote.conf.tar.gz; rm -rf hauppauge-remote.conf.tar.gz;;
-
+c);;
 esac
 #
 dmesg | grep -i ubuntu > $TEMP/ubuntu

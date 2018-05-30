@@ -1316,7 +1316,9 @@ echo "                  *** fix_svdrp_modt_recflag ***"
 echo "                  *** fix_invalid_lock ***"
     patch -p1 < 00_kls_02-fix_invalid_lock.patch; sleep 1;
 echo "                  *** fix-locking-channel-display  ***"
-    patch -p1 < 03-fix-locking-channel-display.diff; sleep 1;
+    patch -p1 < 00_kls_03_fix-locking-channel-display.patch; sleep 1;
+echo "                  *** fix_locking_channel-display_V2  ***"
+    patch -p1 < 00_kls_04_fix_locking_channel-display_V2.patch; sleep 1;
 echo "                  *** zapcockpit ***"
     patch -p1 < 02_vdr_zapcockpit.patch; sleep 1;
 echo "                  *** menuselection ***"
@@ -1347,6 +1349,8 @@ echo "                  *** menuorg ***"
     patch -p1 < 26_vdr_menuorg.patch; sleep 1;
 echo "                  *** permashift ***"
     patch -p1 < 27_vdr_permashift.patch.x86; sleep 1;
+echo "                  *** hide_first_recording_level ***"
+    patch -p1 < 28_vdr_hide_first_recording_level.patch; sleep 1;
 echo "                  *** dvbchan ***"
     patch -p1 < vdr-dvbchan.patch; sleep 1;
 echo "                  *** ci_debug ***"
@@ -1596,11 +1600,12 @@ clear
     echo -n "        Enter your menu choice  [a-d]:      "
     read yourch
     case $yourch in
-a) sed -i "s|-P'dvbapi'|& -P'vaapidevice -f -a pulse'|" /usr/local/bin/vdrrun && cp -rf /home/`logname`/Vdrrepo/setup16_vaapidevice.tar.gz /etc/vdr/; tar -zxvf setup16_vaapidevice.tar.gz; rm -rf setup16_vaapidevice.tar.gz;;
-b) sed -i "s|-P'dvbapi'|& -P'softhddevice -f -v vdpau -w no-hw-decoder'|" /usr/local/bin/vdrrun && cp -rf /home/`logname`/Vdrrepo/setup16_softhddevice.tar.gz /etc/vdr/; tar -zxvf setup16_softhddevice.tar.gz; rm -rf setup16_softhddevice.tar.gz;;
-c) sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --video=vdpau --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun ;; # && cp -rf /home/`logname`/Vdrrepo/setup16_xineliboutput.tar.gz /etc/vdr/; tar -zxvf setup16_xineliboutput.tar.gz; rm -rf setup16_xineliboutput.tar.gz;;
-d) sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --video=vaapi --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun ;; # && cp -rf /home/`logname`/Vdrrepo/setup16_xineliboutput.tar.gz /etc/vdr/; tar -zxvf setup16_xineliboutput.tar.gz; rm -rf setup16_xineliboutput.tar.gz;;
+a) sed -i "s|-P'dvbapi'|& -P'vaapidevice -f -a pulse'|" /usr/local/bin/vdrrun && cp -rf /home/`logname`/Vdrrepo/setup16_vaapidevice.tar.gz /etc/vdr/; cd /etc/vdr/; tar -zxvf setup16_vaapidevice.tar.gz; rm -rf setup16_vaapidevice.tar.gz;;
+b) sed -i "s|-P'dvbapi'|& -P'softhddevice -f -v vdpau -w no-hw-decoder'|" /usr/local/bin/vdrrun && cp -rf /home/`logname`/Vdrrepo/setup16_softhddevice.tar.gz /etc/vdr/; cd /etc/vdr/; tar -zxvf setup16_softhddevice.tar.gz; rm -rf setup16_softhddevice.tar.gz;;
+c) sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --video=vdpau --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun && cp -rf /home/`logname`/Vdrrepo/setup16_xineliboutput.tar.gz /etc/vdr/; cd /etc/vdr/; tar -zxvf setup16_xineliboutput.tar.gz; rm -rf setup16_xineliboutput.tar.gz;;
+d) sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --video=vaapi --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun && cp -rf /home/`logname`/Vdrrepo/setup16_xineliboutput.tar.gz /etc/vdr/; cd /etc/vdr/; tar -zxvf setup16_xineliboutput.tar.gz; rm -rf setup16_xineliboutput.tar.gz;;
 esac
+
 #   Permission to execute Vdr       
 echo "%`logname` ALL=NOPASSWD: /etc/init.d/vdr" >> /etc/sudoers
 #    Creazione /usr/local/bin/vdrpoweroff    

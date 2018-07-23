@@ -784,7 +784,7 @@ if [ -s /home/`logname`/Vdrrepo/flat_weather.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/v6o2zsjt7yvascy/flat_weather.tar.gz;
+    wget https://www.dropbox.com/s/x80qbwk8xnwi0u5/flat_weather.tar.gz;
   fi
 
 chmod -R 777 *;;
@@ -866,7 +866,8 @@ chmod -R 777 *;;
     wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz;
     wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_vaapidevice.tar.gz;
     wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_xineliboutput.tar.gz;
-    wget https://www.dropbox.com/s/v6o2zsjt7yvascy/flat_weather.tar.gz;
+    wget https://www.dropbox.com/s/x80qbwk8xnwi0u5/flat_weather.tar.gz;
+
     #
     chmod -R 777 *;;
     #echo "                    Press Enter to continue ...               "; 
@@ -1319,6 +1320,10 @@ echo "                  *** fix-locking-channel-display  ***"
     patch -p1 < 00_kls_03_fix-locking-channel-display.patch; sleep 1;
 echo "                  *** fix_locking_channel-display_V2  ***"
     patch -p1 < 00_kls_04_fix_locking_channel-display_V2.patch; sleep 1;
+echo "                  *** fix_shutdown  ***"
+    patch -p1 < 00_kls_05_fix_shutdown.patch; sleep 1;
+echo "                  *** fix_channelswitch  ***"
+    patch -p1 < 00_kls_06_fix_channelswitch.patch; sleep 1;
 echo "                  *** zapcockpit ***"
     patch -p1 < 02_vdr_zapcockpit.patch; sleep 1;
 echo "                  *** menuselection ***"
@@ -1351,6 +1356,8 @@ echo "                  *** permashift ***"
     patch -p1 < 27_vdr_permashift.patch.x86; sleep 1;
 echo "                  *** hide_first_recording_level ***"
     patch -p1 < 28_vdr_hide_first_recording_level.patch; sleep 1;
+echo "                  *** vdr_camtweaks ***"
+    patch -p1 < 99_vdr_camtweaks.patch; sleep 1;
 echo "                  *** dvbchan ***"
     patch -p1 < vdr-dvbchan.patch; sleep 1;
 echo "                  *** ci_debug ***"

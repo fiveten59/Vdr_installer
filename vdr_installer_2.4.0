@@ -1226,7 +1226,16 @@ n)                                        ######################################
     apt-get -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev libvorbis-dev
     apt-get -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
     apt-get -y install libtheora-dev libxvidcore-dev libvdpau-dev libmp3lame-dev libogg-dev libfreetype6-dev
-if [ -f /usr/local/nv-codec-headers/makefile ];
+clear        
+    				dialog --title "   ** Setup Vaapidevice / Softhddevice / Xineliboutput **   " --infobox "
+   				-------------------------------------------------------------------------
+                		[a]		Setup FFmpeg only for Nvidia graphic cards             
+                		[b]		Setup FFmpeg only for Intel graphic cards                                                    
+   				------------------------------------------------------------------------- " 0 0
+    echo -n "        Enter your menu choice  [a-b]:      "
+    read yourch
+    case $yourch in
+a) if [ -f /usr/local/nv-codec-headers/makefile ];
   then  echo "nv-codec-headers are already installed"
 else
     cd /usr/local/src/ffmpeg_sources; git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git; cd nv-codec-headers; make; make install;
@@ -1234,9 +1243,16 @@ fi
     echo "                    Wait for a few seconds ...";
     cd /usr/local/src/ffmpeg_sources;
     rm -Rf ffmpeg
+    cp -rf /home/`logname`/Vdrrepo/ffmpeg-3.4.2.tar.bz2 /usr/local/src/ffmpeg_sources; tar xivf ffmpeg-3.4.2.tar.bz2; mv ffmpeg-3.4.2 ffmpeg; rm -rf ffmpeg-3.4.2.tar.bz2; cd ffmpeg; ./configure --extra-libs="-ldl" --enable-gpl --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libxcb --disable-libopus --enable-libtheora --enable-libvorbis --disable-libvpx --enable-libx264 --enable-libx265 --enable-nonfree --enable-libxvid --enable-vdpau --enable-pic --enable-shared --disable-nvenc --disable-doc --enable-avresample 
+    echo "                    Press Enter to continue ...               "; read enterKey;
+    make -j4 install;;
+b)     echo "                    Wait for a few seconds ...";
+    cd /usr/local/src/ffmpeg_sources;
+    rm -Rf ffmpeg
     cp -rf /home/`logname`/Vdrrepo/ffmpeg-3.4.2.tar.bz2 /usr/local/src/ffmpeg_sources; tar xivf ffmpeg-3.4.2.tar.bz2; mv ffmpeg-3.4.2 ffmpeg; rm -rf ffmpeg-3.4.2.tar.bz2; cd ffmpeg; ./configure --extra-libs="-ldl" --enable-gpl --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libxcb --disable-libopus --enable-libtheora --enable-libvorbis --disable-libvpx --enable-libx264 --enable-libx265 --enable-nonfree --enable-libxvid --enable-vdpau --enable-vaapi --enable-pic --enable-shared --disable-nvenc --disable-doc --enable-avresample 
     echo "                    Press Enter to continue ...               "; read enterKey;
-    make -j4 install
+    make -j4 install;;
+esac
     echo "                    Press Enter to continue ...               "; read enterKey;;
 
 #############################################################################################################################  

@@ -150,15 +150,16 @@ ALLOWED="#
           |[32]   Epg2vdr  ..............................[32a]   Epg2vdr ........................... |
           |[33]   Upnp  .................................[33a]   Upnp .............................. |
           |[34]   CecRemote  ............................[34a]   CecRemote ......................... |
-          |[35]   Menuorg  ..............................[35a]   Menuorg ........................... |
+          |[35]   Remote  ...............................[35a]   Remote ............................ |
+          |[36]   Menuorg  ..............................[36a]   Menuorg ........................... |
 
-          |[36]     ..............................[36a]    ........................... |
           |[37]     ..............................[37a]    ........................... |
+          |[38]     ..............................[38a]    ........................... |
           ╭========================================================================================╮                                
           |   [50]    Exit  ..........................................................................|  
           ╰========================================================================================╯" 0 0
 #   -  -  -  -  
-    echo -n "              Enter your menu choice = Submenu [1~37] -- Exit [50] :        "
+    echo -n "              Enter your menu choice = Submenu [1~38] -- Exit [50] :        "
     read yourch
     case $yourch in
 ################################################################################################################################################################
@@ -166,13 +167,16 @@ ALLOWED="#
 1) 
 clear
 echo "        ***                Installing Vdr-Plugin-Softhddevice-Openglosd               ***";  sleep 2
-cd $VDRSRC;
+
 apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libglm-dev
 apt-get -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev
 apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libvdpau1 libvdpau-dev
 apt-get -y install libxext6 libxext-dev libc6-dev zlib1g zlib1g-dev libogg0 libva-dev libglew-dev
+cd $VDRSRC;
+
 if [ -f softhddevice/Makefile ];
-   		then wget https://github.com/rellla/softhddevice-openglosd/archive/jinx.tar.gz && cp -rf jinx.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf jinx.tar.gz && rm -rf jinx.tar.gz && mv softhddevice-openglosd-jinx softhddevice && cd softhddevice && wget https://www.dropbox.com/s/qwi8p6ieb5z86gr/patch_softhddevice_5.tar.gz && tar -zxvf patch_softhddevice_5.tar.gz && mv -f patch_softhddevice_5.tar.gz /home/`logname`/Vdrrepo/ && patch -p1 < 03_LanguageIT.patch && patch -p1 < 10_softhddevice_trusty.patch && patch -p1 < 11_softhddevice_Makefile.patch && patch -p1 < 13_softhddevice_fixmemleakvaapi.patch && patch -p1 < 14_softhddevice_vaapi100.patch && patch -p1 < 16_softhddevice_no-inactive-reset-on-attache.patch && patch -p1 < 17_fsigned_hide-buffer-empty-message.patch && make ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1 && make install && sed -i "s|--lirc|& -P'softhddevice -f -v vdpau'|" /usr/local/bin/vdrrun 
+       then  echo "Vdr-Plugin-Softhddevice $Remind"
+   		else wget https://github.com/rellla/softhddevice-openglosd/archive/jinx.tar.gz && cp -rf jinx.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf jinx.tar.gz && rm -rf jinx.tar.gz && mv softhddevice-openglosd-jinx softhddevice && cd softhddevice && wget https://www.dropbox.com/s/qwi8p6ieb5z86gr/patch_softhddevice_5.tar.gz && tar -zxvf patch_softhddevice_5.tar.gz && mv -f patch_softhddevice_5.tar.gz /home/`logname`/Vdrrepo/ && patch -p1 < 03_LanguageIT.patch && patch -p1 < 10_softhddevice_trusty.patch && patch -p1 < 11_softhddevice_Makefile.patch && patch -p1 < 13_softhddevice_fixmemleakvaapi.patch && patch -p1 < 14_softhddevice_vaapi100.patch && patch -p1 < 16_softhddevice_no-inactive-reset-on-attache.patch && make ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1 && make install && sed -i "s|--lirc|& -P'softhddevice -f -v vdpau -w no-hw-decoder'|" /usr/local/bin/vdrrun 
       fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
       echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -190,7 +194,7 @@ cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
 ################################################################################################################################################################
 2) 
 clear
-echo "        ***                Installing Vdr-Plugin-Softhddevice (Vpp support)               ***";  sleep 2
+echo "        ***                Installing Vdr-Plugin-Softhddevice (No Openglosd)               ***";  sleep 2
 cd $VDRSRC;
 apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libglm-dev unzip;
 apt-get -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev;
@@ -198,7 +202,7 @@ apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasou
 apt-get -y install libxext6 libxext-dev libc6-dev zlib1g zlib1g-dev libogg0 libva-dev libglew-dev;
 if [ -f vaapidevice/Makefile ];
        then  echo "Vdr-Plugin-Softhddevice (Vpp support) $Remind"
-   		else wget https://www.dropbox.com/s/mpzeptpzwdszcx9/vdr-plugin-vaapidevice-vpp_support.zip && unzip vdr-plugin-vaapidevice-vpp_support.zip && rm -rf vdr-plugin-vaapidevice-vpp_support.zip && mv vdr-plugin-vaapidevice-vpp_support vaapidevice && cd vaapidevice && cp -rf /home/`logname`/Vdrrepo/patch_softhddevice_5.tar.gz /$VDRSRC/vaapidevice && tar -zxvf patch_softhddevice_5.tar.gz && rm -rf patch_softhddevice_5.tar.gz && patch -p1 < 03_LanguageIT.patch; patch -p1 < 11_softhddevice_Makefile.patch && patch -p1 < 16_softhddevice_no-inactive-reset-on-attache.patch && patch -p1 < 17_fsigned_hide-buffer-empty-message.patch && make && make install && sed -i "s|--lirc|& -P'softhddevice -f -v vdpau'|" /usr/local/bin/vdrrun 
+   		else wget https://github.com/rellla/softhddevice-openglosd/archive/jinx.tar.gz && cp -rf jinx.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf jinx.tar.gz && rm -rf jinx.tar.gz && mv softhddevice-openglosd-jinx softhddevice && cd softhddevice && wget https://www.dropbox.com/s/pxjx9wnb71f2am4/patch_softhddevice_no_openglosd.tar.gz && tar -zxvf patch_softhddevice_no_openglosd.tar.gz && mv -f patch_softhddevice_no_openglosd.tar.gz /home/`logname`/Vdrrepo/ && patch -p1 < 03_LanguageIT.patch && patch -p1 < 10_softhddevice_trusty.patch && patch -p1 < Makefile_noopenglosd.patch && patch -p1 < 13_softhddevice_fixmemleakvaapi.patch && patch -p1 < 14_softhddevice_vaapi100.patch && patch -p1 < 16_softhddevice_no-inactive-reset-on-attache.patch && make ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1 && make install && sed -i "s|--lirc|& -P'softhddevice -f -v vdpau -w no-hw-decoder'|" /usr/local/bin/vdrrun 
       fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
       echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -221,7 +225,7 @@ echo "        ***                Installing Vdr-Plugin-Vaapidevice              
 cd $VDRSRC &&
  if [ -f vaapidevice/Makefile ];
   		then  echo "Vdr-Plugin-Vaapidevice $Remind"
-			else git clone https://github.com/rofafor/vdr-plugin-vaapidevice.git && cp -rf vdr-plugin-vaapidevice /home/`logname`/Vdrrepo/ && mv vdr-plugin-vaapidevice vaapidevice && cd vaapidevice &&  make && make install && sed -i "s|--lirc|& -P'vaapidevice -f'|" /usr/local/bin/vdrrun
+			else git clone https://github.com/rofafor/vdr-plugin-vaapidevice.git && cp -rf vdr-plugin-vaapidevice /home/`logname`/Vdrrepo/ && mv vdr-plugin-vaapidevice vaapidevice && cd vaapidevice &&  make && make install && sed -i "s|--lirc|& -P'vaapidevice -f -a pulse'|" /usr/local/bin/vdrrun
 		fi
 # wget https://www.dropbox.com/s/vjmoi44yikr5k6q/patch_softhddevice_openglosd.tar.gz && tar -zxvf patch_softhddevice_openglosd.tar.gz && mv -f patch_softhddevice_openglosd.tar.gz /home/`logname`/Vdrrepo/ && patch -p1 < 10_softhddevice_ffmpeg3.patch &&
         echo "                 Press Enter to continue ...               "; read enterKey;;
@@ -229,7 +233,7 @@ cd $VDRSRC &&
 clear
 echo "        ***                Removing Vdr-Plugin-Vaapidevice               ***";  sleep 2
 cd $VDRSRC && if [ -f vaapidevice/Makefile ];
-   		then rm -rf vaapidevice && cd $LIB && rm -rf libvdr-vaapidevice.* && sed -i "s|-P'vaapidevice -f'||" /usr/local/bin/vdrrun  && echo "Vdr-Plugin--Vaapidevice $Remind1"
+   		then rm -rf vaapidevice && cd $LIB && rm -rf libvdr-vaapidevice.* && sed -i "s|-P'vaapidevice -f -a pulse'||" /usr/local/bin/vdrrun  && echo "Vdr-Plugin--Vaapidevice $Remind1"
    			else echo "Vdr-Plugin-Vaapidevice $Remind5" 
       fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
@@ -901,11 +905,31 @@ cd $VDRSRC && if [ -f cecremote/Makefile ];
       	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;; 
-
-
 ################################################################################################################################################################
 ################################################################################################################################################################
 35)
+clear
+echo "        ***                Installing VDR-Plugin-Remote               ***";  sleep 2
+echo "Do you want to install Remote plugin? It's not a good idea if you use lirc (y/n) ";
+
+cd $VDRSRC; if [ -f remote/Makefile ];
+  then  echo "Remote $Remind"
+  else wget http://www.escape-edv.de/endriss/vdr/vdr-remote-0.7.0.tgz && tar -xzvf vdr-remote-0.7.0.tgz && mv remote-0.7.0 remote && rm -r vdr-remote-0.7.0.tgz && cd remote && sed -i Makefile -e 's/VDRVERSION/APIVERSION/g' && cd ../../../ && make plugins &&   echo "*** Remote setup ***" && clear &&  echo "        --------------------------------------" &&    echo "              Show me your IR input number " &&    echo "        --------------------------------------"&&    echo "        Put here below your IR input number " && echo "        You'd find it through: dmesg | grep -i input " &&     echo "        Example:                                               " &&     echo "        dmesg | grep -i input                                  " &&     echo "        ... input: cx88 IR (Hauppauge WinTV-HVR400 as /devices/" &&     echo "        pci0000:00/0000:00:0a.0/0000:01:06.2/rc/rc0/input/5    " &&     echo "        ---> digit 5                            
+ " &&     
+echo "              --------------------------------------" &&     echo "              --------------------------------------" &&     echo -n "        Show me your IR input number:                " && read key && echo    " -P'remote -i /dev/input/event$key'" >> /usr/local/bin/vdrrun_2 && mv /usr/local/bin/vdrrun /usr/local/bin/vdrrun_1 && cat /usr/local/bin/vdrrun_* | tr -d '\n' > /usr/local/bin/vdrrun && rm -rf /usr/local/bin/vdrrun_* && sed -i "s|--lirc||" /usr/local/bin/vdrrun && sed -i "s|bash|& \n|" /usr/local/bin/vdrrun
+fi;;
+35a)
+clear
+echo "        ***                Removing VDR-Plugin-Remote               ***";  sleep 2
+cd $VDRSRC && if [ -f remote/Makefile ];
+  		then rm -rf remote && cd $LIB && rm -rf libvdr-remote.* && sed -i "s|-P'remote'||" /usr/local/bin/vdrrun && echo "Vdr-Plugin-remote $Remind1 "
+ 			 else echo "Vdr-Plugin-Remote $Remind5" 
+      	fi;
+cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
+        echo "                    Press Enter to continue ...               "; read enterKey;;
+################################################################################################################################################################
+################################################################################################################################################################
+36)
 clear
 echo "        ***                Installing Vdr-Plugin-Menuorg               ***";  sleep 2
 cd $VDRSRC; apt-get -y install libxml++2.6-dev libglibmm-2.4-dev;
@@ -915,7 +939,7 @@ cd $VDRSRC; apt-get -y install libxml++2.6-dev libglibmm-2.4-dev;
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;  
-35a) 
+36a) 
 clear
 echo "        ***                Removing Vdr-Plugin-Menuorg               ***";  sleep 2
 cd $VDRSRC && if [ -f menuorg/Makefile ];

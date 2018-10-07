@@ -347,18 +347,18 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
     
 ############################### Download libraries on local repo ################################### 
 
-if [ -s /home/`logname`/Vdrrepo/nasm-2.13.02.tar.bz2 ]; then
+if [ -s /home/`logname`/Vdrrepo/nasm-2.14rc15.tar.bz2 ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget http://www.nasm.us/pub/nasm/releasebuilds/2.13.02/nasm-2.13.02.tar.bz2; 
+    wget http://www.nasm.us/pub/nasm/releasebuilds/2.14rc15/nasm-2.14rc15.tar.bz2; 
   fi
 
 if [ -s /home/`logname`/Vdrrepo/cmrt ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    git clone https://github.com/01org/cmrt
+    git clone https://github.com/intel//cmrt
   fi
 
 if [ -s /home/`logname`/Vdrrepo/libva ]; then
@@ -424,11 +424,11 @@ else
     wget https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.6.tar.gz;
   fi
 
-if [ -s /home/`logname`/Vdrrepo/ffmpeg-3.4.2.tar.bz2 ]; then
+if [ -s /home/`logname`/Vdrrepo/ffmpeg ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget http://ffmpeg.org/releases/ffmpeg-3.4.2.tar.bz2;
+    git clone https://github.com/FFmpeg/FFmpeg ffmpeg
   fi
 
 ################################ Download Vdr and Plugins on local repo ##############################
@@ -495,6 +495,13 @@ else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/qwi8p6ieb5z86gr/patch_softhddevice_5.tar.gz;
   fi
+
+if [ -s /home/`logname`/Vdrrepo/patch_soft_intel.tar.gz ]; then
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+else
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    wget https://www.dropbox.com/s/7aljgibuyd6mjfl/patch_soft_intel.tar.gz
+fi
 
 if [ -s /home/`logname`/Vdrrepo/vdr-plugin-tvguide ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
@@ -698,8 +705,8 @@ chmod -R 777 *;;
 ######################################################################################  
 ############################ Download libraries on local repo ####################################
 
-    wget http://www.nasm.us/pub/nasm/releasebuilds/2.13.02/nasm-2.13.02.tar.bz2; 
-    git clone https://github.com/01org/cmrt;
+    wget http://www.nasm.us/pub/nasm/releasebuilds/2.14rc15/nasm-2.14rc15.tar.bz2; 
+    git clone https://github.com/intel/cmrt;
     git clone https://github.com/intel/libva;
     git clone https://github.com/01org/intel-hybrid-driver;
     git clone https://github.com/intel/intel-vaapi-driver.git;
@@ -709,7 +716,7 @@ chmod -R 777 *;;
     git clone https://github.com/mstorsjo/fdk-aac.git;
     git clone https://github.com/webmproject/libvpx;
     wget https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.6.tar.gz;
-    wget http://ffmpeg.org/releases/ffmpeg-3.4.2.tar.bz2;
+    git clone https://github.com/FFmpeg/FFmpeg ffmpeg
 
 ############################ Download Vdr and Plugins on local repo ################################
 
@@ -722,6 +729,7 @@ chmod -R 777 *;;
     git clone git://projects.vdr-developer.org/vdr-plugin-tvguideng.git;
     wget https://www.dropbox.com/s/qjmzsml13sdhk0u/patch_tvguideng.tar.gz;
     wget https://www.dropbox.com/s/qwi8p6ieb5z86gr/patch_softhddevice_5.tar.gz;
+    wget https://www.dropbox.com/s/7aljgibuyd6mjfl/patch_soft_intel.tar.gz
     git clone http://projects.vdr-developer.org/git/vdr-plugin-epgsearch.git;
     wget https://www.dropbox.com/s/s9vggu8mil8ss7t/patch_epgsearch.tar.gz;
     git clone git://github.com/manio/vdr-plugin-dvbapi.git;
@@ -774,6 +782,18 @@ chmod -R 777 *;;
 2)                                        #######################################################
                                           #  Submenu - X264 - X265 - FDK-AAC - LIBVPX - FFMPEG  # libva-utils
                                           #######################################################
+sudo apt-get -y install autoconf automake build-essential libass-dev libtool pkg-config texinfo zlib1g-dev libva-dev cmake mercurial libdrm-dev libvorbis-dev libogg-dev git libx11-dev libperl-dev libpciaccess-dev libpciaccess0 xorg-dev;
+
+if [ -f /etc/apt/sources.list.d/oibaf-ubuntu-graphics-drivers-bionic.list ];
+  then  echo "graphics-drivers already installed"
+else
+add-apt-repository ppa:oibaf/graphics-drivers
+apt-get update
+apt-get -y upgrade
+apt-get -y dist-upgrade
+fi
+
+#######################################################
                   
     clear        
     dialog --title "   ** Install Assembler - Libraries & Codec - X264 - X265 - FDK-AAC - LIBVPX - FFMPEG **   " --infobox "
@@ -786,8 +806,8 @@ chmod -R 777 *;;
         *****  Install  *****  ............................  *****  Remove  *****
 
         *****                    Sezione schede Intel                       ***** 
-        [a]    Cmrt Git ...................................  [a1]    Cmrt Git
-        [b]    Libva ......................................  [b1]    Libva 
+        [a]    Libva ......................................  [a1]    Libva  
+        [b]    Cmrt Git ...................................  [b1]    Cmrt Git    
         [c]    Intel hybrid driver ........................  [c1]    Intel hybrid driver
         [d]    Intel vaapi driver .........................  [d1]    Intel vaapi driver
         [e]    Libva-utils ................................  [e1]    Libva-utils
@@ -811,11 +831,36 @@ chmod -R 777 *;;
     echo -n "        Enter your menu choice = Install [a-n] ~~ Remove [a1-n1] ~~ Exit [z]:      "
     read yourch
     case $yourch in
-
+  
 #############################################################################################################################  
 #############################################################################################################################
 
 a)                                        #########################################
+                                          #                  LIBVA                #
+                                          #########################################
+
+
+#    apt-get -y install libwayland-dev
+    clear
+    echo "                    Installing Libva "; sleep 3
+    cd /usr/local/src;
+    rm -rf libva;
+    cp -rf /home/`logname`/Vdrrepo/libva /usr/local/src/;
+    cd libva
+    ./autogen.sh
+    ./configure
+    make 
+    make install 
+    rm -rf /etc/ld.so.conf;
+    touch /etc/ld.so.conf;
+    echo 'include /etc/ld.so.conf.d/*.conf
+/usr/local/lib
+/usr/local/lib/dri' >> /etc/ld.so.conf;; 
+
+#############################################################################################################################  
+#############################################################################################################################
+
+b)                                        #########################################
                                           #                   Cmrt                #
                                           #########################################
 
@@ -833,35 +878,12 @@ a)                                        ######################################
     ./autogen.sh
     ./configure
     time make -j4 VERBOSE=1
-    sudo make -j4 install;;   
-#############################################################################################################################  
-#############################################################################################################################
-
-b)                                        #########################################
-                                          #                  LIBVA                #
-                                          #########################################
-
-
-#    apt-get -y install libwayland-dev
-    clear
-    echo "                    Installing Libva "; sleep 3
-    cd /usr/local/src;
-    rm -rf libva;
-    cp -rf /home/`logname`/Vdrrepo/libva /usr/local/src/;
-    cd libva
-    ./autogen.sh
-    make 
-    make install 
-    rm -rf /etc/ld.so.conf;
-    touch /etc/ld.so.conf;
-    echo 'include /etc/ld.so.conf.d/*.conf
-/usr/local/lib
-/usr/local/lib/dri' >> /etc/ld.so.conf;;  
+    sudo make -j4 install;;  
 
 #############################################################################################################################  
 #############################################################################################################################
   
-b1)                                       #########################################
+a1)                                       #########################################
                                           #            Rimozione LIBVA            #
                                           #########################################
 
@@ -906,7 +928,7 @@ d)                                        ######################################
     cp -rf /home/`logname`/Vdrrepo/intel-vaapi-driver /usr/local/src/;
     cd intel-vaapi-driver
     ./autogen.sh
-    ./configure --enable-hybrid-codec
+    ./configure #--enable-hybrid-codec
     make -j4 VERBOSE=1
     make -j4 install  
 ;;
@@ -939,8 +961,8 @@ f)                                        ######################################
 
     clear
     echo "                    Installing Nasm "; sleep 4
-    cd /usr/local/src;
-    cp -rf /home/`logname`/Vdrrepo/nasm-2.13.02.tar.bz2 /usr/local/src && tar xjvf nasm-2.13.02.tar.bz2 && rm -rf nasm-2.13.02.tar.bz2 && cd nasm-2.13.02 && ./autogen.sh && ./configure && make && make install;;
+    cd /usr/local/src; mkdir -p ffmpeg_sources; cd ffmpeg_sources
+    cp -rf /home/`logname`/Vdrrepo/nasm-2.14rc15.tar.bz2 /usr/local/src/ffmpeg_sources && tar xjvf nasm-2.14rc15.tar.bz2 && rm -rf nasm-2.14rc15.tar.bz2 && mv nasm-2.14rc15 nasm && cd nasm && ./autogen.sh && ./configure && make && make install;;
 
 
 #############################################################################################################################  
@@ -1131,17 +1153,17 @@ fi
     echo "                    Wait for a few seconds ...";
     cd /usr/local/src/ffmpeg_sources;
     rm -Rf ffmpeg
-    cp -rf /home/`logname`/Vdrrepo/ffmpeg-3.4.2.tar.bz2 /usr/local/src/ffmpeg_sources; tar xivf ffmpeg-3.4.2.tar.bz2; mv ffmpeg-3.4.2 ffmpeg; rm -rf ffmpeg-3.4.2.tar.bz2; cd ffmpeg; ./configure --extra-libs="-ldl" --enable-gpl --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libxcb --disable-libopus --enable-libtheora --enable-libvorbis --disable-libvpx --enable-libx264 --enable-libx265 --enable-nonfree --enable-libxvid --enable-vdpau --enable-pic --enable-shared --disable-nvenc --disable-doc --enable-avresample 
+    cp -rf /home/`logname`/Vdrrepo/ffmpeg /usr/local/src/ffmpeg_sources/; cd ffmpeg; ./configure --extra-libs="-ldl" --enable-gpl --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libxcb --disable-libopus --enable-libtheora --enable-libvorbis --disable-libvpx --enable-libx264 --enable-libx265 --enable-nonfree --enable-libxvid --enable-vdpau --enable-pic --enable-shared --disable-nvenc --disable-doc --enable-avresample 
     echo "                    Press Enter to continue ...               "; read enterKey;
     make -j4 install;;
 b)     echo "                    Wait for a few seconds ...";
     cd /usr/local/src/ffmpeg_sources;
     rm -Rf ffmpeg
-    cp -rf /home/`logname`/Vdrrepo/ffmpeg-3.4.2.tar.bz2 /usr/local/src/ffmpeg_sources; tar xivf ffmpeg-3.4.2.tar.bz2; mv ffmpeg-3.4.2 ffmpeg; rm -rf ffmpeg-3.4.2.tar.bz2; cd ffmpeg; ./configure --extra-libs="-ldl" --enable-gpl --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libxcb --disable-libopus --enable-libtheora --enable-libvorbis --disable-libvpx --enable-libx264 --enable-libx265 --enable-nonfree --enable-libxvid --enable-vdpau --enable-vaapi --enable-pic --enable-shared --disable-nvenc --disable-doc --enable-avresample 
+    cp -rf /home/`logname`/Vdrrepo/ffmpeg /usr/local/src/ffmpeg_sources; cd ffmpeg; ./configure --extra-libs="-ldl" --enable-gpl --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libxcb --disable-libopus --enable-libtheora --enable-libvorbis --disable-libvpx --enable-libx264 --enable-libx265 --enable-nonfree --enable-libxvid --enable-vdpau --enable-vaapi --enable-pic --enable-shared --disable-nvenc --disable-doc --enable-avresample 
     echo "                    Press Enter to continue ...               "; read enterKey;
     make -j4 install;;
 esac
-    echo "                    Press Enter to continue ...               "; read enterKey;;
+;;
 
 #############################################################################################################################  
 #############################################################################################################################
@@ -1154,8 +1176,6 @@ n1)                                       ######################################
     clear
     echo "                    Removing FFmpeg "; sleep 4
     rm -rf /usr/local/src/ffmpeg_sources/ffmpeg; rm /usr/local/src/packages/ffmpeg*;; 
-    #esac
-    #echo "                    Press Enter to continue ...               "; read enterKey;;
 
 
 #############################################################################################################################  
@@ -1333,20 +1353,21 @@ clear
    				-------------------------------------------------------------------------
                 				Setup Vaapidevice only for Intel graphic cards             
   				-------------------------------------------------------------------------
-			        [a]    Vaapidevice              
+			        [a]    Vaapidevice
+			        [b]    Softhddevice intel                                
    				-------------------------------------------------------------------------
                 				Setup Softhddevice only for Nvidia graphic cards             
   				-------------------------------------------------------------------------     
-			        [b]    Softhddevice openglosd                  
-			        [c]    Softhddevice no openglosd 
+			        [c]    Softhddevice openglosd                  
+			        [d]    Softhddevice no openglosd 
 
    				-------------------------------------------------------------------------
                 				Setup Xineliboutput Intel/Nvidia graphic cards             
   				------------------------------------------------------------------------- 
-			        [d]    Xineliboutput                                         
+			        [e]    Xineliboutput                                         
         
    				------------------------------------------------------------------------- " 0 0
-    echo -n "        Enter your menu choice  [a-d]:      "
+    echo -n "        Enter your menu choice  [a-e]:      "
     read yourch
     case $yourch in
     
@@ -1357,7 +1378,17 @@ apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasou
 apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxext-dev
 cd $VDRSRC; git clone https://github.com/pesintta/vdr-plugin-vaapidevice; cp -rf /$VDRSRC/vdr-plugin-vaapidevice /home/`logname`/Vdrrepo/ && mv vdr-plugin-vaapidevice vaapidevice && cd vaapidevice && export PKG_CONFIG_PATH="usr/local/src/libva/lib/pkgconfig:usr/local/src/ffmpeg_sources/ffmpeg/lib/pkgconfig" && make && make install;;
 
-b) echo ""; echo "               *** Softhddevice openglosd***"; echo ""; sleep 3
+
+b) echo ""; echo "               *** Softhddevice intel***"; echo ""; sleep 3
+apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev 
+apt-get -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev 
+apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libxext6  
+apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxext-dev
+cd $VDRSRC; 
+wget https://github.com/rellla/softhddevice-openglosd/archive/jinx.tar.gz; cp -rf /$VDRSRC/jinx.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf jinx.tar.gz; rm -rf jinx.tar.gz; mv softhddevice-openglosd-jinx softhddevice; cd softhddevice; wget https://www.dropbox.com/s/pxjx9wnb71f2am4/patch_softhddevice_no_openglosd.tar.gz; cp -rf /$VDRSRC/softhddevice/patch_softhddevice_no_openglosd.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_softhddevice_no_openglosd.tar.gz; rm -rf patch_softhddevice_no_openglosd.tar.gz; patch -p1 < 03_LanguageIT.patch; patch -p1 < 10_softhddevice_trusty.patch; patch -p1 < 11_softhddevice_Makefile.patch; patch -p1 < 13_softhddevice_fixmemleakvaapi.patch; patch -p1 < 14_softhddevice_vaapi100.patch; patch -p1 < 16_softhddevice_no-inactive-reset-on-attache.patch; make ALSA=1 OSS=0 VDPAU=0 VAAPI=1 SCREENSAVER=0 SWRESAMPLE=1; make install;;
+
+
+c) echo ""; echo "               *** Softhddevice openglosd***"; echo ""; sleep 3
 apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev 
 apt-get -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev 
 apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libxext6  
@@ -1365,7 +1396,7 @@ apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxex
 cd $VDRSRC; 
 wget https://github.com/rellla/softhddevice-openglosd/archive/jinx.tar.gz; cp -rf /$VDRSRC/jinx.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf jinx.tar.gz; rm -rf jinx.tar.gz; mv softhddevice-openglosd-jinx softhddevice; cd softhddevice; cp -rf /home/`logname`/Vdrrepo/patch_softhddevice_5.tar.gz /$VDRSRC/softhddevice; tar -zxvf patch_softhddevice_5.tar.gz; rm -rf patch_softhddevice_5.tar.gz; patch -p1 < 03_LanguageIT.patch; patch -p1 < 10_softhddevice_trusty.patch; patch -p1 < 11_softhddevice_Makefile.patch; patch -p1 < 13_softhddevice_fixmemleakvaapi.patch; patch -p1 < 14_softhddevice_vaapi100.patch; patch -p1 < 16_softhddevice_no-inactive-reset-on-attache.patch; make ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1; make install;;
 
-c) echo ""; echo "               *** Softhddevice no openglosd***"; echo ""; sleep 3      
+d) echo ""; echo "               *** Softhddevice no openglosd***"; echo ""; sleep 3      
 apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev 
 apt-get -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev 
 apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libxext6  
@@ -1373,7 +1404,7 @@ apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxex
 cd $VDRSRC; 
 wget https://github.com/rellla/softhddevice-openglosd/archive/jinx.tar.gz; cp -rf /$VDRSRC/jinx.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf jinx.tar.gz; rm -rf jinx.tar.gz; mv softhddevice-openglosd-jinx softhddevice; cd softhddevice; wget https://www.dropbox.com/s/pxjx9wnb71f2am4/patch_softhddevice_no_openglosd.tar.gz; cp -rf /$VDRSRC/softhddevice/patch_softhddevice_no_openglosd.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_softhddevice_no_openglosd.tar.gz; rm -rf patch_softhddevice_no_openglosd.tar.gz; patch -p1 < 03_LanguageIT.patch; patch -p1 < 10_softhddevice_trusty.patch; patch -p1 < Makefile_noopenglosd.patch; patch -p1 < 13_softhddevice_fixmemleakvaapi.patch; patch -p1 < 14_softhddevice_vaapi100.patch; patch -p1 < 16_softhddevice_no-inactive-reset-on-attache.patch; make ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1; make install;;
 
-d) echo ""; echo "               *** Xineliboutput***"; echo ""; sleep 3      
+e) echo ""; echo "               *** Xineliboutput***"; echo ""; sleep 3      
 cd $VDRSRC; apt-get -y install autopoint libxine2-dev libxrender-dev libextractor-dev libxrandr-dev libxine2-ffmpeg mjpegtools;
 if [ -f $PACKAGES/libxine2*.deb ]; then
     echo "Xine-lib $Remind"; 
@@ -1503,18 +1534,20 @@ clear
           Create start Vdr command line             
    ----------------------------------------------
         [a]    Vaapidevice                   
-        [b]    Softhddevice                   
-        [c]    Xineliboutput Nvidia graphic card                             
-        [d]    Xineliboutput Intel graphic card 
+        [b]    Softhddevice Nvidia
+        [c]    Softhddevice Intel                  
+        [d]    Xineliboutput Nvidia graphic card                             
+        [e]    Xineliboutput Intel graphic card 
                                     
    ---------------------------------------------- " 0 0
     echo -n "        Enter your menu choice  [a-d]:      "
     read yourch
     case $yourch in
 a) sed -i "s|-P'dvbapi'|& -P'vaapidevice -f -a pulse'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_vaapidevice.tar.gz && cp -rf /etc/vdr/setup16_vaapidevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_vaapidevice.tar.gz && rm -rf setup16_vaapidevice.tar.gz;;
-b) sed -i "s|-P'dvbapi'|& -P'softhddevice -f -v vdpau -w no-hw-decoder'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
+b) sed -i "s|-P'dvbapi'|& -P'softhddevice -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
 c) sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --video=vdpau --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_xineliboutput.tar.gz && cp -rf /etc/vdr/setup16_xineliboutput.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_xineliboutput.tar.gz && rm -rf setup16_xineliboutput.tar.gz;;
 d) sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --video=vaapi --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_xineliboutput.tar.gz && cp -rf /etc/vdr/setup16_xineliboutput.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_xineliboutput.tar.gz && rm -rf setup16_xineliboutput.tar.gz;;
+e) sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --video=vaapi --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_xineliboutput.tar.gz && cp -rf /etc/vdr/setup16_xineliboutput.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_xineliboutput.tar.gz && rm -rf setup16_xineliboutput.tar.gz;;
 esac
 
 #   Permission to execute Vdr       
@@ -1904,11 +1937,18 @@ esac
 
 
 apt-get -y install unzip;
-echo "               *** Install W_scan ***"; sleep 1
+echo "               *** Install W_scan2 ***"; sleep 1
 cd $SRC; 
-if [ -f /$SRC/w_scan/Makefile ];
-  then  echo "W_scan $Remind3"
-else wget http://wirbel.htpc-forum.de/w_scan/w_scan-20170107.tar.bz2; tar xivf w_scan-20170107.tar.bz2; cp -rf w_scan-20170107.tar.bz2 /home/`logname`/Vdrrepo/; mv w_scan-20170107 w_scan; rm -rf w_scan-20170107.tar.bz2; cd w_scan; wget https://www.dropbox.com/s/omt6155y22a5ft3/patch_w_scan.tar.gz; tar -zxvf patch_w_scan.tar.gz; cp -rf patch_w_scan.tar.gz home/`logname`/Vdrrepo/; rm -rf patch_w_scan.tar.gz; patch -p1 < 10_w-scan_dvb-t2.patch; ./configure; make; make install;
+if [ -f /$SRC/w_scan2/Makefile ];
+  then  echo "W_scan2 $Remind3"
+else git clone https://github.com/stefantalpalaru/w_scan2.git; cp w_scan2 /home/`logname`/Vdrrepo/; cd w_scan2; ./autogen.sh; ./configure; make; make install;
+fi
+#
+echo "               *** Install t2scan ***"; sleep 1
+cd $SRC;
+if [ -f /$SRC/t2scan/Makefile ];
+  then  echo "t2scan $Remind3"
+else git clone https://github.com/mighty-p/t2scan; cp t2scan /home/`logname`/Vdrrepo/; cd t2scan; ./configure; make; make install;
 fi
 #
 echo "               *** Install Vdr-getchannels-0.7.0 ***"; sleep 1
@@ -1930,11 +1970,12 @@ fi
         [b]    Install Settings from Kingofsat 13.0E         
         [c]    Install Settings from Kingofsat 19.2E 
                         
-        ****   Sezione W_Scan  ****
-        [d]    Install Settings 9.0E - using W_scan                   
-        [e]    Install Settings 13.0E - using W_scan              
-        [f]    Install Settings 19.2E - using W_scan             
-        [g]    Install Terrestrial Settings - using W_scan
+        ****   Sezione W_Scan/t2scan  ****
+        [d]    Install Settings 9.0E - using W_scan2                   
+        [e]    Install Settings 13.0E - using W_scan2              
+        [f]    Install Settings 19.2E - using W_scan2             
+        [g]    Install Terrestrial Settings - using t2scan
+
 
         [h]    Download from repo (trial 9 - 13 -19.2E)
         [i]    Download from repo (dual 13 -19.2E)  
@@ -1954,11 +1995,11 @@ fi
     b) rm -rf $SRC/e2settings/channels_13.0E.conf && cd $SRC/e2settings/vdr-getchannels && python getchannels.py -l 13.0E -ot channels_13.0E.conf > $SRC/e2settings/channels_13.0E.conf && cp $SRC/e2settings/channels_13.0E.conf /etc/vdr/channels_13.0E.conf;;
     c) rm -rf $SRC/e2settings/channels_19.2E.conf && cd $SRC/e2settings/vdr-getchannels && python getchannels.py -l 19.2E -ot channels_19.2E.conf > $SRC/e2settings/channels_19.2E.conf && cp $SRC/e2settings/channels_19.2E.conf /etc/vdr/channels_19.2E.conf;;
   
-    ##### W_Scan #####
-    d) rm -rf /etc/vdr/channels-w_scan-9E0.conf; w_scan -fs -s S9E0 -D0c -o2 >> /etc/vdr/channels-w_scan-9E0.conf;; 
-    e) rm -rf /etc/vdr/channels-w_scan-13E0.conf; w_scan -fs -s S13E0 -D1c -o2 >> /etc/vdr/channels-w_scan-13E0.conf;;
-    f) rm -rf /etc/vdr/channels-w_scan-19E2.conf; w_scan -fs -s S19E2 -D2c -o2 >> /etc/vdr/channels-w_scan-19E2.conf;;
-    g) rm -rf /etc/vdr/channels-dtt.conf; w_scan -ft -c IT >> /etc/vdr/channels-dtt.conf;;
+    ##### W_Scan/t2scan #####
+    d) rm -rf /etc/vdr/channels-w_scan2-9E0.conf; w_scan2 -fs -s S9E0 -D0c -o2 >> /etc/vdr/channels-w_scan-9E0.conf;; 
+    e) rm -rf /etc/vdr/channels-w_scan2-13E0.conf; w_scan2 -fs -s S13E0 -D1c -o2 >> /etc/vdr/channels-w_scan-13E0.conf;;
+    f) rm -rf /etc/vdr/channels-w_scan2-19E2.conf; w_scan2 -fs -s S19E2 -D2c -o2 >> /etc/vdr/channels-w_scan-19E2.conf;;
+    g) rm -rf /etc/vdr/channels-dtt.conf; t2scan -ot0 >> /etc/vdr/channels-dtt.conf;;
 
     h) cp -rf /home/`logname`/Vdrrepo/channels.conf.trial.tar.gz /etc/vdr/;;
     i) cp -rf /home/`logname`/Vdrrepo/channels.conf.dual.tar.gz /etc/vdr/;;
@@ -1968,8 +2009,6 @@ fi
     z) ;;
     esac
     ;;
-   
-
 #############################################################################################################################  
 #############################################################################################################################
 ###                                                                                                                       ###

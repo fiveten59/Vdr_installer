@@ -404,7 +404,7 @@ else
     hg clone http://hg.videolan.org/x265;
   fi
 
-if [ -s /home/`logname`/Vdrrepo/fdk-aac-0.1.6.tar.gz ]; then
+if [ -s /home/`logname`/Vdrrepo/v0.1.6.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
@@ -1050,8 +1050,8 @@ i)                                        ######################################
     echo "                    Installing Fdk-aac - Git"; sleep 4
     cd /usr/local/src/ffmpeg_sources
     rm -Rf fdk-aac
-    cp -Rf /home/`logname`/Vdrrepo/fdk-aac-0.1.6.tar.gz /usr/local/src/ffmpeg_sources; tar -zxvf fdk-aac-0.1.6.tar.gz;
-    rm -rf fdk-aac-0.1.6.tar.gz; mv fdk-aac-0.1.6 fdk-aac;
+    cp -Rf /home/`logname`/Vdrrepo/v0.1.6.tar.gz /usr/local/src/ffmpeg_sources; tar -zxvf v0.1.6.tar.gz;
+    rm -rf v0.1.6.tar.gz; mv fdk-aac-0.1.6 fdk-aac;
     cd fdk-aac;  
     ./autogen.sh
     ./configure --enable-shared --enable-static
@@ -1547,7 +1547,7 @@ clear
     read yourch
     case $yourch in
 a) sed -i "s|-P'dvbapi'|& -P'vaapidevice -f -a pulse'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_vaapidevice.tar.gz && cp -rf /etc/vdr/setup16_vaapidevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_vaapidevice.tar.gz && rm -rf setup16_vaapidevice.tar.gz;;
-b) sed -i "s|-P'dvbapi'|& -P'softhddevice -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
+b) sed -i "s|-P'dvbapi'|& -P'softhddevice -f -v vdpau -w no-hw-decoder'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
 c) sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --video=vdpau --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_xineliboutput.tar.gz && cp -rf /etc/vdr/setup16_xineliboutput.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_xineliboutput.tar.gz && rm -rf setup16_xineliboutput.tar.gz;;
 d) sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --video=vaapi --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_xineliboutput.tar.gz && cp -rf /etc/vdr/setup16_xineliboutput.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_xineliboutput.tar.gz && rm -rf setup16_xineliboutput.tar.gz;;
 e) sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --video=vaapi --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_xineliboutput.tar.gz && cp -rf /etc/vdr/setup16_xineliboutput.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_xineliboutput.tar.gz && rm -rf setup16_xineliboutput.tar.gz;;

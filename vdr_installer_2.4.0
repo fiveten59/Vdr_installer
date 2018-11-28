@@ -351,85 +351,99 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
 if [ -s /home/`logname`/Vdrrepo/nasm-2.14rc15.tar.bz2 ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget http://www.nasm.us/pub/nasm/releasebuilds/2.14rc15/nasm-2.14rc15.tar.bz2; 
   fi
 
 if [ -s /home/`logname`/Vdrrepo/cmrt ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone https://github.com/intel//cmrt
   fi
 
 if [ -s /home/`logname`/Vdrrepo/libva ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone https://github.com/intel/libva;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/intel-hybrid-driver ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone https://github.com/01org/intel-hybrid-driver
   fi
 
 if [ -s /home/`logname`/Vdrrepo/intel-vaapi-driver ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone https://github.com/intel/intel-vaapi-driver.git
   fi
 
 if [ -s /home/`logname`/Vdrrepo/libva-utils ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone https://github.com/intel/libva-utils
   fi
 
 if [ -s /home/`logname`/Vdrrepo/x264 ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone git://git.videolan.org/x264.git;
   fi 
 
 if [ -s /home/`logname`/Vdrrepo/x265 ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     hg clone http://hg.videolan.org/x265;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/v0.1.6.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File doesn't exist ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://github.com/mstorsjo/fdk-aac/archive/v0.1.6.tar.gz;
+  fi
+
+if [ -s /home/`logname`/Vdrrepo/fdk-aac ]; then
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+else
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    git clone https://github.com/mstorsjo/fdk-aac.git;
   fi
 
 if [ -d /home/`logname`/Vdrrepo/libvpx ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone https://github.com/webmproject/libvpx/
   fi
 
 if [ -s /home/`logname`/Vdrrepo/libvorbis-1.3.6.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.6.tar.gz;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/ffmpeg-3.4.4.tar.bz2 ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
- echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+ echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.ffmpeg.org/releases/ffmpeg-3.4.4.tar.bz2;
+  fi
+
+if [ -s /home/`logname`/Vdrrepo/ffmpeg ]; then
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+else
+ echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    git clone https://github.com/FFmpeg/FFmpeg ffmpeg
   fi
 
 ################################ Download Vdr and Plugins on local repo ##############################
@@ -437,168 +451,168 @@ else
 if [ -s /home/`logname`/Vdrrepo/vdr-2.4.0.tar.bz2 ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget ftp://ftp.tvdr.de/vdr/vdr-2.4.0.tar.bz2;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/vdr-patches.2.4.0.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/krgqj35ioumcr0f/vdr-patches.2.4.0.tar.gz;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/Make.config.2.4.0 ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/3ry2jz01ghbncfp/Make.config.2.4.0;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/vdrsymbols.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/bx97ikp7c1h2qj2/vdrsymbols.tar.gz;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/vdr-plugin-epgsearch ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone http://projects.vdr-developer.org/git/vdr-plugin-epgsearch.git;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/patch_epgsearch.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/s9vggu8mil8ss7t/patch_epgsearch.tar.gz;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/vdr-plugin-dvbapi ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone git://github.com/manio/vdr-plugin-dvbapi.git; 
   fi
 
 if [ -s /home/`logname`/Vdrrepo/patch_dvbapi.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/5tyvqkbhohbbju2/patch_dvbapi.tar.gz;
   fi  
 
 if [ -s /home/`logname`/Vdrrepo/patch_softhddevice_5.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/qwi8p6ieb5z86gr/patch_softhddevice_5.tar.gz;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/patch_soft_intel.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/7aljgibuyd6mjfl/patch_soft_intel.tar.gz
 fi
 
 if [ -s /home/`logname`/Vdrrepo/vdr-plugin-tvguide ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone git://projects.vdr-developer.org/vdr-plugin-tvguide.git;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/patch_tvguide.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/xkax9z6qumb76dj/patch_tvguide.tar.gz;
 fi
 
 if [ -s /home/`logname`/Vdrrepo/vdr-plugin-tvguideng ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone git://projects.vdr-developer.org/vdr-plugin-tvguideng.git;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/patch_tvguideng.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/qjmzsml13sdhk0u/patch_tvguideng.tar.gz;
   fi
 
  if [ -s /home/`logname`/Vdrrepo/01_Add_language_It.patch.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/jrizzen5q8o07uv/01_Add_language_It.patch.tar.gz;
   fi 
 
 if [ -s /home/`logname`/Vdrrepo/vdr-plugin-iptv ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone https://github.com/rofafor/vdr-plugin-iptv.git; 
   fi
 
 if [ -s /home/`logname`/Vdrrepo/patch_iptv.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"; 
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"; 
     wget https://www.dropbox.com/s/nof5ydmxrplw2b0/patch_iptv.tar.gz;
 fi
 
 if [ -s /home/`logname`/Vdrrepo/iptv_conf.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"; 
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"; 
     wget https://www.dropbox.com/s/1ujtklnct0nqq6q/iptv_conf.tar.gz;
 fi
 
 if [ -s /home/`logname`/Vdrrepo/vdr-plugin-weatherforecast ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone git://projects.vdr-developer.org/vdr-plugin-weatherforecast.git  
   fi
 
 if [ -s /home/`logname`/Vdrrepo/patch_weatherforecast.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/v0ipkt6x3bfbbs8/patch_weatherforecast.tar.gz;
 fi
 
 if [ -s /home/`logname`/Vdrrepo/vdr-plugin-externalplayer ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone https://git.uli-eckhardt.de/vdr-plugin-externalplayer.git;
 fi
 
 if [ -s /home/`logname`/Vdrrepo/externalplayer.conf.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/vhz1fz68159s0qg/externalplayer.conf.tar.gz;
 fi
 
 if [ -s /home/`logname`/Vdrrepo/channelscan ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone https://bitbucket.org/ua0lnj/channelscan.git;    
 fi
 
 if [ -s /home/`logname`/Vdrrepo/satellite_pack.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz;    
 fi
 
@@ -607,56 +621,56 @@ fi
 if [ -s /home/`logname`/Vdrrepo/logos.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/omrs8wwh5jbz46e/logos.tar.gz;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/skin-flatplus ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     git clone http://projects.vdr-developer.org/git/skin-flatplus.git;
   fi
   
 if [ -s /home/`logname`/Vdrrepo/icone.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/5uvx468b4b87auy/icone.tar.gz;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/lcars_pack.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/806odyj5vyco3dg/lcars_pack.tar.gz;
   fi 
 
 if [ -s /home/`logname`/Vdrrepo/picon.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/hb2mv9ytz5q6yz7/picon.tar.gz;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/vdr-plugin-skindesigner ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
      git clone git://projects.vdr-developer.org/vdr-plugin-skindesigner.git
   fi 
 
 if [ -s /home/`logname`/Vdrrepo/patch_skindesigner.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/8uiizh0d3t706ll/patch_skindesigner.tar.gz;
   fi   
 
 if [ -s /home/`logname`/Vdrrepo/themes.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/m32a4s23h7r00mg/themes.tar.gz;
   fi
 
@@ -665,35 +679,35 @@ else
 if [ -s /home/`logname`/Vdrrepo/traduzioni.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/6hzpdx9yv5ypzxv/traduzioni.tar.gz;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/hauppauge-remote.conf.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/gvel64ykd3eyx07/hauppauge-remote.conf.tar.gz;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/oscam.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/56oomdr58os7msa/oscam.tar.gz;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/oscam64.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/lvs3eb7q64ericc/oscam64.tar.gz;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/flat_weather.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not present ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/x80qbwk8xnwi0u5/flat_weather.tar.gz;
   fi
 
@@ -715,9 +729,11 @@ chmod -R 777 *;;
     git clone git://git.videolan.org/x264.git;
     hg clone http://hg.videolan.org/x265;
     wget https://github.com/mstorsjo/fdk-aac/archive/v0.1.6.tar.gz;
+    git clone https://github.com/mstorsjo/fdk-aac.git;
     git clone https://github.com/webmproject/libvpx;
     wget https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.6.tar.gz;
     wget https://www.ffmpeg.org/releases/ffmpeg-3.4.4.tar.bz2;
+    git clone https://github.com/FFmpeg/FFmpeg ffmpeg
 
 ############################ Download Vdr and Plugins on local repo ################################
 
@@ -1047,8 +1063,17 @@ i)                                        ######################################
 
 
     clear
-    echo "                    Installing Fdk-aac - Git"; sleep 4
-    cd /usr/local/src/ffmpeg_sources
+    echo "           Installing Fdk-aac - Git"; sleep 4
+    		dialog --title "   ** Setup FDK-AAC **   " --infobox "
+   		-------------------------------------------------------------------------
+                	[a]		Setup FDK-AAC only for Nvidia graphic cards             
+                	[b]		Setup FDK-AAC only for Intel graphic cards                                                    
+   		------------------------------------------------------------------------- " 0 0
+    echo -n "        Enter your menu choice  [a-b]:      "
+    read yourch
+    case $yourch in
+
+a)  cd /usr/local/src/ffmpeg_sources
     rm -Rf fdk-aac
     cp -Rf /home/`logname`/Vdrrepo/v0.1.6.tar.gz /usr/local/src/ffmpeg_sources; tar -zxvf v0.1.6.tar.gz;
     rm -rf v0.1.6.tar.gz; mv fdk-aac-0.1.6 fdk-aac;
@@ -1057,9 +1082,18 @@ i)                                        ######################################
     ./configure --enable-shared --enable-static
     make -j4
     checkinstall --pkgname=fdk-aac --pkgversion="0.1.6" --backup=no --deldoc=yes --fstrans=no --default --pakdir=$PACKAGES;;
+b)  cd /usr/local/src/ffmpeg_sources
+    rm -Rf fdk-aac
+    cp -Rf /home/`logname`/Vdrrepo/fdk-aac /usr/local/src/ffmpeg_sources;
+    cd fdk-aac;  
+    ./autogen.sh
+    ./configure --enable-shared --enable-static
+    make -j4
+    checkinstall --pkgname=fdk-aac --pkgversion="1-git" --backup=no --deldoc=yes --fstrans=no --default --pakdir=$PACKAGES;;
 
-    
-    
+esac    
+;;    
+
 
 #############################################################################################################################  
 #############################################################################################################################
@@ -1140,11 +1174,11 @@ n)                                        ######################################
     apt-get -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
     apt-get -y install libtheora-dev libxvidcore-dev libvdpau-dev libmp3lame-dev libogg-dev libfreetype6-dev
 clear        
-    				dialog --title "   ** Setup Vaapidevice / Softhddevice / Xineliboutput **   " --infobox "
-   				-------------------------------------------------------------------------
-                		[a]		Setup FFmpeg only for Nvidia graphic cards             
-                		[b]		Setup FFmpeg only for Intel graphic cards                                                    
-   				------------------------------------------------------------------------- " 0 0
+    		dialog --title "   ** Setup Vaapidevice / Softhddevice / Xineliboutput **   " --infobox "
+   		--------------------------------------------------------------
+                [a]		Setup FFmpeg only for Nvidia graphic cards             
+                [b]		Setup FFmpeg only for Intel graphic cards                                                    
+   		-------------------------------------------------------------- " 0 0
     echo -n "        Enter your menu choice  [a-b]:      "
     read yourch
     case $yourch in
@@ -1162,7 +1196,7 @@ fi
 b)     echo "                    Wait for a few seconds ...";
     cd /usr/local/src/ffmpeg_sources;
     rm -Rf ffmpeg
-    cp -rf /home/`logname`/Vdrrepo/ffmpeg-3.4.4.tar.bz2 /usr/local/src/ffmpeg_sources/; tar xivf ffmpeg-3.4.4.tar.bz2; rm -rf ffmpeg-3.4.4.tar.bz2; mv ffmpeg-3.4.4 ffmpeg; cd ffmpeg; ./configure --extra-libs="-ldl" --enable-gpl --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libxcb --disable-libopus --enable-libtheora --enable-libvorbis --disable-libvpx --enable-libx264 --enable-libx265 --enable-nonfree --enable-libxvid --enable-vdpau --enable-vaapi --enable-pic --enable-shared --disable-nvenc --disable-doc --enable-avresample 
+    cp -rf /home/`logname`/Vdrrepo/ffmpeg /usr/local/src/ffmpeg_sources/; cd ffmpeg; ./configure --extra-libs="-ldl" --enable-gpl --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libxcb --disable-libopus --enable-libtheora --enable-libvorbis --disable-libvpx --enable-libx264 --enable-libx265 --enable-nonfree --enable-libxvid --enable-vdpau --enable-vaapi --enable-pic --enable-shared --disable-nvenc --disable-doc --enable-avresample 
     echo "                    Press Enter to continue ...               "; read enterKey;
     make -j4 install;;
 esac
@@ -2067,8 +2101,7 @@ if cat $TEMP/ubuntu | grep "ubuntu1~16.04"; then
 cp -rf /usr/share/applications/Kodi.desktop /home/`logname`/Scrivania/
 fi
 #
-apt-get -y install python-software-properties pkg-config; 
-apt-get -y install software-properties-common;
+apt-get -y install software-properties-common pkg-config;
 
 #############################################################################################################################  
 #############################################################################################################################

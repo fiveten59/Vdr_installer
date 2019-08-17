@@ -1,24 +1,24 @@
 #!/bin/bash
 ################################## !!! README !!! #######################################
 #                                                                                       #
-# Script name: vdr_installer_2.4.0                                                     #
+# Script name: vdr_installer_2.4.1                                                     #
 # Version: Github Repository Master (https://github.com/fiveten59/Vdr_installer)        #
-# Tested on Unbuntu 16.04/18.04                                                                                      #
+# Tested on Ubuntu 18.04                                                               #
 # chmod the script                                                                      #
-# then load it simply typing: sudo ./vdr_installer_2.4.0                               #
+# then load it simply typing: sudo ./vdr_installer_2.4.1                               ##
 #                                                                                       #
 #########################################################################################
 #
-PLUGIN="--lirc -P'dvbapi' -P'skindesigner -l /etc/vdr/logos/ -i /usr/local/share/vdr/plugins/skindesigner/skins/' -P'epgsearch' -P'weatherforecast' -P'iptv' -P'tvguideng' -P'externalplayer' -P'channelscan'"
-# -P'tvguide' -P'skinflatplus -l /etc/vdr/logos/' 
+PLUGIN="--lirc -P'dvbapi' -P'skindesigner -l /etc/vdr/logos/ -i /usr/local/share/vdr/plugins/skindesigner/skins/' -P'epgsearch' -P'weatherforecast' -P'iptv' -P'systeminfo' -P'tvguide' -P'externalplayer' -P'channelscan' "
+# -P'skinflatplus -l /etc/vdr/logos/' 
 #
 USER='fiveten' 
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
-SRCVDR='/usr/local/src/vdr-2.4.0'
+SRCVDR='/usr/local/src/vdr-2.4.1'
 VDRSRC=''$SRC'/vdr/PLUGINS/src'
 LIB='/usr/local/lib/vdr/plugins'
-VDR='vdr-2.4.0'
+VDR='vdr-2.4.1'
 PACKAGES="/usr/local/src/packages"
 ARCHIVES="/usr/local/src/archives"
 SCRIPTS="/usr/local/src/archives/scripts"
@@ -268,11 +268,11 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
     dialog --title " VDR Installer Github Repository " --infobox "Copyright (C) 2018
     
 
-	Script name: vdr_installer_2.4.0                                                  
+	Script name: vdr_installer_2.4.1                                                  
 	Version: Github Repository Master  (https://github.com/fiveten59/Vdr_installer) 
-        Tested on Unbuntu 16.04/18.04                                                                          
+        Tested on Ubuntu 18.04                                                                          
 	chmod the script
-        then load it simply typing: sudo ./vdr_installer_2.4.0            
+        then load it simply typing: sudo ./vdr_installer_2.4.1            
                                                                                        
                                                                " 0 0
 
@@ -283,7 +283,7 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
     #
     clear
     echo ""
-    dialog --title "   ♦♦♦♦♦   VDR 2.4.0 Version Installer Script - Libraries & Codec  ♦♦♦♦♦   " --infobox "
+    dialog --title "   ♦♦♦♦♦   VDR 2.4.1 Version Installer Script - Libraries & Codec  ♦♦♦♦♦   " --infobox "
           ╭===========================================================================================╮    
           |   ................♦♦♦   Download & Upgrade Local Repository   ♦♦♦...................  |
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
@@ -295,7 +295,7 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
           |   =======================================================================================   |
           |   .............♦♦♦                        VDR - Plugins  - Skin               ♦♦♦.........  |
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
-          |   [3]    +[Submenu] ~~  VDR 2.4.0 & Plugins ................................................ |     
+          |   [3]    +[Submenu] ~~  VDR 2.4.1 & Plugins ................................................ |     
           |   =======================================================================================   |
           |   .............♦♦♦                    Channells Lists Setup                 ♦♦♦........  |
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
@@ -448,25 +448,25 @@ else
 
 ################################ Download Vdr and Plugins on local repo ##############################
 
-if [ -s /home/`logname`/Vdrrepo/vdr-2.4.0.tar.bz2 ]; then
+if [ -s /home/`logname`/Vdrrepo/vdr-2.4.1.tar.bz2 ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget ftp://ftp.tvdr.de/vdr/vdr-2.4.0.tar.bz2;
+    wget ftp://ftp.tvdr.de/vdr/vdr-2.4.1.tar.bz2;
   fi
 
-if [ -s /home/`logname`/Vdrrepo/vdr-patches.2.4.0.tar.gz ]; then
+if [ -s /home/`logname`/Vdrrepo/vdr-patches.2.4.1.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/krgqj35ioumcr0f/vdr-patches.2.4.0.tar.gz;
+    wget https://www.dropbox.com/s/xkupxr8457fttao/vdr-patches.2.4.1.tar.gz;
   fi
 
-if [ -s /home/`logname`/Vdrrepo/Make.config.2.4.0 ]; then
+if [ -s /home/`logname`/Vdrrepo/Make.config.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/3ry2jz01ghbncfp/Make.config.2.4.0;
+    wget https://www.dropbox.com/s/qds2k91od7oboed/Make.config.tar.gz;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/vdrsymbols.tar.gz ]; then
@@ -497,13 +497,6 @@ else
     git clone git://github.com/manio/vdr-plugin-dvbapi.git; 
   fi
 
-if [ -s /home/`logname`/Vdrrepo/patch_dvbapi.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/5tyvqkbhohbbju2/patch_dvbapi.tar.gz;
-  fi  
-
 if [ -s /home/`logname`/Vdrrepo/patch_softhddevice_5.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
@@ -518,32 +511,11 @@ else
     wget https://www.dropbox.com/s/7aljgibuyd6mjfl/patch_soft_intel.tar.gz
 fi
 
-if [ -s /home/`logname`/Vdrrepo/vdr-plugin-tvguide ]; then
+if [ -s /home/`logname`/Vdrrepo/tvguide-master.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    git clone git://projects.vdr-developer.org/vdr-plugin-tvguide.git;
-  fi
-
-if [ -s /home/`logname`/Vdrrepo/patch_tvguide.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/xkax9z6qumb76dj/patch_tvguide.tar.gz;
-fi
-
-if [ -s /home/`logname`/Vdrrepo/vdr-plugin-tvguideng ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    git clone git://projects.vdr-developer.org/vdr-plugin-tvguideng.git;
-  fi
-
-if [ -s /home/`logname`/Vdrrepo/patch_tvguideng.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/qjmzsml13sdhk0u/patch_tvguideng.tar.gz;
+    wget https://gitlab.com/kamel5/tvguide/-/archive/master/tvguide-master.tar.gz;
   fi
 
  if [ -s /home/`logname`/Vdrrepo/01_Add_language_It.patch.tar.gz ]; then
@@ -602,11 +574,11 @@ else
     wget https://www.dropbox.com/s/vhz1fz68159s0qg/externalplayer.conf.tar.gz;
 fi
 
-if [ -s /home/`logname`/Vdrrepo/channelscan ]; then
+if [ -s /home/`logname`/Vdrrepo/channelscan.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    git clone https://bitbucket.org/ua0lnj/channelscan.git;    
+    wget https://www.dropbox.com/s/xgg8dqq1wtchpzw/channelscan.tar.gz;    
 fi
 
 if [ -s /home/`logname`/Vdrrepo/satellite_pack.tar.gz ]; then
@@ -614,6 +586,13 @@ if [ -s /home/`logname`/Vdrrepo/satellite_pack.tar.gz ]; then
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz;    
+fi
+
+if [ -s /home/`logname`/Vdrrepo/vdr-systeminfo-0.1.5.tar.bz2 ]; then
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+else
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    wget http://firefly.vdr-developer.org/systeminfo/vdr-systeminfo-0.1.5.tar.bz2;
 fi
 
 ################################# Download skins ########################################
@@ -737,20 +716,16 @@ chmod -R 777 *;;
 
 ############################ Download Vdr and Plugins on local repo ################################
 
-    wget ftp://ftp.tvdr.de/vdr/vdr-2.4.0.tar.bz2;
-    wget https://www.dropbox.com/s/krgqj35ioumcr0f/vdr-patches.2.4.0.tar.gz;
-    wget https://www.dropbox.com/s/3ry2jz01ghbncfp/Make.config.2.4.0;
+    wget ftp://ftp.tvdr.de/vdr/vdr-2.4.1.tar.bz2;
+    wget https://www.dropbox.com/s/xkupxr8457fttao/vdr-patches.2.4.1.tar.gz;
+    wget https://www.dropbox.com/s/qds2k91od7oboed/Make.config.tar.gz;
     wget https://www.dropbox.com/s/bx97ikp7c1h2qj2/vdrsymbols.tar.gz;
-    git clone git://projects.vdr-developer.org/vdr-plugin-tvguide.git;
-    wget https://www.dropbox.com/s/xkax9z6qumb76dj/patch_tvguide.tar.gz;
-    git clone git://projects.vdr-developer.org/vdr-plugin-tvguideng.git;
-    wget https://www.dropbox.com/s/qjmzsml13sdhk0u/patch_tvguideng.tar.gz;
+    wget https://gitlab.com/kamel5/tvguide/-/archive/master/tvguide-master.tar.gz
     wget https://www.dropbox.com/s/qwi8p6ieb5z86gr/patch_softhddevice_5.tar.gz;
     wget https://www.dropbox.com/s/7aljgibuyd6mjfl/patch_soft_intel.tar.gz
     git clone http://projects.vdr-developer.org/git/vdr-plugin-epgsearch.git;
     wget https://www.dropbox.com/s/s9vggu8mil8ss7t/patch_epgsearch.tar.gz;
     git clone git://github.com/manio/vdr-plugin-dvbapi.git;
-    wget https://www.dropbox.com/s/5tyvqkbhohbbju2/patch_dvbapi.tar.gz;
     git clone git://projects.vdr-developer.org/vdr-plugin-weatherforecast.git;
     wget https://www.dropbox.com/s/v0ipkt6x3bfbbs8/patch_weatherforecast.tar.gz;
     git clone https://github.com/rofafor/vdr-plugin-iptv.git; 
@@ -758,8 +733,9 @@ chmod -R 777 *;;
     wget https://www.dropbox.com/s/1ujtklnct0nqq6q/iptv_conf.tar.gz;
     git clone https://git.uli-eckhardt.de/vdr-plugin-externalplayer.git;
     wget https://www.dropbox.com/s/vhz1fz68159s0qg/externalplayer.conf.tar.gz;
-    git clone https://bitbucket.org/ua0lnj/channelscan.git;   
-    wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz;   
+    wget https://www.dropbox.com/s/xgg8dqq1wtchpzw/channelscan.tar.gz;    
+    wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz;
+    wget http://firefly.vdr-developer.org/systeminfo/vdr-systeminfo-0.1.5.tar.bz2;   
 
 
 ############################ Download skins ########################################
@@ -799,7 +775,7 @@ chmod -R 777 *;;
 2)                                        #######################################################
                                           #  Submenu - X264 - X265 - FDK-AAC - LIBVPX - FFMPEG  # libva-utils
                                           #######################################################
-sudo apt-get -y install autoconf automake build-essential libass-dev libtool pkg-config texinfo zlib1g-dev libva-dev cmake mercurial libdrm-dev libvorbis-dev libogg-dev git libx11-dev libperl-dev libpciaccess-dev libpciaccess0 xorg-dev;
+apt-get -y install autoconf automake build-essential libass-dev libtool pkg-config texinfo zlib1g-dev libva-dev cmake mercurial libdrm-dev libvorbis-dev libogg-dev git libx11-dev libperl-dev libpciaccess-dev libpciaccess0 xorg-dev;
 
 #if [ -f /etc/apt/sources.list.d/oibaf-ubuntu-graphics-drivers-bionic.list ];
 #  then  echo "graphics-drivers already installed"
@@ -881,9 +857,9 @@ b)                                        ######################################
                                           #                   Cmrt                #
                                           #########################################
 
-    sudo apt-get -y install libva-dev  #  controllare libva
-    sudo apt-get -y install zlib1g-dev libass-dev libdrm-dev libvorbis-dev libogg-dev 
-    sudo apt-get -y install libx11-dev libperl-dev libpciaccess-dev libpciaccess0
+    spt-get -y install libva-dev  #  controllare libva
+    apt-get -y install zlib1g-dev libass-dev libdrm-dev libvorbis-dev libogg-dev 
+    apt-get -y install libx11-dev libperl-dev libpciaccess-dev libpciaccess0
 
     clear
     echo "                    Installing Cmrt "; sleep 3
@@ -895,7 +871,7 @@ b)                                        ######################################
     ./autogen.sh
     ./configure
     time make -j4 VERBOSE=1
-    sudo make -j4 install;;  
+    make -j4 install;;  
 
 #############################################################################################################################  
 #############################################################################################################################
@@ -1253,7 +1229,7 @@ z) ;;
 
                                                                                                                           
 a)                                        #########################################
-                                          #        VDR-2.4.0 & Basic plugins      #
+                                          #        VDR-2.4.1 & Basic plugins      #
                                           #########################################
 
 
@@ -1266,25 +1242,13 @@ a)                                        ######################################
 #
 #
     clear    
-    echo "               Installing VDR 2.4.0      "; sleep 1
+    echo "               Installing VDR 2.4.1      "; sleep 1
 
     cp -rf /home/`logname`/Vdrrepo/$VDR.tar.bz2 $SRC/; tar xivf $VDR.tar.bz2;
     ln -s $VDR vdr; rm -rf $VDR.tar.bz2
     cd vdr; 
-    echo "               Patching VDR 2.4.0      "; sleep 1
-    cp -rf /home/`logname`/Vdrrepo/vdr-patches.2.4.0.tar.gz $SRC/vdr/; tar -zxvf vdr-patches.2.4.0.tar.gz; rm -rf vdr-patches.2.4.0.tar.gz; sleep 1;
-echo "                  *** fix_svdrp_modt_recflag ***"
-    patch -p1 < 00_kls_01_fix_svdrp_modt_recflag.patch; sleep 1;
-echo "                  *** fix_invalid_lock ***"
-    patch -p1 < 00_kls_02-fix_invalid_lock.patch; sleep 1;
-echo "                  *** fix-locking-channel-display  ***"
-    patch -p1 < 00_kls_03_fix-locking-channel-display.patch; sleep 1;
-echo "                  *** fix_locking_channel-display_V2  ***"
-    patch -p1 < 00_kls_04_fix_locking_channel-display_V2.patch; sleep 1;
-echo "                  *** fix_shutdown  ***"
-    patch -p1 < 00_kls_05_fix_shutdown.patch; sleep 1;
-echo "                  *** fix_channelswitch  ***"
-    patch -p1 < 00_kls_06_fix_channelswitch.patch; sleep 1;
+    echo "               Patching VDR 2.4.1      "; sleep 1
+    cp -rf /home/`logname`/Vdrrepo/vdr-patches.2.4.1.tar.gz $SRC/vdr/; tar -zxvf vdr-patches.2.4.1.tar.gz; rm -rf vdr-patches.2.4.1.tar.gz; sleep 1;
 echo "                  *** zapcockpit ***"
     patch -p1 < 02_vdr_zapcockpit.patch; sleep 1;
 echo "                  *** menuselection ***"
@@ -1312,19 +1276,21 @@ echo "                  *** dvb_power_saving ***"
 echo "                  *** gcc7 ***"
     patch -p1 < 25_vdr_gcc7.patch; sleep 1;
 echo "                  *** menuorg ***"
-    patch -p1 < 26_vdr_menuorg.patch; sleep 1;
-echo "                  *** permashift ***"
-    patch -p1 < 27_vdr_permashift.patch.x86; sleep 1;
+   patch -p1 < 26_vdr_menuorg.patch; sleep 1;
+#echo "                  *** permashift ***"
+#    patch -p1 < 27_vdr_permashift.patch.x86; sleep 1;
 echo "                  *** hide_first_recording_level ***"
     patch -p1 < 28_vdr_hide_first_recording_level.patch; sleep 1;
+echo "                  *** ttxtsub ***"
+    patch -p1 < 29_vdr_ttxtsub.patch; sleep 1;
 echo "                  *** vdr_camtweaks ***"
     patch -p1 < 99_vdr_camtweaks.patch; sleep 1;
-echo "                  *** dvbchan ***"
-    patch -p1 < vdr-dvbchan.patch; sleep 1;
 echo "                  *** ci_debug ***"
     patch -p1 < 99_vdr_ci_debug.patch; sleep 1;
+echo "                  *** dvbchan ***"
+    patch -p1 < vdr-dvbchan.patch; sleep 1;
     # 
-    cp -rf /home/`logname`/Vdrrepo/Make.config.2.4.0 $SRC/vdr/; mv Make.config.2.4.0 Make.config; sleep 1;
+    cp -rf /home/`logname`/Vdrrepo/Make.config.tar.gz $SRC/vdr/; tar -zxvf Make.config.tar.gz; sleep 1; #mv Make.config.2.4.1 Make.config;
 #    sed -i 's/|| DVB_API_VERSION_MINOR != 0//' dvbdevice.h
     #
     cp -rf $VDRSRC/pictures/pic2mpg /usr/local/bin/;
@@ -1335,7 +1301,7 @@ echo "                  *** ci_debug ***"
     echo ""; echo "*** Final compilation ***"; echo ""
     cd /usr/local/src/vdr
     apt-get -y purge vdr
-    checkinstall --fstrans=no --install=yes --pkgname=vdr --pkgversion "2.4.0-git" --pakdir=$PACKAGES --default
+    checkinstall --fstrans=no --install=yes --pkgname=vdr --pkgversion "2.4.1-git" --pakdir=$PACKAGES --default
     rm -rf /media/video; mkdir /media/video; mkdir -p /usr/local/lib/vdr/scripts;
     mkdir -p /etc/vdr/plugins; cp *.conf /etc/vdr; mkdir -p /usr/local/lib/vdr/plugins;
 
@@ -1355,7 +1321,7 @@ echo "                  *** ci_debug ***"
 Red       Recordings
 Green     @weatherforecast
 Yellow    Info
-Blue      @tvguideng
+Blue      @tvguide
 Ok        Channels" >> /etc/vdr/keymacros.conf
 #
 /usr/local/bin/vdr --help; exit_status_check
@@ -1372,7 +1338,7 @@ clear
 echo "                        "
 echo "                        "
 echo "                        "
-echo "Install Basic plugins  ( Dvbapi - Vdaapidevice / Softhddevice / Xineliboutput - Epgsearch  - TvGuide - Iptv - ExternalPlayer - Channelscan - Skinflatplus - Skindesigner - TvGuideng - Weatherforecast)"
+echo "Install Basic plugins  ( Dvbapi - Vdaapidevice / Softhddevice / Xineliboutput - Epgsearch  - TvGuide - Iptv - ExternalPlayer - Channelscan - Skinflatplus - Skindesigner - TvGuide - Weatherforecast)"
 echo "                 Press Enter to continue ...         "; read enterKey
 cd $SRC;
 mkdir -p /usr/local/lib/vdr/plugins; mkdir -p /usr/local/lib/vdr/scripts; mkdir -p /etc/vdr/plugins; mkdir -p /etc/vdr/themes; cd $PLUGINS; mkdir -p tvguide;
@@ -1381,7 +1347,7 @@ mkdir -p /usr/local/lib/vdr/plugins; mkdir -p /usr/local/lib/vdr/scripts; mkdir 
 clear 
 echo ""; echo "               *** Dvbapi ***"; echo ""; sleep 3
 cd $VDRSRC; 
-cp -rf /home/`logname`/Vdrrepo/vdr-plugin-dvbapi /$VDRSRC/; mv vdr-plugin-dvbapi dvbapi; cd dvbapi; cp -rf /home/`logname`/Vdrrepo/patch_dvbapi.tar.gz /$VDRSRC/dvbapi/; tar -zxvf patch_dvbapi.tar.gz; rm -rf patch_dvbapi.tar.gz; patch -p1 < vdr-plugin-dvbapi-01_crosscompiling.patch; sleep 1; cd ../../..; make plugins
+cp -rf /home/`logname`/Vdrrepo/vdr-plugin-dvbapi /$VDRSRC/; mv vdr-plugin-dvbapi dvbapi; cd ../..; make plugins
 #
 #
 			   echo "               *** Setup Vaapidevice / Softhddevice / Xineliboutput  ***"; sleep 1
@@ -1395,7 +1361,7 @@ clear
    				-------------------------------------------------------------------------
                 				Setup Softhddevice only for Nvidia graphic cards             
   				-------------------------------------------------------------------------     
-			        [c]    Softhddevice openglosd                  
+			        [c]    Softhddevice openglosd (default)                  
 			        [d]    Softhddevice no openglosd 
 
    				-------------------------------------------------------------------------
@@ -1413,7 +1379,7 @@ apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0
 apt-get -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev 
 apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libxext6  
 apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxext-dev
-cd $VDRSRC; git clone https://github.com/pesintta/vdr-plugin-vaapidevice; cp -rf /$VDRSRC/vdr-plugin-vaapidevice /home/`logname`/Vdrrepo/ && mv vdr-plugin-vaapidevice vaapidevice && cd vaapidevice && export PKG_CONFIG_PATH="usr/local/src/libva/lib/pkgconfig:usr/local/src/ffmpeg_sources/ffmpeg/lib/pkgconfig" && make && make install;;
+cd $VDRSRC; git clone https://github.com/pesintta/vdr-plugin-vaapidevice; cp -rf /$VDRSRC/vdr-plugin-vaapidevice /home/`logname`/Vdrrepo/; mv vdr-plugin-vaapidevice vaapidevice; cd vaapidevice; export PKG_CONFIG_PATH="usr/local/src/libva/lib/pkgconfig:usr/local/src/ffmpeg_sources/ffmpeg/lib/pkgconfig"; make; make install;;
 
 
 b) echo ""; echo "               *** Softhddevice intel***"; echo ""; sleep 3
@@ -1456,48 +1422,47 @@ clear
 echo ""; echo "               *** Epgsearch ***"; echo ""; sleep 3
 cd $VDRSRC;
 apt-get -y install libc6 libgcc1 libstdc++6
-cp -rf /home/`logname`/Vdrrepo/vdr-plugin-epgsearch /$VDRSRC/; mv vdr-plugin-epgsearch epgsearch; cd epgsearch; cp -rf /home/`logname`/Vdrrepo/patch_epgsearch.tar.gz /$VDRSRC/epgsearch/; tar -zxvf patch_epgsearch.tar.gz; rm -rf patch_epgsearch.tar.gz; patch -p1 < 10_langinfo-include.diff; sleep 1; patch -p1 < 10_epgsearch_Makefile.patch; sleep 1; patch -p1 < 11_epgsearch_menue.patch; sleep 1; patch -p1 < 12_epgsearch_README.patch; sleep 1; cd ../../..; make plugins; 
+cp -rf /home/`logname`/Vdrrepo/vdr-plugin-epgsearch /$VDRSRC/; mv vdr-plugin-epgsearch epgsearch; cd epgsearch; cp -rf /home/`logname`/Vdrrepo/patch_epgsearch.tar.gz /$VDRSRC/epgsearch/; tar -zxvf patch_epgsearch.tar.gz; rm -rf patch_epgsearch.tar.gz; patch -p1 < 10_langinfo-include.diff; sleep 1; patch -p1 < 11_epgsearch_menue.patch; sleep 1; patch -p1 < 12_epgsearch_README.patch; sleep 1; cd ../../..; make plugins; 
 #
 #
-#clear
-#echo ""; echo "               *** Tvguide ***";  sleep 3
-#apt-get -y install gettext graphicsmagick-libmagick-dev-compat libmagick++-6.q16-dev
-#cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-tvguide /$VDRSRC; mv vdr-plugin-tvguide tvguide; cd tvguide; cp -rf /home/`logname`/Vdrrepo/patch_tvguide.tar.gz /$VDRSRC/tvguide/; tar -zxvf patch_tvguide.tar.gz; rm -rf patch_tvguide.tar.gz;  patch -p1 < 11_tvguide_i18n-it.patch; patch -p1 < 12_tvguide_VDR235.patch; patch -p1 < 13_tvguide_comp_with_last_tvscraper.patch; make; cd ../../..; make plugins; cp -rf $VDRSRC/tvguide/themes/* /etc/vdr/themes/;
-#  patch -p1 < 10_tvguide_lib_Magick.patch;
+clear
+echo ""; echo "               *** Tvguide ***";  sleep 3
+apt-get -y install gettext graphicsmagick-libmagick-dev-compat libmagick++-6.q16-dev
+cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/tvguide-master.tar.gz /$VDRSRC; tar -zxvf tvguide-master.tar.gz; mv tvguide-master tvguide; rm -rf tvguide-master.tar.gz; cd tvguide;  make; cd ../../..; make plugins; cp -rf $VDRSRC/tvguide/themes/* /etc/vdr/themes/;
+#
 #
 echo ""; echo "               *** Iptv ***"; echo ""; sleep 3
-cd $VDRSRC; apt-get -y install libcurl3 libcurl4-gnutls-dev vlc; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-iptv /$VDRSRC; mv vdr-plugin-iptv iptv; cd iptv; cp -rf /home/`logname`/Vdrrepo/patch_iptv.tar.gz /$VDRSRC/iptv; tar -zxvf patch_iptv.tar.gz; rm -rf patch_iptv.tar.gz; patch -p1 < iptv.patch; make; cd ../../..; make plugins; mkdir -p /etc/vdr/plugins/iptv/vlcinput; cp -rf /home/`logname`/Vdrrepo/iptv_conf.tar.gz /$PLUGINS/iptv/vlcinput/; cd $PLUGINS/iptv/vlcinput; tar -zxvf iptv_conf.tar.gz; rm -rf iptv_conf.tar.gz; 
+cd $VDRSRC; apt-get -y install libcurl3 libcurl4-gnutls-dev vlc; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-iptv /$VDRSRC; mv vdr-plugin-iptv iptv; cd iptv; cp -rf /home/`logname`/Vdrrepo/patch_iptv.tar.gz /$VDRSRC/iptv; tar -zxvf patch_iptv.tar.gz; rm -rf patch_iptv.tar.gz; patch -p1 < iptv.patch; sleep 1; patch -p1 < 10_iptv_protocolext.patch; sleep 1;  make; cd ../../..; make plugins; mkdir -p /etc/vdr/plugins/iptv/vlcinput; cp -rf /home/`logname`/Vdrrepo/iptv_conf.tar.gz /$PLUGINS/iptv/vlcinput/; cd $PLUGINS/iptv/vlcinput; tar -zxvf iptv_conf.tar.gz; rm -rf iptv_conf.tar.gz; 
 #  
 #
 clear
 echo ""; echo "               *** Externalplayer ***";  sleep 3
-cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-externalplayer /$VDRSRC && mv vdr-plugin-externalplayer externalplayer && cp -rf /$SRC/traduzioni/external_it_IT.po /$VDRSRC/externalplayer/po/ && cd externalplayer/po/ && mv external_it_IT.po it_IT.po && cd ../../../.. && make plugins && cp -rf /home/`logname`/Vdrrepo/externalplayer.conf.tar.gz /etc/vdr/plugins/ && cd /etc/vdr/plugins && tar -zxvf externalplayer.conf.tar.gz && rm -rf externalplayer.conf.tar.gz;
-clear
+cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-externalplayer /$VDRSRC; mv vdr-plugin-externalplayer externalplayer; cp -rf /$SRC/traduzioni/external_it_IT.po /$VDRSRC/externalplayer/po/; cd externalplayer/po/; mv external_it_IT.po it_IT.po; cd ../../../..; make plugins; cp -rf /home/`logname`/Vdrrepo/externalplayer.conf.tar.gz /etc/vdr/plugins/; cd /etc/vdr/plugins; tar -zxvf externalplayer.conf.tar.gz; rm -rf externalplayer.conf.tar.gz;
 #
 #
 clear
 echo ""; echo "               *** Channelscan ***";  sleep 3
-cd $VDRSRC; apt-get -y install libboost-iostreams-dev && cp -rf /home/`logname`/Vdrrepo/channelscan /$VDRSRC && cp -rf $VDRSRC/channelscan/script/* /usr/local/bin && cd ../.. && make plugins && cd $PLUGINS && mkdir -p transponders && cp -rf /home/`logname`/Vdrrepo/satellite_pack.tar.gz  $PLUGINS/transponders && cd transponders && tar -zxvf satellite_pack.tar.gz && rm -rf satellite_pack.tar.gz;
+cd $VDRSRC; apt-get -y install libboost-iostreams-dev; cp -rf /home/`logname`/Vdrrepo/channelscan.tar.gz /$VDRSRC; tar -zxvf channelscan.tar.gz; rm -rf channelscan.tar.gz; cp -rf $VDRSRC/channelscan/script/* /usr/local/bin; cd ../..; make plugins; cd $PLUGINS; mkdir -p transponders; cp -rf /home/`logname`/Vdrrepo/satellite_pack.tar.gz  $PLUGINS/transponders; cd transponders; tar -zxvf satellite_pack.tar.gz; rm -rf satellite_pack.tar.gz;
 #
 #
 #clear
 #echo ""; echo "               *** Skin Flatplus ***"; echo ""; sleep 3
-#cd $VDRSRC; apt-get -y install graphicsmagick-libmagick-dev-compat imagemagick libmagick++-6.q16-dev lm-sensors && cp -rf /home/`logname`/Vdrrepo/skin-flatplus /$VDRSRC/ && cd skin-flatplus && make install && cd $LIB/skinflatplus/widgets/temperatures/ && ln -s temperatures.default temperatures && cd ../system_information && ln -s system_information.ubuntu system_information  && cp -rf /home/`logname`/Vdrrepo/flat_weather.tar.gz /$LIB/skinflatplus/widgets/weather/ && cd ../weather && tar -zxvf flat_weather.tar.gz && rm -rf flat_weather.tar.gz;
+#cd $VDRSRC; apt-get -y install graphicsmagick-libmagick-dev-compat imagemagick libmagick++-6.q16-dev lm-sensors; cp -rf /home/`logname`/Vdrrepo/skin-flatplus /$VDRSRC/; cd skin-flatplus; make install; cd $LIB/skinflatplus/widgets/temperatures/; ln -s temperatures.default temperatures; cd ../system_information; ln -s system_information.ubuntu system_information; cp -rf /home/`logname`/Vdrrepo/flat_weather.tar.gz /$LIB/skinflatplus/widgets/weather/; cd ../weather; tar -zxvf flat_weather.tar.gz; rm -rf flat_weather.tar.gz;
 # qui sopra c'è da mettere le icone di menù mancanti che sono dentro le skin del Skin Flatplus traducendole e comprimendole
 #
 clear
 echo ""; echo "               *** Skindesigner ***"; echo ""; sleep 3
-cd $VDRSRC; apt-get -y install graphicsmagick-libmagick-dev-compat libxml2-dev librsvg2-dev && cp -rf /home/`logname`/Vdrrepo/vdr-plugin-skindesigner /$VDRSRC/ && mv -f vdr-plugin-skindesigner skindesigner && cd skindesigner && wget https://www.dropbox.com/s/c0p5iqlpq2b1usq/metrixHD-labor5.tar.bz2 && tar xjf metrixHD-labor5.tar.bz2 && mv -f metrixHD-labor5.tar.bz2 /home/`logname`/Vdrrepo/ && cd themes && rm -rf metrixhd*.theme && cp -rf $VDRSRC/skindesigner/metrixHD-labor/themes/* $VDRSRC/skindesigner/themes/ && cd ../skins && rm -rf metrixhd && cp -rf $VDRSRC/skindesigner/metrixHD-labor/metrixhd $VDRSRC/skindesigner/skins/ && cd metrixhd && wget https://www.dropbox.com/s/wfr9pinoiw22vbb/translation_metrixhd.diff.tar.gz && tar -zxvf translation_metrixhd.diff.tar.gz && mv -f translation_metrixhd.diff.tar.gz /home/`logname`/Vdrrepo/ && patch -p1 < translation_metrixhd.diff && rm -rf translation_metrixhd.diff && cd ../.. && cp -rf /home/`logname`/Vdrrepo/patch_skindesigner.tar.gz /$VDRSRC/skindesigner && tar -zxvf patch_skindesigner.tar.gz && rm -rf patch_skindesigner.tar.gz && patch -p1 < 10_skindesigner_scriptsdir.patch && make install && cd /$SHARE/skindesigner/scripts/ && ln -s temperatures.default temperatures && ln -s vdrstats.default vdrstats; 
-#  
+cd $VDRSRC; apt-get -y install graphicsmagick-libmagick-dev-compat libxml2-dev librsvg2-dev; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-skindesigner /$VDRSRC/; mv -f vdr-plugin-skindesigner skindesigner; cd skindesigner/skins/metrixhd; wget https://www.dropbox.com/s/wfr9pinoiw22vbb/translation_metrixhd.diff.tar.gz; tar -zxvf translation_metrixhd.diff.tar.gz; mv -f translation_metrixhd.diff.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < translation_metrixhd.diff; rm -rf translation_metrixhd.diff; cd ../..; cp -rf /home/`logname`/Vdrrepo/patch_skindesigner.tar.gz /$VDRSRC/skindesigner; tar -zxvf patch_skindesigner.tar.gz; rm -rf patch_skindesigner.tar.gz; patch -p1 < 10_skindesigner_scriptsdir.patch; make install; cd /$SHARE/skindesigner/scripts/; ln -s temperatures.default temperatures; ln -s vdrstats.default vdrstats;
 # 
-clear
-echo ""; echo "               *** TvGuideng ***"; echo ""; sleep 3
-cd $VDRSRC; apt-get -y install libstdc++6 libgcc1 libc6 librsvg2-dev; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-tvguideng /$VDRSRC; mv vdr-plugin-tvguideng tvguideng; cd tvguideng; cp -rf /home/`logname`/Vdrrepo/patch_tvguideng.tar.gz /$VDRSRC/tvguideng/; tar -zxvf patch_tvguideng.tar.gz; rm -rf patch_tvguideng.tar.gz; patch -p1 < tvguideng_235.diff; patch -p1 < tvguideng-0.3.0_fix.diff; patch -p1 < tvguideng-gcc6.patch; cp -rf /$SRC/traduzioni/tvguideng_it_IT.po /$VDRSRC/tvguideng/po/; cd po/; mv tvguideng_it_IT.po it_IT.po; cd ../../../..; make plugins;
-#
-#
+# 
 clear
 echo ""; echo "               *** Weatherforecast ***";  sleep 3
 cd $VDRSRC; apt-get -y install libcurl4-openssl-dev libjansson-dev librsvg2-dev; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-weatherforecast /$VDRSRC; mv vdr-plugin-weatherforecast weatherforecast; cd weatherforecast; cp -rf /home/`logname`/Vdrrepo/patch_weatherforecast.tar.gz /$VDRSRC/weatherforecast/; tar -zxvf patch_weatherforecast.tar.gz; rm -rf patch_weatherforecast.tar.gz; patch -p1 < 10_weatherforecast_debug.patch; sleep 1; patch -p1 < 11_weatherforecast_i18n-it.patch; cd ../../..; make plugins; 
+#
+#
+clear
+echo ""; echo "               *** System Info ***";  sleep 3
+cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/vdr-systeminfo-0.1.5.tar.bz2 /$VDRSRC; tar xivf vdr-systeminfo-0.1.5.tar.bz2; mv systeminfo-0.1.5 systeminfo; rm -rf vdr-systeminfo-0.1.5.tar.bz2; mv -f $VDRSRC/systeminfo/scripts/systeminfo.sh /usr/local/bin/; cd ../..; make plugins; 
 #
 #
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
@@ -1807,7 +1772,7 @@ sleep 10
 sudo /etc/init.d/oscam start > /dev/null 2>&1
 ' >> /usr/local/bin/start-oscam.sh; 
 chmod 777 /usr/local/bin/start-oscam.sh;
-
+    echo "kodi ALL=(ALL) ALL" >> /etc/sudoers; 
 
 #############################################################################################################################  
                                          
@@ -1825,7 +1790,7 @@ Description=Kill Oscam
 Icon=/usr/local/src/icone/killoscam.png
 Exec=/usr/local/bin/KillOscam.sh
 " >> /usr/share/applications/KillOscam.desktop; 
-sudo chmod 777 /usr/share/applications/KillOscam.desktop; 
+chmod 777 /usr/share/applications/KillOscam.desktop; 
 
 rm -rf /usr/local/bin/KillOscam.sh;
 touch /usr/local/bin/KillOscam.sh
@@ -1929,17 +1894,19 @@ clear
    ----------------------------------------------
         [a]    Mce                   
         [b]    Hauppauge                   
-        [c]    Mce-Spinel remote                  
-        [d]    Skip                             
+        [c]    Mce-Spinel remote
+        [d]    Vdr Manual                                                
+        [e]    Skip                             
         
    ---------------------------------------------- " 0 0
-    echo -n "        Enter your menu choice  [a-c]:      "
+    echo -n "        Enter your menu choice  [a-e]:      "
     read yourch
     case $yourch in
 a) cd /etc/vdr; wget https://www.dropbox.com/s/hsp66258srhwa1d/mce-remote.conf.tar.gz; cp -rf /etc/vdr/mce-remote.conf.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf mce-remote.conf.tar.gz; rm -rf mce-remote.conf.tar.gz;;
 b) cd /etc/vdr; wget https://www.dropbox.com/s/gvel64ykd3eyx07/hauppauge-remote.conf.tar.gz; cp -rf /etc/vdr/hauppauge-remote.conf.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf hauppauge-remote.conf.tar.gz; rm -rf hauppauge-remote.conf.tar.gz;;
 c) cd /etc/vdr; wget https://www.dropbox.com/s/t64duomj9f5hkqp/mce-spinel.remote.conf.tar.gz; cp -rf /etc/vdr/mce-spinel.remote.conf.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf mce-spinel.remote.conf.tar.gz; rm -rf mce-spinel.remote.conf.tar.gz;;
-d);;
+d) cd /etc/vdr; touch remote.conf;;
+e);;
 esac 
 #
 dmesg | grep -i ubuntu > $TEMP/ubuntu
@@ -1956,7 +1923,7 @@ sleep 2;
 # Start vdr
 killall -9 vdr
 #
-sudo /usr/local/bin/start-vdr.sh
+/usr/local/bin/start-vdr.sh
 ;;    
 esac
 ;; 
@@ -2036,7 +2003,7 @@ fi
     d) rm -rf /etc/vdr/channels-w_scan2-9E0.conf; w_scan2 -fs -s S9E0 -D0c -o2 >> /etc/vdr/channels-w_scan-9E0.conf;; 
     e) rm -rf /etc/vdr/channels-w_scan2-13E0.conf; w_scan2 -fs -s S13E0 -D1c -o2 >> /etc/vdr/channels-w_scan-13E0.conf;;
     f) rm -rf /etc/vdr/channels-w_scan2-19E2.conf; w_scan2 -fs -s S19E2 -D2c -o2 >> /etc/vdr/channels-w_scan-19E2.conf;;
-    g) rm -rf /etc/vdr/channels-dtt.conf; t2scan -ot0 >> /etc/vdr/channels-dtt.conf;;
+    g) rm -rf /etc/vdr/channels-dtt.conf; t2scan -stro -o -t0 >> /etc/vdr/channels-dtt.conf;;
 
     h) cp -rf /home/`logname`/Vdrrepo/channels.conf.trial.tar.gz /etc/vdr/;;
     i) cp -rf /home/`logname`/Vdrrepo/channels.conf.dual.tar.gz /etc/vdr/;;
@@ -2073,33 +2040,7 @@ fi
     case $yourch in
 
 a)
-rm -rf /home/`logname`/Scrivania/Kodi.desktop; rm -rf /usr/share/applications/Kodi.desktop;
-touch /usr/share/applications/Kodi.desktop; 
-chmod 777 /usr/share/applications/Kodi.desktop;
-echo "[Desktop Entry]
-Version=1.0
-Encoding=UTF-8
-Type=Application
-Name=Kodi
-Description=Kodi Start
-Icon=/usr/local/src/icone/kodi.png
-Exec=/usr/local/bin/start-kodi-vdr.sh
-" >> /usr/share/applications/Kodi.desktop; 
 
-rm -rf /usr/local/bin/start-kodi-vdr.sh;
-touch /usr/local/bin/start-kodi-vdr.sh
-echo '#!/bin/sh
-
-/bin/sleep 2
-kodi 
-' >> /usr/local/bin/start-kodi-vdr.sh; 
-chmod a+x /usr/local/bin/start-kodi-vdr.sh;
-#
-dmesg | grep -i ubuntu > $TEMP/ubuntu
-if cat $TEMP/ubuntu | grep "ubuntu1~16.04"; then
-   echo "Ubuntu 16.04 detected"; rm -rf $TEMP/ubuntu
-cp -rf /usr/share/applications/Kodi.desktop /home/`logname`/Scrivania/
-fi
 #
 apt-get -y install software-properties-common pkg-config;
 
@@ -2124,10 +2065,17 @@ apt-get -y install software-properties-common pkg-config;
     read yourch
     case $yourch in
 
-a)   sudo add-apt-repository ppa:team-xbmc/ppa; sudo apt-get update; sudo apt-get -y install kodi kodi-pvr-iptvsimple;;
-b)   sudo add-apt-repository ppa:team-xbmc/unstable; sudo apt-get update; sudo apt-get -y install kodi kodi-pvr-iptvsimple;;
-c)   sudo add-apt-repository ppa:team-xbmc/xbmc-nightly; sudo apt-get update; sudo apt-get -y install kodi kodi-pvr-iptvsimple;;
- esac    
+a)   add-apt-repository ppa:team-xbmc/ppa -y; apt-get update; apt-get -y install kodi kodi-pvr-iptvsimple;;
+b)   add-apt-repository ppa:team-xbmc/unstable -y; apt-get update; apt-get -y install kodi kodi-pvr-iptvsimple;;
+c)   add-apt-repository ppa:team-xbmc/xbmc-nightly -y; apt-get update; apt-get -y install kodi kodi-pvr-iptvsimple;;
+ esac 
+
+dmesg | grep -i ubuntu > $TEMP/ubuntu
+if cat $TEMP/ubuntu | grep "ubuntu1~16.04"; then
+   echo "Ubuntu 16.04 detected"; rm -rf $TEMP/ubuntu
+cp -rf /usr/share/applications/kodi.desktop /home/`logname`/Scrivania/
+fi 
+  
      echo "                    Press Enter to continue ...               "; read enterKey;;
 
  
@@ -2143,10 +2091,11 @@ a1)                                       ######################################
 
     clear
     echo "                    Remove KODI"; sleep 4
-    apt-get remove kodi*; apt-get purge kodi*; rm -rf ~/.kodi/; sudo add-apt-repository --remove ppa:team-xbmc/xbmc-nightly; sudo add-apt-repository --remove ppa:team-xbmc/ppa; sudo add-apt-repository --remove ppa:team-xbmc/unstable; rm -rf /home/`logname`/Scrivania/Kodi.desktop; rm -rf /usr/share/applications/Kodi.desktop;;
+    apt-get remove kodi*; apt-get purge kodi*; rm -rf ~/.kodi/; rm -rf /home/`logname`/.kodi/*; rm -rf /usr/share/kodi; add-apt-repository --remove ppa:team-xbmc/xbmc-nightly -y; add-apt-repository --remove ppa:team-xbmc/ppa -y; add-apt-repository --remove ppa:team-xbmc/unstable -y; rm -rf /home/`logname`/Scrivania/Kodi.desktop; rm -rf /usr/share/applications/Kodi.desktop;;
     esac
 ;;
 
+# /addons/service.xbmc.versioncheck/lib/*; rm -rf /usr/share/kodi/*;
 #############################################################################################################################  
 #############################################################################################################################
 
@@ -2208,9 +2157,9 @@ esac
     echo "                                              '     Updated and Revision        '"
     echo "                                              ',  by fiveten_59 ® and knap ®    ,'"
     echo "                                              ,'   2013 ~ 2014 ~ 2015 ~ 2016      ',"
-    echo "                                             '        Vdr_installer_2.4.0         '"
+    echo "                                             '        Vdr_installer_2.4.1         '"
     echo "                                              ',        by fiveten_59 ®         '"
-    echo "                                              ',               2018           ,'"
+    echo "                                              ',               2019           ,'"
     echo "                                                '----,      ,----,       ,----'"
     echo "                                                      '----'      '-----'"
     echo "                                                                O"

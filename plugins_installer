@@ -1,24 +1,24 @@
   #!/bin/bash
 ############################## !!! IMPORTANTE !!! #######################################
 #                                                                                       #
-# Script name : plugins_installer (only for vdr = or > 2.4.0                            #
+# Script name : plugins_installer (only for vdr = or > 2.4.1                           #
 # Version: Github Repository Master (https://github.com/fiveten59/plugins_installer)    #
 #                                                                                       #
 # chmod the script                                                                      #
 # then load it simply typing: sudo ./plugins_installer                                  #
-#                                                                                       #
+#                                                                                      #
 #########################################################################################
 # 
 #
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
-SRCVDR='/usr/local/src/vdr-2.4.0'
+SRCVDR='/usr/local/src/vdr-2.4.1'
 VDRSRC=''$SRC'/vdr/PLUGINS/src'
-LIB='/usr/local/lib/vdr/plugins'
-VDR='vdr-2.4.0'
+LIB='/usr/lib/vdr/plugins'
+VDR='vdr-2.4.1'
 PACKAGES="/usr/local/src/packages"
-SKINS='/usr/local/share/vdr/plugins/skindesigner/skins/'
-SHARE='/usr/local/share/vdr/plugins'
+SKINS='/usr/share/vdr/plugins/skindesigner/skins/'
+SHARE='/usr/share/vdr/plugins'
 Xinelib='sudo /etc/init.d/vdr start > /dev/null 2>&1; while ! netcat -z localhost 37890; do sleep 2; vdr-sxfe --video=vdpau --hud --audio=alsa --aspect=16:9 --width=1920 --height=1080 --fullscreen --daemon --reconnect --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1 --buffers=850; done;'
 PLUGINS='/etc/vdr/plugins'
 Remind='is already installed'
@@ -52,7 +52,7 @@ ALLOWED="#
 #
     while :
     do
-    dialog --title " Plugin Installer Script " --infobox "Copyright (C) 2018
+    dialog --title " Plugin Installer Script " --infobox "Copyright (C) 2020
                                                                         
     This file is part of VDR Complete Installer (VCI).                   
                                                                         
@@ -92,11 +92,11 @@ ALLOWED="#
     
     #
     #    
-    dialog --title " Plugin Installer Script " --infobox "Copyright (C) 2018
+    dialog --title " Plugin Installer Script " --infobox "Copyright (C) 2020
     
 
 	Script name: plugins_installer                                                  
-	Version: Github Repository Master  (https://github.com/fiveten59/Vdr_installer)                                                     
+	Version: Github Repository Master  (https://github.com/fiveten/Vdr_installer)                                                     
                                                                                               
 	chmod the script
 	then load it simply typing: sudo ./plugins_installer
@@ -167,16 +167,13 @@ ALLOWED="#
 1) 
 clear
 echo "        ***                Installing Vdr-Plugin-Softhddevice-Openglosd               ***";  sleep 2
-
+cd $VDRSRC;
 apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libglm-dev
 apt-get -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev
 apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libvdpau1 libvdpau-dev
 apt-get -y install libxext6 libxext-dev libc6-dev zlib1g zlib1g-dev libogg0 libva-dev libglew-dev
-cd $VDRSRC;
-
 if [ -f softhddevice/Makefile ];
-       then  echo "Vdr-Plugin-Softhddevice $Remind"
-   		else wget https://github.com/rellla/softhddevice-openglosd/archive/jinx.tar.gz && cp -rf jinx.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf jinx.tar.gz && rm -rf jinx.tar.gz && mv softhddevice-openglosd-jinx softhddevice && cd softhddevice && wget https://www.dropbox.com/s/qwi8p6ieb5z86gr/patch_softhddevice_5.tar.gz && tar -zxvf patch_softhddevice_5.tar.gz && mv -f patch_softhddevice_5.tar.gz /home/`logname`/Vdrrepo/ && patch -p1 < 03_LanguageIT.patch && patch -p1 < 10_softhddevice_trusty.patch && patch -p1 < 11_softhddevice_Makefile.patch && patch -p1 < 13_softhddevice_fixmemleakvaapi.patch && patch -p1 < 14_softhddevice_vaapi100.patch && patch -p1 < 16_softhddevice_no-inactive-reset-on-attache.patch && make ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1 && make install && sed -i "s|--lirc|& -P'softhddevice -f -v vdpau -w no-hw-decoder'|" /usr/local/bin/vdrrun 
+   		then wget https://github.com/rellla/softhddevice-openglosd/archive/jinx.tar.gz && cp -rf jinx.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf jinx.tar.gz && rm -rf jinx.tar.gz && mv softhddevice-openglosd-jinx softhddevice && cd softhddevice && wget https://www.dropbox.com/s/qwi8p6ieb5z86gr/patch_softhddevice_5.tar.gz && tar -zxvf patch_softhddevice_5.tar.gz && mv -f patch_softhddevice_5.tar.gz /home/`logname`/Vdrrepo/ && patch -p1 < 03_LanguageIT.patch && patch -p1 < 10_softhddevice_trusty.patch && patch -p1 < 11_softhddevice_Makefile.patch && patch -p1 < 13_softhddevice_fixmemleakvaapi.patch && patch -p1 < 14_softhddevice_vaapi100.patch && patch -p1 < 16_softhddevice_no-inactive-reset-on-attache.patch && make ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1 && make install && sed -i "s|--lirc|& -P'softhddevice -f -v vdpau -w no-hw-decoder'|" /usr/local/bin/vdrrun 
       fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
       echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -233,7 +230,7 @@ cd $VDRSRC &&
 clear
 echo "        ***                Removing Vdr-Plugin-Vaapidevice               ***";  sleep 2
 cd $VDRSRC && if [ -f vaapidevice/Makefile ];
-   		then rm -rf vaapidevice && cd $LIB && rm -rf libvdr-vaapidevice.* && sed -i "s|-P'vaapidevice -f -a pulse'||" /usr/local/bin/vdrrun  && echo "Vdr-Plugin--Vaapidevice $Remind1"
+   		then rm -rf vaapidevice && cd $LIB && rm -rf libvdr-vaapidevice.* && sed -i "s|-P'vaapidevice -f'||" /usr/local/bin/vdrrun  && echo "Vdr-Plugin--Vaapidevice $Remind1"
    			else echo "Vdr-Plugin-Vaapidevice $Remind5" 
       fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
@@ -454,7 +451,7 @@ clear
 echo "        ***                Installing Vdr-Plugin-Radio               ***";  sleep 2
 cd $VDRSRC && if [ -f radio/Makefile ];
   		then  echo "Vdr-Plugin-Radio $Remind"
-			else git clone https://projects.vdr-developer.org/git/vdr-plugin-radio.git && cp -rf vdr-plugin-radio -rf /home/`logname`/Vdrrepo/ && mv -f vdr-plugin-radio radio && cd ../.. && make && make plugins && cd /etc/vdr/plugins && mkdir -p radio && cp -r /$VDRSRC/radio/config/* $PLUGINS/radio/ && sed -i "s|-P'externalplayer'|& -P'radio'|" /usr/local/bin/vdrrun
+			else git clone https://projects.vdr-developer.org/git/vdr-plugin-radio.git && cp -rf vdr-plugin-radio -rf /home/`logname`/Vdrrepo/ && mv -f vdr-plugin-radio radio && cd ../.. && make && make plugins && cd /etc/vdr/plugins && mkdir -p radio && cp -rf /$VDRSRC/radio/config/mpegstill/* $PLUGINS/radio/ && cp -rf $VDRSRC/radio/config/scripts/radioinfo-0-128 $PLUGINS/radio/ && sed -i "s|-P'externalplayer'|& -P'radio'|" /usr/local/bin/vdrrun
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;  
@@ -633,22 +630,22 @@ cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;; 
 ################################################################################################################################################################
 ################################################################################################################################################################
-22) 
+22) wget https://github.com/vdr-projects/vdr-plugin-skindesigner.git
 clear
 echo "        ***                Installing Vdr-Plugin-Skindesigner               ***";  sleep 2
 cd $VDRSRC; apt-get -y install graphicsmagick-libmagick-dev-compat libxml2-dev librsvg2-dev;
    if [ -f skindesigner/Makefile ];
 		then  echo "Vdr-Plugin-Skindesigner $Remind"
-			else git clone git://projects.vdr-developer.org/vdr-plugin-skindesigner.git && cp -rf vdr-plugin-skindesigner /home/`logname`/Vdrrepo/ && mv -f vdr-plugin-skindesigner skindesigner && cd skindesigner && wget https://www.dropbox.com/s/c0p5iqlpq2b1usq/metrixHD-labor5.tar.bz2 && tar xjf metrixHD-labor5.tar.bz2 && mv -f metrixHD-labor5.tar.bz2 /home/`logname`/Vdrrepo/ && cd themes && rm -rf metrixhd*.theme && cp -rf $VDRSRC/skindesigner/metrixHD-labor/themes/* $VDRSRC/skindesigner/themes/ && cd ../skins && rm -rf metrixhd && cp -rf $VDRSRC/skindesigner/metrixHD-labor/metrixhd $VDRSRC/skindesigner/skins/ && cd metrixhd && wget https://www.dropbox.com/s/wfr9pinoiw22vbb/translation_metrixhd.diff.tar.gz && tar -zxvf translation_metrixhd.diff.tar.gz && mv -f translation_metrixhd.diff.tar.gz /home/`logname`/Vdrrepo/ && patch -p1 < translation_metrixhd.diff && rm -rf translation_metrixhd.diff && cd ../.. && wget https://www.dropbox.com/s/8uiizh0d3t706ll/patch_skindesigner.tar.gz && tar -zxvf patch_skindesigner.tar.gz && mv -f patch_skindesigner.tar.gz /home/`logname`/Vdrrepo/ && patch -p1 < 10_skindesigner_scriptsdir.patch && make install && cd /$SHARE/skindesigner/scripts/ && ln -s temperatures.default temperatures && ln -s vdrstats.default vdrstats && sed -i "s|-P'externalplayer'|& -P'skindesigner -l /etc/vdr/logos/ -i /usr/local/share/vdr/plugins/skindesigner/skins/'|" /usr/local/bin/vdrrun 
+			else git clone git://projects.vdr-developer.org/vdr-plugin-skindesigner.git && cp -rf vdr-plugin-skindesigner /home/`logname`/Vdrrepo/ && mv -f vdr-plugin-skindesigner skindesigner && cd skindesigner/skins/metrixhd && wget https://www.dropbox.com/s/wfr9pinoiw22vbb/translation_metrixhd.diff.tar.gz && tar -zxvf translation_metrixhd.diff.tar.gz && mv -f translation_metrixhd.diff.tar.gz /home/`logname`/Vdrrepo/ && patch -p1 < translation_metrixhd.diff && rm -rf translation_metrixhd.diff && cd ../.. && wget https://www.dropbox.com/s/8uiizh0d3t706ll/patch_skindesigner.tar.gz && tar -zxvf patch_skindesigner.tar.gz && mv -f patch_skindesigner.tar.gz /home/`logname`/Vdrrepo/ && patch -p1 < 10_skindesigner_scriptsdir.patch && make install && cd /$SHARE/skindesigner/scripts/ && ln -s temperatures.default temperatures && ln -s vdrstats.default vdrstats && sed -i "s|-P'externalplayer'|& -P'skindesigner -l /etc/vdr/logos/ -i /usr/share/vdr/plugins/skindesigner/skins/'|" /usr/local/bin/vdrrun 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;
-#&& cp -rf /$SRC/traduzioni/metrixhd/*.xml /$VDRSRC/skindesigner/skins/metrixhd/   
+#   
 22a) 
 clear
 echo "        ***                Removing Vdr-Plugin-Skindesigner               ***";  sleep 2
 cd $VDRSRC && if [ -f skindesigner/Makefile ];
-  	then rm -rf skindesigner && cd $LIB && rm -rf libvdr-skindesigner.* && cd $SHARE && rm -rf skindesigner && sed -i "s|-P'skindesigner -l /etc/vdr/logos/ -i /usr/local/share/vdr/plugins/skindesigner/skins/'||" /usr/local/bin/vdrrun && echo "Vdr-Plugin-Skindesigner $Remind1"
+  	then rm -rf skindesigner && cd $LIB && rm -rf libvdr-skindesigner.* && cd $SHARE && rm -rf skindesigner && sed -i "s|-P'skindesigner -l /etc/vdr/logos/ -i /usr/share/vdr/plugins/skindesigner/skins/'||" /usr/local/bin/vdrrun && echo "Vdr-Plugin-Skindesigner $Remind1"
   			else echo "Vdr-Plugin-Skindesigner $Remind5" 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
@@ -745,7 +742,7 @@ echo "        ***                Installing Vdr-Plugin-Iptv               ***"; 
 cd $VDRSRC; apt-get -y install libcurl3 libcurl4-gnutls-dev vlc;
    if [ -f iptv/Makefile ];
 		then  echo "Vdr-Plugin-Iptv $Remind"
-			else git clone https://github.com/rofafor/vdr-plugin-iptv.git && cp -rf vdr-plugin-iptv /home/`logname`/Vdrrepo/ && mv -f vdr-plugin-iptv iptv && cd iptv && wget https://www.dropbox.com/s/nof5ydmxrplw2b0/patch_iptv.tar.gz && tar -zxvf patch_iptv.tar.gz && mv -f patch_iptv.tar.gz /home/`logname`/Vdrrepo/ && patch -p1 < iptv.patch && make && cd ../../.. && make plugins && mkdir -p /etc/vdr/plugins/iptv/vlcinput && cd $PLUGINS/iptv/vlcinput && wget https://www.dropbox.com/s/1ujtklnct0nqq6q/iptv_conf.tar.gz && tar -zxvf iptv_conf.tar.gz && mv -f iptv_conf.tar.gz /home/`logname`/Vdrrepo/ && sed -i "s|-P'externalplayer'|& -P'iptv'|" /usr/local/bin/vdrrun 
+			else git clone https://github.com/rofafor/vdr-plugin-iptv.git && cp -rf vdr-plugin-iptv /home/`logname`/Vdrrepo/ && mv -f vdr-plugin-iptv iptv && cd iptv && wget https://www.dropbox.com/s/nof5ydmxrplw2b0/patch_iptv.tar.gz && tar -zxvf patch_iptv.tar.gz && mv -f patch_iptv.tar.gz /home/`logname`/Vdrrepo/ && patch -p1 < iptv.patch && patch -p1 < vlc2input.patch && make && cd ../../.. && make plugins && mkdir -p /etc/vdr/plugins/iptv/channels && cd $PLUGINS/iptv/channels && wget https://www.dropbox.com/s/1ujtklnct0nqq6q/iptv_conf.tar.gz && tar -zxvf iptv_conf.tar.gz && mv -f iptv_conf.tar.gz /home/`logname`/Vdrrepo/ && sed -i "s|-P'externalplayer'|& -P'iptv'|" /usr/local/bin/vdrrun 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install; 
         echo "                    Press Enter to continue ...               "; read enterKey;;  

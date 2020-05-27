@@ -9,23 +9,23 @@
 #                                                                                       #
 #########################################################################################
 #
-PLUGIN="--lirc -P'dvbapi' -P'skindesigner -l /etc/vdr/logos/ -i /usr/local/share/vdr/plugins/skindesigner/skins/' -P'epgsearch' -P'weatherforecast' -P'iptv' -P'systeminfo' -P'tvguide' -P'externalplayer' -P'channelscan' "
-# -P'skinflatplus -l /etc/vdr/logos/' 
+PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skindesigner -l /etc/vdr/logos/ -i /usr/share/vdr/plugins/skindesigner/skins/' -P'skinnopacity -l /etc/vdr/logos/' -P'systeminfo' -P'externalplayer' -P'iptv' -P'radio' -P'channelscan'"
+#
 #
 USER='fiveten' 
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
 SRCVDR='/usr/local/src/vdr-2.4.1'
 VDRSRC=''$SRC'/vdr/PLUGINS/src'
-LIB='/usr/local/lib/vdr/plugins'
+LIB='/usr/lib/vdr/plugins'
 VDR='vdr-2.4.1'
 PACKAGES="/usr/local/src/packages"
 ARCHIVES="/usr/local/src/archives"
 SCRIPTS="/usr/local/src/archives/scripts"
 MANUALS="/usr/local/src/READ_THIS"
 TEMP='/tmp'
-SKINS='/usr/local/share/vdr/plugins/skindesigner/skins/'
-SHARE='/usr/local/share/vdr/plugins'
+SKINS='/usr/share/vdr/plugins/skindesigner/skins/'
+SHARE='/usr/share/vdr/plugins'
 PLUGINS='/etc/vdr/plugins'
 Remind3='is already installed'
 Remind4='are already installed'
@@ -55,7 +55,7 @@ ALLOWED="#
 #
 MONO13="#
 # Full DiSEqC sequence:
-# 13E
+# Hotbird - 13.0°E
 S13.0E 11700 V  9750  t v W15 [E0 10 38 F0] W15 A W15 t
 S13.0E 99999 V 10600  t v W15 [E0 10 38 F1] W15 A W15 T
 S13.0E 11700 H  9750  t V W15 [E0 10 38 F2] W15 A W15 t
@@ -64,7 +64,7 @@ S13.0E 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
 "
 MONO19="#
 # Full DiSEqC sequence:
-# 13E
+# Astra 19 - 19.2°E
 S19.2E 11700 V  9750  t v W15 [E0 10 38 F0] W15 A W15 t
 S19.2E 99999 V 10600  t v W15 [E0 10 38 F1] W15 A W15 T
 S19.2E 11700 H  9750  t V W15 [E0 10 38 F2] W15 A W15 t
@@ -225,7 +225,7 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
     mkdir $SRC/packages $SRC/archives $SRC/scripts $SRC/READ_THIS
     while :
     do
-    dialog --title " VDR Installer Github Repository " --infobox "Copyright (C) 2018
+    dialog --title " VDR Installer Github Repository " --infobox "Copyright (C) 2020
                                                                         
     This file is part of VDR Complete Installer (VCI).                   
                                                                         
@@ -265,7 +265,7 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
     
     #
     #    
-    dialog --title " VDR Installer Github Repository " --infobox "Copyright (C) 2018
+    dialog --title " VDR Installer Github Repository " --infobox "Copyright (C) 2020
     
 
 	Script name: vdr_installer_2.4.1                                                  
@@ -348,53 +348,18 @@ S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
     
 ############################### Download libraries on local repo ################################### 
 
-if [ -s /home/`logname`/Vdrrepo/nasm-2.14rc15.tar.bz2 ]; then
+if [ -s /home/`logname`/Vdrrepo/nasm-2.14rc16.tar.bz2 ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget http://www.nasm.us/pub/nasm/releasebuilds/2.14rc15/nasm-2.14rc15.tar.bz2; 
-  fi
-
-if [ -s /home/`logname`/Vdrrepo/cmrt ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    git clone https://github.com/intel//cmrt
-  fi
-
-if [ -s /home/`logname`/Vdrrepo/libva ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    git clone https://github.com/intel/libva;
-  fi
-
-if [ -s /home/`logname`/Vdrrepo/intel-hybrid-driver ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    git clone https://github.com/01org/intel-hybrid-driver
-  fi
-
-if [ -s /home/`logname`/Vdrrepo/intel-vaapi-driver ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    git clone https://github.com/intel/intel-vaapi-driver.git
-  fi
-
-if [ -s /home/`logname`/Vdrrepo/libva-utils ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    git clone https://github.com/intel/libva-utils
+    wget https://www.nasm.us/pub/nasm/releasebuilds/2.14rc16/nasm-2.14rc16.tar.bz2;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/x264 ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    git clone git://git.videolan.org/x264.git;
+    git clone https://code.videolan.org/videolan/x264.git;
   fi 
 
 if [ -s /home/`logname`/Vdrrepo/x265 ]; then
@@ -409,13 +374,6 @@ if [ -s /home/`logname`/Vdrrepo/v0.1.6.tar.gz ]; then
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://github.com/mstorsjo/fdk-aac/archive/v0.1.6.tar.gz;
-  fi
-
-if [ -s /home/`logname`/Vdrrepo/fdk-aac ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    git clone https://github.com/mstorsjo/fdk-aac.git;
   fi
 
 if [ -d /home/`logname`/Vdrrepo/libvpx ]; then
@@ -437,13 +395,6 @@ if [ -s /home/`logname`/Vdrrepo/ffmpeg-3.4.4.tar.bz2 ]; then
 else
  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.ffmpeg.org/releases/ffmpeg-3.4.4.tar.bz2;
-  fi
-
-if [ -s /home/`logname`/Vdrrepo/ffmpeg ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
- echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    git clone https://github.com/FFmpeg/FFmpeg ffmpeg
   fi
 
 ################################ Download Vdr and Plugins on local repo ##############################
@@ -497,25 +448,18 @@ else
     git clone git://github.com/manio/vdr-plugin-dvbapi.git; 
   fi
 
+if [ -s /home/`logname`/Vdrrepo/jinx.tar.gz ]; then
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+else
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    wget https://github.com/rellla/softhddevice-openglosd/archive/jinx.tar.gz;
+  fi
+
 if [ -s /home/`logname`/Vdrrepo/patch_softhddevice_5.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/qwi8p6ieb5z86gr/patch_softhddevice_5.tar.gz;
-  fi
-
-if [ -s /home/`logname`/Vdrrepo/patch_soft_intel.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/7aljgibuyd6mjfl/patch_soft_intel.tar.gz
-fi
-
-if [ -s /home/`logname`/Vdrrepo/tvguide-master.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://gitlab.com/kamel5/tvguide/-/archive/master/tvguide-master.tar.gz;
   fi
 
  if [ -s /home/`logname`/Vdrrepo/01_Add_language_It.patch.tar.gz ]; then
@@ -546,18 +490,11 @@ else
     wget https://www.dropbox.com/s/1ujtklnct0nqq6q/iptv_conf.tar.gz;
 fi
 
-if [ -s /home/`logname`/Vdrrepo/vdr-plugin-weatherforecast ]; then
+if [ -s /home/`logname`/Vdrrepo/vdr-plugin-radio-master.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    git clone git://projects.vdr-developer.org/vdr-plugin-weatherforecast.git  
-  fi
-
-if [ -s /home/`logname`/Vdrrepo/patch_weatherforecast.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/v0ipkt6x3bfbbs8/patch_weatherforecast.tar.gz;
+    wget https://www.dropbox.com/s/e8jnqx4eiwn2zkb/vdr-plugin-radio-master.tar.gz;
 fi
 
 if [ -s /home/`logname`/Vdrrepo/vdr-plugin-externalplayer ]; then
@@ -574,11 +511,11 @@ else
     wget https://www.dropbox.com/s/vhz1fz68159s0qg/externalplayer.conf.tar.gz;
 fi
 
-if [ -s /home/`logname`/Vdrrepo/channelscan.tar.gz ]; then
+if [ -s /home/`logname`/Vdrrepo/channelscan ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/xgg8dqq1wtchpzw/channelscan.tar.gz;    
+    git clone https://bitbucket.org/ua0lnj/channelscan.git;    
 fi
 
 if [ -s /home/`logname`/Vdrrepo/satellite_pack.tar.gz ]; then
@@ -601,15 +538,36 @@ if [ -s /home/`logname`/Vdrrepo/logos.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/omrs8wwh5jbz46e/logos.tar.gz;
+    wget https://www.dropbox.com/s/q0c9vt8xlmtaseq/logos.tar.gz;
   fi
 
-if [ -s /home/`logname`/Vdrrepo/skin-flatplus ]; then
+if [ -s /home/`logname`/Vdrrepo/skin-nopacity ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    git clone http://projects.vdr-developer.org/git/skin-flatplus.git;
+    git clone https://projects.vdr-developer.org/git/skin-nopacity.git;
   fi
+
+if [ -s /home/`logname`/Vdrrepo/patch_skinnopacity.tar.gz ]; then
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+else
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    wget https://www.dropbox.com/s/hegz319loovpb4r/patch_skinnopacity.tar.gz;
+  fi 
+
+if [ -s /home/`logname`/Vdrrepo/vdr-plugin-skindesigner ]; then
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+else
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+     git clone git://projects.vdr-developer.org/vdr-plugin-skindesigner.git;
+  fi
+
+if [ -s /home/`logname`/Vdrrepo/patch_skindesigner.tar.gz ]; then
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+else
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    wget https://www.dropbox.com/s/8uiizh0d3t706ll/patch_skindesigner.tar.gz;
+  fi   
   
 if [ -s /home/`logname`/Vdrrepo/icone.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
@@ -631,20 +589,6 @@ else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/hb2mv9ytz5q6yz7/picon.tar.gz;
   fi
-
-if [ -s /home/`logname`/Vdrrepo/vdr-plugin-skindesigner ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-     git clone git://projects.vdr-developer.org/vdr-plugin-skindesigner.git
-  fi 
-
-if [ -s /home/`logname`/Vdrrepo/patch_skindesigner.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/8uiizh0d3t706ll/patch_skindesigner.tar.gz;
-  fi   
 
 if [ -s /home/`logname`/Vdrrepo/themes.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
@@ -683,13 +627,6 @@ else
     wget https://www.dropbox.com/s/lvs3eb7q64ericc/oscam64.tar.gz;
   fi
 
-if [ -s /home/`logname`/Vdrrepo/flat_weather.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/x80qbwk8xnwi0u5/flat_weather.tar.gz;
-  fi
-
 chmod -R 777 *;;
   
 ######################################################################################  
@@ -699,20 +636,18 @@ chmod -R 777 *;;
 ######################################################################################  
 ############################ Download libraries on local repo ####################################
 
-    wget http://www.nasm.us/pub/nasm/releasebuilds/2.14rc15/nasm-2.14rc15.tar.bz2; 
     git clone https://github.com/intel/cmrt;
     git clone https://github.com/intel/libva;
     git clone https://github.com/01org/intel-hybrid-driver;
     git clone https://github.com/intel/intel-vaapi-driver.git;
     git clone https://github.com/intel/libva-utils;
+    wget https://www.nasm.us/pub/nasm/releasebuilds/2.14rc16/nasm-2.14rc16.tar.bz2;
     git clone git://git.videolan.org/x264.git;
     hg clone http://hg.videolan.org/x265;
     wget https://github.com/mstorsjo/fdk-aac/archive/v0.1.6.tar.gz;
-    git clone https://github.com/mstorsjo/fdk-aac.git;
     git clone https://github.com/webmproject/libvpx;
     wget https://ftp.osuosl.org/pub/xiph/releases/vorbis/libvorbis-1.3.6.tar.gz;
     wget https://www.ffmpeg.org/releases/ffmpeg-3.4.4.tar.bz2;
-    git clone https://github.com/FFmpeg/FFmpeg ffmpeg
 
 ############################ Download Vdr and Plugins on local repo ################################
 
@@ -720,20 +655,18 @@ chmod -R 777 *;;
     wget https://www.dropbox.com/s/xkupxr8457fttao/vdr-patches.2.4.1.tar.gz;
     wget https://www.dropbox.com/s/qds2k91od7oboed/Make.config.tar.gz;
     wget https://www.dropbox.com/s/bx97ikp7c1h2qj2/vdrsymbols.tar.gz;
-    wget https://gitlab.com/kamel5/tvguide/-/archive/master/tvguide-master.tar.gz
+    git clone git://github.com/manio/vdr-plugin-dvbapi.git;
+    wget https://github.com/rellla/softhddevice-openglosd/archive/jinx.tar.gz;
     wget https://www.dropbox.com/s/qwi8p6ieb5z86gr/patch_softhddevice_5.tar.gz;
-    wget https://www.dropbox.com/s/7aljgibuyd6mjfl/patch_soft_intel.tar.gz
     git clone http://projects.vdr-developer.org/git/vdr-plugin-epgsearch.git;
     wget https://www.dropbox.com/s/s9vggu8mil8ss7t/patch_epgsearch.tar.gz;
-    git clone git://github.com/manio/vdr-plugin-dvbapi.git;
-    git clone git://projects.vdr-developer.org/vdr-plugin-weatherforecast.git;
-    wget https://www.dropbox.com/s/v0ipkt6x3bfbbs8/patch_weatherforecast.tar.gz;
-    git clone https://github.com/rofafor/vdr-plugin-iptv.git; 
+    wget https://www.dropbox.com/s/e8jnqx4eiwn2zkb/vdr-plugin-radio-master.tar.gz;
+    git clone https://github.com/rofafor/vdr-plugin-iptv.git;
     wget https://www.dropbox.com/s/nof5ydmxrplw2b0/patch_iptv.tar.gz;
     wget https://www.dropbox.com/s/1ujtklnct0nqq6q/iptv_conf.tar.gz;
     git clone https://git.uli-eckhardt.de/vdr-plugin-externalplayer.git;
     wget https://www.dropbox.com/s/vhz1fz68159s0qg/externalplayer.conf.tar.gz;
-    wget https://www.dropbox.com/s/xgg8dqq1wtchpzw/channelscan.tar.gz;    
+    git clone https://bitbucket.org/ua0lnj/channelscan.git;    
     wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz;
     wget http://firefly.vdr-developer.org/systeminfo/vdr-systeminfo-0.1.5.tar.bz2;   
 
@@ -741,9 +674,8 @@ chmod -R 777 *;;
 ############################ Download skins ########################################
 
     wget https://www.dropbox.com/s/zwb0vp6gfwh7d4y/anthra_pack.tar.gz;
-    git clone git://projects.vdr-developer.org/vdr-plugin-skindesigner.git;
-    wget https://www.dropbox.com/s/8uiizh0d3t706ll/patch_skindesigner.tar.gz;
-    git clone http://projects.vdr-developer.org/git/skin-flatplus.git;
+    git clone https://projects.vdr-developer.org/git/skin-nopacity.git;
+    wget https://www.dropbox.com/s/hegz319loovpb4r/patch_skinnopacity.tar.gz 
     wget https://www.dropbox.com/s/806odyj5vyco3dg/lcars_pack.tar.gz;
 
 ############################ Download others #######################################      
@@ -754,8 +686,7 @@ chmod -R 777 *;;
     wget https://www.dropbox.com/s/lvs3eb7q64ericc/oscam64.tar.gz;
     wget https://www.dropbox.com/s/hb2mv9ytz5q6yz7/picon.tar.gz;
     wget https://www.dropbox.com/s/m32a4s23h7r00mg/themes.tar.gz;
-    wget https://www.dropbox.com/s/omrs8wwh5jbz46e/logos.tar.gz;
-    wget https://www.dropbox.com/s/x80qbwk8xnwi0u5/flat_weather.tar.gz;
+    wget https://www.dropbox.com/s/q0c9vt8xlmtaseq/logos.tar.gz;
 
     #
     chmod -R 777 *;;
@@ -857,9 +788,9 @@ b)                                        ######################################
                                           #                   Cmrt                #
                                           #########################################
 
-    spt-get -y install libva-dev  #  controllare libva
-    apt-get -y install zlib1g-dev libass-dev libdrm-dev libvorbis-dev libogg-dev 
-    apt-get -y install libx11-dev libperl-dev libpciaccess-dev libpciaccess0
+   apt-get -y install libva-dev  #  controllare libva
+   apt-get -y install zlib1g-dev libass-dev libdrm-dev libvorbis-dev libogg-dev 
+   apt-get -y install libx11-dev libperl-dev libpciaccess-dev libpciaccess0
 
     clear
     echo "                    Installing Cmrt "; sleep 3
@@ -903,8 +834,8 @@ c)                                        ######################################
     ./autogen.sh
     ./configure
     make -j4 VERBOSE=1
-    make -j4 install
-;;
+    make -j4 install;;
+
 #############################################################################################################################  
 #############################################################################################################################
 
@@ -923,8 +854,8 @@ d)                                        ######################################
     ./autogen.sh
     ./configure #--enable-hybrid-codec
     make -j4 VERBOSE=1
-    make -j4 install  
-;;
+    make -j4 install;;
+
 #############################################################################################################################  
 #############################################################################################################################
 
@@ -955,8 +886,23 @@ f)                                        ######################################
     clear
     echo "                    Installing Nasm "; sleep 4
     cd /usr/local/src; mkdir -p ffmpeg_sources; cd ffmpeg_sources
-    cp -rf /home/`logname`/Vdrrepo/nasm-2.14rc15.tar.bz2 /usr/local/src/ffmpeg_sources && tar xjvf nasm-2.14rc15.tar.bz2 && rm -rf nasm-2.14rc15.tar.bz2 && mv nasm-2.14rc15 nasm && cd nasm && ./autogen.sh && ./configure && make && make install;;
+    cp -rf /home/`logname`/Vdrrepo/nasm-2.14rc16.tar.bz2 /usr/local/src/ffmpeg_sources && tar xjvf nasm-2.14rc16.tar.bz2 && rm -rf nasm-2.14rc16.tar.bz2 && mv nasm-2.14rc16 nasm && cd nasm && ./autogen.sh && ./configure && make && make install;;
 
+
+
+#############################################################################################################################  
+#############################################################################################################################
+
+f1)                                       #########################################
+                                          #               Remove Nasm          #
+                                          #########################################
+
+
+    clear
+    echo "                    Removing Fdk-aac - Git"; sleep 4
+    apt-get -y purge nasm; rm -rf /usr/local/src/ffmpeg_sources/nasm; rm -rf /usr/local/src/packages/nasm;;
+
+    
 
 #############################################################################################################################  
 #############################################################################################################################
@@ -977,7 +923,6 @@ g)                                        ######################################
     checkinstall --pkgname=x264 --pkgversion="2:26.09.2015-git" --bk --default --deldoc=yes --pakdir=$PACKAGES
     ldconfig -v;;  
 
-
 #############################################################################################################################  
 #############################################################################################################################
 
@@ -990,7 +935,6 @@ g1)                                       ######################################
     echo "                    Removing X264 - Git"; sleep 4
     apt-get -y purge x264; rm -rf /usr/local/src/ffmpeg_sources/x264; rm /usr/local/src/packages/x264*;;
   
-
 #############################################################################################################################  
 #############################################################################################################################
 
@@ -1012,9 +956,6 @@ h)                                        ######################################
     checkinstall --pkgname=x265 --pkgversion="2:1.7-git" --bk --default --deldoc=yes --pakdir=$PACKAGES;
     ldconfig -v;;
 
-    
-    
-
 #############################################################################################################################  
 #############################################################################################################################
 
@@ -1027,8 +968,6 @@ h1)                                       ######################################
     echo "                    Removing X265 - Git"; sleep 4
     apt-get -y purge x265; rm -rf /usr/local/src/ffmpeg_sources/x265; rm -rf /usr/local/src/packages/x265*;;
 
-
-
 #############################################################################################################################  
 #############################################################################################################################
 
@@ -1039,17 +978,9 @@ i)                                        ######################################
 
 
     clear
-    echo "           Installing Fdk-aac - Git"; sleep 4
-    		dialog --title "   ** Setup FDK-AAC **   " --infobox "
-   		-------------------------------------------------------------------------
-                	[a]		Setup FDK-AAC only for Nvidia graphic cards             
-                	[b]		Setup FDK-AAC only for Intel graphic cards                                                    
-   		------------------------------------------------------------------------- " 0 0
-    echo -n "        Enter your menu choice  [a-b]:      "
-    read yourch
-    case $yourch in
+    echo "           Installing Fdk-aac - Git"; sleep 4;
 
-a)  cd /usr/local/src/ffmpeg_sources
+    cd /usr/local/src/ffmpeg_sources
     rm -Rf fdk-aac
     cp -Rf /home/`logname`/Vdrrepo/v0.1.6.tar.gz /usr/local/src/ffmpeg_sources; tar -zxvf v0.1.6.tar.gz;
     rm -rf v0.1.6.tar.gz; mv fdk-aac-0.1.6 fdk-aac;
@@ -1058,17 +989,7 @@ a)  cd /usr/local/src/ffmpeg_sources
     ./configure --enable-shared --enable-static
     make -j4
     checkinstall --pkgname=fdk-aac --pkgversion="0.1.6" --backup=no --deldoc=yes --fstrans=no --default --pakdir=$PACKAGES;;
-b)  cd /usr/local/src/ffmpeg_sources
-    rm -Rf fdk-aac
-    cp -Rf /home/`logname`/Vdrrepo/fdk-aac /usr/local/src/ffmpeg_sources;
-    cd fdk-aac;  
-    ./autogen.sh
-    ./configure --enable-shared --enable-static
-    make -j4
-    checkinstall --pkgname=fdk-aac --pkgversion="1-git" --backup=no --deldoc=yes --fstrans=no --default --pakdir=$PACKAGES;;
-
-esac    
-;;    
+   
 
 
 #############################################################################################################################  
@@ -1082,18 +1003,13 @@ i1)                                       ######################################
     clear
     echo "                    Removing Fdk-aac - Git"; sleep 4
     apt-get -y purge fdk-aac; rm -rf /usr/local/src/ffmpeg_sources/fdk-aac; rm -rf /usr/local/src/packages/fdk-aac*;;
-
-    
-
-    
+ 
 #############################################################################################################################  
 #############################################################################################################################
 
 l)                                        #########################################
                                           #                  LIBVPX               #
                                           #########################################
-
-
 
 
     clear
@@ -1135,6 +1051,18 @@ m)                                        ######################################
     time make -j4
     time make -j4 install;;
 
+#############################################################################################################################  
+#############################################################################################################################
+
+m1)                                       #########################################
+                                          #            Remove Libvorbis              #
+                                          #########################################
+
+
+    clear
+    echo "                    Removing Libvorbis "; sleep 4
+    apt-get -y purge libvorbis; rm -rf /usr/local/src/ffmpeg_sources/libvorbis; rm -rf /usr/local/src/packages/libvorbis*;;
+
 
 #############################################################################################################################  
 #############################################################################################################################
@@ -1149,6 +1077,8 @@ n)                                        ######################################
     apt-get -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev libvorbis-dev
     apt-get -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
     apt-get -y install libtheora-dev libxvidcore-dev libvdpau-dev libmp3lame-dev libogg-dev libfreetype6-dev
+    apt-get -y install freeglut3 freeglut3-dev libglew-dev libglm-dev mesa-common-dev
+
 clear        
     		dialog --title "   ** Setup Vaapidevice / Softhddevice / Xineliboutput **   " --infobox "
    		--------------------------------------------------------------
@@ -1158,15 +1088,15 @@ clear
     echo -n "        Enter your menu choice  [a-b]:      "
     read yourch
     case $yourch in
-a) if [ -f /usr/local/nv-codec-headers/makefile ];
+a) if [ -f /usr/local/src/ffmpeg_sources/nv-codec-headers/makefile ];
   then  echo "nv-codec-headers are already installed"
 else
     cd /usr/local/src/ffmpeg_sources; git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git; cd nv-codec-headers; make; make install;
 fi
     echo "                    Wait for a few seconds ...";
     cd /usr/local/src/ffmpeg_sources;
-    rm -Rf ffmpeg
-    cp -rf /home/`logname`/Vdrrepo/ffmpeg-3.4.4.tar.bz2 /usr/local/src/ffmpeg_sources/; tar xivf ffmpeg-3.4.4.tar.bz2; rm -rf ffmpeg-3.4.4.tar.bz2; mv ffmpeg-3.4.4 ffmpeg; cd ffmpeg; ./configure --extra-libs="-ldl" --enable-gpl --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libxcb --disable-libopus --enable-libtheora --enable-libvorbis --disable-libvpx --enable-libx264 --enable-libx265 --enable-nonfree --enable-libxvid --enable-vdpau --enable-pic --enable-shared --disable-nvenc --disable-doc --enable-avresample 
+    rm -Rf ffmpeg;
+    cp -rf /home/`logname`/Vdrrepo/ffmpeg-3.4.4.tar.bz2 /usr/local/src/ffmpeg_sources/; tar xivf ffmpeg-3.4.4.tar.bz2; rm -rf ffmpeg-3.4.4.tar.bz2; mv ffmpeg-3.4.4 ffmpeg; cd ffmpeg; ./configure --extra-libs="-ldl" --enable-gpl --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libxcb --disable-libopus --enable-libtheora --enable-libvorbis --disable-libvpx --enable-libx264 --enable-libx265 --enable-nonfree --enable-libxvid --enable-vdpau --enable-pic --enable-shared  --disable-doc --enable-swresample --enable-avresample --disable-nvenc
     echo "                    Press Enter to continue ...               "; read enterKey;
     make -j4 install;;
 b)     echo "                    Wait for a few seconds ...";
@@ -1188,12 +1118,11 @@ n1)                                       ######################################
 
     clear
     echo "                    Removing FFmpeg "; sleep 4
-    rm -rf /usr/local/src/ffmpeg_sources/ffmpeg; rm /usr/local/src/packages/ffmpeg*;; 
+    rm -rf /usr/local/src/ffmpeg_sources/nv-codec-headers; rm -rf /usr/local/src/ffmpeg_sources/ffmpeg; rm /usr/local/src/packages/ffmpeg*;; 
 
 
 #############################################################################################################################  
 #############################################################################################################################
-
 
 z) ;;
     esac
@@ -1238,7 +1167,8 @@ a)                                        ######################################
     echo "*** Install libraries ***"; sleep 4 
     cd $SRC; 
     apt-get -y install libfontconfig1-dev libfreetype6-dev libfribidi-dev gettext binutils libglibmm-2.4-dev
-    apt-get -y install libcap-dev libjpeg-dev libtinyxml-dev libncurses5-dev libncursesw5-dev
+    apt-get -y install libcap-dev libjpeg-dev libtinyxml-dev
+    apt-get -y install  libncurses5-dev libncursesw5-dev linux-libc-dev python3
 #
 #
     clear    
@@ -1249,6 +1179,12 @@ a)                                        ######################################
     cd vdr; 
     echo "               Patching VDR 2.4.1      "; sleep 1
     cp -rf /home/`logname`/Vdrrepo/vdr-patches.2.4.1.tar.gz $SRC/vdr/; tar -zxvf vdr-patches.2.4.1.tar.gz; rm -rf vdr-patches.2.4.1.tar.gz; sleep 1;
+echo "                  *** KLS_ckr_v06	 ***"
+    patch -p1 < 00_vdr_KLS_ckr_v06.patch; sleep 1;
+echo "                  *** KLS_ckr_v06v3	 ***"
+    patch -p1 < 00_vdr_KLS_ckr_v06v3.patch; sleep 1;       
+#echo "                  *** Reimer	 ***"
+#    patch -p1 < Reimer.patch; sleep 1;    # only for Ubuntu 20.04
 echo "                  *** zapcockpit ***"
     patch -p1 < 02_vdr_zapcockpit.patch; sleep 1;
 echo "                  *** menuselection ***"
@@ -1271,22 +1207,16 @@ echo "                  *** svdrphosts ***"
     patch -p1 < 22_vdr_svdrphosts.patch; sleep 1;
 echo "                  *** maxdevice ***"
     patch -p1 < 23_vdr_maxdevice.patch; sleep 1;
-echo "                  *** dvb_power_saving ***"
-    patch -p1 < 24_vdr_dvb_power_saving_feature.patch; sleep 1;
+#echo "                  *** dvb_power_saving ***"
+#    patch -p1 < 24_vdr_dvb_power_saving_feature.patch; sleep 1;
 echo "                  *** gcc7 ***"
     patch -p1 < 25_vdr_gcc7.patch; sleep 1;
 echo "                  *** menuorg ***"
    patch -p1 < 26_vdr_menuorg.patch; sleep 1;
-#echo "                  *** permashift ***"
-#    patch -p1 < 27_vdr_permashift.patch.x86; sleep 1;
 echo "                  *** hide_first_recording_level ***"
     patch -p1 < 28_vdr_hide_first_recording_level.patch; sleep 1;
 echo "                  *** ttxtsub ***"
     patch -p1 < 29_vdr_ttxtsub.patch; sleep 1;
-echo "                  *** vdr_camtweaks ***"
-    patch -p1 < 99_vdr_camtweaks.patch; sleep 1;
-echo "                  *** ci_debug ***"
-    patch -p1 < 99_vdr_ci_debug.patch; sleep 1;
 echo "                  *** dvbchan ***"
     patch -p1 < vdr-dvbchan.patch; sleep 1;
     # 
@@ -1338,7 +1268,7 @@ clear
 echo "                        "
 echo "                        "
 echo "                        "
-echo "Install Basic plugins  ( Dvbapi - Vdaapidevice / Softhddevice / Xineliboutput - Epgsearch  - TvGuide - Iptv - ExternalPlayer - Channelscan - Skinflatplus - Skindesigner - TvGuide - Weatherforecast)"
+echo "Install Basic plugins  ( Dvbapi - Epgsearch  - Vdaapidevice / Softhddevice / Xineliboutput - Skindesigner - Skin Nopacity - Channelscan - ExternalPlayer - Iptv - Radio - System Info)"
 echo "                 Press Enter to continue ...         "; read enterKey
 cd $SRC;
 mkdir -p /usr/local/lib/vdr/plugins; mkdir -p /usr/local/lib/vdr/scripts; mkdir -p /etc/vdr/plugins; mkdir -p /etc/vdr/themes; cd $PLUGINS; mkdir -p tvguide;
@@ -1350,6 +1280,14 @@ cd $VDRSRC;
 cp -rf /home/`logname`/Vdrrepo/vdr-plugin-dvbapi /$VDRSRC/; mv vdr-plugin-dvbapi dvbapi; cd ../..; make plugins
 #
 #
+clear
+echo ""; echo "               *** Epgsearch ***"; echo ""; sleep 3
+cd $VDRSRC;
+apt-get -y install libc6 libgcc1 libstdc++6
+cp -rf /home/`logname`/Vdrrepo/vdr-plugin-epgsearch /$VDRSRC/; mv vdr-plugin-epgsearch epgsearch; cd epgsearch; cp -rf /home/`logname`/Vdrrepo/patch_epgsearch.tar.gz /$VDRSRC/epgsearch/; tar -zxvf patch_epgsearch.tar.gz; rm -rf patch_epgsearch.tar.gz; patch -p1 < 10_langinfo-include.diff; sleep 1; patch -p1 < 11_epgsearch_menue.patch; sleep 1; patch -p1 < 12_epgsearch_README.patch; sleep 1; cd ../../..; make plugins; 
+#
+#
+cd $VDRSRC; 
 			   echo "               *** Setup Vaapidevice / Softhddevice / Xineliboutput  ***"; sleep 1
 clear        
     				dialog --title "   ** Setup Vaapidevice / Softhddevice / Xineliboutput **   " --infobox "
@@ -1357,20 +1295,18 @@ clear
                 				Setup Vaapidevice only for Intel graphic cards             
   				-------------------------------------------------------------------------
 			        [a]    Vaapidevice
-			        [b]    Softhddevice intel                                
    				-------------------------------------------------------------------------
                 				Setup Softhddevice only for Nvidia graphic cards             
   				-------------------------------------------------------------------------     
-			        [c]    Softhddevice openglosd (default)                  
-			        [d]    Softhddevice no openglosd 
+			        [b]    Softhddevice                  
 
    				-------------------------------------------------------------------------
                 				Setup Xineliboutput Intel/Nvidia graphic cards             
   				------------------------------------------------------------------------- 
-			        [e]    Xineliboutput                                         
+			        [c]    Xineliboutput                                         
         
    				------------------------------------------------------------------------- " 0 0
-    echo -n "        Enter your menu choice  [a-e]:      "
+    echo -n "        Enter your menu choice  [a-c]:      "
     read yourch
     case $yourch in
     
@@ -1381,33 +1317,17 @@ apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasou
 apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxext-dev
 cd $VDRSRC; git clone https://github.com/pesintta/vdr-plugin-vaapidevice; cp -rf /$VDRSRC/vdr-plugin-vaapidevice /home/`logname`/Vdrrepo/; mv vdr-plugin-vaapidevice vaapidevice; cd vaapidevice; export PKG_CONFIG_PATH="usr/local/src/libva/lib/pkgconfig:usr/local/src/ffmpeg_sources/ffmpeg/lib/pkgconfig"; make; make install;;
 
-
-b) echo ""; echo "               *** Softhddevice intel***"; echo ""; sleep 3
+b) echo ""; echo "               *** Softhddevice**"; echo ""; sleep 3
 apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev 
 apt-get -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev 
 apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libxext6  
 apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxext-dev
-cd $VDRSRC; 
-wget https://github.com/rellla/softhddevice-openglosd/archive/jinx.tar.gz; cp -rf /$VDRSRC/jinx.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf jinx.tar.gz; rm -rf jinx.tar.gz; mv softhddevice-openglosd-jinx softhddevice; cd softhddevice; wget https://www.dropbox.com/s/pxjx9wnb71f2am4/patch_softhddevice_no_openglosd.tar.gz; cp -rf /$VDRSRC/softhddevice/patch_softhddevice_no_openglosd.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_softhddevice_no_openglosd.tar.gz; rm -rf patch_softhddevice_no_openglosd.tar.gz; patch -p1 < 03_LanguageIT.patch; patch -p1 < 10_softhddevice_trusty.patch; patch -p1 < 11_softhddevice_Makefile.patch; patch -p1 < 13_softhddevice_fixmemleakvaapi.patch; patch -p1 < 14_softhddevice_vaapi100.patch; patch -p1 < 16_softhddevice_no-inactive-reset-on-attache.patch; make ALSA=1 OSS=0 VDPAU=0 VAAPI=1 SCREENSAVER=0 SWRESAMPLE=1; make install;;
-
-
-c) echo ""; echo "               *** Softhddevice openglosd***"; echo ""; sleep 3
-apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev 
-apt-get -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev 
-apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libxext6  
-apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxext-dev
-cd $VDRSRC; 
-wget https://github.com/rellla/softhddevice-openglosd/archive/jinx.tar.gz; cp -rf /$VDRSRC/jinx.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf jinx.tar.gz; rm -rf jinx.tar.gz; mv softhddevice-openglosd-jinx softhddevice; cd softhddevice; cp -rf /home/`logname`/Vdrrepo/patch_softhddevice_5.tar.gz /$VDRSRC/softhddevice; tar -zxvf patch_softhddevice_5.tar.gz; rm -rf patch_softhddevice_5.tar.gz; patch -p1 < 03_LanguageIT.patch; patch -p1 < 10_softhddevice_trusty.patch; patch -p1 < 11_softhddevice_Makefile.patch; patch -p1 < 13_softhddevice_fixmemleakvaapi.patch; patch -p1 < 14_softhddevice_vaapi100.patch; patch -p1 < 16_softhddevice_no-inactive-reset-on-attache.patch; make ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1; make install;;
-
-d) echo ""; echo "               *** Softhddevice no openglosd***"; echo ""; sleep 3      
-apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev 
-apt-get -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev 
-apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libxext6  
-apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxext-dev
+apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
+apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev
 cd $VDRSRC; 
 wget https://github.com/rellla/softhddevice-openglosd/archive/jinx.tar.gz; cp -rf /$VDRSRC/jinx.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf jinx.tar.gz; rm -rf jinx.tar.gz; mv softhddevice-openglosd-jinx softhddevice; cd softhddevice; wget https://www.dropbox.com/s/pxjx9wnb71f2am4/patch_softhddevice_no_openglosd.tar.gz; cp -rf /$VDRSRC/softhddevice/patch_softhddevice_no_openglosd.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_softhddevice_no_openglosd.tar.gz; rm -rf patch_softhddevice_no_openglosd.tar.gz; patch -p1 < 03_LanguageIT.patch; patch -p1 < 10_softhddevice_trusty.patch; patch -p1 < Makefile_noopenglosd.patch; patch -p1 < 13_softhddevice_fixmemleakvaapi.patch; patch -p1 < 14_softhddevice_vaapi100.patch; patch -p1 < 16_softhddevice_no-inactive-reset-on-attache.patch; make ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1; make install;;
 
-e) echo ""; echo "               *** Xineliboutput***"; echo ""; sleep 3      
+c) echo ""; echo "               *** Xineliboutput***"; echo ""; sleep 3      
 cd $VDRSRC; apt-get -y install autopoint libxine2-dev libxrender-dev libextractor-dev libxrandr-dev libxine2-ffmpeg mjpegtools;
 if [ -f $PACKAGES/libxine2*.deb ]; then
     echo "Xine-lib $Remind"; 
@@ -1416,23 +1336,19 @@ if [ -f $PACKAGES/libxine2*.deb ]; then
 cd $VDRSRC; 
 git clone https://github.com/vdr-projects/vdr-plugin-xineliboutput.git; cp -rf /$VDRSRC/vdr-plugin-xineliboutput /home/`logname`/Vdrrepo/; mv -f vdr-plugin-xineliboutput xineliboutput; cd xineliboutput; make; make install; cd ../../..; make plugins; mkdir -p /etc/vdr/plugins/xineliboutput; cp -rf /usr/local/src/vdr/PLUGINS/src/xineliboutput/*.mpg /etc/vdr/plugins/xineliboutput; cp -rf /usr/local/src/vdr/PLUGINS/src/xineliboutput/examples/remote.conf.example /etc/vdr/plugins/xineliboutput/remote.conf; echo "*** allowed_hosts.conf setup ***";;
 esac
+#
+#
+clear
+echo ""; echo "               *** Skindesigner ***"; echo ""; sleep 3
+cd $VDRSRC; apt-get -y install graphicsmagick-libmagick-dev-compat libxml2-dev librsvg2-dev; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-skindesigner /$VDRSRC/; mv -f vdr-plugin-skindesigner skindesigner; cd skindesigner/skins/metrixhd; wget https://www.dropbox.com/s/wfr9pinoiw22vbb/translation_metrixhd.diff.tar.gz; tar -zxvf translation_metrixhd.diff.tar.gz; mv -f translation_metrixhd.diff.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < translation_metrixhd.diff; rm -rf translation_metrixhd.diff; cd ../..; cp -rf /home/`logname`/Vdrrepo/patch_skindesigner.tar.gz /$VDRSRC/skindesigner; tar -zxvf patch_skindesigner.tar.gz; rm -rf patch_skindesigner.tar.gz; patch -p1 < 10_skindesigner_scriptsdir.patch; make install; cd /$SHARE/skindesigner/scripts/; ln -s temperatures.default temperatures; ln -s vdrstats.default vdrstats;
 # 
 #
 clear
-echo ""; echo "               *** Epgsearch ***"; echo ""; sleep 3
-cd $VDRSRC;
-apt-get -y install libc6 libgcc1 libstdc++6
-cp -rf /home/`logname`/Vdrrepo/vdr-plugin-epgsearch /$VDRSRC/; mv vdr-plugin-epgsearch epgsearch; cd epgsearch; cp -rf /home/`logname`/Vdrrepo/patch_epgsearch.tar.gz /$VDRSRC/epgsearch/; tar -zxvf patch_epgsearch.tar.gz; rm -rf patch_epgsearch.tar.gz; patch -p1 < 10_langinfo-include.diff; sleep 1; patch -p1 < 11_epgsearch_menue.patch; sleep 1; patch -p1 < 12_epgsearch_README.patch; sleep 1; cd ../../..; make plugins; 
-#
-#
-clear
-echo ""; echo "               *** Tvguide ***";  sleep 3
-apt-get -y install gettext graphicsmagick-libmagick-dev-compat libmagick++-6.q16-dev
-cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/tvguide-master.tar.gz /$VDRSRC; tar -zxvf tvguide-master.tar.gz; mv tvguide-master tvguide; rm -rf tvguide-master.tar.gz; cd tvguide;  make; cd ../../..; make plugins; cp -rf $VDRSRC/tvguide/themes/* /etc/vdr/themes/;
-#
-#
-echo ""; echo "               *** Iptv ***"; echo ""; sleep 3
-cd $VDRSRC; apt-get -y install libcurl3 libcurl4-gnutls-dev vlc; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-iptv /$VDRSRC; mv vdr-plugin-iptv iptv; cd iptv; cp -rf /home/`logname`/Vdrrepo/patch_iptv.tar.gz /$VDRSRC/iptv; tar -zxvf patch_iptv.tar.gz; rm -rf patch_iptv.tar.gz; patch -p1 < iptv.patch; sleep 1; patch -p1 < 10_iptv_protocolext.patch; sleep 1;  make; cd ../../..; make plugins; mkdir -p /etc/vdr/plugins/iptv/vlcinput; cp -rf /home/`logname`/Vdrrepo/iptv_conf.tar.gz /$PLUGINS/iptv/vlcinput/; cd $PLUGINS/iptv/vlcinput; tar -zxvf iptv_conf.tar.gz; rm -rf iptv_conf.tar.gz; 
+echo ""; echo "               *** Skin-Nopacity ***";  sleep 3
+apt-get -y install graphicsmagick-libmagick-dev-compat libmagick++-6.q16-dev
+apt-get -y install libmagickcore-6.q16-3 libfontconfig1-dev 
+apt-get -y install zlib1g zlib1g-dev libglib2.0-0 libexpat1 libexpat1-dev libpcre3 libpcre3-dev
+cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/skin-nopacity /$VDRSRC;  cd skin-nopacity; cp -rf /home/`logname`/Vdrrepo/patch_skinnopacity.tar.gz /$VDRSRC/skin-nopacity; tar -zxvf patch_skinnopacity.tar.gz; rm -rf patch_skinnopacity.tar.gz; patch -p1 < 11_skinnopacity_displaychannel.c.patch; make install; 
 #  
 #
 clear
@@ -1442,22 +1358,17 @@ cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-externalplayer /$VDRSRC; m
 #
 clear
 echo ""; echo "               *** Channelscan ***";  sleep 3
-cd $VDRSRC; apt-get -y install libboost-iostreams-dev; cp -rf /home/`logname`/Vdrrepo/channelscan.tar.gz /$VDRSRC; tar -zxvf channelscan.tar.gz; rm -rf channelscan.tar.gz; cp -rf $VDRSRC/channelscan/script/* /usr/local/bin; cd ../..; make plugins; cd $PLUGINS; mkdir -p transponders; cp -rf /home/`logname`/Vdrrepo/satellite_pack.tar.gz  $PLUGINS/transponders; cd transponders; tar -zxvf satellite_pack.tar.gz; rm -rf satellite_pack.tar.gz;
+cd $VDRSRC; apt-get -y install libboost-iostreams-dev; cp -rf /home/`logname`/Vdrrepo/channelscan /$VDRSRC;  cp -rf $VDRSRC/channelscan/script/* /usr/local/bin; cd ../..; make plugins; cd $PLUGINS; mkdir -p transponders; cp -rf /home/`logname`/Vdrrepo/satellite_pack.tar.gz  $PLUGINS/transponders; cd transponders; tar -zxvf satellite_pack.tar.gz; rm -rf satellite_pack.tar.gz;
 #
+
 #
-#clear
-#echo ""; echo "               *** Skin Flatplus ***"; echo ""; sleep 3
-#cd $VDRSRC; apt-get -y install graphicsmagick-libmagick-dev-compat imagemagick libmagick++-6.q16-dev lm-sensors; cp -rf /home/`logname`/Vdrrepo/skin-flatplus /$VDRSRC/; cd skin-flatplus; make install; cd $LIB/skinflatplus/widgets/temperatures/; ln -s temperatures.default temperatures; cd ../system_information; ln -s system_information.ubuntu system_information; cp -rf /home/`logname`/Vdrrepo/flat_weather.tar.gz /$LIB/skinflatplus/widgets/weather/; cd ../weather; tar -zxvf flat_weather.tar.gz; rm -rf flat_weather.tar.gz;
-# qui sopra c'è da mettere le icone di menù mancanti che sono dentro le skin del Skin Flatplus traducendole e comprimendole
+echo ""; echo "               *** Iptv ***"; echo ""; sleep 3
+cd $VDRSRC; apt-get -y install libcurl3 libcurl4-gnutls-dev vlc; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-iptv /$VDRSRC; mv vdr-plugin-iptv iptv; cd iptv; cp -rf /home/`logname`/Vdrrepo/patch_iptv.tar.gz /$VDRSRC/iptv; tar -zxvf patch_iptv.tar.gz; rm -rf patch_iptv.tar.gz; patch -p1 < vlc2iptv.patch; sleep 1; patch -p1 < 10_iptv_protocolext.patch; sleep 1;  make; cd ../../..; make plugins; mkdir -p /etc/vdr/plugins/iptv/channels; cp -rf /home/`logname`/Vdrrepo/iptv_conf.tar.gz /$PLUGINS/iptv/channels/; cd $PLUGINS/iptv/channels; tar -zxvf iptv_conf.tar.gz; rm -rf iptv_conf.tar.gz; 
+#
 #
 clear
-echo ""; echo "               *** Skindesigner ***"; echo ""; sleep 3
-cd $VDRSRC; apt-get -y install graphicsmagick-libmagick-dev-compat libxml2-dev librsvg2-dev; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-skindesigner /$VDRSRC/; mv -f vdr-plugin-skindesigner skindesigner; cd skindesigner/skins/metrixhd; wget https://www.dropbox.com/s/wfr9pinoiw22vbb/translation_metrixhd.diff.tar.gz; tar -zxvf translation_metrixhd.diff.tar.gz; mv -f translation_metrixhd.diff.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < translation_metrixhd.diff; rm -rf translation_metrixhd.diff; cd ../..; cp -rf /home/`logname`/Vdrrepo/patch_skindesigner.tar.gz /$VDRSRC/skindesigner; tar -zxvf patch_skindesigner.tar.gz; rm -rf patch_skindesigner.tar.gz; patch -p1 < 10_skindesigner_scriptsdir.patch; make install; cd /$SHARE/skindesigner/scripts/; ln -s temperatures.default temperatures; ln -s vdrstats.default vdrstats;
-# 
-# 
-clear
-echo ""; echo "               *** Weatherforecast ***";  sleep 3
-cd $VDRSRC; apt-get -y install libcurl4-openssl-dev libjansson-dev librsvg2-dev; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-weatherforecast /$VDRSRC; mv vdr-plugin-weatherforecast weatherforecast; cd weatherforecast; cp -rf /home/`logname`/Vdrrepo/patch_weatherforecast.tar.gz /$VDRSRC/weatherforecast/; tar -zxvf patch_weatherforecast.tar.gz; rm -rf patch_weatherforecast.tar.gz; patch -p1 < 10_weatherforecast_debug.patch; sleep 1; patch -p1 < 11_weatherforecast_i18n-it.patch; cd ../../..; make plugins; 
+echo ""; echo "               *** Radio ***";  sleep 3
+cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-radio-master.tar.gz /$VDRSRC; tar -zxvf vdr-plugin-radio-master.tar.gz; mv vdr-plugin-radio-master radio; cd radio; make; cd ../../..; make plugins; cd $PLUGINS; mkdir -p radio; cp -rf $VDRSRC/radio/config/mpegstill/* $PLUGINS/radio/; cp -rf $VDRSRC/radio/config/scripts/radioinfo-0-128 $PLUGINS/radio;
 #
 #
 clear
@@ -1480,7 +1391,7 @@ a1)                                       ######################################
 
     clear
     echo "                    Removing VDR 2.4.x"; sleep 4
-dpkg -r vdr; rm -rf /etc/vdr; rm -rf /usr/local/share/vdr; rm -rf /usr/local/lib/vdr; rm -rf /var/cache/vdr; cd $SRC; rm -rf vdr vdr-*; cd packages; rm -rf vdr*.deb; rm -rf /usr/local/bin/vdrpoweroff; rm -rf /usr/local/bin/vdrrun;  rm -rf /usr/local/bin/start-vdr-xine.sh; rm -rf /usr/local/bin/start-xinelib-vdr.sh; rm -rf /usr/local/share/vdr; rm -rf /usr/local/bin/start-vdr.sh; rm -rf /home/`logname`/Scrivania/Xinelib.desktop; rm -rf /home/`logname`/Scrivania/Vdr-Xine.desktop; rm -rf /home/`logname`/Scrivania/Vdr.desktop; rm -rf /home/`logname`/Scrivania/KillVdr.desktop; cd $PACKAGES; rm -rf vdr*.deb; rm -rf /usr/share/applications/Xinelib.desktop; rm -rf /usr/share/applications/Vdr-Xine.desktop; rm -rf /usr/share/applications/Vdr.desktop; rm -rf /usr/share/applications/KillVdr.desktop;
+dpkg -r vdr; rm -rf /etc/vdr; rm -rf /usr/share/vdr; rm -rf /usr/lib/vdr; rm -rf /var/cache/vdr; cd $SRC; rm -rf vdr vdr-*; cd packages; rm -rf vdr*.deb; rm -rf /usr/local/bin/vdrpoweroff; rm -rf /usr/local/bin/vdrrun;  rm -rf /usr/local/bin/start-vdr-xine.sh; rm -rf /usr/local/bin/start-xinelib-vdr.sh; rm -rf /usr/share/vdr; rm -rf /usr/local/bin/start-vdr.sh; rm -rf /home/`logname`/Scrivania/Xinelib.desktop; rm -rf /home/`logname`/Scrivania/Vdr-Xine.desktop; rm -rf /home/`logname`/Scrivania/Vdr.desktop; rm -rf /home/`logname`/Scrivania/KillVdr.desktop; cd $PACKAGES; rm -rf vdr*.deb; rm -rf /usr/share/applications/Xinelib.desktop; rm -rf /usr/share/applications/Vdr-Xine.desktop; rm -rf /usr/share/applications/Vdr.desktop; rm -rf /usr/share/applications/KillVdr.desktop;
     echo "                    Press Enter to continue ...               "; read enterKey;;
 
 
@@ -1537,19 +1448,18 @@ clear
    ----------------------------------------------
         [a]    Vaapidevice                   
         [b]    Softhddevice Nvidia
-        [c]    Softhddevice Intel                  
-        [d]    Xineliboutput Nvidia graphic card                             
-        [e]    Xineliboutput Intel graphic card 
+        [c]    Xineliboutput Nvidia graphic card                             
+        [d]    Xineliboutput Intel graphic card 
                                     
    ---------------------------------------------- " 0 0
     echo -n "        Enter your menu choice  [a-d]:      "
     read yourch
     case $yourch in
 a) sed -i "s|-P'dvbapi'|& -P'vaapidevice -f -a pulse'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_vaapidevice.tar.gz && cp -rf /etc/vdr/setup16_vaapidevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_vaapidevice.tar.gz && rm -rf setup16_vaapidevice.tar.gz;;
-b) sed -i "s|-P'dvbapi'|& -P'softhddevice -f -v vdpau -w no-hw-decoder'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
+b) sed -i "s|-P'dvbapi'|& -P'softhddevice -f -v vdpau'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
 c) sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --video=vdpau --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_xineliboutput.tar.gz && cp -rf /etc/vdr/setup16_xineliboutput.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_xineliboutput.tar.gz && rm -rf setup16_xineliboutput.tar.gz;;
 d) sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --video=vaapi --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_xineliboutput.tar.gz && cp -rf /etc/vdr/setup16_xineliboutput.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_xineliboutput.tar.gz && rm -rf setup16_xineliboutput.tar.gz;;
-e) sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --video=vaapi --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_xineliboutput.tar.gz && cp -rf /etc/vdr/setup16_xineliboutput.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_xineliboutput.tar.gz && rm -rf setup16_xineliboutput.tar.gz;;
+
 esac
 
 #   Permission to execute Vdr       
@@ -1558,7 +1468,7 @@ echo "%`logname` ALL=NOPASSWD: /etc/init.d/vdr" >> /etc/sudoers
 rm -rf /usr/local/bin/vdrpoweroff; touch /usr/local/bin/vdrpoweroff
 echo '#!/bin/sh
 #file name: Kill Vdr "vdrpoweroff"
-killall -9 vdrrun & killall -9 vdr & killall -9 vdr-sxfe & killall -9 vlc 
+killall -9 vdr & killall -9 vlc & killall -9 vdr-sxfe & killall -9 vdrrun 
 # & killall -9 oscam & shutdown -h now '  >> /usr/local/bin/vdrpoweroff
 # & shutdown -h now 
 #
@@ -1595,9 +1505,10 @@ case "$1" in
         ;;
     stop)
         echo -n "Stop VDR "
-       killall vdrrun
-       killall vdr
-       killall vdr-sxfe
+       killall -9 vdr
+       killall -9 vlc       
+       killall -9 vdr-sxfe
+       killall -9 vdrrun
         # Remember status and be verbose
         ;;
     restart)
@@ -1845,6 +1756,7 @@ rm -rf /etc/vdr/diseqc.conf;
 rm -rf /etc/vdr/channels.conf;
 					echo "               *** Diseqc setup  ***"; sleep 1
 #echo "*** diseqc.conf setup ***"; sleep 3
+
     clear        
     dialog --title "   ** diseqc.conf setup **   " --infobox "
    ----------------------------------------------
@@ -1878,6 +1790,16 @@ i) cd /etc/vdr && wget https://www.dropbox.com/s/ryt4z222akmrh11/channels.conf.r
 esac
 
 
+#############################################################################################################################
+#############################################################################################################################
+
+                                          ##################################################
+                                          #                   Vlc as root                 # 
+                                          ##################################################
+
+
+sed -i 's/geteuid/getppid/' /usr/bin/vlc
+
 #############################################################################################################################  
 #############################################################################################################################
 
@@ -1892,33 +1814,27 @@ clear
    ----------------------------------------------
                 Setup remote             
    ----------------------------------------------
-        [a]    Mce                   
-        [b]    Hauppauge                   
-        [c]    Mce-Spinel remote
-        [d]    Vdr Manual                                                
-        [e]    Skip                             
+        [a]    Mce
+        [b]    Hama-Mce        
+        [c]    Hauppauge                   
+        [d]    Mce-Spinel remote
+        [e]    Vdr Manual                                                
+        [f]    Skip                             
         
    ---------------------------------------------- " 0 0
     echo -n "        Enter your menu choice  [a-e]:      "
     read yourch
     case $yourch in
 a) cd /etc/vdr; wget https://www.dropbox.com/s/hsp66258srhwa1d/mce-remote.conf.tar.gz; cp -rf /etc/vdr/mce-remote.conf.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf mce-remote.conf.tar.gz; rm -rf mce-remote.conf.tar.gz;;
-b) cd /etc/vdr; wget https://www.dropbox.com/s/gvel64ykd3eyx07/hauppauge-remote.conf.tar.gz; cp -rf /etc/vdr/hauppauge-remote.conf.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf hauppauge-remote.conf.tar.gz; rm -rf hauppauge-remote.conf.tar.gz;;
-c) cd /etc/vdr; wget https://www.dropbox.com/s/t64duomj9f5hkqp/mce-spinel.remote.conf.tar.gz; cp -rf /etc/vdr/mce-spinel.remote.conf.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf mce-spinel.remote.conf.tar.gz; rm -rf mce-spinel.remote.conf.tar.gz;;
-d) cd /etc/vdr; touch remote.conf;;
-e);;
+b) cd /etc/vdr; wget https://www.dropbox.com/s/3n34kzj48wnxrz2/hama-mce-remote.conf.tar.gz; cp -rf /etc/vdr/hama-mce-remote.conf.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf hama-mce-remote.conf.tar.gz; rm -rf hama-mce-remote.conf.tar.gz;;
+c) cd /etc/vdr; wget https://www.dropbox.com/s/gvel64ykd3eyx07/hauppauge-remote.conf.tar.gz; cp -rf /etc/vdr/hauppauge-remote.conf.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf hauppauge-remote.conf.tar.gz; rm -rf hauppauge-remote.conf.tar.gz;;
+d) cd /etc/vdr; wget https://www.dropbox.com/s/t64duomj9f5hkqp/mce-spinel.remote.conf.tar.gz; cp -rf /etc/vdr/mce-spinel.remote.conf.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf mce-spinel.remote.conf.tar.gz; rm -rf mce-spinel.remote.conf.tar.gz;;
+e) cd /etc/vdr; touch remote.conf;;
+f);;
 esac 
 #
-dmesg | grep -i ubuntu > $TEMP/ubuntu
-if cat $TEMP/ubuntu | grep "ubuntu1~16.04"; then
-   echo "Ubuntu 16.04 detected"; rm -rf $TEMP/ubuntu
-cp -rf /usr/share/applications/KillVdr.desktop /home/`logname`/Scrivania/
-cp -rf /usr/share/applications/KillOscam.desktop /home/`logname`/Scrivania/
-cp -rf /usr/share/applications/Vdr.desktop /home/`logname`/Scrivania/
-cp -rf /usr/share/applications/Oscam.desktop /home/`logname`/Scrivania/
-	echo "Installation completed";
-		else echo "Installation completed";
-fi;
+echo "Installation completed";
+
 sleep 2;
 # Start vdr
 killall -9 vdr
@@ -2095,7 +2011,6 @@ a1)                                       ######################################
     esac
 ;;
 
-# /addons/service.xbmc.versioncheck/lib/*; rm -rf /usr/share/kodi/*;
 #############################################################################################################################  
 #############################################################################################################################
 
@@ -2159,7 +2074,7 @@ esac
     echo "                                              ,'   2013 ~ 2014 ~ 2015 ~ 2016      ',"
     echo "                                             '        Vdr_installer_2.4.1         '"
     echo "                                              ',        by fiveten_59 ®         '"
-    echo "                                              ',               2019           ,'"
+    echo "                                              ',               2020           ,'"
     echo "                                                '----,      ,----,       ,----'"
     echo "                                                      '----'      '-----'"
     echo "                                                                O"

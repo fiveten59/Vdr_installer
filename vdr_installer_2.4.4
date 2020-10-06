@@ -3,7 +3,7 @@
 #                                                                                       #
 # Script name: vdr_2.4.4_installer                                                      #
 # Version: 2.4.4 Repository Master (https://github.com/fiveten59/Vdr_installer)        #
-# Tested on Ubuntu 20.04                                                               #
+# Tested on Ubuntu 18.04 & 20.04                                                               #
 # chmod the script                                                                      #
 # then load it simply typing: sudo ./vdr_2.4.4_installer                                #
 #                                                                                       #
@@ -273,7 +273,7 @@ dialog --title "   ♦♦♦♦♦   VDR 2.4.4 Version Installer Script - Librar
           |   =======================================================================================   |
           |   .............♦♦♦                    Channells Lists Setup                 ♦♦♦........  |
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
-          |   [4]    +[Submenu] ~~  Channells Lists ~ Install ~ Uninstall  .............................  |     
+          |   [4]    +[Submenu] ~~  Channells Lists ~ Install ~ Uninstall  ...........................  |     
           |   =======================================================================================   |
           |   .............................♦♦♦  KODI Setup  ♦♦♦.............................  |
           |   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
@@ -548,11 +548,11 @@ fi
 
 			echo " Downloading skins "
 
-if [ -s /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.8.2.tar.bz2 ]; then
+if [ -s /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.8.5.tar.bz2 ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-     wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.8.2.tar.bz2;
+     wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.8.5.tar.gz;
   fi 
 
 if [ -s /home/`logname`/Vdrrepo/patch_skindesigner.tar.gz ]; then
@@ -703,7 +703,7 @@ wget http://firefly.vdr-developer.org/systeminfo/vdr-systeminfo-0.1.5.tar.bz2;
 			echo " Downloading skins "
 
 wget https://www.dropbox.com/s/zwb0vp6gfwh7d4y/anthra_pack.tar.gz;
-wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.8.2.tar.bz2;
+https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.8.5.tar.gz;
 wget https://www.dropbox.com/s/8uiizh0d3t706ll/patch_skindesigner.tar.gz;
 git clone https://projects.vdr-developer.org/git/skin-nopacity.git;
 wget https://www.dropbox.com/s/hegz319loovpb4r/patch_skinnopacity.tar.gz;
@@ -1168,7 +1168,9 @@ echo "                  *** rec-order ***"
 echo "                  *** transponder_bind ***"
     patch -p1 < 99_vdr_epg_transponder_bind.patch; sleep 1;
 echo "                  *** LcCars***"
-    patch -p1 < numrecordingsinpath.patch; sleep 1;   
+    patch -p1 < numrecordingsinpath.patch; sleep 1;
+echo "                  *** Dvbchan***"
+    patch -p1 < vdr-dvbchan.patch; sleep 1;   
 #
 cp -rf $VDRSRC/pictures/pic2mpg /usr/local/bin/;
 #
@@ -1343,7 +1345,7 @@ cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/skin-nopacity /$VDRSRC;  cd skin-nopa
 #  
 #
 echo ""; echo "               *** Skindesigner ***"; echo ""; sleep 3
-cd $VDRSRC; apt-get -y install graphicsmagick-libmagick-dev-compat libxml2-dev librsvg2-dev lm-sensors; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.8.2.tar.bz2 /$VDRSRC/; tar xjf vdr-plugin-skindesigner-1.2.8.2.tar.bz2; rm -rf vdr-plugin-skindesigner-1.2.8.2.tar.bz2; mv -f vdr-plugin-skindesigner-1.2.8.2 skindesigner; cd skindesigner/skins/metrixhd; wget https://www.dropbox.com/s/wfr9pinoiw22vbb/translation_metrixhd.diff.tar.gz; tar -zxvf translation_metrixhd.diff.tar.gz; mv -f translation_metrixhd.diff.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < translation_metrixhd.diff; rm -rf translation_metrixhd.diff; cd ../..; cp -rf /home/`logname`/Vdrrepo/patch_skindesigner.tar.gz /$VDRSRC/skindesigner; tar -zxvf patch_skindesigner.tar.gz; rm -rf patch_skindesigner.tar.gz; patch -p1 < 10_skindesigner_scriptsdir.patch; make install; cd /$SHARE/skindesigner/scripts/; ln -s temperatures.default temperatures; ln -s vdrstats.default vdrstats;
+cd $VDRSRC; apt-get -y install graphicsmagick-libmagick-dev-compat libxml2-dev librsvg2-dev lm-sensors; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.8.5.tar.gz /$VDRSRC/; tar -zxvf vdr-plugin-skindesigner-1.2.8.5.tar.gz; rm -rf vdr-plugin-skindesigner-1.2.8.5.tar.gz; mv -f vdr-plugin-skindesigner-1.2.8.5 skindesigner; cd skindesigner/skins/metrixhd; wget https://www.dropbox.com/s/wfr9pinoiw22vbb/translation_metrixhd.diff.tar.gz; tar -zxvf translation_metrixhd.diff.tar.gz; mv -f translation_metrixhd.diff.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < translation_metrixhd.diff; rm -rf translation_metrixhd.diff; cd ../..; cp -rf /home/`logname`/Vdrrepo/patch_skindesigner.tar.gz /$VDRSRC/skindesigner; tar -zxvf patch_skindesigner.tar.gz; rm -rf patch_skindesigner.tar.gz; patch -p1 < 10_skindesigner_scriptsdir.patch; make install; cd /$SHARE/skindesigner/scripts/; ln -s temperatures.default temperatures; ln -s vdrstats.default vdrstats;
 #
 #
 echo ""; echo "               *** Iptv ***"; echo ""; sleep 3

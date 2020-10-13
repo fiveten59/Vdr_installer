@@ -3,14 +3,14 @@
 #                                                                                       #
 # Script name: vdr_2.4.4_installer                                                      #
 # Version: 2.4.4 Repository Master (https://github.com/fiveten59/Vdr_installer)        #
-# Tested on Ubuntu 18.04 & 20.04                                                               #
+# Tested on Ubuntu 20.04                                                               #
 # chmod the script                                                                      #
 # then load it simply typing: sudo ./vdr_2.4.4_installer                                #
 #                                                                                       #
 #########################################################################################
 #
-PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skinnopacity -l /etc/vdr/logos/' -P'skindesigner -l /etc/vdr/logos/ -i /usr/local/share/vdr/plugins/skindesigner/skins/' -P'skinlcarsng' -P'iptv' -P'externalplayer' -P'mpv -a alsa' -P'channelscan' -P'radio -l /etc/vdr/plugins/radio/radio-OnAir1080.mpg' -P'systeminfo'"
-# 
+PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skindesigner -l /etc/vdr/logos/ -i /usr/local/share/vdr/plugins/skindesigner/skins/' -P'skinlcarsng' -P'skinnopacity -l /etc/vdr/logos/' -P'mpv -a alsa'-P'iptv' -P'externalplayer' -P'channelscan' -P'radio -l /etc/vdr/plugins/radio/radio-OnAir1080.mpg' -P'systeminfo'"
+# -P'skinnopacity -l /etc/vdr/logos/' -P'mpv -a alsa' 
 #
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
@@ -28,7 +28,7 @@ Remind4='are already installed'
 Remind5='is not installed'
 ALLOWED="#
 # allowed_hosts.conf  This file describes a number of host addresses that
-#                     are allowed to connect to the streamdev/vn****rver/xvdr/xinelioutput server running 
+#                     are allowed to connect to the streamdev/vn****rver/xvdr/xineliboutput server running 
 #                     with the Video Disk Recorder (VDR) on this system.
 # Syntax:
 #
@@ -548,7 +548,7 @@ fi
 
 			echo " Downloading skins "
 
-if [ -s /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.8.5.tar.bz2 ]; then
+if [ -s /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.8.5.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
@@ -580,7 +580,7 @@ if [ -s /home/`logname`/Vdrrepo/logos.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/2c9erwfgci1pqp7/logos.tar.gz;
+    wget https://www.dropbox.com/s/abceg8dohdgidun/logos.tar.gz;
   fi
 
 if [ -s /home/`logname`/Vdrrepo/icone.tar.gz ]; then
@@ -622,13 +622,6 @@ else
 
 			echo " Downloading others "
 
-if [ -s /home/`logname`/Vdrrepo/all-20110131.tar.bz2 ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget http://www.mplayerhq.hu/MPlayer/releases/codecs/all-20110131.tar.bz2;
-fi
-
 if [ -s /home/`logname`/Vdrrepo/traduzioni.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
@@ -647,7 +640,7 @@ if [ -s /home/`logname`/Vdrrepo/oscam64.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/og1k0qketre7r8l/oscam64.tar.gz;
+    wget https://www.dropbox.com/s/b27hv26227bqu0v/oscam64.tar.gz;
   fi
 
 chmod -R 777 *;;
@@ -714,15 +707,14 @@ wget https://www.dropbox.com/s/806odyj5vyco3dg/lcars_pack.tar.gz;
 
 			echo " Downloading others "
 
-wget http://www.mplayerhq.hu/MPlayer/releases/codecs/all-20110131.tar.bz2;      
 wget https://www.dropbox.com/s/6hzpdx9yv5ypzxv/traduzioni.tar.gz;
 wget https://www.dropbox.com/s/jrizzen5q8o07uv/01_Add_language_It.patch.tar.gz;
 wget https://www.dropbox.com/s/5uvx468b4b87auy/icone.tar.gz;
 wget https://www.dropbox.com/s/56oomdr58os7msa/oscam.tar.gz;
-wget https://www.dropbox.com/s/og1k0qketre7r8l/oscam64.tar.gz;
+wget https://www.dropbox.com/s/b27hv26227bqu0v/oscam64.tar.gz;
 wget https://www.dropbox.com/s/hb2mv9ytz5q6yz7/picon.tar.gz; 
 wget https://www.dropbox.com/s/m32a4s23h7r00mg/themes.tar.gz;
-wget https://www.dropbox.com/s/2c9erwfgci1pqp7/logos.tar.gz;
+wget https://www.dropbox.com/s/abceg8dohdgidun/logos.tar.gz;
 
 chmod -R 777 *;;
 
@@ -1165,8 +1157,8 @@ echo "                  *** ttxtsub ***"
     patch -p1 < 29_vdr_ttxtsub.patch; sleep 1;
 echo "                  *** rec-order ***"
     patch -p1 < 30_vdr_rec-order.patch; sleep 1;
-echo "                  *** transponder_bind ***"
-    patch -p1 < 99_vdr_epg_transponder_bind.patch; sleep 1;
+#echo "                  *** transponder_bind ***"
+#    patch -p1 < 99_vdr_epg_transponder_bind.patch; sleep 1;
 echo "                  *** LcCars***"
     patch -p1 < numrecordingsinpath.patch; sleep 1;
 echo "                  *** Dvbchan***"
@@ -1271,11 +1263,11 @@ c)
 clear
 echo ""; echo "               *** Xineliboutput***"; echo ""; sleep 3
 echo "                    Installing Xine-lib"; sleep 4      
-cd $VDRSRC; apt-get -y install autopoint libxine2-dev libxrender-dev libextractor-dev libxrandr-dev libxine2-ffmpeg mjpegtools libtool;
+cd $SRC; apt-get -y install autopoint libxine2-dev libxrender-dev libextractor-dev libxrandr-dev libxine2-ffmpeg mjpegtools libtool;
 if [ -f /usr/local/lib/win32/cook.so ]; then
     echo "Codecs $Remind3"; 
     	else 
-cp /home/`logname`/Vdrrepo/all-20110131.tar.bz2 /usr/local/src/; tar xivf all-20110131.tar.bz2; rm -rf all-20110131.tar.bz2; mv all-20110131 /usr/local/lib/win32; ln -s /usr/local/lib/win32 /usr/local/lib/codecs; 
+	    wget http://www.mplayerhq.hu/MPlayer/releases/codecs/all-20110131.tar.bz2; cp -rf /$VDRSRC/all-20110131.tar.bz2 /home/`logname`/Vdrrepo/; tar xivf all-20110131.tar.bz2; rm -rf all-20110131.tar.bz2; mv all-20110131 /usr/local/lib/win32; ln -s /usr/local/lib/win32 /usr/local/lib/codecs; 
      fi
 #
 if [ -f $PACKAGES/libxine2*.deb ]; then
@@ -1283,13 +1275,13 @@ if [ -f $PACKAGES/libxine2*.deb ]; then
     	else cd $SRC; wget https://downloads.sourceforge.net/xine/xine-lib-1.2.10.tar.xz; tar -xJf xine-lib-1.2.10.tar.xz; mv xine-lib-1.2.10 xine-lib; rm -rf xine-lib-1.2.10.tar.xz; cd xine-lib; export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH; ./configure --disable-dxr3 --enable-w32dll --with-pic --with-w32-path=/usr/local/lib/win32; make -j4; checkinstall --fstrans=no --install=yes --pkgname=libxine2 --pkgversion "1.2.10-git" --pakdir=$PACKAGES --default
 	fi
 #
-echo "                    Installing Xineliboutput"; sleep 4          	
+echo "                    Installing Xineliboutput"; sleep 4 
 cd $VDRSRC; 
-git clone https://github.com/vdr-projects/vdr-plugin-xineliboutput.git; cp -rf /$VDRSRC/vdr-plugin-xineliboutput /home/`logname`/Vdrrepo/; mv -f vdr-plugin-xineliboutput xineliboutput; cd xineliboutput; wget https://www.dropbox.com/s/11clb1n2b6itave/patch_xineliboutput.tar.gz; tar -zxvf patch_xineliboutput.tar.gz; rm -rf patch_xineliboutput.tar.gz;  patch -p1 < configure.patch;  sleep 1; patch -p1 < 12_xineliboutput_dfatmo-switch.patch; sleep 1; patch -p1 < 13_xineliboutput_null.patch; sleep 1; ./configure --enable-vdr --enable-libxine --disable-libcec; make; sleep 10; make install; cd ../../..; make plugins; mkdir -p /etc/vdr/plugins/xineliboutput; cp -rf /usr/local/src/vdr/PLUGINS/src/xineliboutput/*.mpg /etc/vdr/plugins/xineliboutput; cp -rf /usr/local/src/vdr/PLUGINS/src/xineliboutput/examples/remote.conf.example /etc/vdr/plugins/xineliboutput/remote.conf; echo "*** allowed_hosts.conf setup ***";  touch /etc/vdr/plugins/xineliboutput/allowed_hosts.conf; echo "$ALLOWED" >> /etc/vdr/plugins/xineliboutput/allowed_hosts.conf;;
-# patch -p1 < 10_xineliboutput_mld.patch;
+wget https://sourceforge.net/projects/xineliboutput/files/xineliboutput/vdr-xineliboutput-2.2.0/vdr-xineliboutput-2.2.0.tgz; tar zxvf vdr-xineliboutput-2.2.0.tgz; rm -rf vdr-xineliboutput-2.2.0.tgz; cp -rf /$VDRSRC/xineliboutput-2.2.0 /home/`logname`/Vdrrepo/; mv -f xineliboutput-2.2.0 xineliboutput; cd xineliboutput; sleep 1; ./configure --enable-vdr --enable-libxine --disable-libcec; make; sleep 10; make install; cd ../../..; make plugins; mkdir -p /etc/vdr/plugins/xineliboutput; cp -rf /usr/local/src/vdr/PLUGINS/src/xineliboutput/*.mpg /etc/vdr/plugins/xineliboutput; cp -rf /usr/local/src/vdr/PLUGINS/src/xineliboutput/examples/remote.conf.example /etc/vdr/plugins/xineliboutput/remote.conf; echo "*** allowed_hosts.conf setup ***"; touch /etc/vdr/plugins/xineliboutput/allowed_hosts.conf; echo "$ALLOWED" >> /etc/vdr/plugins/xineliboutput/allowed_hosts.conf;;
+# patch -p1 < 10_xineliboutput_mld.patch;wget https://www.dropbox.com/s/11clb1n2b6itave/patch_xineliboutput.tar.gz; tar -zxvf patch_xineliboutput.tar.gz; rm -rf patch_xineliboutput.tar.gz;  patch -p1 < configure.patch;  sleep 1; patch -p1 < 12_xineliboutput_dfatmo-switch.patch; sleep 1; patch -p1 < 13_xineliboutput_null.patch; 
 d)
 clear
-echo ""; echo "               *** Softhddevice (deafault)**"; echo ""; sleep 3
+echo ""; echo "               *** Softhddevice (default)**"; echo ""; sleep 3
 apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev 
 apt-get -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev 
 apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libxext6 libxext-dev 
@@ -1297,8 +1289,8 @@ apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxex
 apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
 apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev
 cd $VDRSRC;
-git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git; cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice; wget https://www.dropbox.com/s/h6w4axdur1jn6qx/patch_softhddevice_ua0lnj.tar.gz; cp -rf /$VDRSRC/softhddevice/patch_softhddevice_ua0lnj.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_softhddevice_ua0lnj.tar.gz; rm -rf patch_softhddevice_ua0lnj.tar.gz; patch -p1 < 03_LanguageIT.patch; make ALSA=1 OSS=0 VDPAU=0 VAAPI=1 SCREENSAVER=0 SWRESAMPLE=1; make install;;
-# 
+git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git; cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice; wget https://www.dropbox.com/s/h6w4axdur1jn6qx/patch_softhddevice_ua0lnj.tar.gz; cp -rf /$VDRSRC/softhddevice/patch_softhddevice_ua0lnj.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_softhddevice_ua0lnj.tar.gz; rm -rf patch_softhddevice_ua0lnj.tar.gz; patch -p1 < 03_LanguageIT.patch; make; make install;;
+# ALSA=1 OSS=0 VDPAU=0 VAAPI=1 SCREENSAVER=0 SWRESAMPLE=1
 e)
 clear
 echo ""; echo "               *** Softhdcuvid **"; echo ""; sleep 3
@@ -1457,8 +1449,8 @@ echo '#!/bin/bash
 
 a) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f -w disable-ogl-osd'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
 b) clear; sed -i "s|-P'dvbapi'|& -P'softhdcuvid -d :0.0 -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
-c) clear; sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=fbfe --video=vdpau --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/kalujk6k7oksr6l/setup16_xineliboutput_nvidia.tar.gz && cp -rf /etc/vdr/setup16_xineliboutput_nvidia.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_xineliboutput_nvidia.tar.gz && rm -rf setup16_xineliboutput_nvidia.tar.gz;;    
-d) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;; 
+c) clear; sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --fullscreen --video=vdpau --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/kalujk6k7oksr6l/setup16_xineliboutput_nvidia.tar.gz && cp -rf /etc/vdr/setup16_xineliboutput_nvidia.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_xineliboutput_nvidia.tar.gz && rm -rf setup16_xineliboutput_nvidia.tar.gz;;    
+d) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f -v va-api'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;; 
 e) clear; sed -i "s|-P'dvbapi'|& -P'softhdvaapi -d :0.0 -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
 f) clear; sed -i "s|-P'dvbapi'|& -P'vaapidevice -f -d :0.0 -p alsa'|" /usr/local/bin/vdrrun  && cd /etc/vdr/ && wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_vaapidevice.tar.gz && cp -rf /etc/vdr/setup16_vaapidevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_vaapidevice.tar.gz && rm -rf setup16_vaapidevice.tar.gz;;
 esac
@@ -1778,9 +1770,9 @@ clear
     echo -n "        Enter your menu choice  [a-z]:      "
     read yourch
     case $yourch in
-    
-a) clear; echo "$MONO13" >> /etc/vdr/diseqc.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/vt0wxz86c3x6y1n/channels.conf.hotbird.tar.gz && cp -rf /etc/vdr/channels.conf.hotbird.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels.conf.hotbird.tar.gz && rm -rf channels.conf.hotbird.tar.gz;;
-b) clear; echo "$MONO19" >> /etc/vdr/diseqc.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/vt0wxz86c3x6y1n/channels.conf.astra.tar.gz && cp -rf /etc/vdr/channels.conf.astra.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels.conf.astra.tar.gz && rm -rf channels.conf.astra.tar.gz;;
+
+a) clear; echo "$MONO13" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/lrsntp500jmwfp7/channels.conf.hotbird.tar.gz && cp -rf /etc/vdr/channels.conf.hotbird.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels.conf.hotbird.tar.gz && rm -rf channels.conf.hotbird.tar.gz;;
+b) clear; echo "$MONO19" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/vt0wxz86c3x6y1n/channels.conf.astra.tar.gz && cp -rf /etc/vdr/channels.conf.astra.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels.conf.astra.tar.gz && rm -rf channels.conf.astra.tar.gz;;
 c) clear; echo "$DUAL" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/z3czcyw5za82utc/channels.conf.dual.tar.gz && cp -rf /etc/vdr/channels.conf.dual.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels.conf.dual.tar.gz && rm -rf channels.conf.dual.tar.gz;;
 d) clear; echo "$TRIAL" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/oebo5gddykvxng4/channels.conf.trial.tar.gz && cp -rf /etc/vdr/channels.conf.trial.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels.conf.trial.tar.gz && rm -rf channels.conf.trial.tar.gz;;
 e) clear; echo "$TRIAL2 Load a channels.conf" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf;;

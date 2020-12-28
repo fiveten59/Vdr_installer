@@ -181,7 +181,7 @@ clear
 echo "        ***                Removing Vdr-Plugin-Softhddevice              ***";  sleep 2
 cd $VDRSRC; if [ -f softhddevice/Makefile ]; echo "$Remind1 Softhddevice"; sleep 2;
    		then rm -rf softhddevice; cd $LIB; rm -rf libvdr-softhddevice.*; sed -i "s|-P'softhddevice -w disable-ogl-osd'||" /usr/local/bin/vdrrun;
-   			else echo "Softhddevice $Remind5";  
+   			else echo "Softhddevice $Remind5"; sed -i "s|-P'softhddevice -w disable-ogl-osd'||" /usr/local/bin/vdrrun; 
       fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
       echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -214,7 +214,7 @@ clear
 echo "        ***                Removing Vdr-Plugin-Softhdcuvid             ***";  sleep 2
 cd $VDRSRC; if [ -f softhdcuvid/Makefile ]; 
    		then rm -rf softhdcuvid; cd $LIB; rm -rf libvdr-softhdcuvid.*; sed -i "s|-P'softhdcuvid -d :0.0'||" /usr/local/bin/vdrrun;
-   			else echo "Softhddevice $Remind5" 
+   			else echo "Softhddevice $Remind5"; sed -i "s|-P'softhdcuvid -d :0.0'||" /usr/local/bin/vdrrun; 
       fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
       echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -240,7 +240,7 @@ clear
 echo "        ***                Removing Vdr-Plugin-Vaapidevice               ***";  sleep 2
 cd $VDRSRC; if [ -f vaapidevice/Makefile ];
    		then rm -rf vaapidevice; cd $LIB; rm -rf libvdr-vaapidevice.*; sed -i "s|-P'vaapidevice -f -a pulse'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin--Vaapidevice $Remind1"
-   			else echo "Vdr-Plugin-Vaapidevice $Remind5" 
+   			else echo "Vdr-Plugin-Vaapidevice $Remind5"; sed -i "s|-P'vaapidevice -f -a pulse'||" /usr/local/bin/vdrrun; 
       fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
       echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -283,8 +283,8 @@ echo "        ***                Removing Vdr-Plugin-Xineliboutput              
 cd $VDRSRC;
  if [ -f xineliboutput/Makefile ];
    		then 
-rm -rf xineliboutput; cd $LIB; rm -rf libvdr-xineliboutput.*; rm -rf libxineliboutput*.*; cd $PLUGINS; rm -rf xineliboutput; sed -i "s|-P'xineliboutput -l none -r 37890 -p'||" /usr/local/bin/vdrrun; rm -rf /home/`logname`/Scrivania/Xinelib.desktop; rm -rf /usr/share/applications/Xinelib.desktop; rm -rf /usr/local/bin/start-xinelib-vdr.sh 
-                       else echo "VDR-Plugin-Xineliboutput $Remind5" 
+rm -rf xineliboutput; cd $LIB; rm -rf libvdr-xineliboutput.*; rm -rf libxineliboutput*.*; cd $PLUGINS; rm -rf xineliboutput; sed -i "s|-P'xineliboutput --local=sxfe --fullscreen --video=vdpau --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'||" /usr/local/bin/vdrrun; rm -rf /home/`logname`/Scrivania/Xinelib.desktop; rm -rf /usr/share/applications/Xinelib.desktop; rm -rf /usr/local/bin/start-xinelib-vdr.sh 
+                       else echo "VDR-Plugin-Xineliboutput $Remind5"; sed -i "s|-P'xineliboutput --local=sxfe --fullscreen --video=vdpau --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'||" /usr/local/bin/vdrrun; 
       	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
 	echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -310,7 +310,7 @@ esac;;
         [b]    Skindesigner ...............................  [b1]    Skindesigner
         [c]    Osd2web ....................................  [c1]    Osd2web
         [d]    Skinflatplus ...............................  [d1]    Skinflatplus
-        [e]    Basic_skin/CoolHD/Anthra/NarrowHD ..........  [e1]    Basic_skin/CoolHD/Anthra/NarrowHD
+        [e]    Basic_skin/CoolHD/Anthra/NarrowHD ...(No OK). [e1]    Basic_skin/CoolHD/Anthra/NarrowHD
         [f]    Skin Enigma ................................  [f1]    Skin Enigma
         [g]    Skinsoppalusikka ...........................  [g1]    Skinsoppalusikka
         [h]    Skin EgalT2 ................................  [h1]    Skin EgalT2
@@ -345,7 +345,7 @@ echo "        ***                Removing Skin-Nopacity               ***";  sle
 cd $VDRSRC;
    if [ -f skin-flatplus/Makefile ];
   	then rm -rf cd skin-nopacity; cd $LIB; rm -rf libvdr-skin-nopacity.*; rm -rf cd skin-nopacity; sed -i "s|-P'skinnopacity -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun; echo "Skin-Nopacity $Remind1"
-  			else echo "Skin-Nopacity $Remind5" 
+  			else echo "Skin-Nopacity $Remind5"; sed -i "s|-P'skinnopacity -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun; 
  	       fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;  					 
@@ -369,7 +369,7 @@ clear
 echo "        ***                Removing Vdr-Plugin-Skindesigner               ***";  sleep 2
 cd $VDRSRC; if [ -f skindesigner/Makefile ];
   	then rm -rf skindesigner; cd $LIB; rm -rf libvdr-skindesigner.*; cd $SHARE; rm -rf skindesigner; cd /$PLUGINS; rm -rf skindesigner; sed -i "s|-P'skindesigner -l /etc/vdr/logos/ -i /usr/share/vdr/plugins/skindesigner/skins/'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-Skindesigner $Remind1"
-  			else echo "Vdr-Plugin-Skindesigner $Remind5" 
+  			else echo "Vdr-Plugin-Skindesigner $Remind5"; sed -i "s|-P'skindesigner -l /etc/vdr/logos/ -i /usr/share/vdr/plugins/skindesigner/skins/'||" /usr/local/bin/vdrrun; 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;; 
@@ -391,7 +391,7 @@ clear
 echo "        ***                Removing Vdr-Plugin-Osd2web               ***";  sleep 2
 cd $VDRSRC; if [ -f osd2web/Makefile ];
    		then rm -rf osd2web; cd $PLUGINS; rm -rf osd2web; cd $LIB; rm -rf libvdr-osd2web.*; sed -i "s|-P'osd2web -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-Osd2web $Remind1"
-   			else echo "Vdr-Plugin-Osd2web $Remind5" 
+   			else echo "Vdr-Plugin-Osd2web $Remind5"; sed -i "s|-P'osd2web -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun; 
 	    fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;  
@@ -414,7 +414,7 @@ clear
 echo "        ***                Removing Vdr-Plugin-Skinflatplus               ***";  sleep 2
 cd $VDRSRC; if [ -f skin-flatplus/Makefile ];
   	then rm -rf skin-flatplus; cd $LIB; rm -rf libvdr-skinflatplus.*; rm -rf skinflatplus; sed -i "s|-P'skinflatplus -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-Skinflatplus $Remind1"
-  			else echo "Vdr-Plugin-Skinflatplus $Remind5" 
+  			else echo "Vdr-Plugin-Skinflatplus $Remind5"; sed -i "s|-P'skinflatplus -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun; 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;; 
@@ -428,8 +428,8 @@ echo "        ***                Installing Basic_skin/CoolHD/Anthra/NarrowHD   
 cd $VDRSRC; apt-get -y install libgraphicsmagick++1-dev;
    if [ -e text2skin/Makefile ];
        then  echo "Text2skin $Remind"
-           else git clone git://projects.vdr-developer.org/vdr-plugin-text2skin.git; cp -rf vdr-plugin-text2skin /home/`logname`/Vdrrepo/; mv vdr-plugin-text2skin text2skin; cd text2skin; wget https://www.dropbox.com/s/h2114fton87spyh/patch_text2skin.tar.gz; cp -rf patch_text2skin.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_text2skin.tar.gz; mv -f patch_text2skin.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < 10_text2skin_livebuffer.patch; patch -p1 < 11_text2skin_render.patch; patch -p1 < 12_text2skin_Makefile.patch; patch -p1 < 17_text2skin_graphicsmagick.patch; cd ../../..; make plugins; sed -i "s|-P'externalplayer'|& -P'text2skin'|" /usr/local/bin/vdrrun
-    fi;
+           else git clone git://projects.vdr-developer.org/vdr-plugin-text2skin.git; cp -rf vdr-plugin-text2skin /home/`logname`/Vdrrepo/; mv vdr-plugin-text2skin text2skin; cd text2skin; wget https://www.dropbox.com/s/h2114fton87spyh/patch_text2skin.tar.gz; cp -rf patch_text2skin.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_text2skin.tar.gz; mv -f patch_text2skin.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < 10_text2skin_livebuffer.patch; patch -p1 < 11_text2skin_render.patch;  patch -p1 < 17_text2skin_graphicsmagick.patch; cd ../../..; make plugins; sed -i "s|-P'externalplayer'|& -P'text2skin'|" /usr/local/bin/vdrrun
+    fi;        #patch -p1 < 12_text2skin_Makefile.patch;
 mkdir -p /etc/vdr/plugins/text2skin;
 cd /etc/vdr/themes;
 if [ -e /etc/vdr/themes/checkthemes ];
@@ -464,7 +464,7 @@ clear
 echo "        ***                Basic_skin/CoolHD/Anthra/NarrowHD              ***";  sleep 2
 cd $VDRSRC 
 if [ -f text2skin/Makefile ];
-   		then rm -rf text2skin; rm -rf narrowhd; cd $PLUGINS; rm -rf text2skin; rm -rf $LIB/libvdr-text2skin.*; sed -i "s|-P'text2skin'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-Text2skin and Basic/CoolHD/Anthra Skins $Remind1 "
+   		then rm -rf text2skin; rm -rf narrowhd; cd $PLUGINS; rm -rf text2skin; rm -rf $LIB/libvdr-text2skin.*; sed -i "s|-P'text2skin'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-Text2skin and Basic/CoolHD/Anthra Skins $Remind1";
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;; 
@@ -509,7 +509,7 @@ g1)
 clear
 echo "        ***                Removing Skinsoppalusikka               ***";  sleep 2
 cd $VDRSRC; if [ -f skinsoppalusikka/Makefile ];
-  	then rm -r $VDRSRC/skinsoppalusikka; rm -rf /etc/vdr/plugins/skinsoppalusikka; rm -rf $LIB/libvdr-skinsoppalusikka.*; sed -i "s|-P'skinsoppalusikka'||" /usr/local/bin/vdrrun; echo "Skinsoppalusikka Skin $Remind1"
+  	then rm -r $VDRSRC/skinsoppalusikka; rm -rf /etc/vdr/plugins/skinsoppalusikka; rm -rf $LIB/libvdr-skinsoppalusikka.*; sed -i "s|-P'skinsoppalusikka'||" /usr/local/bin/vdrrun; echo "Skinsoppalusikka Skin $Remind1"; sed -i "s|-P'skinsoppalusikka'||" /usr/local/bin/vdrrun;
   		else echo "Skinsoppalusikka Skin $Remind5" 
             fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
@@ -620,8 +620,10 @@ cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
 b)
 clear
 echo "        ***                Installing Vdr-Plugin-Epg2vdr               ***";  sleep 2
-cd $VDRSRC; apt-get -y install libmariadbclient-dev libmariadbclient18 uuid-dev libimlib2 libimlib2-dev libtinyxml2-dev;
-   if [ -f channelscan/Makefile ]; 
+cd $VDRSRC; 
+apt-get -y install libmariadbclient-dev libmariadb3 libmariadb-dev uuid-dev libimlib2 libimlib2-dev libtinyxml2-dev;
+
+   if [ -f epg2vdr/Makefile ]; 
 	then  echo "Vdr-Plugin-Epg2vdr $Remind" 
   		else git clone https://projects.vdr-developer.org/git/vdr-plugin-epg2vdr.git; cp -rf vdr-plugin-epg2vdr /home/`logname`/Vdrrepo/; mv -f vdr-plugin-epg2vdr epg2vdr; cd ../..; make plugins; sed -i "s|-P'externalplayer'|& -P'epg2vdr'|" /usr/local/bin/vdrrun;
 	fi;
@@ -668,7 +670,7 @@ echo "        ***                Installing Vdr-Plugin-TvGuide               ***
 cd $VDRSRC; apt-get -y install gettext graphicsmagick-libmagick-dev-compat libmagick++-6.q16-dev
    if [ -f tvguide/Makefile ];
 		then  echo "Vdr-Plugin-TvGuide $Remind"
-			else git clone git://projects.vdr-developer.org/vdr-plugin-tvguide.git; cp -rf vdr-plugin-tvguide /home/`logname`/Vdrrepo/; mv vdr-plugin-tvguide tvguide; cd tvguide; wget https://www.dropbox.com/s/xkax9z6qumb76dj/patch_tvguide.tar.gz; tar -zxvf patch_tvguide.tar.gz; mv -f patch_tvguide.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < 10_tvguide_lib_Magick.patch;patch -p1 < 11_tvguide_i18n-it.patch; patch -p1 < 12_tvguide_VDR235.patch; patch -p1 < 13_tvguide_comp_with_last_tvscraper.patch; make; cd ../../..; make plugins; cp -rf $VDRSRC/tvguide/themes/* /etc/vdr/themes/; sed -i "s|-P'externalplayer'|& -P'tvguide'|" /usr/local/bin/vdrrun 
+			else git clone git://projects.vdr-developer.org/vdr-plugin-tvguide.git; cp -rf vdr-plugin-tvguide /home/`logname`/Vdrrepo/; mv vdr-plugin-tvguide tvguide; make; cd ../../..; make plugins; cp -rf $VDRSRC/tvguide/themes/* /etc/vdr/themes/; sed -i "s|-P'externalplayer'|& -P'tvguide'|" /usr/local/bin/vdrrun 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install; 
         echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -691,7 +693,7 @@ echo "        ***                Installing Vdr-Plugin-TvGuideng               *
 cd $VDRSRC;  apt-get -y install libstdc++6 libgcc1 libc6 librsvg2-dev;
    if [ -f tvguideng/Makefile ];
 		then  echo "Vdr-Plugin-TvGuideng $Remind"
-			else git clone git://projects.vdr-developer.org/vdr-plugin-tvguideng.git; cp -rf vdr-plugin-tvguideng /home/`logname`/Vdrrepo/; mv vdr-plugin-tvguideng tvguideng; cd tvguideng; wget https://www.dropbox.com/s/qjmzsml13sdhk0u/patch_tvguideng.tar.gz; tar -zxvf patch_tvguideng.tar.gz; mv -f patch_tvguideng.tar.gz /home/`logname`/Vdrrepo/; mv -f patch_skindesigner.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < tvguideng_235.diff; patch -p1 < tvguideng-0.3.0_fix.diff; patch -p1 < tvguideng-gcc6.patch; cp -rf /$SRC/traduzioni/tvguideng_it_IT.po /$VDRSRC/tvguideng/po/; cd po/; mv tvguideng_it_IT.po it_IT.po; cd ../../../..; make plugins; sed -i "s|-P'externalplayer'|& -P'tvguideng'|" /usr/local/bin/vdrrun 
+			else git clone git://projects.vdr-developer.org/vdr-plugin-tvguideng.git; cp -rf vdr-plugin-tvguideng /home/`logname`/Vdrrepo/; mv vdr-plugin-tvguideng tvguideng; cd ../../..; make plugins; sed -i "s|-P'externalplayer'|& -P'tvguideng'|" /usr/local/bin/vdrrun 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -711,10 +713,13 @@ cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
 f) 
 clear
 echo "        ***                Installing Vdr-Plugin-Scraper2vdr               ***";  sleep 2
-cd $VDRSRC;  apt-get -y install uuid-dev libmysql++-dev libimlib2-dev libssl-dev;
+cd $VDRSRC;  
+apt-get -y install libmariadbclient-dev libmariadb3 libmariadb-dev uuid-dev libmysql++-dev libimlib2-dev libssl-dev;
+apt-get -y install graphicsmagick-libmagick-dev-compat libmagick++-6.q16-dev;
+apt-get  install libmysqlclient-dev
 if [ -f scraper2vdr/Makefile ];
   		then  echo "Vdr-Plugin-Scraper2vdr $Remind"
-  			else apt-get -y install libmariadb2; git clone https://github.com/horchi/scraper2vdr.git; cp -rf scraper2vdr /home/`logname`/Vdrrepo/; cd scraper2vdr; wget https://www.dropbox.com/s/rqm9w3n85igu5p0/patch_scraper2vdr.tar.gz; tar -zxvf patch_scraper2vdr.tar.gz; mv -f patch_scraper2vdr.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < 11_scraper2vdr_i18n-it.patch; patch -p1 < 10_scraper2vdr_common.patch; cd $PLUGINS; mkdir -p scraper2vdr; cd $VDRSRC/scraper2vdr; make; cp -rf $VDRSRC/scraper2vdr/configs/epg.dat $PLUGINS/scraper2vdr/; sed -i "s|-P'externalplayer'|& -P'scraper2vdr'|" /usr/local/bin/vdrrun
+  			else git clone https://github.com/horchi/scraper2vdr.git; cp -rf scraper2vdr /home/`logname`/Vdrrepo/; cd scraper2vdr; wget https://www.dropbox.com/s/rqm9w3n85igu5p0/patch_scraper2vdr.tar.gz; tar -zxvf patch_scraper2vdr.tar.gz; mv -f patch_scraper2vdr.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < 11_scraper2vdr_i18n-it.patch; patch -p1 < 10_scraper2vdr_common.patch; cd $PLUGINS; mkdir -p scraper2vdr; cd $VDRSRC/scraper2vdr; make; cp -rf $VDRSRC/scraper2vdr/configs/epg.dat $PLUGINS/scraper2vdr/; sed -i "s|-P'externalplayer'|& -P'scraper2vdr'|" /usr/local/bin/vdrrun
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -926,7 +931,7 @@ esac;;
         [d]    Femon ......................................  [d1]    Femon 
         [e]    Devstatus ..................................  [e1]    Devstatus 
         [f]    Osdteletext ................................  [f1]    Osdteletext 
-        [g]    Ttxsubs (only Vdr 2.2.0) ...................  [g1]    Ttxsubs (only Vdr 2.2.0) 
+        [g]    Ttxsubs (No OK) ............................  [g1]    Ttxsubs 
                                  
         [z]    Skip
 
@@ -1059,7 +1064,7 @@ echo "        ***                Installing Vdr-Plugin-Osdteletext              
 cd $VDRSRC; apt-get -y install git-core fonts-freefont-ttf;
 if [ -f osdteletext/Makefile ];
 		then  echo "Vdr-Plugin-Osdteletext $Remind"
-			else git clone https://github.com/rofafor/vdr-plugin-osdteletext.git; cp -rf vdr-plugin-osdteletext /home/`logname`/Vdrrepo/;  mv -f vdr-plugin-osdteletext osdteletext; cd osdteletext; wget https://www.dropbox.com/s/ncb0gnw9pkee83d/patch_osdteletext.tar.gz; tar -zxvf patch_osdteletext.tar.gz; mv -f patch_osdteletext.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < 10_osdteletext_txtrecv.patch; patch -p1 < 11_osdteletext_remove-blank-lines.patch; cd ../../..; make plugins; sed -i "s|-P'externalplayer'|& -P'osdteletext'|" /usr/local/bin/vdrrun; cd /var/cache/vdr; mkdir -p vtx 
+			else git clone https://github.com/rofafor/vdr-plugin-osdteletext.git; cp -rf vdr-plugin-osdteletext /home/`logname`/Vdrrepo/;  mv -f vdr-plugin-osdteletext osdteletext; cd osdteletext; wget https://www.dropbox.com/s/ncb0gnw9pkee83d/patch_osdteletext.tar.gz; tar -zxvf patch_osdteletext.tar.gz; mv -f patch_osdteletext.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < 10_osdteletext_txtrecv.patch; cd ../../..; make plugins; sed -i "s|-P'externalplayer'|& -P'osdteletext'|" /usr/local/bin/vdrrun; cd /var/cache/vdr; mkdir -p vtx 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;; 
@@ -1082,7 +1087,7 @@ clear
 echo "        ***                Installing Vdr-Plugin-Ttxsubs               ***";  sleep 2
 cd $VDRSRC; if [ -f ttxsubs/Makefile ];
 		then  echo "Vdr-Plugin-Ttxsubs $Remind"
-			else git clone https://projects.vdr-developer.org/git/vdr-plugin-ttxtsubs.git/; cp -rf vdr-plugin-ttxsubs /home/`logname`/Vdrrepo/;  mv -f vdr-plugin-ttxsubs ttxsubs; cd ../..; make plugins; sed -i "s|-P'externalplayer'|& -P'ttxsubs'|" /usr/local/bin/vdrrun 
+			else wget https://projects.vdr-developer.org/git/vdr-plugin-ttxtsubs.git/snapshot/vdr-plugin-ttxtsubs-ac89f6a027bf2cecafe376dd9deef7cfd80c0ac3.tar.gz; tar -zxvf vdr-plugin-ttxtsubs-ac89f6a027bf2cecafe376dd9deef7cfd80c0ac3.tar.gz; cp -rf vdr-plugin-ttxtsubs-ac89f6a027bf2cecafe376dd9deef7cfd80c0ac3 /home/`logname`/Vdrrepo/;  mv -f vdr-plugin-ttxtsubs-ac89f6a027bf2cecafe376dd9deef7cfd80c0ac3 ttxsubs; cd ../..; make plugins; sed -i "s|-P'externalplayer'|& -P'ttxsubs'|" /usr/local/bin/vdrrun 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;; 
@@ -1092,7 +1097,7 @@ clear
 echo "        ***                Removing Vdr-Plugin-Ttxsubs               ***";  sleep 2
 cd $VDRSRC; if [ -f ttxsubs/Makefile ];
   	then rm -rf ttxsubs; cd $LIB; rm -rf libvdr-ttxsubs.*; sed -i "s|-P'ttxsubs'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-Ttxsubs $Remind1"
-  			else echo "Vdr-Plugin-Ttxsubs $Remind5" 
+  			else echo "Vdr-Plugin-Ttxsubs $Remind5"; sed -i "s|-P'ttxsubs'||" /usr/local/bin/vdrrun 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;

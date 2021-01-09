@@ -1,4 +1,4 @@
-#!/bin/bash 
+#!/bin/bash
 ################################## !!! README !!! #######################################
 #                                                                                       #
 # Script name: vdr_2.4.6_installer                                                      #
@@ -20,7 +20,7 @@ LIB='/usr/lib/vdr/plugins'
 VDR='vdr-2.4.6'
 PACKAGES="/usr/local/src/packages"
 TEMP='/tmp'
-SKINS='/usr/share/vdr/plugins/skindesigner/skins/'
+SKINS='/etc/vdr/plugins/skindesigner/skins/'
 SHARE='/usr/share/vdr/plugins'
 PLUGINS='/etc/vdr/plugins'
 Remind3='is already installed'
@@ -468,7 +468,7 @@ if [ -e /home/`logname`/Vdrrepo/vdr-patches.2.4.6.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/cde278yaazs4hnx/vdr-patches.2.4.6.tar.gz;
+    wget https://www.dropbox.com/s/bblslie14bgd9ni/vdr-patches.2.4.6.tar.gz;
   fi
 
 if [ -e /home/`logname`/Vdrrepo/Make.config.tar.gz ]; then
@@ -719,7 +719,7 @@ wget https://ffmpeg.org/releases/ffmpeg-4.3.1.tar.bz2;
 			echo " Downloading Vdr and Plugins on local repo "
 
 wget ftp://ftp.tvdr.de/vdr/vdr-2.4.6.tar.bz2;
-wget https://www.dropbox.com/s/cde278yaazs4hnx/vdr-patches.2.4.6.tar.gz;
+wget https://www.dropbox.com/s/bblslie14bgd9ni/vdr-patches.2.4.6.tar.gz;
 wget https://www.dropbox.com/s/qds2k91od7oboed/Make.config.tar.gz;
 wget https://www.dropbox.com/s/bx97ikp7c1h2qj2/vdrsymbols.tar.gz;
 git clone http://projects.vdr-developer.org/git/vdr-plugin-epgsearch.git;
@@ -1182,6 +1182,8 @@ echo "                  *** mainmenuhooks ***"
     patch -p1 < 15_vdr_mainmenuhooks_vdr234.patch; sleep 1;
 echo "                  *** wareagleicon ***"
     patch -p1 < 16_vdr_wareagleicon.patch; sleep 1;
+echo "                  *** skinlcarsng ***"
+    patch -p1 < 17_vdr_skinlcarsng_numrecordings.patch; sleep 1;    
 echo "                  *** config ***"
     patch -p1 < 20_vdr_config.patch; sleep 1;
 echo "                  *** svdrphosts ***"
@@ -1198,12 +1200,12 @@ echo "                  *** ttxtsub ***"
     patch -p1 < 29_vdr_ttxtsub.patch; sleep 1;
 echo "                  *** rec-order ***"
     patch -p1 < 30_vdr_rec-order.patch; sleep 1;
-#echo "                  *** transponder_bind ***"
-#    patch -p1 < 99_vdr_epg_transponder_bind.patch; sleep 1;
-echo "                  *** LcCars***"
-    patch -p1 < numrecordingsinpath.patch; sleep 1;
-echo "                  *** Dvbchan***"
-    patch -p1 < vdr-dvbchan.patch; sleep 1;   
+#echo "                  *** naludump ***"
+#    patch -p1 < 32_vdr_naludump.patch; sleep 1;    
+echo "                  *** transponder_bind ***"
+    patch -p1 < 99_vdr_epg_transponder_bind.patch; sleep 1;
+#echo "                  *** Dvbchan***"
+#    patch -p1 < vdr-dvbchan.patch; sleep 1;   
 #
 cp -rf $VDRSRC/pictures/pic2mpg /usr/local/bin/;
 #
@@ -1507,7 +1509,7 @@ killall -9 vdr & killall -9 vlc & killall -9 vdr-sxfe & killall -9 vdrrun
 # & killall -9 oscam & shutdown -h now '  >> /usr/local/bin/vdrpoweroff
 # 
 #
-chmod 755 /usr/local/bin/vdrpoweroff
+chmod 755 /usr/local/bin/vdrpoweroffc
 #
 #  Create /etc/init.d/vdr           
 rm -rf /etc/init.d/vdr; touch /etc/init.d/vdr 
@@ -1760,6 +1762,9 @@ else cp -rf /home/`logname`/Vdrrepo/lcars_pack.tar.gz /etc/vdr/themes; cd /etc/v
 fi
 #
 cp -rf /home/`logname`/Vdrrepo/skin-lcarsng-master.tar.gz /$VDRSRC/; cd /$VDRSRC/; tar -zxvf skin-lcarsng-master.tar.gz; rm -rf skin-lcarsng-master.tar.gz; mv -f skin-lcarsng-master skin-lcarsng; cd skin-lcarsng; make; make install;
+
+rm -rf $SKINS/shady_KISS; cd $SKINS; git clone https://github.com/tomsax56/shady_KISS; 
+
 
 #############################################################################################################################  
 #############################################################################################################################

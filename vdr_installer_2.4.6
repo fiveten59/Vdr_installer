@@ -538,14 +538,14 @@ if [ -e /home/`logname`/Vdrrepo/iptv_conf.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░"; 
-    wget https://www.dropbox.com/s/1ujtklnct0nqq6q/iptv_conf.tar.gz;
+    wget https://www.dropbox.com/s/vmhkf4rzhoh4wa5/iptv_conf.tar.gz;
 fi
 
 if [ -e /home/`logname`/Vdrrepo/vdr-plugin-radio-master.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/e8jnqx4eiwn2zkb/vdr-plugin-radio-master.tar.gz;
+    wget https://www.dropbox.com/s/dv6okhltz3eu20i/vdr-plugin-radio-master.tar.gz;
 fi
 
 if [ -e /home/`logname`/Vdrrepo/vdr-plugin-externalplayer ]; then
@@ -594,11 +594,11 @@ fi
 
 			echo " Downloading skins "
 
-if [ -e /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.8.6.tar.gz ]; then
+if [ -e /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.10.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-     wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.8.6.tar.gz;
+     wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.10.tar.gz;
   fi 
 
 if [ -e /home/`logname`/Vdrrepo/patch_skindesigner.tar.gz ]; then
@@ -626,7 +626,7 @@ if [ -e /home/`logname`/Vdrrepo/logos.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/yn90wkejcd420vy/logos.tar.gz;
+    wget https://www.dropbox.com/s/0mb399xtozg028r/logos.tar.gz;
   fi
 
 if [ -e /home/`logname`/Vdrrepo/icone.tar.gz ]; then
@@ -686,7 +686,7 @@ if [ -e /home/`logname`/Vdrrepo/oscam64.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/sn1xk3vf6wdjanq/oscam64.tar.gz;
+    wget https://www.dropbox.com/s/z2v79qjdjcm1qjo/oscam64.tar.gz;
   fi
 
 chmod -R 777 *;;
@@ -725,10 +725,10 @@ wget https://www.dropbox.com/s/bx97ikp7c1h2qj2/vdrsymbols.tar.gz;
 git clone http://projects.vdr-developer.org/git/vdr-plugin-epgsearch.git;
 wget https://www.dropbox.com/s/s9vggu8mil8ss7t/patch_epgsearch.tar.gz;
 git clone git://github.com/manio/vdr-plugin-dvbapi.git;
-wget https://www.dropbox.com/s/e8jnqx4eiwn2zkb/vdr-plugin-radio-master.tar.gz;
+wget https://www.dropbox.com/s/dv6okhltz3eu20i/vdr-plugin-radio-master.tar.gz;
 git clone https://github.com/rofafor/vdr-plugin-iptv.git; 
 wget https://www.dropbox.com/s/nof5ydmxrplw2b0/patch_iptv.tar.gz;
-wget https://www.dropbox.com/s/1ujtklnct0nqq6q/iptv_conf.tar.gz;
+wget https://www.dropbox.com/s/vmhkf4rzhoh4wa5/iptv_conf.tar.gz;
 git clone https://github.com/ua0lnj/vdr-plugin-mpv.git;
 git clone https://git.uli-eckhardt.de/vdr-plugin-externalplayer.git;
 wget https://www.dropbox.com/s/vhz1fz68159s0qg/externalplayer.conf.tar.gz;
@@ -741,7 +741,7 @@ wget http://firefly.vdr-developer.org/systeminfo/vdr-systeminfo-0.1.5.tar.bz2;
 			echo " Downloading skins "
 
 wget https://www.dropbox.com/s/zwb0vp6gfwh7d4y/anthra_pack.tar.gz;
-wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.8.6.tar.gz;
+wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.10.tar.gz;
 wget https://www.dropbox.com/s/8uiizh0d3t706ll/patch_skindesigner.tar.gz;
 git clone https://projects.vdr-developer.org/git/skin-nopacity.git;
 wget https://www.dropbox.com/s/hegz319loovpb4r/patch_skinnopacity.tar.gz;
@@ -756,10 +756,10 @@ wget https://www.dropbox.com/s/6hzpdx9yv5ypzxv/traduzioni.tar.gz;
 wget https://www.dropbox.com/s/jrizzen5q8o07uv/01_Add_language_It.patch.tar.gz;
 wget https://www.dropbox.com/s/5uvx468b4b87auy/icone.tar.gz;
 wget https://www.dropbox.com/s/56oomdr58os7msa/oscam.tar.gz;
-wget https://www.dropbox.com/s/sn1xk3vf6wdjanq/oscam64.tar.gz;
+wget https://www.dropbox.com/s/z2v79qjdjcm1qjo/oscam64.tar.gz;
 wget https://www.dropbox.com/s/hb2mv9ytz5q6yz7/picon.tar.gz; 
 wget https://www.dropbox.com/s/m32a4s23h7r00mg/themes.tar.gz;
-wget https://www.dropbox.com/s/yn90wkejcd420vy/logos.tar.gz;
+wget https://www.dropbox.com/s/0mb399xtozg028r/logos.tar.gz;
 
 chmod -R 777 *;;
 
@@ -974,12 +974,12 @@ else
 apt-get -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev libvorbis-dev;
 apt-get -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev;
 apt-get -y install libtheora-dev libxvidcore-dev libvdpau-dev libmp3lame-dev libogg-dev libfreetype6-dev;
-apt-get -y install freeglut3 freeglut3-dev libglew-dev libglm-dev mesa-common-dev
+apt-get -y install freeglut3 freeglut3-dev libglew-dev libglm-dev mesa-common-dev libssl-dev
 
     echo "                    Wait for a few seconds ...";
 cd /usr/local/src/ffmpeg_sources;
 cp -rf /home/`logname`/Vdrrepo/ffmpeg-4.3.1.tar.bz2 /usr/local/src/ffmpeg_sources/; 
-tar xjvf ffmpeg-4.3.1.tar.bz2; mv ffmpeg-4.3.1 ffmpeg; rm -rf ffmpeg-4.3.1.tar.bz2; cd ffmpeg; ./configure --extra-libs="-ldl" --enable-gpl --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-libxcb --disable-libopus --enable-libtheora --enable-libvorbis --disable-libvpx --enable-libx264 --enable-libx265 --enable-cuvid --enable-nonfree --enable-libxvid --enable-opengl --enable-vdpau --enable-vaapi --enable-pic --enable-shared  --disable-doc --enable-swresample --disable-avresample --enable-nvenc --enable-cuda --disable-cuda-sdk
+tar xjvf ffmpeg-4.3.1.tar.bz2; mv ffmpeg-4.3.1 ffmpeg; rm -rf ffmpeg-4.3.1.tar.bz2; cd ffmpeg; ./configure --extra-libs="-ldl" --enable-gpl --enable-libfdk-aac --enable-libfreetype --enable-libmp3lame --enable-openssl --enable-libxcb --disable-libopus --enable-libtheora --enable-libvorbis --disable-libvpx --enable-libx264 --enable-libx265 --enable-cuvid --enable-nonfree --enable-libxvid --enable-opengl --enable-vdpau --enable-vaapi --enable-pic --enable-shared  --disable-doc --enable-swresample --disable-avresample --enable-nvenc --enable-cuda --disable-cuda-sdk 
     echo "                    Press Enter to continue ...               "; read enterKey;
 make -j10; checkinstall --pkgname=ffmpeg --pkgversion="2.4.6" --backup=no --deldoc=yes --fstrans=no --default --pakdir=$PACKAGES
 fi;
@@ -1251,7 +1251,7 @@ clear
 echo "                        "
 echo "                        "
 echo "                        "
-echo "Install Basic plugins  ( Softhddevice / Softhdcuvid / Xineliboutput - Dvbapi - Epgsearch - SkinNopacity - Skindesigner - Iptv - ExternalPlayer - Radio -Channelscan - System Info)"
+echo "Install Basic plugins  ( Softhddevice / Softhdcuvid / Xineliboutput - Dvbapi - Epgsearch - SkinNopacity - Skindesigner - Skin-Lcarsng - Iptv - ExternalPlayer - Radio -Channelscan - System Info)"
 echo "                 Press Enter to continue ...         "; read enterKey
 cd $SRC;
 mkdir -p /etc/vdr/plugins; mkdir -p /etc/vdr/themes; mkdir -p /$SHARE/skindesigner/scripts;
@@ -1332,7 +1332,7 @@ apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxex
 apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
 apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev
 cd $VDRSRC;
-git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git; cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice; wget https://www.dropbox.com/s/h6w4axdur1jn6qx/patch_softhddevice_ua0lnj.tar.gz; cp -rf /$VDRSRC/softhddevice/patch_softhddevice_ua0lnj.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_softhddevice_ua0lnj.tar.gz; rm -rf patch_softhddevice_ua0lnj.tar.gz; patch -p1 < 03_LanguageIT.patch; make; make install;;
+git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git; cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice; wget https://www.dropbox.com/s/h6w4axdur1jn6qx/patch_softhddevice_ua0lnj.tar.gz; cp -rf /$VDRSRC/softhddevice/patch_softhddevice_ua0lnj.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_softhddevice_ua0lnj.tar.gz; rm -rf patch_softhddevice_ua0lnj.tar.gz; patch -p1 < 03_LanguageIT.patch; make ALSA=1 OSS=0 VDPAU=0 VAAPI=1 SCREENSAVER=0 SWRESAMPLE=1; make install;;
 # ALSA=1 OSS=0 VDPAU=0 VAAPI=1 SCREENSAVER=0 SWRESAMPLE=1
 e)
 clear
@@ -1376,19 +1376,18 @@ echo ""; echo "               *** Skin-Nopacity ***";  sleep 3
 apt-get -y install libgraphicsmagick++1-dev libmagick++-6.q16-dev
 apt-get -y install libmagickcore-6.q16-6 libfontconfig1-dev 
 apt-get -y install zlib1g zlib1g-dev libglib2.0-0 libexpat1 libexpat1-dev libpcre3 libpcre3-dev
-cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/skin-nopacity /$VDRSRC;  cd skin-nopacity; cp -rf /home/`logname`/Vdrrepo/patch_skinnopacity.tar.gz /$VDRSRC/skin-nopacity; tar -zxvf patch_skinnopacity.tar.gz; rm -rf patch_skinnopacity.tar.gz; patch -p1 < 11_skinnopacity_displaychannel.c.patch; make install; 
+cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/skin-nopacity /$VDRSRC; cd skin-nopacity; make install; 
 #  
 #
 echo ""; echo "               *** Skindesigner ***"; echo ""; sleep 3
-cd $VDRSRC; apt-get -y install graphicsmagick-libmagick-dev-compat libxml2-dev librsvg2-dev lm-sensors; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.8.6.tar.gz /$VDRSRC/; tar -zxvf vdr-plugin-skindesigner-1.2.8.6.tar.gz; rm -rf vdr-plugin-skindesigner-1.2.8.6.tar.gz; mv -f vdr-plugin-skindesigner-1.2.8.6 skindesigner; cd skindesigner/libskindesignerapi; make; make install; cd $VDRSRC/skindesigner/skins/metrixhd; wget https://www.dropbox.com/s/wfr9pinoiw22vbb/translation_metrixhd.diff.tar.gz; tar -zxvf translation_metrixhd.diff.tar.gz; mv -f translation_metrixhd.diff.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < translation_metrixhd.diff; rm -rf translation_metrixhd.diff; cd ../..; cp -rf /home/`logname`/Vdrrepo/patch_skindesigner.tar.gz /$VDRSRC/skindesigner; tar -zxvf patch_skindesigner.tar.gz; rm -rf patch_skindesigner.tar.gz; patch -p1 < 10_skindesigner_scriptsdir.patch; make install;
+cd $VDRSRC; apt-get -y install graphicsmagick-libmagick-dev-compat libxml2-dev librsvg2-dev lm-sensors; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.10.tar.gz /$VDRSRC/; tar -zxvf vdr-plugin-skindesigner-1.2.10.tar.gz; rm -rf vdr-plugin-skindesigner-1.2.10.tar.gz; mv -f vdr-plugin-skindesigner-1.2.10 skindesigner; cd skindesigner; make; make install; 
 #
+#
+echo ""; echo "               *** Skin-Lcarsng ***"; echo ""; sleep 3
+cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/skin-lcarsng-master.tar.gz /$VDRSRC/; cd /$VDRSRC/; tar -zxvf skin-lcarsng-master.tar.gz; rm -rf skin-lcarsng-master.tar.gz; mv -f skin-lcarsng-master skin-lcarsng; cd skin-lcarsng; make; make install;
 #
 echo ""; echo "               *** Iptv ***"; echo ""; sleep 3
-cd $VDRSRC; apt-get -y install libcurl4 libcurl4-gnutls-dev vlc; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-iptv /$VDRSRC; mv vdr-plugin-iptv iptv; cd iptv; cp -rf /home/`logname`/Vdrrepo/patch_iptv.tar.gz /$VDRSRC/iptv; tar -zxvf patch_iptv.tar.gz; rm -rf patch_iptv.tar.gz; patch -p1 < vlc2iptv.patch; patch -p1 < 10_iptv_protocolext.patch; make; cd ../../..; make plugins; mkdir -p /etc/vdr/plugins/iptv/channels; cp -rf /home/`logname`/Vdrrepo/iptv_conf.tar.gz /$PLUGINS/iptv/channels/; cd $PLUGINS/iptv/channels; tar -zxvf iptv_conf.tar.gz; rm -rf iptv_conf.tar.gz; 
-#  
-#
-echo ""; echo "              *** Mpv ***"; echo ""; sleep 3
-cd $VDRSRC; apt-get -y install mpv libmpv-dev libmpv1; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-mpv /$VDRSRC; mv vdr-plugin-mpv mpv; cd mpv; make; make install;
+cd $VDRSRC; apt-get -y install libcurl4 libcurl4-gnutls-dev vlc mplayer; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-iptv /$VDRSRC; mv vdr-plugin-iptv iptv; cd iptv; cp -rf /home/`logname`/Vdrrepo/patch_iptv.tar.gz /$VDRSRC/iptv; tar -zxvf patch_iptv.tar.gz; rm -rf patch_iptv.tar.gz; patch -p1 < 10_iptv_protocolext.patch; make; cd ../../..; make plugins; 
 #
 #
 echo ""; echo "               *** Externalplayer ***";  sleep 3
@@ -1406,6 +1405,12 @@ cd $VDRSRC; apt-get -y install libboost-iostreams-dev; cp -rf /home/`logname`/Vd
 echo ""; echo "               *** System Info ***";  sleep 3
 cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/vdr-systeminfo-0.1.5.tar.bz2 /$VDRSRC; tar xivf vdr-systeminfo-0.1.5.tar.bz2; mv systeminfo-0.1.5 systeminfo; rm -rf vdr-systeminfo-0.1.5.tar.bz2; mv -f $VDRSRC/systeminfo/scripts/systeminfo.sh /usr/local/bin/; cd ../..; make plugins; 
 #
+#
+cd $SRC/vdr; make plugins install;
+#   
+#
+echo ""; echo "              *** Mpv ***"; echo ""; sleep 3
+cd $VDRSRC; apt-get -y install mpv libmpv-dev libmpv1; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-mpv /$VDRSRC; mv vdr-plugin-mpv mpv; cd mpv; make; make install;
 #
 cd $SRC/vdr; make plugins install;
 
@@ -1437,6 +1442,9 @@ clear
 clear
 cd /$PLUGINS/skindesigner/scripts/; ln -s temperatures.default temperatures; ln -s vdrstats.default vdrstats;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *;
+#
+cp -rf /home/`logname`/Vdrrepo/iptv_conf.tar.gz /$PLUGINS/iptv/; cd /$PLUGINS/iptv/; rm -rf vlc2iptv; tar -zxvf iptv_conf.tar.gz; rm -rf iptv_conf.tar.gz; 
+#  
 					echo "    Installing true type"; sleep 1
 
 if [ -d /usr/share/fonts/truetype/vdrsymbols ];
@@ -1505,11 +1513,11 @@ echo "%`logname` ALL=NOPASSWD: /etc/init.d/vdr" >> /etc/sudoers
 rm -rf /usr/local/bin/vdrpoweroff; touch /usr/local/bin/vdrpoweroff
 echo '#!/bin/sh
 #file name: Kill Vdr "vdrpoweroff"
-killall -9 vdr & killall -9 vlc & killall -9 vdr-sxfe & killall -9 vdrrun 
+killall -9 mpv & killall -9 vdr & killall -9 vlc & killall -9 vdr-sxfe & killall -9 vdrrun 
 # & killall -9 oscam & shutdown -h now '  >> /usr/local/bin/vdrpoweroff
 # 
 #
-chmod 755 /usr/local/bin/vdrpoweroffc
+chmod 755 /usr/local/bin/vdrpoweroff
 #
 #  Create /etc/init.d/vdr           
 rm -rf /etc/init.d/vdr; touch /etc/init.d/vdr 
@@ -1542,8 +1550,10 @@ case "$1" in
         ;;
     stop)
         echo -n "Stop VDR "
+
        killall -9 vdr
-       killall -9 vlc       
+       killall -9 mpv       
+       killall -9 vlc
        killall -9 vdr-sxfe
        killall -9 vdrrun
         # Remember status and be verbose
@@ -1761,9 +1771,11 @@ then echo " Default Skin is already installed"
 else cp -rf /home/`logname`/Vdrrepo/lcars_pack.tar.gz /etc/vdr/themes; cd /etc/vdr/themes; tar -zxvf lcars_pack.tar.gz; cd /etc/vdr/themes; rm -rf lcars_pack.tar.gz;
 fi
 #
-cp -rf /home/`logname`/Vdrrepo/skin-lcarsng-master.tar.gz /$VDRSRC/; cd /$VDRSRC/; tar -zxvf skin-lcarsng-master.tar.gz; rm -rf skin-lcarsng-master.tar.gz; mv -f skin-lcarsng-master skin-lcarsng; cd skin-lcarsng; make; make install;
-
-rm -rf $SKINS/shady_KISS; cd $SKINS; git clone https://github.com/tomsax56/shady_KISS; 
+if [ -e /etc/vdr/themes/shady*.* ];
+then echo " Shady Skin is already installed"
+else cd $SKINS; git clone https://github.com/tomsax56/shady_KISS;
+fi;
+#
 
 
 #############################################################################################################################  

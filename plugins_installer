@@ -403,11 +403,11 @@ cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
 d) 
 clear
 echo "        ***                Installing Vdr-Plugin-Skinflatplus               ***";  sleep 2
-cd $VDRSRC; apt-get -y install libfreetype6-dev graphicsmagick-libmagick-dev-compat  lm-sensors;
+cd $VDRSRC; apt-get -y install libfreetype6-dev graphicsmagick-libmagick-dev-compat lm-sensors;
    if [ -f skin-flatplus/Makefile ];
 		then  echo "Vdr-Plugin-Skinflatplus $Remind"
-			else git clone http://projects.vdr-developer.org/git/skin-flatplus.git; cp -rf skin-flatplus /home/`logname`/Vdrrepo/; cd skin-flatplus; make; make install; sed -i "s|-P'externalplayer'|& -P'skinflatplus -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun; cd /usr/local/lib/vdr/plugins/skinflatplus/widgets/temperatures/; ln -s temperatures.default temperatures; cd ../system_information; ln -s system_information.ubuntu system_information; cd ../weather/; wget https://www.dropbox.com/s/v6o2zsjt7yvascy/flat_weather.tar.gz; tar -zxvf flat_weather.tar.gz; mv -f flat_weather.tar.gz /home/`logname`/Vdrrepo/  
-	fi;
+			else git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git; cp -rf skin-flatplus /home/`logname`/Vdrrepo/; mv vdr-plugin-skinflatplus skinflatplus; cd skinflatplus; make; make install; sed -i "s|-P'externalplayer'|& -P'skinflatplus -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun; cd /usr/lib/vdr/skinflatplus/widgets/temperatures/; ln -s temperatures.default temperatures; cd ../system_information; ln -s system_information.ubuntu system_information; cd ../weather/; wget https://www.dropbox.com/s/x80qbwk8xnwi0u5/flat_weather.tar.gz; tar -zxvf flat_weather.tar.gz; mv -f flat_weather.tar.gz /home/`logname`/Vdrrepo/  
+	fi; 
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install; 
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$					
@@ -846,7 +846,7 @@ echo "        ***                Installing Vdr-Plugin-Mpv                     *
 cd $VDRSRC; apt-get -y install mpv libmpv-dev libmpv1 libxrandr-dev;
    if [ -f mpv/Makefile ];
   		then  echo "Vdr-Plugin-Mpv $Remind"
-			else git clone https://github.com/ua0lnj/vdr-plugin-mpv.git; cp -rf vdr-plugin-mpv -rf /home/`logname`/Vdrrepo/; mv -f vdr-plugin-mpv mpv; cd mpv; make install; sed -i "s|-P'externalplayer'|& -P'mpv -a alsa -b /home/'|" /usr/local/bin/vdrrun
+			else git clone https://github.com/ua0lnj/vdr-plugin-mpv.git; cp -rf vdr-plugin-mpv -rf /home/`logname`/Vdrrepo/; mv -f vdr-plugin-mpv mpv; cd mpv; make install; sed -i "s|-P'externalplayer'|& -P'mpv'|" /usr/local/bin/vdrrun
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -855,7 +855,7 @@ c1)
 clear
 echo "        ***                Removing Vdr-Plugin-Mpv               ***";  sleep 2
 cd $VDRSRC; if [ -f mpv/Makefile ];
-  		then rm -rf mpv; cd $LIB; rm -rf libvdr-mpv.*; sed -i "s|-P'mpv -a alsa -b /home/'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-Mpv $Remind1"
+  		then rm -rf mpv; cd $LIB; rm -rf libvdr-mpv.*; sed -i "s|-P'mpv'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-Mpv $Remind1"
   			else echo "Vdr-Plugin-Mpv $Remind5" 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;

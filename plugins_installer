@@ -327,13 +327,15 @@ case $yourch in
 a) 
 clear
 echo "        ***                Installing Skin-Nopacity               ***";  sleep 2
-apt-get -y install graphicsmagick-libmagick-dev-compat libmagick++-6.q16-dev
-apt-get -y install libmagickcore-6.q16-3 libfontconfig1-dev zlib1g zlib1g-dev 
-apt-get -y install libglib2.0-0 libexpat1 libexpat1-dev libpcre3 libpcre3-dev
+apt-get -y install graphicsmagick-libmagick-dev-compat 
+apt-get -y install libc6-dev libfontconfig1-dev  
+apt-get -y install zlib1g zlib1g-dev
+apt-get -y install libglib2.0-0 libpcre3 libpcre3-dev
+apt-get -y install libexpat1 libexpat1-dev libpcre3 libpcre3-dev
 cd $VDRSRC;
     if [ -f skin-nopacity/Makefile ];
   	then  echo "Skin-Nopacity $Remind"
-  		else git clone https://projects.vdr-developer.org/git/skin-nopacity.git; cp -rf skin-nopacity /home/`logname`/Vdrrepo/; cd skin-nopacity; wget https://www.dropbox.com/s/hegz319loovpb4r/patch_skinnopacity.tar.gz; tar -zxvf patch_skinnopacity.tar.gz; mv -f patch_skinnopacity.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < 11_skinnopacity_displaychannel.c.patch; make install; cd ../../..; make plugins install; sed -i "s|-P'externalplayer'|& -P'skinnopacity -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun 
+  		else git clone https://projects.vdr-developer.org/git/skin-nopacity.git; cp -rf skin-nopacity /home/`logname`/Vdrrepo/; cd skin-nopacity; make install; cd ../../..; make plugins install; sed -i "s|-P'externalplayer'|& -P'skinnopacity -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun 
 fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "  
@@ -343,7 +345,7 @@ a1)
 clear
 echo "        ***                Removing Skin-Nopacity               ***";  sleep 2
 cd $VDRSRC;
-   if [ -f skin-flatplus/Makefile ];
+   if [ -f skin-nopacity/Makefile ];
   	then rm -rf cd skin-nopacity; cd $LIB; rm -rf libvdr-skin-nopacity.*; rm -rf cd skin-nopacity; sed -i "s|-P'skinnopacity -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun; echo "Skin-Nopacity $Remind1"
   			else echo "Skin-Nopacity $Remind5"; sed -i "s|-P'skinnopacity -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun; 
  	       fi;
@@ -355,21 +357,21 @@ cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
 b) 
 clear
 echo "        ***                Installing Vdr-Plugin-Skindesigner               ***";  sleep 2
-cd $VDRSRC; apt-get -y install graphicsmagick-libmagick-dev-compat libxml2-dev librsvg2-dev;
+cd $VDRSRC; apt-get -y install libcurl4 librsvg2-dev libxml2-dev libcairo2-dev lm-sensors;
    if [ -f skindesigner/Makefile ];
 		then  echo "Vdr-Plugin-Skindesigner $Remind"
-			else wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.8.6.tar.gz; tar -zxvf vdr-plugin-skindesigner-1.2.8.6.tar.gz; mv -f vdr-plugin-skindesigner-1.2.8.6 skindesigner; cp -rf vdr-plugin-skindesigner-1.2.8.6.tar.gz /home/`logname`/Vdrrepo/; cd skindesigner/libskindesignerapi; make; make install; cd $VDRSRC/skindesigner/skins/metrixhd; wget https://www.dropbox.com/s/wfr9pinoiw22vbb/translation_metrixhd.diff.tar.gz; tar -zxvf translation_metrixhd.diff.tar.gz; mv -f translation_metrixhd.diff.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < translation_metrixhd.diff; rm -rf translation_metrixhd.diff; cd ../..; cp -rf /home/`logname`/Vdrrepo/patch_skindesigner.tar.gz /$VDRSRC/skindesigner; tar -zxvf patch_skindesigner.tar.gz; rm -rf patch_skindesigner.tar.gz; patch -p1 < 10_skindesigner_scriptsdir.patch; make install; sed -i "s|-P'externalplayer'|& -P'skindesigner -l /etc/vdr/logos/ -i /usr/share/vdr/plugins/skindesigner/skins/'|" /usr/local/bin/vdrrun 
+			else wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.10.tar.bz2; tar xjf vdr-plugin-skindesigner-1.2.10.tar.bz2; mv -f vdr-plugin-skindesigner-1.2.10 skindesigner; cp -rf vdr-plugin-skindesigner-1.2.10.tar.bz2 /home/`logname`/Vdrrepo/; cd skindesigner; make;  make install; sed -i "s|-P'externalplayer'|& -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/'|" /usr/local/bin/vdrrun 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
-cd /$PLUGINS/skindesigner/scripts/; ln -s temperatures.default temperatures; ln -s vdrstats.default vdrstats;
+cd /$SHARE/skindesigner/scripts/; ln -s temperatures.default temperatures; ln -s vdrstats.default vdrstats;
         echo "                    Press Enter to continue ...               "; read enterKey;;
 		
 b1) 
 clear
 echo "        ***                Removing Vdr-Plugin-Skindesigner               ***";  sleep 2
 cd $VDRSRC; if [ -f skindesigner/Makefile ];
-  	then rm -rf skindesigner; cd $LIB; rm -rf libvdr-skindesigner.*; cd $SHARE; rm -rf skindesigner; cd /$PLUGINS; rm -rf skindesigner; sed -i "s|-P'skindesigner -l /etc/vdr/logos/ -i /usr/share/vdr/plugins/skindesigner/skins/'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-Skindesigner $Remind1"
-  			else echo "Vdr-Plugin-Skindesigner $Remind5"; sed -i "s|-P'skindesigner -l /etc/vdr/logos/ -i /usr/share/vdr/plugins/skindesigner/skins/'||" /usr/local/bin/vdrrun; 
+  	then rm -rf skindesigner; cd $LIB; rm -rf libvdr-skindesigner.*; cd $SHARE; rm -rf skindesigner; cd /$PLUGINS; rm -rf skindesigner; sed -i "s|-P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-Skindesigner $Remind1"
+  			else echo "Vdr-Plugin-Skindesigner $Remind5"; sed -i "s|-P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/'||" /usr/local/bin/vdrrun; 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;; 
@@ -401,7 +403,7 @@ cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
 d) 
 clear
 echo "        ***                Installing Vdr-Plugin-Skinflatplus               ***";  sleep 2
-cd $VDRSRC; apt-get -y install graphicsmagick-libmagick-dev-compat imagemagick libmagick++-6.q16-dev lm-sensors;
+cd $VDRSRC; apt-get -y install libfreetype6-dev graphicsmagick-libmagick-dev-compat  lm-sensors;
    if [ -f skin-flatplus/Makefile ];
 		then  echo "Vdr-Plugin-Skinflatplus $Remind"
 			else git clone http://projects.vdr-developer.org/git/skin-flatplus.git; cp -rf skin-flatplus /home/`logname`/Vdrrepo/; cd skin-flatplus; make; make install; sed -i "s|-P'externalplayer'|& -P'skinflatplus -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun; cd /usr/local/lib/vdr/plugins/skinflatplus/widgets/temperatures/; ln -s temperatures.default temperatures; cd ../system_information; ln -s system_information.ubuntu system_information; cd ../weather/; wget https://www.dropbox.com/s/v6o2zsjt7yvascy/flat_weather.tar.gz; tar -zxvf flat_weather.tar.gz; mv -f flat_weather.tar.gz /home/`logname`/Vdrrepo/  
@@ -841,10 +843,10 @@ cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
 c) 
 clear
 echo "        ***                Installing Vdr-Plugin-Mpv                     ***";  sleep 2
-cd $VDRSRC; apt-get -y install mpv libmpv-dev libmpv1;
+cd $VDRSRC; apt-get -y install mpv libmpv-dev libmpv1 libxrandr-dev;
    if [ -f mpv/Makefile ];
   		then  echo "Vdr-Plugin-Mpv $Remind"
-			else git clone https://github.com/ua0lnj/vdr-plugin-mpv.git; cp -rf vdr-plugin-mpv -rf /home/`logname`/Vdrrepo/; mv -f vdr-plugin-mpv mpv; cd mpv; make install; sed -i "s|-P'externalplayer'|& -P'mpv'|" /usr/local/bin/vdrrun
+			else git clone https://github.com/ua0lnj/vdr-plugin-mpv.git; cp -rf vdr-plugin-mpv -rf /home/`logname`/Vdrrepo/; mv -f vdr-plugin-mpv mpv; cd mpv; make install; sed -i "s|-P'externalplayer'|& -P'mpv -a alsa -b /home/'|" /usr/local/bin/vdrrun
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -853,7 +855,7 @@ c1)
 clear
 echo "        ***                Removing Vdr-Plugin-Mpv               ***";  sleep 2
 cd $VDRSRC; if [ -f mpv/Makefile ];
-  		then rm -rf mpv; cd $LIB; rm -rf libvdr-mpv.*; sed -i "s|-P'mpv'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-Mpv $Remind1"
+  		then rm -rf mpv; cd $LIB; rm -rf libvdr-mpv.*; sed -i "s|-P'mpv -a alsa -b /home/'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-Mpv $Remind1"
   			else echo "Vdr-Plugin-Mpv $Remind5" 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;

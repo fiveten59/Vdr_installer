@@ -9,7 +9,7 @@
 #                                                                                       #
 #########################################################################################
 #
-PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skindesigner -l /etc/vdr/logos/ -i /usr/local/share/vdr/plugins/skindesigner/skins/' -P'skinlcarsng' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/radio-OnAir1080.mpg' -P'skinnopacity -l /etc/vdr/logos/' -P'mpv -a alsa' -P'externalplayer' -P'channelscan' -P'systeminfo'"
+PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/' -P'skinlcarsng' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/radio-OnAir1080.mpg' -P'skinnopacity -l /etc/vdr/logos/' -P'mpv -a alsa -b /home/' -P'externalplayer' -P'channelscan' -P'systeminfo'"
 #    
 #
 ETC='/usr/local/etc'
@@ -1288,7 +1288,7 @@ apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxex
 apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
 apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev
 cd $VDRSRC;
-git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git; cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice; wget https://www.dropbox.com/s/h6w4axdur1jn6qx/patch_softhddevice_ua0lnj.tar.gz; cp -rf /$VDRSRC/softhddevice/patch_softhddevice_ua0lnj.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_softhddevice_ua0lnj.tar.gz; rm -rf patch_softhddevice_ua0lnj.tar.gz; patch -p1 < 03_LanguageIT.patch; make ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1; make install;;
+git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git; cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice; make ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1; make install;;
 #
 b) 
 clear
@@ -1332,8 +1332,8 @@ apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxex
 apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
 apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev
 cd $VDRSRC;
-git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git; cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice; wget https://www.dropbox.com/s/h6w4axdur1jn6qx/patch_softhddevice_ua0lnj.tar.gz; cp -rf /$VDRSRC/softhddevice/patch_softhddevice_ua0lnj.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_softhddevice_ua0lnj.tar.gz; rm -rf patch_softhddevice_ua0lnj.tar.gz; patch -p1 < 03_LanguageIT.patch; make ALSA=1 OSS=0 VDPAU=0 VAAPI=1 SCREENSAVER=0 SWRESAMPLE=1; make install;;
-# ALSA=1 OSS=0 VDPAU=0 VAAPI=1 SCREENSAVER=0 SWRESAMPLE=1
+git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git; cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice;  make ALSA=1 OSS=0 VDPAU=0 VAAPI=1 SCREENSAVER=0 SWRESAMPLE=1; make install;;
+#
 e)
 clear
 echo ""; echo "               *** Softhdcuvid **"; echo ""; sleep 3
@@ -1373,14 +1373,16 @@ cp -rf /home/`logname`/Vdrrepo/vdr-plugin-epgsearch /$VDRSRC/; mv vdr-plugin-epg
 # 
 #
 echo ""; echo "               *** Skin-Nopacity ***";  sleep 3
-apt-get -y install libgraphicsmagick++1-dev libmagick++-6.q16-dev
-apt-get -y install libmagickcore-6.q16-6 libfontconfig1-dev 
-apt-get -y install zlib1g zlib1g-dev libglib2.0-0 libexpat1 libexpat1-dev libpcre3 libpcre3-dev
+apt-get -y install graphicsmagick-libmagick-dev-compat 
+apt-get -y install libc6-dev libfontconfig1-dev  
+apt-get -y install zlib1g zlib1g-dev lm-sensors
+apt-get -y install libglib2.0-0 libpcre3 libpcre3-dev
+apt-get -y install libexpat1 libexpat1-dev libpcre3 libpcre3-dev
 cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/skin-nopacity /$VDRSRC; cd skin-nopacity; make install; 
 #  
 #
 echo ""; echo "               *** Skindesigner ***"; echo ""; sleep 3
-cd $VDRSRC; apt-get -y install graphicsmagick-libmagick-dev-compat libxml2-dev librsvg2-dev lm-sensors; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.10.tar.gz /$VDRSRC/; tar -zxvf vdr-plugin-skindesigner-1.2.10.tar.gz; rm -rf vdr-plugin-skindesigner-1.2.10.tar.gz; mv -f vdr-plugin-skindesigner-1.2.10 skindesigner; cd skindesigner; make; make install; 
+cd $VDRSRC; apt-get -y install libcurl4 librsvg2-dev libxml2-dev libcairo2-dev; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.10.tar.gz /$VDRSRC/; tar -zxvf vdr-plugin-skindesigner-1.2.10.tar.gz; rm -rf vdr-plugin-skindesigner-1.2.10.tar.gz; mv -f vdr-plugin-skindesigner-1.2.10 skindesigner; cd skindesigner; make; make install; 
 #
 #
 echo ""; echo "               *** Skin-Lcarsng ***"; echo ""; sleep 3
@@ -1410,7 +1412,7 @@ cd $SRC/vdr; make plugins install;
 #   
 #
 echo ""; echo "              *** Mpv ***"; echo ""; sleep 3
-cd $VDRSRC; apt-get -y install mpv libmpv-dev libmpv1; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-mpv /$VDRSRC; mv vdr-plugin-mpv mpv; cd mpv; make; make install;
+cd $VDRSRC; apt-get -y install mpv libmpv-dev libmpv1 libxrandr-dev; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-mpv /$VDRSRC; mv vdr-plugin-mpv mpv; cd mpv; make; make install;
 #
 cd $SRC/vdr; make plugins install;
 
@@ -1440,7 +1442,7 @@ b)                                        ######################################
 clear
 					echo "    Configuring VDR"; sleep 3
 clear
-cd /$PLUGINS/skindesigner/scripts/; ln -s temperatures.default temperatures; ln -s vdrstats.default vdrstats;
+cd /$SHARE/skindesigner/scripts/; ln -s temperatures.default temperatures; ln -s vdrstats.default vdrstats;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *;
 #
 cp -rf /home/`logname`/Vdrrepo/iptv_conf.tar.gz /$PLUGINS/iptv/; cd /$PLUGINS/iptv/; rm -rf vlc2iptv; tar -zxvf iptv_conf.tar.gz; rm -rf iptv_conf.tar.gz; 

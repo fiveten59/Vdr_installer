@@ -846,7 +846,7 @@ echo "        ***                Installing Vdr-Plugin-Mpv                     *
 cd $VDRSRC; apt-get -y install mpv libmpv-dev libmpv1 libxrandr-dev;
    if [ -f mpv/Makefile ];
   		then  echo "Vdr-Plugin-Mpv $Remind"
-			else git clone https://github.com/ua0lnj/vdr-plugin-mpv.git; cp -rf vdr-plugin-mpv -rf /home/`logname`/Vdrrepo/; mv -f vdr-plugin-mpv mpv; cd mpv; make install; sed -i "s|-P'externalplayer'|& -P'mpv'|" /usr/local/bin/vdrrun
+			else git clone https://github.com/ua0lnj/vdr-plugin-mpv.git; cp -rf vdr-plugin-mpv -rf /home/`logname`/Vdrrepo/; mv -f vdr-plugin-mpv mpv; cd mpv; make install; sed -i "s|-P'externalplayer'|& -P'mpv -a alsa -b /home/'|" /usr/local/bin/vdrrun
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -855,7 +855,7 @@ c1)
 clear
 echo "        ***                Removing Vdr-Plugin-Mpv               ***";  sleep 2
 cd $VDRSRC; if [ -f mpv/Makefile ];
-  		then rm -rf mpv; cd $LIB; rm -rf libvdr-mpv.*; sed -i "s|-P'mpv'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-Mpv $Remind1"
+  		then rm -rf mpv; cd $LIB; rm -rf libvdr-mpv.*; sed -i "s|-P'mpv -a alsa -b /home/'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-Mpv $Remind1"
   			else echo "Vdr-Plugin-Mpv $Remind5" 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
@@ -971,7 +971,7 @@ clear
 echo "        ***                Installing Vdr-Plugin-ExternalPlayer               ***";  sleep 2
 cd $VDRSRC; if [ -f externalplayer/Makefile ];
 		then  echo "Vdr-Plugin-ExternalPlayer $Remind"
-			else git clone https://git.uli-eckhardt.de/vdr-plugin-externalplayer.git; cp -rf vdr-plugin-externalplayer /home/`logname`/Vdrrepo/; mv -f vdr-plugin-externalplayer externalplayer; cd externalplayer; cp -rf /$SRC/traduzioni/external_it_IT.po /$VDRSRC/externalplayer/po/; cd externalplayer/po/; mv -f external_it_IT.po it_IT.po; cd ../../../..; make plugins; cd /etc/vdr/plugins; wget https://www.dropbox.com/s/vhz1fz68159s0qg/externalplayer.conf.tar.gz; tar -zxvf externalplayer.conf.tar.gz; tar -zxvf externalplayer.conf.tar.gz; cp -rf externalplayer.tar.gz /home/`logname`/Vdrrepo/; sed -i "s|-P'iptv'|& -P'externalplayer'|" /usr/local/bin/vdrrun 
+			else wget https://www.uli-eckhardt.de/vdr/download/vdr-externalplayer-0.3.4.tgz; cp -rf wget https://www.uli-eckhardt.de/vdr/download/vdr-externalplayer-0.3.4.tgz /home/`logname`/Vdrrepo/; tar zxvf vdr-externalplayer-0.3.4.tgz; rm -rf vdr-externalplayer-0.3.4.tgz; mv externalplayer-0.3.4 externalplayer; cp -rf /$SRC/traduzioni/external_it_IT.po /$VDRSRC/externalplayer/po/; cd externalplayer/po/; mv external_it_IT.po it_IT.po; cd ../../../..; make plugins; cd /etc/vdr/plugins; wget https://www.dropbox.com/s/vhz1fz68159s0qg/externalplayer.conf.tar.gz; tar -zxvf externalplayer.conf.tar.gz; tar -zxvf externalplayer.conf.tar.gz; cp -rf externalplayer.tar.gz /home/`logname`/Vdrrepo/; rm -rf externalplayer.conf.tar.gz; sed -i "s|-P'iptv'|& -P'externalplayer'|" /usr/local/bin/vdrrun 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install; 
         echo "                    Press Enter to continue ...               "; read enterKey;;

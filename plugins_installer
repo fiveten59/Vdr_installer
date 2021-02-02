@@ -406,7 +406,7 @@ echo "        ***                Installing Vdr-Plugin-Skinflatplus             
 cd $VDRSRC; apt-get -y install libfreetype6-dev graphicsmagick-libmagick-dev-compat lm-sensors;
    if [ -f skin-flatplus/Makefile ];
 		then  echo "Vdr-Plugin-Skinflatplus $Remind"
-			else git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git; cp -rf skin-flatplus /home/`logname`/Vdrrepo/; mv vdr-plugin-skinflatplus skinflatplus; cd skinflatplus; make; make install; sed -i "s|-P'externalplayer'|& -P'skinflatplus -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun; cd /usr/lib/vdr/skinflatplus/widgets/temperatures/; ln -s temperatures.default temperatures; cd ../system_information; ln -s system_information.ubuntu system_information; cd ../weather/; wget https://www.dropbox.com/s/x80qbwk8xnwi0u5/flat_weather.tar.gz; tar -zxvf flat_weather.tar.gz; mv -f flat_weather.tar.gz /home/`logname`/Vdrrepo/  
+			else git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git; cp -rf vdr-plugin-skinflatplus /home/`logname`/Vdrrepo/; mv vdr-plugin-skinflatplus skinflatplus; cd skinflatplus; make; make install; sed -i "s|-P'externalplayer'|& -P'skinflatplus -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun; cd /usr/lib/vdr/skinflatplus/widgets/temperatures/; ln -s temperatures.default temperatures; cd ../system_information; ln -s system_information.ubuntu system_information; cd ../weather/; wget https://www.dropbox.com/s/x80qbwk8xnwi0u5/flat_weather.tar.gz; tar -zxvf flat_weather.tar.gz; mv -f flat_weather.tar.gz /home/`logname`/Vdrrepo/  
 	fi; 
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install; 
         echo "                    Press Enter to continue ...               "; read enterKey;;

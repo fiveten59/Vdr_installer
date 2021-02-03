@@ -169,19 +169,20 @@ apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswre
 apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev
 if [ -f softhddevice/Makefile ]; then  
 	echo "Softhddevice $Remind5"; 
-    		 else git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git; cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice; wget https://www.dropbox.com/s/pxjx9wnb71f2am4/patch_softhddevice_no_openglosd.tar.gz; cp -rf /$VDRSRC/softhddevice/patch_softhddevice_no_openglosd.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_softhddevice_no_openglosd.tar.gz; rm -rf patch_softhddevice_no_openglosd.tar.gz; patch -p1 < 03_LanguageIT.patch; make ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1; make install; sed -i "s|-P'dvbapi'|& -P'softhddevice -w disable-ogl-osd'|" /usr/local/bin/vdrrun; 
-      fi; 
+    		 else git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git; cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice; make ; make install; sed -i "s|-P'dvbapi'|& -P'softhddevice -f -w disable-ogl-osd'|" /usr/local/bin/vdrrun; 
 cd $SRC/vdr; make plugins install; cd /etc/vdr/; wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz; cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf setup16_softhddevice.tar.gz; rm -rf setup16_softhddevice.tar.gz
+fi; 
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; 
-      echo "                    Press Enter to continue ...               "; read enterKey;;
+        echo "  
+                  Press Enter to continue ...               "; read enterKey;;
       
 #                                      $$$$$$$$$$$$$$$$$$					
 a1) 
 clear
 echo "        ***                Removing Vdr-Plugin-Softhddevice              ***";  sleep 2
 cd $VDRSRC; if [ -f softhddevice/Makefile ]; echo "$Remind1 Softhddevice"; sleep 2;
-   		then rm -rf softhddevice; cd $LIB; rm -rf libvdr-softhddevice.*; sed -i "s|-P'softhddevice -w disable-ogl-osd'||" /usr/local/bin/vdrrun;
-   			else echo "Softhddevice $Remind5"; sed -i "s|-P'softhddevice -w disable-ogl-osd'||" /usr/local/bin/vdrrun; 
+   		then rm -rf softhddevice; cd $LIB; rm -rf libvdr-softhddevice.*; sed -i "s|-P'softhddevice -f -w disable-ogl-osd'||" /usr/local/bin/vdrrun;
+   			else echo "Softhddevice $Remind5"; sed -i "s|-P'softhddevice -f -w disable-ogl-osd'||" /usr/local/bin/vdrrun; 
       fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
       echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -202,19 +203,21 @@ apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswre
 apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev
 if [ -f softhddevice/Makefile ]; then 
 	echo "Softhdcuvid $Remind5"; 
-    		else wget https://github.com/jojo61/vdr-plugin-softhdcuvid/archive/master.tar.gz; cp -rf /$VDRSRC/master.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf master.tar.gz; mv vdr-plugin-softhdcuvid-master softhdcuvid; cd softhdcuvid; make; make install; sed -i "s|-P'dvbapi'|& -P'softhdcuvid -d :0.0'|" /usr/local/bin/vdrrun
-      fi;
-cd $SRC/vdr; make plugins install; cd /etc/vdr/; wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz; cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf setup16_softhddevice.tar.gz; rm -rf setup16_softhddevice.tar.gz      
-cd /home/`logname`/Vdrrepo/; chmod -R 777 *;
-      echo "                    Press Enter to continue ...               "; read enterKey;;
+    		else 
+wget https://github.com/jojo61/vdr-plugin-softhdcuvid/archive/master.tar.gz; cp -rf /$VDRSRC/master.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf master.tar.gz; mv vdr-plugin-softhdcuvid-master softhdcuvid; rm -rf master.tar.gz; cd softhdcuvid; rm -rf Makefile; wget https://www.dropbox.com/s/50olrxtjn8pcon1/patch_softhdcuvid.tar.gz; cp -rf /$VDRSRC/softhdcuvid/patch_softhdcuvid.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_softhdcuvid.tar.gz; rm -rf patch_softhdcuvid.tar.gz; patch -p1 < 03_LanguageIT.patch; make; make install; sed -i "s|-P'dvbapi'|& -P'softhdcuvid -f'|" /usr/local/bin/vdrrun
+cd $SRC/vdr; make plugins install; cd /etc/vdr/; wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz; cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf setup16_softhddevice.tar.gz; rm -rf setup16_softhddevice.tar.gz
+fi      
+cd /home/`logname`/Vdrrepo/; chmod -R 777 *; 
+        echo "  
+                  Press Enter to continue ...               "; read enterKey;;
       
 #                                      $$$$$$$$$$$$$$$$$$					
 b1) 
 clear
 echo "        ***                Removing Vdr-Plugin-Softhdcuvid             ***";  sleep 2
 cd $VDRSRC; if [ -f softhdcuvid/Makefile ]; 
-   		then rm -rf softhdcuvid; cd $LIB; rm -rf libvdr-softhdcuvid.*; sed -i "s|-P'softhdcuvid -d :0.0'||" /usr/local/bin/vdrrun;
-   			else echo "Softhddevice $Remind5"; sed -i "s|-P'softhdcuvid -d :0.0'||" /usr/local/bin/vdrrun; 
+   		then rm -rf softhdcuvid; cd $LIB; rm -rf libvdr-softhdcuvid.*; sed -i "s|-P'softhdcuvid -f'||" /usr/local/bin/vdrrun;
+   			else echo "Softhddevice $Remind5"; sed -i "s|-P'softhdcuvid -f'||" /usr/local/bin/vdrrun; 
       fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
       echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -231,8 +234,9 @@ cd $VDRSRC;
 			else cd $VDRSRC; git clone https://github.com/pesintta/vdr-plugin-vaapidevice; cp -rf /$VDRSRC/vdr-plugin-vaapidevice /home/`logname`/Vdrrepo/; mv vdr-plugin-vaapidevice vaapidevice; cd vaapidevice; export PKG_CONFIG_PATH="usr/local/src/libva/lib/pkgconfig:usr/local/src/ffmpeg_sources/ffmpeg/lib/pkgconfig"; make; make install; sed -i "s|-P'-dvbapi'|& -P'vaapidevice -f -a pulse'|" /usr/local/bin/vdrrun
     fi;
 cd $SRC/vdr; make plugins install; cd /etc/vdr/ && wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_vaapidevice.tar.gz && cp -rf /etc/vdr/setup16_vaapidevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_vaapidevice.tar.gz && rm -rf setup16_vaapidevice.tar.gz;
-cd /home/`logname`/Vdrrepo/; chmod -R 777 *;		
-        echo "                 Press Enter to continue ...               "; read enterKey;;
+cd /home/`logname`/Vdrrepo/; chmod -R 777 *;
+        echo "  
+                  Press Enter to continue ...               "; read enterKey;;
         
 #                                      $$$$$$$$$$$$$$$$$$					
 c1) 
@@ -360,7 +364,7 @@ echo "        ***                Installing Vdr-Plugin-Skindesigner             
 cd $VDRSRC; apt-get -y install libcurl4 librsvg2-dev libxml2-dev libcairo2-dev lm-sensors;
    if [ -f skindesigner/Makefile ];
 		then  echo "Vdr-Plugin-Skindesigner $Remind"
-			else wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.10.tar.bz2; tar xjf vdr-plugin-skindesigner-1.2.10.tar.bz2; mv -f vdr-plugin-skindesigner-1.2.10 skindesigner; cp -rf vdr-plugin-skindesigner-1.2.10.tar.bz2 /home/`logname`/Vdrrepo/; cd skindesigner; make;  make install; sed -i "s|-P'externalplayer'|& -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/'|" /usr/local/bin/vdrrun 
+			else wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.11.tar.bz2; tar xjf vdr-plugin-skindesigner-1.2.11.tar.bz2; mv -f vdr-plugin-skindesigner-1.2.11 skindesigner; cp -rf vdr-plugin-skindesigner-1.2.11.tar.bz2 /home/`logname`/Vdrrepo/; cd skindesigner; make;  make install; sed -i "s|-P'externalplayer'|& -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/'|" /usr/local/bin/vdrrun 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
 cd /$SHARE/skindesigner/scripts/; ln -s temperatures.default temperatures; ln -s vdrstats.default vdrstats;

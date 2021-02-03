@@ -594,11 +594,11 @@ fi
 
 			echo " Downloading skins "
 
-if [ -e /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.10.tar.gz ]; then
+if [ -e /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.11.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-     wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.10.tar.gz;
+     wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.11.tar.gz;
   fi 
 
 if [ -e /home/`logname`/Vdrrepo/patch_skindesigner.tar.gz ]; then
@@ -741,7 +741,7 @@ wget http://firefly.vdr-developer.org/systeminfo/vdr-systeminfo-0.1.5.tar.bz2;
 			echo " Downloading skins "
 
 wget https://www.dropbox.com/s/zwb0vp6gfwh7d4y/anthra_pack.tar.gz;
-wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.10.tar.gz;
+wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.11.tar.gz;
 wget https://www.dropbox.com/s/8uiizh0d3t706ll/patch_skindesigner.tar.gz;
 git clone https://projects.vdr-developer.org/git/skin-nopacity.git;
 wget https://www.dropbox.com/s/hegz319loovpb4r/patch_skinnopacity.tar.gz;
@@ -1288,7 +1288,7 @@ apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxex
 apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
 apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev
 cd $VDRSRC;
-git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git; cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice; make ALSA=1 OSS=0 VDPAU=1 VAAPI=0 SCREENSAVER=0 SWRESAMPLE=1; make install;;
+git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git; cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice; make ; make install;;
 #
 b) 
 clear
@@ -1300,7 +1300,7 @@ apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxex
 apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
 apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev libplacebo-dev libavfilter-dev
 cd $VDRSRC;
-cd $VDRSRC; wget https://github.com/jojo61/vdr-plugin-softhdcuvid/archive/master.tar.gz; cp -rf /$VDRSRC/master.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf master.tar.gz; mv vdr-plugin-softhdcuvid-master softhdcuvid; rm -rf master.tar.gz; cd softhdcuvid; wget https://www.dropbox.com/s/h6w4axdur1jn6qx/patch_softhddevice_ua0lnj.tar.gz; cp -rf /$VDRSRC/softhddevice/patch_softhddevice_ua0lnj.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_softhddevice_ua0lnj.tar.gz; rm -rf patch_softhddevice_ua0lnj.tar.gz; patch -p1 < 03_LanguageIT.patch; make ALSA=1 OSS=0 CUVID=1 VAAPI=0 LIBPLACEBO=0 SCREENSAVER=0 SWRESAMPLE=1 install;;
+cd $VDRSRC; wget https://github.com/jojo61/vdr-plugin-softhdcuvid/archive/master.tar.gz; cp -rf /$VDRSRC/master.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf master.tar.gz; mv vdr-plugin-softhdcuvid-master softhdcuvid; rm -rf master.tar.gz; cd softhdcuvid; rm -rf Makefile; wget https://www.dropbox.com/s/50olrxtjn8pcon1/patch_softhdcuvid.tar.gz; cp -rf /$VDRSRC/softhdcuvid/patch_softhdcuvid.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_softhdcuvid.tar.gz; rm -rf patch_softhdcuvid.tar.gz; patch -p1 < 03_LanguageIT.patch; make; make install;;
 #
 c) 
 clear
@@ -1332,7 +1332,7 @@ apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxex
 apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
 apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev
 cd $VDRSRC;
-git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git; cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice;  make ALSA=1 OSS=0 VDPAU=0 VAAPI=1 SCREENSAVER=0 SWRESAMPLE=1; make install;;
+git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git; cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/; mv vdr-plugin-softhddevice softhddevice; cd softhddevice;  make; make install;;
 #
 e)
 clear
@@ -1344,7 +1344,7 @@ apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxex
 apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
 apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev libplacebo-dev libavfilter-dev
 cd $VDRSRC; 
-wget https://github.com/jojo61/vdr-plugin-softhdcuvid/archive/master.tar.gz; cp -rf /$VDRSRC/master.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf master.tar.gz; mv vdr-plugin-softhdcuvid-master softhdcuvid; cd softhdcuvid; wget https://www.dropbox.com/s/h6w4axdur1jn6qx/patch_softhddevice_ua0lnj.tar.gz; cp -rf /$VDRSRC/softhddevice/patch_softhddevice_ua0lnj.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_softhddevice_ua0lnj.tar.gz; rm -rf patch_softhddevice_ua0lnj.tar.gz; patch -p1 < 03_LanguageIT.patch; make ALSA=1 OSS=0 CUVID=0 VAAPI=1 SCREENSAVER=0 SWRESAMPLE=1; make install;;
+wget https://github.com/jojo61/vdr-plugin-softhdcuvid/archive/master.tar.gz; cp -rf /$VDRSRC/master.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf master.tar.gz; mv vdr-plugin-softhdcuvid-master softhdcuvid; cd softhdcuvid; wget https://www.dropbox.com/s/h6w4axdur1jn6qx/patch_softhddevice_ua0lnj.tar.gz; cp -rf /$VDRSRC/softhddevice/patch_softhddevice_ua0lnj.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_softhddevice_ua0lnj.tar.gz; rm -rf patch_softhddevice_ua0lnj.tar.gz; patch -p1 < 03_LanguageIT.patch; make; make install;;
 #   
 f)
 clear
@@ -1382,7 +1382,7 @@ cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/skin-nopacity /$VDRSRC; cd skin-nopac
 #  
 #
 echo ""; echo "               *** Skindesigner ***"; echo ""; sleep 3
-cd $VDRSRC; apt-get -y install libcurl4 librsvg2-dev libxml2-dev libcairo2-dev; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.10.tar.gz /$VDRSRC/; tar -zxvf vdr-plugin-skindesigner-1.2.10.tar.gz; rm -rf vdr-plugin-skindesigner-1.2.10.tar.gz; mv -f vdr-plugin-skindesigner-1.2.10 skindesigner; cd skindesigner; make; make install; 
+cd $VDRSRC; apt-get -y install libcurl4 librsvg2-dev libxml2-dev libcairo2-dev; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.11.tar.gz /$VDRSRC/; tar -zxvf vdr-plugin-skindesigner-1.2.11.tar.gz; rm -rf vdr-plugin-skindesigner-1.2.11.tar.gz; mv -f vdr-plugin-skindesigner-1.2.11 skindesigner; cd skindesigner; make; make install; 
 #
 #
 echo ""; echo "               *** Skin-Lcarsng ***"; echo ""; sleep 3
@@ -1404,15 +1404,13 @@ echo ""; echo "               *** Channelscan ***";  sleep 3
 cd $VDRSRC; apt-get -y install libboost-iostreams-dev; cp -rf /home/`logname`/Vdrrepo/channelscan /$VDRSRC; cp -rf $VDRSRC/channelscan/script/* /usr/local/bin; cd ../..; make plugins; cd $PLUGINS; mkdir -p transponders; cp -rf /home/`logname`/Vdrrepo/satellite_pack.tar.gz  $PLUGINS/transponders; cd transponders; tar -zxvf satellite_pack.tar.gz; rm -rf satellite_pack.tar.gz;
 #
 #
+echo ""; echo "              *** Mpv ***"; echo ""; sleep 3
+cd $VDRSRC; apt-get -y install mpv libmpv-dev libmpv1 libxrandr-dev; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-mpv /$VDRSRC; mv vdr-plugin-mpv mpv; cd mpv; make; make install;
+#
+#
 echo ""; echo "               *** System Info ***";  sleep 3
 cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/vdr-systeminfo-0.1.5.tar.bz2 /$VDRSRC; tar xivf vdr-systeminfo-0.1.5.tar.bz2; mv systeminfo-0.1.5 systeminfo; rm -rf vdr-systeminfo-0.1.5.tar.bz2; mv -f $VDRSRC/systeminfo/scripts/systeminfo.sh /usr/local/bin/; cd ../..; make plugins; 
 #
-#
-cd $SRC/vdr; make plugins install;
-#   
-#
-echo ""; echo "              *** Mpv ***"; echo ""; sleep 3
-cd $VDRSRC; apt-get -y install mpv libmpv-dev libmpv1 libxrandr-dev; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-mpv /$VDRSRC; mv vdr-plugin-mpv mpv; cd mpv; make; make install;
 #
 cd $SRC/vdr; make plugins install;
 
@@ -1503,7 +1501,7 @@ echo '#!/bin/bash
     case $yourch in
 
 a) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f -w disable-ogl-osd'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
-b) clear; sed -i "s|-P'dvbapi'|& -P'softhdcuvid -d :0.0 -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
+b) clear; sed -i "s|-P'dvbapi'|& -P'softhdcuvid -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
 c) clear; sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --fullscreen --video=vdpau --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1,chroma_filter=0,enabled=1'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/kalujk6k7oksr6l/setup16_xineliboutput_nvidia.tar.gz && cp -rf /etc/vdr/setup16_xineliboutput_nvidia.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_xineliboutput_nvidia.tar.gz && rm -rf setup16_xineliboutput_nvidia.tar.gz;;    
 d) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f -v va-api'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;; 
 e) clear; sed -i "s|-P'dvbapi'|& -P'softhdvaapi -d :0.0 -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;

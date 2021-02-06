@@ -594,11 +594,11 @@ fi
 
 			echo " Downloading skins "
 
-if [ -e /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.11.tar.gz ]; then
+if [ -e /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.10.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-     wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.11.tar.gz;
+     wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.10.tar.gz;
   fi 
 
 if [ -e /home/`logname`/Vdrrepo/patch_skindesigner.tar.gz ]; then
@@ -741,7 +741,7 @@ wget http://firefly.vdr-developer.org/systeminfo/vdr-systeminfo-0.1.5.tar.bz2;
 			echo " Downloading skins "
 
 wget https://www.dropbox.com/s/zwb0vp6gfwh7d4y/anthra_pack.tar.gz;
-wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.11.tar.gz;
+wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.10.tar.gz;
 wget https://www.dropbox.com/s/8uiizh0d3t706ll/patch_skindesigner.tar.gz;
 git clone https://projects.vdr-developer.org/git/skin-nopacity.git;
 wget https://www.dropbox.com/s/hegz319loovpb4r/patch_skinnopacity.tar.gz;
@@ -1382,7 +1382,7 @@ cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/skin-nopacity /$VDRSRC; cd skin-nopac
 #  
 #
 echo ""; echo "               *** Skindesigner ***"; echo ""; sleep 3
-cd $VDRSRC; apt-get -y install libcurl4 librsvg2-dev libxml2-dev libcairo2-dev; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.11.tar.gz /$VDRSRC/; tar -zxvf vdr-plugin-skindesigner-1.2.11.tar.gz; rm -rf vdr-plugin-skindesigner-1.2.11.tar.gz; mv -f vdr-plugin-skindesigner-1.2.11 skindesigner; cd skindesigner; make; make install; 
+cd $VDRSRC; apt-get -y install libcurl4 librsvg2-dev libxml2-dev libcairo2-dev; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.12.tar.gz /$VDRSRC/; tar -zxvf vdr-plugin-skindesigner-1.2.12.tar.gz; rm -rf vdr-plugin-skindesigner-1.2.12.tar.gz; mv -f vdr-plugin-skindesigner-1.2.12 skindesigner; cd skindesigner; make; make install; 
 #
 #
 echo ""; echo "               *** Skin-Lcarsng ***"; echo ""; sleep 3
@@ -1440,7 +1440,7 @@ b)                                        ######################################
 clear
 					echo "    Configuring VDR"; sleep 3
 clear
-cd /$SHARE/skindesigner/scripts/; ln -s temperatures.default temperatures; ln -s vdrstats.default vdrstats;
+cd /usr/lib/vdr/skindesigner/scripts/; ln -s temperatures.default temperatures; ln -s vdrstats.default vdrstats;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *;
 #
 cp -rf /home/`logname`/Vdrrepo/iptv_conf.tar.gz /$PLUGINS/iptv/; cd /$PLUGINS/iptv/; rm -rf vlc2iptv; tar -zxvf iptv_conf.tar.gz; rm -rf iptv_conf.tar.gz; 

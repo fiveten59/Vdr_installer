@@ -548,11 +548,11 @@ else
     wget https://www.dropbox.com/s/dv6okhltz3eu20i/vdr-plugin-radio-master.tar.gz;
 fi
 
-if [ -e /home/`logname`/Vdrrepo/vdr-externalplayer-0.3.4.tgz ]; then
+if [ -e /home/`logname`/Vdrrepo/vdr-externalplayer-0.3.5.tgz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.uli-eckhardt.de/vdr/download/vdr-externalplayer-0.3.4.tgz;
+    wget https://www.uli-eckhardt.de/vdr/download/vdr-externalplayer-0.3.5.tgz;
 fi
 
 if [ -e /home/`logname`/Vdrrepo/externalplayer.conf.tar.gz ]; then
@@ -730,7 +730,7 @@ git clone https://github.com/rofafor/vdr-plugin-iptv.git;
 wget https://www.dropbox.com/s/nof5ydmxrplw2b0/patch_iptv.tar.gz;
 wget https://www.dropbox.com/s/vmhkf4rzhoh4wa5/iptv_conf.tar.gz;
 git clone https://github.com/ua0lnj/vdr-plugin-mpv.git;
-wget https://www.uli-eckhardt.de/vdr/download/vdr-externalplayer-0.3.4.tgz;
+wget https://www.uli-eckhardt.de/vdr/download/vdr-externalplayer-0.3.5.tgz;
 wget https://www.dropbox.com/s/vhz1fz68159s0qg/externalplayer.conf.tar.gz;
 git clone https://bitbucket.org/ua0lnj/channelscan.git;    
 wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz;
@@ -1393,7 +1393,7 @@ cd $VDRSRC; apt-get -y install libcurl4 libcurl4-gnutls-dev vlc mplayer; cp -rf 
 #
 #
 echo ""; echo "               *** Externalplayer ***";  sleep 3
-cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/vdr-externalplayer-0.3.4.tgz /$VDRSRC; tar zxvf vdr-externalplayer-0.3.4.tgz; rm -rf vdr-externalplayer-0.3.4.tgz; mv externalplayer-0.3.4 externalplayer; cp -rf /$SRC/traduzioni/external_it_IT.po /$VDRSRC/externalplayer/po/; cd externalplayer/po/; mv external_it_IT.po it_IT.po; cd ../../../..; make plugins; cp -rf /home/`logname`/Vdrrepo/externalplayer.conf.tar.gz /etc/vdr/plugins/; cd /etc/vdr/plugins; tar -zxvf externalplayer.conf.tar.gz; rm -rf externalplayer.conf.tar.gz;
+cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/vdr-externalplayer-0.3.5.tgz /$VDRSRC; tar zxvf vdr-externalplayer-0.3.5.tgz; rm -rf vdr-externalplayer-0.3.5.tgz; mv externalplayer-0.3.5 externalplayer; cp -rf /$SRC/traduzioni/external_it_IT.po /$VDRSRC/externalplayer/po/; cd externalplayer/po/; mv external_it_IT.po it_IT.po; cd ../../../..; make plugins; cp -rf /home/`logname`/Vdrrepo/externalplayer.conf.tar.gz /etc/vdr/plugins/; cd /etc/vdr/plugins; tar -zxvf externalplayer.conf.tar.gz; rm -rf externalplayer.conf.tar.gz;
 #
 #
 echo ""; echo "               *** Radio ***";  sleep 3

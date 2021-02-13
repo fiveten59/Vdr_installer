@@ -9,7 +9,7 @@
 #                                                                                       #
 #########################################################################################
 #
-PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/' -P'skinlcarsng' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/radio-OnAir1080.mpg' -P'skinnopacity -l /etc/vdr/logos/' -P'mpv -a alsa -b /home/' -P'externalplayer' -P'channelscan' -P'systeminfo'"
+PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/' -P'skinlcarsng' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/radio-OnAir1080.mpg' -P'skinnopacity -l /etc/vdr/logos/' -P'externalplayer' -P'channelscan' -P'systeminfo'"
 #    
 #
 ETC='/usr/local/etc'
@@ -594,33 +594,19 @@ fi
 
 			echo " Downloading skins "
 
-if [ -e /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.10.tar.gz ]; then
+if [ -e /home/`logname`/Vdrrepo/skindesigner ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-     wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.10.tar.gz;
+     git clone https://gitlab.com/kamel5/skindesigner.git;
   fi 
-
-if [ -e /home/`logname`/Vdrrepo/patch_skindesigner.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/8uiizh0d3t706ll/patch_skindesigner.tar.gz;
-  fi
   
-if [ -e /home/`logname`/Vdrrepo/skin-nopacity ]; then
+if [ -e /home/`logname`/Vdrrepo/SkinNopacity ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    git clone https://projects.vdr-developer.org/git/skin-nopacity.git;
+    git clone https://gitlab.com/kamel5/SkinNopacity.git;
   fi
-
-if [ -e /home/`logname`/Vdrrepo/patch_skinnopacity.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/hegz319loovpb4r/patch_skinnopacity.tar.gz;
-  fi   
 
 if [ -e /home/`logname`/Vdrrepo/logos.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
@@ -655,13 +641,6 @@ if [ -e /home/`logname`/Vdrrepo/picon.tar.gz ]; then
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/hb2mv9ytz5q6yz7/picon.tar.gz;
-  fi
-
-if [ -e /home/`logname`/Vdrrepo/themes.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/m32a4s23h7r00mg/themes.tar.gz;
   fi
 
 ############################# Download others ##############################
@@ -740,11 +719,8 @@ wget http://firefly.vdr-developer.org/systeminfo/vdr-systeminfo-0.1.5.tar.bz2;
 
 			echo " Downloading skins "
 
-wget https://www.dropbox.com/s/zwb0vp6gfwh7d4y/anthra_pack.tar.gz;
-wget https://projects.vdr-developer.org/git/vdr-plugin-skindesigner.git/snapshot/vdr-plugin-skindesigner-1.2.10.tar.gz;
-wget https://www.dropbox.com/s/8uiizh0d3t706ll/patch_skindesigner.tar.gz;
-git clone https://projects.vdr-developer.org/git/skin-nopacity.git;
-wget https://www.dropbox.com/s/hegz319loovpb4r/patch_skinnopacity.tar.gz;
+git clone https://gitlab.com/kamel5/skindesigner.git;
+git clone https://gitlab.com/kamel5/SkinNopacity.git;
 wget https://projects.vdr-developer.org/git/skin-lcarsng.git/snapshot/skin-lcarsng-master.tar.gz;        
 wget https://www.dropbox.com/s/806odyj5vyco3dg/lcars_pack.tar.gz;
 
@@ -758,7 +734,6 @@ wget https://www.dropbox.com/s/5uvx468b4b87auy/icone.tar.gz;
 wget https://www.dropbox.com/s/56oomdr58os7msa/oscam.tar.gz;
 wget https://www.dropbox.com/s/d3bn3ig8b3q2xp7/oscam64.tar.gz;
 wget https://www.dropbox.com/s/hb2mv9ytz5q6yz7/picon.tar.gz; 
-wget https://www.dropbox.com/s/m32a4s23h7r00mg/themes.tar.gz;
 wget https://www.dropbox.com/s/iwa4vj6z0y5uu5z/logos.tar.gz;
 
 chmod -R 777 *;;
@@ -1378,11 +1353,11 @@ apt-get -y install libc6-dev libfontconfig1-dev
 apt-get -y install zlib1g zlib1g-dev lm-sensors
 apt-get -y install libglib2.0-0 libpcre3 libpcre3-dev
 apt-get -y install libexpat1 libexpat1-dev libpcre3 libpcre3-dev
-cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/skin-nopacity /$VDRSRC; cd skin-nopacity; make install; 
+cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/SkinNopacity /$VDRSRC; cd SkinNopacity; make install; 
 #  
 #
 echo ""; echo "               *** Skindesigner ***"; echo ""; sleep 3
-cd $VDRSRC; apt-get -y install libcurl4 librsvg2-dev libxml2-dev libcairo2-dev; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-skindesigner-1.2.12.tar.gz /$VDRSRC/; tar -zxvf vdr-plugin-skindesigner-1.2.12.tar.gz; rm -rf vdr-plugin-skindesigner-1.2.12.tar.gz; mv -f vdr-plugin-skindesigner-1.2.12 skindesigner; cd skindesigner; make; make install; 
+cd $VDRSRC; apt-get -y install libcurl4 librsvg2-dev libxml2-dev libcairo2-dev; cp -rf /home/`logname`/Vdrrepo/skindesigner /$VDRSRC/; cd skindesigner; make; make install; 
 #
 #
 echo ""; echo "               *** Skin-Lcarsng ***"; echo ""; sleep 3
@@ -1486,26 +1461,26 @@ echo '#!/bin/bash
    ----------------------------------------------
 
 	NVIDIA VIDEO DEVICES
-        [a]    Softhddevice (default)
-        [b]    Softhdcuvid
-        [c]    Xineliboutput
+        [a]    Softhddevice (default) & Mpv
+        [b]    Softhdcuvid  & Mpv
+        [c]    Xineliboutput  & Mpv
         
 	INTEL VIDEO DEVICES
-        [d]    Softhddevice (default)
-        [e]    Softhdcuvid
-        [f]    Vaapidevice
+        [d]    Softhddevice (default)  & Mpv
+        [e]    Softhdcuvid & Mpv
+        [f]    Vaapidevice  & Mpv
 
    ---------------------------------------------- " 0 0
     echo -n "        Enter your menu choice  [a-f]:      "
     read yourch
-    case $yourch in
+    case $yourch in                  
 
-a) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f -w disable-ogl-osd'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
-b) clear; sed -i "s|-P'dvbapi'|& -P'softhdcuvid -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
-c) clear; sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --fullscreen --video=vdpau --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1,chroma_filter=0,enabled=1'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/kalujk6k7oksr6l/setup16_xineliboutput_nvidia.tar.gz && cp -rf /etc/vdr/setup16_xineliboutput_nvidia.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_xineliboutput_nvidia.tar.gz && rm -rf setup16_xineliboutput_nvidia.tar.gz;;    
-d) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f -v va-api'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;; 
-e) clear; sed -i "s|-P'dvbapi'|& -P'softhdvaapi -d :0.0 -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
-f) clear; sed -i "s|-P'dvbapi'|& -P'vaapidevice -f -d :0.0 -p alsa'|" /usr/local/bin/vdrrun  && cd /etc/vdr/ && wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_vaapidevice.tar.gz && cp -rf /etc/vdr/setup16_vaapidevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_vaapidevice.tar.gz && rm -rf setup16_vaapidevice.tar.gz;;
+a) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f -w disable-ogl-osd'|" /usr/local/bin/vdrrun && sed -i "s|-P'iptv'|& -P'mpv -a alsa -b /home/`logname`'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
+b) clear; sed -i "s|-P'dvbapi'|& -P'softhdcuvid -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && sed -i "s|-P'iptv'|& -P'mpv -a alsa -b /home/`logname`'|" /usr/local/bin/vdrrun && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
+c) clear; sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --fullscreen --video=vdpau --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1,chroma_filter=0,enabled=1'|" /usr/local/bin/vdrrun && sed -i "s|-P'iptv'|& -P'mpv -a alsa -b /home/`logname`'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/kalujk6k7oksr6l/setup16_xineliboutput_nvidia.tar.gz && cp -rf /etc/vdr/setup16_xineliboutput_nvidia.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_xineliboutput_nvidia.tar.gz && rm -rf setup16_xineliboutput_nvidia.tar.gz;;    
+d) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f -v va-api'|" /usr/local/bin/vdrrun && sed -i "s|-P'iptv'|& -P'mpv -a alsa -v vaapi -b /home/`logname`'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;; 
+e) clear; sed -i "s|-P'dvbapi'|& -P'softhdvaapi -d :0.0 -f'|" /usr/local/bin/vdrrun && sed -i "s|-P'iptv'|& -P'mpv -a alsa -v vaapi -b /home/`logname`'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
+f) clear; sed -i "s|-P'dvbapi'|& -P'vaapidevice -f -d :0.0 -p alsa'|" /usr/local/bin/vdrrun  && sed -i "s|-P'iptv'|& -P'mpv -a alsa -v vaapi -b /home/`logname`'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/irj1su05tudvmns/setup16_vaapidevice.tar.gz && cp -rf /etc/vdr/setup16_vaapidevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_vaapidevice.tar.gz && rm -rf setup16_vaapidevice.tar.gz;;
 esac
 #   Permission to execute Vdr       
 echo "%`logname` ALL=NOPASSWD: /etc/init.d/vdr" >> /etc/sudoers
@@ -1771,10 +1746,6 @@ then echo " Default Skin is already installed"
 else cp -rf /home/`logname`/Vdrrepo/lcars_pack.tar.gz /etc/vdr/themes; cd /etc/vdr/themes; tar -zxvf lcars_pack.tar.gz; cd /etc/vdr/themes; rm -rf lcars_pack.tar.gz;
 fi
 #
-if [ -e /etc/vdr/themes/shady*.* ];
-then echo " Shady Skin is already installed"
-else cd $SKINS; git clone https://github.com/tomsax56/shady_KISS;
-fi;
 #
 
 

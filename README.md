@@ -3,7 +3,7 @@
 
 A special thanks goes to Klaus Schmidinger Vdr Developer & all plugins developers
 
-Two scrips: 
+Two scripts: 
 - vdr_2.4.6_installer installs Vdr on Ubuntu with essential plugins (in about 10 min)
 - plugin installer installs others plugins 
     

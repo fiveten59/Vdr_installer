@@ -1,5 +1,5 @@
 # Vdr_installer
-# plugins_installer
+# Plugins_installer
 
 A special thanks goes to Klaus Schmidinger Vdr Developer & all plugins developers
 

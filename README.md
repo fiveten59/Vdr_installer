@@ -1,7 +1,7 @@
 # Vdr_installer
 # Plugins_installer
 
-A special thanks goes to Klaus Schmidinger Vdr Developer & all plugins developers
+A special thanks goes to Klaus Schmidinger Vdr Developer & all plugin developers
 
 Two scripts: 
 - vdr_2.4.6_installer installs Vdr on Ubuntu with essential plugins (in about 10 min)
@@ -13,7 +13,7 @@ Two scripts:
     chmod the script
     then load it simply typing: sudo ./vdr_2.4.6_installer
     
-    Script name: 
+    Script name: plugins_installer
     Version:2.4.6  
     Tested on Ubuntu 18.04 & 20.04
     chmod the script

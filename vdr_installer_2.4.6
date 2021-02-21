@@ -9,7 +9,7 @@
 #                                                                                       #
 #########################################################################################
 #
-PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/' -P'skinlcarsng' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/radio-OnAir1080.mpg' -P'skinnopacity -l /etc/vdr/logos/' -P'externalplayer' -P'channelscan' -P'systeminfo'"
+PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/radio-OnAir1080.mpg' -P'skinnopacity -l /etc/vdr/logos/' -P'weatherforecast' -P'externalplayer' -P'channelscan' -P'systeminfo'"
 #    
 #
 ETC='/usr/local/etc'
@@ -569,6 +569,20 @@ else
     git clone https://github.com/ua0lnj/vdr-plugin-mpv.git;
 fi
 
+if [ -e /home/`logname`/Vdrrepo/vdr-plugin-weatherforecast ]; then
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+else
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    git clone git://projects.vdr-developer.org/vdr-plugin-weatherforecast.git;
+fi    
+
+if [ -s /home/`logname`/sifinstallrepo/patch_weatherforecast.tar.gz ]; then
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+else
+  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
+    wget https://www.dropbox.com/s/v0ipkt6x3bfbbs8/patch_weatherforecast.tar.gz;
+fi
+
 if [ -e /home/`logname`/Vdrrepo/channelscan ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
@@ -621,13 +635,6 @@ else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
     wget https://www.dropbox.com/s/5uvx468b4b87auy/icone.tar.gz;
   fi
-  
-if [ -e /home/`logname`/Vdrrepo/skin-lcarsng-master.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://projects.vdr-developer.org/git/skin-lcarsng.git/snapshot/skin-lcarsng-master.tar.gz;        
-  fi  
     
 if [ -e /home/`logname`/Vdrrepo/lcars_pack.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
@@ -709,6 +716,8 @@ git clone https://github.com/rofafor/vdr-plugin-iptv.git;
 wget https://www.dropbox.com/s/nof5ydmxrplw2b0/patch_iptv.tar.gz;
 wget https://www.dropbox.com/s/vmhkf4rzhoh4wa5/iptv_conf.tar.gz;
 git clone https://github.com/ua0lnj/vdr-plugin-mpv.git;
+git clone git://projects.vdr-developer.org/vdr-plugin-weatherforecast.git;
+wget https://www.dropbox.com/s/v0ipkt6x3bfbbs8/patch_weatherforecast.tar.gz;
 wget https://www.uli-eckhardt.de/vdr/download/vdr-externalplayer-0.3.5.tgz;
 wget https://www.dropbox.com/s/vhz1fz68159s0qg/externalplayer.conf.tar.gz;
 git clone https://bitbucket.org/ua0lnj/channelscan.git;    
@@ -721,7 +730,6 @@ wget http://firefly.vdr-developer.org/systeminfo/vdr-systeminfo-0.1.5.tar.bz2;
 
 git clone https://gitlab.com/kamel5/skindesigner.git;
 git clone https://gitlab.com/kamel5/SkinNopacity.git;
-wget https://projects.vdr-developer.org/git/skin-lcarsng.git/snapshot/skin-lcarsng-master.tar.gz;        
 wget https://www.dropbox.com/s/806odyj5vyco3dg/lcars_pack.tar.gz;
 
 ############################ Download others #######################################
@@ -1226,7 +1234,7 @@ clear
 echo "                        "
 echo "                        "
 echo "                        "
-echo "Install Basic plugins  ( Softhddevice / Softhdcuvid / Xineliboutput - Dvbapi - Epgsearch - SkinNopacity - Skindesigner - Skin-Lcarsng - Iptv - ExternalPlayer - Radio -Channelscan - System Info)"
+echo "Install Basic plugins  ( Softhddevice / Softhdcuvid / Xineliboutput - Dvbapi - Epgsearch - SkinNopacity - Skindesigner - Wheatherforecast - Iptv - ExternalPlayer - Radio -Channelscan - System Info)"
 echo "                 Press Enter to continue ...         "; read enterKey
 cd $SRC;
 mkdir -p /etc/vdr/plugins; mkdir -p /etc/vdr/themes; mkdir -p /$SHARE/skindesigner/scripts;
@@ -1319,7 +1327,6 @@ apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswre
 apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev libplacebo-dev libavfilter-dev
 cd $VDRSRC; 
 wget https://github.com/jojo61/vdr-plugin-softhdcuvid/archive/master.tar.gz; cp -rf /$VDRSRC/master.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf master.tar.gz; mv vdr-plugin-softhdcuvid-master softhdcuvid; cd softhdcuvid; wget https://www.dropbox.com/s/h6w4axdur1jn6qx/patch_softhddevice_ua0lnj.tar.gz; cp -rf /$VDRSRC/softhddevice/patch_softhddevice_ua0lnj.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_softhddevice_ua0lnj.tar.gz; rm -rf patch_softhddevice_ua0lnj.tar.gz; patch -p1 < 03_LanguageIT.patch; make; make install;;
-#
 esac
 #
 #
@@ -1334,7 +1341,7 @@ apt-get -y install libc6 libgcc1 libstdc++6
 cp -rf /home/`logname`/Vdrrepo/vdr-plugin-epgsearch /$VDRSRC/; mv vdr-plugin-epgsearch epgsearch; cd epgsearch; cp -rf /home/`logname`/Vdrrepo/patch_epgsearch.tar.gz /$VDRSRC/epgsearch/; tar -zxvf patch_epgsearch.tar.gz; rm -rf patch_epgsearch.tar.gz; patch -p1 < 10_langinfo-include.diff; patch -p1 < 11_epgsearch_menue.patch; patch -p1 < 12_epgsearch_README.patch; cd ../../..; make plugins; 
 # 
 #
-echo ""; echo "               *** Skin-Nopacity ***";  sleep 3
+echo ""; echo "               *** SkinNopacity ***";  sleep 3
 apt-get -y install graphicsmagick-libmagick-dev-compat 
 apt-get -y install libc6-dev libfontconfig1-dev  
 apt-get -y install zlib1g zlib1g-dev lm-sensors
@@ -1347,15 +1354,15 @@ echo ""; echo "               *** Skindesigner ***"; echo ""; sleep 3
 cd $VDRSRC; apt-get -y install libcurl4 librsvg2-dev libxml2-dev libcairo2-dev; cp -rf /home/`logname`/Vdrrepo/skindesigner /$VDRSRC/; cd skindesigner; make; make install; 
 #
 #
-echo ""; echo "               *** Skin-Lcarsng ***"; echo ""; sleep 3
-cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/skin-lcarsng-master.tar.gz /$VDRSRC/; cd /$VDRSRC/; tar -zxvf skin-lcarsng-master.tar.gz; rm -rf skin-lcarsng-master.tar.gz; mv -f skin-lcarsng-master skin-lcarsng; cd skin-lcarsng; make; make install;
-#
 echo ""; echo "               *** Iptv ***"; echo ""; sleep 3
 cd $VDRSRC; apt-get -y install libcurl4 libcurl4-gnutls-dev vlc mplayer; cp -rf /home/`logname`/Vdrrepo/vdr-plugin-iptv /$VDRSRC; mv vdr-plugin-iptv iptv; cd iptv; cp -rf /home/`logname`/Vdrrepo/patch_iptv.tar.gz /$VDRSRC/iptv; tar -zxvf patch_iptv.tar.gz; rm -rf patch_iptv.tar.gz; patch -p1 < 10_iptv_protocolext.patch; make; cd ../../..; make plugins; 
 #
+echo ""; echo "               *** Weatherforecast ***"; echo ""; sleep 3
+cd $VDRSRC; apt-get -y install libcurl4-openssl-dev libjansson-dev librsvg2-dev;
+cp -rf /home/`logname`/Vdrrepo/vdr-plugin-weatherforecast /$VDRSRC; mv vdr-plugin-weatherforecast weatherforecast; cd weatherforecast; cp /home/`logname`/sifinstallrepo/patch_weatherforecast.tar.gz /$VDRSRC/weatherforecast/; tar -zxvf patch_weatherforecast.tar.gz; rm -r patch_weatherforecast.tar.gz; patch -p1 < 10_weatherforecast_debug.patch; sleep 1; patch -p1 < 11_weatherforecast_i18n-it.patch; cd ../../..; make plugins
 #
 echo ""; echo "               *** Externalplayer ***";  sleep 3
-cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/vdr-externalplayer-0.3.5.tgz /$VDRSRC; tar zxvf vdr-externalplayer-0.3.5.tgz; rm -rf vdr-externalplayer-0.3.5.tgz; mv externalplayer-0.3.5 externalplayer; cp -rf /$SRC/traduzioni/external_it_IT.po /$VDRSRC/externalplayer/po/; cd externalplayer/po/; mv external_it_IT.po it_IT.po; cd ../../../..; make plugins; cp -rf /home/`logname`/Vdrrepo/externalplayer.conf.tar.gz /etc/vdr/plugins/; cd /etc/vdr/plugins; tar -zxvf externalplayer.conf.tar.gz; rm -rf externalplayer.conf.tar.gz;
+cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/vdr-externalplayer-0.3.5.tgz /$VDRSRC; tar zxvf vdr-externalplayer-0.3.5.tgz; rm -rf vdr-externalplayer-0.3.5.tgz; mv externalplayer-0.3.5 externalplayer; cp -rf /$SRC/traduzioni/external_it_IT.po /$VDRSRC/externalplayer/po/; cd externalplayer/po/; mv external_it_IT.po it_IT.po; cd ../../../..; make plugins; 
 #
 #
 echo ""; echo "               *** Radio ***";  sleep 3
@@ -1404,6 +1411,8 @@ clear
 clear
 cd /usr/lib/vdr/skindesigner/scripts/; ln -s temperatures.default temperatures; ln -s vdrstats.default vdrstats;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *;
+#
+cp -rf /home/`logname`/Vdrrepo/externalplayer.conf.tar.gz /etc/vdr/plugins/externalplayer; cd /etc/vdr/plugins/externalplayer; rm -rf externalplayer.conf; tar -zxvf externalplayer.conf.tar.gz; rm -rf externalplayer.conf.tar.gz;
 #
 cp -rf /home/`logname`/Vdrrepo/iptv_conf.tar.gz /$PLUGINS/iptv/; cd /$PLUGINS/iptv/; rm -rf vlc2iptv; tar -zxvf iptv_conf.tar.gz; rm -rf iptv_conf.tar.gz; 
 #  
@@ -1464,8 +1473,8 @@ echo '#!/bin/bash
 a) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f -w disable-ogl-osd' -P'mpv -a alsa -b /home/`logname`'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
 b) clear; sed -i "s|-P'dvbapi'|& -P'softhdcuvid -f' -P'mpv -a alsa -b /home/`logname`'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
 c) clear; sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --fullscreen --video=vdpau --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1,chroma_filter=0,enabled=1'|" /usr/local/bin/vdrrun && sed -i "s|-P'iptv'|& -P'mpv -a alsa -b /home/`logname`'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/kalujk6k7oksr6l/setup16_xineliboutput_nvidia.tar.gz && cp -rf /etc/vdr/setup16_xineliboutput_nvidia.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_xineliboutput_nvidia.tar.gz && rm -rf setup16_xineliboutput_nvidia.tar.gz;;    
-d) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f -v va-api'|" /usr/local/bin/vdrrun && sed -i "s|-P'iptv'|& -P'mpv -a alsa -v vaapi -b /home/`logname`'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;; 
-e) clear; sed -i "s|-P'dvbapi'|& -P'softhdvaapi -d :0.0 -f' -P'mpv -a alsa -b /home/`logname`'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
+d) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f -v va-api' -P'mpv -a alsa -v vaapi -b /home/`logname`'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;; 
+e) clear; sed -i "s|-P'dvbapi'|& -P'softhdvaapi -d :0.0 -f' -P'mpv -a alsa -v vaapi -b /home/`logname`'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
 esac
 #   Permission to execute Vdr       
 echo "%`logname` ALL=NOPASSWD: /etc/init.d/vdr" >> /etc/sudoers
@@ -1837,7 +1846,7 @@ clear
     case $yourch in
 
 a) clear; cd /etc/vdr; wget https://www.dropbox.com/s/hsp66258srhwa1d/mce-remote.conf.tar.gz; cp -rf /etc/vdr/mce-remote.conf.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf mce-remote.conf.tar.gz; rm -rf mce-remote.conf.tar.gz;;
-b) clear; cd /etc/vdr; wget https://www.dropbox.com/s/3n34kzj48wnxrz2/hama-mce-remote.conf.tar.gz; cp -rf /etc/vdr/hama-mce-remote.conf.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf hama-mce-remote.conf.tar.gz; rm -rf hama-mce-remote.conf.tar.gz;;
+b) clear; cd /etc/vdr; wget https://www.dropbox.com/s/gjjsn2h32mlqm4i/New-hama-mce-remote.conf.tar.gz; cp -rf /etc/vdr/New-hama-mce-remote.conf.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf New-hama-mce-remote.conf.tar.gz; rm -rf New-hama-mce-remote.conf.tar.gz;;
 c) clear; cd /etc/vdr; wget https://www.dropbox.com/s/gvel64ykd3eyx07/hauppauge-remote.conf.tar.gz; cp -rf /etc/vdr/hauppauge-remote.conf.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf hauppauge-remote.conf.tar.gz; rm -rf hauppauge-remote.conf.tar.gz;;
 d) clear; cd /etc/vdr; wget https://www.dropbox.com/s/t64duomj9f5hkqp/mce-spinel.remote.conf.tar.gz; cp -rf /etc/vdr/mce-spinel.remote.conf.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf mce-spinel.remote.conf.tar.gz; rm -rf mce-spinel.remote.conf.tar.gz;;
 e) clear; cd /etc/vdr; touch remote.conf;;

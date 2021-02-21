@@ -1,4 +1,4 @@
-  #!/bin/bash
+#!/bin/bash
 ############################## !!! IMPORTANTE !!! #######################################
 #                                                                                       #
 # Script name : plugins_installer (only for vdr = or > 2.4.1                           #
@@ -18,7 +18,6 @@ LIB='/usr/lib/vdr'
 #VDR='vdr-2.4.3'
 PACKAGES="/usr/local/src/packages"
 SKINS='/etc/vdr/plugins/skindesigner/skins/'
-#SHARE='/usr/lib/vdr/'
 Xinelib='sudo /etc/init.d/vdr start > /dev/null 2>&1; while ! netcat -z localhost 37890; do sleep 2; vdr-sxfe --video=vdpau --hud --audio=alsa --aspect=16:9 --width=1920 --height=1080 --fullscreen --daemon --reconnect --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1 --buffers=850; done;'
 PLUGINS='/etc/vdr/plugins'
 Remind='is already installed'
@@ -320,20 +319,21 @@ esac;;
 
         [a]    SkinNopacity ...............................  [a1]    SkinNopacity
         [b]    Skindesigner ...............................  [b1]    Skindesigner
-        [c]    Shady KISSpb (need Skindesigner)............  [c1]    Shady KISSpb        
-        [d]    Osd2web ....................................  [d1]    Osd2web
-        [e]    Skinflatplus ...............................  [e1]    Skinflatplus
-        [f]    Basic_skin/CoolHD/Anthra/NarrowHD ...(No OK). [f1]    Basic_skin/CoolHD/Anthra/NarrowHD
-        [g]    Skin Enigma ................................  [g1]    Skin Enigma
-        [h]    Skinsoppalusikka ...........................  [h1]    Skinsoppalusikka
-        [i]    Skin EgalT2 ................................  [i1]    Skin EgalT2
-        [l]    Skin Elchi HD...............................  [l1]    Skin Elchi HD
+        [c]    Skin-Lcarsng ...............................  [c1]    Skin-Lcarsng
+        [d]    Shady KISSpb (need Skindesigner) ...........  [d1]    Shady KISSpb        
+        [e]    Osd2web ....................................  [e1]    Osd2web
+        [f]    Skinflatplus ...............................  [f1]    Skinflatplus
+        [g]    Basic_skin/CoolHD/Anthra/NarrowHD ...(No OK). [g1]    Basic_skin/CoolHD/Anthra/NarrowHD
+        [h]    Skin Enigma ................................  [h1]    Skin Enigma
+        [i]    Skinsoppalusikka ...........................  [i1]    Skinsoppalusikka
+        [l]    Skin EgalT2 ................................  [l1]    Skin EgalT2
+        [m]    Skin Elchi HD...............................  [m1]    Skin Elchi HD
         
         [z]    Skip
 
    -------------------------------------------------------------------------------------------------------- 
    --------------------------------------------------------------------------------------------------------" 0 0
-echo -n "        Enter your menu choice = Install [a-i] ~~ Remove [a1-e1] ~~ Skip [z]:      "
+echo -n "        Enter your menu choice = Install [a-m] ~~ Remove [a1-m1] ~~ Skip [z]:      "
 read yourch
 case $yourch in   
 					##################
@@ -363,8 +363,7 @@ cd $VDRSRC;
   			else echo "Skin-Nopacity $Remind5"; sed -i "s|-P'skinnopacity -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun; 
  	       fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
-        echo "                    Press Enter to continue ...               "; read enterKey;;  					 
-					
+        echo "                    Press Enter to continue ...               "; read enterKey;;  					
 ################################################################################################################################################################
 ################################################################################################################################################################
 b) 
@@ -388,10 +387,33 @@ cd $VDRSRC; if [ -f skindesigner/Makefile ];
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;
-        
-        ################################################################################################################################################################
+
+################################################################################################################################################################
 ################################################################################################################################################################
 c) 
+clear
+echo "        ***                Installing SkinLCARSNG               ***";  sleep 2
+cd $VDRSRC;
+   if [ -f skinlcarsng/Makefile ];
+		then  echo "SkinLCARSNG $Remind"
+			else git clone https://gitlab.com/kamel5/skinlcarsng.git; cp -rf skinlcarsng /home/`logname`/Vdrrepo/; cd skinlcarsng; make; make install; sed -i "s|-P'externalplayer'|& -P'skinlcarsng'|" /usr/local/bin/vdrrun 
+	fi;
+cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
+        echo "                    Press Enter to continue ...               "; read enterKey;;
+#                                      $$$$$$$$$$$$$$$$$$							
+c1) 
+clear
+echo "        ***                Removing SkinLCARSNG               ***";  sleep 2
+cd $VDRSRC; if [ -f skinlcarsng/Makefile ];
+  	then rm -rf skinlcarsng; cd $LIB; rm -rf libvdr-skinlcarsng.*; sed -i "s|-P'skinlcarsng'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-SkinLCARSNG $Remind1"
+  			else echo "SkinLCARSNG $Remind5"; sed -i "s|-P'skinlcarsng'||" /usr/local/bin/vdrrun; 
+	fi;
+cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
+        echo "                    Press Enter to continue ...               "; read enterKey;;
+
+################################################################################################################################################################
+################################################################################################################################################################
+d) 
 clear
 echo "        ***                Installing Shady KISSpb               ***";  sleep 2
 cd $SKINS; 
@@ -403,8 +425,8 @@ cd $SKINS;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; 
 
         echo "                    Press Enter to continue ...               "; read enterKey;;
-		
-c1) 
+#                                      $$$$$$$$$$$$$$$$$$							
+d1) 
 clear
 echo "        ***                Removing Shady KISSpb               ***";  sleep 2
 
@@ -414,7 +436,7 @@ echo "        ***                Remove Skindesigner Shady KISSpb               
 
 ################################################################################################################################################################
 ################################################################################################################################################################
-d) 
+e) 
 clear
 echo "        ***                Installing Vdr-Plugin-Osd2web               ***";  sleep 2
 cd $VDRSRC; apt-get -y install libtinyxml2-dev libexif-dev cmake;
@@ -425,7 +447,7 @@ cd $VDRSRC; apt-get -y install libtinyxml2-dev libexif-dev cmake;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$					
-d1) 
+e1) 
 clear
 echo "        ***                Removing Vdr-Plugin-Osd2web               ***";  sleep 2
 cd $VDRSRC; if [ -f osd2web/Makefile ];
@@ -437,7 +459,7 @@ cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
 
 ################################################################################################################################################################
 ################################################################################################################################################################
-e) 
+f) 
 clear
 echo "        ***                Installing Vdr-Plugin-Skinflatplus               ***";  sleep 2
 cd $VDRSRC; apt-get -y install libfreetype6-dev graphicsmagick-libmagick-dev-compat lm-sensors;
@@ -448,7 +470,7 @@ cd $VDRSRC; apt-get -y install libfreetype6-dev graphicsmagick-libmagick-dev-com
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install; 
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$					
-e1) 
+f1) 
 clear
 echo "        ***                Removing Vdr-Plugin-Skinflatplus               ***";  sleep 2
 cd $VDRSRC; if [ -f skin-flatplus/Makefile ];
@@ -461,7 +483,7 @@ cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
 
 ################################################################################################################################################################
 ################################################################################################################################################################
-f)  
+g)  
 clear
 echo "        ***                Installing Basic_skin/CoolHD/Anthra/NarrowHD               ***";  sleep 2
 cd $VDRSRC; apt-get -y install libgraphicsmagick++1-dev;
@@ -498,7 +520,7 @@ if [ -e /etc/vdr/plugins/text2skin/Basic ];
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
 	echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$					
-f1) 
+g1) 
 clear
 echo "        ***                Basic_skin/CoolHD/Anthra/NarrowHD              ***";  sleep 2
 cd $VDRSRC 
@@ -510,7 +532,7 @@ cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
 
 ################################################################################################################################################################
 ################################################################################################################################################################
-g) 
+h) 
 clear
 echo "        ***                Installing Skin Enigma               ***";  sleep 2
 cd $VDRSRC; apt-get -y install libgraphicsmagick++1-dev;  
@@ -521,7 +543,7 @@ cd $VDRSRC; apt-get -y install libgraphicsmagick++1-dev;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$					
-g1) 
+h1) 
 clear
 echo "        ***                Removing Skin Enigma               ***";  sleep 2
 cd $VDRSRC; if [ -f skinenigmang/Makefile ];
@@ -533,7 +555,7 @@ cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
           
 ################################################################################################################################################################
 ################################################################################################################################################################
-h) 
+i) 
 clear
 echo "        ***                Installing Skinsoppalusikka               ***";  sleep 2
 cd $VDRSRC;
@@ -544,7 +566,7 @@ cd $VDRSRC;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$					
-h1) 
+i1) 
 clear
 echo "        ***                Removing Skinsoppalusikka               ***";  sleep 2
 cd $VDRSRC; if [ -f skinsoppalusikka/Makefile ];
@@ -556,7 +578,7 @@ cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
 
 ################################################################################################################################################################
 ################################################################################################################################################################
-i) 
+l) 
 clear
 echo "        ***                Installing Skin EgalT2               ***";  sleep 2
 cd $VDRSRC;
@@ -567,7 +589,7 @@ cd $VDRSRC;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$					
-i1) 
+l1) 
 clear
 echo "        ***                Removing Skin EgalT2               ***";  sleep 2
 cd $VDRSRC;
@@ -580,7 +602,7 @@ cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
 
 ################################################################################################################################################################
 ################################################################################################################################################################
-l) 
+m) 
 clear
 echo "        ***                Installing Skin Elchi HD              ***";  sleep 2
 cd $VDRSRC; apt-get -y install libmagick++-6.q16-dev
@@ -592,7 +614,7 @@ fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$					
-l1) 
+m1) 
 clear
 echo "        ***                Removing Skin Elchi HD              ***";  sleep 2
 cd $VDRSRC; if [ -f skinelchihd/Makefile ];
@@ -1146,7 +1168,7 @@ echo "        ***                Installing Vdr-Plugin-Osdteletext              
 cd $VDRSRC; apt-get -y install git-core fonts-freefont-ttf;
 if [ -f osdteletext/Makefile ];
 		then  echo "Vdr-Plugin-Osdteletext $Remind"
-			else git clone https://github.com/rofafor/vdr-plugin-osdteletext.git; cp -rf vdr-plugin-osdteletext /home/`logname`/Vdrrepo/;  mv -f vdr-plugin-osdteletext osdteletext; cd osdteletext; wget https://www.dropbox.com/s/ncb0gnw9pkee83d/patch_osdteletext.tar.gz; tar -zxvf patch_osdteletext.tar.gz; mv -f patch_osdteletext.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < 10_osdteletext_txtrecv.patch; cd ../../..; make plugins; sed -i "s|-P'externalplayer'|& -P'osdteletext'|" /usr/local/bin/vdrrun; cd /var/cache/vdr; mkdir -p vtx 
+			else git clone https://github.com/vdr-projects/vdr-plugin-osdteletext.git; cp -rf vdr-plugin-osdteletext /home/`logname`/Vdrrepo/;  mv -f vdr-plugin-osdteletext osdteletext; cd ../..; make plugins; sed -i "s|-P'externalplayer'|& -P'osdteletext'|" /usr/local/bin/vdrrun; cd /var/cache/vdr; mkdir -p vtx 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;; 
@@ -1538,7 +1560,7 @@ echo "        ***                Installing Vdr-Plugin-Upnp               ***"; 
 cd $VDRSRC; apt-get install -y libboost-dev libsqlite3-dev libupnp-dev libtntdb-dev tntdb-sqlite4v5;
    if [ -f upnp/Makefile ];
        then  echo "Upnp $Remind"
-		else git clone https://projects.vdr-developer.org/git/vdr-plugin-upnp.git; cp -rf vdr-plugin-upnp /home/`logname`/Vdrrepo/; mv vdr-plugin-upnp upnp cd upnp; wget https://www.dropbox.com/s/hgsv671o7aai2qm/patch_upnp.tar.gz; tar -zxvf patch_upnp.tar.gz; mv -f patch_upnp.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < 10_upnp_vdr2.1.2.patch; patch -p1 < 11_upnp_httptnt.patch; patch -p1 < 12_upnp_lock.patch.vdr23; make; make subplugins; cd ../../..; make plugins; sed -i "s|-P'externalplayer'|& -P'upnp'|" /usr/local/bin/vdrrun 
+		else git clone https://projects.vdr-developer.org/git/vdr-plugin-upnp.git; cp -rf vdr-plugin-upnp /home/`logname`/Vdrrepo/; mv vdr-plugin-upnp upnp; cd upnp; wget https://www.dropbox.com/s/hgsv671o7aai2qm/patch_upnp.tar.gz; tar -zxvf patch_upnp.tar.gz; mv -f patch_upnp.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < 10_upnp_vdr2.1.2.patch; patch -p1 < 11_upnp_httptnt.patch; patch -p1 < 12_upnp_lock.patch.vdr23; make; make subplugins; cd ../../..; make plugins; sed -i "s|-P'externalplayer'|& -P'upnp'|" /usr/local/bin/vdrrun 
     fi
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -1584,7 +1606,7 @@ echo "        ***                Installing Vdr-Plugin-Weatherforecast          
 cd $VDRSRC;  apt-get -y install libcurl4-openssl-dev libjansson-dev librsvg2-dev;
     if [ -f weatherforecast/Makefile ];
 		then  echo "Vdr-Plugin-Weatherforecast $Remind"
-			else git clone git://projects.vdr-developer.org/vdr-plugin-weatherforecast.git; cp -rf vdr-plugin-weatherforecast /home/`logname`/Vdrrepo/; rm -rf vdr-plugin-weatherforecast; mv vdr-plugin-weatherforecast weatherforecast; cd weatherforecast; wget https://www.dropbox.com/s/v0ipkt6x3bfbbs8/patch_weatherforecast.tar.gz; tar -zxvf patch_weatherforecast.tar.gz; mv -f patch_weatherforecast.tar.gz /home/`logname`/Vdrrepo/; patch -p1 < 10_weatherforecast_debug.patch; patch -p1 < 11_weatherforecast_i18n-it.patch; cd ../../..; make plugins; sed -i "s|-P'externalplayer'|& -P'weatherforecast'|" /usr/local/bin/vdrrun 
+			else git clone git://projects.vdr-developer.org/vdr-plugin-weatherforecast.git; cp -rf vdr-plugin-weatherforecast /home/`logname`/Vdrrepo/; mv vdr-plugin-weatherforecast weatherforecast; cd weatherforecast; wget https://www.dropbox.com/s/v0ipkt6x3bfbbs8/patch_weatherforecast.tar.gz; cp -rf patch_weatherforecast.tar.gz /home/`logname`/Vdrrepo/; tar -zxvf patch_weatherforecast.tar.gz; rm -r patch_weatherforecast.tar.gz; patch -p1 < 10_weatherforecast_debug.patch; sleep 1; patch -p1 < 11_weatherforecast_i18n-it.patch;  cd ../../..; make plugins; sed -i "s|-P'externalplayer'|& -P'weatherforecast'|" /usr/local/bin/vdrrun 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install; 
         echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -1611,7 +1633,7 @@ cd $VDRSRC;  apt-get -y install libimlib2-dev;
 			else git clone https://github.com/vdr-projects/vdr-plugin-weatherng.git; cp -rf vdr-plugin-weatherng /home/`logname`/Vdrrepo/; mv vdr-plugin-weatherng weatherng; cd weatherng; make ; sed -i "s|-P'externalplayer'|& -P'weatherng'|" /usr/local/bin/vdrrun; cp -rf /weatherng /etc/vdr/plugins/;
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
-cp -rf $VDRSRC/weatherng/weatherng/* /etc/vdr/plugins/weatherng/; cd ..; mv -f libvdr-weatherng.so $LIB/libvdr-weatherng.so.2.4.6
+cp -rf $VDRSRC/weatherng/weatherng/* /etc/vdr/plugins/weatherng/;
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$ 
 b1) 
@@ -1624,8 +1646,6 @@ cd $VDRSRC; if [ -f weatherng/Makefile ];
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;
 
-
-       
 #----------------------------------------------------------------------------------------------------------------------------------
 z);; 
 esac;;

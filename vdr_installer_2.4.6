@@ -513,13 +513,6 @@ else
     wget https://www.dropbox.com/s/s9vggu8mil8ss7t/patch_epgsearch.tar.gz;
   fi
 
- if [ -e /home/`logname`/Vdrrepo/01_Add_language_It.patch.tar.gz ]; then
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-else
-  echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/jrizzen5q8o07uv/01_Add_language_It.patch.tar.gz;
-  fi 
-
 if [ -e /home/`logname`/Vdrrepo/vdr-plugin-iptv ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
@@ -626,7 +619,7 @@ if [ -e /home/`logname`/Vdrrepo/logos.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/iwa4vj6z0y5uu5z/logos.tar.gz;
+    wget https://www.dropbox.com/s/6bdejeummyv0p3f/logos.tar.gz;
   fi
 
 if [ -e /home/`logname`/Vdrrepo/icone.tar.gz ]; then
@@ -737,12 +730,11 @@ wget https://www.dropbox.com/s/806odyj5vyco3dg/lcars_pack.tar.gz;
 			echo " Downloading others "
 
 wget https://www.dropbox.com/s/6hzpdx9yv5ypzxv/traduzioni.tar.gz;
-wget https://www.dropbox.com/s/jrizzen5q8o07uv/01_Add_language_It.patch.tar.gz;
 wget https://www.dropbox.com/s/5uvx468b4b87auy/icone.tar.gz;
 wget https://www.dropbox.com/s/56oomdr58os7msa/oscam.tar.gz;
 wget https://www.dropbox.com/s/d3bn3ig8b3q2xp7/oscam64.tar.gz;
 wget https://www.dropbox.com/s/hb2mv9ytz5q6yz7/picon.tar.gz; 
-wget https://www.dropbox.com/s/iwa4vj6z0y5uu5z/logos.tar.gz;
+wget https://www.dropbox.com/s/6bdejeummyv0p3f/logos.tar.gz;
 
 chmod -R 777 *;;
 
@@ -1183,12 +1175,8 @@ echo "                  *** ttxtsub ***"
     patch -p1 < 29_vdr_ttxtsub.patch; sleep 1;
 echo "                  *** rec-order ***"
     patch -p1 < 30_vdr_rec-order.patch; sleep 1;
-#echo "                  *** naludump ***"
-#    patch -p1 < 32_vdr_naludump.patch; sleep 1;    
 echo "                  *** transponder_bind ***"
     patch -p1 < 99_vdr_epg_transponder_bind.patch; sleep 1;
-#echo "                  *** Dvbchan***"
-#    patch -p1 < vdr-dvbchan.patch; sleep 1;   
 #
 cp -rf $VDRSRC/pictures/pic2mpg /usr/local/bin/;
 #
@@ -1463,7 +1451,7 @@ echo '#!/bin/bash
         
 	INTEL VIDEO DEVICES
         [d]    Softhddevice (default)  & Mpv
-        [e]    Softhdcuvid & Mpv
+        [e]    Softhdvaapi & Mpv
 
    ---------------------------------------------- " 0 0
     echo -n "        Enter your menu choice  [a-e]:      "
@@ -1473,7 +1461,7 @@ echo '#!/bin/bash
 a) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f -w disable-ogl-osd' -P'mpv -a alsa -b /home/`logname`'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
 b) clear; sed -i "s|-P'dvbapi'|& -P'softhdcuvid -f' -P'mpv -a alsa -b /home/`logname`'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
 c) clear; sed -i "s|-P'dvbapi'|& -P'xineliboutput --local=sxfe --fullscreen --video=vdpau --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1,chroma_filter=0,enabled=1'|" /usr/local/bin/vdrrun && sed -i "s|-P'iptv'|& -P'mpv -a alsa -b /home/`logname`'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/kalujk6k7oksr6l/setup16_xineliboutput_nvidia.tar.gz && cp -rf /etc/vdr/setup16_xineliboutput_nvidia.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_xineliboutput_nvidia.tar.gz && rm -rf setup16_xineliboutput_nvidia.tar.gz;;    
-d) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f -v va-api' -P'mpv -a alsa -v vaapi -b /home/`logname`'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;; 
+d) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f -v va-api' -P'mpv -a alsa -v vaapi -b /home/'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;; 
 e) clear; sed -i "s|-P'dvbapi'|& -P'softhdvaapi -d :0.0 -f' -P'mpv -a alsa -v vaapi -b /home/`logname`'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && cp -rf /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf setup16_softhddevice.tar.gz && rm -rf setup16_softhddevice.tar.gz;;
 esac
 #   Permission to execute Vdr       
@@ -1871,12 +1859,12 @@ esac;;
                                           #     Install && Upgrade Settings       #
                                           #########################################
 clear
-echo "               *** Install W_scan2 ***"; sleep 1
+echo "               *** Install W_scan ***"; sleep 1
 cd $SRC; 
-if [ -f /$SRC/w_scan2/Makefile ];
-  then  echo "W_scan $Remind3"
-else git clone https://github.com/stefantalpalaru/w_scan2.git; cp w_scan2 /home/`logname`/Vdrrepo/; cd w_scan2; ./autogen.sh; ./configure; make; make install;
-fi
+ if [ -f w_scan/Makefile ];
+  		then echo "W_scan $Remind"
+			else wget https://www.gen2vdr.de/wirbel/w_scan_cpp/w_scan-20210218.tar.bz2; tar xjf w_scan-20210218.tar.bz2; cp -rf w_scan-20210218 /home/`logname`/Vdrrepo/; mv -f w_scan-20210218 w_scan; cd w_scan; ./configure; make; make install;
+	fi;
 #
 echo "               *** Install t2scan ***"; sleep 1
 cd $SRC;
@@ -1893,9 +1881,9 @@ clear
 
                         
         ****   Sezione W_Scan/t2scan  ****
-        [a]    Install Settings 9.0E - using W_scan2
-        [b]    Install Settings 13.0E - using W_scan2
-        [c]    Install Settings 19.2E - using W_scan2
+        [a]    Install Settings 9.0E - using W_scan
+        [b]    Install Settings 13.0E - using W_scan
+        [c]    Install Settings 19.2E - using W_scan
         [d]    Install Terrestrial Settings - using t2scan
                   
         [z]    Skip
@@ -1906,9 +1894,9 @@ clear
     case $yourch in
  
     ##### W_Scan/t2scan #####
-a) clear; rm -rf /etc/vdr/channels-w_scan2-9E0.conf; w_scan2 -fs -s S9E0 -D0c -o2 >> /etc/vdr/channels-w_scan-9E0.conf;; 
-b) clear; rm -rf /etc/vdr/channels-w_scan2-13E0.conf; w_scan2 -fs -s S13E0 -D1c -o2 >> /etc/vdr/channels-w_scan-13E0.conf;;
-c) clear; rm -rf /etc/vdr/channels-w_scan2-19E2.conf; w_scan2 -fs -s S19E2 -D2c -o2 >> /etc/vdr/channels-w_scan-19E2.conf;;
+a) clear; rm -rf /etc/vdr/channels-w_scan-9E0.conf; w_scan -fs -s S9E0 -D0c -o2 >> /etc/vdr/channels-w_scan-9E0.conf;; 
+b) clear; rm -rf /etc/vdr/channels-w_scan-13E0.conf; w_scan -fs -s S13E0 -D1c -o2 >> /etc/vdr/channels-w_scan-13E0.conf;;
+c) clear; rm -rf /etc/vdr/channels-w_scan-19E2.conf; w_scan -fs -s S19E2 -D2c -o2 >> /etc/vdr/channels-w_scan-19E2.conf;;
 d) clear; rm -rf /etc/vdr/channels-dtt.conf; t2scan -stro -o -t0 >> /etc/vdr/channels-dtt.conf;;
 
 z) ;;

@@ -569,7 +569,7 @@ else
     git clone git://projects.vdr-developer.org/vdr-plugin-weatherforecast.git;
 fi    
 
-if [ -s /home/`logname`/sifinstallrepo/patch_weatherforecast.tar.gz ]; then
+if [ -e /home/`logname`/Vdrrepo/patch_weatherforecast.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File Presente ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File non Presente ... Eseguo il Download ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
@@ -1144,7 +1144,7 @@ cd vdr;
 cp -rf /home/`logname`/Vdrrepo/vdr-patches.2.4.6.tar.gz $SRC/vdr/; tar -zxvf vdr-patches.2.4.6.tar.gz; rm -rf vdr-patches.2.4.6.tar.gz; sleep 1;
 #
 echo "                  *** zapcockpit ***"
-    patch -p1 < 02_vdr_zapcockpit.patch; sleep 1;
+    patch -p1 < vdr-2.4.0_zapcockpit.patch; sleep 1;
 echo "                  *** editrecording ***"
     patch -p1 < 05_vdr_editrecording.patch; sleep 1;
 echo "                  *** avcdescriptor ***"
@@ -1347,7 +1347,7 @@ cd $VDRSRC; apt-get -y install libcurl4 libcurl4-gnutls-dev vlc mplayer; cp -rf 
 #
 echo ""; echo "               *** Weatherforecast ***"; echo ""; sleep 3
 cd $VDRSRC; apt-get -y install libcurl4-openssl-dev libjansson-dev librsvg2-dev;
-cp -rf /home/`logname`/Vdrrepo/vdr-plugin-weatherforecast /$VDRSRC; mv vdr-plugin-weatherforecast weatherforecast; cd weatherforecast; cp /home/`logname`/sifinstallrepo/patch_weatherforecast.tar.gz /$VDRSRC/weatherforecast/; tar -zxvf patch_weatherforecast.tar.gz; rm -r patch_weatherforecast.tar.gz; patch -p1 < 10_weatherforecast_debug.patch; sleep 1; patch -p1 < 11_weatherforecast_i18n-it.patch; cd ../../..; make plugins
+cp -rf /home/`logname`/Vdrrepo/vdr-plugin-weatherforecast /$VDRSRC; mv vdr-plugin-weatherforecast weatherforecast; cd weatherforecast; cp -rf /home/`logname`/Vdrrepo/patch_weatherforecast.tar.gz /$VDRSRC/weatherforecast/; tar -zxvf patch_weatherforecast.tar.gz; rm -rf patch_weatherforecast.tar.gz; patch -p1 < 10_weatherforecast_debug.patch; sleep 1; patch -p1 < 11_weatherforecast_i18n-it.patch; cd ../../..; make plugins
 #
 echo ""; echo "               *** Externalplayer ***";  sleep 3
 cd $VDRSRC; cp -rf /home/`logname`/Vdrrepo/vdr-externalplayer-0.3.5.tgz /$VDRSRC; tar zxvf vdr-externalplayer-0.3.5.tgz; rm -rf vdr-externalplayer-0.3.5.tgz; mv externalplayer-0.3.5 externalplayer; cp -rf /$SRC/traduzioni/external_it_IT.po /$VDRSRC/externalplayer/po/; cd externalplayer/po/; mv external_it_IT.po it_IT.po; cd ../../../..; make plugins; 

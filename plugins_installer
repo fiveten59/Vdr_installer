@@ -375,7 +375,7 @@ cd $VDRSRC; apt-get -y install libcurl4 librsvg2-dev libxml2-dev libcairo2-dev l
 			else git clone https://gitlab.com/kamel5/skindesigner.git; cp -rf skindesigner /home/`logname`/Vdrrepo/; cd skindesigner; make;  make install; sed -i "s|-P'externalplayer'|& -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/'|" /usr/local/bin/vdrrun 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
-cd /$LIB/skindesigner/scripts/; rm ln -s temperatures.default temperatures; ln -s vdrstats.default vdrstats;
+cd /$LIB/skindesigner/scripts/; ln -s temperatures.default temperatures; ln -s vdrstats.default vdrstats;
         echo "                    Press Enter to continue ...               "; read enterKey;;
 		
 b1) 

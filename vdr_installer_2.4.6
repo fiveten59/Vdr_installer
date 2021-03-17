@@ -619,7 +619,8 @@ if [ -e /home/`logname`/Vdrrepo/logos.tar.gz ]; then
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File exists ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
 else
   echo "░░░░░░░░░░░░░░░░░░░░░░░░░░░░░¦¦¦¦¦¦:::: ..... File not found ... Downloading it now ..... ::::¦¦¦¦¦¦░░░░░░░░░░░░░░░░░░░░░░░░░░░░░";
-    wget https://www.dropbox.com/s/6bdejeummyv0p3f/logos.tar.gz;
+    #wget https://www.dropbox.com/s/6bdejeummyv0p3f/logos.tar.gz;
+    git clone https://github.com/fiveten59/Logos.git logos
   fi
 
 if [ -e /home/`logname`/Vdrrepo/icone.tar.gz ]; then
@@ -734,7 +735,8 @@ wget https://www.dropbox.com/s/5uvx468b4b87auy/icone.tar.gz;
 wget https://www.dropbox.com/s/56oomdr58os7msa/oscam.tar.gz;
 wget https://www.dropbox.com/s/d3bn3ig8b3q2xp7/oscam64.tar.gz;
 wget https://www.dropbox.com/s/hb2mv9ytz5q6yz7/picon.tar.gz; 
-wget https://www.dropbox.com/s/6bdejeummyv0p3f/logos.tar.gz;
+#wget https://www.dropbox.com/s/6bdejeummyv0p3f/logos.tar.gz;
+git clone https://github.com/fiveten59/Logos.git logos
 
 chmod -R 777 *;;
 

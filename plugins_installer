@@ -419,7 +419,7 @@ echo "        ***                Installing Shady KISSpb               ***";  sl
 cd $SKINS; 
    if [ -f shady_KISSpb/setup.xml ];
 		then  echo "Shady KISSpb $Remind"
-			else git clone https://gitlab.com/kamel5/shady_KISSpb.git; cp -rf shady_KISSpb /home/`logname`/Vdrrepo/; find -name *.theme -exec mv {} "/etc/vdr/themes" \;
+			else git clone https://gitlab.com/kamel5/shady_KISSpb.git; cp -rf shady_KISSpb /home/`logname`/Vdrrepo/; find -name *.theme -exec mv {} "/etc/vdr/plugins/skindesigner/skins/" \;
 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; 
@@ -867,7 +867,7 @@ cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
 a1) 
 clear
 echo "        ***                Removing Vdr-Plugin-Iptv               ***";  sleep 2
-cd $VDRSRC; if [ -f iptv/Makefile ];
+cd $VDRSRC; if [ -e iptv/Makefile ];
   	then rm -rf iptv; cd $LIB; rm -rf libvdr-iptv.*; sed -i "s|-P'iptv'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-Iptv $Remind1"
   			else echo "Vdr-Plugin-Iptv $Remind5" 
 	fi;
@@ -889,7 +889,7 @@ cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
 b1) 
 clear
 echo "        ***                Removing Vdr-Plugin-Radio               ***";  sleep 2
-cd $VDRSRC; if [ -f radio/Makefile ];
+cd $VDRSRC; if [ -e radio/Makefile ];
    		then rm -rf radio; cd $LIB; rm -rf libvdr-radio.*; rm -rf $PLUGINS/radio; sed -i "s|-P'radio'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-Radio $Remind1"
    			else echo "Vdr-Plugin-Radio $Remind5" 
 	fi;
@@ -922,7 +922,7 @@ cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
     read yourch
     case $yourch in
 #
-a) sed -i "s|-P'iptv'|& -P'mpv -a alsa -b /home/`logname`/'|" /usr/local/bin/vdrrun;;          
+a) sed -i "s|-P'iptv'|& -P'mpv -a alsa -b /home/'|" /usr/local/bin/vdrrun;;          
 b) sed -i "s|-P'iptv'|& -P'mpv -a alsa -v vaapi -b /home/'|" /usr/local/bin/vdrrun;;
 esac 
         echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -931,7 +931,7 @@ c1)
 clear
 echo "        ***                Removing Vdr-Plugin-Mpv               ***";  sleep 2
 cd $VDRSRC; if [ -f mpv/Makefile ];
-  		then rm -rf mpv; cd $LIB; rm -rf libvdr-mpv.*; sed -i "s|-P'mpv -a alsa -b /home/`logname`/'||" /usr/local/bin/vdrrun; sed -i "s|-P'mpv -a alsa -v vaapi -b /home/'||" /usr/local/bin/vdrrun;echo "Vdr-Plugin-Mpv $Remind1"
+  		then rm -rf mpv; cd $LIB; rm -rf libvdr-mpv.*; sed -i "s|-P'mpv -a alsa -b /home/'||" /usr/local/bin/vdrrun; sed -i "s|-P'mpv -a alsa -v vaapi -b /home/'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-Mpv $Remind1"
   			else echo "Vdr-Plugin-Mpv $Remind5" 
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
@@ -1058,13 +1058,14 @@ esac;;
         [d]    Femon ......................................  [d1]    Femon 
         [e]    Devstatus ..................................  [e1]    Devstatus 
         [f]    Osdteletext ................................  [f1]    Osdteletext 
-        [g]    Ttxsubs (No OK) ............................  [g1]    Ttxsubs 
+        [g]    Ttxsubs (No OK) ............................  [g1]    Ttxsubs
+        [h]    Suspendoutput ..............................  [h1]    Suspendoutput         
                                  
         [z]    Skip
 
    -------------------------------------------------------------------------------------------------------------------- 
    -------------------------------------------------------------------------------------------------------------------- " 0 0
-echo -n "        Enter your menu choice = Install [a-g] ~~ Remove [a1-g1] ~~ Skip [z]:      "
+echo -n "        Enter your menu choice = Install [a-h] ~~ Remove [a1-h1] ~~ Skip [z]:      "
 read yourch
 case $yourch in   
 					################## 
@@ -1228,6 +1229,33 @@ cd $VDRSRC; if [ -f ttxsubs/Makefile ];
 	fi;
 cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
         echo "                    Press Enter to continue ...               "; read enterKey;;
+        
+################################################################################################################################################################
+################################################################################################################################################################
+
+h) 
+clear
+echo "        ***                Installing Vdr-Plugin-Suspendoutput               ***";  sleep 2
+cd $VDRSRC; if [ -f suspendoutput/Makefile ];
+		then  echo "Vdr-Plugin-Suspendoutput $Remind"
+		else wget http://phivdr.dyndns.org/vdr/vdr-suspendoutput/vdr-suspendoutput-2.1.0.tgz; tar xzvf vdr-suspendoutput-2.1.0.tgz; cp -rf vdr-suspendoutput-2.1.0.tgz /home/`logname`/Vdrrepo/;  mv -f suspendoutput-2.1.0 suspendoutput; cd suspendoutput; wget https://www.dropbox.com/s/brvjs1g28i1xkfd/patch_suspendoutput.tar.gz; tar -zxvf patch_suspendoutput.tar.gz; patch -p1 < suspendoutput_nooutput.patch; patch -p1 < suspendoutput_compile.patch; cd ../../..; make plugins; sed -i "s|-P'externalplayer'|& -P'suspendoutput -l'|" /usr/local/bin/vdrrun 
+	fi;
+cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
+        echo "                    Press Enter to continue ...               "; read enterKey;; 
+#                                      $$$$$$$$$$$$$$$$$$
+h1) 
+clear
+echo "        ***                Removing Vdr-Plugin-Suspendoutput               ***";  sleep 2
+cd $VDRSRC; if [ -f suspendoutput/Makefile ];
+  	then rm -rf suspendoutput; cd $LIB; rm -rf libvdr-suspendoutput.*; sed -i "s|-P'suspendoutput -l'||" /usr/local/bin/vdrrun; echo "Vdr-Plugin-Suspendoutput $Remind1"
+  			else echo "Vdr-Plugin-Suspendoutput $Remind5"; sed -i "s|-P'suspendoutput -l'||" /usr/local/bin/vdrrun 
+	fi;
+cd /home/`logname`/Vdrrepo/; chmod -R 777 *; cd $SRC/vdr; make plugins install;
+        echo "                    Press Enter to continue ...               "; read enterKey;;        
+        
+        
+        
+        
 
 #----------------------------------------------------------------------------------------------------------------------------------
 z);; 

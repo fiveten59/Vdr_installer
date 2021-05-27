@@ -3,7 +3,7 @@
 #                                                                                       #
 # Script name: vdr_2.4.7_installer                                                      #
 # Version: 2.4.7 Repository Master (https://github.com/fiveten59/Vdr_installer)        #
-# Tested on Ubuntu 18.04 & 20.04                                                               #
+# Tested on Ubuntu 18.04 & 20.04                                                       #
 # chmod the script                                                                      #
 # then load it simply typing: sudo ./vdr_2.4.7_installer                                #
 #                                                                                       #
@@ -453,12 +453,11 @@ else
 
 echo " Downloading Vdr and Plugins on local repo "
 
-if [ -e /home/`logname`/Vdrrepo/vdr-2.4.7.tar.bz2 ]; then
+if [ -e /home/`logname`/Vdrrepo/2.4.7.tar.gz ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    # wget ftp://ftp.tvdr.de/vdr/vdr-2.4.7.tar.bz2
-    wget https://www.dropbox.com/s/dr54cemvikrybzc/vdr-2.4.7.tar.bz2
+    wget https://github.com/vdr-projects/vdr/archive/refs/tags/2.4.7.tar.gz
   fi
 
 if [ -e /home/`logname`/Vdrrepo/vdr-patches.2.4.7.tar.gz ]; then
@@ -688,8 +687,7 @@ wget https://ffmpeg.org/releases/ffmpeg-4.3.1.tar.bz2
 
 			echo " Downloading Vdr and Plugins on local repo "
 
-#wget ftp://ftp.tvdr.de/vdr/vdr-2.4.7.tar.bz2
-wget https://www.dropbox.com/s/dr54cemvikrybzc/vdr-2.4.7.tar.bz2
+wget https://github.com/vdr-projects/vdr/archive/refs/tags/2.4.7.tar.gz
 wget https://www.dropbox.com/s/h5ievr44vju9tr9/vdr-patches.2.4.7.tar.gz
 wget https://www.dropbox.com/s/qds2k91od7oboed/Make.config.tar.gz
 wget https://www.dropbox.com/s/bx97ikp7c1h2qj2/vdrsymbols.tar.gz
@@ -1192,10 +1190,10 @@ clear
 echo " Installing VDR      "
 sleep 1
 
-cp -rf /home/`logname`/Vdrrepo/$VDR.tar.bz2 $SRC/
-tar xivf $VDR.tar.bz2
+cp -rf /home/`logname`/Vdrrepo/$VDR.tar.gz $SRC/
+tar -zxvf $VDR.tar.gz
 ln -s $VDR vdr
-rm -rf $VDR.tar.bz2
+rm -rf $VDR.tar.gz
 echo " Patching VDR      "
 sleep 1
 cd vdr
@@ -1215,7 +1213,6 @@ echo " *** zapcockpit ***"
 #echo " *** pin ***"
 #    patch -p1 < 12_vdr_pin.patch
 echo " *** mainmenuhooks ***"
-#    patch -p1 < 15_vdr_mainmenuhooks_vdr234.patch
     patch -p1 < vdr-MainMenuHooks.patch
 echo " *** wareagleicon ***"
     patch -p1 < 16_vdr_wareagleicon.patch
@@ -2205,7 +2202,7 @@ clear
 a)   clear; add-apt-repository ppa:team-xbmc/ppa; apt-get update; apt-get -y install kodi; apt install kodi-pvr-iptvsimple=3.9.8-1~focal;;
 b)   clear; add-apt-repository ppa:team-xbmc/unstable; apt-get update;  apt-get -y install kodi; apt-get -y install kodi-pvr-iptvsimple;;
 c)   clear; add-apt-repository ppa:team-xbmc/xbmc-nightly;  apt-get -y install kodi; apt-get -y install kodi-pvr-iptvsimple;;
-c)   clear; add-apt-repository ppa:team-xbmc/xbmc-old;  apt-get -y install kodi; apt-get -y install kodi-pvr-iptvsimple;;
+d)   clear; add-apt-repository ppa:team-xbmc/xbmc-old;  apt-get -y install kodi; apt-get -y install kodi-pvr-iptvsimple apt-mark hold kodi;;
 esac 
 #
 echo "               *** Install Kodi Picon ***"

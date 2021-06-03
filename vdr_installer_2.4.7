@@ -733,7 +733,7 @@ esac ;;
 2)
 
 clear
-apt-get -y install autoconf automake build-essential libass-dev libtool pkg-config texinfo zlib1g zlib1g-dev libva-dev cmake mercurial libdrm-dev libvorbis-dev libogg-dev git libx11-dev libperl-dev libpciaccess-dev libpciaccess0 xorg-dev
+apt-get -y install autoconf automake build-essential libass-dev pkg-config texinfo zlib1g zlib1g-dev libva-dev cmake mercurial libdrm-dev libvorbis-dev libogg-dev git libx11-dev libperl-dev libpciaccess-dev libpciaccess0 xorg-dev
 cd /usr/local/src
 mkdir -p ffmpeg_sources
 
@@ -1191,9 +1191,9 @@ echo " Installing VDR      "
 sleep 1
 
 cp -rf /home/`logname`/Vdrrepo/$VDR.tar.gz $SRC/
-tar -zxvf $VDR.tar.gz
+tar -zxvf 2.4.7.tar.gz
 ln -s $VDR vdr
-rm -rf $VDR.tar.gz
+rm -rf 2.4.7.tar.gz
 echo " Patching VDR      "
 sleep 1
 cd vdr
@@ -1317,12 +1317,10 @@ a)
 clear
 echo ""; echo "               *** Softhddevice**"; echo ""
 sleep 3
-apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev 
-apt-get -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev 
-apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libxext6 libxext-dev 
-apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxext-dev
-apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
-apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev
+apt-get -y install libx11-xcb-dev libc6-dev libogg0
+apt-get -y install libxcb-ewmh-dev libasound2-dev libxext6 libxext-dev 
+apt-get -y install libvdpau1 libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
+apt-get -y install libglu1-mesa-dev libgl1-mesa-dev
 cd $VDRSRC
 git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git
 cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/
@@ -1334,12 +1332,10 @@ b)
 clear
 echo ""; echo "               *** Softhdcuvid **"; echo ""
 sleep 3
-apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev 
-apt-get -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev 
-apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libxext6 libxext-dev 
-apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxext-dev
-apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
-apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev libplacebo-dev libavfilter-dev
+apt-get -y install libx11-xcb-dev libc6-dev libogg0
+apt-get -y install libxcb-ewmh-dev libasound2-dev libxext6 libxext-dev 
+apt-get -y install libvdpau1 libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
+apt-get -y install libglu1-mesa-dev libgl1-mesa-dev libplacebo-dev libavfilter-dev
 cd $VDRSRC
 wget https://github.com/jojo61/vdr-plugin-softhdcuvid/archive/master.tar.gz
 cp -rf /$VDRSRC/master.tar.gz /home/`logname`/Vdrrepo/
@@ -1362,7 +1358,7 @@ sleep 3
 echo "                    Installing Xine-lib"
 sleep 1      
 cd $SRC
-apt-get -y install autopoint libxine2-dev libxrender-dev libextractor-dev libxrandr-dev libxine2-ffmpeg mjpegtools libtool
+apt-get -y install libxine2-dev libxrender-dev libextractor-dev libxrandr-dev libxine2-ffmpeg mjpegtools
 if [ -f /usr/local/lib/win32/cook.so ]; then
     echo "Codecs $Remind3"
     	else 
@@ -1418,12 +1414,10 @@ d)
 clear
 echo ""; echo "               *** Softhddevice (default)**"; echo ""
 sleep 3
-apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev 
-apt-get -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev 
-apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libxext6 libxext-dev 
-apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxext-dev
-apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
-apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev
+apt-get -y install libx11-xcb-dev libc6-dev libogg0
+apt-get -y install libxcb-ewmh-dev libasound2-dev libxext6 libxext-dev 
+apt-get -y install libvdpau1 libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
+apt-get -y install libglu1-mesa-dev libgl1-mesa-dev
 cd $VDRSRC
 git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git
 cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/
@@ -1435,12 +1429,10 @@ e)
 clear
 echo ""; echo "               *** Softhdcuvid **"; echo ""
 sleep 3
-apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev 
-apt-get -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev 
-apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libxext6 libxext-dev 
-apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxext-dev
-apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
-apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev libplacebo-dev libavfilter-dev
+apt-get -y install libx11-xcb-dev libc6-dev libogg0
+apt-get -y install libxcb-ewmh-dev libasound2-dev libxext6 libxext-dev 
+apt-get -y install libvdpau1 libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
+apt-get -y install libglu1-mesa-dev libgl1-mesa-dev libplacebo-dev libavfilter-dev
 cd $VDRSRC
 wget https://github.com/jojo61/vdr-plugin-softhdcuvid/archive/master.tar.gz
 cp -rf /$VDRSRC/master.tar.gz /home/`logname`/Vdrrepo/
@@ -1484,11 +1476,9 @@ make plugins
 #
 echo ""; echo "               *** SkinNopacity ***"
 sleep 3
-apt-get -y install graphicsmagick-libmagick-dev-compat 
-apt-get -y install libc6-dev libfontconfig1-dev  
-apt-get -y install zlib1g zlib1g-dev lm-sensors
+apt-get -y install graphicsmagick-libmagick-dev-compat
+apt-get -y install lm-sensors libexpat1 libexpat1-dev
 apt-get -y install libglib2.0-0 libpcre3 libpcre3-dev
-apt-get -y install libexpat1 libexpat1-dev libpcre3 libpcre3-dev
 cd $VDRSRC
 cp -rf /home/`logname`/Vdrrepo/SkinNopacity /$VDRSRC
 cd SkinNopacity
@@ -1506,7 +1496,7 @@ make && make install
 #
 echo ""; echo "               *** Iptv ***"; echo ""
 sleep 3
-apt-get -y install libcurl4 libcurl4-gnutls-dev vlc mplayer
+apt-get -y install libcurl4-gnutls-dev vlc mplayer
 cd $VDRSRC
 cp -rf /home/`logname`/Vdrrepo/vdr-plugin-iptv /$VDRSRC
 mv vdr-plugin-iptv iptv
@@ -1521,7 +1511,7 @@ make plugins
 #
 echo ""; echo "               *** Weatherforecast ***"; echo ""
 sleep 3
-apt-get -y install libcurl4-openssl-dev libjansson-dev librsvg2-dev
+apt-get -y install libcurl4-openssl-dev libjansson-dev
 cd $VDRSRC
 cp -rf /home/`logname`/Vdrrepo/vdr-plugin-weatherforecast /$VDRSRC
 mv vdr-plugin-weatherforecast weatherforecast

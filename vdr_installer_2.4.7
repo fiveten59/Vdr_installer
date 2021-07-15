@@ -3,7 +3,7 @@
 #                                                                                       #
 # Script name: vdr_2.4.7_installer                                                      #
 # Version: 2.4.7 Repository Master (https://github.com/fiveten59/Vdr_installer)        #
-# Tested on Ubuntu 18.04 & 20.04                                                       #
+# Tested on Ubuntu 18.04 & 20.04                                                      #
 # chmod the script                                                                      #
 # then load it simply typing: sudo ./vdr_2.4.7_installer                                #
 #                                                                                       #
@@ -1204,36 +1204,22 @@ sleep 1
 #
 echo " *** zapcockpit ***"
     patch -p1 < vdr-2.4.0_zapcockpit.patch
-#echo " *** editrecording ***"
-#    patch -p1 < 05_vdr_editrecording.patch
-#echo " *** avcdescriptor ***"
-#    patch -p1 < 06_vdr_avcdescriptor.patch
-#echo " *** epgsearch ***"
-#    patch -p1 < 10_vdr_epgsearch_exttimeredit_vdr-2.3.5.patch
-#echo " *** pin ***"
-#    patch -p1 < 12_vdr_pin.patch
 echo " *** mainmenuhooks ***"
     patch -p1 < vdr-MainMenuHooks.patch
 echo " *** wareagleicon ***"
-    patch -p1 < 16_vdr_wareagleicon.patch
+    patch -p1 < vdr_wareagleicon.patch
 echo " *** skinlcarsng ***"
-    patch -p1 < 17_vdr_skinlcarsng_numrecordings.patch
+    patch -p1 < vdr_skinlcarsng_numrecordings.patch
 echo " *** config ***"
-    patch -p1 < 20_vdr_config.patch
+    patch -p1 < vdr_config.patch
 echo " *** svdrphosts ***"
-    patch -p1 < 22_vdr_svdrphosts.patch
-#echo " *** maxdevice ***"
-#    patch -p1 < 23_vdr_maxdevice.patch
-#echo " *** dvb_power_saving ***"
-#    patch -p1 < 24_vdr_dvb_power_saving_feature.patch
-#echo " *** menuorg ***"
-#   patch -p1 < 26_vdr_menuorg.patch
-#echo " *** hide_first_recording_level ***"
-#    patch -p1 < 28_vdr_hide_first_recording_level.patch
+    patch -p1 < vdr_svdrphosts.patch
+echo " *** menuselection ***"
+    patch -p1 < vdr_menuselection.patch
 echo " *** ttxtsub ***"
-    patch -p1 < 29_vdr_ttxtsub.patch
-#echo " *** rec-order ***"
-#    patch -p1 < 30_vdr_rec-order.patch
+    patch -p1 < vdr_ttxtsub.patch
+#echo " *** vdr-fix-stl-conflicts ***" # NON SERVE NELLA VERSIONE GIT
+#    patch -p1 < vdr-fix-stl-conflicts.patch    
 #echo " *** transponder_bind ***"
 #    patch -p1 < 99_vdr_epg_transponder_bind.patch
 #
@@ -2118,6 +2104,20 @@ cd t2scan
 make && make install
 fi
 #
+#
+echo "               *** Install W_scan2 ***"
+sleep 1
+cd $SRC
+if [ -f /$SRC/w_scan2/Makefile ]
+  then  echo "W_scan2 $emind3"
+else git clone https://github.com/stefantalpalaru/w_scan2
+cp w_scan2 /home/`logname`/Vdrrepo/
+cd w_scan2
+./autogen.sh
+./configure
+make && make install
+fi
+#
 clear        
     dialog --title "   ** Install && Upgrade Settings **   " --infobox "
    --------------------------------------------------------------
@@ -2129,7 +2129,7 @@ clear
         [a]    Install Settings 9.0E - using W_scan
         [b]    Install Settings 13.0E - using W_scan
         [c]    Install Settings 19.2E - using W_scan
-        [d]    Install Terrestrial Settings - using t2scan
+        [d]    Install Terrestrial Settings - using W_scan2
                   
         [z]    Skip
         
@@ -2139,10 +2139,10 @@ clear
     case $yourch in
  
     ##### W_Scan/t2scan #####
-a) clear; rm -rf /etc/vdr/channels-w_scan-9E0.conf; w_scan -fs -s S9E0 -D0c -o2 >> /etc/vdr/channels-w_scan-9E0.conf;; 
-b) clear; rm -rf /etc/vdr/channels-w_scan-13E0.conf; w_scan -fs -s S13E0 -D1c -o2 >> /etc/vdr/channels-w_scan-13E0.conf;;
-c) clear; rm -rf /etc/vdr/channels-w_scan-19E2.conf; w_scan -fs -s S19E2 -D2c -o2 >> /etc/vdr/channels-w_scan-19E2.conf;;
-d) clear; rm -rf /etc/vdr/channels-dtt.conf; t2scan -stro -o -t0 >> /etc/vdr/channels-dtt.conf;;
+a) clear; rm -rf /etc/vdr/channels-w_scan2-9E0.conf; w_scan2 -fs -s S9E0 -D0c -o2 >> /etc/vdr/channels-w_scan2-9E0.conf;; 
+b) clear; rm -rf /etc/vdr/channels-w_scan2-13E0.conf; w_scan2 -fs -s S13E0 -D1c -o2 >> /etc/vdr/channels-w_scan2-13E0.conf;;
+c) clear; rm -rf /etc/vdr/channels-w_scan2-19E2.conf; w_scan2 -fs -s S19E2 -D2c -o2 >> /etc/vdr/channels-w_scan2-19E2.conf;;
+d) clear; rm -rf /etc/vdr/channels-dtt.conf; ./w_scan2 -c IT >> /etc/vdr/channels-dtt.conf && ./w_scan2 -fc -c IT >> /etc/vdr/channels-dtt.conf;;
 
 z) ;;
 #

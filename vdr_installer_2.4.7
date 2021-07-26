@@ -9,7 +9,8 @@
 #                                                                                       #
 #########################################################################################
 #
-PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/radio-OnAir1080.mpg' -P'skinnopacity -l /etc/vdr/logos/' -P'weatherforecast' -P'externalplayer' -P'channelscan' -P'systeminfo'"
+PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/radio-OnAir1080.mpg' -P'skinnopacity -l /etc/vdr/logos/' -P'externalplayer' -P'channelscan' -P'systeminfo'"
+# -P'weatherforecast' 
 #
 #
 ETC='/usr/local/etc'
@@ -464,7 +465,7 @@ if [ -e /home/`logname`/Vdrrepo/vdr-patches.2.4.7.tar.gz ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    wget https://www.dropbox.com/s/h5ievr44vju9tr9/vdr-patches.2.4.7.tar.gz
+    wget https://www.dropbox.com/s/ywio8ht9oqa308d/vdr-patches.2.4.7.tar.gz
   fi
 
 if [ -e /home/`logname`/Vdrrepo/Make.config.tar.gz ]; then
@@ -609,7 +610,7 @@ else
     git clone https://gitlab.com/kamel5/SkinNopacity.git
   fi
 
-if [ -e /home/`logname`/Vdrrepo/logos.tar.gz ]; then
+if [ -e /home/`logname`/Vdrrepo/logos ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
@@ -688,7 +689,7 @@ wget https://ffmpeg.org/releases/ffmpeg-4.3.1.tar.bz2
 			echo " Downloading Vdr and Plugins on local repo "
 
 wget https://github.com/vdr-projects/vdr/archive/refs/tags/2.4.7.tar.gz
-wget https://www.dropbox.com/s/h5ievr44vju9tr9/vdr-patches.2.4.7.tar.gz
+wget https://www.dropbox.com/s/ywio8ht9oqa308d/vdr-patches.2.4.7.tar.gz
 wget https://www.dropbox.com/s/qds2k91od7oboed/Make.config.tar.gz
 wget https://www.dropbox.com/s/bx97ikp7c1h2qj2/vdrsymbols.tar.gz
 git clone http://projects.vdr-developer.org/git/vdr-plugin-epgsearch.git
@@ -1190,7 +1191,7 @@ clear
 echo " Installing VDR      "
 sleep 1
 
-cp -rf /home/`logname`/Vdrrepo/$VDR.tar.gz $SRC/
+cp -rf /home/`logname`/Vdrrepo/2.4.7.tar.gz $SRC/
 tar -zxvf 2.4.7.tar.gz
 ln -s $VDR vdr
 rm -rf 2.4.7.tar.gz
@@ -1495,20 +1496,20 @@ make
 cd ../../..
 make plugins
 #
-echo ""; echo "               *** Weatherforecast ***"; echo ""
-sleep 3
-apt-get -y install libcurl4-openssl-dev libjansson-dev
-cd $VDRSRC
-cp -rf /home/`logname`/Vdrrepo/vdr-plugin-weatherforecast /$VDRSRC
-mv vdr-plugin-weatherforecast weatherforecast
-cd weatherforecast
-cp -rf /home/`logname`/Vdrrepo/patch_weatherforecast.tar.gz /$VDRSRC/weatherforecast/
-tar -zxvf patch_weatherforecast.tar.gz
-rm -rf patch_weatherforecast.tar.gz
-patch -p1 < 10_weatherforecast_debug.patch
-patch -p1 < 11_weatherforecast_i18n-it.patch
-cd ../../..
-make plugins
+#echo ""; echo "               *** Weatherforecast ***"; echo ""
+#sleep 3
+#apt-get -y install libcurl4-openssl-dev libjansson-dev
+#cd $VDRSRC
+#cp -rf /home/`logname`/Vdrrepo/vdr-plugin-weatherforecast /$VDRSRC
+#mv vdr-plugin-weatherforecast weatherforecast
+#cd weatherforecast
+#cp -rf /home/`logname`/Vdrrepo/patch_weatherforecast.tar.gz /$VDRSRC/weatherforecast/
+#tar -zxvf patch_weatherforecast.tar.gz
+#rm -rf patch_weatherforecast.tar.gz
+#patch -p1 < 10_weatherforecast_debug.patch
+#patch -p1 < 11_weatherforecast_i18n-it.patch
+#cd ../../..
+#make plugins
 #
 echo ""; echo "               *** Externalplayer ***"
 sleep 3
@@ -1985,10 +1986,7 @@ mkdir -p picon
 if [ -f /etc/vdr/logos/2be.png ]
 then echo " Logos are already installed"
 else
-cp -rf /home/`logname`/Vdrrepo/logos.tar.gz /etc/vdr/
-cd /etc/vdr/
-tar -zxvf logos.tar.gz
-rm -rf logos.tar.gz
+cp -rf /home/`logname`/Vdrrepo/logos /etc/vdr/
 fi
 sleep 1
 ln -s /etc/vdr/plugins/picon liquid-logos4anthra_HD

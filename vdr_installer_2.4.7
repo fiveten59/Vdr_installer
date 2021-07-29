@@ -9,8 +9,7 @@
 #                                                                                       #
 #########################################################################################
 #
-PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/radio-OnAir1080.mpg' -P'skinnopacity -l /etc/vdr/logos/' -P'externalplayer' -P'channelscan' -P'systeminfo'"
-# -P'weatherforecast' 
+PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/radio-OnAir1080.mpg' -P'skinnopacity -l /etc/vdr/logos/' -P'externalplayer' -P'channelscan' -P'systeminfo'" 
 #
 #
 ETC='/usr/local/etc'
@@ -559,20 +558,6 @@ else
     git clone https://github.com/ua0lnj/vdr-plugin-mpv.git
 fi
 
-if [ -e /home/`logname`/Vdrrepo/vdr-plugin-weatherforecast ]; then
-  echo " ..... File exists ..... "
-else
-  echo "File not found ... Downloading it now ....."
-    git clone git://projects.vdr-developer.org/vdr-plugin-weatherforecast.git
-fi    
-
-if [ -e /home/`logname`/Vdrrepo/patch_weatherforecast.tar.gz ]; then
-  echo " ..... File exists ..... "
-else
-  echo "File not found ... Downloading it now ....."
-    wget https://www.dropbox.com/s/v0ipkt6x3bfbbs8/patch_weatherforecast.tar.gz
-fi
-
 if [ -e /home/`logname`/Vdrrepo/channelscan ]; then
   echo " ..... File exists ..... "
 else
@@ -700,8 +685,6 @@ git clone https://github.com/rofafor/vdr-plugin-iptv.git
 wget https://www.dropbox.com/s/nof5ydmxrplw2b0/patch_iptv.tar.gz
 wget https://www.dropbox.com/s/vmhkf4rzhoh4wa5/iptv_conf.tar.gz
 git clone https://github.com/ua0lnj/vdr-plugin-mpv.git
-git clone git://projects.vdr-developer.org/vdr-plugin-weatherforecast.git
-wget https://www.dropbox.com/s/v0ipkt6x3bfbbs8/patch_weatherforecast.tar.gz
 wget https://www.uli-eckhardt.de/vdr/download/vdr-externalplayer-0.3.5.tgz
 wget https://www.dropbox.com/s/vhz1fz68159s0qg/externalplayer.conf.tar.gz
 git clone https://bitbucket.org/ua0lnj/channelscan.git
@@ -1271,7 +1254,7 @@ tar -zxvf traduzioni.tar.gz
 rm -rf traduzioni.tar.gz
 #
 clear
-echo "Install Basic plugins  ( Softhddevice / Softhdcuvid / Xineliboutput - Dvbapi - Epgsearch - SkinNopacity - Skindesigner - Wheatherforecast - Iptv - ExternalPlayer - Radio -Channelscan - System Info)"
+echo "Install Basic plugins  ( Softhddevice / Softhdcuvid / Xineliboutput - Dvbapi - Epgsearch - SkinNopacity - Skindesigner - Iptv - ExternalPlayer - Radio -Channelscan - Mpv - System Info)"
 echo "                 Press Enter to continue ...         "
 read enterKey
 cd $SRC
@@ -1496,20 +1479,6 @@ make
 cd ../../..
 make plugins
 #
-#echo ""; echo "               *** Weatherforecast ***"; echo ""
-#sleep 3
-#apt-get -y install libcurl4-openssl-dev libjansson-dev
-#cd $VDRSRC
-#cp -rf /home/`logname`/Vdrrepo/vdr-plugin-weatherforecast /$VDRSRC
-#mv vdr-plugin-weatherforecast weatherforecast
-#cd weatherforecast
-#cp -rf /home/`logname`/Vdrrepo/patch_weatherforecast.tar.gz /$VDRSRC/weatherforecast/
-#tar -zxvf patch_weatherforecast.tar.gz
-#rm -rf patch_weatherforecast.tar.gz
-#patch -p1 < 10_weatherforecast_debug.patch
-#patch -p1 < 11_weatherforecast_i18n-it.patch
-#cd ../../..
-#make plugins
 #
 echo ""; echo "               *** Externalplayer ***"
 sleep 3
@@ -2094,7 +2063,7 @@ echo "               *** Install t2scan ***"
 sleep 1
 cd $SRC
 if [ -f /$SRC/t2scan/Makefile ]
-  then  echo "t2scan $emind3"
+  then  echo "t2scan $Remind3"
 else git clone https://github.com/mighty-p/t2scan
 cp t2scan /home/`logname`/Vdrrepo/
 cd t2scan
@@ -2107,7 +2076,8 @@ echo "               *** Install W_scan2 ***"
 sleep 1
 cd $SRC
 if [ -f /$SRC/w_scan2/Makefile ]
-  then  echo "W_scan2 $emind3"
+  then  echo "W_scan2 $Remind3"
+  sleep 1
 else git clone https://github.com/stefantalpalaru/w_scan2
 cp w_scan2 /home/`logname`/Vdrrepo/
 cd w_scan2
@@ -2123,11 +2093,11 @@ clear
    --------------------------------------------------------------
 
                         
-        ****   Sezione W_Scan/t2scan  ****
-        [a]    Install Settings 9.0E - using W_scan
-        [b]    Install Settings 13.0E - using W_scan
-        [c]    Install Settings 19.2E - using W_scan
-        [d]    Install Terrestrial Settings - using W_scan2
+        ****   Sezione W_Scan/t2scan/W_Scan2  ****
+        [a]    Install Settings 9.0E - using W_Scan
+        [b]    Install Settings 13.0E - using W_Scan2
+        [c]    Install Settings 19.2E - using W_Scan2
+        [d]    Install Terrestrial Settings - W_Scan2
                   
         [z]    Skip
         
@@ -2137,7 +2107,7 @@ clear
     case $yourch in
  
     ##### W_Scan/t2scan #####
-a) clear; rm -rf /etc/vdr/channels-w_scan2-9E0.conf; w_scan2 -fs -s S9E0 -D0c -o2 >> /etc/vdr/channels-w_scan2-9E0.conf;; 
+a) clear; rm -rf /etc/vdr/channels-w_scan2-9E0.conf; w_scan2 -fs -s S9E0 -D0c -o2 >> /etc/vdr/channels-w_scan-9E0.conf;; 
 b) clear; rm -rf /etc/vdr/channels-w_scan2-13E0.conf; w_scan2 -fs -s S13E0 -D1c -o2 >> /etc/vdr/channels-w_scan2-13E0.conf;;
 c) clear; rm -rf /etc/vdr/channels-w_scan2-19E2.conf; w_scan2 -fs -s S19E2 -D2c -o2 >> /etc/vdr/channels-w_scan2-19E2.conf;;
 d) clear; rm -rf /etc/vdr/channels-dtt.conf; ./w_scan2 -c IT >> /etc/vdr/channels-dtt.conf && ./w_scan2 -fc -c IT >> /etc/vdr/channels-dtt.conf;;

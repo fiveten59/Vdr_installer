@@ -9,7 +9,7 @@
 #                                                                                       #
 #########################################################################################
 #
-PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/radio-OnAir1080.mpg' -P'skinnopacity -l /etc/vdr/logos/' -P'externalplayer' -P'channelscan' -P'systeminfo'" 
+PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/radio-OnAir1080.mpg' -P'externalplayer' -P'channelscan' -P'systeminfo'"
 #
 #
 ETC='/usr/local/etc'
@@ -49,6 +49,47 @@ ALLOWED="#
 #
 #               Disecq
 #
+TRIAL="# Full DiSEqC sequence:
+# 9 - 13 - 19.2E
+S9E  11700 V  9750 t v W15 [E0 10 38 F0] W15 A W15 T
+S9E  99999 V 10600 t v W15 [E0 10 38 F1] W15 A W15 T
+S9E  11700 H  9750 t V W15 [E0 10 38 F2] W15 A W15 T
+S9E  99999 H 10600 t V W15 [E0 10 38 F3] W15 A W15 T
+
+S13.0E 11700 V  9750 t v W15 [E0 10 38 F4] W15 B W15 t
+S13.0E 99999 V 10600 t v W15 [E0 10 38 F5] W15 B W15 T
+S13.0E 11700 H  9750 t V W15 [E0 10 38 F6] W15 B W15 t
+S13.0E 99999 H 10600 t V W15 [E0 10 38 F7] W15 B W15 T
+
+S19.2E 11700 V  9750 t v W15 [E0 10 38 F8] W15 A W15 t
+S19.2E 99999 V 10600 t v W15 [E0 10 38 F9] W15 A W15 T
+S19.2E 11700 H  9750 t V W15 [E0 10 38 FA] W15 A W15 t
+S19.2E 99999 H 10600 t V W15 [E0 10 38 FB] W15 A W15 T
+#
+"
+DUAL="#
+# Full DiSEqC sequence:
+# 13 - 19.2E
+S13.0E 11700 V  9750  t v W15 [E0 10 38 F0] W15 A W15 t
+S13.0E 99999 V 10600  t v W15 [E0 10 38 F1] W15 A W15 T
+S13.0E 11700 H  9750  t V W15 [E0 10 38 F2] W15 A W15 t
+S13.0E 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
+
+S19.2E  11700 V  9750  t v W15 [E0 10 38 F4] W15 B W15 t
+S19.2E  99999 V 10600  t v W15 [E0 10 38 F5] W15 B W15 T
+S19.2E  11700 H  9750  t V W15 [E0 10 38 F6] W15 B W15 t
+S19.2E  99999 H 10600  t V W15 [E0 10 38 F7] W15 B W15 T
+#
+"
+MONO5E="#
+# Full DiSEqC sequence:
+# Astra 4 - 4.8°E
+S4.8E 11700 V  9750  t v W15 [E0 10 38 F0] W15 A W15 t
+S4.8E 99999 V 10600  t v W15 [E0 10 38 F1] W15 A W15 T
+S4.8E 11700 H  9750  t V W15 [E0 10 38 F2] W15 A W15 t
+S4.8E 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
+#
+"
 MONO9="#
 # Full DiSEqC sequence:
 # Eutelsat 9 - 9.0°E 
@@ -58,7 +99,6 @@ S9.0E 11700 H  9750  t V W15 [E0 10 38 F2] W15 A W15 t
 S9.0E 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
 #
 "
-
 MONO13="#
 # Full DiSEqC sequence:
 # Hotbird - 13.0°E
@@ -95,6 +135,15 @@ S28.2E 11700 H  9750  t V W15 [E0 10 38 F2] W15 A W15 t
 S28.2E 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
 #
 "
+MONO42="#
+# Full DiSEqC sequence:
+# Turksat - 42°E
+S42.0E 11700 V  9750  t v W15 [E0 10 38 F0] W15 A W15 t
+S42.0E 99999 V 10600  t v W15 [E0 10 38 F1] W15 A W15 T
+S42.0E 11700 H  9750  t V W15 [E0 10 38 F2] W15 A W15 t
+S42.0E 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
+#
+"
 MONO08W="#
 # Full DiSEqC sequence:
 # Thor - 0.8°W
@@ -113,100 +162,13 @@ S5.0W 11700 H  9750  t V W15 [E0 10 38 F2] W15 A W15 t
 S5.0W 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
 #
 "
-DUAL="#
+MONO30W="#
 # Full DiSEqC sequence:
-# 13 - 19.2E
-S13.0E 11700 V  9750  t v W15 [E0 10 38 F0] W15 A W15 t
-S13.0E 99999 V 10600  t v W15 [E0 10 38 F1] W15 A W15 T
-S13.0E 11700 H  9750  t V W15 [E0 10 38 F2] W15 A W15 t
-S13.0E 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
-
-S19.2E  11700 V  9750  t v W15 [E0 10 38 F4] W15 B W15 t
-S19.2E  99999 V 10600  t v W15 [E0 10 38 F5] W15 B W15 T
-S19.2E  11700 H  9750  t V W15 [E0 10 38 F6] W15 B W15 t
-S19.2E  99999 H 10600  t V W15 [E0 10 38 F7] W15 B W15 T
-#
-"
-TRIAL="# Full DiSEqC sequence:
-# 9 - 13 - 19.2E
-S9E  11700 V  9750 t v W15 [E0 10 38 F0] W15 A W15 T
-S9E  99999 V 10600 t v W15 [E0 10 38 F1] W15 A W15 T
-S9E  11700 H  9750 t V W15 [E0 10 38 F2] W15 A W15 T
-S9E  99999 H 10600 t V W15 [E0 10 38 F3] W15 A W15 T
-
-S13.0E 11700 V  9750 t v W15 [E0 10 38 F4] W15 B W15 t
-S13.0E 99999 V 10600 t v W15 [E0 10 38 F5] W15 B W15 T
-S13.0E 11700 H  9750 t V W15 [E0 10 38 F6] W15 B W15 t
-S13.0E 99999 H 10600 t V W15 [E0 10 38 F7] W15 B W15 T
-
-S19.2E 11700 V  9750 t v W15 [E0 10 38 F8] W15 A W15 t
-S19.2E 99999 V 10600 t v W15 [E0 10 38 F9] W15 A W15 T
-S19.2E 11700 H  9750 t V W15 [E0 10 38 FA] W15 A W15 t
-S19.2E 99999 H 10600 t V W15 [E0 10 38 FB] W15 A W15 T
-#
-"
-TRIAL2="# Full DiSEqC sequence:
-# 13 - 16 - 19.2E
-S13.0E  11700 V  9750 t v W15 [E0 10 38 F0] W15 A W15 T
-S13.0E  99999 V 10600 t v W15 [E0 10 38 F1] W15 A W15 T
-S13.0E  11700 H  9750 t V W15 [E0 10 38 F2] W15 A W15 T
-S13.0E  99999 H 10600 t V W15 [E0 10 38 F3] W15 A W15 T
-
-S16.0E 11700 V  9750 t v W15 [E0 10 38 F4] W15 B W15 t
-S16.0E 99999 V 10600 t v W15 [E0 10 38 F5] W15 B W15 T
-S16.0E 11700 H  9750 t V W15 [E0 10 38 F6] W15 B W15 t
-S16.0E 99999 H 10600 t V W15 [E0 10 38 F7] W15 B W15 T
-
-S19.2E 11700 V 9750 t v W15 [E0 10 38 F8] W15 A W15 t
-S19.2E 99999 V 10600 t v W15 [E0 10 38 F9] W15 A W15 T
-S19.2E 11700 H 9750 t V W15 [E0 10 38 FA] W15 A W15 t
-S19.2E 99999 H 10600 t V W15 [E0 10 38 FB] W15 A W15 T
-#
-"
-QUADRI="# Full DiSEqC sequence:
-# 13 - 19 - 23.5 - 28.2°E
-S13.0E  11700 V  9750 t v W15 [E0 10 38 F0] W15 A W15 T
-S13.0E  99999 V 10600 t v W15 [E0 10 38 F1] W15 A W15 T
-S13.0E  11700 H  9750 t V W15 [E0 10 38 F2] W15 A W15 T
-S13.0E  99999 H 10600 t V W15 [E0 10 38 F3] W15 A W15 T
-
-S19.2E 11700 V  9750 t v W15 [E0 10 38 F4] W15 B W15 t
-S19.2E 99999 V 10600 t v W15 [E0 10 38 F5] W15 B W15 T
-S19.2E 11700 H  9750 t V W15 [E0 10 38 F6] W15 B W15 t
-S19.2E 99999 H 10600 t V W15 [E0 10 38 F7] W15 B W15 T
-
-S23.5E 11700 V  9750 t v W15 [E0 10 38 F8] W15 A W15 t
-S23.5E 99999 V 10600 t v W15 [E0 10 38 F9] W15 A W15 T
-S23.5E 11700 H  9750 t V W15 [E0 10 38 FA] W15 A W15 t
-S23.5E 99999 H 10600 t V W15 [E0 10 38 FB] W15 A W15 T
-
-S28.2E  11700 V  9750  t v W15 [E0 10 38 FC] W15 B W15 t
-S28.2E  99999 V 10600  t v W15 [E0 10 38 FD] W15 B W15 T
-S28.2E  11700 H  9750  t V W15 [E0 10 38 FE] W15 B W15 t
-S28.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
-#
-"
-QUADRI2="# Full DiSEqC sequence:
-# 9 - 13 - 16 - 19.2°E
-S9E  11700 V  9750 t v W15 [E0 10 38 F0] W15 A W15 T
-S9E  99999 V 10600 t v W15 [E0 10 38 F1] W15 A W15 T
-S9E  11700 H  9750 t V W15 [E0 10 38 F2] W15 A W15 T
-S9E  99999 H 10600 t V W15 [E0 10 38 F3] W15 A W15 T
-
-S13.0E 11700 V  9750 t v W15 [E0 10 38 F4] W15 B W15 t
-S13.0E 99999 V 10600 t v W15 [E0 10 38 F5] W15 B W15 T
-S13.0E 11700 H  9750 t V W15 [E0 10 38 F6] W15 B W15 t
-S13.0E 99999 H 10600 t V W15 [E0 10 38 F7] W15 B W15 T
-
-S16.0E 11700 V  9750 t v W15 [E0 10 38 F8] W15 A W15 t
-S16.0E 99999 V 10600 t v W15 [E0 10 38 F9] W15 A W15 T
-S16.0E 11700 H  9750 t V W15 [E0 10 38 FA] W15 A W15 t
-S16.0E 99999 H 10600 t V W15 [E0 10 38 FB] W15 A W15 T
-
-S19.2E  11700 V  9750  t v W15 [E0 10 38 FC] W15 B W15 t
-S19.2E  99999 V 10600  t v W15 [E0 10 38 FD] W15 B W15 T
-S19.2E  11700 H  9750  t V W15 [E0 10 38 FE] W15 B W15 t
-S19.2E  99999 H 10600  t V W15 [E0 10 38 FF] W15 B W15 T
+# Hispasat - 30°W
+S30.0W 11700 V  9750  t v W15 [E0 10 38 F0] W15 A W15 t
+S30.0W 99999 V 10600  t v W15 [E0 10 38 F1] W15 A W15 T
+S30.0W 11700 H  9750  t V W15 [E0 10 38 F2] W15 A W15 t
+S30.0W 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
 #
 "
 # 
@@ -257,8 +219,7 @@ apt-get -y install libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev  pkg-config te
     echo "This script must be run as root" 1>&2
     exit 1
     fi
-  
-    
+
 
 #############################################################  
 #############################################################
@@ -558,6 +519,20 @@ else
     git clone https://github.com/ua0lnj/vdr-plugin-mpv.git
 fi
 
+if [ -e /home/`logname`/Vdrrepo/vdr-plugin-weatherforecast ]; then
+  echo " ..... File exists ..... "
+else
+  echo "File not found ... Downloading it now ....."
+    git clone git://projects.vdr-developer.org/vdr-plugin-weatherforecast.git
+fi    
+
+if [ -e /home/`logname`/Vdrrepo/patch_weatherforecast.tar.gz ]; then
+  echo " ..... File exists ..... "
+else
+  echo "File not found ... Downloading it now ....."
+    wget https://www.dropbox.com/s/v0ipkt6x3bfbbs8/patch_weatherforecast.tar.gz
+fi
+
 if [ -e /home/`logname`/Vdrrepo/channelscan ]; then
   echo " ..... File exists ..... "
 else
@@ -569,7 +544,7 @@ if [ -e /home/`logname`/Vdrrepo/satellite_pack.tar.gz ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz
+    wget https://www.dropbox.com/s/wm7c6nx4ymbcdk1/satellite_pack.tar.gz
 fi
 
 if [ -e /home/`logname`/Vdrrepo/vdr-systeminfo-0.1.5.tar.bz2 ]; then
@@ -644,7 +619,7 @@ if [ -e /home/`logname`/Vdrrepo/oscam64.tar.gz ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    wget https://www.dropbox.com/s/lkynmfzpr9n6dak/oscam64.tar.gz
+    wget https://www.dropbox.com/s/nf9ppypip5jgv6q/oscam64.tar.gz
   fi
 
 chmod -R 777 *;;
@@ -685,10 +660,12 @@ git clone https://github.com/rofafor/vdr-plugin-iptv.git
 wget https://www.dropbox.com/s/nof5ydmxrplw2b0/patch_iptv.tar.gz
 wget https://www.dropbox.com/s/vmhkf4rzhoh4wa5/iptv_conf.tar.gz
 git clone https://github.com/ua0lnj/vdr-plugin-mpv.git
+git clone git://projects.vdr-developer.org/vdr-plugin-weatherforecast.git
+wget https://www.dropbox.com/s/v0ipkt6x3bfbbs8/patch_weatherforecast.tar.gz
 wget https://www.uli-eckhardt.de/vdr/download/vdr-externalplayer-0.3.5.tgz
 wget https://www.dropbox.com/s/vhz1fz68159s0qg/externalplayer.conf.tar.gz
 git clone https://bitbucket.org/ua0lnj/channelscan.git
-wget https://www.dropbox.com/s/400whbxq4tzsbtq/satellite_pack.tar.gz
+wget https://www.dropbox.com/s/wm7c6nx4ymbcdk1/satellite_pack.tar.gz
 wget http://firefly.vdr-developer.org/systeminfo/vdr-systeminfo-0.1.5.tar.bz2
 
 			echo " Downloading skins "
@@ -702,13 +679,12 @@ wget https://www.dropbox.com/s/806odyj5vyco3dg/lcars_pack.tar.gz
 wget https://www.dropbox.com/s/6hzpdx9yv5ypzxv/traduzioni.tar.gz
 wget https://www.dropbox.com/s/5uvx468b4b87auy/icone.tar.gz
 wget https://www.dropbox.com/s/56oomdr58os7msa/oscam.tar.gz
-wget https://www.dropbox.com/s/lkynmfzpr9n6dak/oscam64.tar.gz
+wget https://www.dropbox.com/s/nf9ppypip5jgv6q/oscam64.tar.gz
 wget https://www.dropbox.com/s/hb2mv9ytz5q6yz7/picon.tar.gz
 #wget https://www.dropbox.com/s/eeopbzh4gbyuir1/logos.tar.gz
 git clone https://github.com/fiveten59/Logos.git logos
 
 chmod -R 777 *;;
-
 z) ;;
 esac ;;
 
@@ -728,8 +704,8 @@ dialog --title "   ** Install Intel / Nvidia & Common Libraries **   " --infobox
    --------------------------------------------------------------------------------------------------------------------
         
         *****  Install  *****  
-        [a]    ONLY Intel Devices (Libva - Cmrt - Intel hybrid driver - Intel vaapi driver - Libva-utils)   
-        [b]    Common Libs (Nasm - X264 - X265 - Fdk-Aac - Libvpx - Libvorbis -Ffmpeg)     
+        [a]    ONLY FOR Intel Devices (Libva - Cmrt - Intel hybrid driver - Intel vaapi driver - Libva-utils)   
+        [b]    Common Libs (Nasm - X264 - X265 - Fdk-Aac - Libvpx - Libvorbis - Ffmpeg)     
         
         *****  Remove  *****
                 
@@ -751,8 +727,10 @@ dialog --title "   ** Install Intel / Nvidia & Common Libraries **   " --infobox
         
         [z]     Skip
 
-   -------------------------------------------------------------------------------------------------------------------- 
-   -------------------------------------------------------------------------------------------------------------------- " 0 0
+--------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------------------------------- 
+" 0 0
+
 echo -n "        Enter your menu choice = Install [a-b] ~~ Remove [a1-n1] ~~ Exit [z]:      "
 read yourch
 case $yourch in
@@ -793,8 +771,8 @@ fi
 #
 echo "Installing Cmrt"
 sleep 2
-apt-get -y install libva-dev  #  controllare libva
-apt-get -y install zlib1g-dev libass-dev libvorbis-dev libogg-dev 
+apt-get -y install libva-dev
+apt-get -y install zlib1g-dev libass-dev libvorbis-dev libogg-dev
 apt-get -y install libx11-dev libperl-dev libpciaccess-dev libpciaccess0n libdrm-dev
 if [ -d /usr/local/src/ffmpeg_sources/cmrt ]
 then echo " Cmrt is already installed" 
@@ -1136,7 +1114,7 @@ rm -rf $PACKAGES/ffmpeg*.deb;;
 
 z) ;;
 esac;;
-    
+
 #############################################################
 #############################################################
 
@@ -1173,7 +1151,7 @@ apt-get -y install libncurses5-dev libncursesw5-dev linux-libc-dev python3
 clear    
 echo " Installing VDR      "
 sleep 1
-
+#
 cp -rf /home/`logname`/Vdrrepo/2.4.7.tar.gz $SRC/
 tar -zxvf 2.4.7.tar.gz
 ln -s $VDR vdr
@@ -1254,7 +1232,7 @@ tar -zxvf traduzioni.tar.gz
 rm -rf traduzioni.tar.gz
 #
 clear
-echo "Install Basic plugins  ( Softhddevice / Softhdcuvid / Xineliboutput - Dvbapi - Epgsearch - SkinNopacity - Skindesigner - Iptv - ExternalPlayer - Radio -Channelscan - Mpv - System Info)"
+echo "Install Basic plugins  ( Softhddevice / Softhdcuvid / Xineliboutput - Dvbapi - Epgsearch - SkinNopacity - Skindesigner - Wheatherforecast - Iptv - ExternalPlayer - Radio -Channelscan - System Info)"
 echo "                 Press Enter to continue ...         "
 read enterKey
 cd $SRC
@@ -1265,23 +1243,24 @@ mkdir -p /$SHARE/skindesigner/scripts
 echo "               *** Setup Softhddevice / Softhdcuvid / Xineliboutput  ***"
 sleep 1
 #clear        
-    				dialog --title "   ** Setup Softhddevice / Softhdcuvid / Xineliboutput **   " --infobox "
-   				-------------------------------------------------------------------------
-  				-------------------------------------------------------------------------
+		dialog --title "   ** Setup Softhddevice / Softhdcuvid / Xineliboutput **   " --infobox "
+	-------------------------------------------------------------------------
+	-------------------------------------------------------------------------
 
-                                                       Nvidia Video Devices
-			        [a]    Softhddevice (default)                 
-			        [b]    Softhdcuvid                  
-			        [c]    Xineliboutput 
+                                Nvidia Video Devices
+	        [a]    Softhddevice (default)                 
+	        [b]    Softhdcuvid                  
+	        [c]    Xineliboutput 
 
-                                                       Intel Video Devices
-			        [d]    Softhddevice (default)                  
-			        [e]    Softhdcuvid                  
+                                Intel Video Devices
+	        [d]    Softhddevice (default)                  
+	        [e]    Softhdcuvid                  
 			                
-   				------------------------------------------------------------------------- " 0 0
-    echo -n "        Enter your menu choice  [a-e]:      "
-    read yourch
-    case $yourch in
+	------------------------------------------------------------------------- " 0 0
+
+echo -n "        Enter your menu choice  [a-e]:      "
+read yourch
+case $yourch in
 #
 a)  
 clear
@@ -1353,7 +1332,7 @@ if [ -f $PACKAGES/libxine2*.deb ]; then
     	make -j4
     	checkinstall --fstrans=no --install=yes --pkgname=libxine2 --pkgversion "1.2.11-git" --pakdir=$PACKAGES --default
 	fi
-# wget https://downloads.sourceforge.net/xine/xine-lib-1.2.10.tar.xz
+#
 echo "                    Installing Xineliboutput"
 sleep 3 
 cd $VDRSRC
@@ -1479,6 +1458,20 @@ make
 cd ../../..
 make plugins
 #
+#echo ""; echo "               *** Weatherforecast ***"; echo ""
+#sleep 3
+#apt-get -y install libcurl4-openssl-dev libjansson-dev
+#cd $VDRSRC
+#cp -rf /home/`logname`/Vdrrepo/vdr-plugin-weatherforecast /$VDRSRC
+#mv vdr-plugin-weatherforecast weatherforecast
+#cd weatherforecast
+#cp -rf /home/`logname`/Vdrrepo/patch_weatherforecast.tar.gz /$VDRSRC/weatherforecast/
+#tar -zxvf patch_weatherforecast.tar.gz
+#rm -rf patch_weatherforecast.tar.gz
+#patch -p1 < 10_weatherforecast_debug.patch
+#patch -p1 < 11_weatherforecast_i18n-it.patch
+#cd ../../..
+#make plugins
 #
 echo ""; echo "               *** Externalplayer ***"
 sleep 3
@@ -1692,7 +1685,7 @@ echo "               *** Permission to execute Vdr  ***"
 sleep 1
 echo "%`logname` ALL=NOPASSWD: /etc/init.d/vdr" >> /etc/sudoers
 #
-echo "               *** Creazione Vdr vdrpoweroff ***"
+echo "               *** Create Vdr vdrpoweroff ***"
 sleep 1
 rm -rf /usr/local/bin/vdrpoweroff
 touch /usr/local/bin/vdrpoweroff
@@ -1702,7 +1695,7 @@ killall -9 mpv & killall -9 vdr & killall -9 vlc & killall -9 vdr-sxfe & killall
 # & killall -9 oscam & shutdown -h now '  >> /usr/local/bin/vdrpoweroff
 chmod 755 /usr/local/bin/vdrpoweroff
 #
-echo "               *** Creazione init.d Vdr ***"
+echo "               *** Create init.d Vdr ***"
 sleep 1
 rm -rf /etc/init.d/vdr
 touch /etc/init.d/vdr 
@@ -1969,32 +1962,40 @@ clear
    ----------------------------------------------
                 Diseqc setup             
    ----------------------------------------------
-        [a]    Eutelsat 9°E
-        [b]    Hot Bird 13°E
-        [c]    Astra 19.2°E
-        [d]    Astra 23°E
-        [e]    Astra 28.2°E
-        [f]    Thor 0.8°W
-        [g]    Eutelsat 5°W                   
-        [h]    Dual 13, 19.2°E
-        [i]    Trial 9, 13, 19.2°E
+
+        [a]    Trial 9, 13, 19.2°E
+        [b]    Dual 13, 19.2°E
+        [c]    Astra 4 - 4.8°E
+        [d]    Eutelsat 9°E
+        [e]    Hot Bird 13°E
+        [f]    Astra 19.2°E
+        [g]    Astra 23°E
+        [h]    Astra 28.2°E
+        [i]    Turksat 42°E
+        [l]    Thor 0.8°W
+        [m]    Eutelsat 5°W 
+        [n]    Hispasat - 30°W
 
         [z]    Skip
-        
+  
    ---------------------------------------------- " 0 0
     echo -n "        Enter your menu choice  [a-z]:      "
     
     read yourch
     case $yourch in
-a) echo "$MONO9" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/xfvwaoesgbtfecr/channels.Eutelsat9.conf.tar.gz && cp -rf /etc/vdr/channels.Eutelsat9.conf.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels.Eutelsat9.conf.tar.gz && rm -rf channels.Eutelsat9.conf.tar.gz;;
-b) clear; echo "$MONO13" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/lrsntp500jmwfp7/channels.conf.hotbird.tar.gz && cp -rf /etc/vdr/channels.conf.hotbird.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels.conf.hotbird.tar.gz && rm -rf channels.conf.hotbird.tar.gz;;
-c) clear; echo "$MONO19" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/vt0wxz86c3x6y1n/channels.conf.astra.tar.gz && cp -rf /etc/vdr/channels.conf.astra.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels.conf.astra.tar.gz && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && rm -rf channels.conf.astra.tar.gz;;
-d) echo "$MONO23" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/vt0wxz86c3x6y1n/channels.conf.Astra23.tar.gz && cp -rf /etc/vdr/channels.conf.Astra23.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels.conf.Astra23.tar.gz && rm -rf channels.conf.Astra23.tar.gz;;
-e) echo "$MONO28" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/vt0wxz86c3x6y1n/channels.conf.Astra28.tar.gz && cp -rf /etc/vdr/channels.conf.Astra28.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels.conf.Astra28.tar.gz && rm -rf channels.conf.Astra28.tar.gz;;
-f) echo "$MONO08W" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/vt0wxz86c3x6y1n/channels.conf.Thor.tar.gz && cp -rf /etc/vdr/channels.conf.Thor.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels.conf.Thor.tar.gz && rm -rf channels.conf.Thor.tar.gz;;
-g) echo "$MONO5W" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/vt0wxz86c3x6y1n/channels.conf.Eutelsat5.tar.gz && cp -rf /etc/vdr/channels.conf.Eutelsat5.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels.conf.Eutelsat5.tar.gz && rm -rf channels.conf.Eutelsat5.tar.gz;;
-h) clear; echo "$DUAL" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/z3czcyw5za82utc/channels.conf.dual.tar.gz && cp -rf /etc/vdr/channels.conf.dual.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels.conf.dual.tar.gz && rm -rf channels.conf.dual.tar.gz;;
-i) clear; echo "$TRIAL" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/oebo5gddykvxng4/channels.conf.trial.tar.gz && cp -rf /etc/vdr/channels.conf.trial.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels.conf.trial.tar.gz && rm -rf channels.conf.trial.tar.gz;;
+a) clear; echo "$TRIAL" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/oebo5gddykvxng4/channels.conf.trial.tar.gz && cp -rf /etc/vdr/channels.conf.trial.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels.conf.trial.tar.gz && rm -rf channels.conf.trial.tar.gz;;
+b) clear; echo "$DUAL" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/z3czcyw5za82utc/channels.conf.dual.tar.gz && cp -rf /etc/vdr/channels.conf.dual.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels.conf.dual.tar.gz && rm -rf channels.conf.dual.tar.gz;;
+# c);;
+d) echo "$MONO9" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && https://www.dropbox.com/s/5ua5501tc74biys/channels-w_scan2-Eutelsat_9.conf.tar.gz && cp -rf /etc/vdr/channels-w_scan2-Eutelsat9.conf.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels-w_scan2-Eutelsat9.conf.tar.gz && rm -rf channels-w_scan2-Eutelsat9.conf.tar.gz;;
+e) clear; echo "$MONO13" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/lh713r7dqjui9pr/channels-w_scan2-Hotbird.conf.tar.gz && cp -rf /etc/vdr/channels-w_scan2-hotbird.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels-w_scan2-hotbird.tar.gz && rm -rf channels-w_scan2-hotbird.tar.gz;;
+f) clear; echo "$MONO19" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/igp1yulhe9lj4o6/channels-w_scan2-Astra_19.conf.tar.gz && cp -rf /etc/vdr/channels-w_scan2-Astra_19.conf.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels-w_scan2-Astra_19.conf.tar.gz && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && rm -rf channels-w_scan2-Astra_19.conf.tar.gz;;
+g) echo "$MONO23" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/4kd5zwqkmac34nt/channels-w_scan2-Astra23.conf.tar.gz && cp -rf /etc/vdr/channels-w_scan2-Astra23.conf.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels-w_scan2-Astra23.conf.tar.gz && rm -rf channels-w_scan2-Astra23.conf.tar.gz;;
+h) echo "$MONO28" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://channelpedia.yavdr.com/gen/DVB-S/S28.2E/S28.2E_complete_sorted_by_groups.channels.conf/S28.2E_complete_sorted_by_groups.channels.conf && mv -f S28.2E_complete_sorted_by_groups.channels.conf Astra28_channels.conf && cp -rf Astra28_channels.conf /home/`logname`/Vdrrepo/;;
+i) echo "$MONO42" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/ax4l7pa7ckp9ndk/channels-w_scan2-Turksat.conf.tar.gz && cp -rf /etc/vdr/channels-w_scan2-Turksat.conf.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels-w_scan2-Turksat.conf.tar.gz && rm -rf channels-w_scan2-Turksat.conf.tar.gz;;
+l) echo "$MONO08W" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/sqq40r6i461s1mx/channels-w_scan2-Thor.conf.tar.gz && cp -rf /etc/vdr/channels-w_scan2-Thor.conf.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels-w_scan2-Thor.conf.tar.gz && rm -rf channels-w_scan2-Thor.conf.tar.gz;;
+# m) echo "$MONO5W" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/vt0wxz86c3x6y1n/channels-w_scan2-Eutelsat5.tar.gz && cp -rf /etc/vdr/channels-w_scan2-Eutelsat5.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels-w_scan2-Eutelsat5.tar.gz && rm -rf channels-w_scan2-Eutelsat5.tar.gz;;
+n) echo "$MONO30W" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/vt0wxz86c3x6y1n/channels-w_scan2-Eutelsat5.tar.gz && cp -rf /etc/vdr/channels-w_scan2-Eutelsat5.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels-w_scan2-Eutelsat5.tar.gz && rm -rf channels-w_scan2-Eutelsat5.tar.gz;;
+
 z);;
 esac
 #
@@ -2044,26 +2045,23 @@ esac;;
 4)
 
 clear
-echo "               *** Install W_scan ***"
+echo "               *** Install W_scan_cpp ***"
 sleep 1
 cd $SRC
-if [ -f w_scan/Makefile ]
-	then echo "W_scan $Remind3"
-		else wget https://www.gen2vdr.de/wirbel/w_scan_cpp/w_scan-20210218.tar.bz2
-		tar xjf w_scan-20210218.tar.bz2
-		cp -rf w_scan-20210218 /home/`logname`/Vdrrepo/
-		mv -f w_scan-20210218 w_scan
-		rm -rf w_scan-20210218.tar.bz2
-		cd w_scan
-		./configure
-		make && make install
+apt-get -y install linux-libc-dev libfreetype6-dev libfontconfig1-dev libcurl4-openssl-dev git wget libjpeg-dev libpugixml-dev libcap-dev ca-certificates
+if [ -f /usr/local/bin/w_scan_cpp ]
+	then echo "W_scan_cpp $Remind3"
+		else wget https://www.gen2vdr.de/wirbel/w_scan_cpp/w_scan_cpp-20210218-binary-aarch64.tar.bz2
+		tar xjf w_scan_cpp-20210218-binary-aarch64.tar.bz2
+		cp -rf w_scan_cpp /usr/local/bin/
+		rm -rf w_scan_cpp-20210218-binary-aarch64.tar.bz2
 	fi
 #
 echo "               *** Install t2scan ***"
 sleep 1
 cd $SRC
 if [ -f /$SRC/t2scan/Makefile ]
-  then  echo "t2scan $Remind3"
+  then  echo "t2scan $emind3"
 else git clone https://github.com/mighty-p/t2scan
 cp t2scan /home/`logname`/Vdrrepo/
 cd t2scan
@@ -2076,8 +2074,7 @@ echo "               *** Install W_scan2 ***"
 sleep 1
 cd $SRC
 if [ -f /$SRC/w_scan2/Makefile ]
-  then  echo "W_scan2 $Remind3"
-  sleep 1
+  then  echo "W_scan2 $emind3"
 else git clone https://github.com/stefantalpalaru/w_scan2
 cp w_scan2 /home/`logname`/Vdrrepo/
 cd w_scan2
@@ -2093,46 +2090,63 @@ clear
    --------------------------------------------------------------
 
                         
-        ****   Sezione W_Scan/t2scan/W_Scan2  ****
-        [a]    Install Settings 9.0E - using W_Scan
-        [b]    Install Settings 13.0E - using W_Scan2
-        [c]    Install Settings 19.2E - using W_Scan2
-        [d]    Install Terrestrial Settings - W_Scan2
-                  
+        ****   Sezione W_Scan/t2scan  ****
+
+        [a]    Install Settings Turksat - 42°E- using W_scan2
+        [b]    Install Settings Astra 4 - 4.8°E - using W_scan2    # no
+        [c]    Install Settings Eutelsat 9 - 9.0°E - using W_scan2
+        [d]    Install Settings Hotbird - 13.0°E - using W_scan2
+        [e]    Install Settings Astra 19 - 19.2°E - using W_scan2
+        [f]    Install Settings Astra 23.5 - 23.5°E - using W_scan2
+        [g]    Install Settings Astra 28 - 28.2°E - using W_scan2    #?
+        [h]    Install Settings Thor 0.8°W - using W_scan2
+        [i]    Install Settings Eutelsat 5 - 5°W - using W_scan2    #no
+        [l]    Install Settings Hispasat - 30°W - using W_scan2
+        [m]    Install Terrestrial Settings - using t2scan
+
+
+
         [z]    Skip
         
    -------------------------------------------------------------- " 0 0
     echo -n "        Enter your menu choice  [a-z]:      "
     read yourch
     case $yourch in
- 
+
     ##### W_Scan/t2scan #####
-a) clear; rm -rf /etc/vdr/channels-w_scan2-9E0.conf; w_scan2 -fs -s S9E0 -D0c -o2 >> /etc/vdr/channels-w_scan-9E0.conf;; 
-b) clear; rm -rf /etc/vdr/channels-w_scan2-13E0.conf; w_scan2 -fs -s S13E0 -D1c -o2 >> /etc/vdr/channels-w_scan2-13E0.conf;;
-c) clear; rm -rf /etc/vdr/channels-w_scan2-19E2.conf; w_scan2 -fs -s S19E2 -D2c -o2 >> /etc/vdr/channels-w_scan2-19E2.conf;;
-d) clear; rm -rf /etc/vdr/channels-dtt.conf; ./w_scan2 -c IT >> /etc/vdr/channels-dtt.conf && ./w_scan2 -fc -c IT >> /etc/vdr/channels-dtt.conf;;
+    a) rm -rf /etc/vdr/channels-w_scan2-Turksat.conf; w_scan2 -fs -s S42E0 >> /etc/vdr/channels-w_scan2-Turksat.conf;;
+#    b) rm -rf /etc/vdr/channels-w_scan2-Astra_4.conf; w_scan2 -fs -s S4E8 >> /etc/vdr/channels-w_scan2-Astra_4.conf;;
+    c) rm -rf /etc/vdr/channels-w_scan2-Eutelsat_9.conf; w_scan2 -fs -s S9E0 >> /etc/vdr/channels-w_scan2-Eutelsat_9.conf;;
+    d) rm -rf /etc/vdr/channels-w_scan2-Hotbird.conf; w_scan2 -fs -s S13E0 >> /etc/vdr/channels-w_scan2-Hotbird.conf;;
+    e) rm -rf /etc/vdr/channels-w_scan2-Astra_19.conf; w_scan2 -fs -s S19E2 >> /etc/vdr/channels-w_scan2-Astra_19.conf;;
+    f) rm -rf /etc/vdr/channels-w_scan2-Astra_23.conf; w_scan2 -fs -s S23E5 >> /etc/vdr/channels-w_scan2-Astra_23.conf;;
+#    g) rm -rf /etc/vdr/channels-w_scan2-Astra_28.conf; w_scan2 -fs -s S28E2 >> /etc/vdr/channels-w_scan2-Astra_28.conf;;
+    h) rm -rf /etc/vdr/channels-w_scan2-Thor.conf; w_scan2 -fs -s S0W8 >> /etc/vdr/channels-w_scan2-Thor.conf;;
+#    i) rm -rf /etc/vdr/channels-w_scan2-Eutelsat_5.conf; w_scan2 -fs -s S5W0 >> /etc/vdr/channels-w_scan2-Eutelsat_5.conf;;
+    l) rm -rf /etc/vdr/channels-w_scan2-Hispasat.conf; w_scan2 -fs -s S30W0 >> /etc/vdr/channels-w_scan2-Hispasat.conf;;
+    m) rm -rf /etc/vdr/channels-dtt.conf; t2scan -ot0 >> /etc/vdr/channels-dtt.conf;;
 
 z) ;;
 #
 esac;;
-    
+
 #############################################################################################################################  
 #############################################################################################################################
 
 5)
 
-clear        
+clear
     dialog --title "   ** Install & Setup KODI **   " --infobox "
    --------------------------------------------------------------
                          Install/Remove Kodi
    --------------------------------------------------------------
-        
+
         *****  Install  *****  ..........  *****  Remove  *****
-        [a]    Install  ............  [a1]    Remove KODI  
-        
+        [a]    Install  ............  [a1]    Remove KODI
+
         [z]    Skip
-      
-                   
+
+
    -------------------------------------------------------------- " 0 0
     echo -n "        Enter your menu choice = Install [a] ~~ Remove [a1] ~~ Exit [z]:      "
     read yourch
@@ -2207,48 +2221,48 @@ esac;;
     echo ""
     echo ""
     echo ""
-    echo "                                                       .-----,        ,.----."
-    echo "                                                .-----'       '------'       ',"
-    echo "                                              ,'  First ed. by mona66 ® 2010   ',"
-    echo "                                              '     Updated and Revision        '"
-    echo "                                              ',  by fiveten_59 ® and knap ®    ,'"
-    echo "                                              ,'   2013 ~ 2014 ~ 2015 ~ 2016      ',"
-    echo "                                             '        vdr_2.4.7_ installer        '"
-    echo "                                              ',        by fiveten_59 ®         '"
-    echo "                                              ',               2021           ,'"
-    echo "                                                '----,      ,----,       ,----'"
-    echo "                                                      '----'      '-----'"
-    echo "                                                                O"
-    echo "                                                                 o "
-    echo "                                                                  o  "
-    echo "                                                                   °"
-    echo "                                                                    °"
-    echo "                                                                .88888888:.          "
-    echo "                                                              88888888.88888.          "
-    echo "                                                            .8888888888888888.          "
-    echo "                                                            888888888888888888          "
-    echo "                                                            88'..'888'..'88888          "
-    echo "                                                            88'  '888'  '88888          "
-    echo "                                                            88'..':::'..':8888          "
-    echo "                                                            88:::,::,:::::8888          "
-    echo "                                                            88':::::::::''8888          "
-    echo "                                                           .88  '::::'    8:88.          "
-    echo "                                                          8888            '8:888.          "
-    echo "                                                        .8888'             '888888.          "
-    echo "                                                       .8888:..  .::.  ...:'8888888:.          "
-    echo "                                                      .8888.'     :'     ''::'88:88888          "
-    echo "                                                     .8888        '         '.888:8888.          "
-    echo "                                                    888:8         .           888:88888          "
-    echo "                                                  .888:88        .:           888:88888:          "
-    echo "                                                  8888888.       ::           88:888888          "
-    echo "                                                  '.::.888.      ::          .88888888          "
-    echo "                                                 .::::::.888.    ::         :::'8888'.:.          "
-    echo "                                                ::::::::::.888   '         .::::::::::::          "
-    echo "                                                ::::::::::::.8    '      .:8::::::::::::.          "
-    echo "                                              .::::::::::::::.        .:888:::::::::::::          "
-    echo "                                              :::::::::::::::88:.__..:88888:::::::::::'          "
-    echo "                                               ''.:::::::::::88888888888.88:::::::::'          "
-    echo "                                                     '':::_:' -- '' -'-' '':_::::''          "
+    echo "                                             .-----,        ,.----."
+    echo "                                      .-----'       '------'       ',"
+    echo "                                    ,'  First ed. by mona66 ® 2010   ',"
+    echo "                                    '     Updated and Revision        '"
+    echo "                                    ',  by fiveten_59 ® and knap ®    ,'"
+    echo "                                     ,'   2013 ~ 2014 ~ 2015 ~ 2016      ',"
+    echo "                                   '         vdr_git_installer         '"
+    echo "                                    ',        by fiveten_59 ®         '"
+    echo "                                    ',               2021           ,'"
+    echo "                                      '----,      ,----,       ,----'"
+    echo "                                            '----'      '-----'"
+    echo "                                                      O"
+    echo "                                                      o "
+    echo "                                                        o  "
+    echo "                                                       °"
+    echo "                                                        °"
+    echo "                                                      .88888888:.          "
+    echo "                                                    88888888.88888.          "
+    echo "                                                  .8888888888888888.          "
+    echo "                                                  888888888888888888          "
+    echo "                                                  88'..'888'..'88888          "
+    echo "                                                  88'  '888'  '88888          "
+    echo "                                                  88'..':::'..':8888          "
+    echo "                                                  88:::,::,:::::8888          "
+    echo "                                                  88':::::::::''8888          "
+    echo "                                                 .88  '::::'    8:88.          "
+    echo "                                                8888            '8:888.          "
+    echo "                                              .8888'             '888888.          "
+    echo "                                             .8888:..  .::.  ...:'8888888:.          "
+    echo "                                            .8888.'     :'     ''::'88:88888          "
+    echo "                                           .8888        '         '.888:8888.          "
+    echo "                                          888:8         .           888:88888          "
+    echo "                                        .888:88        .:           888:88888:          "
+    echo "                                        8888888.       ::           88:888888          "
+    echo "                                        '.::.888.      ::          .88888888          "
+    echo "                                       .::::::.888.    ::         :::'8888'.:.          "
+    echo "                                      ::::::::::.888   '         .::::::::::::          "
+    echo "                                      ::::::::::::.8    '      .:8::::::::::::.          "
+    echo "                                    .::::::::::::::.        .:888:::::::::::::          "
+    echo "                                    :::::::::::::::88:.__..:88888:::::::::::'          "
+    echo "                                     ''.:::::::::::88888888888.88:::::::::'          "
+    echo "                                           '':::_:' -- '' -'-' '':_::::''          "
     echo ""
     echo "                                                     Grazie a tutti e buon divertimento"
     echo "                                                               Have fun :-)"

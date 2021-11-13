@@ -2096,9 +2096,9 @@ clear
 echo "        ***                Removing W_scan_cpp               ***"; sleep 2
 cd $SRC
 if [ -f /usr/local/bin/w_scan_cpp ]
+	then echo "W_scan_cpp $Remind1"
 	rm -rf w_scan_cpp
 	rm -rf /usr/local/bin/w_scan
-	echo "W_scan_cpp $Remind1"
 		else echo "W_scan_cpp $Remind5"
 fi
         echo "                    Press Enter to continue ...               "; read enterKey;;

@@ -1,11 +1,11 @@
 #!/bin/bash
 ################################## !!! README !!! #######################################
 #                                                                                       #
-# Script name: vdr_2.6.1_installer                                                      #
-# Version: 2.6.1 Repository Master (https://github.com/fiveten59/Vdr_installer)        #
-# Tested on Ubuntu 20.04                                                      #
+# Script name: vdr_2.6.0_installer                                                      #
+# Version: 2.6.0 Repository Master (https://github.com/fiveten59/Vdr_installer)        #
+# Tested on Ubuntu 20.04 - Mint 20.2                                                     #
 # chmod the script                                                                      #
-# then load it simply typing: sudo ./vdr_2.6.1_installer                                #
+# then load it simply typing: sudo ./vdr_2.6.0_installer                                #
 #                                                                                       #
 #########################################################################################
 #
@@ -14,10 +14,10 @@ PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skindesigner -l /etc/vdr/logos/ -i /e
 #
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
-SRCVDR='/usr/local/src/vdr-2.6.1'
+SRCVDR='/usr/local/src/vdr-2.6.0'
 VDRSRC=''$SRC'/vdr/PLUGINS/src'
 LIB='/usr/lib/vdr/plugins'
-VDR='vdr-2.6.1'
+VDR='vdr-2.6.0'
 PACKAGES="/usr/local/src/packages"
 TEMP='/tmp'
 SKINS='/etc/vdr/plugins/skindesigner/skins/'
@@ -224,7 +224,7 @@ apt-get -y install libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev  pkg-config te
 
 
 mkdir $SRC/packages
-dialog --title " VDR 2.6.1 Installer " --infobox "Copyright (C) 2020
+dialog --title " VDR 2.6.0 Installer " --infobox "Copyright (C) 2020
 
     This file is part of VDR Complete Installer (VCI).
 
@@ -245,11 +245,11 @@ dialog --title " VDR 2.6.1 Installer " --infobox "Copyright (C) 2020
 
     A special thanks goes to Klaus Schmidinger Vdr Developer
 
-    Script name: vdr_2.6.1_installer
-    Version:2.6.1  (https:/github.com/fiveten59/Vdr_installer)
-    Tested on Ubuntu 20.04
+    Script name: vdr_2.6.0_installer
+    Version:2.6.0  (https:/github.com/fiveten59/Vdr_installer)
+    Tested on Ubuntu 20.04 - Mint 20.2
     chmod the script
-    then load it simply typing: sudo ./vdr_2.6.1_installer " 0 0
+    then load it simply typing: sudo ./vdr_2.6.0_installer " 0 0
 
 
 echo "                    Press Enter to continue ...               "
@@ -261,7 +261,7 @@ clear
 while :
 do
 echo ""
-dialog --title "   ♦♦♦♦♦   VDR 2.6.1 Version Installer Script - Libraries & Codec  ♦♦♦♦♦   " --infobox "
+dialog --title "   ♦♦♦♦♦   VDR 2.6.0 Version Installer Script - Libraries & Codec  ♦♦♦♦♦   " --infobox "
 
 	╭===========================================================================================╮
 	|   ................♦♦♦   Download & Upgrade Local Repository   ♦♦♦.......................  |
@@ -369,18 +369,18 @@ else
 
 echo " Downloading Vdr and Plugins on local repo "
 
-if [ -e /home/`logname`/Vdrrepo/2.6.1.tar.gz ]; then
+if [ -e /home/`logname`/Vdrrepo/2.6.0.tar.gz ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    wget https://github.com/vdr-projects/vdr/archive/refs/tags/2.6.1.tar.gz
+    wget https://github.com/vdr-projects/vdr/archive/refs/tags/2.6.0.tar.gz
   fi
 
-if [ -e /home/`logname`/Vdrrepo/vdr-patches.2.6.1.tar.gz ]; then
+if [ -e /home/`logname`/Vdrrepo/vdr-patches.2.6.0.tar.gz ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    wget https://www.dropbox.com/s/o87kvrdx3zocksm/vdr-patches.2.6.1.tar.gz
+    wget https://www.dropbox.com/s/68uysbsym158ubz/vdr-patches.2.6.0.tar.gz
   fi
 
 if [ -e /home/`logname`/Vdrrepo/Make.config.tar.gz ]; then
@@ -562,9 +562,8 @@ wget https://ffmpeg.org/releases/ffmpeg-4.4.1.tar.bz2
 
 echo "                    Downloading Vdr and Plugins on local repo "
 
-#wget https://github.com/vdr-projects/vdr/archive/refs/tags/2.6.1.tar.gz
-
-wget https://www.dropbox.com/s/o87kvrdx3zocksm/vdr-patches.2.6.1.tar.gz
+wget https://github.com/vdr-projects/vdr/archive/refs/tags/2.6.0.tar.gz
+wget https://www.dropbox.com/s/68uysbsym158ubz/vdr-patches.2.6.0.tar.gz
 wget https://www.dropbox.com/s/qds2k91od7oboed/Make.config.tar.gz
 wget https://www.dropbox.com/s/bx97ikp7c1h2qj2/vdrsymbols.tar.gz
 git clone http://projects.vdr-developer.org/git/vdr-plugin-epgsearch.git
@@ -797,7 +796,7 @@ cd ffmpeg
     echo "                    Press Enter to continue ...               "
     read enterKey
 make -j10
-checkinstall --pkgname=ffmpeg --pkgversion="2.6.1" --backup=no --deldoc=yes --fstrans=no --default --pakdir=$PACKAGES
+checkinstall --pkgname=ffmpeg --pkgversion="2.6.0" --backup=no --deldoc=yes --fstrans=no --default --pakdir=$PACKAGES
 fi;
 #
 
@@ -961,17 +960,18 @@ clear
 echo " Installing VDR      "
 sleep 1
 #
-cp -rf /home/`logname`/Vdrrepo/$VDR.tar.bz2 $SRC/
-tar xivf $VDR.tar.bz2
+cp -rf /home/`logname`/Vdrrepo/2.6.0.tar.gz $SRC/
+cd $SRC
+tar -zxvf 2.6.0.tar.gz
 ln -s $VDR vdr
-rm -rf $VDR.tar.bz2
-
+rm -rf 2.6.0.tar.gz
+#
 echo " Patching VDR      "
 sleep 1
 cd vdr
-cp -rf /home/`logname`/Vdrrepo/vdr-patches.2.6.1.tar.gz $SRC/vdr/
-tar -zxvf vdr-patches.2.6.1.tar.gz
-rm -rf vdr-patches.2.6.1.tar.gz
+cp -rf /home/`logname`/Vdrrepo/vdr-patches.2.6.0.tar.gz $SRC/vdr/
+tar -zxvf vdr-patches.2.6.0.tar.gz
+rm -rf vdr-patches.2.6.0.tar.gz
 sleep 1
 #
 echo " *** Patching avcdescriptor ***"
@@ -1009,7 +1009,7 @@ clear
 echo "                *** Final compilation ***"
 echo ""
 cd /usr/local/src/vdr
-checkinstall --fstrans=no --install=yes --pkgname=vdr --pkgversion "2.6.1" --pakdir=$PACKAGES --default
+checkinstall --fstrans=no --install=yes --pkgname=vdr --pkgversion "2.6.0" --pakdir=$PACKAGES --default
 rm -rf /media/video
 mkdir /media/video
 mkdir -p /etc/vdr/plugins
@@ -1694,6 +1694,19 @@ echo '#!/bin/sh
 sudo /etc/init.d/eventlircd start > /dev/null 2>&1' >> /usr/local/bin/start-eventlircd.sh
 chmod 755 /usr/local/bin/start-eventlircd.sh
 #
+rm -rf ~/.config/autostart/start-eventlircd.sh.desktop
+echo "[Desktop Entry]
+Type=Application
+Exec=/usr/local/bin/start-eventlircd.sh
+Hidden=false
+NoDisplay=false
+X-GNOME-Autostart-enabled=true
+Name[it_IT]=Eventlircd
+Name=Eventlircd
+Comment[it_IT]=
+Comment=
+" >> ~/.config/autostart/start-eventlircd.sh.desktop
+#
 else echo "Eventlircd is not installed"
 fi
 #
@@ -1914,14 +1927,14 @@ if [ -d /usr/local/src/librepfunc ]
         fi
 if [ -f /usr/local/bin/w_scan_cpp ]
     then echo "W_scan_cpp $Remind3"; sleep 3
-        else wget https://www.gen2vdr.de/wirbel/w_scan_cpp/w_scan_cpp-20211212.tar.bz2
-        tar xjf w_scan_cpp-20211212.tar.bz2
-        mv -f w_scan_cpp-20211212 w_scan_cpp
+        else wget https://www.gen2vdr.de/wirbel/w_scan_cpp/w_scan_cpp-20220105.tar.bz2
+        tar xjf w_scan_cpp-20220105.tar.bz2
+        mv -f w_scan_cpp-20220105 w_scan_cpp
         cd w_scan_cpp
         make download
         make
         make install
-        rm -rf w_scan_cpp-20211212.tar.bz2
+        rm -rf w_scan_cpp-20220105.tar.bz2
 fi
 #
 echo "               *** Install W_scan2 ***"
@@ -2033,6 +2046,8 @@ wget https://www.dropbox.com/s/nntbowyed3m37tl/kodi_picon.tar.gz
 cp -rf /usr/local/etc/kodi_picon.tar.gz /home/`logname`/Vdrrepo/
 tar -zxvf kodi_picon.tar.gz
 rm -rf kodi_picon.tar.gz
+cd /home/`logname`/Vdrrepo/
+chmod -R 777
 
 echo "                    Press Enter to continue ...               "
 read enterKey;;

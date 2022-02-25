@@ -1694,7 +1694,8 @@ echo '#!/bin/sh
 sudo /etc/init.d/eventlircd start > /dev/null 2>&1' >> /usr/local/bin/start-eventlircd.sh
 chmod 755 /usr/local/bin/start-eventlircd.sh
 #
-rm -rf ~/.config/autostart/start-eventlircd.sh.desktop
+rm -rf /home/`logname`/.config/autostart/start-eventlircd.sh.desktop
+touch /home/`logname`/.config/autostart/start-eventlircd.sh.desktop
 echo "[Desktop Entry]
 Type=Application
 Exec=/usr/local/bin/start-eventlircd.sh
@@ -1705,7 +1706,7 @@ Name[it_IT]=Eventlircd
 Name=Eventlircd
 Comment[it_IT]=
 Comment=
-" >> ~/.config/autostart/start-eventlircd.sh.desktop
+" >> /home/`logname`/.config/autostart/start-eventlircd.sh.desktop
 #
 else echo "Eventlircd is not installed"
 fi

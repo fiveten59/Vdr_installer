@@ -181,10 +181,6 @@ S30.0W 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
 #
 "
 #
-apt-get -y install dialog git cvs wget checkinstall yasm mercurial unzip
-apt-get -y install autoconf autopoint automake build-essential cmake libtool
-apt-get -y install libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev  pkg-config texinfo
-    #
     exit_status_check()
     {
     if [ $? -ne 0 ]; then
@@ -230,7 +226,7 @@ apt-get -y install libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev  pkg-config te
     fi
 
 #############################################################
-
+apt-get -y install dialog git subversion wget
 
 mkdir $SRC/packages
 dialog --title " VDR 2.6.1 Installer " --infobox "Copyright (C) 2022
@@ -262,6 +258,7 @@ dialog --title " VDR 2.6.1 Installer " --infobox "Copyright (C) 2022
 
 
 echo "                    Press Enter to continue ...               "
+sleep 2
 read enterKey
 
 #############################################################
@@ -269,41 +266,96 @@ read enterKey
 clear
 while :
 do
+clear
 echo ""
 dialog --title "   ♦♦♦♦♦   VDR 2.6.1 Version Installer Script - Libraries & Codec  ♦♦♦♦♦   " --infobox "
 
 	╭===========================================================================================╮
+	|   ................♦♦♦   Download & Upgrade Libaries   ♦♦♦...............................  |
+	|   ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
+	|   [1]    +[Submenu] ~~  Libaries ~ Install - Upgrade  ~~ ...............................  |
+	|   ======================================================================================= |	
 	|   ................♦♦♦   Download & Upgrade Local Repository   ♦♦♦.......................  |
 	|   ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
-	|   [1]    +[Submenu] ~~  Local Repository Directory ~ Install - Upgrade  ~~ .............  |
+	|   [2]    +[Submenu] ~~  Local Repository Directory ~ Install - Upgrade  ~~ .............  |
 	|   ======================================================================================= |
-	|   ..........♦♦♦   Audio Video & Codec Libraries - Install & Uninstall  ♦♦♦..............  |
+	|   ..........♦♦♦   Sat Firmware & Audio Video & Infrared Control   ♦♦♦..................................  |
 	|   ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
-	|   [2]    +[Submenu] ~~ Libs For Intel & Nvidia Devices   ...............................  |
+	|   [3]    +[Submenu] ~~  Install & Uninstall  ...........................................  |
 	|   ======================================================================================= |
 	|   .......................♦♦♦    VDR - Plugins - Skin    ♦♦♦.............................  |
 	|   ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
-	|   [3]    +[Submenu] ~~  VDR & Plugins ..................................................  |
+	|   [4]    +[Submenu] ~~  Install & Uninstall  ...........................................  |
 	|   ======================================================================================= |
 	|   .......................♦♦♦    Channells Lists Setup    ♦♦♦............................  |
 	|   ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
-	|   [4]    +[Submenu] ~~  Channells Lists ~ Install ~ Uninstall  .........................  |
-	|   ======================================================================================= |
-	|   .............................♦♦♦  KODI Setup  ♦♦♦.....................................  |
-	|   ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''  |
-	|   [5]    +[Submenu] ~~  Kodi Media Center ~ Install ~ Uninstall  .......................  |
+	|   [5]    +[Submenu] ~~  Channells Lists ~ Install ~ Uninstall  .........................  |
 	|   ======================================================================================= |
 	|   .............................♦♦♦   Exit Setup Menu   ♦♦♦..............................  |
 	|   [6]     Exit  ........................................................................  |
 	╰===========================================================================================╯" 0 0
 
-echo -n "              Enter your menu choice = Submenu [1~5] -- Exit [6] :        "
+echo -n "              Enter your menu choice = Submenu [1~4] -- Exit [6] :        "
 read yourch
 case $yourch in
 
-#############################################################
 
 1)
+echo "               *** Install / Upgrade libraries  ***"
+sleep 1
+clear
+		dialog --title "   ** Install / Upgrade Common libraries **   " --infobox "
+	-------------------------------------------------------------------------
+	-------------------------------------------------------------------------
+
+	        [a]    First install libraries
+	        [b]    Upgrade libraries	        
+	        [c]    Skip
+
+	------------------------------------------------------------------------- " 0 0
+
+echo -n "        Enter your menu choice  [a-c]:      "
+read yourch
+case $yourch in
+#
+a)
+apt-get -y install cvs checkinstall yasm mercurial unzip
+apt-get -y install autoconf autopoint automake build-essential cmake libtool
+apt-get -y install libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev pkg-config texinfo
+apt-get -y install libass-dev zlib1g zlib1g-dev libva-dev libdrm-dev libvorbis-dev
+apt-get -y install cmake-curses-gui libogg-dev libx11-dev libperl-dev libpciaccess-dev libpciaccess0
+apt-get -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev
+apt-get -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
+apt-get -y install libtheora-dev libxvidcore-dev libmp3lame-dev libavfilter-dev libfreetype6-dev
+apt-get -y install freeglut3 freeglut3-dev libglew-dev libglm-dev mesa-common-dev
+apt-get -y install libopencore-amrnb-dev libopencore-amrwb-dev libudev-dev libv4l-dev libwebp-dev
+apt-get -y install libxcb-ewmh-dev libx265-dev libfontconfig1-dev
+apt-get -y install libxml2-dev xorg-dev libvdpau-dev libx264-dev gawk
+apt-get -y install evtest ir-keytable
+apt-get -y install libfontconfig1-dev libfreetype6-dev libfribidi-dev gettext binutils
+apt-get -y install libglibmm-2.4-dev libcap-dev libjpeg-dev libtinyxml-dev
+apt-get -y install libncurses5-dev libncursesw5-dev linux-libc-dev python3
+apt-get -y install libx11-xcb-dev libc6-dev libogg0
+apt-get -y install libasound2-dev libxext6 libxext-dev
+apt-get -y install libvdpau1 libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
+apt-get -y install libglu1-mesa-dev libgl1-mesa-dev
+apt-get -y install libraspberrypi-dev libgles2-mesa-dev
+apt-get -y install libc6 libgcc1 libstdc++6
+apt-get -y install libcurl4 libcurl4-gnutls-dev librsvg2-dev libcairo2-dev
+apt-get -y install vlc mplayer
+apt-get -y install libboost-iostreams-dev python3-dev libbz2-dev
+apt-get -y install libssl.dev libcrypto++-dev pcscd
+apt-get -y install libpcsclite-dev libdvbcsa-dev
+apt-get -y install libcurl4-openssl-dev libpugixml-dev ca-certificates;;
+#
+b)
+apt.get update
+apt-get upgrade;;
+#
+c) ;;
+esac ;;
+#############################################################
+2)
 
 cd /home/`logname`
 mkdir -p Vdrrepo
@@ -314,14 +366,15 @@ dialog --title "   ** Download & Upgrade Local Repository **   " --infobox "
    ---------------------------------------------------------------------------------------------
        Install ~ Upgrade ~ Remove ~ Local Repository
    ---------------------------------------------------------------------------------------------
-        [a]  Install Intel Video devices libraries (If Not Exist)
-        [b]  Install libs & progs for Vdr - Intel & Nvidia Video devices (If Not Exist)
+
+        [a]  Download libraries (ONLY for Intel Video device)
+        [b]  Download progs for Vdr
         [c]  Remove & Upgrade all
 
         [z]  Skip
 
    ---------------------------------------------------------------------------------------------" 0 0
-echo -n "        Enter your menu choice = Install [a-b]  ~~ Remove & Upgrade [c] ~~ Skip [z]:      "
+echo -n "        Enter your menu choice      "
 read yourch
 case $yourch in
 
@@ -382,7 +435,7 @@ if [ -e /home/`logname`/Vdrrepo/vdr-2.6.1.tar.bz2 ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    wget https://www.dropbox.com/s/wsmvt45newjywho/vdr-2.6.1.tar.bz2
+    wget https://vdr-projects.e-tobi.net/git/vdr/snapshot/vdr-2.6.1.tar.bz2
   fi
 
 if [ -e /home/`logname`/Vdrrepo/vdr-patches.2.6.1.tar.gz ]; then
@@ -417,7 +470,7 @@ if [ -e /home/`logname`/Vdrrepo/vdr-plugin-epgsearch ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    git clone http://projects.vdr-developer.org/git/vdr-plugin-epgsearch.git
+    git clone https://github.com/vdr-projects/vdr-plugin-epgsearch.git
   fi
 
 if [ -e /home/`logname`/Vdrrepo/patch_epgsearch.tar.gz ]; then
@@ -553,7 +606,7 @@ clear
 cd /home/`logname`/Vdrrepo
 rm -rf *
 
-echo "                    Downloading libraries on local repo "
+echo "                    Remove & Downloading all libraries & progs on local repo "
 
 git clone https://github.com/intel/cmrt
 git clone https://github.com/intel/libva
@@ -568,7 +621,7 @@ wget https://www.dropbox.com/s/wsmvt45newjywho/vdr-2.6.1.tar.bz2
 wget https://www.dropbox.com/s/o87kvrdx3zocksm/vdr-patches.2.6.1.tar.gz
 wget https://www.dropbox.com/s/qds2k91od7oboed/Make.config.tar.gz
 wget https://www.dropbox.com/s/bx97ikp7c1h2qj2/vdrsymbols.tar.gz
-git clone http://projects.vdr-developer.org/git/vdr-plugin-epgsearch.git
+git clone https://github.com/vdr-projects/vdr-plugin-epgsearch.git
 wget https://www.dropbox.com/s/s9vggu8mil8ss7t/patch_epgsearch.tar.gz
 git clone git://github.com/manio/vdr-plugin-dvbapi.git
 git clone https://github.com/siricco/vdr-plugin-radio.git
@@ -601,20 +654,8 @@ esac ;;
 
 #############################################################
 
-2)
-
+3)
 clear
-apt-get -y install libass-dev zlib1g zlib1g-dev libva-dev libdrm-dev libvorbis-dev
-apt-get -y install cmake-curses-gui libogg-dev git libx11-dev libperl-dev libpciaccess-dev libpciaccess0
-apt-get -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev
-apt-get -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
-apt-get -y install libtheora-dev libxvidcore-dev libmp3lame-dev libavfilter-dev libfreetype6-dev
-apt-get -y install freeglut3 freeglut3-dev libglew-dev libglm-dev mesa-common-dev libssl-dev
-apt-get -y install libopencore-amrnb-dev libopencore-amrwb-dev libudev-dev libv4l-dev libwebp-dev
-apt-get -y install libxcb-ewmh-dev libx265-dev libasound2-dev libfontconfig1-dev libfribidi-dev librsvg2-dev
-apt-get -y install libxml2-dev xorg-dev libvdpau-dev libx264-dev gawk
-apt-get -y install evtest ir-keytable
-
 echo "                    Installing Sat firmware & drivers"
 sleep 2
 if [ -f /usr/local/src/driver_dvb/check ]
@@ -645,7 +686,8 @@ dialog --title "   ** Install Intel / Nvidia & Common Libraries **   " --infobox
 
         *****  Install  *****
         [a]    ONLY FOR Intel Devices (Libva - Cmrt - Intel hybrid driver - Intel vaapi driver - Libva-utils)
-        [b]    Common Libs (Ffmpeg) & Infra-Red Remotes Control
+        [b]    Ffmpeg
+        [c]    Infra-Red Remotes Control
 
         *****  Remove  *****
 
@@ -668,7 +710,7 @@ dialog --title "   ** Install Intel / Nvidia & Common Libraries **   " --infobox
 --------------------------------------------------------------------------------------------------
 " 0 0
 
-echo -n "        Enter your menu choice = Install [a-b] ~~ Remove [a1-h1] ~~ Exit [z]:      "
+echo -n "        Enter your menu choice = Install [a-c] ~~ Remove [a1-h1] ~~ Exit [z]:      "
 read yourch
 case $yourch in
 
@@ -765,22 +807,17 @@ fi;;
 #############################################################
 
 b)
-
 clear
-echo "                    Installing Common Libs"
-sleep 3
-clear
-
 echo "                    Installing Nv-Codec"
 sleep 2
-	if [ -f /usr/local/src/ffmpeg_sources/nv-codec-headers/Makefile ]
-  then echo "nv-codec-headers are already installed"; sleep 3
+if [ -f /usr/local/src/ffmpeg_sources/nv-codec-headers/Makefile ]
+then echo "nv-codec-headers are already installed"; sleep 3
 else
-    cd /usr/local/src/ffmpeg_sources
-    git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git
-    cd nv-codec-headers
-    make && make install
-	fi
+cd /usr/local/src/ffmpeg_sources
+git clone https://git.videolan.org/git/ffmpeg/nv-codec-headers.git
+cd nv-codec-headers
+make && make install
+fi
 #
 echo "                    Installing Ffmpeg"
 sleep 2
@@ -788,7 +825,6 @@ if [ -d /usr/local/src/ffmpeg_sources/ffmpeg ]
 then echo "Ffmpeg is already installed"; sleep 3
 else
     echo "                    Wait for a few seconds ..."
-
 cd /usr/local/src/ffmpeg_sources
 cp -rf /home/`logname`/Vdrrepo/ffmpeg-5.0.tar.bz2 /usr/local/src/ffmpeg_sources/
 tar xjvf ffmpeg-5.0.tar.bz2
@@ -801,10 +837,10 @@ cd ffmpeg
 make -j10
 checkinstall --pkgname=ffmpeg --pkgversion="5.0" --backup=no --deldoc=yes --fstrans=no --default --pakdir=$PACKAGES
 sleep 3
-fi;
+fi;;
 #
-
-echo "                 *** InstallingInfra-Red Remotes Control  ***"
+c)
+echo "                 *** Installing Infra-Red Remotes Control  ***"
 sleep 2
 clear
 #
@@ -822,33 +858,131 @@ clear
     read yourch
     case $yourch in
 
-a) clear; if [ -d /etc/lirc/hardware.conf ]
+a) clear
+if [ -d /etc/lirc/hardware.conf ]
 then echo " Lirc is already installed"; sleep 3
-else apt remove ir-keytable lirc; echo 'deb http://ca.archive.ubuntu.com/ubuntu/ xenial universe' >>  /etc/apt/sources.list; apt update; apt -y install lirc/xenial; apt -y install lirc-x/xenial; sed -i "s|deb http://ca.archive.ubuntu.com/ubuntu/ xenial universe||" /etc/apt/sources.list; apt update; echo " Lirc is now installed"; sleep 3; fi;;
-#
-b) clear; if [ -d /usr/sbin/eventlircd ]
-then echo " Eventlircd is already installed"; sleep 3
-else cd /usr/local/src; git clone https://github.com/OpenELEC/eventlircd.git;
-cp -rf eventlircd /home/`logname`/Vdrrepo;
-cd eventlircd;
-cp -rf eventlircd /home/`logname`/Vdrrepo;
-wget https://www.dropbox.com/s/5qyshoaz1z97auu/eventlircd_patch.tar.gz;
-tar -zxvf eventlircd_patch.tar.gz;
-mv -f eventlircd_patch.tar.gz /home/`logname`/Vdrrepo;
-patch -p1 < eventlircd_makefile.patch; patch -p1 < eventlircd_configure.patch; patch -p1 < eventlircd_version.patch; autoreconf -fi; ./configure --sysconfdir=/etc --with-evmap=/etc/eventlircd.d --with-udev-dir=/lib/udev --with-lircd-socket=/var/run/lirc/lircd; make; make install; 
-echo 'uinput
-i2c-dev
-ir-kbd-i2c' >> /etc/modules
-wget https://www.dropbox.com/s/pou5xp8yuxkgvzw/eventlircd.conf.tar.gz; tar -zxvf eventlircd.conf.tar.gz; mv -f evmap.tar.gz /etc/eventlircd.d; mv -f rules.tar.gz /lib/udev/rules.d; mv -f rc_keymaps /lib/udev/; cd /lib/udev/rc_keymaps; chmod 0644 *; cd /etc/eventlircd.d; tar -zxvf evmap.tar.gz; chmod 0644 *; rm -rf evmap.tar.gz; cd /lib/udev/rules.d; rm -rf 98-eventlircd.rules.disabled; rm -rf 98-lircd.rules.disabled; tar -zxvf rules.tar.gz; chmod 0644 *; rm -rf rules.tar.gz; cd $SRC/eventlircd; mv -f eventlircd.conf.tar.gz /home/`logname`/Vdrrepo; echo "Eventlircd is now installed"; 
+else apt remove ir-keytable lirc
+echo 'deb http://ca.archive.ubuntu.com/ubuntu/ xenial universe' >>  /etc/apt/sources.list
+apt update
+apt -y install lirc/xenial
+apt -y install lirc-x/xenial
+sed -i "s|deb http://ca.archive.ubuntu.com/ubuntu/ xenial universe||" /etc/apt/sources.list
+apt update
+echo " Lirc is now installed"
 sleep 3
 fi;;
 #
-z);;
+b) 
+clear
+if [ -d /usr/sbin/eventlircd ]
+then echo " Eventlircd is already installed"; sleep 3
+else cd /usr/local/src
+git clone https://github.com/OpenELEC/eventlircd.git
+cp -rf eventlircd /home/`logname`/Vdrrepo
+cd eventlircd
+cp -rf eventlircd /home/`logname`/Vdrrepo
+wget https://www.dropbox.com/s/5qyshoaz1z97auu/eventlircd_patch.tar.gz
+tar -zxvf eventlircd_patch.tar.gz
+mv -f eventlircd_patch.tar.gz /home/`logname`/Vdrrepo
+patch -p1 < eventlircd_makefile.patch
+patch -p1 < eventlircd_configure.patch
+patch -p1 < eventlircd_version.patch
+autoreconf -fi
+./configure --sysconfdir=/etc --with-evmap=/etc/eventlircd.d --with-udev-dir=/lib/udev --with-lircd-socket=/var/run/lirc/lircd
+make && make install
+#
+echo 'uinput
+i2c-dev
+ir-kbd-i2c' >> /etc/modules
+wget https://www.dropbox.com/s/pou5xp8yuxkgvzw/eventlircd.conf.tar.gz
+tar -zxvf eventlircd.conf.tar.gz
+mv -f evmap.tar.gz /etc/eventlircd.d
+mv -f rules.tar.gz /lib/udev/rules.d
+mv -f rc_keymaps /lib/udev/
+cd /lib/udev/rc_keymaps
+chmod 0644 *
+cd /etc/eventlircd.d
+tar -zxvf evmap.tar.gz
+chmod 0644 *
+rm -rf evmap.tar.gz
+cd /lib/udev/rules.d
+rm -rf 98-eventlircd.rules.disabled
+rm -rf 98-lircd.rules.disabled
+tar -zxvf rules.tar.gz
+chmod 0644 *
+rm -rf rules.tar.gz
+cd $SRC/eventlircd
+mv -f eventlircd.conf.tar.gz /home/`logname`/Vdrrepo
+echo "Eventlircd is now installed" 
+sleep 3
+#
+echo "                *** Create Eventircd start command line (if installed)***"; sleep 2
+rm -rf /etc/init.d/eventlircd; touch /etc/init.d/eventlircd
+echo '#!/bin/sh
+#
+# To be copied to: /etc/init.d
+# And type:
+### BEGIN INIT INFO
+# Provides:          Eventlircd
+# Required-Start:
+# Required-Stop:
+# Default-Start:     0 1 2 3 4 5 6
+# Default-Stop:
+# Description:       Start, Stop or Restart Eventlircd
+### END INIT INFO
+
+# Shell functions sourced from /etc/rc.status:
+set -e
+
+# Reset status of this service
+# rc_reset
+#
+echo "Eventlircd init.d script using: $1" >> /var/log/eventlircd.log &
+case "$1" in
+    start)
+        echo -n "Start Eventlircd "
+        rm -rf /var/run/lirc/lircd
+	mkdir -p /var/run/lirc
+        /usr/sbin/eventlircd -e /etc/eventlircd.d
+        # Remember status and be verbose
+        ;;
+    stop)
+        echo -n "Kill Eventlircd "
+        killall -9 eventlircd
+        # Remember status and be verbose
+        ;;
+    restart)
+        echo -n "Restart Eventlircd"
+        $0 stop
+        $0 start
+
+        # Remember status and be quiet
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+        ;;
+esac
+exit 0
+' >> /etc/init.d/eventlircd; chmod 777 /etc/init.d/eventlircd
+#
+rm -rf /etc/sudoers.d/eventlircd
+touch /etc/sudoers.d/eventlircd
+sed -i "s|%`logname` ALL=NOPASSWD: /etc/init.d/eventlircd||" /etc/sudoers.d/eventlircd
+echo "%`logname` ALL=NOPASSWD: /etc/init.d/eventlircd" >> /etc/sudoers.d/eventlircd
+sed -i "s|eventlircd ALL=(ALL) ALL||" /etc/sudoers.d/eventlircd
+echo "eventlircd ALL=(ALL) ALL" >> /etc/sudoers.d/eventlircd
+#
+rm -rf /usr/local/bin/start-eventlircd.sh
+touch /usr/local/bin/start-eventlircd.sh
+echo '#!/bin/sh
+
+sudo /etc/init.d/eventlircd start > /dev/null 2>&1' >> /usr/local/bin/start-eventlircd.sh
+chmod 777 /usr/local/bin/start-eventlircd.sh
+fi;;
 esac;;
 
-##############################################################
-#############################################################
-
+#
 a1)
 clear
 echo "                    Removing Libva "
@@ -923,6 +1057,8 @@ echo "                    Removing Eventlircd "
 rm -rf /etc/modules
 rm -rf /etc/eventlircd.d
 rm -rf /usr/sbin/eventlircd
+rm -rf /usr/local/bin/start-eventlircd.sh
+rm -rf /etc/sudoers.d/eventlircd
 rm -rf $SRC/eventlircd;;
 #
 #
@@ -931,7 +1067,7 @@ esac;;
 
 #############################################################
 
-3)
+4)
 
 clear
     dialog --title "   ** Install VDR-2.6.1 & Basic plugins   **   " --infobox "
@@ -951,21 +1087,11 @@ clear
 
 a)
 clear
-#
-echo "*** Install Vdr libraries ***"
-sleep 3
-cd $SRC
-apt-get -y install libfontconfig1-dev libfreetype6-dev libfribidi-dev gettext binutils
-apt-get -y install libglibmm-2.4-dev libcap-dev libjpeg-dev libtinyxml-dev
-apt-get -y install libncurses5-dev libncursesw5-dev linux-libc-dev python3
-#
-#
-clear
 echo " Installing VDR      "
-sleep 1
+sleep 2
 #
-cp -rf /home/`logname`/Vdrrepo/vdr-2.6.1.tar.bz2 $SRC/
 cd $SRC
+cp -rf /home/`logname`/Vdrrepo/vdr-2.6.1.tar.bz2 $SRC/
 tar xjf vdr-2.6.1.tar.bz2
 ln -s $VDR vdr
 rm -rf vdr-2.6.1.tar.bz2
@@ -1087,10 +1213,6 @@ a)
 clear
 echo "               *** Softhddevice**"
 sleep 3
-apt-get -y install libx11-xcb-dev libc6-dev libogg0
-apt-get -y install libxcb-ewmh-dev libasound2-dev libxext6 libxext-dev
-apt-get -y install libvdpau1 libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
-apt-get -y install libglu1-mesa-dev libgl1-mesa-dev
 cd $VDRSRC
 git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git
 cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/
@@ -1102,10 +1224,6 @@ b)
 clear
 echo "               *** Softhdcuvid **"
 sleep 3
-apt-get -y install libx11-xcb-dev libc6-dev libogg0
-apt-get -y install libxcb-ewmh-dev libasound2-dev libxext6 libxext-dev
-apt-get -y install libvdpau1 libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
-apt-get -y install libglu1-mesa-dev libgl1-mesa-dev libplacebo-dev libavfilter-dev
 cd $VDRSRC
 wget https://github.com/jojo61/vdr-plugin-softhdcuvid/archive/master.tar.gz
 cp -rf /$VDRSRC/master.tar.gz /home/`logname`/Vdrrepo/
@@ -1231,7 +1349,6 @@ make plugins
 echo "               *** Epgsearch ***"
 sleep 3
 cd $VDRSRC
-apt-get -y install libc6 libgcc1 libstdc++6
 cp -rf /home/`logname`/Vdrrepo/vdr-plugin-epgsearch /$VDRSRC/
 mv vdr-plugin-epgsearch epgsearch
 cd epgsearch
@@ -1247,7 +1364,6 @@ make plugins
 #
 echo "               *** Skindesigner ***"
 sleep 3
-apt-get -y install libcurl4 libcurl4-gnutls-dev librsvg2-dev libxml2-dev libcairo2-dev
 cd $VDRSRC
 cp -rf /home/`logname`/Vdrrepo/skindesigner /$VDRSRC/
 cd skindesigner
@@ -1256,7 +1372,6 @@ make && make install
 #
 echo "               *** Iptv ***"
 sleep 3
-apt-get -y install vlc mplayer
 cd $VDRSRC
 cp -rf /home/`logname`/Vdrrepo/vdr-plugin-iptv /$VDRSRC
 mv vdr-plugin-iptv iptv
@@ -1286,6 +1401,15 @@ cp -rf $VDRSRC/radio/config/mpegstill/* /$PLUGINS/radio/
 cp -rf /home/`logname`/Vdrrepo/radio_scripts.tar.gz /$PLUGINS/radio/
 tar -zxvf radio_scripts.tar.gz
 rm -rf radio_scripts.tar.gz
+#
+#
+echo "               *** TvGuideng ***"
+sleep 3
+cd $VDRSRC
+git clone https://gitlab.com/kamel5/tvguideng.git
+cp -rf /home/`logname`/Vdrrepo/tvguideng /$VDRSRC
+cd tvguideng
+make
 #
 #
 echo "               *** Channelscan ***"
@@ -1495,14 +1619,15 @@ case "$1" in
 esac
 exit 0
 ' >> /etc/init.d/vdr
-chmod 755 /etc/init.d/vdr
+chmod 777 /etc/init.d/vdr
 #
 rm -rf /usr/local/bin/start-vdr.sh
 touch /usr/local/bin/start-vdr.sh
 echo "#!/bin/sh
 
 sudo /etc/init.d/vdr start > /dev/null 2>&1" >> /usr/local/bin/start-vdr.sh
-chmod 755 /usr/local/bin/start-vdr.sh
+chmod 777 /usr/local/bin/start-vdr.sh
+#
 #
 echo "                    *** Create Vdr vdrpoweroff ***"
 sleep 1
@@ -1510,9 +1635,9 @@ rm -rf /usr/local/bin/vdrpoweroff
 touch /usr/local/bin/vdrpoweroff
 echo '#!/bin/sh
 #file name: Kill Vdr "vdrpoweroff"
-killall -9 mpv & killall -9 vdr & killall -9 vlc & killall -9 vdr-sxfe & killall -9 vdrrun
+killall -9 mpv & killall -9 vdr & killall -9 vlc
 # & killall -9 oscam & shutdown -h now '  >> /usr/local/bin/vdrpoweroff
-chmod 755 /usr/local/bin/vdrpoweroff
+chmod 777 /usr/local/bin/vdrpoweroff
 #
 echo "                    *** Setup Vdr icons  ***"
 sleep 3
@@ -1599,7 +1724,7 @@ clear
         [m]    Eutelsat 5°W
         [n]    Hispasat - 30°W
         [p]    Camper - 13°E
-
+          
         [z]    Skip
 
    ---------------------------------------------- " 0 0
@@ -1623,73 +1748,6 @@ p) clear; echo "$MONO13_CAMPER" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/
 z);;
 esac
 #
-clear
-echo "                *** Create Eventircd start command line (if installed)***"; sleep 2
-if [ -f /usr/sbin/eventlircd ];
-then
-rm -rf /etc/init.d/eventlircd; touch /etc/init.d/eventlircd
-echo '#!/bin/sh
-#
-# To be copied to: /etc/init.d
-# And type:
-### BEGIN INIT INFO
-# Provides:          Eventlircd
-# Required-Start:
-# Required-Stop:
-# Default-Start:     0 1 2 3 4 5 6
-# Default-Stop:
-# Description:       Start, Stop or Restart Eventlircd
-### END INIT INFO
-
-# Shell functions sourced from /etc/rc.status:
-set -e
-
-# Reset status of this service
-# rc_reset
-#
-echo "Eventlircd init.d script using: $1" >> /var/log/eventlircd.log &
-case "$1" in
-    start)
-        echo -n "Start Eventlircd "
-        rm -rf /var/run/lirc/lircd
-	mkdir -p /var/run/lirc
-        /usr/sbin/eventlircd -e /etc/eventlircd.d
-        # Remember status and be verbose
-        ;;
-    stop)
-        echo -n "Kill Eventlircd "
-        killall -9 eventlircd
-        # Remember status and be verbose
-        ;;
-    restart)
-        echo -n "Restart Eventlircd"
-        $0 stop
-        $0 start
-
-        # Remember status and be quiet
-        ;;
-    *)
-        echo "Usage: $0 {start|stop|restart}"
-        exit 1
-        ;;
-esac
-exit 0
-' >> /etc/init.d/eventlircd; chmod 755 /etc/init.d/eventlircd
-touch /etc/sudoers.d/eventlircd
-sed -i "s|%`logname` ALL=NOPASSWD: /etc/init.d/eventlircd||" /etc/sudoers.d/eventlircd
-echo "%`logname` ALL=NOPASSWD: /etc/init.d/eventlircd" >> /etc/sudoers.d/eventlircd
-sed -i "s|eventlircd ALL=(ALL) ALL||" /etc/sudoers.d/eventlircd
-echo "eventlircd ALL=(ALL) ALL" >> /etc/sudoers.d/eventlircd
-#
-rm -rf /usr/local/bin/start-eventlircd.sh; touch /usr/local/bin/start-eventlircd.sh
-echo '#!/bin/sh
-
-sudo /etc/init.d/eventlircd start > /dev/null 2>&1' >> /usr/local/bin/start-eventlircd.sh
-chmod 755 /usr/local/bin/start-eventlircd.sh
-echo "Start Eventlircd manually !!!!!"; sleep 5
-#
-else echo "Eventlircd is not installed"
-fi
 #
 sleep 1
 clear
@@ -1851,6 +1909,24 @@ chmod 777 /usr/local/bin/KillOscam.sh
 echo "                    Configuring Skindesigner"
 sleep 1
 cd /usr/lib/vdr/skindesigner/scripts/
+
+    dialog --title "   ** Configuring Skindesigner **   " --infobox "
+   ----------------------------------------------
+              Infra-Red Remotes Control
+   ----------------------------------------------
+        [a]    Nvidia video device
+        [b]    Intel & Arm video device
+
+        [z]    Skip
+
+    ---------------------------------------------- " 0 0
+    echo -n "        Enter your menu choice  [a-z]:      "
+    read yourch
+    case $yourch in
+a);;
+b)sed -i "s|GPU=`nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader`||" /usr/lib/vdr/skindesigner/scripts/temperatures.default
+ sed -i 's|echo "${GPU}°C" > ${OUTPUTFLDR}/gpu"||' /usr/lib/vdr/skindesigner/scripts/temperatures.default;;
+esac
 ln -s temperatures.default temperatures
 ln -s vdrstats.default vdrstats
 cd /home/`logname`/Vdrrepo/

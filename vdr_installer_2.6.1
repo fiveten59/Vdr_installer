@@ -321,7 +321,7 @@ else
   echo "File not found ... Downloading it now ....."
     wget https://www.dropbox.com/s/qds2k91od7oboed/Make.config.tar.gz
   fi
-
+  
 if [ -e /home/`logname`/Vdrrepo/vdrsymbols.tar.gz ]; then
   echo " ..... File exists ..... "
 else
@@ -333,7 +333,7 @@ if [ -e /home/`logname`/Vdrrepo/vdr-plugin-dvbapi ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    git clone http://github.com/manio/vdr-plugin-dvbapi.git
+    git clone   https://github.com/ua0lnj/vdr-plugin-dvbapi.git 
   fi
 
 if [ -e /home/`logname`/Vdrrepo/vdr-plugin-epgsearch ]; then
@@ -456,15 +456,14 @@ if [ -e /home/`logname`/Vdrrepo/oscam.tar.gz ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    wget https://www.dropbox.com/s/56oomdr58os7msa/oscam.tar.gz
+    wget https://www.dropbox.com/s/4mw9329v90e0joe/oscam.tar.gz
   fi
 
 if [ -e /home/`logname`/Vdrrepo/oscam64.tar.gz ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    wget https://www.dropbox.com/s/vw273o32syfv2dk/oscam64.tar.gz
-
+    wget https://www.dropbox.com/s/lwjq95banncxaay/oscam64.tar.gz
   fi
 
 chmod -R 777 *;;
@@ -489,7 +488,7 @@ wget https://www.dropbox.com/s/qds2k91od7oboed/Make.config.tar.gz
 wget https://www.dropbox.com/s/bx97ikp7c1h2qj2/vdrsymbols.tar.gz
 git clone https://github.com/vdr-projects/vdr-plugin-epgsearch.git
 wget https://www.dropbox.com/s/s9vggu8mil8ss7t/patch_epgsearch.tar.gz
-git clone git://github.com/manio/vdr-plugin-dvbapi.git
+git clone   https://github.com/ua0lnj/vdr-plugin-dvbapi.git 
 git clone https://github.com/siricco/vdr-plugin-radio.git
 wget https://www.dropbox.com/s/qlnarjlzfsh8vvl/radio_scripts.tar.gz
 git clone https://github.com/rofafor/vdr-plugin-iptv.git
@@ -509,8 +508,8 @@ echo "                    Downloading others "
 
 wget https://www.dropbox.com/s/6hzpdx9yv5ypzxv/traduzioni.tar.gz
 wget https://www.dropbox.com/s/5uvx468b4b87auy/icone.tar.gz
-wget https://www.dropbox.com/s/56oomdr58os7msa/oscam.tar.gz
-wget https://www.dropbox.com/s/vw273o32syfv2dk/oscam64.tar.gz
+wget https://www.dropbox.com/s/4mw9329v90e0joe/oscam.tar.gz
+wget https://www.dropbox.com/s/lwjq95banncxaay/oscam64.tar.gz
 git clone https://github.com/fiveten59/Logos.git logos
 #
 chmod -R 777 *;;
@@ -745,7 +744,7 @@ sleep 2
 echo "                *** Create Eventircd start command line (if installed)***"
 sleep 2
 cd /etc/init.d/
-rm -rf /etc/init.d/eventlircd
+rm -rf eventlircd
 touch eventlircd
 echo '#!/bin/sh
 #
@@ -1001,6 +1000,8 @@ clear
                                 Intel Video Devices
 	        [c]    Softhddevice
 	        [d]    Softhdvaapi
+	        
+	        [z]    Skip
 
 	------------------------------------------------------------------------- " 0 0
 
@@ -1019,7 +1020,6 @@ apt-get -y install libglu1-mesa-dev libgl1-mesa-dev libswscale-dev libavfilter-d
 apt-get -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev
 apt-get -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
 cd $VDRSRC
-git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git
 cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/
 mv vdr-plugin-softhddevice softhddevice
 echo "Edit Makefile for your choice - disable/enable screensaver"
@@ -1055,6 +1055,7 @@ apt-get -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-scr
 apt-get -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
 cd $VDRSRC
 wget https://github.com/ua0lnj/vdr-plugin-softhddevice/archive/refs/heads/test.zip
+https://github.com/ua0lnj/vdr-plugin-softhddevice/archive/refs/heads/test.zip
 unzip test.zip
 cp -rf /$VDRSRC/vdr-plugin-softhddevice-test /home/`logname`/Vdrrepo/
 mv vdr-plugin-softhddevice-test softhddevice
@@ -1085,6 +1086,8 @@ wget https://www.dropbox.com/s/0sc1ihx8wns0717/patch_softhdcuvid_vaapi.tar.gz
 tar -zxvf patch_softhdcuvid_vaapi.tar.gz
 cp -rf /$VDRSRC/softhdvaapi/patch_softhdcuvid_vaapi.tar.gz /home/`logname`/Vdrrepo/
 make && make install;;
+#
+z) ;;
 esac
 #
 echo "               *** Dvbapi ***"
@@ -1319,7 +1322,7 @@ case $yourch in
 # da cambiare i setup
 a) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f' -P'mpv -a alsa -b / -l ita'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && tar -zxvf setup16_softhddevice.tar.gz && mv -f /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/;;
 b) clear; sed -i "s|-P'dvbapi'|& -P'softhdcuvid -d :0.0 -f' -P'mpv -a alsa -v vaapi -b /-l ita'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/f6ngr529g1obxgg/setup16_softhdcuvid.tar.gz  && tar -zxvf setup16_softhdcuvid.tar.gz && mv -f /etc/vdr/setup16_softhdcuvid.tar.gz /home/`logname`/Vdrrepo/;;
-c) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -d :0.0 -f' -P'mpv -a alsa -v gpu -h vaapi-copy -b /-l ita'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && tar -zxvf setup16_softhddevice.tar.gz && mv -f /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/;;
+c) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -v va-api-egl -d :0.0 -f' -P'mpv -a alsa -v gpu -h vaapi-copy -b /-l ita'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && tar -zxvf setup16_softhddevice.tar.gz && mv -f /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/;;
 d) clear; sed -i "s|-P'dvbapi'|& -P'softhdvaapi -d :0.0 -f' -P'mpv -a alsa -v vaapi -b /-l ita'|" /usr/local/bin/vdrrun && cd /etc/vdr/  && wget https://www.dropbox.com/s/f6ngr529g1obxgg/setup16_softhdcuvid.tar.gz  && tar -zxvf setup16_softhdcuvid.tar.gz && mv -f /etc/vdr/setup16_softhdcuvid.tar.gz /home/`logname`/Vdrrepo/;;
 
 esac
@@ -1546,8 +1549,7 @@ mkdir -p etc
 if [ -f /usr/local/etc/oscam.check ]
   then  echo "Oscam is already installed"
 else
-apt-get -y install libssl.dev libcrypto++-dev 
-apt-get -y install libccid pcscd subversion libpcsclite-dev
+apt-get -y install libssl-dev libcrypto++-dev pcscd subversion libpcsclite-dev
 cd $ETC
 cp -rf /home/`logname`/Vdrrepo/oscam.tar.gz /$ETC/
 tar -zxvf oscam.tar.gz

@@ -1,37 +1,34 @@
 #!/bin/bash
 ################################## !!! README !!! #######################################
 #                                                                                       #
-# Script name: vdr_installer_2.6.1                                                     #
-# Version: Git Repository Master (https://github.com/fiveten59/Vdr_installer)        #
-# Tested on Ubuntu 20.04 - Ubuntu 22.04 - Mint 20.2 - Debian Bullseye                   #
+# Script name: vdr_installer_2.6.4                                                      #
+# Version: Git Repository Master (https://github.com/fiveten59/Vdr_installer)           #
+# Tested on Ubuntu 20.04 - Ubuntu 22.04 - Mint 20.2 - Mint 21 - Debian Bullseye         #
 # chmod the script                                                                      #
-# then load it simply typing: sudo ./vdr_installer_2.6.1  (Ubuntu/Mint)                 #
-#                             su - /vdr_installer_2.6.1  (Debian)                       #
+# then load it simply typing: sudo ./vdr_installer_2.6.4  (Ubuntu/Mint)                 #
+#                             su - /vdr_installer_2.6.4  (Debian)                       #
 #########################################################################################
 #
-PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/radio-OnAir1080.mpg'  -P'systeminfo'"
-#-P'channelscan'
-#
+clear
+PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skinflatplus -l /etc/vdr/logos/' -P'iptv' -P'radio' -P'channelscan'"
+PLUGINSERVER="-P'dvbapi' -P'iptv' -P'vnsiserver'"
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
-SRCVDR='/usr/local/src/vdr-2.6.1'
+SRCVDR='/usr/local/src/vdr-2.6.4'
 VDRSRC=''$SRC'/vdr/PLUGINS/src'
 LIB='/usr/lib/vdr/plugins'
-VDR='vdr-2.6.1'
+VDR='vdr-2.6.4'
 PACKAGES="/usr/local/src/packages"
 TEMP='/tmp'
-SKINS='/etc/vdr/plugins/skindesigner/skins/'
 SHARE='/usr/share/vdr/plugins'
 PLUGINS='/etc/vdr/plugins'
 Remind3='is already installed'
 Remind4='are already installed'
 Remind5='is not installed'
 ALLOWED="#
-# allowed_hosts.conf  This file describes a number of host addresses that
-#                     are allowed to connect to the streamdev/vn****rver/xvdr/xineliboutput server running
-#                     with the Video Disk Recorder (VDR) on this system.
+# allowed_hosts.conf
+
 # Syntax:
-#
 # IP-Address[/Netmask]
 #
 127.0.0.1             # always accept localhost
@@ -40,16 +37,11 @@ ALLOWED="#
 #204.152.189.113      # a specific host
 #0.0.0.0/0            # any host on any net (USE THIS WITH CARE!)
 #
-#
-# If your network setup is correct pls don't touch
-# exit with CTRL+X
-#
-# If your network setup is diiferent change it and
-# Save it with CTRL+O and exit with CTRL+X "
-#
+"
 #               Disecq
-#
-TRIAL="# Full DiSEqC sequence:
+
+TRIAL="
+# Full DiSEqC sequence:
 # 9 - 13 - 19.2E
 S9E  11700 V  9750 t v W15 [E0 10 38 F0] W15 A W15 T
 S9E  99999 V 10600 t v W15 [E0 10 38 F1] W15 A W15 T
@@ -180,13 +172,13 @@ S30.0W 11700 H  9750  t V W15 [E0 10 38 F2] W15 A W15 t
 S30.0W 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
 #
 "
-#############################################################
+#
 apt-get -y install dialog git subversion wget
 apt-get -y install checkinstall build-essential autoconf 
 apt-get -y install autopoint automake cmake libtool
 
 mkdir $SRC/packages
-dialog --title " VDR 2.6.1 Installer " --infobox "Copyright (C) 2022
+dialog --title " VDR 2.6.4 Installer " --infobox "Copyright (C) 2023
 
     This file is part of VDR Complete Installer (VCI).
 
@@ -207,11 +199,11 @@ dialog --title " VDR 2.6.1 Installer " --infobox "Copyright (C) 2022
 
     A special thanks goes to Klaus Schmidinger Vdr Developer
 
-    Script name: vdr_installer_2.6.1
-    Version: 2.6.1
-    Tested on Ubuntu 20.04 - Ubuntu 22.04 - Mint 20.2
+    Script name: vdr_installer_2.6.4
+    Version: 2.6.4
+    Tested on Ubuntu 20.04 - Ubuntu 22.04 - Mint 20.2 - Mint 21 - Debian 11
     chmod the script
-    then load it simply typing: sudo ./vdr_installer_2.6.1 " 0 0
+    then load it simply typing: sudo ./vdr_installer_2.6.4 " 0 0
 
 
 echo "                    Press Enter to continue ...               "
@@ -225,7 +217,7 @@ while :
 do
 clear
 echo ""
-dialog --title "   ♦♦♦♦♦   VDR 2.6.1 Version Installer Script - Libraries & Codec  ♦♦♦♦♦   " --infobox "
+dialog --title "   ♦♦♦♦♦   VDR 2.6.4 Version Installer Script - Libraries & Codec  ♦♦♦♦♦   " --infobox "
 
 
 	   ==============================================================================	
@@ -244,13 +236,14 @@ dialog --title "   ♦♦♦♦♦   VDR 2.6.1 Version Installer Script - Librar
 	   ..........................   Vdr Plugns   ..................................
            ............................................................................
 	   [4]    +[Submenu] ~~  Install & Uninstall  .................................
-	   ==============================================================================	
-	   ..........................   VDR Setup   ...................................
-	   [5]    Final configuration  ................................................
 	   ==============================================================================
-	   .......................    Channells Lists Setup    ........................
+	   .......................   Final configuration   ............................
+	   '''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''' 
+	   [5]    +[Submenu] ~~  Vdr (Stand alone) - Vdr Server (Need Kodi) ...........	   
+	   ==============================================================================
+	   ............................   Kodi   ......................................
 	   ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
-	   [6]    +[Submenu]   Channells Lists ~ Install ~ Uninstall  .................
+	   [6]    +[Submenu]   Install & Uninstall  ...................................	   
 	   ==============================================================================
 	   .............................   Exit Setup Menu   ..........................
 	   [7]     Exit  ..............................................................
@@ -271,14 +264,12 @@ dialog --title "   ** Download & Upgrade Local Repository **   " --infobox "
    ---------------------------------------------------------------------------------------------
        Install ~ Upgrade ~ Remove ~ Local Repository
    ---------------------------------------------------------------------------------------------
-
-        [a]  Download progs for Vdr
+        [a]  Download libs & progs for Vdr
         [b]  Remove & Upgrade all
 
         [z]  Skip
-
    ---------------------------------------------------------------------------------------------" 0 0
-echo -n "        Enter your menu choice      "
+echo -n "     Enter your menu choice = Install [a] ~~ Remove & Upgrade [b] ~~ Skip [z]      "
 read yourch
 case $yourch in
 #
@@ -301,18 +292,18 @@ else
 
 echo " Downloading Vdr and Plugins on local repo "
 
-if [ -e /home/`logname`/Vdrrepo/vdr-2.6.1.tar.bz2 ]; then
+if [ -e /home/`logname`/Vdrrepo/vdr-2.6.4 ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    wget https://vdr-projects.e-tobi.net/git/vdr/snapshot/vdr-2.6.1.tar.bz2
+    git clone --branch stable/2.6 git://git.tvdr.de/vdr.git vdr-2.6.4
   fi
 
-if [ -e /home/`logname`/Vdrrepo/vdr-patches.2.6.1.tar.gz ]; then
+if [ -e /home/`logname`/Vdrrepo/vdr-patches.2.6.4.tar.gz ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    wget https://www.dropbox.com/s/k18y38vyl9endtf/vdr-patches.2.6.1.tar.gz
+    wget https://www.dropbox.com/s/mu9fx8udl94jy2p/vdr-patches.2.6.4.tar.gz
   fi
 
 if [ -e /home/`logname`/Vdrrepo/Make.config.tar.gz ]; then
@@ -321,7 +312,7 @@ else
   echo "File not found ... Downloading it now ....."
     wget https://www.dropbox.com/s/qds2k91od7oboed/Make.config.tar.gz
   fi
-  
+
 if [ -e /home/`logname`/Vdrrepo/vdrsymbols.tar.gz ]; then
   echo " ..... File exists ..... "
 else
@@ -385,11 +376,11 @@ else
     wget https://www.dropbox.com/s/qlnarjlzfsh8vvl/radio_scripts.tar.gz
 fi
 
-if [ -e /home/`logname`/Vdrrepo/vdr-plugin-mpv ]; then
+if [ -e /home/`logname`/Vdrrepo/vdr-plugin-vnsiserver ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    git clone https://github.com/ua0lnj/vdr-plugin-mpv.git
+    git clone https://github.com/vdr-projects/vdr-plugin-vnsiserver.git
 fi
 
 if [ -e /home/`logname`/Vdrrepo/channelscan ]; then
@@ -406,20 +397,13 @@ else
     wget https://www.dropbox.com/s/wm7c6nx4ymbcdk1/satellite_pack.tar.gz
 fi
 
-if [ -e /home/`logname`/Vdrrepo/vdr-systeminfo-0.1.5.tar.bz2 ]; then
-  echo " ..... File exists ..... "
-else
-  echo "File not found ... Downloading it now ....."
-    wget http://firefly.vdr-developer.org/systeminfo/vdr-systeminfo-0.1.5.tar.bz2
-fi
-
 echo " Downloading skins "
 
-if [ -e /home/`logname`/Vdrrepo/skindesigner ]; then
+if [ -e /home/`logname`/Vdrrepo/vdr-plugin-skinflatplus ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-     git clone https://gitlab.com/kamel5/skindesigner.git
+     git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git
   fi
 
 if [ -e /home/`logname`/Vdrrepo/logos ]; then
@@ -482,26 +466,25 @@ wget https://ffmpeg.org/releases/ffmpeg-5.0.1.tar.bz2
 
 echo "                    Downloading Vdr and Plugins on local repo "
 
-wget https://www.dropbox.com/s/wsmvt45newjywho/vdr-2.6.1.tar.bz2
-wget https://www.dropbox.com/s/o87kvrdx3zocksm/vdr-patches.2.6.1.tar.gz
+git clone --branch stable/2.6 git://git.tvdr.de/vdr.git vdr-2.6.4
+wget https://www.dropbox.com/s/mu9fx8udl94jy2p/vdr-patches.2.6.4.tar.gz
 wget https://www.dropbox.com/s/qds2k91od7oboed/Make.config.tar.gz
 wget https://www.dropbox.com/s/bx97ikp7c1h2qj2/vdrsymbols.tar.gz
 git clone https://github.com/vdr-projects/vdr-plugin-epgsearch.git
 wget https://www.dropbox.com/s/s9vggu8mil8ss7t/patch_epgsearch.tar.gz
-git clone   https://github.com/ua0lnj/vdr-plugin-dvbapi.git 
+git clone https://github.com/ua0lnj/vdr-plugin-dvbapi.git 
 git clone https://github.com/siricco/vdr-plugin-radio.git
 wget https://www.dropbox.com/s/qlnarjlzfsh8vvl/radio_scripts.tar.gz
 git clone https://github.com/rofafor/vdr-plugin-iptv.git
 wget https://www.dropbox.com/s/nof5ydmxrplw2b0/patch_iptv.tar.gz
 wget https://www.dropbox.com/s/vmhkf4rzhoh4wa5/iptv_conf.tar.gz
-git clone https://github.com/ua0lnj/vdr-plugin-mpv.git
+git clone https://github.com/vdr-projects/vdr-plugin-vnsiserver.git
 git clone https://bitbucket.org/ua0lnj/channelscan.git
 wget https://www.dropbox.com/s/wm7c6nx4ymbcdk1/satellite_pack.tar.gz
-wget http://firefly.vdr-developer.org/systeminfo/vdr-systeminfo-0.1.5.tar.bz2
 
 echo "                    Downloading skins "
 
-git clone https://gitlab.com/kamel5/skindesigner.git
+git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git
 wget https://www.dropbox.com/s/806odyj5vyco3dg/lcars_pack.tar.gz
 
 echo "                    Downloading others "
@@ -531,8 +514,8 @@ dialog --title "   ** Install Intel / Nvidia & Common Libraries **   " --infobox
 
         *****  Install  *****
         [a]    ONLY FOR Intel Devices (Intel vaapi driver)
-        [b]    Installing Sat firmware        
-        [c]    Ffmpeg
+        [b]    Installing Sat firmware
+        [c]    FFmpeg
         [d]    Infra-Red Remotes Control
 
         *****  Remove  *****
@@ -558,7 +541,6 @@ case $yourch in
 
 #############################################################
 a)
-sudo apt-get install libdrm-dev 
 clear
 echo "                    Installing Ubuntu-graphics-drivers"
 sleep 3
@@ -603,8 +585,9 @@ cp -rf *.fw /lib/firmware/
 cd dvbsky-firmware
 cp -rf *.fw /lib/firmware/
 cd ../Hauppuage
-dd if=hcw88bda.sys of=/lib/firmware/dvb-fe-cx24116-1.26.90.0.fw bs=1 skip=105768 count=32290
-ln -s /lib/firmware/dvb-fe-cx24116-1.26.90.0.fw /lib/firmware/dvb-fe-cx24116.fw
+#dd if=hcw88bda.sys of=/lib/firmware/dvb-fe-cx24116-1.26.90.0.fw bs=1 skip=105768 count=32290
+#ln -s /lib/firmware/dvb-fe-cx24116-1.26.90.0.fw /lib/firmware/dvb-fe-cx24116.fw
+cp -rf dvb-fe-cx24116.fw /lib/firmware/
 echo " Sat firmwares & drivers are now installed"; sleep 2
 fi;;
 
@@ -635,7 +618,7 @@ apt-get -y install libxvidcore-dev freeglut3-dev libssl-dev libvdpau-dev libdrm-
 apt-get -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev 
 apt-get -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
 apt-get -y install libglew-dev libglm-dev mesa-common-dev libogg-dev libva-dev
-apt-get -y install libpciaccess-dev xorg-dev
+apt-get -y install libpciaccess-dev xorg-dev libpulse-dev
 
     echo "                    Wait for a few seconds ..."
 cd /usr/local/src/ffmpeg_sources
@@ -644,7 +627,7 @@ tar xjvf ffmpeg-5.0.1.tar.bz2
 mv ffmpeg-5.0.1 ffmpeg
 rm -rf ffmpeg-5.0.1.tar.bz2
 cd ffmpeg
-./configure --extra-libs="-ldl" --enable-gpl --enable-libfreetype --enable-libmp3lame --enable-openssl --enable-libxcb --disable-libopus --enable-libtheora --enable-libvorbis --enable-libx265 --enable-cuvid --enable-nonfree --enable-libxvid --enable-opengl --enable-vdpau --enable-vaapi --enable-pic --enable-shared  --disable-doc --enable-swresample --enable-nvenc --enable-cuda --disable-cuda-sdk
+./configure --extra-libs="-ldl" --enable-gpl --enable-libfreetype --enable-libmp3lame --enable-openssl --enable-libxcb --disable-libopus --enable-libtheora --enable-libvorbis --enable-libx265 --enable-cuvid --enable-nonfree --enable-libxvid --enable-opengl --enable-vdpau --enable-vaapi --enable-pic --enable-shared  --disable-doc --enable-swresample --enable-nvenc --enable-cuda --disable-cuda-sdk --enable-libpulse
 
     echo "                    Press Enter to continue ...               "
     read enterKey
@@ -653,10 +636,9 @@ checkinstall --pkgname=ffmpeg --pkgversion="5.0.1" --backup=no --deldoc=yes --fs
 apt-mark hold ffmpeg
 sleep 3
 fi;;
-
-#############################################################
-
+#
 d)
+clear
 echo "                 *** Installing Infra-Red Remotes Control  ***"
 sleep 2
 clear
@@ -680,11 +662,13 @@ clear
 if [ -d /etc/lirc/hardware.conf ]
 then echo " Lirc is already installed"; sleep 3
 else apt remove ir-keytable lirc
+apt purge ir-keytable lirc
 echo 'deb [trusted=yes] http://ca.archive.ubuntu.com/ubuntu/ xenial universe' >>  /etc/apt/sources.list
 apt update
 apt -y install lirc/xenial
 apt -y install lirc-x/xenial
-sed -i "s|deb [trusted=yes] http://ca.archive.ubuntu.com/ubuntu/ xenial universe||" /etc/apt/sources.list
+#sed -i "s|deb [trusted=yes] http://ca.archive.ubuntu.com/ubuntu/ xenial universe||" /etc/apt/sources.list
+gedit /etc/apt/sources.list
 apt update
 echo " Lirc is now installed"
 apt-mark hold lirc lirc-x
@@ -692,13 +676,13 @@ sleep 3
 fi;;
 #
 b)
-echo "                 *** Installing Infra-Red Remotes Control (Eventlircd) ***" 
 clear
+echo "                 *** Installing Infra-Red Remotes Control (Eventlircd) ***" 
 if [ -d /usr/sbin/eventlircd ]
 then echo " Eventlircd is already installed"; sleep 3
 else 
 apt-get -y install gawk libudev-dev lirc evtest
-#update-rc.d lirc remove
+update-rc.d lirc remove
 cd /usr/local/src
 git clone https://github.com/LibreELEC/eventlircd.git
 cp -rf eventlircd /home/`logname`/Vdrrepo
@@ -738,7 +722,6 @@ chmod 0644 *
 rm -rf rules.tar.gz
 cd /usr/local/src
 mv -f eventlircd.conf.tar.gz /home/`logname`/Vdrrepo
-echo "Eventlircd is now installed" 
 sleep 2
 #
 echo "                *** Create Eventircd start command line (if installed)***"
@@ -803,6 +786,8 @@ echo '#!/bin/sh
 sleep 5
 sudo /etc/init.d/eventlircd start > /dev/null 2>&1' >> start-eventlircd.sh
 chmod 777 start-eventlircd.sh
+echo "Eventlircd is now installed"
+sleep 2
 fi;;
 esac;;
 
@@ -827,7 +812,6 @@ rm -rf /usr/local/src/ffmpeg_sources/nv-codec-headers
 rm -rf /usr/local/src/ffmpeg_sources/ffmpeg
 rm -rf $PACKAGES/ffmpeg*.deb;;
 #
-#
 c1)
 clear
 echo "                    Removing Lircd "
@@ -848,21 +832,19 @@ rm -rf /usr/local/bin/start-eventlircd.sh
 rm -rf /etc/sudoers.d/eventlircd
 rm -rf $SRC/eventlircd;;
 #
-z) ;;
+z);;
 esac;;
-
 #############################################################
 
 3)
 clear
-    dialog --title "   ** Install/Remove VDR-2.6.1   **   " --infobox "
+    dialog --title "   ** Install/Remove VDR-2.6.4   **   " --infobox "
 
    ---------------------------------------------------------------------------------------------
-        [a]  Install VDR-2.6.1
-        [b]  Remove VDR-2.6.1
+        [a]  Install VDR-2.6.4
+        [b]  Remove VDR-2.6.*
 
         [z]  Skip
-
    ---------------------------------------------------------------------------------------------" 0 0
 
     echo -n "        Enter your menu choice = Install [a] ~~ Remove [b] ~~ Skip [z]      "
@@ -879,84 +861,79 @@ apt-get -y install libfreetype6-dev libfontconfig1-dev libfribidi-dev gettext
 apt-get -y install libncurses5-dev libncursesw5-dev
 #
 cd $SRC
-cp -rf /home/`logname`/Vdrrepo/vdr-2.6.1.tar.bz2 $SRC/
-tar xjf vdr-2.6.1.tar.bz2
+cp -rf /home/`logname`/Vdrrepo/vdr-2.6.4 $SRC
 ln -s $VDR vdr
-rm -rf vdr-2.6.1.tar.bz2
 #
 echo " Patching VDR      "
 sleep 1
 cd vdr
-cp -rf /home/`logname`/Vdrrepo/vdr-patches.2.6.1.tar.gz $SRC/vdr/
-tar -zxvf vdr-patches.2.6.1.tar.gz
-rm -rf vdr-patches.2.6.1.tar.gz
+cp -rf /home/`logname`/Vdrrepo/vdr-patches.2.6.4.tar.gz $SRC/vdr/
+tar -zxvf vdr-patches.2.6.4.tar.gz
+rm -rf vdr-patches.2.6.4.tar.gz
 sleep 1
 #
 echo " *** Patching avcdescriptor ***"
-    patch -p1 < vdr_avcdescriptor.patch
+patch -p1 < vdr_avcdescriptor.patch
 echo " *** config ***"
-    patch -p1 < vdr_config.patch
+patch -p1 < vdr_config.patch
 echo " *** Patching dvb_power_saving_feature ***"
-    patch -p1 < vdr_dvb_power_saving_feature.patch
+patch -p1 < vdr_dvb_power_saving_feature.patch
 echo " *** Patching ClearObsoleteChannels ***"
-    patch -p1 < vdr_HelmutB_ClearObsoleteChannels.patch
+patch -p1 < vdr_HelmutB_ClearObsoleteChannels.patch
 #echo " *** mainmenuhooks ***"
-#    patch -p1 < vdr_mainmenuhook.patch
+#patch -p1 < vdr_mainmenuhook.patch
 echo " *** Patching vdr_maxdevice ***"
-    patch -p1 < vdr_maxdevice.patch
+patch -p1 < vdr_maxdevice.patch
 #echo " *** Patching vdr_menuorg ***"
 #    patch -p1 < vdr_menuorg.patch
 echo " *** Patching menuselection ***"
-    patch -p1 < vdr_menuselection.patch
-echo " *** Patching skinlcarsng ***"
-#    patch -p1 < vdr_skinlcarsng_numrecordings.patch
+patch -p1 < vdr_menuselection.patch
 #echo " *** Patching svdrphosts ***"
-    patch -p1 < vdr_svdrphosts.patch
+patch -p1 < vdr_svdrphosts.patch
 echo " *** Patching ttxtsub ***"
-    patch -p1 < vdr_ttxtsub.patch
+patch -p1 < vdr_ttxtsub.patch
 echo " *** Patching wareagleicon ***"
-    patch -p1 < vdr_wareagleicon.patch
+patch -p1 < vdr_wareagleicon.patch
 echo " *** Patching zapcockpit ***"
-    patch -p1 < vdr_zapcockpit.patch
-#
+patch -p1 < vdr_zapcockpit.patch
+echo " *** Patching channellscan ***"
+patch -p1 < vdr-dvbchan.patch
 cp -rf $VDRSRC/pictures/pic2mpg /usr/local/bin/
 #
 make && make plugins
-exit_status_check
 clear
 echo "                *** Final compilation ***"
+sleep 3
 echo ""
 cd /usr/local/src/vdr
-checkinstall --fstrans=no --install=yes --pkgname=vdr --pkgversion "2.6.1" --pakdir=$PACKAGES --default
+checkinstall --fstrans=no --install=yes --pkgname=vdr --pkgversion "2.6.4" --pakdir=$PACKAGES --default
 cp *.conf /etc/vdr;;
 #
 b)
 clear
-echo "                    Removing VDR-2.6.1"
-
-
-sleep 3
+echo "                    Removing VDR-2.6.4"
+sleep 1
 dpkg -r vdr
 dpkg --purge vdr
 rm -rf /etc/vdr
 rm -rf /usr/share/vdr
 rm -rf /usr/lib/vdr
 rm -rf /var/cache/vdr
-cd $SRC
-rm -rf vdr vdr-*
-cd packages
-rm -rf vdr*.deb
 rm -rf /usr/local/bin/vdrpoweroff
 rm -rf /usr/local/bin/vdrrun
-rm -rf /usr/local/lib/vdr
 rm -rf /usr/local/bin/vdr-*
-rm -rf /usr/local/bin/vdr
-rm -rf /usr/local/share/vdr
+rm -rf /usr/bin/vdr
 rm -rf /usr/local/bin/KillVdr.sh
 rm -rf /home/`logname`/Scrivania/Vdr.desktop
 rm -rf /home/`logname`/Scrivania/KillVdr.desktop
 rm -rf /usr/share/applications/Vdr.desktop
-rm -rf /usr/share/applications/KillVdr.desktop;;
+rm -rf /usr/share/applications/KillVdr.desktop
+rm -rf /etc/xdg/autostart/Vdr.desktop
+rm -rf /etc/xdg/autostart/Oscam.desktop
+cd $SRC
+rm -rf vdr vdr-*
+cd packages
+rm -rf vdr*.deb;;
 #
 z);;
 esac;;
@@ -968,8 +945,8 @@ clear
 
    ---------------------------------------------------------------------------------------------
 
-        [a]  Install VDR-2.6.1 - Plugins
-        [b]  Remove VDR-2.6.1 - Plugins
+        [a]  Install VDR-2.6.4 - Plugins
+        [b]  Remove VDR-2.6.4 - Plugins
 
         [z]  Skip
 
@@ -978,13 +955,13 @@ clear
     echo -n "        Enter your menu choice = Install [a] ~~ Remove [b] ~~ Skip [z]      "
     read yourch
     case $yourch in
-
 a)
 clear
 cd $SRC
 mkdir -p /etc/vdr/plugins
 mkdir -p /etc/vdr/themes
-mkdir -p /$SHARE/skindesigner/scripts
+rm -rf /media/video
+mkdir /media/video
 #
 echo "               *** Setup Softhddevice / Softhdcuvid ***"
 sleep 2
@@ -1023,8 +1000,6 @@ cd $VDRSRC
 git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git
 cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdrrepo/
 mv vdr-plugin-softhddevice softhddevice
-echo "Edit Makefile for your choice - disable/enable screensaver"
-sleep 3
 cd softhddevice
 make && make install;;
 b)
@@ -1056,15 +1031,10 @@ apt-get -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-scr
 apt-get -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
 cd $VDRSRC
 wget https://github.com/ua0lnj/vdr-plugin-softhddevice/archive/refs/heads/test.zip
-https://github.com/ua0lnj/vdr-plugin-softhddevice/archive/refs/heads/test.zip
 unzip test.zip
 cp -rf /$VDRSRC/vdr-plugin-softhddevice-test /home/`logname`/Vdrrepo/
 mv vdr-plugin-softhddevice-test softhddevice
 cd softhddevice
-rm -rf Makefile
-wget https://www.dropbox.com/s/1defhq944lffrm8/patch_softhddevice_ua0lnj_vaapi.tar.gz
-tar -zxvf patch_softhddevice_ua0lnj_vaapi.tar.gz
-mv -f patch_softhddevice_ua0lnj_vaapi.tar.gz /home/`logname`/Vdrrepo/
 make && make install;;
 #
 d)
@@ -1117,18 +1087,26 @@ patch -p1 < 12_epgsearch_README.patch
 cd ../../..
 make plugins
 #
-echo "               *** Skindesigner ***"
+echo "               *** Skinflatplus ***"
 sleep 2
-apt-get -y install libcurl4 libcurl4-gnutls-dev
-apt-get -y install librsvg2-dev libxml2-dev libcairo2-dev lm-sensors
+apt-get -y install libfreetype6-dev graphicsmagick-libmagick-dev-compat lm-sensors
 cd $VDRSRC
-cp -rf /home/`logname`/Vdrrepo/skindesigner /$VDRSRC/
-cd skindesigner
+cp -rf /home/`logname`/Vdrrepo/vdr-plugin-skinflatplus /$VDRSRC/
+mv vdr-plugin-skinflatplus skinflatplus
+cd skinflatplus
 make && make install
+cd /usr/lib/vdr/skinflatplus/widgets/temperatures
+ln -s temperatures.default temperatures
+cd ../system_information
+ln -s system_information.ubuntu system_information
+cd ../weather/
+wget https://www.dropbox.com/s/x80qbwk8xnwi0u5/flat_weather.tar.gz
+tar -zxvf flat_weather.tar.gz
+mv -f flat_weather.tar.gz /home/`logname`/Vdrrepo/
 #
 echo "               *** Iptv ***"
 sleep 2
-apt-get -y install vlc 
+apt-get -y install vlc libcurl4 libcurl4-gnutls-dev
 cd $VDRSRC
 cp -rf /home/`logname`/Vdrrepo/vdr-plugin-iptv /$VDRSRC
 mv vdr-plugin-iptv iptv
@@ -1173,25 +1151,13 @@ cd transponders
 tar -zxvf satellite_pack.tar.gz
 rm -rf satellite_pack.tar.gz
 #
-echo "              *** Mpv ***"; echo ""
+echo "               *** Vnsiserver ***"
 sleep 2
-apt-get -y install mpv libmpv-dev libmpv1 libxrandr-dev
 cd $VDRSRC
-cp -rf /home/`logname`/Vdrrepo/vdr-plugin-mpv /$VDRSRC
-mv vdr-plugin-mpv mpv
-cd mpv
+cp -rf /home/`logname`/Vdrrepo/vdr-plugin-vnsiserver /$VDRSRC/
+mv vdr-plugin-vnsiserver vnsiserver
+cd vnsiserver
 make && make install
-#
-echo "               *** System Info ***"
-sleep 2
-cd $VDRSRC
-cp -rf /home/`logname`/Vdrrepo/vdr-systeminfo-0.1.5.tar.bz2 /$VDRSRC
-tar xivf vdr-systeminfo-0.1.5.tar.bz2
-mv systeminfo-0.1.5 systeminfo
-rm -rf vdr-systeminfo-0.1.5.tar.bz2
-mv -f $VDRSRC/systeminfo/scripts/systeminfo.sh /usr/local/bin/
-cd ../..
-make plugins
 #
 cd $SRC/vdr
 make plugins install
@@ -1199,37 +1165,30 @@ make plugins install
 cd /home/`logname`/Vdrrepo
 chmod -R 777 *;;
 #
-#echo "                    Press Enter to continue ...               "
-#read enterKey;;
-
-#############################################################
-
 b)
 
 clear
 clear
-echo "                    Removing VDR-2.6.1 plugins"
+echo "                    Removing VDR-2.6.4 plugins"
 cd $VDRSRC
 rm -rf softhdcuvid
 rm -rf softhddevice
 rm -rf epgsearch
-rm -rf skindesigner 
+rm -rf skinflatplus
 rm -rf iptv
 rm -rf radio
-rm -rf tvguideng
 rm -rf channelscan
-rm -rf systeminfo
+rm -rf vnsiserver
 rm -rf dvbapi
 cd $LIB
 rm -rf libvdr-softhdcuvid.*
 rm -rf libvdr-softhddevice.*
 rm -rf libvdr-epgsearch.*
-rm -rf libvdr-skindesigner
+rm -rf skinflatplus.*
 rm -rf libvdr-iptv.*
 rm -rf libvdr-radio.*
-rm -rf libvdr-tvguideng.*
 rm -rf libvdr-channelscan.*
-rm -rf libvdr-systeminfo.*
+rm -rf libvdr-vnsiserver.*
 rm -rf libvdr-dvbapi.*;;
 z);;
 #
@@ -1293,167 +1252,6 @@ tar -zxvf vdrsymbols.tar.gz
 fc-cache -fv
 fi
 #
-echo "                    Create Vdr start command line"
-sleep 1
-rm -rf /usr/local/bin/vdrrun
-touch /usr/local/bin/vdrrun
-echo '#!/bin/bash
-
-/usr/local/bin/vdr -c /etc/vdr -E /var/vdr -l 3 -u root '$PLUGIN' -s /usr/local/bin/vdrpoweroff
-
-# for hdmi audio'-P sofhthddevive -a hw:1,3 -f' >> /usr/local/bin/vdrrun
-chmod a+x /usr/local/bin/vdrrun
-#
-#
-    dialog --title "   ** Create start Vdr command line **   " --infobox "
-   ----------------------------------------------
-          Create start Vdr command line
-   ----------------------------------------------
-
-	NVIDIA VIDEO DEVICES
-        [a]    Softhddevice (default) & Mpv
-        [b]    Softhdcuvid & Mpv
-        
-	INTEL VIDEO DEVICES
-        [c]    Softhddevice (default) & Mpv	
-        [d]    Softhdvaapi & Mpv
-
-   ---------------------------------------------- " 0 0
-echo -n "        Enter your menu choice  [a-d]:      "
-read yourch
-case $yourch in
-# da cambiare i setup
-a) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f' -P'mpv -a alsa -b / -l ita'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && tar -zxvf setup16_softhddevice.tar.gz && mv -f /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/;;
-b) clear; sed -i "s|-P'dvbapi'|& -P'softhdcuvid -d :0.0 -f' -P'mpv -a alsa -v vaapi -b /-l ita'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/f6ngr529g1obxgg/setup16_softhdcuvid.tar.gz  && tar -zxvf setup16_softhdcuvid.tar.gz && mv -f /etc/vdr/setup16_softhdcuvid.tar.gz /home/`logname`/Vdrrepo/;;
-c) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -v va-api-egl -d :0.0 -f' -P'mpv -a alsa -v gpu -h vaapi-copy -b /-l ita'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && tar -zxvf setup16_softhddevice.tar.gz && mv -f /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/;;
-d) clear; sed -i "s|-P'dvbapi'|& -P'softhdvaapi -d :0.0 -f' -P'mpv -a alsa -v vaapi -b /-l ita'|" /usr/local/bin/vdrrun && cd /etc/vdr/  && wget https://www.dropbox.com/s/f6ngr529g1obxgg/setup16_softhdcuvid.tar.gz  && tar -zxvf setup16_softhdcuvid.tar.gz && mv -f /etc/vdr/setup16_softhdcuvid.tar.gz /home/`logname`/Vdrrepo/;;
-
-esac
-#
-echo "                    *** Create init.d Vdr ***"
-sleep 1
-rm -rf /etc/init.d/vdr
-touch /etc/init.d/vdr
-echo '#!/bin/sh
-#
-# To be copied to: /etc/init.d
-# And type:
-### BEGIN INIT INFO
-# Provides:          VDR
-# Required-Start:
-# Required-Stop:
-# Default-Start:     0 1 2 3 4 5 6
-# Default-Stop:
-# Description:       Start, Stop or Restart VDR
-### END INIT INFO
-
-# Shell functions sourced from /etc/rc.status:
-set -e
-
-# Reset status of this service
-# rc_reset
-#
-echo "Vdr init.d script using: $1" >> /var/log/vdr.log &
-case "$1" in
-    start)
-        echo -n "Start VDR "
-       /usr/local/bin/vdrrun >> /var/log/vdr.log &
-        # Remember status and be verbose
-        ;;
-    stop)
-        echo -n "Stop VDR "
-
-        killall -9 mpv & killall -9 vlc & killall -9 vdr
-        
-        # Remember status and be verbose
-        ;;
-    restart)
-        echo -n "Restart VDR "
-        $0 stop
-        $0 start
-
-        # Remember status and be quiet
-        ;;
-    *)
-        echo "Usage: $0 {start|stop|restart}"
-        exit 1
-        ;;
-esac
-exit 0
-' >> /etc/init.d/vdr
-chmod 777 /etc/init.d/vdr
-#
-rm -rf /usr/local/bin/start-vdr.sh
-touch /usr/local/bin/start-vdr.sh
-echo "#!/bin/sh
-
-sleep 10
-sudo /etc/init.d/vdr start > /dev/null 2>&1" >> /usr/local/bin/start-vdr.sh
-chmod 777 /usr/local/bin/start-vdr.sh
-#
-echo "                    *** Create Vdr vdrpoweroff ***"
-sleep 1
-rm -rf /usr/local/bin/vdrpoweroff
-touch /usr/local/bin/vdrpoweroff
-echo '#!/bin/sh
-#file name: Kill Vdr "vdrpoweroff"
-killall -9 mpv & killall -9 vdr & killall -9 vlc
-# & killall -9 oscam & shutdown -h now '  >> /usr/local/bin/vdrpoweroff
-chmod 777 /usr/local/bin/vdrpoweroff
-#
-echo "                    *** Setup Vdr icons  ***"
-sleep 3
-rm -rf /home/`logname`/Scrivania/Vdr.desktop
-rm -rf /usr/share/applications/Vdr.desktop
-touch /usr/share/applications/Vdr.desktop
-chmod 777 /usr/share/applications/Vdr.desktop
-echo "[Desktop Entry]
-Version=1.0
-Encoding=UTF-8
-Type=Application
-Name=Vdr
-Description=Start of Vdr
-Icon=/usr/local/src/icone/vdr.png
-Exec=/usr/local/bin/start-vdr.sh
-" >> /usr/share/applications/Vdr.desktop
-chmod 777 /usr/share/applications/Vdr.desktop
-#
-echo "                    *** Setup Kill Vdr icon  ***"
-sleep 1
-rm -rf /home/`logname`/Scrivania/KillVdr.desktop
-rm -rf /usr/share/applications/KillVdr.desktop
-touch /usr/share/applications/KillVdr.desktop
-chmod 777 /usr/share/applications/KillVdr.desktop
-echo "[Desktop Entry]
-Version=1.0
-Encoding=UTF-8
-Type=Application
-Name=KillVdr
-Description=Kill Vdr
-Icon=/usr/local/src/icone/killvdr.png
-Exec=/usr/local/bin/KillVdr.sh
-" >> /usr/share/applications/KillVdr.desktop
-chmod 777 /usr/share/applications/KillVdr.desktop
-#
-rm -rf /usr/local/bin/KillVdr.sh
-touch /usr/local/bin/KillVdr.sh
-echo '#!/bin/sh
-
-sudo /etc/init.d/vdr stop > /dev/null 2>&1
-' >> /usr/local/bin/KillVdr.sh
-chmod 777 /usr/local/bin/KillVdr.sh
-#
-echo "                    *** Install default Skin for Vdr  ***"
-sleep 1
-if [ -f /etc/vdr/themes/checklcars ]
-then echo " Default Skin is already installed"
-else cp -rf /home/`logname`/Vdrrepo/lcars_pack.tar.gz /etc/vdr/themes
-cd /etc/vdr/themes
-tar -zxvf lcars_pack.tar.gz
-cd /etc/vdr/themes
-rm -rf lcars_pack.tar.gz
-fi
-#
 echo "                    *** Install Channels logos  ***"
 sleep 1
 if [ -f /etc/vdr/logos/2be.png ]
@@ -1486,30 +1284,29 @@ clear
         [m]    Eutelsat 5°W
         [n]    Hispasat - 30°W
         [p]    Camper - 13°E
-          
+
         [z]    Skip
 
    ---------------------------------------------- " 0 0
-echo -n "        Enter your menu choice  [a-z]:      "
+echo -n "        Enter your menu choice = Install [a-p] ~~ Skip [z]      "
 read yourch
 case $yourch in
 
-a) clear; echo "$TRIAL" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/oebo5gddykvxng4/channels.conf.trial.tar.gz && tar -zxvf channels.conf.trial.tar.gz && mv -f /etc/vdr/channels.conf.trial.tar.gz /home/`logname`/Vdrrepo/; echo "Channell list installed"; sleep 2;;
-b) clear; echo "$DUAL" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 0/DiSEqC = 1/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/0h0dczjbx288aat/channels.conf.dual.tar.gz && tar -zxvf channels.conf.dual.tar.gz && mv -f /etc/vdr/channels.conf.dual.tar.gz /home/`logname`/Vdrrepo/; echo "Channell list installed"; sleep 2;;
+a) clear; echo "$TRIAL" >> /etc/vdr/diseqc.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/oebo5gddykvxng4/channels.conf.trial.tar.gz && tar -zxvf channels.conf.trial.tar.gz && mv -f /etc/vdr/channels.conf.trial.tar.gz /home/`logname`/Vdrrepo/; echo "Channell list installed"; sleep 2;;
+b) clear; echo "$DUAL" >> /etc/vdr/diseqc.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/0h0dczjbx288aat/channels.conf.dual.tar.gz && tar -zxvf channels.conf.dual.tar.gz && mv -f /etc/vdr/channels.conf.dual.tar.gz /home/`logname`/Vdrrepo/; echo "Channell list installed"; sleep 2;;
 # c);;
-d) echo "$MONO9" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/5ua5501tc74biys/channels-w_scan2-Eutelsat_9.conf.tar.gz && tar -zxvf channels-w_scan2-Eutelsat9.conf.tar.gz && mv -f /etc/vdr/channels-w_scan2-Eutelsat9.conf.tar.gz /home/`logname`/Vdrrepo/; echo "Channell list installed"; sleep 2;;
-e) clear; echo "$MONO13" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/oebo5gddykvxng4/channels.conf.trial.tar.gz && tar -zxvf channels.conf.trial.tar.gz && mv -f /etc/vdr/channels.conf.trial.tar.gz /home/`logname`/Vdrrepo/; echo "Channell list installed"; sleep 2;;
-f) clear; echo "$MONO19" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/igp1yulhe9lj4o6/channels-w_scan2-Astra_19.conf.tar.gz && tar -zxvf channels-w_scan2-Astra_19.conf.tar.gz && mv -f /etc/vdr/channels-w_scan2-Astra_19.conf.tar.gz /home/`logname`/Vdrrepo/; echo "Channell list installed"; sleep 2;;
-g) clear; echo "$MONO23" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/4kd5zwqkmac34nt/channels-w_scan2-Astra23.conf.tar.gz && tar -zxvf channels-w_scan2-Astra23.conf.tar.gz && mv -f /etc/vdr/channels-w_scan2-Astra23.conf.tar.gz /home/`logname`/Vdrrepo/; echo "Channell list installed"; sleep 2;;
-h) clear; echo "$MONO28" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://channelpedia.yavdr.com/gen/DVB-S/S28.2E/S28.2E_complete_sorted_by_groups.channels.conf/S28.2E_complete_sorted_by_groups.channels.conf && mv -f S28.2E_complete_sorted_by_groups.channels.conf Astra28_channels.conf && cp -rf Astra28_channels.conf /home/`logname`/Vdrrepo/; echo "Channell list installed"; sleep 2;;
-i) clear; echo "$MONO42" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/ax4l7pa7ckp9ndk/channels-w_scan2-Turksat.conf.tar.gz && tar -zxvf channels-w_scan2-Turksat.conf.tar.gz && mv -f /etc/vdr/channels-w_scan2-Turksat.conf.tar.gz /home/`logname`/Vdrrepo/; echo "Channell list installed"; sleep 2;;
-l) clear; echo "$MONO08W" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/sqq40r6i461s1mx/channels-w_scan2-Thor.conf.tar.gz  && tar -zxvf channels-w_scan2-Thor.conf.tar.gz && mv -f /etc/vdr/channels-w_scan2-Thor.conf.tar.gz /home/`logname`/Vdrrepo/; echo "Channell list installed"; sleep 2;;
-# clear; m) echo "$MONO5W" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/vt0wxz86c3x6y1n/channels-w_scan2-Eutelsat5.tar.gz && cp -rf /etc/vdr/channels-w_scan2-Eutelsat5.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels-w_scan2-Eutelsat5.tar.gz && rm -rf channels-w_scan2-Eutelsat5.tar.gz;;
-n) clear; echo "$MONO30W" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/vt0wxz86c3x6y1n/channels-w_scan2-Eutelsat5.tar.gz && tar -zxvf channels-w_scan2-Eutelsat5.tar.gz && mv -f /etc/vdr/channels-w_scan2-Eutelsat5.tar.gz /home/`logname`/Vdrrepo/;;
-p) clear; echo "$MONO13_CAMPER" >> /etc/vdr/diseqc.conf && sed -i 's/DiSEqC = 1/DiSEqC = 0/' /etc/vdr/setup.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/bvqumx2x6hqr9jc/channels.conf.camper.tar.gz && tar -zxvf channels.conf.camper.tar.gz && mv -f /etc/vdr/channels.conf.camper.tar.gz /home/`logname`/Vdrrepo/;;
+d) echo "$MONO9" >> /etc/vdr/diseqc.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/5ua5501tc74biys/channels-w_scan2-Eutelsat_9.conf.tar.gz && tar -zxvf channels-w_scan2-Eutelsat9.conf.tar.gz && mv -f /etc/vdr/channels-w_scan2-Eutelsat9.conf.tar.gz /home/`logname`/Vdrrepo/; echo "Channell list installed"; sleep 2;;
+e) clear; echo "$MONO13" >> /etc/vdr/diseqc.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/oebo5gddykvxng4/channels.conf.trial.tar.gz && tar -zxvf channels.conf.trial.tar.gz && mv -f /etc/vdr/channels.conf.trial.tar.gz /home/`logname`/Vdrrepo/; echo "Channell list installed"; sleep 2;;
+f) clear; echo "$MONO19" >> /etc/vdr/diseqc.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/igp1yulhe9lj4o6/channels-w_scan2-Astra_19.conf.tar.gz && tar -zxvf channels-w_scan2-Astra_19.conf.tar.gz && mv -f /etc/vdr/channels-w_scan2-Astra_19.conf.tar.gz /home/`logname`/Vdrrepo/; echo "Channell list installed"; sleep 2;;
+g) clear; echo "$MONO23" >> /etc/vdr/diseqc.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/4kd5zwqkmac34nt/channels-w_scan2-Astra23.conf.tar.gz && tar -zxvf channels-w_scan2-Astra23.conf.tar.gz && mv -f /etc/vdr/channels-w_scan2-Astra23.conf.tar.gz /home/`logname`/Vdrrepo/; echo "Channell list installed"; sleep 2;;
+h) clear; echo "$MONO28" >> /etc/vdr/diseqc.conf && cd /etc/vdr/ && wget https://channelpedia.yavdr.com/gen/DVB-S/S28.2E/S28.2E_complete_sorted_by_groups.channels.conf/S28.2E_complete_sorted_by_groups.channels.conf && mv -f S28.2E_complete_sorted_by_groups.channels.conf Astra28_channels.conf && cp -rf Astra28_channels.conf /home/`logname`/Vdrrepo/; echo "Channell list installed"; sleep 2;;
+i) clear; echo "$MONO42" >> /etc/vdr/diseqc.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/ax4l7pa7ckp9ndk/channels-w_scan2-Turksat.conf.tar.gz && tar -zxvf channels-w_scan2-Turksat.conf.tar.gz && mv -f /etc/vdr/channels-w_scan2-Turksat.conf.tar.gz /home/`logname`/Vdrrepo/; echo "Channell list installed"; sleep 2;;
+l) clear; echo "$MONO08W" >> /etc/vdr/diseqc.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/sqq40r6i461s1mx/channels-w_scan2-Thor.conf.tar.gz  && tar -zxvf channels-w_scan2-Thor.conf.tar.gz && mv -f /etc/vdr/channels-w_scan2-Thor.conf.tar.gz /home/`logname`/Vdrrepo/; echo "Channell list installed"; sleep 2;;
+# clear; m) echo "$MONO5W" >> /etc/vdr/diseqc.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/vt0wxz86c3x6y1n/channels-w_scan2-Eutelsat5.tar.gz && cp -rf /etc/vdr/channels-w_scan2-Eutelsat5.tar.gz /home/`logname`/Vdrrepo/ && tar -zxvf channels-w_scan2-Eutelsat5.tar.gz && rm -rf channels-w_scan2-Eutelsat5.tar.gz;;
+n) clear; echo "$MONO30W" >> /etc/vdr/diseqc.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/vt0wxz86c3x6y1n/channels-w_scan2-Eutelsat5.tar.gz && tar -zxvf channels-w_scan2-Eutelsat5.tar.gz && mv -f /etc/vdr/channels-w_scan2-Eutelsat5.tar.gz /home/`logname`/Vdrrepo/;;
+p) clear; echo "$MONO13_CAMPER" >> /etc/vdr/diseqc.conf && cd /etc/vdr/ && wget https://www.dropbox.com/s/bvqumx2x6hqr9jc/channels.conf.camper.tar.gz && tar -zxvf channels.conf.camper.tar.gz && mv -f /etc/vdr/channels.conf.camper.tar.gz /home/`logname`/Vdrrepo/;;
 z);;
 esac
-#
 #
 sleep 1
 clear
@@ -1667,31 +1464,45 @@ chmod 777 /usr/local/bin/KillOscam.sh
 systemctl enable pcscd
 systemctl start pcscd
 #
-echo "                    Configuring Skindesigner"
+echo "                    *** Setup Kill Vdr icon  ***"
 sleep 1
-cd /usr/lib/vdr/skindesigner/scripts/
-clear
-    dialog --title "   ** Configuring Skindesigner **   " --infobox "
-   ----------------------------------------------
-              Infra-Red Remotes Control
-   ----------------------------------------------
-        [a]    Nvidia video device
-        [b]    Intel & Arm video device
+rm -rf /home/`logname`/Scrivania/KillVdr.desktop
+rm -rf /usr/share/applications/KillVdr.desktop
+touch /usr/share/applications/KillVdr.desktop
+chmod 777 /usr/share/applications/KillVdr.desktop
+echo "[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Name=KillVdr
+Description=Kill Vdr
+Icon=/usr/local/src/icone/killvdr.png
+Exec=/usr/local/bin/KillVdr.sh
+" >> /usr/share/applications/KillVdr.desktop
+chmod 777 /usr/share/applications/KillVdr.desktop
+#
+rm -rf /usr/local/bin/KillVdr.sh
+touch /usr/local/bin/KillVdr.sh
+echo '#!/bin/sh
 
-        [z]    Skip
-
-    ---------------------------------------------- " 0 0
-    echo -n "        Enter your menu choice  [a-z]:      "
-    read yourch
-    case $yourch in
-a);;
-b)sed -i "s|GPU=`nvidia-smi --query-gpu=temperature.gpu --format=csv,noheader`||" /usr/lib/vdr/skindesigner/scripts/temperatures.default
- sed -i 's|echo "${GPU}°C" > ${OUTPUTFLDR}/gpu"||' /usr/lib/vdr/skindesigner/scripts/temperatures.default;;
-esac
-ln -s temperatures.default temperatures
-ln -s vdrstats.default vdrstats
-cd /home/`logname`/Vdrrepo/
-chmod -R 777 *
+sudo /etc/init.d/vdr stop > /dev/null 2>&1
+' >> /usr/local/bin/KillVdr.sh
+chmod 777 /usr/local/bin/KillVdr.sh
+#
+echo "                    *** Install default Skin for Vdr  ***"
+sleep 1
+if [ -f /etc/vdr/themes/checklcars ]
+then echo " Default Skin is already installed"
+else cp -rf /home/`logname`/Vdrrepo/lcars_pack.tar.gz /etc/vdr/themes
+cd /etc/vdr/themes
+tar -zxvf lcars_pack.tar.gz
+cd /etc/vdr/themes
+rm -rf lcars_pack.tar.gz
+fi
+#
+echo "                    Configuring Vnsiserver"
+sleep 1
+cp -rf $VDRSRC/vnsiserver/vnsiserver/allowed_hosts.conf /$PLUGINS/vnsiserver
 #
 echo "                    Configuring Iptv"
 sleep 1
@@ -1702,41 +1513,246 @@ rm -rf vlc2iptv
 tar -zxvf iptv_conf.tar.gz
 rm -rf iptv_conf.tar.gz
 #
+echo "                    *** Create Vdr vdrpoweroff ***"
+sleep 1
+rm -rf /usr/local/bin/vdrpoweroff
+touch /usr/local/bin/vdrpoweroff
+echo '#!/bin/sh
+#file name: Kill Vdr "vdrpoweroff"
+killall -9 vdr & killall -9 vlc
+# & killall -9 oscam & shutdown -h now '  >> /usr/local/bin/vdrpoweroff
+chmod 777 /usr/local/bin/vdrpoweroff
+#
 echo "             *** Permission to execute Eventlircd - Vdr - Oscam  ***"
 sleep 2
-#
 rm -rf /etc/sudoers.d/eventlircd
 touch /etc/sudoers.d/eventlircd
 echo "eventlircd ALL=(ALL) ALL" >> /etc/sudoers.d/eventlircd
 echo "%`logname` ALL=NOPASSWD: /etc/init.d/eventlircd" >> /etc/sudoers.d/eventlircd
-rm -rf /etc/sudoers.d/vdr
-touch /etc/sudoers.d/vdr
-echo "vdr ALL=(ALL) ALL" >> /etc/sudoers.d/vdr
-echo "%`logname` ALL=NOPASSWD: /etc/init.d/vdr" >> /etc/sudoers.d/vdr
 rm -rf /etc/sudoers.d/oscam
 touch /etc/sudoers.d/oscam
 echo "oscam ALL=(ALL) ALL" >> /etc/sudoers.d/oscam
 echo "%`logname` ALL=NOPASSWD: /etc/init.d/oscam" >> /etc/sudoers.d/oscam
+rm -rf /etc/sudoers.d/vdr
+touch /etc/sudoers.d/vdr
+echo "vdr ALL=(ALL) ALL" >> /etc/sudoers.d/vdr
+echo "%`logname` ALL=NOPASSWD: /etc/init.d/vdr" >> /etc/sudoers.d/vdr
+rm -rf /etc/sudoers.d/server-vdr
+touch /etc/sudoers.d/server-vdr
+echo "vdr ALL=(ALL) ALL" >> /etc/sudoers.d/server-vdr
+echo "%`logname` ALL=NOPASSWD: /etc/init.d/server-vdr" >> /etc/sudoers.d/server-vdr
 #
-echo "                    *** Automatic start Vdr - Oscam  ***"
+
+echo "             *** Configuring VDR & Vdr Server  ***"
+clear
+echo "                    Create Vdr start command line"
+sleep 1
+rm -rf /usr/local/bin/vdrrun
+touch /usr/local/bin/vdrrun
+echo '#!/bin/bash
+
+/usr/bin/vdr -c /etc/vdr -E /var/vdr -l 3 -u root '$PLUGIN' -s /usr/local/bin/vdrpoweroff
+
+# for hdmi nvidia audio -P softhddevice -a hw:1,3 -f 
+# for hdmi intel audio -P softhddevice -a hw:0,3 -f ' >> /usr/local/bin/vdrrun
+chmod a+x /usr/local/bin/vdrrun
+#
+echo "                    *** Create init.d Vdr ***"
+sleep 1
+rm -rf /etc/init.d/vdr
+touch /etc/init.d/vdr
+echo '#!/bin/sh
+#
+# To be copied to: /etc/init.d
+# And type:
+### BEGIN INIT INFO
+# Provides:          VDR
+# Required-Start:
+# Required-Stop:
+# Default-Start:     0 1 2 3 4 5 6
+# Default-Stop:
+# Description:       Start, Stop or Restart VDR
+### END INIT INFO
+
+# Shell functions sourced from /etc/rc.status:
+set -e
+
+# Reset status of this service
+# rc_reset
+#
+echo "Vdr init.d script using: $1" >> /var/log/vdr.log &
+case "$1" in
+    start)
+        echo -n "Start VDR "
+        /usr/local/bin/vdrrun >> /var/log/vdr.log &
+        # Remember status and be verbose
+        ;;
+    stop)
+        echo -n "Stop VDR "
+
+        killall -9 vlc & killall -9 vdr
+        
+        # Remember status and be verbose
+        ;;
+    restart)
+        echo -n "Restart VDR "
+        $0 stop
+        $0 start
+
+        # Remember status and be quiet
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+        ;;
+esac
+exit 0
+' >> /etc/init.d/vdr
+chmod 777 /etc/init.d/vdr
+#
+rm -rf /usr/local/bin/start-vdr.sh
+touch /usr/local/bin/start-vdr.sh
+echo "#!/bin/sh
+
+#sleep 10
+sudo /etc/init.d/vdr start > /dev/null 2>&1" >> /usr/local/bin/start-vdr.sh
+chmod 777 /usr/local/bin/start-vdr.sh
+#
+echo "                    *** Setup Vdr icons  ***"
+sleep 3
+rm -rf /home/`logname`/Scrivania/Vdr.desktop
+rm -rf /usr/share/applications/Vdr.desktop
+touch /usr/share/applications/Vdr.desktop
+chmod 777 /usr/share/applications/Vdr.desktop
+echo "[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Name=Vdr
+Description=Start of Vdr
+Icon=/usr/local/src/icone/vdr.png
+Exec=/usr/local/bin/start-vdr.sh
+" >> /usr/share/applications/Vdr.desktop
+chmod 777 /usr/share/applications/Vdr.desktop
+#
+echo "                    Create Vdr Server start command line"
+clear
+sleep 1
+rm -rf /usr/local/bin/server_vdrrun
+touch /usr/local/bin/server_vdrrun
+echo '#!/bin/bash
+
+/usr/bin/vdr -c /etc/vdr -E /var/vdr -l 3 -u root '$PLUGINSERVER' ' >> /usr/local/bin/server_vdrrun
+
+chmod a+x /usr/local/bin/server_vdrrun
+#
+echo "                    *** Create init.d Vdr Server***"
+sleep 1
+rm -rf /etc/init.d/server-vdr
+touch /etc/init.d/server-vdr
+echo '#!/bin/sh
+#
+# To be copied to: /etc/init.d
+# And type:
+### BEGIN INIT INFO
+# Provides:          VDR
+# Required-Start:
+# Required-Stop:
+# Default-Start:     0 1 2 3 4 5 6
+# Default-Stop:
+# Description:       Start, Stop or Restart VDR
+### END INIT INFO
+
+# Shell functions sourced from /etc/rc.status:
+set -e
+
+# Reset status of this service
+# rc_reset
+#
+echo "Vdr init.d script using: $1" >> /var/log/vdr.log &
+case "$1" in
+    start)
+        echo -n "Start VDR "
+       /usr/local/bin/server_vdrrun >> /var/log/vdr.log &
+        # Remember status and be verbose
+        ;;
+    stop)
+        echo -n "Stop VDR "
+
+        killall -9 vlc & killall -9 vdr
+        
+        # Remember status and be verbose
+        ;;
+    restart)
+        echo -n "Restart VDR "
+        $0 stop
+        $0 start
+
+        # Remember status and be quiet
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+        ;;
+esac
+exit 0
+' >> /etc/init.d/server-vdr
+chmod 777 /etc/init.d/server-vdr
+#
+rm -rf /usr/local/bin/start-server-vdr.sh
+touch /usr/local/bin/start-server-vdr.sh
+echo "#!/bin/sh
+
+#sleep 5
+/usr/lib/x86_64-linux-gnu/kodi/kodi.bin & sudo /etc/init.d/server-vdr start > /dev/null 2>&1" >> /usr/local/bin/start-server-vdr.sh
+chmod 777 /usr/local/bin/start-server-vdr.sh
+#
+echo "                    *** Setup Vdr Server icons  ***"
+sleep 3
+rm -rf /home/`logname`/Scrivania/Server.desktop
+rm -rf /usr/share/applications/Server.desktop
+touch /usr/share/applications/Server.desktop
+echo "[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Name=Server_Vdr
+Description=Start of Vdr Server
+Icon=/usr/local/src/icone/server_vdr.png
+Exec=/usr/local/bin/start-server-vdr.sh
+" >> /usr/share/applications/Server.desktop
+chmod 777 /usr/share/applications/Server.desktop
+#
 sleep 1
 cd /etc/xdg/autostart
 clear
-    dialog --title "   ** Automatic start Vdr - Oscam **   " --infobox "
+echo  "        ** Automatic start Vdr - Vdr Server - Oscam  command**"
+sleep 2
+wget https://www.dropbox.com/s/wjgrdnrzbx29vik/autostart.tar.gz; tar -zxvf autostart.tar.gz; mv -f autostart.tar.gz /home/`logname`/Vdrrepo
+#
+clear
+    dialog --title "   ** Configuring Frontend **   " --infobox "
    ----------------------------------------------
-              Infra-Red Remotes Control
+        Configuring Frontend & Vdr command line
    ----------------------------------------------
-        [a]    Automatic start Vdr - Oscam
-        [b]    Skip
 
-    ---------------------------------------------- " 0 0
-    echo -n "        Enter your menu choice  [a-b]:      "
-    read yourch
-    case $yourch in
+	NVIDIA VIDEO DEVICES
+        [a]    Softhddevice (default)
+        [b]    Softhdcuvid
+        
+	INTEL VIDEO DEVICES
+        [c]    Softhddevice (default)	
+        [d]    Softhdvaapi
 
-
-a) clear; wget https://www.dropbox.com/s/wjgrdnrzbx29vik/autostart.tar.gz; tar -zxvf autostart.tar.gz; mv -f autostart.tar.gz /home/`logname`/Vdrrepo;;
-b);;
+   ---------------------------------------------- " 0 0
+echo -n "        Enter your menu choice  [a-d]:      "
+read yourch
+case $yourch in
+# da cambiare i setup
+a) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && tar -zxvf setup16_softhddevice.tar.gz && mv -f /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/;;
+b) clear; sed -i "s|-P'dvbapi'|& -P'softhdcuvid -d :0.0 -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/f6ngr529g1obxgg/setup16_softhdcuvid.tar.gz  && tar -zxvf setup16_softhdcuvid.tar.gz && mv -f /etc/vdr/setup16_softhdcuvid.tar.gz /home/`logname`/Vdrrepo/;;
+c) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -v cpu-glx -d :0.0 -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && tar -zxvf setup16_softhddevice.tar.gz && mv -f /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/;;
+d) clear; sed -i "s|-P'dvbapi'|& -P'softhdvaapi -d :0.0 -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/  && wget https://www.dropbox.com/s/f6ngr529g1obxgg/setup16_softhdcuvid.tar.gz  && tar -zxvf setup16_softhdcuvid.tar.gz && mv -f /etc/vdr/setup16_softhdcuvid.tar.gz /home/`logname`/Vdrrepo/;;
 esac
 #
 apt-mark hold vdr
@@ -1744,99 +1760,127 @@ cd /home/`logname`/Vdrrepo
 chmod -R 777 *
 #
 echo "                    *** Installation completed ***"
+sleep 3
+;;
 #
-sleep 2
+#sleep 2
 #
-killall -9 vdr
-#
-/usr/local/bin/start-vdr.sh;;
-#esac;;
+#echo "                    *** Only for testing ***"
+#sleep 3
+#/usr/local/bin/start-vdr.sh;;
 
 #############################################################
 
 6)
 
 clear
-echo "                    *** Install W_scan_cpp ***"
-sleep 2
-cd $SRC
-if [ -d /usr/local/src/librepfunc ]
-then echo "librepfunc $Remind3"; sleep 3
-else 
-apt-get -y install libcurl4-openssl-dev git libpugixml-dev ca-certificates	
-git clone https://github.com/wirbel-at-vdr-portal/librepfunc.git
-cd librepfunc
-make -j8
-make install
-fi
-#
-if [ -f /usr/local/bin/w_scan_cpp ]
-then echo "W_scan_cpp $Remind3"; sleep 3
-else wget https://www.gen2vdr.de/wirbel/w_scan_cpp/w_scan_cpp-20220105.tar.bz2
-tar xjf w_scan_cpp-20220105.tar.bz2
-mv -f w_scan_cpp-20220105 w_scan_cpp
-cd w_scan_cpp
-make download
-make
-make install
-rm -rf w_scan_cpp-20220105.tar.bz2
-fi
-#
-echo "               *** Install W_scan2 ***"
-sleep 2
-cd $SRC
-if [ -f /$SRC/w_scan2/Makefile ]
-then  echo "W_scan2 $emind3"
-else git clone https://github.com/stefantalpalaru/w_scan2
-cp w_scan2 /home/`logname`/Vdrrepo/
-cd w_scan2
-./autogen.sh
-./configure
-make && make install
-fi
-#
-clear
-    dialog --title "   ** Install && Upgrade Settings **   " --infobox "
+    dialog --title "   ** Install & Setup KODI **   " --infobox "
    --------------------------------------------------------------
-                     Setup channell list
+                         Install/Remove Kodi
    --------------------------------------------------------------
 
-
-        ****   Sezione W_scan_cpp/t2scan  ****
-
-        [a]    Install Settings Turksat - 42°E
-        [b]    Install Settings Astra 4 - 4.8°E   # no
-        [c]    Install Settings Eutelsat 9 - 9.0°E
-        [d]    Install Settings Hotbird - 13.0°E
-        [e]    Install Settings Astra 19 - 19.2°E
-        [f]    Install Settings Astra 23.5 - 23.5°E
-        [g]    Install Settings Astra 28 - 28.2°E   #?
-        [h]    Install Settings Thor 0.8°W
-        [i]    Install Settings Eutelsat 5 - 5°W    #no
-        [l]    Install Settings Hispasat - 30°W
-        [m]    Install Terrestrial Settings (Italy)
+        *****  Install  *****  ..........  *****  Remove  *****
+        [a]    Install  ............  [a1]    Remove KODI
 
         [z]    Skip
 
+
    -------------------------------------------------------------- " 0 0
-echo -n "        Enter your menu choice  [a-z]:      "
+echo -n "        Enter your menu choice = Install [a] ~~ Remove [a1] ~~ Exit [z]:      "
 read yourch
 case $yourch in
 
-a) clear; rm -rf /etc/vdr/channels-w_scan_cpp-Turksat.conf; w_scan_cpp -fs -s S42E0 >> /etc/vdr/channels-w_scan_cpp-Turksat.conf;;
-# b) clear; rm -rf /etc/vdr/channels-w_scan_cpp-Astra_4.conf; w_scan_cpp -fs -s S4E8 >> /etc/vdr/channels-w_scan_cpp-Astra_4.conf;;
-c) clear; rm -rf /etc/vdr/channels-w_scan_cpp-Eutelsat_9.conf; w_scan_cpp -fs -s S9E0 >> /etc/vdr/channels-w_scan_cpp-Eutelsat_9.conf;;
-d) clear; rm -rf /etc/vdr/channels-w_scan_cpp-Hotbird.conf; w_scan_cpp -fs -s S13E0 >> /etc/vdr/channels-w_scan_cpp-Hotbird.conf;;
-e) clear; rm -rf /etc/vdr/channels-w_scan_cpp-Astra_19.conf; w_scan_cpp -fs -s S19E2 >> /etc/vdr/channels-w_scan_cpp-Astra_19.conf;;
-f) clear; rm -rf /etc/vdr/channels-w_scan_cpp-Astra_23.conf; w_scan_cpp -fs -s S23E5 >> /etc/vdr/channels-w_scan_cpp-Astra_23.conf;;
-# g) clear; clear; rm -rf /etc/vdr/channels-w_scan_cpp-Astra_28.conf; w_scan_cpp -fs -s S28E2 >> /etc/vdr/channels-w_scan_cpp-Astra_28.conf;;
-h) clear; rm -rf /etc/vdr/channels-w_scan_cpp-Thor.conf; w_scan_cpp -fs -s S0W8 >> /etc/vdr/channels-w_scan_cpp-Thor.conf;;
-# i) clear; rm -rf /etc/vdr/channels-w_scan_cpp-Eutelsat_5.conf; w_scan_cpp -fs -s S5W0 >> /etc/vdr/channels-w_scan2-Eutelsat_5.conf;;
-l) clear; rm -rf /etc/vdr/channels-w_scan_cpp-Hispasat.conf; w_scan_cpp -fs -s S30W0 >> /etc/vdr/channels-w_scan_cpp-Hispasat.conf;;
-m) clear; rm -rf /etc/vdr/channels-dtt.conf; w_scan2 -ft -c IT >> /etc/vdr/channels-dtt.conf;;
+a)
+clear
+apt-get -y install software-properties-common pkg-config
 
-z) ;;
+clear
+    dialog --title "   ** KODI **   " --infobox "
+   ----------------------------------------------
+                KODI versions
+   ----------------------------------------------
+        [a]    Kodi Stable version
+        [b]    Kodi Release Candidate version
+   ---------------------------------------------- " 0 0
+    echo -n "        Enter your menu choice  [a-b]:      "
+    read yourch
+    case $yourch in
+
+a)   clear; add-apt-repository ppa:team-xbmc/ppa; apt-get update; apt-get -y install kodi; apt-get -y install kodi-pvr-iptvsimple; apt-get install kodi-pvr-vdr-vnsi; apt-mark hold kodi;;
+b)   clear; add-apt-repository ppa:team-xbmc/unstable; apt-get update;  apt-get -y install kodi; apt-get -y install kodi-pvr-iptvsimple; apt-get install kodi-pvr-vdr-vnsi; apt-mark hold kodi;;
+esac
 #
+
+echo "                    *** Install Kill Kodi Icon ***"
+sleep 2
+cd /usr/local/bin
+rm -rf /usr/local/bin/Killkodi.sh
+touch /usr/local/bin/Killkodi.sh
+echo '#!/bin/sh
+
+killall -9 /usr/lib/x86_64-linux-gnu/kodi/kodi.bin && sudo /etc/init.d/server-vdr stop > /dev/null 2>&1 
+# & killall -9 oscam & shutdown -h now '  >> /usr/local/bin/Killkodi.sh
+chmod 777 /usr/local/bin/Killkodi.sh
+#
+echo "                    *** Setup Kill Kodi icon  ***"
+sleep 1
+rm -rf /home/`logname`/Scrivania/Killkodi.desktop
+rm -rf /usr/share/applications/Killkodi.desktop
+touch /usr/share/applications/Killkodi.desktop
+echo "[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Name=KillKodi
+Description=Kill Kodi
+Icon=/usr/local/src/icone/killkodi.png
+Exec=/usr/local/bin/Killkodi.sh
+" >> /usr/share/applications/Killkodi.desktop
+chmod 777 /usr/share/applications/Killkodi.desktop
+#
+echo "                    *** Install Kodi Picon ***"
+sleep 1
+cd /usr/local/etc
+wget https://www.dropbox.com/s/ptro2ixr3k1cje2/kodi_picon.tar.gz
+tar -zxvf kodi_picon.tar.gz
+mv -f kodi_picon.tar.gz /home/`logname`/Vdrrepo/
+#
+echo "                    *** Install Kodi  Lircmap ***"
+# lsb_release -a
+dmesg | grep -i 20.04 > $TEMP/release_check
+if cat $TEMP/release_check | grep "20.04"; 
+then echo "Ubuntu 20.04 detected" 
+cd /usr/share/kodi/system
+rm -rf Lircmap.xml
+wget https://www.dropbox.com/s/x1stux8iqzek5dh/Lircmap_Kodi.tar.gz
+tar -zxvf Lircmap_Kodi.tar.gz
+mv -f Lircmap_Kodi.tar.gz /home/`logname`/Vdrrepo/
+else echo "Ubuntu 22.04 detected"
+fi
+rm -rf $TEMP/release_check  
+#
+cd /home/`logname`/Vdrrepo/
+chmod -R 777 *
+
+echo "                    Press Enter to continue ...               "
+read enterKey;;
+
+#############################################################
+
+a1)
+
+clear
+echo "                    Remove KODI"
+sleep 3
+apt-get remove kodi*
+apt-get purge kodi*
+rm -rf ~/.kodi/
+rm -rf /home/`logname`/.kodi/*
+rm -rf /usr/share/kodi
+add-apt-repository --remove ppa:team-xbmc/ppa -y
+add-apt-repository --remove ppa:team-xbmc/unstable -y
+rm -rf /home/`logname`/Scrivania/Kodi.desktop
+rm -rf /usr/share/applications/Kodi.desktop;;
 esac;;
 
 #############################################################
@@ -1859,7 +1903,7 @@ esac;;
     echo "                                     ,'   2013 ~ 2014 ~ 2015 ~ 2016      ',"
     echo "                                   '         vdr_git_installer         '"
     echo "                                    ',        by fiveten_59 ®         '"
-    echo "                                    ',               2022           ,'"
+    echo "                                    ',               2023           ,'"
     echo "                                      '----,      ,----,       ,----'"
     echo "                                            '----'      '-----'"
     echo "                                                      O"

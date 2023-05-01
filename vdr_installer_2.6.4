@@ -10,7 +10,7 @@
 #########################################################################################
 #
 clear
-PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skinflatplus -l /etc/vdr/logos/' -P'iptv' -P'radio' -P'channelscan'"
+PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skinflatplus -l /etc/vdr/logos/' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/rtextUnten-kleo2.mpg' -P'channelscan'"
 PLUGINSERVER="-P'dvbapi' -P'iptv' -P'vnsiserver'"
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
@@ -176,8 +176,9 @@ S30.0W 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
 apt-get -y install dialog git subversion wget
 apt-get -y install checkinstall build-essential autoconf 
 apt-get -y install autopoint automake cmake libtool
-
-mkdir $SRC/packages
+#
+sudo useradd vdr -g video -d /home/vdr -s /bin/bash -m
+#mkdir $SRC/packages
 dialog --title " VDR 2.6.4 Installer " --infobox "Copyright (C) 2023
 
     This file is part of VDR Complete Installer (VCI).
@@ -289,6 +290,13 @@ else
   echo "File not found ... Downloading it now ....."
     wget https://ffmpeg.org/releases/ffmpeg-5.0.1.tar.bz2
   fi
+  
+if [ -e /home/`logname`/Vdrrepo/ffmpeg-4.4.tar.bz2 ]; then
+  echo " ..... File exists ..... "
+else
+  echo "File not found ... Downloading it now ....."
+    wget https://ffmpeg.org/releases/ffmpeg-4.4.tar.bz2
+  fi  
 
 echo " Downloading Vdr and Plugins on local repo "
 
@@ -324,7 +332,7 @@ if [ -e /home/`logname`/Vdrrepo/vdr-plugin-dvbapi ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    git clone   https://github.com/ua0lnj/vdr-plugin-dvbapi.git 
+    git clone https://github.com/ua0lnj/vdr-plugin-dvbapi.git 
   fi
 
 if [ -e /home/`logname`/Vdrrepo/vdr-plugin-epgsearch ]; then
@@ -622,17 +630,21 @@ apt-get -y install libpciaccess-dev xorg-dev libpulse-dev
 
     echo "                    Wait for a few seconds ..."
 cd /usr/local/src/ffmpeg_sources
-cp -rf /home/`logname`/Vdrrepo/ffmpeg-5.0.1.tar.bz2 /usr/local/src/ffmpeg_sources/
-tar xjvf ffmpeg-5.0.1.tar.bz2
-mv ffmpeg-5.0.1 ffmpeg
-rm -rf ffmpeg-5.0.1.tar.bz2
+#cp -rf /home/`logname`/Vdrrepo/ffmpeg-5.0.1.tar.bz2 /usr/local/src/ffmpeg_sources/
+#tar xjvf ffmpeg-5.0.1.tar.bz2
+#mv ffmpeg-5.0.1 ffmpeg
+#rm -rf ffmpeg-5.0.1.tar.bz2
+cp -rf /home/`logname`/Vdrrepo/ffmpeg-4.4.tar.bz2 /usr/local/src/ffmpeg_sources/
+tar xjvf ffmpeg-4.4.tar.bz2
+mv ffmpeg-4.4 ffmpeg
+rm -rf ffmpeg-4.4.tar.bz2
 cd ffmpeg
 ./configure --extra-libs="-ldl" --enable-gpl --enable-libfreetype --enable-libmp3lame --enable-openssl --enable-libxcb --disable-libopus --enable-libtheora --enable-libvorbis --enable-libx265 --enable-cuvid --enable-nonfree --enable-libxvid --enable-opengl --enable-vdpau --enable-vaapi --enable-pic --enable-shared  --disable-doc --enable-swresample --enable-nvenc --enable-cuda --disable-cuda-sdk --enable-libpulse
 
     echo "                    Press Enter to continue ...               "
     read enterKey
 make -j10
-checkinstall --pkgname=ffmpeg --pkgversion="5.0.1" --backup=no --deldoc=yes --fstrans=no --default --pakdir=$PACKAGES
+checkinstall --pkgname=ffmpeg --pkgversion="4.4" --backup=no --deldoc=yes --fstrans=no --default --pakdir=$PACKAGES
 apt-mark hold ffmpeg
 sleep 3
 fi;;
@@ -1590,7 +1602,7 @@ case "$1" in
     stop)
         echo -n "Stop VDR "
 
-        killall -9 vlc & killall -9 vdr
+        killall -9 vlc & killall -9 vdr & killall -9 mpv
         
         # Remember status and be verbose
         ;;

@@ -10,7 +10,7 @@
 #########################################################################################
 #
 clear
-PLUGIN="--lirc -P'dvbapi' -P'epgsearch' -P'skinflatplus -l /etc/vdr/logos/' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/rtextUnten-kleo2.mpg' -P'channelscan'"
+PLUGIN="--lirc -P'dvbapi' -P'skinflatplus -l /etc/vdr/logos/' -P'skinlcarsng' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/rtextUnten-kleo2.mpg'"
 PLUGINSERVER="-P'dvbapi' -P'iptv' -P'vnsiserver'"
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
@@ -178,7 +178,7 @@ apt-get -y install checkinstall build-essential autoconf
 apt-get -y install autopoint automake cmake libtool
 #
 sudo useradd vdr -g video -d /home/vdr -s /bin/bash -m
-#mkdir $SRC/packages
+mkdir $SRC/packages
 dialog --title " VDR 2.6.4 Installer " --infobox "Copyright (C) 2023
 
     This file is part of VDR Complete Installer (VCI).
@@ -203,7 +203,7 @@ dialog --title " VDR 2.6.4 Installer " --infobox "Copyright (C) 2023
     Script name: vdr_installer_2.6.4
     Version: 2.6.4
     Tested on Ubuntu 20.04 - Ubuntu 22.04 - Mint 20.2 - Mint 21 - Debian 11
-    chmod the script
+    chmod the script 'vdr_installer_2.6.4'
     then load it simply typing: sudo ./vdr_installer_2.6.4 " 0 0
 
 
@@ -335,20 +335,6 @@ else
     git clone https://github.com/ua0lnj/vdr-plugin-dvbapi.git 
   fi
 
-if [ -e /home/`logname`/Vdrrepo/vdr-plugin-epgsearch ]; then
-  echo " ..... File exists ..... "
-else
-  echo "File not found ... Downloading it now ....."
-    git clone https://github.com/vdr-projects/vdr-plugin-epgsearch.git
-  fi
-
-if [ -e /home/`logname`/Vdrrepo/patch_epgsearch.tar.gz ]; then
-  echo " ..... File exists ..... "
-else
-  echo "File not found ... Downloading it now ....."
-    wget https://www.dropbox.com/s/s9vggu8mil8ss7t/patch_epgsearch.tar.gz
-  fi
-
 if [ -e /home/`logname`/Vdrrepo/vdr-plugin-iptv ]; then
   echo " ..... File exists ..... "
 else
@@ -391,20 +377,6 @@ else
     git clone https://github.com/vdr-projects/vdr-plugin-vnsiserver.git
 fi
 
-if [ -e /home/`logname`/Vdrrepo/channelscan ]; then
-  echo " ..... File exists ..... "
-else
-  echo "File not found ... Downloading it now ....."
-    git clone https://bitbucket.org/ua0lnj/channelscan.git
-fi
-
-if [ -e /home/`logname`/Vdrrepo/satellite_pack.tar.gz ]; then
-  echo " ..... File exists ..... "
-else
-  echo "File not found ... Downloading it now ....."
-    wget https://www.dropbox.com/s/wm7c6nx4ymbcdk1/satellite_pack.tar.gz
-fi
-
 echo " Downloading skins "
 
 if [ -e /home/`logname`/Vdrrepo/vdr-plugin-skinflatplus ]; then
@@ -414,6 +386,15 @@ else
      git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git
   fi
 
+if [ -e /home/`logname`/Vdrrepo/skinlcarsng-develop.tar.gz ]; then
+#if [ -e /home/`logname`/Vdrrepo/skinlcarsng ]; then
+  echo " ..... File exists ..... "
+else
+  echo "File not found ... Downloading it now ....."
+     wget https://gitlab.com/kamel5/skinlcarsng/-/archive/develop/skinlcarsng-develop.tar.gz
+#     git clone https://gitlab.com/kamel5/skinlcarsng.git
+  fi
+  
 if [ -e /home/`logname`/Vdrrepo/logos ]; then
   echo " ..... File exists ..... "
 else
@@ -478,8 +459,6 @@ git clone --branch stable/2.6 git://git.tvdr.de/vdr.git vdr-2.6.4
 wget https://www.dropbox.com/s/mu9fx8udl94jy2p/vdr-patches.2.6.4.tar.gz
 wget https://www.dropbox.com/s/qds2k91od7oboed/Make.config.tar.gz
 wget https://www.dropbox.com/s/bx97ikp7c1h2qj2/vdrsymbols.tar.gz
-git clone https://github.com/vdr-projects/vdr-plugin-epgsearch.git
-wget https://www.dropbox.com/s/s9vggu8mil8ss7t/patch_epgsearch.tar.gz
 git clone https://github.com/ua0lnj/vdr-plugin-dvbapi.git 
 git clone https://github.com/siricco/vdr-plugin-radio.git
 wget https://www.dropbox.com/s/qlnarjlzfsh8vvl/radio_scripts.tar.gz
@@ -487,11 +466,11 @@ git clone https://github.com/rofafor/vdr-plugin-iptv.git
 wget https://www.dropbox.com/s/nof5ydmxrplw2b0/patch_iptv.tar.gz
 wget https://www.dropbox.com/s/vmhkf4rzhoh4wa5/iptv_conf.tar.gz
 git clone https://github.com/vdr-projects/vdr-plugin-vnsiserver.git
-git clone https://bitbucket.org/ua0lnj/channelscan.git
-wget https://www.dropbox.com/s/wm7c6nx4ymbcdk1/satellite_pack.tar.gz
 
 echo "                    Downloading skins "
 
+#git clone https://gitlab.com/kamel5/skinlcarsng.git
+wget https://gitlab.com/kamel5/skinlcarsng/-/archive/develop/skinlcarsng-develop.tar.gz
 git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git
 wget https://www.dropbox.com/s/806odyj5vyco3dg/lcars_pack.tar.gz
 
@@ -892,15 +871,15 @@ echo " *** Patching dvb_power_saving_feature ***"
 patch -p1 < vdr_dvb_power_saving_feature.patch
 echo " *** Patching ClearObsoleteChannels ***"
 patch -p1 < vdr_HelmutB_ClearObsoleteChannels.patch
-#echo " *** mainmenuhooks ***"
-#patch -p1 < vdr_mainmenuhook.patch
+echo " *** mainmenuhook ***"
+patch -p1 < opt-42-x_MainMenuHooks-v1.0.1.patch
 echo " *** Patching vdr_maxdevice ***"
 patch -p1 < vdr_maxdevice.patch
-#echo " *** Patching vdr_menuorg ***"
-#    patch -p1 < vdr_menuorg.patch
+echo " *** Patching vdr_menuorg ***"
+patch -p1 < vdr_menuorg.patch
 echo " *** Patching menuselection ***"
 patch -p1 < vdr_menuselection.patch
-#echo " *** Patching svdrphosts ***"
+echo " *** Patching svdrphosts ***"
 patch -p1 < vdr_svdrphosts.patch
 echo " *** Patching ttxtsub ***"
 patch -p1 < vdr_ttxtsub.patch
@@ -910,7 +889,10 @@ echo " *** Patching zapcockpit ***"
 patch -p1 < vdr_zapcockpit.patch
 echo " *** Patching channellscan ***"
 patch -p1 < vdr-dvbchan.patch
-cp -rf $VDRSRC/pictures/pic2mpg /usr/local/bin/
+#echo " *** Patching skinlcarsng ***"
+#patch -p1 < numrecordingsinpath.patch
+echo " *** Patching Volume ***"
+patch -p1 < restore-volume.patch
 #
 make && make plugins
 clear
@@ -1044,6 +1026,7 @@ apt-get -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-iccc
 cd $VDRSRC
 wget https://github.com/ua0lnj/vdr-plugin-softhddevice/archive/refs/heads/test.zip
 unzip test.zip
+rm -rf test.zip
 cp -rf /$VDRSRC/vdr-plugin-softhddevice-test /home/`logname`/Vdrrepo/
 mv vdr-plugin-softhddevice-test softhddevice
 cd softhddevice
@@ -1083,22 +1066,6 @@ cd dvbapi
 cd ../../..
 make plugins
 #
-echo "               *** Epgsearch ***"
-sleep 2
-apt-get -y install libc6 libgcc1 libstdc++6
-cd $VDRSRC
-cp -rf /home/`logname`/Vdrrepo/vdr-plugin-epgsearch /$VDRSRC/
-mv vdr-plugin-epgsearch epgsearch
-cd epgsearch
-cp -rf /home/`logname`/Vdrrepo/patch_epgsearch.tar.gz /$VDRSRC/epgsearch/
-tar -zxvf patch_epgsearch.tar.gz
-rm -rf patch_epgsearch.tar.gz
-patch -p1 < 10_langinfo-include.diff
-patch -p1 < 11_epgsearch_menue.patch
-patch -p1 < 12_epgsearch_README.patch
-cd ../../..
-make plugins
-#
 echo "               *** Skinflatplus ***"
 sleep 2
 apt-get -y install libfreetype6-dev graphicsmagick-libmagick-dev-compat lm-sensors
@@ -1115,6 +1082,20 @@ cd ../weather/
 wget https://www.dropbox.com/s/x80qbwk8xnwi0u5/flat_weather.tar.gz
 tar -zxvf flat_weather.tar.gz
 mv -f flat_weather.tar.gz /home/`logname`/Vdrrepo/
+#
+echo "               *** Skinlcarsng ***"
+sleep 2
+cd $VDRSRC
+cp -rf /home/`logname`/Vdrrepo/skinlcarsng-develop.tar.gz /$VDRSRC
+#cp -rf /home/`logname`/Vdrrepo/skinlcarsng /$VDRSRC
+tar -zxvf skinlcarsng-develop.tar.gz
+mv skinlcarsng-develop skinlcarsng
+cd skinlcarsng
+make && make install
+cd /etc/vdr/themes
+ln -s lcars-BlueGlass.theme lcarsng-Bluegass.theme
+ln -s lcars-390Lb.theme lcarsng-390Lb.theme
+ln -s lcars-LbSense.theme lcarsng-LbSense.theme
 #
 echo "               *** Iptv ***"
 sleep 2
@@ -1148,21 +1129,6 @@ cp -rf /home/`logname`/Vdrrepo/radio_scripts.tar.gz /$PLUGINS/radio/
 tar -zxvf radio_scripts.tar.gz
 rm -rf radio_scripts.tar.gz
 #
-echo "               *** Channelscan ***"
-sleep 2
-apt-get -y install libboost-iostreams-dev python3-dev libbz2-dev
-cd $VDRSRC
-cp -rf /home/`logname`/Vdrrepo/channelscan /$VDRSRC
-cp -rf $VDRSRC/channelscan/script/* /usr/local/bin
-cd ../..
-make plugins
-cd $PLUGINS
-mkdir -p transponders
-cp -rf /home/`logname`/Vdrrepo/satellite_pack.tar.gz  $PLUGINS/transponders
-cd transponders
-tar -zxvf satellite_pack.tar.gz
-rm -rf satellite_pack.tar.gz
-#
 echo "               *** Vnsiserver ***"
 sleep 2
 cd $VDRSRC
@@ -1170,6 +1136,8 @@ cp -rf /home/`logname`/Vdrrepo/vdr-plugin-vnsiserver /$VDRSRC/
 mv vdr-plugin-vnsiserver vnsiserver
 cd vnsiserver
 make && make install
+#
+
 #
 cd $SRC/vdr
 make plugins install
@@ -1185,21 +1153,20 @@ echo "                    Removing VDR-2.6.4 plugins"
 cd $VDRSRC
 rm -rf softhdcuvid
 rm -rf softhddevice
-rm -rf epgsearch
 rm -rf skinflatplus
+rm -rf skinlcarsng
 rm -rf iptv
 rm -rf radio
-rm -rf channelscan
 rm -rf vnsiserver
 rm -rf dvbapi
+rm -rf skinlcarsng
 cd $LIB
 rm -rf libvdr-softhdcuvid.*
 rm -rf libvdr-softhddevice.*
-rm -rf libvdr-epgsearch.*
 rm -rf skinflatplus.*
+rm -rf libvdr-skinlcarsng.*
 rm -rf libvdr-iptv.*
 rm -rf libvdr-radio.*
-rm -rf libvdr-channelscan.*
 rm -rf libvdr-vnsiserver.*
 rm -rf libvdr-dvbapi.*;;
 z);;
@@ -1626,7 +1593,7 @@ rm -rf /usr/local/bin/start-vdr.sh
 touch /usr/local/bin/start-vdr.sh
 echo "#!/bin/sh
 
-#sleep 10
+sleep 3
 sudo /etc/init.d/vdr start > /dev/null 2>&1" >> /usr/local/bin/start-vdr.sh
 chmod 777 /usr/local/bin/start-vdr.sh
 #
@@ -1761,9 +1728,11 @@ echo -n "        Enter your menu choice  [a-d]:      "
 read yourch
 case $yourch in
 # da cambiare i setup
-a) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && tar -zxvf setup16_softhddevice.tar.gz && mv -f /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/;;
+a) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice - v cuvid -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && tar -zxvf setup16_softhddevice.tar.gz && mv -f /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/;;
 b) clear; sed -i "s|-P'dvbapi'|& -P'softhdcuvid -d :0.0 -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/f6ngr529g1obxgg/setup16_softhdcuvid.tar.gz  && tar -zxvf setup16_softhdcuvid.tar.gz && mv -f /etc/vdr/setup16_softhdcuvid.tar.gz /home/`logname`/Vdrrepo/;;
-c) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -v cpu-glx -d :0.0 -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && tar -zxvf setup16_softhddevice.tar.gz && mv -f /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/;;
+c) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && tar -zxvf setup16_softhddevice.tar.gz && mv -f /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/
+#-v cpu-glx -d :0.0
+;;
 d) clear; sed -i "s|-P'dvbapi'|& -P'softhdvaapi -d :0.0 -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/  && wget https://www.dropbox.com/s/f6ngr529g1obxgg/setup16_softhdcuvid.tar.gz  && tar -zxvf setup16_softhdcuvid.tar.gz && mv -f /etc/vdr/setup16_softhdcuvid.tar.gz /home/`logname`/Vdrrepo/;;
 esac
 #
@@ -1774,8 +1743,6 @@ chmod -R 777 *
 echo "                    *** Installation completed ***"
 sleep 3
 ;;
-#
-#sleep 2
 #
 #echo "                    *** Only for testing ***"
 #sleep 3

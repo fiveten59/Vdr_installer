@@ -1593,7 +1593,7 @@ rm -rf /usr/local/bin/start-vdr.sh
 touch /usr/local/bin/start-vdr.sh
 echo "#!/bin/sh
 
-sleep 3
+sleep 5;
 sudo /etc/init.d/vdr start > /dev/null 2>&1" >> /usr/local/bin/start-vdr.sh
 chmod 777 /usr/local/bin/start-vdr.sh
 #
@@ -1728,7 +1728,7 @@ echo -n "        Enter your menu choice  [a-d]:      "
 read yourch
 case $yourch in
 # da cambiare i setup
-a) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice - v cuvid -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && tar -zxvf setup16_softhddevice.tar.gz && mv -f /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/;;
+a) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -v cuvid -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && tar -zxvf setup16_softhddevice.tar.gz && mv -f /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/;;
 b) clear; sed -i "s|-P'dvbapi'|& -P'softhdcuvid -d :0.0 -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/f6ngr529g1obxgg/setup16_softhdcuvid.tar.gz  && tar -zxvf setup16_softhdcuvid.tar.gz && mv -f /etc/vdr/setup16_softhdcuvid.tar.gz /home/`logname`/Vdrrepo/;;
 c) clear; sed -i "s|-P'dvbapi'|& -P'softhddevice -f'|" /usr/local/bin/vdrrun && cd /etc/vdr/ && wget https://www.dropbox.com/s/873qnh3yxmnzo0o/setup16_softhddevice.tar.gz && tar -zxvf setup16_softhddevice.tar.gz && mv -f /etc/vdr/setup16_softhddevice.tar.gz /home/`logname`/Vdrrepo/
 #-v cpu-glx -d :0.0

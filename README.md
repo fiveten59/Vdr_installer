@@ -66,8 +66,7 @@ If you'd like add others plugins you can use another script called Vdr_plugins i
     
 #    Script name: plugins_installer
 Versionr Vdr > 2.4.x  
-Tested on Ubuntu 20.04 - Mint 20.3 - Ubuntu 22.04 (development branch)
+Tested on Ubuntu 20.04 - Mint 20.3 - Ubuntu 22.04
 chmod the script
 then load it simply typing: sudo ./plugins_installer   
-    
     Have fun!

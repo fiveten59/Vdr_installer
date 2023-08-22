@@ -32,7 +32,7 @@ Point 1)
 Point 2) 
 * submenu a) install ffmpeg
 * submenu b) Install Sat firmware
-*submenu c) install Infra-Red Remotes Control (choice between lirc or eventlircd)
+* submenu c) install Infra-Red Remotes Control (choice between lirc or eventlircd)
 * submenu d) ONLY FOR Intel Devices (Intel vaapi driver) in many case not needed
 
 Point 3) 

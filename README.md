@@ -30,7 +30,6 @@ Then follow the script  ...
 
 Point 1) 
 * submenu a) the script creates a local repository folder (Vdr_repo) downloading FFmpeg 5.0.1 - Vdr 2.6.x - some basic plugins (softhddevice dvbapi skinlcarsng radio iptv) + other files needed by vdr
-
 * submenu b) reinstall all
 
 Point 2) 
@@ -48,8 +47,8 @@ Point 4)
 * submenu b) Uninstall Plugins
 
 Point 5) 
-*submenu a) Configure VDR and all the system creating icons and something else :-)
-* Pls note this point add the icons relating at Vdr Server (in this case Vdr will starts with only three plugins dvbapi radio iptv)
+* submenu a) Configure VDR and all the system creating icons and something else :-)
+  Pls note this point add the icons relating at Vdr Server (in this case Vdr will starts with only three plugins dvbapi radio iptv)
 * submenu b) you can reconfigure the system
 
 Point 6)

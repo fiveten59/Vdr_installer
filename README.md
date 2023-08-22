@@ -30,11 +30,14 @@ Then follow the script  ...
 
 Point 1) 
 submenu a) the script creates a local repository folder (Vdr_repo) downloading FFmpeg 5.0.1 - Vdr 2.6.x - some basic plugins (softhddevice dvbapi skinlcarsng radio iptv) + other files needed by vdr
+
 submenu b) reinstall all
 
 Point 2) 
 submenu a) install ffmpeg
+
 submenu b) Install Sat firmware
+
 submenu c) install Infra-Red Remotes Control (choice between lirc or eventlircd)
 submenu d) ONLY FOR Intel Devices (Intel vaapi driver) in many case not needed
 

@@ -5,7 +5,7 @@ Two scripts:
 - vdr_plugins_installer installs others plugins 
   
 # Script name: vdr_installer_2.6.4
-A script for installing Vdr (stand alone) and Vdr Server (frontenf Kodi)
+A script for installing Vdr (stand alone) and Vdr Server (frontend Kodi)
 tested on Ubuntu 20.04 - 22.04 Linux Mint 21 Debian 11
 
 At first install the OS (Ubuntu 20.04 - 22.04 Linux Mint 21 Debian 11)

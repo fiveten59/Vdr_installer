@@ -28,21 +28,21 @@ sudo ./vdr_installer_2.6.x
 At first the script install some libraries
 Then follow the script  ...
 
-Point 1) submenu
+Point 1) 
 submenu a) the script creates a local repository folder (Vdr_repo) downloading FFmpeg 5.0.1 - Vdr 2.6.x - some basic plugins (softhddevice dvbapi skinlcarsng radio iptv) + other files needed by vdr
 submenu b) reinstall all
 
-Point 2) submenu
+Point 2) 
 submenu a) install ffmpeg
 submenu b) Install Sat firmware
 submenu c) install Infra-Red Remotes Control (choice between lirc or eventlircd)
 submenu d) ONLY FOR Intel Devices (Intel vaapi driver) in many case not needed
 
-Point 3) submenu
+Point 3) 
 submenu a) Install VDR-2.6.x
 submenu b) Uninstall VDR-2.6.x
 
-Point 4) submenu
+Point 4) 
 submenu a) Install Plugins (softhddevice dvbapi skinlcarsng radio iptv)
 submenu b) Uninstall Plugins
 

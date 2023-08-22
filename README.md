@@ -47,9 +47,9 @@ Point 4)
 * submenu a) Install Plugins (softhddevice dvbapi skinlcarsng radio iptv)
 * submenu b) Uninstall Plugins
 
-Point 5)
+Point 5) 
 *submenu a) Configure VDR and all the system creating icons and something else :-)
-Pls note this point add the icons relating at Vdr Server (in this case Vdr will starts with only three plugins dvbapi radio iptv)
+* Pls note this point add the icons relating at Vdr Server (in this case Vdr will starts with only three plugins dvbapi radio iptv)
 * submenu b) you can reconfigure the system
 
 Point 6)

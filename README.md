@@ -1,7 +1,4 @@
-# Vdr_installer
-# Plugins_installer
-
-A special thanks goes to Klaus Schmidinger Vdr Developer & all plugin developers
+A  special thanks goes to Klaus Schmidinger Vdr Developer & all plugin developers
 
 Two scripts: 
 - vdr_installer_2.6.4 installs Vdr on Ubuntu with essential plugins (in about 15 min)

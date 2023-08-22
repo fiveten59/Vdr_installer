@@ -61,7 +61,7 @@ Vdr starts at boot!!!
 
 If you'd like add others plugins you can use another script called Vdr_plugins installer in the same github repo
     
-#    Script name: plugins_installer
+#    Script name: Vdr_plugins_installer
 Versionr Vdr > 2.4.x  
 Tested on Ubuntu 20.04 - Mint 20.3 - Ubuntu 22.04
 chmod the script

@@ -181,21 +181,7 @@ sudo useradd vdr -g video -d /home/vdr -s /bin/bash -m
 mkdir $SRC/packages
 dialog --title " VDR 2.6.4 Installer " --infobox "Copyright (C) 2023
 
-    This file is part of VDR Complete Installer (VCI).
 
-    VCI is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    VCI is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with VCI. see the file VCI_License.GPL, If not see
-    <http://www.gnu.org/licenses/>.
 
 
     A special thanks goes to Klaus Schmidinger Vdr Developer
@@ -234,7 +220,7 @@ dialog --title "   ♦♦♦♦♦   VDR 2.6.4 Version Installer Script - Librar
 	   ''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
 	   [3]    +[Submenu]   Install & Uninstall  ...................................
 	   ==============================================================================
-	   ..........................   Vdr Plugns   ..................................
+	   ..........................   Vdr Plugins   ..................................
            ............................................................................
 	   [4]    +[Submenu] ~~  Install & Uninstall  .................................
 	   ==============================================================================
@@ -254,7 +240,6 @@ echo -n "              Enter your menu choice = Submenu [1~6] -- Exit [7] :     
 read yourch
 case $yourch in
 #
-
 1)
 cd /home/`logname`
 #mkdir -p Vdr_repo
@@ -286,13 +271,20 @@ else
   fi
   
 cd Vdr_repo 
-  
+
 if [ -e /home/`logname`/Vdr_repo/ffmpeg-5.1.tar.bz2 ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
     wget https://ffmpeg.org/releases/ffmpeg-5.1.tar.bz2
-  fi  
+fi
+
+if [ -e /home/`logname`/Vdr_repo/eventlircd ]; then
+  echo " ..... File exists ..... "
+else
+  echo "File not found ... Downloading it now ....."
+    git clone https://github.com/LibreELEC/eventlircd.git
+fi
 
 echo " Downloading Vdr and Plugins on local repo "
 sleep 2
@@ -377,8 +369,8 @@ git clone https://github.com/intel/intel-vaapi-driver.git
 
 echo "        Downloading libs - progs & patch for Vdr on local repo "
 
-git clone https://github.com/OpenELEC/eventlircd.git
 wget https://ffmpeg.org/releases/ffmpeg-5.1.tar.bz2
+git clone https://github.com/OpenELEC/eventlircd.git
 git clone --branch stable/2.6 git://git.tvdr.de/vdr.git vdr-2.6.4
 wget https://github.com/ua0lnj/vdr-plugin-softhddevice/archive/refs/heads/test.zip
 git clone https://github.com/ua0lnj/vdr-plugin-dvbapi.git 
@@ -531,11 +523,11 @@ else
 apt-get -y install gawk libudev-dev lirc evtest
 update-rc.d lirc remove
 cd /usr/local/src
-git clone https://github.com/LibreELEC/eventlircd.git
+cp -rf /home/`logname`/Vdr_repo/eventlircd /usr/local/src
 cp -rf /home/`logname`/Vdr_repo/eventlircd_patch.tar.gz /usr/local/src/eventlircd
 cd eventlircd
 tar -zxvf eventlircd_patch.tar.gz
-mv -f eventlircd_patch.tar.gz /home/`logname`/Vdr_repo
+rm -rf eventlircd_patch.tar.gz
 patch -p1 < eventlircd_makefile.patch
 patch -p1 < eventlircd_configure.patch
 patch -p1 < eventlircd_version.patch
@@ -547,10 +539,9 @@ make && make install
 echo 'uinput
 i2c-dev
 ir-kbd-i2c' >> /etc/modules
-cp -rf /home/`logname`/Vdr_repo/eventlircd.conf.tar.gz /usr/local/src/
 cd /usr/local/src
-tar -zxvf eventlircd.conf.tar.gz
-rm -rf eventlircd.conf.tar.gz
+cp -rf /home/`logname`/Vdr_repo/eventlircd_conf.tar.gz /usr/local/src
+tar -zxvf eventlircd_conf.tar.gz
 mv -f evmap.tar.gz /etc/eventlircd.d
 mv -f rules.tar.gz /lib/udev/rules.d
 rm -rf /lib/udev/rc_keymaps
@@ -567,6 +558,7 @@ cd /lib/udev/rules.d
 tar -zxvf rules.tar.gz
 rm -rf rules.tar.gz
 chmod 0644 *
+cd /usr/local/src
 sleep 2
 #
 echo "                *** Create Eventircd start command line (if installed)***"
@@ -1334,6 +1326,8 @@ esac
 exit 0
 ' >> /etc/init.d/oscam
 chmod 755 /etc/init.d/oscam
+echo "Oscam start command line created"
+sleep 2
 #
 echo "                    *** Setup Oscam icon  ***"
 sleep 1
@@ -1358,6 +1352,8 @@ sleep 10
 sudo /etc/init.d/oscam start > /dev/null 2>&1
 ' >> /usr/local/bin/start-oscam.sh
 chmod 777 /usr/local/bin/start-oscam.sh
+echo "Setup Oscam icon & Oscam start created"
+sleep 2
 #
 echo "                    *** Setup Kill Oscam icon  ***"
 sleep 1
@@ -1382,6 +1378,8 @@ echo '#!/bin/sh
 sudo /etc/init.d/oscam stop > /dev/null 2>&1
 ' >> /usr/local/bin/KillOscam.sh
 chmod 777 /usr/local/bin/KillOscam.sh
+echo "Kill Oscam icon & kill Oscam created"
+sleep 2
 #
 systemctl enable pcscd
 systemctl start pcscd
@@ -1410,6 +1408,8 @@ echo '#!/bin/sh
 sudo /etc/init.d/vdr stop > /dev/null 2>&1
 ' >> /usr/local/bin/KillVdr.sh
 chmod 777 /usr/local/bin/KillVdr.sh
+echo "Kill Vdr & Vdr start created"
+sleep 2
 #
 echo "                    *** Install default Skin for Vdr  ***"
 sleep 1
@@ -1419,11 +1419,15 @@ else cp -rf /home/`logname`/Vdr_repo/lcars_pack.tar.gz /etc/vdr/themes
 cd /etc/vdr/themes
 tar -zxvf lcars_pack.tar.gz
 rm -rf lcars_pack.tar.gz
+echo " Default Skin installed"
+sleep 2
 fi
 #
 echo "                    Configuring Vnsiserver"
 sleep 1
 cp -rf $VDRSRC/vnsiserver/vnsiserver/allowed_hosts.conf /$PLUGINS/vnsiserver
+echo "Vnsiserver configured"
+sleep 2
 #
 echo "                    Configuring Iptv"
 sleep 1
@@ -1433,6 +1437,8 @@ cd $PLUGINS/iptv/
 rm -rf vlc2iptv
 tar -zxvf iptv_conf.tar.gz
 rm -rf iptv_conf.tar.gz
+echo "Iptv configured"
+sleep 2
 #
 echo "                    *** Create Vdr vdrpoweroff ***"
 sleep 1
@@ -1440,9 +1446,11 @@ rm -rf /usr/local/bin/vdrpoweroff
 touch /usr/local/bin/vdrpoweroff
 echo '#!/bin/sh
 #file name: Kill Vdr "vdrpoweroff"
-killall -9 vdr & killall -9 vlc
+killall -9 vdr & killall -9 vlc & killall mpv
 # & killall -9 oscam & shutdown -h now '  >> /usr/local/bin/vdrpoweroff
 chmod 777 /usr/local/bin/vdrpoweroff
+echo "Vdrpoweroff created"
+sleep 2
 #
 echo "             *** Permission to execute Eventlircd - Vdr - Oscam  ***"
 sleep 2
@@ -1462,10 +1470,11 @@ rm -rf /etc/sudoers.d/server-vdr
 touch /etc/sudoers.d/server-vdr
 echo "vdr ALL=(ALL) ALL" >> /etc/sudoers.d/server-vdr
 echo "%`logname` ALL=NOPASSWD: /etc/init.d/server-vdr" >> /etc/sudoers.d/server-vdr
+echo ""
+sleep 2
 #
-
 echo "             *** Configuring VDR & Vdr Server  ***"
-clear
+sleep 2
 echo "                    Create Vdr start command line"
 sleep 1
 rm -rf /usr/local/bin/vdrrun
@@ -1564,7 +1573,7 @@ rm -rf /usr/local/bin/server_vdrrun
 touch /usr/local/bin/server_vdrrun
 echo '#!/bin/bash
 
-/usr/local/bin/vdr -c /etc/vdr -E /var/vdr -l 3 -u root '$PLUGINSERVER' ' >> /usr/local/bin/server_vdrrun
+/usr/bin/vdr -c /etc/vdr -E /var/vdr -l 3 -u root '$PLUGINSERVER' ' >> /usr/local/bin/server_vdrrun
 
 chmod a+x /usr/local/bin/server_vdrrun
 #
@@ -1649,8 +1658,9 @@ clear
 echo  "        ** Automatic start Vdr - Vdr Server - Oscam  command**"
 sleep 2
 cd /etc/xdg/autostart
-cp -rf /home/'logname'/Vdr-repo/autostart.tar.gz
+cp -rf /home/'logname'/Vdr-repo/autostart.tar.gz /etc/xdg/autostart
 tar -zxvf autostart.tar.gz
+rm -rf autostart.tar.gz
 #
 clear
     dialog --title "   ** Configuring Frontend **   " --infobox "

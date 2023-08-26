@@ -143,11 +143,12 @@ dialog --title "   ** Setup Softhddevice **   " --infobox "
   			-------------------------------------------------------------------------
 
                                                Nvidia Video Devices
-		        [a]    Nvidia Video Devices                 
-		        [b]    Intel Video Devices                  
+		        [a]    Nvidia Video Devices 
+		        [b]    Nvidia Video Devices (Softhddevice test version)
+		        [c]    Intel Video Devices
 
 			------------------------------------------------------------------------- " 0 0
-    echo -n "        Enter your menu choice  [a-b]:      "
+    echo -n "        Enter your menu choice  [a-c]:      "
     read yourch
     case $yourch in
 #
@@ -158,9 +159,19 @@ cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdr_repo/
 mv vdr-plugin-softhddevice softhddevice
 cd softhddevice
 make && make install
-sed -i "s|-P'dvbapi'|& -P'softhddevice -v cuvid -f'|" /usr/local/bin/vdrrun;;
+sed -i "s|-P'dvbapi'|& -P'softhddevice -v vdpau -f'|" /usr/local/bin/vdrrun;;
 #
 b)
+cd $VDRSRC
+wget https://github.com/ua0lnj/vdr-plugin-softhddevice/archive/refs/heads/test.zip
+unzip test.zip
+cp -rf /$VDRSRC/vdr-plugin-softhddevice-test /home/`logname`/Vdr_repo/
+mv vdr-plugin-softhddevice-test softhddevice
+cd softhddevice
+make && make install
+sed -i "s|-P'dvbapi'|& -P'softhddevice -v cuvid -f'|" /usr/local/bin/vdrrun;;
+#
+c)
 cd $VDRSRC
 wget https://github.com/ua0lnj/vdr-plugin-softhddevice/archive/refs/heads/test.zip
 unzip test.zip
@@ -177,6 +188,8 @@ cp -rf /home/`logname`/Vdr_repo/setup16_softhddevice.tar.gz /etc/vdr/
 cd /etc/vdr/
 tar -zxvf setup16_softhddevice.tar.gz
 rm -rf setup16_softhddevice.tar.gz
+echo "Vdr-Plugin-Softhddevice installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -190,14 +203,14 @@ echo "        ***                Removing Vdr-Plugin-Softhddevice              *
 sleep 2
 cd $VDRSRC
 if [ -f softhddevice/Makefile ]
-echo "$Remind1 Softhddevice"
+echo "$Remind1 Vdr-Plugin-Softhddevice"
 sleep 2
 	then rm -rf softhddevice
 	cd $LIB
 	rm -rf libvdr-softhddevice.*
 	sed -i "s|-P'softhddevice -v cuvid -f'||" /usr/local/bin/vdrrun
 	sed -i "s|-P'softhddevice -v cpu-glx -f'||" /usr/local/bin/vdrrun
-		else echo "Softhddevice $Remind5"
+		else echo "Vdr-Plugin-Softhddevice $Remind5"
 fi
 #
 cd /home/`logname`
@@ -220,14 +233,13 @@ apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswre
 apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev libplacebo-dev
 cd $VDRSRC
 if [ -f softhdcuvid/Makefile ]
-then echo "Softhdcuvid $Remind5"
+then echo "Vdr-Plugin-Softhdcuvid $Remind5"
 	sleep 2
 	elif [ -f softhdvaapi/Makefile ]
-	then echo "Softhdvaapi $Remind5"
+	then echo "Vdr-Plugin-Softhdvaapi $Remind5"
 	sleep 2
 else git clone https://github.com/jojo61/vdr-plugin-softhdcuvid.git
 cp -rf /$VDRSRC/vdr-plugin-softhdcuvid /home/`logname`/Vdr_repo/
-fi
  
      			dialog --title "   ** Setup Softhdcuvid / Softhdvaapi  **   " --infobox "
    			-------------------------------------------------------------------------
@@ -250,9 +262,7 @@ cp -rf /home/`logname`/Vdr_repo/patch_softhdcuvid_cuvid.tar.gz $VDRSRC/softhdcuv
 tar -zxvf patch_softhdcuvid_cuvid.tar.gz
 rm -rf patch_softhdcuvid_cuvid.tar.gz
 make && make install
-sed -i "s|-P'dvbapi'|& -P'softhdcuvid -f'|" /usr/local/bin/vdrrun
-cd $SRC/vdr
-make plugins install;;    		
+sed -i "s|-P'dvbapi'|& -P'softhdcuvid -f'|" /usr/local/bin/vdrrun;;
 #
 b) 
 mv -f vdr-plugin-softhdcuvid softhdvaapi
@@ -262,18 +272,22 @@ cp -rf /home/`logname`/Vdr_repo/patch_softhdcuvid_vaapi.tar.gz $VDRSRC/softhdvaa
 tar -zxvf patch_softhdcuvid_vaapi.tar.gz
 rm -rf patch_softhdcuvid_vaapi.tar.gz
 make && make install
-sed -i "s|-P'dvbapi'|& -P'softhdvaapi -d :0.0 -f'|" /usr/local/bin/vdrrun
+sed -i "s|-P'dvbapi'|& -P'softhdvaapi -d :0.0 -f'|" /usr/local/bin/vdrrun;;
+esac
+#
 cp -rf /home/`logname`/Vdr_repo/setup16_softhdcuvid.tar.gz /etc/vdr
 cd /etc/vdr
 tar -zxvf setup16_softhdcuvid.tar.gz
 rm -f setup16_softhdcuvid.tar.gz
-#
-cd /home/`logname`
-chmod -R 777 Vdr_repo
+echo "Vdr-Plugin-Softhdcuvid / Softhdvaapi installed"
+sleep 2
+fi
 #
 cd $SRC/vdr
 make plugins install
-esac
+#
+cd /home/`logname`
+chmod -R 777 Vdr_repo
 #
         echo "            Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
@@ -359,6 +373,8 @@ cp -rf /home/`logname`/Vdr_repo/setup16_xineliboutput_nvidia.tar.gz /etc/vdr/
 cd /etc/vdr/
 tar -zxvf setup16_xineliboutput_nvidia.tar.gz
 rm -rf setup16_xineliboutput_nvidia.tar.gz
+sed -i "s|-P'iptv'|& -P'radio'|" /usr/local/bin/vdrrun
+echo "Vdr-Xineliboutput installed"
 #
 cd /home/`logname`
 chmod -R 777 /Vdr_repo
@@ -399,13 +415,15 @@ clear
 echo "        ***                Installing Sothddevice-drm            ***"; sleep 2
 cd $VDRSRC
 if [ -f softhddevice-drm/Makefile ]
-	then echo "Sothddevice-drm $Remind5"
+	then echo "Vdr-Plugin-Sothddevice-drm $Remind5"
 	sleep 2	
     		else git clone https://github.com/zillevdr/vdr-plugin-softhddevice-drm.git
 		cp -rf softhddevice-drm /home/`logname`/Vdr_repo/
 		cd softhddevice-drm
 		make && make install
 		sed -i "s|-P'dvbapi'|& -P'softhddevice-drm'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Sothddevice-drm installed"
+		sleep 2
 fi
 #		
 cd /home/`logname`
@@ -417,18 +435,18 @@ make plugins install
 #
 d1)
 clear
-echo "        ***                Removing Sothddevice-drm              ***"; sleep 2
+echo "        ***                Removing Vdr-Plugin-Sothddevice-drm              ***"; sleep 2
 cd $VDRSRC
 if [ -f  softhddevice-drm/Makefile ]
-echo "$Remind1 Sothddevice-drm"
+echo "$Remind1 Vdr-Plugin-Sothddevice-drm"
 sleep 2
 	then rm -rf softhddevice-gles
 	cd $LIB
 	rm -rf libvdr-softhddevice-drm.*
 	rm -rf /home/`logname`/Vdr_repo/softhddevice-drm
 	sed -i "s|-P'softhddevice-drm'||" /usr/local/bin/vdrrun
-	echo "Sothddevice-drm $Remind1"
-		else echo "Sothddevice-drm $Remind5"
+	echo "Vdr-Plugin-Sothddevice-drm $Remind1"
+		else echo "Vdr-Plugin-Sothddevice-drm $Remind5"
 fi
 #
 cd /home/`logname`
@@ -440,7 +458,7 @@ make plugins install
 #
 e)
 clear
-echo "        ***                Installing Rpihddevice               ***"; sleep 2
+echo "        ***                Installing Vdr-Plugin-Rpihddevice               ***"; sleep 2
 clear
 echo "
 *****    IMPORTANT *******
@@ -463,7 +481,7 @@ fi
 #
 cd $VDRSRC
 if [ -f rpihddevice/Makefile ]
-	then echo "Rpihddevice $Remind5"
+	then echo "Vdr-Plugin-Rpihddevice $Remind5"
 	sleep 2
 		else git clone https://github.com/vdr-projects/vdr-plugin-rpihddevice.git
 		cp -rf vdr-plugin-rpihddevice /home/`logname`/Vdr_repo/
@@ -471,6 +489,8 @@ if [ -f rpihddevice/Makefile ]
 		cd rpihddevice
 		make && make install
 		sed -i "s|-P'dvbapi'|& -P'rpihddevice -o 5'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Rpihddevice installed"
+		sleep 2
 fi
 # 
 cd /home/`logname`
@@ -483,16 +503,16 @@ make plugins install
 #
 e1)
 clear
-echo "        ***                Removing Rpihddevice               ***"; sleep 2
+echo "        ***                Removing Vdr-Plugin-Rpihddevice               ***"; sleep 2
 cd $VDRSRC
 if [ -f rpihddevice/Makefile ]
-echo "$Remind1 Rpihddevice"
+echo "$Remind1 Vdr-Plugin-Rpihddevice"
 sleep 2
 	then rm -rf rpihddevice
 	cd $LIB
 	rm -rf libvdr-rpihddevice.*
 	sed -i "s|-P'rpihddevice -o 5'||" /usr/local/bin/vdrrun
-		else echo "Rpihddevice $Remind5"
+		else echo "Vdr-Plugin-Rpihddevice $Remind5"
 fi
 #
 cd /home/`logname`
@@ -551,6 +571,8 @@ if [ -f SkinNopacity/Makefile ]
   		cd ../../..
   		make plugins install
   		sed -i "s|-P'iptv'|& -P'skinnopacity -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
+		echo "SkinNopacity installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -600,6 +622,8 @@ if [ -f skindesigner/Makefile ]
 		patch -p1 < skindesigner.patch
 		make && make install
 		sed -i "s|-P'iptv'|& -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/'|" /usr/local/bin/vdrrun
+		echo "Skindesigner installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -655,6 +679,8 @@ if [ -f skinlcarsng/Makefile ]
 		ln -s lcars-BlueGlass.theme lcarsng-Bluegass.theme
 		ln -s lcars-390Lb.theme lcarsng-390Lb.theme
 		ln -s lcars-LbSense.theme lcarsng-LbSense.theme
+		echo "SkinLCARSNG installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -711,6 +737,8 @@ if [ -f osd2web/Makefile ]
 		cd ../../..
 		make plugins
 		sed -i "s|-P'iptv'|& -P'osd2web -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Osd2web installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -746,11 +774,11 @@ make plugins install
 ###########################################################################################################
 e)
 clear
-echo "        ***                Installing Vdr-Plugin-Skinflatplus               ***"; sleep 2
+echo "        ***                Installing Skinflatplus               ***"; sleep 2
 apt-get -y install libfreetype6-dev graphicsmagick-libmagick-dev-compat lm-sensors
 cd $VDRSRC
 if [ -f /skinflatplus/Makefile ]
-	then  echo "Vdr-Plugin-Skinflatplus $Remind"
+	then  echo "Skinflatplus $Remind"
 	sleep 2
 	        else git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git
 		cp -rf vdr-plugin-skinflatplus /home/`logname`/Vdr_repo/
@@ -767,6 +795,8 @@ if [ -f /skinflatplus/Makefile ]
 		cd ../weather/
 		cp -rf /home/`logname`/Vdr_repo/flat_weather.tar.gz
 		tar -zxvf flat_weather.tar.gz
+		echo "Skinflatplus installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -778,17 +808,17 @@ make plugins install
 #                                      $$$$$$$$$$$$$$$$$$
 e1)
 clear
-echo "        ***                Removing Vdr-Plugin-Skinflatplus               ***"; sleep 2
+echo "        ***                Removing Skinflatplus               ***"; sleep 2
 cd $VDRSRC
 if [ -f skinflatplus/Makefile ]
-echo "Vdr-Plugin-Skinflatplus $Remind1"
+echo "Skinflatplus $Remind1"
 sleep 2
 	then rm -rf skinflatplus
 	cd $LIB
 	rm -rf libvdr-skinflatplus.*
 	rm -rf skinflatplus
 	sed -i "s|-P'skinflatplus -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun
-		else echo "Vdr-Plugin-Skinflatplus $Remind5"
+		else echo "Skinflatplus $Remind5"
 fi
 #
 cd /home/`logname`
@@ -818,7 +848,8 @@ if [ -f skinelchihd/Makefile ]
  		cd ../../..
  		make plugins install
  		sed -i "s|-P'iptv'|& -P'skinelchihd -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
- 		
+		echo "Skin Elchi HD installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -884,6 +915,8 @@ if [ -f text2skin/Makefile ]
  		#rm -r logos
  		# sudo ln -s /etc/vdr/logos /etc/vdr/plugins/text2skin/NarrowHD/
  		sed -i "s|-P'iptv'|& -P'text2skin'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Text2skin & NarrowHD skin installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -966,10 +999,15 @@ if [ -f epgsearch/Makefile ]
 		cd ../../..
 		make plugins
 		sed -i "s|-P'iptv'|& -P'epgsearch'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Epgsearch installed"
+		sleep 2
+#	
 fi
 cd /home/`logname`/Vdr_repo/
 chmod -R 777 *
-cd $SRC/vdr; make plugins install
+#
+cd $SRC/vdr
+make plugins install
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 a1)
@@ -1008,6 +1046,8 @@ if [ -f epg2vdr/Makefile ]
 		cd ../..
 		make plugins
 		sed -i "s|-P'iptv'|& -P'epg2vdr'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Epg2vdr installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -1056,6 +1096,8 @@ if [ -f neutrinoepg/Makefile ]
 		cd ../../..
 		make plugins
 		sed -i "s|-P'iptv'|& -P'neutrinoepg'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Neutrinoepg installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -1103,6 +1145,8 @@ if [ -f tvguide/Makefile ]
 		make plugins
 		cp -rf $VDRSRC/tvguide/themes/* /etc/vdr/themes/
 		sed -i "s|-P'iptv'|& -P'tvguide'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-TvGuide installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -1148,6 +1192,8 @@ if [ -f tvguideng/Makefile ]
 		cd ../../..
 		make plugins
 		sed -i "s|-P'iptv'|& -P'tvguideng'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-TvGuideng installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -1179,22 +1225,22 @@ make plugins install
         echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
-f)
-clear
-echo "        ***                Installing Vdr-Plugin-TvScraper               ***"; sleep 2
+#f)
+#clear
+#echo "        ***                Installing Vdr-Plugin-TvScraper               ***"; sleep 2
 #apt-get -y install libmariadbclient-dev libmariadb3 libmariadb-dev uuid-dev
 #apt-get -y install graphicsmagick-libmagick-dev-compat libmagick++-6.q16-dev
 #apt-get -y install libmysqlclient-dev libmysql++-dev libimlib2-dev libssl-dev
-apt-get -y install libsqlite3-dev libcurl4-openssl-dev libxml2-dev libjansson-dev
+#apt-get -y install libsqlite3-dev libcurl4-openssl-dev libxml2-dev libjansson-dev
 
-cd $VDRSRC
-if [ -f scraper2vdr/Makefile ]
-	then  echo "Vdr-Plugin-TvScraper $Remind"
-	sleep 2
-		else git clone https://github.com/MarkusEh/vdr-plugin-tvscraper.git
-		cp -rf vdr-plugin-tvscraper /home/`logname`/Vdr_repo/
-		mv -f  vdr-plugin-tvscraper tvscraper
-		cd tvscraper
+#cd $VDRSRC
+#if [ -f scraper2vdr/Makefile ]
+#	then  echo "Vdr-Plugin-TvScraper $Remind"
+#	sleep 2
+#		else git clone https://github.com/MarkusEh/vdr-plugin-tvscraper.git
+#		cp -rf vdr-plugin-tvscraper /home/`logname`/Vdr_repo/
+#		mv -f  vdr-plugin-tvscraper tvscraper
+#		cd tvscraper
 #		wget https://www.dropbox.com/s/rqm9w3n85igu5p0/patch_scraper2vdr.tar.gz
 #		tar -zxvf patch_scraper2vdr.tar.gz
 #		mv -f patch_scraper2vdr.tar.gz /home/`logname`/Vdr_repo/
@@ -1203,40 +1249,41 @@ if [ -f scraper2vdr/Makefile ]
 #		cd $PLUGINS
 #		mkdir -p scraper2vdr
 #		cd $VDRSRC/scraper2vdr
-		make
+#		make
 #		cp -rf $VDRSRC/scraper2vdr/configs/epg.dat $PLUGINS/scraper2vdr/
-		sed -i "s|-P'iptv'|& -P'tvscraper'|" /usr/local/bin/vdrrun
-fi
+#		sed -i "s|-P'iptv'|& -P'tvscraper'|" /usr/local/bin/vdrrun
+#		echo "Vdr-Plugin-TvScraper installed"
+#		sleep 2	
+#fi
+##
+#cd /home/`logname`
+#chmod -R 777 Vdr_repo
 #
-cd /home/`logname`
-chmod -R 777 Vdr_repo
+#cd $SRC/vdr
+#make plugins install
+#        echo "                    Press Enter to continue ...               "; read enterKey;;
+#                                      $$$$$$$$$$$$$$$$$$#f1)
+#clear
+#echo "        ***                Removing Vdr-Plugin-Tvscraper               ***"; sleep 2
+#cd $VDRSRC
+#if [ -f tvscraper/Makefile ]
+#echo "Vdr-Plugin-Tvscraper $Remind1"
+#sleep 2#
+#	then rm -rf tvscraper#
+#	cd $PLUGINS
+#	rm -rf tvscraper
+#	cd $LIB
+#	rm -rf libvdr-tvscraper.*
+#	sed -i "s|-P'tvscraper'||" /usr/local/bin/vdrrun
+#		else echo "Vdr-Plugin-Tvscraper $Remind5"
+#fi
 #
-cd $SRC/vdr
-make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
-#                                      $$$$$$$$$$$$$$$$$$
-f1)
-clear
-echo "        ***                Removing Vdr-Plugin-Tvscraper               ***"; sleep 2
-cd $VDRSRC
-if [ -f tvscraper/Makefile ]
-echo "Vdr-Plugin-Tvscraper $Remind1"
-sleep 2
-	then rm -rf tvscraper
-	cd $PLUGINS
-	rm -rf tvscraper
-	cd $LIB
-	rm -rf libvdr-tvscraper.*
-	sed -i "s|-P'tvscraper'||" /usr/local/bin/vdrrun
-		else echo "Vdr-Plugin-Tvscraper $Remind5"
-fi
+#cd /home/`logname`
+#chmod -R 777 Vdr_repo
 #
-cd /home/`logname`
-chmod -R 777 Vdr_repo
-#
-cd $SRC/vdr
-make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#cd $SRC/vdr
+#make plugins install
+#        echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 g)
@@ -1262,6 +1309,8 @@ if [ -f live/Makefile ]
 		tar -zxvf live-themes.tar.gz
 		rm -rf live-themes.tar.gz
 		sed -i "s|-P'iptv'|& -P'live'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Live installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -1352,6 +1401,8 @@ if [ -f iptv/Makefile ]
 		tar -zxvf iptv_conf.tar.gz
 		rm -rf iptv_conf.tar.gz
 		sed -i "s|-P'radio'|& -P'iptv'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Radio installed"
+		sleep 2	
 fi
 #
 cd /home/`logname`
@@ -1402,6 +1453,8 @@ if [ -f radio/Makefile ]
 		cp -rf $VDRSRC/radio/config/mpegstill/* $PLUGINS/radio/
 		cp -rf $VDRSRC/radio/config/scripts/* $PLUGINS/radio/
 		sed -i "s|-P'iptv'|& -P'radio'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Radio installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -1474,10 +1527,10 @@ read yourch
 case $yourch in
 #
 a) sed -i "s|-P'iptv'|& -P'mpv -a alsa -v gpu -h auto -b /media -l ita'|" /usr/local/bin/vdrrun
-echo "Nvidia Video Devices setup installed"
+echo "Mpv Nvidia Video Devices setup installed"
 sleep 2;;
 b) sed -i "s|-P'iptv'|& -P'mpv -a alsa -v gpu -h vaapi-copy -b /media -l ita'|" /usr/local/bin/vdrrun
-echo "Intel Video Devices setup installed"
+echo "Mpv Intel Video Devices setup installed"
 sleep 2;;
 esac
         echo "                    Press Enter to continue ...               "; read enterKey;;
@@ -1519,6 +1572,8 @@ if [ -f dvd/Makefile ]
 		cd dvd
 		make install
 		sed -i "s|-P'iptv'|& -P'dvd'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Mp3 installed"
+		sleep 2		
 fi
 #
 cd /home/`logname`
@@ -1569,6 +1624,8 @@ if [ -f mp3/Makefile ]
 		cp -rf $VDRSRC/mp3/examples/mp3sources.conf.example /etc/vdr/plugins/
 		cd /etc/vdr/plugins/
 		mv -f mp3sources.conf.example mp3sources.conf
+		echo "Vdr-Plugin-Mp3 installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -1614,6 +1671,8 @@ if [ -f hbbtv/HbbTv ]
 		cd hbbtv
 		make && make install
 		sed -i "s|-P'iptv'|& -P'hbbtv'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-HbbTv installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -1661,6 +1720,8 @@ if [ -f image/Makefile ]
 		cp -rf $VDRSRC/image/scripts/imageplugin.sh /usr/local/bin/
 		cp -rf $VDRSRC/image/scripts/magickplugin.sh /usr/local/bin/
 		sed -i "s|-P'iptv'|& -P'image -c /etc/vdr/plugins'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Image installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -1738,6 +1799,8 @@ if [ -f dvbapi/Makefile ]
 		cd ../..
 		make plugins
 		sed -i "s|--lirc|& -P'dvbapi'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Dvbapi installed"
+		sleep 2		
 fi
 #
 cd /home/`logname`
@@ -1790,7 +1853,9 @@ if [ -f externalplayer/Makefile ]
 		cd /etc/vdr/plugins
 		tar -zxvf externalplayer.conf.tar.gz
 		rm -rf externalplayer.conf.tar.gz
-		sed -i "s|-P'iptv'|& -P'externalplayer'|" /usr/local/bin/vdrrun 
+		sed -i "s|-P'iptv'|& -P'externalplayer'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-ExternalPlayer installed"
+		sleep 2		 
 fi
 #
 cd /home/`logname`
@@ -1841,6 +1906,8 @@ if [ -f systeminfo/Makefile ]
 		make plugins
 		
 		sed -i "s|-P'iptv'|& -P'systeminfo'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Systeminfo installed"
+		sleep 2	
 fi
 #
 cd /home/`logname`
@@ -1888,6 +1955,8 @@ if [ -f femon/Makefile ]
 		cd ../../..
 		make plugins
 		sed -i "s|-P'iptv'|& -P'femon'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Femon installed"
+		sleep 2		
 fi
 #
 cd /home/`logname`
@@ -1934,6 +2003,8 @@ if [ -f devstatus/Makefile ]
 		cd ../../..
 		make plugins
 		sed -i "s|-P'iptv'|& -P'devstatus'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Devstatus installed"
+		sleep 2	
 fi
 #
 cd /home/`logname`
@@ -1981,6 +2052,8 @@ if [ -f osdteletext/Makefile ]
 		sed -i "s|-P'iptv'|& -P'osdteletext'|" /usr/local/bin/vdrrun
 		cd /var/cache/vdr
 		mkdir -p vtx
+		echo "Vdr-Plugin-Osdteletext installed"
+		sleep 2	
 fi
 #
 cd /home/`logname`
@@ -2032,6 +2105,8 @@ if [ -f ttxsubs/Makefile ]
 		make
 		make plugins
 		sed -i "s|-P'iptv'|& -P'ttxtsubs'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Ttxtsubs installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -2084,6 +2159,8 @@ if [ -f suspendoutput/Makefile ]
 		cd ../../..
 		make plugins
 		sed -i "s|-P'iptv'|& -P'suspendoutput -l'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Suspendoutput installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -2164,6 +2241,8 @@ if [ -f channelscan/Makefile ]
 		tar -zxvf satellite_pack.tar.gz
 		rm -rf satellite_pack.tar.gz
 		sed -i "s|-P'iptv'|& -P'channelscan'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Channellscan installed"
+		sleep 2		
 fi
 #
 cd /home/`logname`
@@ -2185,6 +2264,7 @@ sleep 2
 	rm -rf libvdr-channelscan.*
 	sed -i "s|-P'channelscan'||" /usr/local/bin/vdrrun
 		else echo "Vdr-Plugin-Channellscan $Remind5"
+		
 fi
 #
 cd /home/`logname`
@@ -2220,6 +2300,8 @@ if [ -f /usr/local/bin/w_scan_cpp ]
 	        make download	
 	        make
 	        make install
+		echo "W_scan_cpp installed"
+		sleep 2	        
 fi
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
@@ -2252,6 +2334,8 @@ if [ -f wirbelscan/Makefile ]
 		cd ../..
 		make plugins
 		sed -i "s|-P'iptv'|& -P'wirbelscan'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Wirbelscan installed"
+		sleep 2	
 fi
 #
 cd /home/`logname`
@@ -2299,6 +2383,8 @@ if [ -f satip/Makefile ]
 		cd ../..
 		make plugins
 		sed -i "s|-P'iptv'|& -P'satip'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Satip installed"
+		sleep 2	
 fi
 #
 cd /home/`logname`
@@ -2343,6 +2429,8 @@ if [ -f /$SRC/w_scan2/Makefile ]
 		./autogen.sh
 		./configure
 		make && make install
+		echo "W_scan2 installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -2378,6 +2466,8 @@ if [ -f /$SRC/t2scan/Makefile ]
 		cd t2scan
 		./configure
 		make && make install
+		echo "T2scan installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -2446,6 +2536,8 @@ if [ -f vdrmanager/Makefile ]
 		echo "*** vdrmanager.conf setup ***"
 		cp -rf $VDRSRC/vdrmanager/vdr-vdrmanager/examples/*.conf $PLUGINS/
 		sed -i "s|-P'iptv'|& -P'vdrmanager -p 6420 -P change'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Vdrmanager installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -2493,6 +2585,8 @@ if [ -f cecremote/Makefile ]
 		cd ../..
 		make plugins
 		sed -i "s|-P'iptv'|& -P'cecremote'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-CecRemote installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -2561,6 +2655,8 @@ if [ -f remote/Makefile ]
 		rm -rf /usr/local/bin/vdrrun_*
 		sed -i "s|--lirc||" /usr/local/bin/vdrrun
 		sed -i "s|bash|& \n|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Remote installed"
+		sleep 2	
 fi
 #
 cd /home/`logname`
@@ -2615,7 +2711,9 @@ if [ -f menuorg/Makefile ]
 		tar xzvf menuorg.tar.gz
 		rm -rf menuorg.tar.gz
 		sed -i "s|-P'iptv'|& -P'menuorg'|" /usr/local/bin/vdrrun
-fi
+		echo "Vdr-Plugin-Menuorg installed"
+		sleep 2
+		fi
 #
 cd /home/`logname`
 chmod -R 777 Vdr_repo
@@ -2659,6 +2757,8 @@ if [ -f chanman/Makefile ]
 		cd chanman
 		make
 		sed -i "s|-P'iptv'|& -P'chanman'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Chanman installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -2703,6 +2803,8 @@ if [ -f channellists/Makefile ]
 		cd channellists
 		make
 		sed -i "s|-P'iptv'|& -P'channellists'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Channellists installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -2780,6 +2882,8 @@ if [ -f streamdev/Makefile ]
 		touch $PLUGINS/streamdev-server/streamdevhosts.conf
 		echo "$ALLOWED" >> $PLUGINS/streamdev-server/streamdevhosts.conf
 		sed -i "s|-P'iptv'|& -P'streamdev-server'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-StreamDev installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -2827,6 +2931,8 @@ if [ -f vnsiserver/Makefile ]
 		cd vnsiserver
 		make && make install
 		sed -i "s|-P'iptv'|& -P'vnsiserver'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Vnsiserver installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -2903,6 +3009,8 @@ if [ -f weatherforecast/Makefile ]
 		cd ../../..
 		make plugins
 		sed -i "s|-P'iptv'|& -P'weatherforecast'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Weatherforecast installed"
+		sleep 2
 fi
 #
 cd /home/`logname`
@@ -2958,6 +3066,10 @@ cd $SRC/vdr
 make plugins install
 #
 cp -rf $VDRSRC/weatherng/weatherng/* /etc/vdr/plugins/weatherng/
+#
+echo "Vdr-Plugin-Weatherng installed"
+sleep 2
+
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 b1)
@@ -3047,4 +3159,3 @@ esac;;
 *) ;;
 esac
 done
-

@@ -60,7 +60,7 @@ ALLOWED="#
 	then load it simply typing: sudo ./Vdr_plugins_installer
 
                                                                " 0 0
-sleep 4
+sleep 2
 
 ###########################################################################################################
 
@@ -112,14 +112,14 @@ case $yourch in
         [a]    Softhddevice ...............................  [a1]    Softhddevice
         [b]    Softhdcuvid / Softhdvaapi ..................  [b1]    Softhdcuvid / Softhdvaapi
         [c]    Xineliboutput ..............................  [c1]    Xineliboutput
-        [d]    Softhddevice-drm ...........................  [d1]    Softhddevice-drm
-        [e]    Rpihddevice (Raspberry Pi3).................  [e1]    Rpihddevice (Raspberry Pi3)
-
+        [d]    Softhddevice-drm (Raspberry) ...............  [d1]    Softhddevice-drm (Raspberry)
+        [e]    Softhddevice-drm-gles (Raspberry) ..........  [e1]    Softhddevice-drm-gles (Raspberry)        
+        [f]    Rpihddevice (Raspberry Pi3).................  [f1]    Rpihddevice (Raspberry Pi3)
         
         [z]    Skip
 ----------------------------------------------------------------------------------------------------- " 0 0
 
-echo -n "        Enter your menu choice = Install [a-e] ~~ Remove [a1-e1] ~~ Skip [z]:      "
+echo -n "        Enter your menu choice = Install [a-f] ~~ Remove [a1-f1] ~~ Skip [z]:      "
 read yourch
 case $yourch in
 					##################
@@ -136,7 +136,7 @@ apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswre
 apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev
 #
 if [ -f softhddevice/Makefile ]
-	then echo "Softhddevice $Remind5"
+	then echo "Vdr-Plugin-Softhddevice $Remind5"
 		else
 dialog --title "   ** Setup Softhddevice **   " --infobox "
    			-------------------------------------------------------------------------
@@ -208,8 +208,10 @@ sleep 2
 	then rm -rf softhddevice
 	cd $LIB
 	rm -rf libvdr-softhddevice.*
+	sed -i "s|-P'softhddevice -v vdpau -f'||" /usr/local/bin/vdrrun	
 	sed -i "s|-P'softhddevice -v cuvid -f'||" /usr/local/bin/vdrrun
 	sed -i "s|-P'softhddevice -v cpu-glx -f'||" /usr/local/bin/vdrrun
+	
 		else echo "Vdr-Plugin-Softhddevice $Remind5"
 fi
 #
@@ -413,6 +415,8 @@ make plugins install
 d)
 clear
 echo "        ***                Installing Sothddevice-drm            ***"; sleep 2
+apt-get -y install libglm-dev libxcb-screensaver0-dev libxcb-dpms0-dev 
+apt-get -y install libxcb-ewmh-dev libva-dev libx265-dev libasound2-dev 
 cd $VDRSRC
 if [ -f softhddevice-drm/Makefile ]
 	then echo "Vdr-Plugin-Sothddevice-drm $Remind5"
@@ -440,7 +444,7 @@ cd $VDRSRC
 if [ -f  softhddevice-drm/Makefile ]
 echo "$Remind1 Vdr-Plugin-Sothddevice-drm"
 sleep 2
-	then rm -rf softhddevice-gles
+	then rm -rf softhddevice-drm
 	cd $LIB
 	rm -rf libvdr-softhddevice-drm.*
 	rm -rf /home/`logname`/Vdr_repo/softhddevice-drm
@@ -457,6 +461,50 @@ make plugins install
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #
 e)
+clear
+echo "        ***                Installing Vdr-Plugin-Sothddevice-drm-gles            ***"; sleep 2
+apt-get -y install libglm-dev libxcb-screensaver0-dev libxcb-dpms0-dev 
+apt-get -y install libxcb-ewmh-dev libva-dev libx265-dev libasound2-dev
+apt-get -y install libgles2-mesa libgles2-mesa-dev libegl-mesa0
+apt-get -y install libgbm-dev libglm-dev libpng-dev
+cd $VDRSRC
+if [ -f softhddevice-drm/Makefile ]
+	then echo "Vdr-Plugin-Sothddevice-drm-gles $Remind5"
+	sleep 2	
+    		else git clone https://github.com/rellla/vdr-plugin-softhddevice-drm-gles.git
+		cp -rf softhddevice-drm-gles /home/`logname`/Vdr_repo/
+		cd softhddevice-drm-gles
+		make && make install
+		sed -i "s|-P'dvbapi'|& -P'softhddevice-drm-gles'|" /usr/local/bin/vdrrun
+		echo "Vdr-Plugin-Sothddevice-drm-gles"
+		sleep 2
+fi
+#		
+cd /home/`logname`
+chmod -R 777 Vdr_repo
+#
+cd $SRC/vdr
+make plugins install
+        echo "     Press Enter to continue ...               "; read enterKey;;
+#
+e1)
+clear
+echo "        ***                Removing Vdr-Plugin-Sothddevice-drm-gles              ***"; sleep 2
+cd $VDRSRC
+if [ -f  softhddevice-drm-gles/Makefile ]
+echo "$Remind1 Vdr-Plugin-Softhddevice-drm-gles"
+sleep 2
+	then rm -rf softhddevice-drm-gles
+	cd $LIB
+	rm -rf libvdr-softhddevice-drm.*
+	rm -rf /home/`logname`/Vdr_repo/softhddevice-drm-gles
+	sed -i "s|-P'softhddevice-drm-gles'||" /usr/local/bin/vdrrun
+	echo "Vdr-Plugin-Sothddevice-drm-gles $Remind1"
+		else echo "Vdr-Plugin-Sothddevice-drm-gles $Remind5"
+fi
+;;
+#
+f)
 clear
 echo "        ***                Installing Vdr-Plugin-Rpihddevice               ***"; sleep 2
 clear
@@ -501,7 +549,7 @@ make plugins install
 #
         echo "     Press Enter to continue ...               "; read enterKey;;
 #
-e1)
+f1)
 clear
 echo "        ***                Removing Vdr-Plugin-Rpihddevice               ***"; sleep 2
 cd $VDRSRC
@@ -1518,11 +1566,12 @@ make plugins install
 ---------------------------------------------------
 
 	[a]    Nvidia Video Devices                 
-	[b]    Intel Video Devices                  
+	[b]    Intel Video Devices
+	[c]    Raspberry Pi4	                  
 			                
 --------------------------------------------------- " 0 0
 
-echo -n "        Enter your menu choice  [a-b]:      "
+echo -n "        Enter your menu choice  [a-c]:      "
 read yourch
 case $yourch in
 #
@@ -1532,6 +1581,8 @@ sleep 2;;
 b) sed -i "s|-P'iptv'|& -P'mpv -a alsa -v gpu -h vaapi-copy -b /media -l ita'|" /usr/local/bin/vdrrun
 echo "Mpv Intel Video Devices setup installed"
 sleep 2;;
+c) sed -i "s|-P'iptv'|& -P'mpv -a alsa -v gpu -h auto -c drm -b /media -l ita'|" /usr/local/bin/vdrrun
+echo "Mpv for Raspberry setup installed"
 esac
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
@@ -3159,4 +3210,3 @@ esac;;
 *) ;;
 esac
 done
-

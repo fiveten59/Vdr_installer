@@ -1054,7 +1054,7 @@ case $yourch in
 a) clear
 echo "$TRIAL" >> /etc/vdr/diseqc.conf
 cd /etc/vdr/
-cp -rf $REPO4/channels.conf.trial.tar.gz /etc/vdr/
+cp -rf $REPO/channels.conf.trial.tar.gz /etc/vdr/
 tar -zxvf channels.conf.trial.tar.gz
 rm -rf channels.conf.trial.tar.gz
 echo "Channell TRIAL list installed"
@@ -1466,7 +1466,7 @@ rm -rf /etc/sudoers.d/server-vdr
 touch /etc/sudoers.d/server-vdr
 echo "vdr ALL=(ALL) ALL" >> /etc/sudoers.d/server-vdr
 echo "%`logname` ALL=NOPASSWD: /etc/init.d/server-vdr" >> /etc/sudoers.d/server-vdr
-echo ""
+echo "Permissions created"
 sleep 2
 #
 echo "             *** Configuring VDR & Vdr Server  ***"
@@ -1651,14 +1651,6 @@ Exec=/usr/local/bin/start-server-vdr.sh
 chmod 777 /usr/share/applications/Server.desktop
 #
 clear
-echo  "        ** Automatic start Vdr - Vdr Server - Oscam  command**"
-sleep 2
-cd /etc/xdg/autostart
-cp -rf /home/'logname'/Vdr-repo/autostart.tar.gz /etc/xdg/autostart
-tar -zxvf autostart.tar.gz
-rm -rf autostart.tar.gz
-#
-clear
     dialog --title "   ** Configuring Frontend **   " --infobox "
    ----------------------------------------------
         Configuring Frontend & Vdr command line
@@ -1691,6 +1683,20 @@ cd /etc/vdr/
 tar -zxvf setup16_softhddevice.tar.gz
 rm -rf setup16_softhddevice.tar.gz
 #
+echo "Vdr & Vdr Server configured"
+sleep 2
+#
+clear
+echo  "        ** Automatic start Vdr - Vdr Server - Oscam  command**"
+sleep 2
+cd /etc/xdg/autostart
+cp -rf /home/'logname'/Vdr-repo/autostart.tar.gz /etc/xdg/autostart
+tar -zxvf autostart.tar.gz
+rm -rf autostart.tar.gz
+echo "Automatic start Vdr - Vdr Server - Oscam  command installed"
+sleep 2
+#
+
 apt-mark hold vdr
 cd /home/`logname`
 chmod -R 777 Vdr_repo
@@ -1708,19 +1714,19 @@ sleep 3
 6)
 
 clear
+
     dialog --title "   ** Install & Setup KODI **   " --infobox "
+
    --------------------------------------------------------------
-                         Install/Remove Kodi
-   --------------------------------------------------------------
 
-        *****  Install  *****  ..........  *****  Remove  *****
-        [a]    Install  ............  [a1]    Remove KODI
+        [a]    Install Kodi
+        [b]    Remove Kodi
 
-        [z]    Skip
-
+        [z]    Exit
 
    -------------------------------------------------------------- " 0 0
-echo -n "        Enter your menu choice = Install [a] ~~ Remove [a1] ~~ Exit [z]:      "
+
+echo -n "        Enter your menu choice = Install [a] ~~ Remove [b] ~~ Exit [z]:      "
 read yourch
 case $yourch in
 
@@ -1801,7 +1807,7 @@ read enterKey;;
 
 #############################################################
 
-a1)
+b)
 
 clear
 echo "                    Remove KODI"
@@ -1815,6 +1821,8 @@ add-apt-repository --remove ppa:team-xbmc/ppa -y
 add-apt-repository --remove ppa:team-xbmc/unstable -y
 rm -rf /home/`logname`/Scrivania/Kodi.desktop
 rm -rf /usr/share/applications/Kodi.desktop;;
+#
+z);;
 esac;;
 
 #############################################################

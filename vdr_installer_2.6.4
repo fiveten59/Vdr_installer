@@ -466,9 +466,11 @@ cd ffmpeg
     echo "                    Press Enter to continue ...               "
     read enterKey
 make -j10
-checkinstall --pkgname=ffmpeg --pkgversion="5.1" --backup=no --deldoc=yes --fstrans=no --default --pakdir=$PACKAGES
+make install
+#checkinstall --pkgname=ffmpeg --pkgversion="5.1" --backup=no --deldoc=yes --fstrans=no --default --pakdir=$PACKAGES
 apt-mark hold ffmpeg
 sleep 3
+echo " FFmpeg installed "; sleep 2
 fi;;
 
 #############################################################
@@ -688,13 +690,16 @@ rm -rf $SRC/ffmpeg_sources/nv-codec-headers
 rm -rf $SRC/ffmpeg_sources/ffmpeg
 rm -rf /usr/local/share/ffmpeg
 rm -rf /usr/share/doc/ffmpeg
-rm -rf $PACKAGES/ffmpeg*.deb;;
+rm -rf $PACKAGES/ffmpeg*.deb
+echo " FFmpeg removed "; sleep 2;;
 #
 b1)
 clear
-echo "                    Removing Lircd "
+echo "                    Removing Lirc "
 apt remove lirc lirc-x
-apt purge lirc lirc-x;;
+apt purge lirc lirc-x
+echo " Lirc removed "; sleep 2;;
+
 #
 c1)
 clear
@@ -707,7 +712,8 @@ rm -rf /etc/eventlircd.d
 rm -rf /usr/sbin/eventlircd
 rm -rf /usr/local/bin/start-eventlircd.sh
 rm -rf /etc/sudoers.d/eventlircd
-rm -rf $SRC/eventlircd;;
+rm -rf $SRC/eventlircd
+echo " Eventlircd removed "; sleep 2;;
 #
 d1)
 clear
@@ -716,7 +722,8 @@ sleep 2
 cd $PACKAGES
 dpkg -r intel-vaapi.deb
 rm -rf $SRC/ffmpeg_sources/intel-vaapi-driver
-rm -rf $PACKAGES/intel-vaapi*;;
+rm -rf $PACKAGES/intel-vaapi*
+echo " Intel-vaapi-driver removed "; sleep 2;;
 #
 z);;
 esac;;
@@ -788,12 +795,12 @@ clear
 echo "                *** Final compilation ***"
 sleep 3
 echo ""
-cd $SRC/vdr
-checkinstall --fstrans=no --install=yes --pkgname=vdr --pkgversion "2.6.4" --pakdir=$PACKAGES --default
+make install
+#checkinstall --fstrans=no --install=yes --pkgname=vdr --pkgversion "2.6.4" --pakdir=$PACKAGES --default
 cp *.conf /etc/vdr
 #
 apt-mark hold vdr
-sleep 1;;
+echo " VDR-2.6.4 installed "; sleep 2;;
 #
 b)
 clear
@@ -814,12 +821,14 @@ rm -rf /home/`logname`/Scrivania/Vdr.desktop
 rm -rf /home/`logname`/Scrivania/KillVdr.desktop
 rm -rf /usr/share/applications/Vdr.desktop
 rm -rf /usr/share/applications/KillVdr.desktop
-rm -rf /etc/xdg/autostart/Vdr.desktop
+rm -rf /etc/xdg/autostart/vdr-autostart.desktop
+rm -rf /etc/xdg/autostart/vdr-server-autostart.desktop
 rm -rf /etc/xdg/autostart/Oscam.desktop
 cd $SRC
 rm -rf vdr vdr-*
 cd packages
-rm -rf vdr*.deb;;
+rm -rf vdr*.deb
+echo " VDR-2.6.4 removed "; sleep 2;;
 #
 z);;
 esac;;
@@ -931,7 +940,9 @@ cd $SRC/vdr
 make plugins install
 #
 cd $REPO
-chmod -R 777 *;;
+chmod -R 777 *
+echo " VDR-2.6.4 plugins installed "; sleep 2
+;;
 #
 b)
 clear
@@ -949,7 +960,8 @@ rm -rf libvdr-skinlcarsng.*
 rm -rf libvdr-iptv.*
 rm -rf libvdr-radio.*
 rm -rf libvdr-vnsiserver.*
-rm -rf libvdr-dvbapi.*;;
+rm -rf libvdr-dvbapi.*
+echo " VDR-2.6.4 plugins removed "; sleep 2;;
 z);;
 #
 esac;;
@@ -971,17 +983,19 @@ else cd $SRC
 cp -rf $REPO/icone.tar.gz $SRC
 tar -zxvf icone.tar.gz
 rm -rf icone.tar.gz
+echo " Icons installed "; sleep 2
 fi
 #
-echo " Installing Italian translation for some plugins "
+echo "                    Installing Italian translation for some plugins "
 cd $SRC
 mkdir -p traduzioni
 cd traduzioni
 cp $REPO/traduzioni.tar.gz /$SRC/traduzioni/
 tar -zxvf traduzioni.tar.gz
 rm -rf traduzioni.tar.gz
+echo " Italian translation installed "; sleep 2
 #
-echo "*** keymacros.conf setup ***"
+echo "                    keymacros.conf setup "
 rm -rf /etc/vdr/keymacros.conf
 touch /etc/vdr/keymacros.conf
 echo "# Remote control key macros for VDR
@@ -998,8 +1012,9 @@ Green     @channelscan
 Yellow    Info
 Blue      @tvguide
 Ok        Channels" >> /etc/vdr/keymacros.conf
+echo " keymacros installed "; sleep 2
 #
-echo "                    Installing true type"
+echo "                    Installing True Type Fonts"
 sleep 2
 if [ -d /usr/share/fonts/truetype/vdrsymbols ];
 then echo " Fonts $Remind4"
@@ -1009,18 +1024,20 @@ cd /usr/share/fonts/truetype/
 tar -zxvf vdrsymbols.tar.gz
 rm -rf vdrsymbols.tar.gz
 fc-cache -fv
+echo " True Type Fonts installed "; sleep 2
 fi
 #
-echo "                    *** Install Channels logos  ***"
+echo "                    Install Channels logos "
 sleep 2
 if [ -f /etc/vdr/logos/2be.png ]
 then echo " Logos are already installed"
 else
 cp -rf $REPO/logos /etc/vdr/
+echo " Channels logos installed "; sleep 2
 fi
 sleep 2
 #
-echo "                    *** Diseqc setup  ***"
+echo "                    Diseqc & Channells setup "
 sleep 2
 rm -rf /etc/vdr/diseqc.conf
 rm -rf /etc/vdr/channels.conf
@@ -1250,7 +1267,7 @@ sleep 2;;
 z);;
 esac
 #
-echo "                    *** Oscam Setup  ***"
+echo "                    Oscam Setup "
 sleep 2
 cd /usr/local
 mkdir -p etc
@@ -1267,11 +1284,10 @@ cd /usr/local/bin
 tar -zxvf oscam64.tar.gz
 rm -rf oscam64.tar.gz
 chmod 777 oscam
-echo "Oscam installed"
-sleep 2
+echo "Oscam installed"; sleep 2
 fi
 #
-echo "                    *** Create Oscam start command line ***"
+echo "                    Create Oscam start command line "
 sleep 2
 rm -rf /etc/init.d/oscam
 touch /etc/init.d/oscam
@@ -1322,10 +1338,9 @@ esac
 exit 0
 ' >> /etc/init.d/oscam
 chmod 755 /etc/init.d/oscam
-echo "Oscam start command line created"
-sleep 2
+echo "Oscam start command line created"; sleep 2
 #
-echo "                    *** Setup Oscam icon  ***"
+echo "                    Setup Oscam icon "
 sleep 1
 rm -rf /home/`logname`/Scrivania/Oscam.desktop
 rm -rf /usr/share/applications/Oscam.desktop
@@ -1348,10 +1363,9 @@ sleep 10
 sudo /etc/init.d/oscam start > /dev/null 2>&1
 ' >> /usr/local/bin/start-oscam.sh
 chmod 777 /usr/local/bin/start-oscam.sh
-echo "Setup Oscam icon & Oscam start created"
-sleep 2
+echo "Setup Oscam icon & Oscam start created"; sleep 2
 #
-echo "                    *** Setup Kill Oscam icon  ***"
+echo "                    Setup Kill Oscam icon "
 sleep 1
 rm -rf /home/`logname`/Scrivania/KillOscam.desktop
 rm -rf /usr/share/applications/KillOscam.desktop
@@ -1374,13 +1388,12 @@ echo '#!/bin/sh
 sudo /etc/init.d/oscam stop > /dev/null 2>&1
 ' >> /usr/local/bin/KillOscam.sh
 chmod 777 /usr/local/bin/KillOscam.sh
-echo "Kill Oscam icon & kill Oscam created"
-sleep 2
+echo "Kill Oscam icon & kill Oscam created"; sleep 2
 #
 systemctl enable pcscd
 systemctl start pcscd
 #
-echo "                    *** Setup Kill Vdr icon  ***"
+echo "                    Setup Kill Vdr icon "
 sleep 1
 rm -rf /home/`logname`/Scrivania/KillVdr.desktop
 rm -rf /usr/share/applications/KillVdr.desktop
@@ -1404,10 +1417,9 @@ echo '#!/bin/sh
 sudo /etc/init.d/vdr stop > /dev/null 2>&1
 ' >> /usr/local/bin/KillVdr.sh
 chmod 777 /usr/local/bin/KillVdr.sh
-echo "Kill Vdr & Vdr start created"
-sleep 2
+echo "Kill Vdr & Vdr start created"; sleep 2
 #
-echo "                    *** Install default Skin for Vdr  ***"
+echo "                    Install default Skin for Vdr "
 sleep 1
 if [ -f /etc/vdr/themes/checklcars ]
 then echo " Default Skin is already installed"
@@ -1415,26 +1427,22 @@ else cp -rf $REPO/lcars_pack.tar.gz /etc/vdr/themes
 cd /etc/vdr/themes
 tar -zxvf lcars_pack.tar.gz
 rm -rf lcars_pack.tar.gz
-echo " Default Skin installed"
-sleep 2
+echo " Default Skin installed"; sleep 2
 fi
 #
 echo "                    Configuring Vnsiserver"
 sleep 1
 cp -rf $VDRSRC/vnsiserver/vnsiserver/allowed_hosts.conf /$PLUGINS/vnsiserver
-echo "Vnsiserver configured"
-sleep 2
+echo "Vnsiserver configured"; sleep 2
 #
 echo "                    Configuring Iptv"
-sleep 1
 sed -i 's/geteuid/getppid/' /usr/bin/vlc
 cp -rf $REPO/iptv_conf.tar.gz /$PLUGINS/iptv/
 cd $PLUGINS/iptv/
 rm -rf vlc2iptv
 tar -zxvf iptv_conf.tar.gz
 rm -rf iptv_conf.tar.gz
-echo "Iptv configured"
-sleep 2
+echo "Iptv configured"; sleep 2
 #
 echo "                    *** Create Vdr vdrpoweroff ***"
 sleep 1
@@ -1445,8 +1453,7 @@ echo '#!/bin/sh
 killall -9 vdr & killall -9 vlc & killall mpv
 # & killall -9 oscam & shutdown -h now '  >> /usr/local/bin/vdrpoweroff
 chmod 777 /usr/local/bin/vdrpoweroff
-echo "Vdrpoweroff created"
-sleep 2
+echo "Vdrpoweroff created"; sleep 2
 #
 echo "             *** Permission to execute Eventlircd - Vdr - Oscam  ***"
 sleep 2
@@ -1466,13 +1473,12 @@ rm -rf /etc/sudoers.d/server-vdr
 touch /etc/sudoers.d/server-vdr
 echo "vdr ALL=(ALL) ALL" >> /etc/sudoers.d/server-vdr
 echo "%`logname` ALL=NOPASSWD: /etc/init.d/server-vdr" >> /etc/sudoers.d/server-vdr
-echo "Permissions created"
-sleep 2
+echo "Permissions created"; sleep 2
 #
-echo "             *** Configuring VDR & Vdr Server  ***"
+echo "                    Configuring VDR & Vdr Server "
 sleep 2
 echo "                    Create Vdr start command line"
-sleep 1
+sleep 2
 rm -rf /usr/local/bin/vdrrun
 touch /usr/local/bin/vdrrun
 echo '#!/bin/bash
@@ -1563,7 +1569,6 @@ Exec=/usr/local/bin/start-vdr.sh
 chmod 777 /usr/share/applications/Vdr.desktop
 #
 echo "                    Create Vdr Server start command line"
-clear
 sleep 1
 rm -rf /usr/local/bin/server_vdrrun
 touch /usr/local/bin/server_vdrrun
@@ -1573,7 +1578,7 @@ echo '#!/bin/bash
 
 chmod a+x /usr/local/bin/server_vdrrun
 #
-echo "                    *** Create init.d Vdr Server***"
+echo "                    Create init.d Vdr Server "
 sleep 1
 rm -rf /etc/init.d/server-vdr
 touch /etc/init.d/server-vdr
@@ -1634,7 +1639,7 @@ echo "#!/bin/sh
 /usr/lib/x86_64-linux-gnu/kodi/kodi.bin & sudo /etc/init.d/server-vdr start > /dev/null 2>&1" >> /usr/local/bin/start-server-vdr.sh
 chmod 777 /usr/local/bin/start-server-vdr.sh
 #
-echo "                    *** Setup Vdr Server icons  ***"
+echo "                    Setup Vdr Server icons "
 sleep 3
 rm -rf /home/`logname`/Scrivania/Server.desktop
 rm -rf /usr/share/applications/Server.desktop
@@ -1682,26 +1687,54 @@ cp -rf $REPO/setup16_softhddevice.tar.gz /etc/vdr
 cd /etc/vdr/
 tar -zxvf setup16_softhddevice.tar.gz
 rm -rf setup16_softhddevice.tar.gz
+echo "Vdr & Vdr Server configured"; sleep 2
 #
-echo "Vdr & Vdr Server configured"
-sleep 2
-#
-clear
-echo  "        ** Automatic start Vdr - Vdr Server - Oscam  command**"
-sleep 2
+echo "                    Eventlircd & Oscam Automatic start at boot "
+sleep 1 
 cd /etc/xdg/autostart
-cp -rf /home/'logname'/Vdr-repo/autostart.tar.gz /etc/xdg/autostart
+cp -rf $REPO/autostart.tar.gz /etc/xdg/autostart
 tar -zxvf autostart.tar.gz
 rm -rf autostart.tar.gz
-echo "Automatic start Vdr - Vdr Server - Oscam  command installed"
-sleep 2
+echo "Automatic Eventlircd & Oscam installed"; sleep 2
 #
+clear
+    dialog --title "   ** Vdr & Vdr Server Automatic start at boot **   " --infobox "
+   ----------------------------------------------
+        Configuring Automatic start at boot
+   ----------------------------------------------
 
+        [a]    Vdr
+        [b]    Vdr Server
+        [c]    No auto starting	
+
+   ---------------------------------------------- " 0 0
+echo -n "        Enter your menu choice  [a-c]:      "
+read yourch
+case $yourch in
+a)
+clear
+cd /etc/xdg/autostart
+rm -rf vdr-autostart.desktop
+cp -rf $REPO/vdr-autostart.tar.gz /etc/xdg/autostart
+tar -zxvf vdr-autostart.tar.gz
+rm -rf vdr-autostart.tar.gz
+echo "Automatic start Vdr installed"; sleep 2;;
+b)
+clear
+cd /etc/xdg/autostart
+rm -rf vdr-server-autostart.desktop
+cp -rf $REPO/vdr_server-autostart.tar.gz /etc/xdg/autostart
+tar -zxvf vdr_server-autostart.tar.gz
+rm -rf vdr_server-autostart.tar.gz
+echo "Automatic start Vdr Server installed"; sleep 2;;
+c);;
+esac
+#
 apt-mark hold vdr
 cd /home/`logname`
 chmod -R 777 Vdr_repo
 #
-echo "                    *** Installation completed! ***"
+echo "                    Installation completed!"
 sleep 3
 ;;
 #
@@ -1751,7 +1784,7 @@ b)   clear; add-apt-repository ppa:team-xbmc/unstable; apt-get update;  apt-get 
 esac
 #
 
-echo "                    *** Install Kill Kodi Icon ***"
+echo "                    Install Kill Kodi Icon "
 sleep 2
 cd /usr/local/bin
 rm -rf /usr/local/bin/Killkodi.sh
@@ -1762,7 +1795,7 @@ killall -9 /usr/lib/x86_64-linux-gnu/kodi/kodi.bin && sudo /etc/init.d/server-vd
 # & killall -9 oscam & shutdown -h now '  >> /usr/local/bin/Killkodi.sh
 chmod 777 /usr/local/bin/Killkodi.sh
 #
-echo "                    *** Setup Kill Kodi icon  ***"
+echo "                    Setup Kill Kodi icon "
 sleep 1
 rm -rf /home/`logname`/Scrivania/Killkodi.desktop
 rm -rf /usr/share/applications/Killkodi.desktop
@@ -1778,14 +1811,14 @@ Exec=/usr/local/bin/Killkodi.sh
 " >> /usr/share/applications/Killkodi.desktop
 chmod 777 /usr/share/applications/Killkodi.desktop
 #
-echo "                    *** Install Kodi Picon ***"
+echo "                    Install Kodi Picon "
 sleep 1
 cp -rf /home/'logname'/Vdr-repo/kodi_picon.tar.gz $ETC
 cd $ETC
 tar -zxvf kodi_picon.tar.gz
 rm -rf kodi_picon.tar.gz
 #
-echo "                    *** Install Kodi  Lircmap ***"
+echo "                    Install Kodi  Lircmap "
 # lsb_release -a
 dmesg | grep -i 20.04 > $TEMP/release_check
 if cat $TEMP/release_check | grep "20.04"; 

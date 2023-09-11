@@ -54,7 +54,6 @@ Point 6)
 
 Point 7) Exit
 
-Vdr starts at boot!!!
 * The "dark" is in /usr/local/etc
 * You can put your channells as usual in /etc/vdr
 * plugins libs are placed in /lib/vdr

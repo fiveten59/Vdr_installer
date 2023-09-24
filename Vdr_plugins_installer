@@ -2,7 +2,7 @@
 ############################## !!! IMPORTANTE !!! #######################################
 #                                                                                       #
 # Script name : Vdr_plugins_installer (only for vdr = or > 2.4.x                        #
-# Version: Github Repository Master (https://github.com/fiveten59/Vdr-Tools.git)        #
+# Version: Github Repository Master (https://github.com/fiveten59/Vdr_installer)        #
 #                                                                                       #
 # chmod the script 'Vdr_plugins_installer'                                              #
 # then load it simply typing: sudo ./Vdr_plugins_installer                              #
@@ -51,12 +51,12 @@ ALLOWED="#
                                                                                                            
 #
 
-    dialog --title " VDR Plugins Installer Script " --infobox "
+dialog --title " VDR Plugins Installer Script " --infobox "
                                                                         
 	Script name: Vdr_plugins_installer                                                  
-	Version: Github Repository Master (https://github.com/fiveten/Vdr_tools)                                                     
+	Version: Github Repository Master (https://github.com/fiveten59/Vdr_installer)                                                     
                                                                                               
-	chmod the script
+	chmod 755 the script
 	then load it simply typing: sudo ./Vdr_plugins_installer
 
                                                                " 0 0
@@ -64,16 +64,16 @@ sleep 2
 
 ###########################################################################################################
 
-    echo "                    Press Enter to continue ...               "; read enterKey
+echo "                    Press Enter to continue ...               "; read enterKey
 #
-    clear
-    echo ""
-    while :
-    do
-    dialog --title "               ♦♦♦♦♦   Vdr-Plugin Installer  ♦♦♦♦♦                    " --infobox "
+clear
+echo ""
+while :
+do
+dialog --title "               ♦♦♦♦♦   Vdr-Plugin Installer  ♦♦♦♦♦                    " --infobox "
 
           ===========================================================    
-             [1]    +[Submenu] ~~  Essemtial Plugins               
+             [1]    +[Submenu] ~~  Frontend Plugins               
              ------------------------------------------------------- 
              [2]    +[Submenu] ~~  Skins Plugins
              ------------------------------------------------------- 
@@ -100,11 +100,11 @@ case $yourch in
 
 ###########################################################################################################
 1)
-    clear
-    echo ""
-    dialog --title "               ♦♦♦♦♦   Essential Plugins ♦♦♦♦♦                    " --infobox "
+clear
+echo ""
+dialog --title "               ♦♦♦♦♦   Frontend Plugins ♦♦♦♦♦                    " --infobox "
 ----------------------------------------------------------------------------------------------------
-                                     Install or Remove Essential Plugins
+                                     Install or Remove Frontend Plugins
 ----------------------------------------------------------------------------------------------------
         
         *****  Install  *****  .................................................  *****  Remove  *****
@@ -123,11 +123,10 @@ echo -n "        Enter your menu choice = Install [a-f] ~~ Remove [a1-f1] ~~ Ski
 read yourch
 case $yourch in
 					##################
-
 a)
 clear
 echo "        ***                Installing Vdr-Plugin-Softhddevice              ***"; sleep 2
-cd $VDRSRC;
+cd $VDRSRC
 apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev
 apt-get -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev
 apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libxext6 libxext-dev
@@ -136,8 +135,8 @@ apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswre
 apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev
 #
 if [ -f softhddevice/Makefile ]
-	then echo "Vdr-Plugin-Softhddevice $Remind5"
-		else
+then echo "Vdr-Plugin-Softhddevice $Remind5"
+else
 dialog --title "   ** Setup Softhddevice **   " --infobox "
    			-------------------------------------------------------------------------
   			-------------------------------------------------------------------------
@@ -148,9 +147,9 @@ dialog --title "   ** Setup Softhddevice **   " --infobox "
 		        [c]    Intel Video Devices
 
 			------------------------------------------------------------------------- " 0 0
-    echo -n "        Enter your menu choice  [a-c]:      "
-    read yourch
-    case $yourch in
+echo -n "        Enter your menu choice  [a-c]:      "
+read yourch
+case $yourch in
 #
 a)
 cd $VDRSRC
@@ -205,13 +204,16 @@ cd $VDRSRC
 if [ -f softhddevice/Makefile ]
 echo "$Remind1 Vdr-Plugin-Softhddevice"
 sleep 2
-	then rm -rf softhddevice
-	cd $LIB
-	rm -rf libvdr-softhddevice.*
-	sed -i "s|-P'softhddevice -v vdpau -f'||" /usr/local/bin/vdrrun	
-	sed -i "s|-P'softhddevice -v cuvid -f'||" /usr/local/bin/vdrrun
-	sed -i "s|-P'softhddevice -v cpu-glx -f'||" /usr/local/bin/vdrrun
-	
+then 
+rm -rf softhddevice
+rm -rf test.zip
+cd $LIB
+rm -rf libvdr-softhddevice.*
+sed -i "s|-P'softhddevice -v vdpau -f'||" /usr/local/bin/vdrrun	
+sed -i "s|-P'softhddevice -v cuvid -f'||" /usr/local/bin/vdrrun
+sed -i "s|-P'softhddevice -v cpu-glx -f'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Softhddevice uninstalled"
+sleep 2		
 		else echo "Vdr-Plugin-Softhddevice $Remind5"
 fi
 #
@@ -220,6 +222,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
       echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
@@ -236,10 +239,10 @@ apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev libplacebo-d
 cd $VDRSRC
 if [ -f softhdcuvid/Makefile ]
 then echo "Vdr-Plugin-Softhdcuvid $Remind5"
-	sleep 2
-	elif [ -f softhdvaapi/Makefile ]
-	then echo "Vdr-Plugin-Softhdvaapi $Remind5"
-	sleep 2
+sleep 2
+elif [ -f softhdvaapi/Makefile ]
+then echo "Vdr-Plugin-Softhdvaapi $Remind5"
+sleep 2
 else git clone https://github.com/jojo61/vdr-plugin-softhdcuvid.git
 cp -rf /$VDRSRC/vdr-plugin-softhdcuvid /home/`logname`/Vdr_repo/
  
@@ -308,7 +311,9 @@ rm -rf libvdr-softhdcuvid.*
 then rm -rf libvdr-softhdvaapi.*
 sed -i "s|-P'softhdcuvid -f'||" /usr/local/bin/vdrrun
 sed -i "s|-P'softhdvaapi -d :0.0 -f'||" /usr/local/bin/vdrrun
-	else echo "Softhdcuvid  $Remind5"
+echo "                    Vdr-Plugin-Softhdcuvid uninstalled"
+sleep 2	
+else echo "Softhdcuvid  $Remind5"
 fi
 #
 cd /home/`logname`
@@ -316,7 +321,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-      echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #
 c)
 clear
@@ -324,37 +330,37 @@ echo "        ***                Installing Vdr-Plugin-Xineliboutput            
 apt-get -y install autopoint libxine2-dev libxrender-dev libextractor-dev libxrandr-dev libxine2-ffmpeg mjpegtools
 cd $VDRSRC
 if [ -f $PACKAGES/libxine2*.deb ]
-	then echo "Xine-lib $Remind"
-	sleep 2
-    		else cd $SRC
-    		wget https://sourceforge.net/projects/xine/files/xine-lib/1.2.12/xine-lib-1.2.12.tar.xz
-    		tar -xJf xine-lib-1.2.12.tar.xz
-    		mv xine-lib-1.2.12 xine-lib
-    		cp -rf /$SRC/xine-lib-1.2.12.tar.xz /home/`logname`/Vdr_repo/
-    		./configure
-
-    		make
-#    		make install 
-   		checkinstall --fstrans=no --install=yes --pkgname=libxine2 --pkgversion "1.2.12-git" --pakdir=$PACKAGES --default
+then echo "Xine-lib $Remind"
+sleep 2
+else cd $SRC
+wget https://sourceforge.net/projects/xine/files/xine-lib/1.2.12/xine-lib-1.2.12.tar.xz
+tar -xJf xine-lib-1.2.12.tar.xz
+mv xine-lib-1.2.12 xine-lib
+cp -rf /$SRC/xine-lib-1.2.12.tar.xz /home/`logname`/Vdr_repo/
+./configure
+make
+make install 
+#checkinstall --fstrans=no --install=yes --pkgname=libxine2 --pkgversion "1.2.12-git" --pakdir=$PACKAGES --default
 fi
+#
 if [ -f xineliboutput/Makefile ]
-	then  echo "VDR-Plugin-Xineliboutput $Remind"
-	sleep 2	
-		else git clone https://salsa.debian.org/vdr-team/vdr-plugin-xineliboutput.git
-		cp -rf /$VDRSRC/vdr-plugin-xineliboutput /home/`logname`/Vdr_repo/
-		mv -f vdr-plugin-xineliboutput xineliboutput
-		cd xineliboutput
-		./configure --enable-vdr --enable-libxine --disable-libcec
-		make && make install
-		cd ../../..
-		make plugins
-		mkdir -p /etc/vdr/plugins/xineliboutput
-		cp -rf /usr/local/src/vdr/PLUGINS/src/xineliboutput/*.mpg /etc/vdr/plugins/xineliboutput
+then  echo "VDR-Plugin-Xineliboutput $Remind"
+sleep 2	
+else git clone https://salsa.debian.org/vdr-team/vdr-plugin-xineliboutput.git
+cp -rf /$VDRSRC/vdr-plugin-xineliboutput /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-xineliboutput xineliboutput
+cd xineliboutput
+./configure --enable-vdr --enable-libxine --disable-libcec
+make && make install
+cd ../../..
+make plugins
+mkdir -p /etc/vdr/plugins/xineliboutput
+cp -rf /usr/local/src/vdr/PLUGINS/src/xineliboutput/*.mpg /etc/vdr/plugins/xineliboutput
 #		cp -rf /usr/local/src/vdr/PLUGINS/src/xineliboutput/examples/remote.conf.example /etc/vdr/plugins/xineliboutput/remote.conf
-		echo "*** allowed_hosts.conf setup ***"
-		touch /etc/vdr/plugins/xineliboutput/allowed_hosts.conf
-		echo "$ALLOWED" >> /etc/vdr/plugins/xineliboutput/allowed_hosts.conf
-		sed -i "s|-P'-dvbapi'|& -P'xineliboutput --local=sxfe --fullscreen --video=vdpau --hud --audio=alsa:plughw:0,0 --remote=37890 --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun
+echo "*** allowed_hosts.conf setup ***"
+touch /etc/vdr/plugins/xineliboutput/allowed_hosts.conf
+echo "$ALLOWED" >> /etc/vdr/plugins/xineliboutput/allowed_hosts.conf
+sed -i "s|-P'-dvbapi'|& -P'xineliboutput --local=sxfe --fullscreen --video=vdpau --hud --audio=alsa:plughw:0,0 --remote=37890 --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'|" /usr/local/bin/vdrrun
 echo "#!/bin/sh
 "$Xinelib"" >> /usr/local/bin/start-xinelib-vdr.sh
 chmod a+x /usr/local/bin/start-xinelib-vdr.sh
@@ -383,7 +389,7 @@ chmod -R 777 /Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-	echo "                    Press Enter to continue ...               "; read enterKey;;
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                     $$$$$$$$$$$$$$$$$$
 c1)
 clear
@@ -392,17 +398,19 @@ cd $VDRSRC
 if [ -f xineliboutput/Makefile ]
 echo "$Remind1 Xineliboutput"
 sleep 2
-	then rm -rf xineliboutput
-	cd $LIB
-	rm -rf libvdr-xineliboutput.*
-	rm -rf libxineliboutput*.*
-	cd $PLUGINS
-	rm -rf xineliboutput
-	sed -i "s|-P'xineliboutput --local=sxfe --fullscreen --video=vdpau --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'||" /usr/local/bin/vdrrun
-	rm -rf /home/`logname`/Scrivania/Xinelib.desktop
-	rm -rf /usr/share/applications/Xinelib.desktop
-	rm -rf /usr/local/bin/start-xinelib-vdr.sh
-		else echo "VDR-Plugin-Xineliboutput $Remind5"
+then rm -rf xineliboutput
+cd $LIB
+rm -rf libvdr-xineliboutput.*
+rm -rf libxineliboutput*.*
+cd $PLUGINS
+rm -rf xineliboutput
+sed -i "s|-P'xineliboutput --local=sxfe --fullscreen --video=vdpau --hud --audio=alsa --remote=none --post=tvtime:method=Linear,cheap_mode=1,pulldown=0,use_progressive_frame_flag=1'||" /usr/local/bin/vdrrun
+rm -rf /home/`logname`/Scrivania/Xinelib.desktop
+rm -rf /usr/share/applications/Xinelib.desktop
+rm -rf /usr/local/bin/start-xinelib-vdr.sh
+echo "                    Vdr-Plugin-Softhdcuvid uninstalled"
+sleep 2	
+else echo "VDR-Plugin-Xineliboutput $Remind5"
 fi
 #
 cd /home/`logname`
@@ -410,7 +418,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-      echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #
 d)
 clear
@@ -419,16 +428,16 @@ apt-get -y install libglm-dev libxcb-screensaver0-dev libxcb-dpms0-dev
 apt-get -y install libxcb-ewmh-dev libva-dev libx265-dev libasound2-dev 
 cd $VDRSRC
 if [ -f softhddevice-drm/Makefile ]
-	then echo "Vdr-Plugin-Sothddevice-drm $Remind5"
-	sleep 2	
-    		else git clone https://github.com/zillevdr/vdr-plugin-softhddevice-drm.git
-		cp -rf vdr-plugin-softhddevice-drm /home/`logname`/Vdr_repo/
-		mv -f vdr-plugin-softhddevice-drm softhddevice-drm
-		cd softhddevice-drm
-		make && make install
-		sed -i "s|-P'dvbapi'|& -P'softhddevice-drm'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Sothddevice-drm installed"
-		sleep 2
+then echo "Vdr-Plugin-Sothddevice-drm $Remind5"
+sleep 2	
+else git clone https://github.com/zillevdr/vdr-plugin-softhddevice-drm.git
+cp -rf vdr-plugin-softhddevice-drm /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-softhddevice-drm softhddevice-drm
+cd softhddevice-drm
+make && make install
+sed -i "s|-P'dvbapi'|& -P'softhddevice-drm'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Sothddevice-drm installed"
+sleep 2
 fi
 #		
 cd /home/`logname`
@@ -436,7 +445,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "     Press Enter to continue ...               "; read enterKey;;
+#
+echo "     Press Enter to continue ...               "; read enterKey;;
 #
 d1)
 clear
@@ -445,13 +455,14 @@ cd $VDRSRC
 if [ -f  softhddevice-drm/Makefile ]
 echo "$Remind1 Vdr-Plugin-Sothddevice-drm"
 sleep 2
-	then rm -rf softhddevice-drm
-	cd $LIB
-	rm -rf libvdr-softhddevice-drm.*
-	rm -rf /home/`logname`/Vdr_repo/softhddevice-drm
-	sed -i "s|-P'softhddevice-drm'||" /usr/local/bin/vdrrun
-	echo "Vdr-Plugin-Sothddevice-drm $Remind1"
-		else echo "Vdr-Plugin-Sothddevice-drm $Remind5"
+then rm -rf softhddevice-drm
+cd $LIB
+rm -rf libvdr-softhddevice-drm.*
+rm -rf /home/`logname`/Vdr_repo/softhddevice-drm
+sed -i "s|-P'softhddevice-drm'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Sothddevice-drm uninstalled"
+sleep 2	
+else echo "Vdr-Plugin-Sothddevice-drm $Remind5"
 fi
 #
 cd /home/`logname`
@@ -459,7 +470,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #
 e)
 clear
@@ -470,16 +482,16 @@ apt-get -y install libgles2-mesa libgles2-mesa-dev libegl-mesa0
 apt-get -y install libgbm-dev libglm-dev libpng-dev
 cd $VDRSRC
 if [ -f softhddevice-drm-gles/Makefile ]
-	then echo "Vdr-Plugin-Sothddevice-drm-gles $Remind5"
-	sleep 2	
-    		else git clone https://github.com/rellla/vdr-plugin-softhddevice-drm-gles.git
-		cp -rf vdr-plugin-softhddevice-drm-gles /home/`logname`/Vdr_repo/
-		mv -f vdr-plugin-softhddevice-drm-gles softhddevice-drm-gles
-		cd softhddevice-drm-gles
-		make && make install
-		sed -i "s|-P'dvbapi'|& -P'softhddevice-drm-gles'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Sothddevice-drm-gles installed"
-		sleep 2
+then echo "Vdr-Plugin-Sothddevice-drm-gles $Remind5"
+sleep 2	
+else git clone https://github.com/rellla/vdr-plugin-softhddevice-drm-gles.git
+cp -rf vdr-plugin-softhddevice-drm-gles /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-softhddevice-drm-gles softhddevice-drm-gles
+cd softhddevice-drm-gles
+make && make install
+sed -i "s|-P'dvbapi'|& -P'softhddevice-drm-gles'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Sothddevice-drm-gles installed"
+sleep 2
 fi
 #		
 cd /home/`logname`
@@ -487,7 +499,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "     Press Enter to continue ...               "; read enterKey;;
+#
+echo "     Press Enter to continue ...               "; read enterKey;;
 #
 e1)
 clear
@@ -496,15 +509,23 @@ cd $VDRSRC
 if [ -f  softhddevice-drm-gles/Makefile ]
 echo "$Remind1 Vdr-Plugin-Softhddevice-drm-gles"
 sleep 2
-	then rm -rf softhddevice-drm-gles
-	cd $LIB
-	rm -rf libvdr-softhddevice-drm-gles.*
-	rm -rf /home/`logname`/Vdr_repo/softhddevice-drm-gles
-	sed -i "s|-P'softhddevice-drm-gles'||" /usr/local/bin/vdrrun
-	echo "Vdr-Plugin-Sothddevice-drm-gles $Remind1"
-		else echo "Vdr-Plugin-Sothddevice-drm-gles $Remind5"
+then rm -rf softhddevice-drm-gles
+cd $LIB
+rm -rf libvdr-softhddevice-drm-gles.*
+rm -rf /home/`logname`/Vdr_repo/softhddevice-drm-gles
+sed -i "s|-P'softhddevice-drm-gles'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Sothddevice-drm-gles uninstalled"
+sleep 2	
+else echo "Vdr-Plugin-Sothddevice-drm-gles $Remind5"
 fi
-;;
+#		
+cd /home/`logname`
+chmod -R 777 Vdr_repo
+#
+cd $SRC/vdr
+make plugins install
+#
+echo "     Press Enter to continue ...               "; read enterKey;;
 #
 f)
 clear
@@ -520,8 +541,8 @@ sleep 6
 clear
 cd $SRC
 if [ -f /opt/vc/lib/libvcos.so ]; then
-  	echo " Userland is already installed"
-	sleep 2  
+echo " Userland is already installed"
+sleep 2  
 else
 git clone https://github.com/raspberrypi/userland.git
 cp -rf /$SRC/userland /home/`logname`/Vdr_repo/
@@ -531,16 +552,16 @@ fi
 #
 cd $VDRSRC
 if [ -f rpihddevice/Makefile ]
-	then echo "Vdr-Plugin-Rpihddevice $Remind5"
-	sleep 2
-		else git clone https://github.com/vdr-projects/vdr-plugin-rpihddevice.git
-		cp -rf vdr-plugin-rpihddevice /home/`logname`/Vdr_repo/
-		mv vdr-plugin-rpihddevice rpihddevice
-		cd rpihddevice
-		make && make install
-		sed -i "s|-P'dvbapi'|& -P'rpihddevice -o 5'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Rpihddevice installed"
-		sleep 2
+then echo "Vdr-Plugin-Rpihddevice $Remind5"
+sleep 2
+else git clone https://github.com/vdr-projects/vdr-plugin-rpihddevice.git
+cp -rf vdr-plugin-rpihddevice /home/`logname`/Vdr_repo/
+mv vdr-plugin-rpihddevice rpihddevice
+cd rpihddevice
+make && make install
+sed -i "s|-P'dvbapi'|& -P'rpihddevice -o 5'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Rpihddevice installed"
+sleep 2
 fi
 # 
 cd /home/`logname`
@@ -549,7 +570,7 @@ chmod -R 777 Vdr_repo
 cd $SRC/vdr
 make plugins install
 #
-        echo "     Press Enter to continue ...               "; read enterKey;;
+echo "     Press Enter to continue ...               "; read enterKey;;
 #
 f1)
 clear
@@ -558,11 +579,13 @@ cd $VDRSRC
 if [ -f rpihddevice/Makefile ]
 echo "$Remind1 Vdr-Plugin-Rpihddevice"
 sleep 2
-	then rm -rf rpihddevice
-	cd $LIB
-	rm -rf libvdr-rpihddevice.*
-	sed -i "s|-P'rpihddevice -o 5'||" /usr/local/bin/vdrrun
-		else echo "Vdr-Plugin-Rpihddevice $Remind5"
+then rm -rf rpihddevice
+cd $LIB
+rm -rf libvdr-rpihddevice.*
+sed -i "s|-P'rpihddevice -o 5'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Rpihddevice uninstalled"
+sleep 2		
+else echo "Vdr-Plugin-Rpihddevice $Remind5"
 fi
 #
 cd /home/`logname`
@@ -570,16 +593,17 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #
 z);;
 esac;;
 
 ###########################################################################################################
 2)
-    clear
-    echo ""
-    dialog --title "               ♦♦♦♦♦   Skin Plugins ♦♦♦♦♦                    " --infobox "
+clear
+echo ""
+dialog --title "               ♦♦♦♦♦   Skin Plugins ♦♦♦♦♦                    " --infobox "
               
    ----------------------------------------------------------------------------------------------------
                                      Install or Remove Skin Plugins
@@ -612,17 +636,17 @@ apt-get -y install libglib2.0-0 libpcre3 libpcre3-dev
 apt-get -y install libexpat1 libexpat1-dev
 cd $VDRSRC
 if [ -f SkinNopacity/Makefile ]
-	then  echo "SkinNopacity $Remind"
-	sleep 2	
-  		else git clone https://gitlab.com/kamel5/SkinNopacity.git
-  		cp -rf SkinNopacity /home/`logname`/Vdr_repo/
-  		cd SkinNopacity
-  		make && make install
-  		cd ../../..
-  		make plugins install
-  		sed -i "s|-P'iptv'|& -P'skinnopacity -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
-		echo "                    SkinNopacity installed"
-		sleep 2
+then  echo "SkinNopacity $Remind"
+sleep 2	
+else git clone https://gitlab.com/kamel5/SkinNopacity.git
+cp -rf SkinNopacity /home/`logname`/Vdr_repo/
+cd SkinNopacity
+make && make install
+cd ../../..
+make plugins install
+sed -i "s|-P'iptv'|& -P'skinnopacity -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
+echo "                    SkinNopacity installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -630,7 +654,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "     Press Enter to continue ...               "; read enterKey;;
+#
+echo "     Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 a1)
 clear
@@ -639,11 +664,13 @@ cd $VDRSRC
 if [ -f SkinNopacity/Makefile ]
 echo "$Remind1 SkinNopacity"
 sleep 2
-	then rm -rf SkinNopacity
-	cd $LIB
-	rm -rf libvdr-skinnopacity.*
-	sed -i "s|-P'skinnopacity -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun
-		else echo "Skin-Nopacity $Remind5"
+then rm -rf SkinNopacity
+cd $LIB
+rm -rf libvdr-skinnopacity.*
+sed -i "s|-P'skinnopacity -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun
+echo "                    SkinNopacity uninstalled"
+sleep 2	
+		else echo "SkinNopacity $Remind5"
 fi
 #
 cd /home/`logname`
@@ -651,7 +678,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################					
 
@@ -661,19 +689,19 @@ echo "        ***                Installing Skindesigner               ***"; sle
 apt-get -y install libcurl4 librsvg2-dev libxml2-dev libcairo2-dev lm-sensors
 cd $VDRSRC
 if [ -f skindesigner/Makefile ]
-	then  echo "Skindesigner $Remind"
-	sleep 2	
-		else git clone https://gitlab.com/kamel5/skindesigner.git
-		cp -rf skindesigner /home/`logname`/Vdr_repo/
-		cd skindesigner
-		cp -rf /home/`logname`/Vdr_repo/skindesigner.patch.tar.gz /$VDRSRC/skindesigner
-		tar -zxvf skindesigner.patch.tar.gz
-		rm -rf skindesigner.patch.tar.gz
-		patch -p1 < skindesigner.patch
-		make && make install
-		sed -i "s|-P'iptv'|& -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/'|" /usr/local/bin/vdrrun
-		echo "                    Skindesigner installed"
-		sleep 2
+then  echo "Skindesigner $Remind"
+sleep 2	
+else git clone https://gitlab.com/kamel5/skindesigner.git
+cp -rf skindesigner /home/`logname`/Vdr_repo/
+cd skindesigner
+cp -rf /home/`logname`/Vdr_repo/skindesigner.patch.tar.gz /$VDRSRC/skindesigner
+tar -zxvf skindesigner.patch.tar.gz
+rm -rf skindesigner.patch.tar.gz
+patch -p1 < skindesigner.patch
+make && make install
+sed -i "s|-P'iptv'|& -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/'|" /usr/local/bin/vdrrun
+echo "                    Skindesigner installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -685,7 +713,7 @@ make plugins install
 cd /$LIB/skindesigner/scripts/
 ln -s temperatures.default temperatures
 ln -s vdrstats.default vdrstats
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #
 b1)
 clear
@@ -694,14 +722,16 @@ cd $VDRSRC
 if [ -f skindesigner/Makefile ]
 echo "Vdr-Plugin-Skindesigner $Remind1"
 sleep 2
-	then rm -rf skindesigner
-  	cd $LIB
-  	rm -rf libvdr-skindesigner.*
-  	cd $SHARE
-  	rm -rf skindesigner
-  	cd /$PLUGINS
-  	rm -rf skindesigner
-  	sed -i "s|-P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/'||" /usr/local/bin/vdrrun
+then rm -rf skindesigner
+cd $LIB
+rm -rf libvdr-skindesigner.*
+cd $SHARE
+rm -rf skindesigner
+cd /$PLUGINS
+rm -rf skindesigner
+sed -i "s|-P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/'||" /usr/local/bin/vdrrun
+echo "                    Skindesigner uninstalled"
+sleep 2	
 		else echo "Skindesigner $Remind5"
 fi
 #
@@ -710,7 +740,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 c)
@@ -718,19 +749,19 @@ clear
 echo "        ***                Installing SkinLCARSNG               ***"; sleep 2
 cd $VDRSRC
 if [ -f skinlcarsng/Makefile ]
-	then  echo "SkinLCARSNG $Remind"
-	sleep 2	
-		else git clone https://gitlab.com/kamel5/skinlcarsng.git
-		cp -rf skinlcarsng /home/`logname`/Vdr_repo/
-		cd skinlcarsng
-		make && make install
-		sed -i "s|-P'iptv'|& -P'skinlcarsng'|" /usr/local/bin/vdrrun
-		cd /etc/vdr/themes
-		ln -s lcars-BlueGlass.theme lcarsng-Bluegass.theme
-		ln -s lcars-390Lb.theme lcarsng-390Lb.theme
-		ln -s lcars-LbSense.theme lcarsng-LbSense.theme
-		echo "                    SkinLCARSNG installed"
-		sleep 2
+then  echo "SkinLCARSNG $Remind"
+sleep 2	
+else git clone https://gitlab.com/kamel5/skinlcarsng.git
+cp -rf skinlcarsng /home/`logname`/Vdr_repo/
+cd skinlcarsng
+make && make install
+sed -i "s|-P'iptv'|& -P'skinlcarsng'|" /usr/local/bin/vdrrun
+cd /etc/vdr/themes
+ln -s lcars-BlueGlass.theme lcarsng-Bluegass.theme
+ln -s lcars-390Lb.theme lcarsng-390Lb.theme
+ln -s lcars-LbSense.theme lcarsng-LbSense.theme
+echo "                    SkinLCARSNG installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -738,7 +769,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                 $$$$$$$$$$$$$$$$$$
 c1)
 clear
@@ -747,14 +779,16 @@ cd $VDRSRC
 if [ -f skinlcarsng/Makefile ]
 echo "Vdr-Plugin-SkinLCARSNG $Remind1"
 sleep 2
-	then rm -rf skinlcarsng
-	cd $LIB
-	rm -rf libvdr-skinlcarsng.*
-	rm -rf ln lcars-BlueGlass.theme lcarsng-Bluegass.theme
-	rm -rf ln lcars-390Lb.theme lcarsng-390Lb.theme
-	rm -rf ln lcars-LbSense.theme lcarsng-LbSense.theme	
-	sed -i "s|-P'skinlcarsng'||" /usr/local/bin/vdrrun
-		else echo "SkinLCARSNG $Remind5"
+then rm -rf skinlcarsng
+cd $LIB
+rm -rf libvdr-skinlcarsng.*
+rm -rf ln lcars-BlueGlass.theme lcarsng-Bluegass.theme
+rm -rf ln lcars-390Lb.theme lcarsng-390Lb.theme
+rm -rf ln lcars-LbSense.theme lcarsng-LbSense.theme	
+sed -i "s|-P'skinlcarsng'||" /usr/local/bin/vdrrun
+echo "                    SkinLCARSNG uninstalled"
+sleep 2	
+else echo "SkinLCARSNG $Remind5"
 fi
 #
 cd /home/`logname`
@@ -762,7 +796,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 
@@ -772,23 +807,24 @@ echo "        ***                Installing Vdr-Plugin-Osd2web               ***
 apt-get -y install libtinyxml2-dev libexif-dev cmake
 cd $VDRSRC
 if [ -f osd2web/Makefile ]
-	then  echo "Vdr-Plugin-Osd2web $Remind"
-	sleep 2	
-		else cd $VDRSRC; 
-		git clone https://github.com/horchi/vdr-plugin-osd2web.git
-		cp -rf vdr-plugin-osd2web /home/`logname`/Vdr_repo/
-		mv -f vdr-plugin-osd2web osd2web
-		cp -rf /home/`logname`/Vdr_repo/patch_osd2web.tar.gz /$VDRSRC/osd2web
-		cd osd2web		
-		tar -zxvf patch_osd2web.tar.gz
-		rm -rf patch_osd2web.tar.gz
-		patch -p1 < osd2web_vdr-2.3.8_compat.diff
-		make install
-		cd ../../..
-		make plugins
-		sed -i "s|-P'iptv'|& -P'osd2web -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Osd2web installed"
-		sleep 2
+then  echo "Vdr-Plugin-Osd2web $Remind"
+sleep 2	
+else
+cd $VDRSRC
+git clone https://github.com/horchi/vdr-plugin-osd2web.git
+cp -rf vdr-plugin-osd2web /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-osd2web osd2web
+cp -rf /home/`logname`/Vdr_repo/patch_osd2web.tar.gz /$VDRSRC/osd2web
+cd osd2web		
+tar -zxvf patch_osd2web.tar.gz
+rm -rf patch_osd2web.tar.gz
+patch -p1 < osd2web_vdr-2.3.8_compat.diff
+make install
+cd ../../..
+make plugins
+sed -i "s|-P'iptv'|& -P'osd2web -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Osd2web installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -796,7 +832,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 d1)
 clear
@@ -805,13 +842,15 @@ cd $VDRSRC
 if [ -f osd2web/Makefile ]
 echo "Vdr-Plugin-Osd2web $Remind1"
 sleep 2
-	then rm -rf osd2web
-	cd $PLUGINS
-	rm -rf osd2web
-	cd $LIB
-	rm -rf libvdr-osd2web.*
-	sed -i "s|-P'osd2web -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun
-		else echo "Vdr-Plugin-Osd2web $Remind5"
+then rm -rf osd2web
+cd $PLUGINS
+rm -rf osd2web
+cd $LIB
+rm -rf libvdr-osd2web.*
+sed -i "s|-P'osd2web -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Osd2web uninstalled"
+sleep 2	
+else echo "Vdr-Plugin-Osd2web $Remind5"
 fi
 #
 cd /home/`logname`
@@ -819,7 +858,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 e)
@@ -828,25 +868,25 @@ echo "        ***                Installing Skinflatplus               ***"; sle
 apt-get -y install libfreetype6-dev graphicsmagick-libmagick-dev-compat lm-sensors
 cd $VDRSRC
 if [ -f /skinflatplus/Makefile ]
-	then  echo "Skinflatplus $Remind"
-	sleep 2
-	        else git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git
-		cp -rf vdr-plugin-skinflatplus /home/`logname`/Vdr_repo/
-		mv vdr-plugin-skinflatplus skinflatplus
-		cd skinflatplus
-		make
- 		cd ../../..
- 		make plugins install		
-		sed -i "s|-P'iptv'|& -P'skinflatplus -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
-		cd /usr/lib/vdr/skinflatplus/widgets/temperatures/
-		ln -s temperatures.default temperatures
-		cd ../system_information
-		ln -s system_information.ubuntu system_information
-		cd ../weather/
-		cp -rf /home/`logname`/Vdr_repo/flat_weather.tar.gz
-		tar -zxvf flat_weather.tar.gz
-		echo "                    Skinflatplus installed"
-		sleep 2
+then  echo "Skinflatplus $Remind"
+sleep 2
+else git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git
+cp -rf vdr-plugin-skinflatplus /home/`logname`/Vdr_repo/
+mv vdr-plugin-skinflatplus skinflatplus
+cd skinflatplus
+make
+cd ../../..
+make plugins install		
+sed -i "s|-P'iptv'|& -P'skinflatplus -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
+cd /usr/lib/vdr/skinflatplus/widgets/temperatures/
+ln -s temperatures.default temperatures
+cd ../system_information
+ln -s system_information.ubuntu system_information
+cd ../weather/
+cp -rf /home/`logname`/Vdr_repo/flat_weather.tar.gz
+tar -zxvf flat_weather.tar.gz
+echo "                    Skinflatplus installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -854,7 +894,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 e1)
 clear
@@ -863,12 +904,14 @@ cd $VDRSRC
 if [ -f skinflatplus/Makefile ]
 echo "Skinflatplus $Remind1"
 sleep 2
-	then rm -rf skinflatplus
-	cd $LIB
-	rm -rf libvdr-skinflatplus.*
-	rm -rf skinflatplus
-	sed -i "s|-P'skinflatplus -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun
-		else echo "Skinflatplus $Remind5"
+then rm -rf skinflatplus
+cd $LIB
+rm -rf libvdr-skinflatplus.*
+rm -rf skinflatplus
+sed -i "s|-P'skinflatplus -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun
+echo "                    Skinflatplus uninstalled"
+sleep 2
+else echo "Skinflatplus $Remind5"
 fi
 #
 cd /home/`logname`
@@ -876,30 +919,29 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 f)
 clear
 echo "        ***                Installing Skin Elchi HD              ***"; sleep 2
-
-#
 cd $VDRSRC
 if [ -f skinelchihd/Makefile ]
-	then  echo "SkinElchiHD $Remind"
-	sleep 2	
-		else git clone https://github.com/FireFlyVDR/vdr-plugin-skinelchihd.git
- 		cp -rf vdr-plugin-skinelchihd /home/`logname`/Vdr_repo/		 
-		mv -f vdr-plugin-skinelchihd skinelchihd
-		cp -rf skinelchihd/themes/* /etc/vdr/themes
- 		cd skinelchihd
- 		sed -i "s|?= imagemagick|?= graphicsmagick|" Makefile
- 		make 
- 		cd ../../..
- 		make plugins install
- 		sed -i "s|-P'iptv'|& -P'skinelchihd -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
-		echo "                    Skin Elchi HD installed"
-		sleep 2
+then  echo "SkinElchiHD $Remind"
+sleep 2	
+else git clone https://github.com/FireFlyVDR/vdr-plugin-skinelchihd.git
+cp -rf vdr-plugin-skinelchihd /home/`logname`/Vdr_repo/		 
+mv -f vdr-plugin-skinelchihd skinelchihd
+cp -rf skinelchihd/themes/* /etc/vdr/themes
+cd skinelchihd
+sed -i "s|?= imagemagick|?= graphicsmagick|" Makefile
+make 
+cd ../../..
+make plugins install
+sed -i "s|-P'iptv'|& -P'skinelchihd -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
+echo "                    Skin Elchi HD installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -907,19 +949,22 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 f1)
 clear
-echo "        ***                Removing Skin Elchi HD              ***"; sleep 2
+echo "        ***                Removing SkinelchiHD              ***"; sleep 2
 cd $VDRSRC
 if [ -f skinelchihd/Makefile ]
-echo "Skin Elchi HD $Remind1"
+echo "SkinelchiHD $Remind1"
 sleep 2
-	then rm -rf $VDRSRC/skinelchihd
-	rm -rf $LIB/libvdr-skinelchihd.*
-	sed -i "s|-P'skinelchihd -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun
-		else echo "SkinelchiHD $Remind5"
+then rm -rf $VDRSRC/skinelchihd
+rm -rf $LIB/libvdr-skinelchihd.*
+sed -i "s|-P'skinelchihd -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun
+echo "                    SkinelchiHD uninstalled"
+sleep 2
+else echo "SkinelchiHD $Remind5"
 fi
 #
 cd /home/`logname`
@@ -927,7 +972,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 ###########################################################################################################
 g)
 clear
@@ -937,36 +983,36 @@ apt-get -y install libgraphicsmagick++1-dev
 #
 cd $VDRSRC
 if [ -f text2skin/Makefile ]
-	then  echo "Text2Skin-NarrowHD $Remind"
-	sleep 2	
-		else git clone https://github.com/vdr-projects/vdr-plugin-text2skin.git
- 		cp -rf vdr-plugin-text2skin /home/`logname`/Vdr_repo/		
-		mv vdr-plugin-text2skin text2skin
-		cp -rf /home/`logname`/Vdr_repo/patch_text2skin.tar.gz $VDRSRC/text2skin	
- 		cd text2skin
-		tar -zxvf patch_text2skin.tar.gz
-		rm -r patch_text2skin.tar.gz
-		patch -p1 < text2skin_livebuffer.patch
-		patch -p1 < text2skin_render.patch
-		patch -p1 < text2skin_graphicsmagick.patch
-		make
- 		cd ../../..
- 		make plugins install
- 		cd $VDRSRC
- 		git clone https://github.com/vdr-projects/text2skin-narrowhd.git
- 		cp -rf text2skin-narrowhd /home/`logname`/Vdr_repo/
-		cp -rf /home/`logname`/Vdr_repo/NarrowHD_skin.patch.tar.gz $VDRSRC/text2skin-narrowhd
- 		cd text2skin-narrowhd
-		tar -zxvf NarrowHD_skin.patch.tar.gz
-		rm -r NarrowHD_skin.patch.tar.gz
-		patch -p1 < NarrowHD_skin.patch		
- 		make install
- 		#cd $TEXT2SKIN/NarrowHD
- 		#rm -r logos
- 		# sudo ln -s /etc/vdr/logos /etc/vdr/plugins/text2skin/NarrowHD/
- 		sed -i "s|-P'iptv'|& -P'text2skin'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Text2skin & NarrowHD skin installed"
-		sleep 2
+then  echo "Text2Skin-NarrowHD $Remind"
+sleep 2	
+else git clone https://github.com/vdr-projects/vdr-plugin-text2skin.git
+cp -rf vdr-plugin-text2skin /home/`logname`/Vdr_repo/		
+mv vdr-plugin-text2skin text2skin
+cp -rf /home/`logname`/Vdr_repo/patch_text2skin.tar.gz $VDRSRC/text2skin	
+cd text2skin
+tar -zxvf patch_text2skin.tar.gz
+rm -r patch_text2skin.tar.gz
+patch -p1 < text2skin_livebuffer.patch
+patch -p1 < text2skin_render.patch
+patch -p1 < text2skin_graphicsmagick.patch
+make
+cd ../../..
+make plugins install
+cd $VDRSRC
+git clone https://github.com/vdr-projects/text2skin-narrowhd.git
+cp -rf text2skin-narrowhd /home/`logname`/Vdr_repo/
+cp -rf /home/`logname`/Vdr_repo/NarrowHD_skin.patch.tar.gz $VDRSRC/text2skin-narrowhd
+cd text2skin-narrowhd
+tar -zxvf NarrowHD_skin.patch.tar.gz
+rm -r NarrowHD_skin.patch.tar.gz
+patch -p1 < NarrowHD_skin.patch		
+make install
+#cd $TEXT2SKIN/NarrowHD
+#rm -r logos
+# sudo ln -s /etc/vdr/logos /etc/vdr/plugins/text2skin/NarrowHD/
+sed -i "s|-P'iptv'|& -P'text2skin'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Text2skin & NarrowHD skin installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -974,7 +1020,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 g1)
 clear
@@ -983,13 +1030,15 @@ cd $VDRSRC
 if [ -f text2skin/Makefile ]
 echo "Text2Skin-NarrowHD $Remind1"
 sleep 2
-	then rm -rf $VDRSRC/text2skin
-	rm -rf $VDRSRC/text2skin-narrowhd
-	rm -rf $LIB/libvdr-text2skin.*
-	rm -rf $PLUGINS/text2skin
-	rm -rf /etc/vdr/themes/NarrowHD-default.theme
-	sed -i "s|-P'text2skin'||" /usr/local/bin/vdrrun
-		else echo "Text2Skin-NarrowHD $Remind5"
+then rm -rf $VDRSRC/text2skin
+rm -rf $VDRSRC/text2skin-narrowhd
+rm -rf $LIB/libvdr-text2skin.*
+rm -rf $PLUGINS/text2skin
+rm -rf /etc/vdr/themes/NarrowHD-default.theme
+sed -i "s|-P'text2skin'||" /usr/local/bin/vdrrun
+echo "                    Text2Skin-NarrowHD uninstalled"
+sleep 2
+else echo "Text2Skin-NarrowHD $Remind5"
 fi
 #
 cd /home/`logname`
@@ -997,7 +1046,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;        
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;        
 #
 z);;
 esac;;
@@ -1035,22 +1085,22 @@ echo "        ***                Installing Vdr-Plugin-Epgsearch               *
 apt-get -y install libc6 libgcc1 libstdc++6
 cd $VDRSRC
 if [ -f epgsearch/Makefile ]
-	then  echo "Vdr-Plugin-Epgsearch $Remind"
-	sleep 2
-		else git clone https://github.com/vdr-projects/vdr-plugin-epgsearch.git
-		cp -rf vdr-plugin-epgsearch /home/`logname`/Vdr_repo/
-		mv -f vdr-plugin-epgsearch epgsearch
-		cp -rf /home/`logname`/Vdr_repo/patch_epgsearch.tar.gz $VDRSRC/epgsearch
-		cd epgsearch
-		tar -zxvf patch_epgsearch.tar.gz
-		patch -p1 < 10_langinfo-include.diff
-		patch -p1 < 11_epgsearch_menue.patch
-		patch -p1 < 12_epgsearch_README.patch
-		cd ../../..
-		make plugins
-		sed -i "s|-P'iptv'|& -P'epgsearch'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Epgsearch installed"
-		sleep 2
+then  echo "Vdr-Plugin-Epgsearch $Remind"
+sleep 2
+else git clone https://github.com/vdr-projects/vdr-plugin-epgsearch.git
+cp -rf vdr-plugin-epgsearch /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-epgsearch epgsearch
+cp -rf /home/`logname`/Vdr_repo/patch_epgsearch.tar.gz $VDRSRC/epgsearch
+cd epgsearch
+tar -zxvf patch_epgsearch.tar.gz
+patch -p1 < 10_langinfo-include.diff
+patch -p1 < 11_epgsearch_menue.patch
+patch -p1 < 12_epgsearch_README.patch
+cd ../../..
+make plugins
+sed -i "s|-P'iptv'|& -P'epgsearch'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Epgsearch installed"
+sleep 2
 #	
 fi
 cd /home/`logname`/Vdr_repo/
@@ -1067,9 +1117,11 @@ cd $VDRSRC
 if [ -f epgsearch/Makefile ]
 echo "Vdr-Plugin-Epgsearch $Remind1"
 sleep 2
-	then rm -rf epgsearch
-	cd $LIB; rm -rf libvdr-epgsearch.*
-	sed -i "s|-P'epgsearch'||" /usr/local/bin/vdr
+then rm -rf epgsearch
+cd $LIB; rm -rf libvdr-epgsearch.*
+sed -i "s|-P'epgsearch'||" /usr/local/bin/vdr
+echo "                    Vdr-Plugin-Epgsearch uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Epgsearch $Remind5"
 fi
 #
@@ -1078,6 +1130,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
@@ -1088,16 +1141,16 @@ apt-get -y install libmariadbclient-dev libmariadb3 libmariadb-dev
 apt-get -y install  uuid-dev libimlib2 libimlib2-dev libtinyxml2-dev
 cd $VDRSRC
 if [ -f epg2vdr/Makefile ]
-	then  echo "Vdr-Plugin-Epg2vdr $Remind"
-	sleep 2
-		else git clone https://projects.vdr-developer.org/git/vdr-plugin-epg2vdr.git
-		cp -rf vdr-plugin-epg2vdr /home/`logname`/Vdr_repo/
-		mv -f vdr-plugin-epg2vdr epg2vdr
-		cd ../..
-		make plugins
-		sed -i "s|-P'iptv'|& -P'epg2vdr'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Epg2vdr installed"
-		sleep 2
+then  echo "Vdr-Plugin-Epg2vdr $Remind"
+sleep 2
+else git clone https://projects.vdr-developer.org/git/vdr-plugin-epg2vdr.git
+cp -rf vdr-plugin-epg2vdr /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-epg2vdr epg2vdr
+cd ../..
+make plugins
+sed -i "s|-P'iptv'|& -P'epg2vdr'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Epg2vdr installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -1105,7 +1158,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 b1)
 clear
@@ -1114,10 +1167,12 @@ cd $VDRSRC
 if [ -f epg2vdr/Makefile ]
 echo "Vdr-Plugin-Epg2vdr $Remind1 "
 sleep 2
-	then rm -rf epg2vdr
-	cd $LIB
-	rm -rf libvdr-epg2vdr.*
-	sed -i "s|-P'epg2vdr'||" /usr/local/bin/vdrrun
+then rm -rf epg2vdr
+cd $LIB
+rm -rf libvdr-epg2vdr.*
+sed -i "s|-P'epg2vdr'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Epg2vdr uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Epg2vdr $Remind5"
 fi
 #
@@ -1126,6 +1181,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
@@ -1134,20 +1190,20 @@ clear
 echo "        ***                Installing Vdr-Plugin-Neutrinoepg               ***"; sleep 2
 cd $VDRSRC
 if [ -f neutrinoepg/Makefile ]
-	then  echo "Vdr-Plugin-Neutrinoepg $Remind"
-	sleep 2
-		else git clone https://github.com/vdr-projects/vdr-plugin-neutrinoepg.git
-		cp -rf vdr-plugin-neutrinoepg /home/`logname`/Vdr_repo/
-		mv -f vdr-plugin-neutrinoepg neutrinoepg
-		cp -rf /home/`logname`/Vdr_repo/patch_neutrinoepg.tar.gz $VDRSRC/neutrinoepg
-		cd neutrinoepg
-		tar -zxvf patch_neutrinoepg.tar.gz
-		rm -rf patch_neutrinoepg.tar.gz
-		cd ../../..
-		make plugins
-		sed -i "s|-P'iptv'|& -P'neutrinoepg'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Neutrinoepg installed"
-		sleep 2
+then  echo "Vdr-Plugin-Neutrinoepg $Remind"
+sleep 2
+else git clone https://github.com/vdr-projects/vdr-plugin-neutrinoepg.git
+cp -rf vdr-plugin-neutrinoepg /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-neutrinoepg neutrinoepg
+cp -rf /home/`logname`/Vdr_repo/patch_neutrinoepg.tar.gz $VDRSRC/neutrinoepg
+cd neutrinoepg
+tar -zxvf patch_neutrinoepg.tar.gz
+rm -rf patch_neutrinoepg.tar.gz
+cd ../../..
+make plugins
+sed -i "s|-P'iptv'|& -P'neutrinoepg'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Neutrinoepg installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -1155,7 +1211,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 c1)
 clear
@@ -1164,10 +1221,12 @@ cd $VDRSRC
 if [ -f neutrinoepg/Makefile ]
 echo "Vdr-Plugin-Neutrinoepg $Remind1"
 sleep 2
-	then rm -rf neutrinoepg
-	cd $LIB
-	rm -rf libvdr-neutrinoepg.*
-	sed -i "s|-P'neutrinoepg'||" /usr/local/bin/vdrrun
+then rm -rf neutrinoepg
+cd $LIB
+rm -rf libvdr-neutrinoepg.*
+sed -i "s|-P'neutrinoepg'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Neutrinoepg uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Neutrinoepg $Remind5"
 fi
 #
@@ -1176,7 +1235,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 d)
@@ -1185,18 +1245,18 @@ echo "        ***                Installing TvGuide               ***"; sleep 2
 apt-get -y install gettext graphicsmagick-libmagick-dev-compat
 cd $VDRSRC
 if [ -f tvguide/Makefile ]
-	then  echo "TvGuide $Remind"
-	sleep 2
-		else git clone https://gitlab.com/kamel5/tvguide.git
-		cp -rf tvguide /home/`logname`/Vdr_repo/
-		cd tvguide
-		make
-		cd ../../..
-		make plugins
-		cp -rf $VDRSRC/tvguide/themes/* /etc/vdr/themes/
-		sed -i "s|-P'iptv'|& -P'tvguide'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-TvGuide installed"
-		sleep 2
+then  echo "TvGuide $Remind"
+sleep 2
+else git clone https://gitlab.com/kamel5/tvguide.git
+cp -rf tvguide /home/`logname`/Vdr_repo/
+cd tvguide
+make
+cd ../../..
+make plugins
+cp -rf $VDRSRC/tvguide/themes/* /etc/vdr/themes/
+sed -i "s|-P'iptv'|& -P'tvguide'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-TvGuide installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -1204,7 +1264,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 d1)
 clear
@@ -1213,9 +1273,11 @@ cd $VDRSRC
 if [ -f tvguide/Makefile ]
 echo "TvGuide $Remind1"
 sleep 2
-	then rm -rf tvguide
-	cd $LIB; rm -rf libvdr-tvguide.*
-	sed -i "s|-P'tvguide'||" /usr/local/bin/vdrrun
+then rm -rf tvguide
+cd $LIB; rm -rf libvdr-tvguide.*
+sed -i "s|-P'tvguide'||" /usr/local/bin/vdrrun
+echo "                    TvGuide uninstalled"
+sleep 2
 		else echo "TvGuide $Remind5"
 fi
 #
@@ -1224,6 +1286,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
@@ -1233,17 +1296,17 @@ echo "        ***                Installing TvGuideng               ***"; sleep 
 apt-get -y install libstdc++6 libgcc1 libc6 librsvg2-dev
 cd $VDRSRC
 if [ -f tvguideng/Makefile ]
-	then  echo "TvGuideng $Remind"
-	sleep 2
-		else git clone https://gitlab.com/kamel5/tvguideng.git
-		cp -rf tvguideng /home/`logname`/Vdr_repo/
-		cd tvguideng
-		make
-		cd ../../..
-		make plugins
-		sed -i "s|-P'iptv'|& -P'tvguideng'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-TvGuideng installed"
-		sleep 2
+then  echo "TvGuideng $Remind"
+sleep 2
+else git clone https://gitlab.com/kamel5/tvguideng.git
+cp -rf tvguideng /home/`logname`/Vdr_repo/
+cd tvguideng
+make
+cd ../../..
+make plugins
+sed -i "s|-P'iptv'|& -P'tvguideng'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-TvGuideng installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -1251,6 +1314,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 e1)
@@ -1260,10 +1324,12 @@ cd $VDRSRC
 if [ -f tvguideng/Makefile ]
 echo "TvGuideng $Remind1"
 sleep 2
-	then rm -rf tvguideng
-	cd $LIB
-	rm -rf libvdr-tvguideng.*
-	sed -i "s|-P'tvguideng'||" /usr/local/bin/vdrrun
+then rm -rf tvguideng
+cd $LIB
+rm -rf libvdr-tvguideng.*
+sed -i "s|-P'tvguideng'||" /usr/local/bin/vdrrun
+echo "                    TvGuideng uninstalled"
+sleep 2
 		else echo "TvGuideng $Remind5"
 fi
 #
@@ -1272,7 +1338,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 #f)
@@ -1285,25 +1352,25 @@ make plugins install
 
 #cd $VDRSRC
 #if [ -f scraper2vdr/Makefile ]
-#	then  echo "Vdr-Plugin-TvScraper $Remind"
-#	sleep 2
-#		else git clone https://github.com/MarkusEh/vdr-plugin-tvscraper.git
-#		cp -rf vdr-plugin-tvscraper /home/`logname`/Vdr_repo/
-#		mv -f  vdr-plugin-tvscraper tvscraper
-#		cd tvscraper
-#		wget https://www.dropbox.com/s/rqm9w3n85igu5p0/patch_scraper2vdr.tar.gz
-#		tar -zxvf patch_scraper2vdr.tar.gz
-#		mv -f patch_scraper2vdr.tar.gz /home/`logname`/Vdr_repo/
-#		patch -p1 < 11_scraper2vdr_i18n-it.patch
-#		patch -p1 < 10_scraper2vdr_common.patch
-#		cd $PLUGINS
-#		mkdir -p scraper2vdr
-#		cd $VDRSRC/scraper2vdr
-#		make
-#		cp -rf $VDRSRC/scraper2vdr/configs/epg.dat $PLUGINS/scraper2vdr/
-#		sed -i "s|-P'iptv'|& -P'tvscraper'|" /usr/local/bin/vdrrun
-#		echo "                    Vdr-Plugin-TvScraper installed"
-#		sleep 2	
+#then  echo "Vdr-Plugin-TvScraper $Remind"
+#sleep 2
+#else git clone https://github.com/MarkusEh/vdr-plugin-tvscraper.git
+#cp -rf vdr-plugin-tvscraper /home/`logname`/Vdr_repo/
+#mv -f  vdr-plugin-tvscraper tvscraper
+#cd tvscraper
+#wget https://www.dropbox.com/s/rqm9w3n85igu5p0/patch_scraper2vdr.tar.gz
+#tar -zxvf patch_scraper2vdr.tar.gz
+#mv -f patch_scraper2vdr.tar.gz /home/`logname`/Vdr_repo/
+#patch -p1 < 11_scraper2vdr_i18n-it.patch
+#patch -p1 < 10_scraper2vdr_common.patch
+#cd $PLUGINS
+#mkdir -p scraper2vdr
+#cd $VDRSRC/scraper2vdr
+#make
+#cp -rf $VDRSRC/scraper2vdr/configs/epg.dat $PLUGINS/scraper2vdr/
+#sed -i "s|-P'iptv'|& -P'tvscraper'|" /usr/local/bin/vdrrun
+#echo "                    Vdr-Plugin-TvScraper installed"
+#sleep 2	
 #fi
 ##
 #cd /home/`logname`
@@ -1311,7 +1378,8 @@ make plugins install
 #
 #cd $SRC/vdr
 #make plugins install
-#        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+#echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$#f1)
 #clear
 #echo "        ***                Removing Vdr-Plugin-Tvscraper               ***"; sleep 2
@@ -1319,13 +1387,15 @@ make plugins install
 #if [ -f tvscraper/Makefile ]
 #echo "Vdr-Plugin-Tvscraper $Remind1"
 #sleep 2#
-#	then rm -rf tvscraper#
-#	cd $PLUGINS
-#	rm -rf tvscraper
-#	cd $LIB
-#	rm -rf libvdr-tvscraper.*
-#	sed -i "s|-P'tvscraper'||" /usr/local/bin/vdrrun
-#		else echo "Vdr-Plugin-Tvscraper $Remind5"
+#then rm -rf tvscraper#
+#cd $PLUGINS
+#rm -rf tvscraper
+#cd $LIB
+#rm -rf libvdr-tvscraper.*
+#sed -i "s|-P'tvscraper'||" /usr/local/bin/vdrrun
+#echo "                    Vdr-Plugin-Tvscraper uninstalled"
+#sleep 2
+#else echo "Vdr-Plugin-Tvscraper $Remind5"
 #fi
 #
 #cd /home/`logname`
@@ -1333,7 +1403,8 @@ make plugins install
 #
 #cd $SRC/vdr
 #make plugins install
-#        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+#echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 g)
@@ -1342,25 +1413,25 @@ echo "        ***                Installing Vdr-Plugin-Live               ***"; 
 apt-get -y install libcxxtools-dev libtntnet-dev libpcre3-dev libboost-dev openssl
 cd $VDRSRC
 if [ -f live/Makefile ]
-	then  echo "Vdr-Plugin-Live $Remind"
-	sleep 2
-		else git clone https://github.com/MarkusEh/vdr-plugin-live.git
-		cp -rf vdr-plugin-live /home/`logname`/Vdr_repo/
-		mv -f vdr-plugin-live live
-		cd live
-		make
-		cd ../../..
-		make plugins
-		cd $PLUGINS
-		mkdir -p live
-		cp -a $VDRSRC/live/live/* /etc/vdr/plugins/live/
-		cp -rf /home/`logname`/Vdr_repo/live-themes.tar.gz /etc/vdr/plugins/live/themes
-		cd /etc/vdr/plugins/live/themes
-		tar -zxvf live-themes.tar.gz
-		rm -rf live-themes.tar.gz
-		sed -i "s|-P'iptv'|& -P'live'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Live installed"
-		sleep 2
+then  echo "Vdr-Plugin-Live $Remind"
+sleep 2
+else git clone https://github.com/MarkusEh/vdr-plugin-live.git
+cp -rf vdr-plugin-live /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-live live
+cd live
+make
+cd ../../..
+make plugins
+cd $PLUGINS
+mkdir -p live
+cp -a $VDRSRC/live/live/* /etc/vdr/plugins/live/
+cp -rf /home/`logname`/Vdr_repo/live-themes.tar.gz /etc/vdr/plugins/live/themes
+cd /etc/vdr/plugins/live/themes
+tar -zxvf live-themes.tar.gz
+rm -rf live-themes.tar.gz
+sed -i "s|-P'iptv'|& -P'live'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Live installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -1368,7 +1439,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 g1)
 clear
@@ -1377,15 +1449,17 @@ cd $VDRSRC
 if [ -f live/Makefile ]
 echo "Vdr-Plugin-Live $Remind1 "
 sleep 2
-	then rm -rf live
-	cd $PLUGINS
-	rm -rf live
-	cd $LIB
-	rm -rf libvdr-live.*
-	cd $SHARE
-	rm -rf live
-	sed -i "s|-P'live'||" /usr/local/bin/vdrrun
-		else echo "Vdr-Plugin-Live $Remind5"
+then rm -rf live
+cd $PLUGINS
+rm -rf live
+cd $LIB
+rm -rf libvdr-live.*
+cd $SHARE
+rm -rf live
+sed -i "s|-P'live'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Live uninstalled"
+sleep 2
+else echo "Vdr-Plugin-Live $Remind5"
 fi
 #
 cd /home/`logname`
@@ -1393,16 +1467,17 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #
 z);;
 esac;;
 
 ###########################################################################################################
 4)
-    clear
-    echo ""
-    dialog --title "               ♦♦♦♦♦   Multimedia Plugins ♦♦♦♦♦                    " --infobox "
+clear
+echo ""
+dialog --title "               ♦♦♦♦♦   Multimedia Plugins ♦♦♦♦♦                    " --infobox "
               
 --------------------------------------------------------------------------------------------------
                                      Install or Remove Multimedia Plugins
@@ -1431,28 +1506,28 @@ echo "        ***                Installing Vdr-Plugin-Iptv               ***"; 
 apt-get -y install libcurl4 libcurl4-gnutls-dev vlc
 cd $VDRSRC
 if [ -f iptv/Makefile ]
-	then  echo "Vdr-Plugin-Iptv $Remind"
-	sleep 2
-		else git clone https://github.com/rofafor/vdr-plugin-iptv.git
-		cp -rf vdr-plugin-iptv /home/`logname`/Vdr_repo/
-		mv -f vdr-plugin-iptv iptv
-		cp -rf  /home/`logname`/Vdr_repo/patch_iptv.tar.gz $VDRSRC/iptv
-		cd iptv
-		tar -zxvf patch_iptv.tar.gz
-		rm -rf patch_iptv.tar.gz
-		patch -p1 < iptv.patch
-		patch -p1 < 10_iptv_protocolext.patch
-		make
-		cd ../../..
-		make plugins
-		mkdir -p /etc/vdr/plugins/iptv/channels
-		cp -rf /home/`logname`/Vdr_repo/iptv_conf.tar.gz $PLUGINS/iptv/vlcinput
-		cd $PLUGINS/iptv/vlcinput
-		tar -zxvf iptv_conf.tar.gz
-		rm -rf iptv_conf.tar.gz
-		sed -i "s|-P'radio'|& -P'iptv'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Radio installed"
-		sleep 2	
+then  echo "Vdr-Plugin-Iptv $Remind"
+sleep 2
+else git clone https://github.com/rofafor/vdr-plugin-iptv.git
+cp -rf vdr-plugin-iptv /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-iptv iptv
+cp -rf  /home/`logname`/Vdr_repo/patch_iptv.tar.gz $VDRSRC/iptv
+cd iptv
+tar -zxvf patch_iptv.tar.gz
+rm -rf patch_iptv.tar.gz
+patch -p1 < iptv.patch
+patch -p1 < 10_iptv_protocolext.patch
+make
+cd ../../..
+make plugins
+mkdir -p /etc/vdr/plugins/iptv/channels
+cp -rf /home/`logname`/Vdr_repo/iptv_conf.tar.gz $PLUGINS/iptv/vlcinput
+cd $PLUGINS/iptv/vlcinput
+tar -zxvf iptv_conf.tar.gz
+rm -rf iptv_conf.tar.gz
+sed -i "s|-P'radio'|& -P'iptv'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Radio installed"
+sleep 2	
 fi
 #
 cd /home/`logname`
@@ -1460,7 +1535,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 a1)
 clear
@@ -1469,10 +1545,12 @@ cd $VDRSRC
 if [ -e iptv/Makefile ]
 echo "Vdr-Plugin-Iptv $Remind1"
 sleep 2
-	then rm -rf iptv
-	cd $LIB
-	rm -rf libvdr-iptv.*
-	sed -i "s|-P'iptv'||" /usr/local/bin/vdrrun
+then rm -rf iptv
+cd $LIB
+rm -rf libvdr-iptv.*
+sed -i "s|-P'iptv'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Iptv uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Iptv $Remind5"
 fi
 #
@@ -1481,7 +1559,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 b)
@@ -1489,22 +1568,22 @@ clear
 echo "        ***                Installing Vdr-Plugin-Radio               ***"; sleep 2
 cd $VDRSRC
 if [ -f radio/Makefile ]
-	then  echo "Vdr-Plugin-Radio $Remind"
-	sleep 2
-		else git clone https://github.com/siricco/vdr-plugin-radio.git
-		cp -rf vdr-plugin-radio -rf /home/`logname`/Vdr_repo/
-		mv -f vdr-plugin-radio radio
-		cd radio
-		make
-		cd ../../..
-		make plugins
-		cd /etc/vdr/plugins
-		mkdir -p radio
-		cp -rf $VDRSRC/radio/config/mpegstill/* $PLUGINS/radio/
-		cp -rf $VDRSRC/radio/config/scripts/* $PLUGINS/radio/
-		sed -i "s|-P'iptv'|& -P'radio'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Radio installed"
-		sleep 2
+then  echo "Vdr-Plugin-Radio $Remind"
+sleep 2
+else git clone https://github.com/siricco/vdr-plugin-radio.git
+cp -rf vdr-plugin-radio -rf /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-radio radio
+cd radio
+make
+cd ../../..
+make plugins
+cd /etc/vdr/plugins
+mkdir -p radio
+cp -rf $VDRSRC/radio/config/mpegstill/* $PLUGINS/radio/
+cp -rf $VDRSRC/radio/config/scripts/* $PLUGINS/radio/
+sed -i "s|-P'iptv'|& -P'radio'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Radio installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -1512,7 +1591,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 b1)
 clear
@@ -1521,12 +1601,14 @@ cd $VDRSRC
 if [ -e radio/Makefile ]
 echo "Vdr-Plugin-Radio $Remind1"
 sleep 2
-	then rm -rf radio
-	cd $LIB
-	rm -rf libvdr-radio.*
-	rm -rf $PLUGINS/radio
-	sed -i "s|-P'radio'||" /usr/local/bin/vdrrun
-		else echo "Vdr-Plugin-Radio $Remind5"
+then rm -rf radio
+cd $LIB
+rm -rf libvdr-radio.*
+rm -rf $PLUGINS/radio
+sed -i "s|-P'radio'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Radio uninstalled"
+sleep 2
+else echo "Vdr-Plugin-Radio $Remind5"
 fi
 #
 cd /home/`logname`
@@ -1534,7 +1616,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 c)
@@ -1544,13 +1627,13 @@ apt-get -y install mpv libmpv-dev libmpv1 libxrandr-dev
 apt-get install libx11-xcb-dev
 cd $VDRSRC
 if [ -f mpv/Makefile ]
-	then  echo "Vdr-Plugin-Mpv $Remind"
-	sleep 2
-		else git clone https://github.com/ua0lnj/vdr-plugin-mpv.git
-		cp -rf vdr-plugin-mpv /home/`logname`/Vdr_repo/
-		mv -f vdr-plugin-mpv mpv
-		cd mpv
-		make install
+then  echo "Vdr-Plugin-Mpv $Remind"
+sleep 2
+else git clone https://github.com/ua0lnj/vdr-plugin-mpv.git
+cp -rf vdr-plugin-mpv /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-mpv mpv
+cd mpv
+make install
 fi
 cp -rf  /home/`logname`/Vdr_repo/setup_mpv.conf.tar.gz /etc/vdr
 cd /etc/vdr
@@ -1581,7 +1664,7 @@ case $yourch in
 a) sed -i "s|-P'iptv'|& -P'mpv -a alsa -v gpu -h auto -b /media -l ita'|" /usr/local/bin/vdrrun
 echo "                    Mpv Nvidia Video Devices setup installed"
 sleep 2;;
-b) sed -i "s|-P'iptv'|& -P'mpv -a alsa -v gpu -h vaapi-copy -b /media -l ita'|" /usr/local/bin/vdrrun
+b) sed -i "s|-P'iptv'|& -P'mpv -a alsa -v gpu -h auto -b /media -l ita'|" /usr/local/bin/vdrrun
 echo "                    Mpv Intel Video Devices setup installed"
 sleep 2;;
 c) sed -i "s|-P'iptv'|& -P'mpv -a alsa -v gpu -h auto -c drm -b /media -l ita'|" /usr/local/bin/vdrrun
@@ -1597,11 +1680,13 @@ cd $VDRSRC
 if [ -f mpv/Makefile ]
 echo "Vdr-Plugin-Mpv $Remind1"
 sleep 2
-	then rm -rf mpv
-	cd $LIB
-	rm -rf libvdr-mpv.*
-	sed -i "s|-P'mpv -a alsa -v gpu -h auto -b /media -l ita'||" /usr/local/bin/vdrrun
-	sed -i "s|-P'mpv -a alsa -v gpu -h vaapi-copy -b /media -l ita'||" /usr/local/bin/vdrrun
+then rm -rf mpv
+cd $LIB
+rm -rf libvdr-mpv.*
+sed -i "s|-P'mpv -a alsa -v gpu -h auto -b /media -l ita'||" /usr/local/bin/vdrrun
+sed -i "s|-P'mpv -a alsa -v gpu -h vaapi-copy -b /media -l ita'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Mpv uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Mpv $Remind5"
 fi
 #
@@ -1610,7 +1695,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 d)
@@ -1619,16 +1705,16 @@ echo "        ***                Installing Vdr-Plugin-Dvd                     *
  apt-get -y install libdvd-pkg libdvdnav-dev liba52-0.7.4-dev
 cd $VDRSRC
 if [ -f dvd/Makefile ]
-	then  echo "Vdr-Plugin-Dvd $Remind"
-	sleep 2
-		else git clone https://github.com/ua0lnj/vdr-plugin-dvd
-		cp -rf vdr-plugin-dvd /home/`logname`/Vdr_repo/
-		mv -f vdr-plugin-dvd dvd
-		cd dvd
-		make install
-		sed -i "s|-P'iptv'|& -P'dvd'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Dvd installed"
-		sleep 2		
+then  echo "Vdr-Plugin-Dvd $Remind"
+sleep 2
+else git clone https://github.com/ua0lnj/vdr-plugin-dvd
+cp -rf vdr-plugin-dvd /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-dvd dvd
+cd dvd
+make install
+sed -i "s|-P'iptv'|& -P'dvd'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Dvd installed"
+sleep 2		
 fi
 #
 cd /home/`logname`
@@ -1636,7 +1722,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 d1)
 clear
@@ -1645,10 +1732,12 @@ cd $VDRSRC
 if [ -f dvd/Makefile ]
 echo "Vdr-Plugin-Dvd $Remind1"
 sleep 2
-	then rm -rf dvd
-	cd $LIB
-	rm -rf libvdr-dvd.*
-	sed -i "s|-P'dvd'||" /usr/local/bin/vdrrun
+then rm -rf dvd
+cd $LIB
+rm -rf libvdr-dvd.*
+sed -i "s|-P'dvd'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Dvd uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Dvd $Remind5"
 fi
 #
@@ -1657,7 +1746,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 e)
@@ -1666,21 +1756,21 @@ echo "        ***                Installing Vdr-Plugin-Mp3                     *
 apt-get -y install libmad0-dev libid3tag0-dev libsndfile1-dev libvorbis-dev libvorbisfile3
 cd $VDRSRC
 if [ -f mp3/Makefile ]
-	then  echo "Vdr-Plugin-Mp3 $Remind"
-	sleep 2
-		else git clone https://github.com/vdr-projects/vdr-plugin-mp3.git
-		cp -rf vdr-plugin-mp3 /home/`logname`/Vdr_repo/
-		mv -f vdr-plugin-mp3 mp3
-		cd mp3
-		make
-		cd ../../..
-		make plugins install
-		sed -i "s|-P'iptv'|& -P'mp3'|" /usr/local/bin/vdrrun
-		cp -rf $VDRSRC/mp3/examples/mp3sources.conf.example /etc/vdr/plugins/
-		cd /etc/vdr/plugins/
-		mv -f mp3sources.conf.example mp3sources.conf
-		echo "                    Vdr-Plugin-Mp3 installed"
-		sleep 2
+then  echo "Vdr-Plugin-Mp3 $Remind"
+sleep 2
+else git clone https://github.com/vdr-projects/vdr-plugin-mp3.git
+cp -rf vdr-plugin-mp3 /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-mp3 mp3
+cd mp3
+make
+cd ../../..
+make plugins install
+sed -i "s|-P'iptv'|& -P'mp3'|" /usr/local/bin/vdrrun
+cp -rf $VDRSRC/mp3/examples/mp3sources.conf.example /etc/vdr/plugins/
+cd /etc/vdr/plugins/
+mv -f mp3sources.conf.example mp3sources.conf
+echo "                    Vdr-Plugin-Mp3 installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -1688,7 +1778,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 e1) 
 clear
@@ -1697,10 +1788,12 @@ cd $VDRSRC
 if [ -f mp3/Makefile ]
 echo "Vdr-Plugin-Mp3 $Remind1"
 sleep 2
-	then rm -rf mp3
-	cd $LIB
-	rm -rf libvdr-mp3.*
-	sed -i "s|-P'mp3'||" /usr/local/bin/vdrrun
+then rm -rf mp3
+cd $LIB
+rm -rf libvdr-mp3.*
+sed -i "s|-P'mp3'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Mp3 uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Mp3 $Remind5"
 fi
 #
@@ -1709,7 +1802,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 f)
@@ -1719,15 +1813,15 @@ add-apt-repository ppa:zabrimus/vdr-cef
 apt install vdr-osr-browser
 cd $VDRSRC
 if [ -f hbbtv/HbbTv ]
-	then  echo "Vdr-Plugin-Mpv $Remind"
-	sleep 2
-		else git clone https://github.com/Zabrimus/vdr-plugin-hbbtv.git
-		mv -f vdr-plugin-hbbtv hbbtv
-		cd hbbtv
-		make && make install
-		sed -i "s|-P'iptv'|& -P'hbbtv'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-HbbTv installed"
-		sleep 2
+then  echo "Vdr-Plugin-Mpv $Remind"
+sleep 2
+else git clone https://github.com/Zabrimus/vdr-plugin-hbbtv.git
+mv -f vdr-plugin-hbbtv hbbtv
+cd hbbtv
+make && make install
+sed -i "s|-P'iptv'|& -P'hbbtv'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-HbbTv installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -1735,7 +1829,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 f1)
 clear
@@ -1744,10 +1839,12 @@ cd $VDRSRC
 if [ -f hbbtv/Makefile ]
 echo "Vdr-Plugin-HbbTv $Remind1"
 sleep 2
-	then rm -rf hbbtv
-	cd $LIB
-	rm -rf libvdr-hbbtv.*
-	sed -i "s|-P'hbbtv'||" /usr/local/bin/vdrrun
+then rm -rf hbbtv
+cd $LIB
+rm -rf libvdr-hbbtv.*
+sed -i "s|-P'hbbtv'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-HbbTv uninstalled"
+sleep 2
  		else echo "Vdr-Plugin-HbbTv $Remind5"
 fi
 #
@@ -1756,7 +1853,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 g)
@@ -1765,18 +1863,18 @@ echo "        ***                Installing Vdr-Plugin-Image               ***";
 apt-get -y install libexif12 libnetpbm9 libnetpbm9-dev
 cd $VDRSRC
 if [ -f image/Makefile ]
-	then  echo "Vdr-Plugin-Image $Remind"
-	sleep 2
-		else git clone https://github.com/ua0lnj/vdr-plugin-image.git
-		cp -rf vdr-plugin-image /home/`logname`/Vdr_repo/
-		mv -f vdr-plugin-image image
-		cd image
-		make
-		cp -rf $VDRSRC/image/scripts/imageplugin.sh /usr/local/bin/
-		cp -rf $VDRSRC/image/scripts/magickplugin.sh /usr/local/bin/
-		sed -i "s|-P'iptv'|& -P'image -c /etc/vdr/plugins'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Image installed"
-		sleep 2
+then  echo "Vdr-Plugin-Image $Remind"
+sleep 2
+else git clone https://github.com/ua0lnj/vdr-plugin-image.git
+cp -rf vdr-plugin-image /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-image image
+cd image
+make
+cp -rf $VDRSRC/image/scripts/imageplugin.sh /usr/local/bin/
+cp -rf $VDRSRC/image/scripts/magickplugin.sh /usr/local/bin/
+sed -i "s|-P'iptv'|& -P'image -c /etc/vdr/plugins'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Image installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -1784,7 +1882,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 g1)
@@ -1794,12 +1892,14 @@ cd $VDRSRC
 if [ -f image/Makefile ]
 echo "Vdr-Plugin-Image $Remind1 "
 sleep 2
-	then rm -rf image
-	cd $LIB
-	rm -rf libvdr-image.*
-	rm -rf /usr/local/bin/imageplugin.sh
-	rm -rf /usr/local/bin/magickplugin.sh
-	sed -i "s|-P'image -c /etc/vdr/plugins'||" /usr/local/bin/vdrrun
+then rm -rf image
+cd $LIB
+rm -rf libvdr-image.*
+rm -rf /usr/local/bin/imageplugin.sh
+rm -rf /usr/local/bin/magickplugin.sh
+sed -i "s|-P'image -c /etc/vdr/plugins'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Image uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Image $Remind5"
 fi
 #
@@ -1808,16 +1908,17 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #
 z);;
 esac;;
 
 ###########################################################################################################
 5)                                        
-    clear
-    echo ""
-    dialog --title "               ♦♦♦♦♦   System Plugins ♦♦♦♦♦                    " --infobox "
+clear
+echo ""
+dialog --title "               ♦♦♦♦♦   System Plugins ♦♦♦♦♦                    " --infobox "
               
 --------------------------------------------------------------------------------------------------
                                      Install or Remove System Plugins
@@ -1846,12 +1947,12 @@ echo "        ***                Installing Vdr-Plugin-Dvbapi               ***"
 apt-get -y install libssl-dev libdvbcsa-dev
 cd $VDRSRC
 if [ -f dvbapi/Makefile ]
-	then  echo "Vdr-Plugin-Dvbapi $Remind"
-	sleep 2
-		else git clone https://github.com/ua0lnj/vdr-plugin-dvbapi.git
-		cp -rf vdr-plugin-dvbapi /home/`logname`/Vdr_repo/
-		mv -f vdr-plugin-dvbapi dvbapi
-		cd dvbapi
+then  echo "Vdr-Plugin-Dvbapi $Remind"
+sleep 2
+else git clone https://github.com/ua0lnj/vdr-plugin-dvbapi.git
+cp -rf vdr-plugin-dvbapi /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-dvbapi dvbapi
+cd dvbapi
 clear
     dialog --title "   **  Vdr-Plugin-Dvbapi  **   " --infobox "
 
@@ -1862,9 +1963,9 @@ clear
 
    ---------------------------------------------------------------------------------------------" 0 0
 
-    echo -n "        Enter your menu choice = Install [a-b]     "
-    read yourch
-    case $yourch in
+echo -n "        Enter your menu choice = Install [a-b]     "
+read yourch
+case $yourch in
 a)
 make;;
 b)
@@ -1884,7 +1985,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 a1)
 clear
@@ -1893,10 +1994,12 @@ cd $VDRSRC
 if [ -f dvbapi/Makefile ]
 echo "Vdr-Plugin-Dvbapi $Remind1"
 sleep 2
-	then rm -rf dvbapi
-	cd $LIB
-	rm -rf libvdr-dvbapi.*
-	sed -i "s|-P'dvbapi'||" /usr/local/bin/vdrrun
+then rm -rf dvbapi
+cd $LIB
+rm -rf libvdr-dvbapi.*
+sed -i "s|-P'dvbapi'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Dvbapi uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Dvbapi $Remind5"
 fi
 #
@@ -1905,7 +2008,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 b)
@@ -1913,25 +2017,25 @@ clear
 echo "        ***                Installing Vdr-Plugin-ExternalPlayer               ***"; sleep 2
 cd $VDRSRC
 if [ -f externalplayer/Makefile ]
-	then  echo "Vdr-Plugin-ExternalPlayer $Remind"
-	sleep 2
-		else wget https://www.uli-eckhardt.de/vdr/download/vdr-externalplayer-0.3.5.tgz
-		cp -rf vdr-externalplayer-0.3.5.tgz /home/`logname`/Vdr_repo/
-		tar zxvf vdr-externalplayer-0.3.5.tgz
-		rm -rf vdr-externalplayer-0.3.5.tgz
-		mv externalplayer-0.3.5 externalplayer
-		cp -rf /$SRC/traduzioni/external_it_IT.po /$VDRSRC/externalplayer/po/
-		cd externalplayer/po/
-		mv external_it_IT.po it_IT.po
-		cd ../../../..
-		make plugins
-		cp -rf /home/`logname`/Vdr_repo/externalplayer.conf.tar.gz /etc/vdr/plugins		
-		cd /etc/vdr/plugins
-		tar -zxvf externalplayer.conf.tar.gz
-		rm -rf externalplayer.conf.tar.gz
-		sed -i "s|-P'iptv'|& -P'externalplayer'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-ExternalPlayer installed"
-		sleep 2		 
+then  echo "Vdr-Plugin-ExternalPlayer $Remind"
+sleep 2
+else wget https://www.uli-eckhardt.de/vdr/download/vdr-externalplayer-0.3.5.tgz
+cp -rf vdr-externalplayer-0.3.5.tgz /home/`logname`/Vdr_repo/
+tar zxvf vdr-externalplayer-0.3.5.tgz
+rm -rf vdr-externalplayer-0.3.5.tgz
+mv externalplayer-0.3.5 externalplayer
+cp -rf /$SRC/traduzioni/external_it_IT.po /$VDRSRC/externalplayer/po/
+cd externalplayer/po/
+mv external_it_IT.po it_IT.po
+cd ../../../..
+make plugins
+cp -rf /home/`logname`/Vdr_repo/externalplayer.conf.tar.gz /etc/vdr/plugins		
+cd /etc/vdr/plugins
+tar -zxvf externalplayer.conf.tar.gz
+rm -rf externalplayer.conf.tar.gz
+sed -i "s|-P'iptv'|& -P'externalplayer'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-ExternalPlayer installed"
+sleep 2		 
 fi
 #
 cd /home/`logname`
@@ -1939,7 +2043,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 b1)
 clear
@@ -1948,10 +2053,12 @@ cd $VDRSRC
 if [ -f externalplayer/Makefile ]
 echo "Vdr-Plugin-ExternalPlayer $Remind1"
 sleep 2
-	then rm -rf externalplayer
-	cd $LIB
-	rm -rf libvdr-externalplayer.*
-	sed -i "s|-P'externalplayer'||" /usr/local/bin/vdrrun
+then rm -rf externalplayer
+cd $LIB
+rm -rf libvdr-externalplayer.*
+sed -i "s|-P'externalplayer'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-ExternalPlayer uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-ExternalPlayer $Remind5"
 fi
 #
@@ -1960,7 +2067,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 c)
@@ -1968,22 +2076,21 @@ clear
 echo "        ***                Installing Vdr-Plugin-Systeminfo               ***"; sleep 2
 cd $VDRSRC
 if [ -f systeminfo/Makefile ]
-	then  echo "Vdr-Plugin-Systeminfo $Remind"
-	sleep 2
-		else wget http://firefly.vdr-developer.org/systeminfo/vdr-systeminfo-0.1.5.tar.bz2
-		tar xjf vdr-systeminfo-0.1.5.tar.bz2
-		mv -f vdr-systeminfo-0.1.5.tar.bz2 /home/`logname`/Vdr_repo/
-		mv systeminfo-0.1.5 systeminfo
-		cd systeminfo
-		make
-		cd scripts
-		cp -rf systeminfo.sh /usr/local/bin
-		cd ../../../..
-		make plugins
-		
-		sed -i "s|-P'iptv'|& -P'systeminfo'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Systeminfo installed"
-		sleep 2	
+then  echo "Vdr-Plugin-Systeminfo $Remind"
+sleep 2
+else wget http://firefly.vdr-developer.org/systeminfo/vdr-systeminfo-0.1.5.tar.bz2
+tar xjf vdr-systeminfo-0.1.5.tar.bz2
+mv -f vdr-systeminfo-0.1.5.tar.bz2 /home/`logname`/Vdr_repo/
+mv systeminfo-0.1.5 systeminfo
+cd systeminfo
+make
+cd scripts
+cp -rf systeminfo.sh /usr/local/bin
+cd ../../../..
+make plugins
+sed -i "s|-P'iptv'|& -P'systeminfo'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Systeminfo installed"
+sleep 2	
 fi
 #
 cd /home/`logname`
@@ -1991,7 +2098,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 c1)
 clear
@@ -2000,11 +2108,13 @@ cd $VDRSRC
 if [ -f systeminfo/Makefile ]
 echo "Vdr-Plugin-Systeminfo $Remind1"
 sleep 2
-	then rm -rf systeminfo
-	rm -rf /usr/local/bin/systeminfo.sh
-	cd $LIB
-	rm -rf libvdr-systeminfo.*
-	sed -i "s|-P'systeminfo'||" /usr/local/bin/vdrrun
+then rm -rf systeminfo
+rm -rf /usr/local/bin/systeminfo.sh
+cd $LIB
+rm -rf libvdr-systeminfo.*
+sed -i "s|-P'systeminfo'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Systeminfo uninstalled"
+sleep 2
 		else echo "                    Vdr-Plugin-Systeminfo $Remind5"
 fi
 #
@@ -2013,7 +2123,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 d)
@@ -2021,18 +2132,18 @@ clear
 echo "        ***                Installing Vdr-Plugin-Femon               ***"; sleep 2
 cd $VDRSRC
 if [ -f femon/Makefile ]
-	then  echo "Vdr-Plugin-Femon $Remind"
-	sleep 2
-		else git clone https://github.com/rofafor/vdr-plugin-femon.git
-		cp -rf vdr-plugin-femon /home/`logname`/Vdr_repo/
-		mv vdr-plugin-femon femon
-		cd femon
-		make
-		cd ../../..
-		make plugins
-		sed -i "s|-P'iptv'|& -P'femon'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Femon installed"
-		sleep 2		
+then  echo "Vdr-Plugin-Femon $Remind"
+sleep 2
+else git clone https://github.com/rofafor/vdr-plugin-femon.git
+cp -rf vdr-plugin-femon /home/`logname`/Vdr_repo/
+mv vdr-plugin-femon femon
+cd femon
+make
+cd ../../..
+make plugins
+sed -i "s|-P'iptv'|& -P'femon'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Femon installed"
+sleep 2		
 fi
 #
 cd /home/`logname`
@@ -2040,7 +2151,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 d1)
 clear
@@ -2049,12 +2161,13 @@ cd $VDRSRC
 if [ -f femon/Makefile ]
 echo "Vdr-Plugin-Femon $Remind1"
 sleep 2
-	then rm -rf femon
-	cd $LIB
-	rm -rf libvdr-femon.*
-	sed -i "s|-P'femon'||" /usr/local/bin/vdrrun
-
-		else echo "Vdr-Plugin-Femon $Remind5"
+then rm -rf femon
+cd $LIB
+rm -rf libvdr-femon.*
+sed -i "s|-P'femon'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Femon uninstalled"
+sleep 2
+else echo "Vdr-Plugin-Femon $Remind5"
 fi
 #
 cd /home/`logname`
@@ -2062,7 +2175,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 e)
@@ -2070,17 +2184,17 @@ clear
 echo "        ***                Installing Vdr-Plugin-Devstatus               ***"; sleep 2
 cd $VDRSRC
 if [ -f devstatus/Makefile ]
-	then  echo "Vdr-Plugin-Devstatus $Remind"
-	sleep 2
-		else git clone https://gitlab.com/kamel5/devstatus.git
-		cp -rf devstatus /home/`logname`/Vdr_repo/
-		cd devstatus
-		make
-		cd ../../..
-		make plugins
-		sed -i "s|-P'iptv'|& -P'devstatus'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Devstatus installed"
-		sleep 2	
+then  echo "Vdr-Plugin-Devstatus $Remind"
+sleep 2
+else git clone https://gitlab.com/kamel5/devstatus.git
+cp -rf devstatus /home/`logname`/Vdr_repo/
+cd devstatus
+make
+cd ../../..
+make plugins
+sed -i "s|-P'iptv'|& -P'devstatus'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Devstatus installed"
+sleep 2	
 fi
 #
 cd /home/`logname`
@@ -2088,7 +2202,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 e1)
 clear
@@ -2097,10 +2212,12 @@ cd $VDRSRC
 if [ -f devstatus/Makefile ]
 echo "Vdr-Plugin-Devstatus $Remind1 "
 sleep 2
-	then rm -rf devstatus
-	cd $LIB
-	rm -rf libvdr-devstatus.*
-	sed -i "s|-P'devstatus'||" /usr/local/bin/vdrrun
+then rm -rf devstatus
+cd $LIB
+rm -rf libvdr-devstatus.*
+sed -i "s|-P'devstatus'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Devstatus uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Devstatus $Remind5"
 fi
 #
@@ -2109,7 +2226,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 f)
@@ -2118,18 +2236,18 @@ echo "        ***                Installing Vdr-Plugin-Osdteletext              
 apt-get -y install git-core fonts-freefont-ttf
 cd $VDRSRC
 if [ -f osdteletext/Makefile ]
-	then  echo "Vdr-Plugin-Osdteletext $Remind"
-	sleep 2
-		else git clone https://github.com/pbiering/vdr-plugin-osdteletext.git
-		cp -rf vdr-plugin-osdteletext /home/`logname`/Vdr_repo/
-		mv -f vdr-plugin-osdteletext osdteletext
-		cd ../..
-		make plugins
-		sed -i "s|-P'iptv'|& -P'osdteletext'|" /usr/local/bin/vdrrun
-		cd /var/cache/vdr
-		mkdir -p vtx
-		echo "                    Vdr-Plugin-Osdteletext installed"
-		sleep 2	
+then  echo "Vdr-Plugin-Osdteletext $Remind"
+sleep 2
+else git clone https://github.com/pbiering/vdr-plugin-osdteletext.git
+cp -rf vdr-plugin-osdteletext /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-osdteletext osdteletext
+cd ../..
+make plugins
+sed -i "s|-P'iptv'|& -P'osdteletext'|" /usr/local/bin/vdrrun
+cd /var/cache/vdr
+mkdir -p vtx
+echo "                    Vdr-Plugin-Osdteletext installed"
+sleep 2	
 fi
 #
 cd /home/`logname`
@@ -2137,7 +2255,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 f1)
 clear
@@ -2146,11 +2265,13 @@ cd $VDRSRC
 if [ -f osdteletext/Makefile ]
 echo "Vdr-Plugin-Osdteletext $Remind1"
 sleep 2
-	then rm -rf osdteletext
-	rm -rf /var/cache/vdr/vtx
-	cd $LIB
-	rm -rf libvdr-osdteletext.*
-	sed -i "s|-P'osdteletext'||" /usr/local/bin/vdrrun
+then rm -rf osdteletext
+rm -rf /var/cache/vdr/vtx
+cd $LIB
+rm -rf libvdr-osdteletext.*
+sed -i "s|-P'osdteletext'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Osdteletext uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Osdteletext $Remind5"
 fi
 #
@@ -2159,7 +2280,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 g)
@@ -2168,21 +2290,21 @@ echo "        ***                Installing Vdr-Plugin-Ttxtsubs               **
 apt install pkg-config
 cd $VDRSRC
 if [ -f ttxsubs/Makefile ]
-	then  echo "Vdr-Plugin-Ttxtsubs $Remind"
-	sleep 2
-		else git clone https://github.com/vdr-projects/vdr-plugin-ttxtsubs.git
-		mv -f vdr-plugin-ttxtsubs ttxtsubs
-		cp -rf /home/`logname`/Vdr_repo/patch_ttxtsubs.tar.gz $VDRSRC/ttxtsubs
-		cd ttxtsubs
-#		tar -zxvf patch_ttxtsubs.tar.gz
-#		rm -rf patch_ttxtsubs.tar.gz
-#		patch -p1 < patch_ttxtsubs.patch		
-#		cd ../../..
-		make
-		make plugins
-		sed -i "s|-P'iptv'|& -P'ttxtsubs'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Ttxtsubs installed"
-		sleep 2
+then  echo "Vdr-Plugin-Ttxtsubs $Remind"
+sleep 2
+else git clone https://github.com/vdr-projects/vdr-plugin-ttxtsubs.git
+mv -f vdr-plugin-ttxtsubs ttxtsubs
+cp -rf /home/`logname`/Vdr_repo/patch_ttxtsubs.tar.gz $VDRSRC/ttxtsubs
+cd ttxtsubs
+#tar -zxvf patch_ttxtsubs.tar.gz
+#rm -rf patch_ttxtsubs.tar.gz
+#patch -p1 < patch_ttxtsubs.patch		
+#cd ../../..
+make
+make plugins
+sed -i "s|-P'iptv'|& -P'ttxtsubs'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Ttxtsubs installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -2190,7 +2312,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 g1)
 clear
@@ -2199,10 +2322,12 @@ cd $VDRSRC
 if [ -f ttxsubs/Makefile ]
 echo "Vdr-Plugin-Ttxsubs $Remind1"
 sleep 2
-	then rm -rf ttxtsubs
-	cd $LIB
-	rm -rf libvdr-ttxtsubs.*
-	sed -i "s|-P'ttxtsubs'||" /usr/local/bin/vdrrun
+then rm -rf ttxtsubs
+cd $LIB
+rm -rf libvdr-ttxtsubs.*
+sed -i "s|-P'ttxtsubs'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Ttxtsubs uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Ttxtsubs $Remind5"
 fi
 #
@@ -2211,7 +2336,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 h)
@@ -2219,24 +2345,24 @@ clear
 echo "        ***                Installing Vdr-Plugin-Suspendoutput               ***"; sleep 2
 cd $VDRSRC
 if [ -f suspendoutput/Makefile ]
-	then  echo "Vdr-Plugin-Suspendoutput $Remind"
-	sleep 2
-		else wget http://phivdr.dyndns.org/vdr/vdr-suspendoutput/vdr-suspendoutput-2.1.0.tgz
-		tar xzvf vdr-suspendoutput-2.1.0.tgz
-		mv -f vdr-suspendoutput-2.1.0.tgz /home/`logname`/Vdr_repo/
-		mv -f suspendoutput-2.1.0 suspendoutput
-		cp -rf /home/`logname`/Vdr_repo/patch_suspendoutput.tar.gz $VDRSRC/suspendoutput
-		cd suspendoutput
-		tar -zxvf patch_suspendoutput.tar.gz
-		rm -rf patch_suspendoutput.tar.gz
-		patch -p1 < suspendoutput_nooutput.patch
-		patch -p1 < suspendoutput_compile.patch
-		make
-		cd ../../..
-		make plugins
-		sed -i "s|-P'iptv'|& -P'suspendoutput -l'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Suspendoutput installed"
-		sleep 2
+then  echo "Vdr-Plugin-Suspendoutput $Remind"
+sleep 2
+else wget http://phivdr.dyndns.org/vdr/vdr-suspendoutput/vdr-suspendoutput-2.1.0.tgz
+tar xzvf vdr-suspendoutput-2.1.0.tgz
+mv -f vdr-suspendoutput-2.1.0.tgz /home/`logname`/Vdr_repo/
+mv -f suspendoutput-2.1.0 suspendoutput
+cp -rf /home/`logname`/Vdr_repo/patch_suspendoutput.tar.gz $VDRSRC/suspendoutput
+cd suspendoutput
+tar -zxvf patch_suspendoutput.tar.gz
+rm -rf patch_suspendoutput.tar.gz
+patch -p1 < suspendoutput_nooutput.patch
+patch -p1 < suspendoutput_compile.patch
+make
+cd ../../..
+make plugins
+sed -i "s|-P'iptv'|& -P'suspendoutput -l'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Suspendoutput installed"
+sleep 2
 fi
 #
 cd /home/`logname`
@@ -2244,7 +2370,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 h1)
 clear
@@ -2253,10 +2380,12 @@ cd $VDRSRC
 if [ -f suspendoutput/Makefile ]
 echo "Vdr-Plugin-Suspendoutput $Remind1"
 sleep 2
-	then rm -rf suspendoutput
-	cd $LIB
-	rm -rf libvdr-suspendoutput.*
-	sed -i "s|-P'suspendoutput -l'||" /usr/local/bin/vdrrun
+then rm -rf suspendoutput
+cd $LIB
+rm -rf libvdr-suspendoutput.*
+sed -i "s|-P'suspendoutput -l'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Suspendoutput uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Suspendoutput $Remind5"
 fi
 #
@@ -2265,16 +2394,17 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #
 z);;
 esac;;
 
 ###########################################################################################################
 6)                               
-    clear
-    echo ""
-    dialog --title "               ♦♦♦♦♦   Sat Plugins ♦♦♦♦♦                    " --infobox "
+clear
+echo ""
+dialog --title "               ♦♦♦♦♦   Sat Plugins ♦♦♦♦♦                    " --infobox "
 
 --------------------------------------------------------------------------------------------------
                                      Install or Remove Sat Plugins
@@ -2300,24 +2430,25 @@ echo "        ***                Installing Vdr-Plugin-Channellscan             
 apt-get -y install libboost-iostreams-dev
 cd $VDRSRC
 if [ -f channelscan/Makefile ]
-	then  echo "Vdr-Plugin-Channellscan $Remind"
-	sleep 2
-		else git clone https://github.com/ua0lnj/vdr-plugin-channelscan.git
-		cp -rf vdr-plugin-channelscan /home/`logname`/Vdr_repo/
-		mv -f vdr-plugin-channelscan channelscan
-		cp -rf $VDRSRC/channelscan/script/* /usr/local/bin
-		cd channelscan
-		cd ../..
-		make plugins
-		cd $PLUGINS
-		mkdir -p transponders
-		cp -rf /home/`logname`/Vdr_repo/satellite_pack.tar.gz $PLUGINS/transponders
-		cd transponders
-		tar -zxvf satellite_pack.tar.gz
-		rm -rf satellite_pack.tar.gz
-		sed -i "s|-P'iptv'|& -P'channelscan'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Channellscan installed"
-		sleep 2		
+then echo "Vdr-Plugin-Channellscan $Remind"
+sleep 2
+else git clone https://github.com/ua0lnj/vdr-plugin-channelscan.git
+cp -rf vdr-plugin-channelscan /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-channelscan channelscan
+cp -rf $VDRSRC/channelscan/script/* /usr/local/bin
+cd channelscan
+make & make install
+cd ../..
+make plugins
+cd $PLUGINS
+mkdir -p transponders
+cp -rf /home/`logname`/Vdr_repo/satellite_pack.tar.gz $PLUGINS/transponders
+cd transponders
+tar -zxvf satellite_pack.tar.gz
+rm -rf satellite_pack.tar.gz
+sed -i "s|-P'iptv'|& -P'channelscan'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Channellscan installed"
+sleep 2		
 fi
 #
 cd /home/`logname`
@@ -2325,7 +2456,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 a1)
 clear
@@ -2334,10 +2466,12 @@ cd $VDRSRC
 if [ -f channelscan/Makefile ]
 echo "Vdr-Plugin-Channellscan $Remind1 "
 sleep 2
-	then rm -rf channelscan
-	cd $LIB
-	rm -rf libvdr-channelscan.*
-	sed -i "s|-P'channelscan'||" /usr/local/bin/vdrrun
+then rm -rf channelscan
+cd $LIB
+rm -rf libvdr-channelscan.*
+sed -i "s|-P'channelscan'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Channellscan uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Channellscan $Remind5"
 		
 fi
@@ -2347,7 +2481,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 b)
@@ -2356,29 +2491,30 @@ echo "        ***                Installing W_scan_cpp               ***"; sleep
 sleep 2
 cd $SRC
 if [ -d /usr/local/src/librepfunc ]
-	then echo "librepfunc $Remind3"
-	sleep 2
-		else git clone https://github.com/wirbel-at-vdr-portal/librepfunc.git
-        	cd librepfunc
-		make -j8
-		make install
-        fi
+then echo "librepfunc $Remind3"
+sleep 2
+else git clone https://github.com/wirbel-at-vdr-portal/librepfunc.git
+cd librepfunc
+make -j8
+make install
+fi
+#
 cd $SRC
 if [ -f /usr/local/bin/w_scan_cpp ]
-	then echo "W_scan_cpp $Remind"
-	sleep 2
-		else wget wget https://www.gen2vdr.de/wirbel/w_scan_cpp/w_scan_cpp-20230121.tar.bz2
-		tar xjf w_scan_cpp-20230121.tar.bz2
-	        rm -rf w_scan_cpp-20230121.tar.bz2
-	        mv -f w_scan_cpp-20230121 w_scan_cpp
-	        cd w_scan_cpp
-	        make download	
-	        make
-	        make install
-		echo "                    W_scan_cpp installed"
-		sleep 2	        
+then echo "W_scan_cpp $Remind"
+sleep 2
+else wget wget https://www.gen2vdr.de/wirbel/w_scan_cpp/w_scan_cpp-20230121.tar.bz2
+tar xjf w_scan_cpp-20230121.tar.bz2
+rm -rf w_scan_cpp-20230121.tar.bz2
+mv -f w_scan_cpp-20230121 w_scan_cpp
+cd w_scan_cpp
+make download	
+make
+make install
+echo "                    W_scan_cpp installed"
+sleep 2	        
 fi
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 b1)
 clear
@@ -2387,11 +2523,13 @@ cd $SRC
 if [ -f /usr/local/bin/w_scan_cpp ]
 then echo "W_scan_cpp $Remind1"
 sleep 2
-	rm -rf w_scan_cpp
-	rm -rf /usr/local/bin/w_scan
-		else echo "W_scan_cpp $Remind5"
+rm -rf w_scan_cpp
+rm -rf /usr/local/bin/w_scan
+echo "                    W_scan_cpp uninstalled"
+sleep 2
+else echo "W_scan_cpp $Remind5"
 fi
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 c)
@@ -2400,18 +2538,18 @@ echo "        ***                Installing Vdr-Plugin-Satip               ***";
 apt-get -y install libpugixml1 libpugixml-dev
 cd $VDRSRC
 if [ -f satip/Makefile ]
-	then  echo "Vdr-Plugin-Satip $Remind"
-	sleep 2
-		else git clone https://github.com/rofafor/vdr-plugin-satip.git
-		cp -rf vdr-plugin-satip /home/`logname`/Vdr_repo/
-		mv -f vdr-plugin-satip satip
-		cd satip
-		make
-		cd ../..
-		make plugins
-		sed -i "s|-P'iptv'|& -P'satip'|" /usr/local/bin/vdrrun
-		echo "                    Vdr-Plugin-Satip installed"
-		sleep 2	
+then  echo "Vdr-Plugin-Satip $Remind"
+sleep 2
+else git clone https://github.com/rofafor/vdr-plugin-satip.git
+cp -rf vdr-plugin-satip /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-satip satip
+cd satip
+make
+cd ../..
+make plugins
+sed -i "s|-P'iptv'|& -P'satip'|" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Satip installed"
+sleep 2	
 fi
 #
 cd /home/`logname`
@@ -2419,7 +2557,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 c1)
 clear
@@ -2428,10 +2567,12 @@ cd $VDRSRC
 if [ -f satip/Makefile ]
 echo "Vdr-Plugin-Satip $Remind1"
 sleep 2
-	then rm -rf satip
-	cd $LIB
-	rm -rf libvdr-satip.*
-	sed -i "s|-P'satip'||" /usr/local/bin/vdrrun
+then rm -rf satip
+cd $LIB
+rm -rf libvdr-satip.*
+sed -i "s|-P'satip'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Satip uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Sat-Ip $Remind5"
 fi
 #
@@ -2440,7 +2581,8 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 d)
@@ -2448,22 +2590,22 @@ clear
 echo "        ***                Installing W_scan2               ***"; sleep 2
 cd $SRC
 if [ -f /$SRC/w_scan2/Makefile ]
-	then  echo "W_scan $Remind3"
-	sleep 2
-		else git clone https://github.com/stefantalpalaru/w_scan2.git
-		cp w_scan2 /home/`logname`/Vdr_repo/
-		cd w_scan2
-		./autogen.sh
-		./configure
-		make && make install
-		echo "                    W_scan2 installed"
-		sleep 2
+then  echo "W_scan $Remind3"
+sleep 2
+else git clone https://github.com/stefantalpalaru/w_scan2.git
+cp w_scan2 /home/`logname`/Vdr_repo/
+cd w_scan2
+./autogen.sh
+./configure
+make && make install
+echo "                    W_scan2 installed"
+sleep 2
 fi
 #
 cd /home/`logname`
 chmod -R 777 Vdr_repo
 #
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 d1)
 clear
@@ -2472,13 +2614,15 @@ cd $SRC
 if [ -f c$SRC/w_scan2/Makefile ]
 echo "W_scan2 $Remind1"
 sleep 2
-	then cd w_scan2
-	make clean
-	make distclean
-	rm -rf w_scan2
-		else echo "W_scan2 $Remind5"
+then cd w_scan2
+make clean
+make distclean
+rm -rf w_scan2
+echo "                    W_scan2 uninstalled"
+sleep 2
+else echo "W_scan2 $Remind5"
 fi
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
 e)
@@ -2486,21 +2630,21 @@ clear
 echo "        ***                Installing T2scan              ***"; sleep 2
 cd $SRC
 if [ -f /$SRC/t2scan/Makefile ]
-	then  echo "T2scan $emind3"
-	sleep 2
-		else git clone https://github.com/mighty-p/t2scan
-		cp t2scan /home/`logname`/Vdr_repo/
-		cd t2scan
-		./configure
-		make && make install
-		echo "                    T2scan installed"
-		sleep 2
+then  echo "T2scan $emind3"
+sleep 2
+else git clone https://github.com/mighty-p/t2scan
+cp t2scan /home/`logname`/Vdr_repo/
+cd t2scan
+./configure
+make && make install
+echo "                    T2scan installed"
+sleep 2
 fi
 #
 cd /home/`logname`
 chmod -R 777 Vdr_repo
 #
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 e1)
 clear
@@ -2509,13 +2653,15 @@ cd $SRC
 if [ -f /$SRC/t2scan/Makefile ]
 echo "T2scan $Remind1"
 sleep 2
-	then cd t2scan
-	make clean
-	make distclean
-	rm -rf t2scan
-		else echo "T2scan $Remind5"
+then cd t2scan
+make clean
+make distclean
+rm -rf t2scan
+echo "                    T2scan uninstalled"
+sleep 2
+else echo "T2scan $Remind5"
 fi
-        echo "                    Press Enter to continue ...               "; read enterKey;;
+echo "                    Press Enter to continue ...               "; read enterKey;;
 #
 z);;
 esac;;
@@ -2572,6 +2718,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 a1)
@@ -2581,12 +2728,14 @@ cd $VDRSRC
 if [ -f vdrmanager/vdr-vdrmanager/Makefile ]
 echo "Vdr-Plugin-Manager $Remind1"
 sleep 2
-  	then rm -rf vdrmanager
-	cd $LIB
-	rm -rf libvdr-vdrmanager.*
-	cd $PLUGINS
-	rm -rf plugin.vdrmanager.*
-	sed -i "s|-P'vdrmanager -p 6420 -P change'||" /usr/local/bin/vdrrun
+then rm -rf vdrmanager
+cd $LIB
+rm -rf libvdr-vdrmanager.*
+cd $PLUGINS
+rm -rf plugin.vdrmanager.*
+sed -i "s|-P'vdrmanager -p 6420 -P change'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Vdrmanager uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Vdrmanager $Remind5"
 fi
 #
@@ -2595,6 +2744,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
@@ -2621,6 +2771,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 b1)
@@ -2630,10 +2781,12 @@ cd $VDRSRC
 if [ -f cecremote/Makefile ]
 echo "Vdr-Plugin-CecRemote $Remind1"
 sleep 2
-	then rm -rf cecremote
-	cd $LIB
-	rm -rf libvdr-cecremote.*
-	sed -i "s|-P'cecremote'||" /usr/local/bin/vdrrun
+then rm -rf cecremote
+cd $LIB
+rm -rf libvdr-cecremote.*
+sed -i "s|-P'cecremote'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-CecRemote uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-CecRemote $Remind5"
 fi
 #
@@ -2642,6 +2795,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
@@ -2699,10 +2853,12 @@ cd $VDRSRC
 if [ -f remote/Makefile ]
 echo "Vdr-Plugin-remote $Remind1"
 sleep 2
-	then rm -rf remote
-	cd $LIB
-	rm -rf libvdr-remote.*
-	sed -i "s|-P'remote'||" /usr/local/bin/vdrrun
+then rm -rf remote
+cd $LIB
+rm -rf libvdr-remote.*
+sed -i "s|-P'remote'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Remote uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Remote $Remind5"
 fi
 #
@@ -2711,6 +2867,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
@@ -2756,10 +2913,12 @@ cd $VDRSRC
 if [ -f menuorg/Makefile ]
 echo "Vdr-Plugin-Menuorg $Remind1"
 sleep 2
-	then rm -rf menuorg
-	cd $LIB
-	rm -rf libvdr-menuorg.*
-	sed -i "s|-P'menuorg'||" /usr/local/bin/vdrrun
+then rm -rf menuorg
+cd $LIB
+rm -rf libvdr-menuorg.*
+sed -i "s|-P'menuorg'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Menuorg uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Menuorg $Remind5"
 fi
 #
@@ -2768,6 +2927,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
         
 ###########################################################################################################
@@ -2793,6 +2953,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 e1)
@@ -2802,10 +2963,12 @@ cd $VDRSRC
 if [ -f chanman/Makefile ]
 echo "Vdr-Plugin-Chanman $Remind1"
 sleep 2
-	then rm -rf chanman
-	cd $LIB
-	rm -rf libvdr-chanman.*
-	sed -i "s|-P'chanman'||" /usr/local/bin/vdrrun
+then rm -rf chanman
+cd $LIB
+rm -rf libvdr-chanman.*
+sed -i "s|-P'chanman'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Chanman uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Chanman $Remind5"
 fi
 #
@@ -2814,6 +2977,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
@@ -2839,6 +3003,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 f1)
@@ -2848,10 +3013,12 @@ cd $VDRSRC
 if [ -f channellists/Makefile ]
 echo "Vdr-Plugin-Channellists $Remind1"
 sleep 2
-	then rm -rf channellists
-	cd $LIB
-	rm -rf libvdr-channellists.*
-	sed -i "s|-P'channellists'||" /usr/local/bin/vdrrun
+then rm -rf channellists
+cd $LIB
+rm -rf libvdr-channellists.*
+sed -i "s|-P'channellists'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Channellists uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Channellists $Remind5"
 fi
 #
@@ -2860,6 +3027,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 
 #
@@ -2918,6 +3086,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 # cp -a $VDRSRC/streamdev/externremux.sh $PLUGINS/streamdev-server/externremux.sh.orig
 #                                      $$$$$$$$$$$$$$$$$$
@@ -2928,12 +3097,14 @@ cd $VDRSRC
 if [ -f streamdev/Makefile ]
 echo "Vdr-Plugin-StreamDev $Remind1"
 sleep 2
-	then rm -rf streamdev
-	cd $PLUGINS
-	rm -rf streamdev-server
-	cd $LIB
-	rm -rf libvdr-streamdev-*
-	sed -i "s|-P'streamdev-server'||" /usr/local/bin/vdrrun
+then rm -rf streamdev
+cd $PLUGINS
+rm -rf streamdev-server
+cd $LIB
+rm -rf libvdr-streamdev-*
+sed -i "s|-P'streamdev-server'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-StreamDev uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-StreamDev $Remind5"
 fi
 #
@@ -2942,6 +3113,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
@@ -2978,10 +3150,12 @@ cd $VDRSRC
 if [ -f vnsiserver/Makefile ]
 echo "Vdr-Plugin-Vnsiserver $Remind1"
 sleep 2
-	then rm -rf vnsiserver
-	cd $LIB
-	rm -rf libvdr-vnsiserver.*
-	sed -i "s|-P'vnsiserver'||" /usr/local/bin/vdrrun
+then rm -rf vnsiserver
+cd $LIB
+rm -rf libvdr-vnsiserver.*
+sed -i "s|-P'vnsiserver'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Vnsiserver uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Vnsiserver $Remind5"
 fi
 #
@@ -2990,6 +3164,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #
 z);;
@@ -3047,6 +3222,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 a1)
@@ -3056,10 +3232,12 @@ cd $VDRSRC
 if [ -f weatherforecast/Makefile ]
 echo "Vdr-Plugin-Weatherforecast $Remind1"
 sleep 2
-	then rm -rf weatherforecast
-	cd $LIB
-	rm -rf libvdr-weatherforecast.*
-	sed -i "s|-P'weatherforecast'||" /usr/local/bin/vdrrun
+then rm -rf weatherforecast
+cd $LIB
+rm -rf libvdr-weatherforecast.*
+sed -i "s|-P'weatherforecast'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Weatherforecast uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Weatherforecast $Remind5"
 fi
 #
@@ -3068,6 +3246,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
@@ -3098,7 +3277,7 @@ cp -rf $VDRSRC/weatherng/weatherng/* /etc/vdr/plugins/weatherng/
 #
 echo "                    Vdr-Plugin-Weatherng installed"
 sleep 2
-
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 b1)
@@ -3108,10 +3287,12 @@ cd $VDRSRC
 if [ -f weatherng/Makefile ]
 echo "Vdr-Plugin-Weatherng $Remind1"
 sleep 2
-  	then rm -rf weatherng
-  	cd $LIB
-  	rm -rf libvdr-weatherng.*
-  	sed -i "s|-P'weatherng'||" /usr/local/bin/vdrrun
+then rm -rf weatherng
+cd $LIB
+rm -rf libvdr-weatherng.*
+sed -i "s|-P'weatherng'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Weatherng uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Weatherng $Remind5"
 fi
 #
@@ -3120,6 +3301,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 ###########################################################################################################
 c)
@@ -3146,7 +3328,7 @@ make plugins install
 #
 echo "                    Vdr-Plugin-Ciplus installed"
 sleep 2
-
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
 c1)
@@ -3156,10 +3338,12 @@ cd $VDRSRC
 if [ -f ciplus/Makefile ]
 echo "Vdr-Plugin-Ciplus $Remind1"
 sleep 2
-  	then rm -rf ciplus
-  	cd $LIB
-  	rm -rf libvdr-ciplus.*
-  	sed -i "s|-P'weatherng'||" /usr/local/bin/vdrrun
+then rm -rf ciplus
+cd $LIB
+rm -rf libvdr-ciplus.*
+sed -i "s|-P'weatherng'||" /usr/local/bin/vdrrun
+echo "                    Vdr-Plugin-Ciplus uninstalled"
+sleep 2
 		else echo "Vdr-Plugin-Ciplus $Remind5"
 fi
 #
@@ -3168,6 +3352,7 @@ chmod -R 777 Vdr_repo
 #
 cd $SRC/vdr
 make plugins install
+#
         echo "                    Press Enter to continue ...               "; read enterKey;;
 z);;
 esac;;
@@ -3235,4 +3420,3 @@ esac;;
 *) ;;
 esac
 done
-

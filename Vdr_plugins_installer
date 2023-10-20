@@ -141,13 +141,12 @@ dialog --title "   ** Setup Softhddevice **   " --infobox "
    			-------------------------------------------------------------------------
   			-------------------------------------------------------------------------
 
-                                               Nvidia Video Devices
-		        [a]    Nvidia Video Devices 
-		        [b]    Nvidia Video Devices (Softhddevice test version)
-		        [c]    Intel Video Devices
+                                               Video Devices
+		        [a]    Nvidia/Intel Softhddevice latest verion 
+		        [b]    Nvidia/Intel Softhddevice test version
 
 			------------------------------------------------------------------------- " 0 0
-echo -n "        Enter your menu choice  [a-c]:      "
+echo -n "        Enter your menu choice  [a-b]:      "
 read yourch
 case $yourch in
 #
@@ -158,8 +157,14 @@ cp -rf /$VDRSRC/vdr-plugin-softhddevice /home/`logname`/Vdr_repo/
 mv vdr-plugin-softhddevice softhddevice
 cd softhddevice
 make && make install
-sed -i "s|-P'dvbapi'|& -P'softhddevice -v vdpau -f'|" /usr/local/bin/vdrrun;;
-#
+lspci | grep VGA > /tmp/videocard
+if cat /tmp/videocard | grep "Intel Corporation HD Graphics "
+then 
+sed -i "s|-P'dvbapi'|& -P'softhddevice -v cpu-glx -f'|" /usr/local/bin/vdrrun
+else 
+sed -i "s|-P'dvbapi'|& -P'softhddevice -v cuvid -f'|" /usr/local/bin/vdrrun
+rm -rf /tmp/videocard
+fi;;
 b)
 cd $VDRSRC
 wget https://github.com/ua0lnj/vdr-plugin-softhddevice/archive/refs/heads/test.zip
@@ -168,17 +173,14 @@ cp -rf /$VDRSRC/vdr-plugin-softhddevice-test /home/`logname`/Vdr_repo/
 mv vdr-plugin-softhddevice-test softhddevice
 cd softhddevice
 make && make install
-sed -i "s|-P'dvbapi'|& -P'softhddevice -v cuvid -f'|" /usr/local/bin/vdrrun;;
-#
-c)
-cd $VDRSRC
-wget https://github.com/ua0lnj/vdr-plugin-softhddevice/archive/refs/heads/test.zip
-unzip test.zip
-cp -rf /$VDRSRC/vdr-plugin-softhddevice-test /home/`logname`/Vdr_repo/
-mv vdr-plugin-softhddevice-test softhddevice
-cd softhddevice
-make && make install
-sed -i "s|-P'dvbapi'|& -P'softhddevice -v cpu-glx -f'|" /usr/local/bin/vdrrun;;
+lspci | grep VGA > /tmp/videocard
+if cat /tmp/videocard | grep "Intel Corporation HD Graphics "
+then 
+sed -i "s|-P'dvbapi'|& -P'softhddevice -v cpu-glx -f'|" /usr/local/bin/vdrrun
+else 
+sed -i "s|-P'dvbapi'|& -P'softhddevice -v cuvid -f'|" /usr/local/bin/vdrrun
+rm -rf /tmp/videocard
+fi;;
 esac
 #
 cd $SRC/vdr
@@ -212,6 +214,7 @@ rm -rf libvdr-softhddevice.*
 sed -i "s|-P'softhddevice -v vdpau -f'||" /usr/local/bin/vdrrun	
 sed -i "s|-P'softhddevice -v cuvid -f'||" /usr/local/bin/vdrrun
 sed -i "s|-P'softhddevice -v cpu-glx -f'||" /usr/local/bin/vdrrun
+sed -i "s|-P'softhddevice -v cpu-egl -f'||" /usr/local/bin/vdrrun
 echo "                    Vdr-Plugin-Softhddevice uninstalled"
 sleep 2		
 		else echo "Vdr-Plugin-Softhddevice $Remind5"
@@ -245,31 +248,10 @@ then echo "Vdr-Plugin-Softhdvaapi $Remind5"
 sleep 2
 else git clone https://github.com/jojo61/vdr-plugin-softhdcuvid.git
 cp -rf /$VDRSRC/vdr-plugin-softhdcuvid /home/`logname`/Vdr_repo/
- 
-     			dialog --title "   ** Setup Softhdcuvid / Softhdvaapi  **   " --infobox "
-   			-------------------------------------------------------------------------
-  			-------------------------------------------------------------------------
-
-                                               Nvidia Video Devices
-		        [a]    Nvidia Video Devices (Softhdcuvid)
-		        [b]    Intel Video Devices (Softhdvaapi)                  
-
-			------------------------------------------------------------------------- " 0 0
-
-echo -n "        Enter your menu choice  [a-b]:      "
-read yourch    		
-case $yourch in    		
-a)
-mv -f vdr-plugin-softhdcuvid softhdcuvid
-cd softhdcuvid
-rm -rf Makefile
-cp -rf /home/`logname`/Vdr_repo/patch_softhdcuvid_cuvid.tar.gz $VDRSRC/softhdcuvid
-tar -zxvf patch_softhdcuvid_cuvid.tar.gz
-rm -rf patch_softhdcuvid_cuvid.tar.gz
-make && make install
-sed -i "s|-P'dvbapi'|& -P'softhdcuvid -f'|" /usr/local/bin/vdrrun;;
 #
-b) 
+lspci | grep VGA > /tmp/videocard
+if cat /tmp/videocard | grep "Intel Corporation HD Graphics"
+then
 mv -f vdr-plugin-softhdcuvid softhdvaapi
 cd softhdvaapi
 rm -rf Makefile
@@ -277,8 +259,17 @@ cp -rf /home/`logname`/Vdr_repo/patch_softhdcuvid_vaapi.tar.gz $VDRSRC/softhdvaa
 tar -zxvf patch_softhdcuvid_vaapi.tar.gz
 rm -rf patch_softhdcuvid_vaapi.tar.gz
 make && make install
-sed -i "s|-P'dvbapi'|& -P'softhdvaapi -d :0.0 -f'|" /usr/local/bin/vdrrun;;
-esac
+sed -i "s|-P'dvbapi'|& -P'softhdvaapi -d :0.0 -f'|" /usr/local/bin/vdrrun
+else
+mv -f vdr-plugin-softhdcuvid softhdcuvid
+cd softhdcuvid
+rm -rf Makefile
+cp -rf /home/`logname`/Vdr_repo/patch_softhdcuvid_cuvid.tar.gz $VDRSRC/softhdcuvid
+tar -zxvf patch_softhdcuvid_cuvid.tar.gz
+rm -rf patch_softhdcuvid_cuvid.tar.gz
+make && make install
+sed -i "s|-P'dvbapi'|& -P'softhdcuvid -f'|" /usr/local/bin/vdrrun
+fi
 #
 cp -rf /home/`logname`/Vdr_repo/setup16_softhdcuvid.tar.gz /etc/vdr
 cd /etc/vdr
@@ -333,10 +324,10 @@ if [ -f $PACKAGES/libxine2*.deb ]
 then echo "Xine-lib $Remind"
 sleep 2
 else cd $SRC
-wget https://sourceforge.net/projects/xine/files/xine-lib/1.2.12/xine-lib-1.2.12.tar.xz
-tar -xJf xine-lib-1.2.12.tar.xz
-mv xine-lib-1.2.12 xine-lib
-cp -rf /$SRC/xine-lib-1.2.12.tar.xz /home/`logname`/Vdr_repo/
+wget https://sourceforge.net/projects/xine/files/xine-lib/1.2.13/xine-lib-1.2.13.tar.xz
+tar -xJf xine-lib-1.2.13.tar.xz
+mv xine-lib-1.2.13 xine-lib
+cp -rf /$SRC/xine-lib-1.2.13.tar.xz /home/`logname`/Vdr_repo/
 ./configure
 make
 make install 
@@ -804,8 +795,22 @@ echo "                    Press Enter to continue ...               "; read ente
 d)
 clear
 echo "        ***                Installing Vdr-Plugin-Osd2web               ***"; sleep 2
-apt-get -y install libtinyxml2-dev libexif-dev cmake
+cd $SRC
+apt-get -y install cmake
+if [ -f $SRC/libwebsockets ]
+then  echo "Libwebsockets $Remind"
+else
+git clone https://github.com/warmcat/libwebsockets.git
+cd libwebsockets
+mkdir build
+cd build
+cmake ..
+make
+make install
+fi
+#
 cd $VDRSRC
+apt-get -y install libtinyxml2-dev libexif-dev libjansson-dev
 if [ -f osd2web/Makefile ]
 then  echo "Vdr-Plugin-Osd2web $Remind"
 sleep 2	
@@ -814,12 +819,8 @@ cd $VDRSRC
 git clone https://github.com/horchi/vdr-plugin-osd2web.git
 cp -rf vdr-plugin-osd2web /home/`logname`/Vdr_repo/
 mv -f vdr-plugin-osd2web osd2web
-cp -rf /home/`logname`/Vdr_repo/patch_osd2web.tar.gz /$VDRSRC/osd2web
 cd osd2web		
-tar -zxvf patch_osd2web.tar.gz
-rm -rf patch_osd2web.tar.gz
-patch -p1 < osd2web_vdr-2.3.8_compat.diff
-make install
+make & make install
 cd ../../..
 make plugins
 sed -i "s|-P'iptv'|& -P'osd2web -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
@@ -3420,3 +3421,4 @@ esac;;
 *) ;;
 esac
 done
+

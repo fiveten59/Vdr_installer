@@ -291,11 +291,11 @@ else
     git clone --branch stable/2.6 git://git.tvdr.de/vdr.git vdr-2.6.4
   fi
   
-if [ -e $REPO/test.zip ]; then
+if [ -e $REPO/vdr-plugin-softhddevice ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    wget https://github.com/ua0lnj/vdr-plugin-softhddevice/archive/refs/heads/test.zip
+    git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git
   fi  
 
 if [ -e $REPO/vdr-plugin-dvbapi ]; then
@@ -367,7 +367,7 @@ echo "                    Downloading libs - progs & patch for Vdr on local repo
 wget https://ffmpeg.org/releases/ffmpeg-5.1.tar.bz2
 git clone https://github.com/OpenELEC/eventlircd.git
 git clone --branch stable/2.6 git://git.tvdr.de/vdr.git vdr-2.6.4
-wget https://github.com/ua0lnj/vdr-plugin-softhddevice/archive/refs/heads/test.zip
+git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git
 git clone https://github.com/ua0lnj/vdr-plugin-dvbapi.git 
 git clone https://github.com/siricco/vdr-plugin-radio.git
 git clone https://github.com/rofafor/vdr-plugin-iptv.git
@@ -861,10 +861,8 @@ apt-get -y install libglu1-mesa-dev libgl1-mesa-dev libswscale-dev libavfilter-d
 apt-get -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev
 apt-get -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
 cd $VDRSRC
-cp -rf $REPO/test.zip /$VDRSRC/
-unzip test.zip
-rm -rf test.zip
-mv vdr-plugin-softhddevice-test softhddevice
+cp -rf $REPO/vdr-plugin-softhddevice /$VDRSRC/
+mv vdr-plugin-softhddevice softhddevice
 cd softhddevice
 make && make install
 #
@@ -936,6 +934,8 @@ make plugins install
 cd $REPO
 chmod -R 777 *
 echo "                    VDR-2.6.4 plugins installed"; sleep 2
+echo "For more Vdr plugins pls visit https://github.com/fiveten59/Vdr_installer
+and download Vdr_plugins_installer"; sleep 5
 ;;
 #
 b)
@@ -971,7 +971,7 @@ clear
 echo "                    Installing Icons"
 sleep 2
 if [ -f $SRC/icone/vdr.jpg ]
-then echo " Icons $Remind4"
+then echo "Icons $Remind4"
 sleep 2
 else cd $SRC
 cp -rf $REPO/icone.tar.gz $SRC
@@ -1018,16 +1018,16 @@ cd /usr/share/fonts/truetype/
 tar -zxvf vdrsymbols.tar.gz
 rm -rf vdrsymbols.tar.gz
 fc-cache -fv
-echo "                    True Type Fonts installed"; sleep 2
+echo "True Type Fonts installed"; sleep 2
 fi
 #
 echo "                    Install Channels logos"
 sleep 2
 if [ -f /etc/vdr/logos/2be.png ]
-then echo " Logos are already installed"
+then echo "Logos are already installed"
 else
 cp -rf $REPO/logos /etc/vdr/
-echo "Channels logos installed"; sleep 2
+echo "                    Channels logos installed"; sleep 2
 fi
 sleep 2
 #
@@ -1108,7 +1108,7 @@ cd /etc/vdr/
 cp -rf $REPO/channels-w_scan2-Astra_19.conf.tar.gz /etc/vdr/
 tar -zxvf channels-w_scan2-Astra_19.conf.tar.gz
 rm -rf channels-w_scan2-Astra_19.conf.tar.gz
-echo "Channell MONO19 list installed"
+echo "                    Channell MONO19 list installed"
 sleep 2;;
 #
 g)
@@ -1138,7 +1138,7 @@ cd /etc/vdr/
 cp -rf $REPO/channels-w_scan2-Tursat.conf.tar.gz /etc/vdr/
 tar -zxvf channels-w_scan2-Turksat.conf.tar.gz
 rm -rf channels-w_scan2-Turksat.conf.tar.gz
-echo "Channell MONO42 list installed"
+echo "                    Channell MONO42 list installed"
 sleep 2;;
 #
 l) clear
@@ -1421,7 +1421,7 @@ else cp -rf $REPO/lcars_pack.tar.gz /etc/vdr/themes
 cd /etc/vdr/themes
 tar -zxvf lcars_pack.tar.gz
 rm -rf lcars_pack.tar.gz
-echo "Default Skin installed"; sleep 2
+echo "                    Default Skin installed"; sleep 2
 fi
 #
 echo "                    Configuring Vnsiserver"
@@ -1436,7 +1436,7 @@ cd $PLUGINS/iptv/
 rm -rf vlc2iptv
 tar -zxvf iptv_conf.tar.gz
 rm -rf iptv_conf.tar.gz
-echo "Iptv configured"; sleep 2
+echo "                    Iptv configured"; sleep 2
 #
 echo "                    Create Vdr vdrpoweroff"
 sleep 1
@@ -1449,7 +1449,7 @@ killall -9 vdr & killall -9 vlc & killall mpv
 chmod 777 /usr/local/bin/vdrpoweroff
 echo "Vdrpoweroff created"; sleep 2
 #
-echo "                    Permission to execute Eventlircd - Vdr - Oscam"
+echo "                    Permissions to execute Eventlircd - Vdr - Oscam"
 sleep 2
 rm -rf /etc/sudoers.d/eventlircd
 touch /etc/sudoers.d/eventlircd
@@ -1561,6 +1561,8 @@ Icon=$SRC/icone/vdr.png
 Exec=/usr/local/bin/start-vdr.sh
 " >> /usr/share/applications/Vdr.desktop
 chmod 777 /usr/share/applications/Vdr.desktop
+
+echo "Vdr start command line created"; sleep 2
 #
 echo "                    Create Vdr Server start command line"
 sleep 1
@@ -1648,40 +1650,24 @@ Icon=$SRC/icone/server_vdr.png
 Exec=/usr/local/bin/start-server-vdr.sh
 " >> /usr/share/applications/Server.desktop
 chmod 777 /usr/share/applications/Server.desktop
+echo "Vdr Server start command line created"; sleep 2
 #
-clear
-    dialog --title "   ** Configuring Frontend **   " --infobox "
-   ----------------------------------------------
-        Configuring Frontend & Vdr command line
-   ----------------------------------------------
-
-	NVIDIA VIDEO DEVICES
-        [a]    Softhddevice (vdpau)
-        [b]    Softhddevice (cuvid)
-        
-	INTEL VIDEO DEVICES
-        [c]    Softhddevice (default)	
-
-   ---------------------------------------------- " 0 0
-echo -n "        Enter your menu choice  [a-c]:      "
-read yourch
-case $yourch in
-# da cambiare i setup
-a) clear
-sed -i "s|-P'dvbapi'|& -P'softhddevice -v vdpau -f'|" /usr/local/bin/vdrrun;;
+echo "                    Configuring Frontend"
+sleep 3
+lspci | grep VGA > /tmp/videocard
+if cat /tmp/videocard | grep "Intel Corporation HD Graphics "
+then 
+sed -i "s|-P'dvbapi'|& -P'softhddevice -v cpu-glx -f'|" /usr/local/bin/vdrrun
+else 
+sed -i "s|-P'dvbapi'|& -P'softhddevice -v cuvid -f'|" /usr/local/bin/vdrrun
+rm -rf /tmp/videocard
+fi
 #
-b) clear
-sed -i "s|-P'dvbapi'|& -P'softhddevice -v cuvid -f'|" /usr/local/bin/vdrrun;;
-#
-c) clear
-sed -i "s|-P'dvbapi'|& -P'softhddevice -v cpu-glx -f'|" /usr/local/bin/vdrrun;;
-#-v cpu-glx -d :0.0
-esac
 cp -rf $REPO/setup16_softhddevice.tar.gz /etc/vdr
 cd /etc/vdr/
 tar -zxvf setup16_softhddevice.tar.gz
 rm -rf setup16_softhddevice.tar.gz
-echo "Vdr & Vdr Server configured"; sleep 2
+echo "Frontend configured"; sleep 2
 #
 echo "                    Eventlircd & Oscam Automatic start at boot"
 sleep 1 

@@ -174,9 +174,9 @@ S30.0W 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
 #
 "
 #
-apt-get -y install dialog git subversion wget
-apt-get -y install checkinstall build-essential autoconf 
-apt-get -y install autopoint automake cmake libtool
+apt -y install dialog git subversion wget
+apt -y install checkinstall build-essential autoconf 
+apt -y install autopoint automake cmake libtool
 #
 sudo useradd vdr -g video -d /home/vdr -s /bin/bash -m
 mkdir $SRC/packages
@@ -444,14 +444,14 @@ sleep 2
 if [ -d $SRC/ffmpeg_sources/ffmpeg ]
 then echo "Ffmpeg is already installed"; sleep 3
 else
-apt-get -y install libavfilter-dev libx265-dev libavcodec-dev yasm libass-dev 
-apt-get -y install libavformat-dev libswresample-dev libswscale-dev libudev-dev
-apt-get -y install libfreetype6-dev libmp3lame-dev libtheora-dev libvorbis-dev
-apt-get -y install libxvidcore-dev freeglut3-dev libssl-dev libvdpau-dev libdrm-dev
-apt-get -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev 
-apt-get -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
-apt-get -y install libglew-dev libglm-dev mesa-common-dev libogg-dev libva-dev
-apt-get -y install libpciaccess-dev xorg-dev libpulse-dev libx265-dev
+apt -y install libavfilter-dev libx265-dev libavcodec-dev yasm libass-dev 
+apt -y install libavformat-dev libswresample-dev libswscale-dev libudev-dev
+apt -y install libfreetype6-dev libmp3lame-dev libtheora-dev libvorbis-dev
+apt -y install libxvidcore-dev freeglut3-dev libssl-dev libvdpau-dev libdrm-dev
+apt -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev 
+apt -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
+apt -y install libglew-dev libglm-dev mesa-common-dev libogg-dev libva-dev
+apt -y install libpciaccess-dev xorg-dev libpulse-dev libx265-dev
 
     echo "                    Wait for a few seconds ..."
 cd $SRC/ffmpeg_sources
@@ -524,7 +524,7 @@ if [ -d /usr/sbin/eventlircd ]
 then echo "Eventlircd is already installed"
 sleep 2
 else 
-apt-get -y install gawk libudev-dev lirc evtest
+apt -y install gawk libudev-dev lirc evtest
 update-rc.d lirc remove
 cd $SRC
 cp -rf $REPO/eventlircd $SRC
@@ -638,7 +638,7 @@ sleep 2
 if [ -f $SRC/driver_dvb/check ]
 then echo "Sat firmwares are already installed"; sleep 2
 else
-cp -rf /home/'logname'/Vdr_repo/driver_dvb.tar.gz $SRC
+cp -rf $REPO/driver_dvb.tar.gz $SRC
 cd $SRC
 tar -zxvf driver_dvb.tar.gz
 rm -rf driver_dvb.tar.gz
@@ -661,9 +661,9 @@ if [ -f /etc/apt/sources.list.d/oibaf-ubuntu-graphics-drivers-focal.list ]
   then echo "Intel Graphics-drivers already installed"
 else
 add-apt-repository ppa:oibaf/graphics-drivers
-apt-get update
-apt-get -y upgrade
-apt-get -y dist-upgrade
+apt update
+apt -y upgrade
+apt -y dist-upgrade
 fi
 #
 echo "                    Installing Intel-Vaapi-driver"
@@ -749,9 +749,9 @@ clear
 echo "                    Installing VDR      "
 sleep 2
 echo "Installing libraries"; sleep 3
-apt-get -y install libjpeg-dev libcap-dev libtinyxml-dev binutils libglibmm-2.4-dev g++
-apt-get -y install libfreetype6-dev libfontconfig1-dev libfribidi-dev gettext
-apt-get -y install libncurses5-dev libncursesw5-dev
+apt -y install libjpeg-dev libcap-dev libtinyxml-dev binutils libglibmm-2.4-dev g++
+apt -y install libfreetype6-dev libfontconfig1-dev libfribidi-dev gettext
+apt -y install libncurses5-dev libncursesw5-dev
 #
 cd $SRC
 cp -rf $REPO/vdr-2.6.4 $SRC
@@ -861,12 +861,12 @@ mkdir /media/video
 clear
 echo "                    Softhddevice"
 sleep 2
-apt-get -y install libx11-xcb-dev libc6-dev libogg0 libegl-dev
-apt-get -y install libxcb-ewmh-dev libasound2-dev libxext6 libxext-dev
-apt-get -y install libvdpau1 libavcodec-dev libavformat-dev libswresample-dev 
-apt-get -y install libglu1-mesa-dev libgl1-mesa-dev libswscale-dev libavfilter-dev
-apt-get -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev
-apt-get -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
+apt -y install libx11-xcb-dev libc6-dev libogg0 libegl-dev
+apt -y install libxcb-ewmh-dev libasound2-dev libxext6 libxext-dev
+apt -y install libvdpau1 libavcodec-dev libavformat-dev libswresample-dev 
+apt -y install libglu1-mesa-dev libgl1-mesa-dev libswscale-dev libavfilter-dev
+apt -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev
+apt -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
 cd $VDRSRC
 cp -rf $REPO/vdr-plugin-softhddevice /$VDRSRC/
 mv vdr-plugin-softhddevice softhddevice
@@ -875,7 +875,7 @@ make && make install
 #
 echo "                    Dvbapi"
 sleep 2
-apt-get -y install libssl-dev libdvbcsa-dev
+apt -y install libssl-dev libdvbcsa-dev
 cd $VDRSRC
 cp -rf $REPO/vdr-plugin-dvbapi /$VDRSRC/
 mv vdr-plugin-dvbapi dvbapi
@@ -897,7 +897,7 @@ ln -s lcars-LbSense.theme lcarsng-LbSense.theme
 #
 echo "                    Iptv"
 sleep 2
-apt-get -y install vlc libcurl4 libcurl4-gnutls-dev
+apt -y install vlc libcurl4 libcurl4-gnutls-dev
 cd $VDRSRC
 cp -rf $REPO/vdr-plugin-iptv /$VDRSRC
 mv vdr-plugin-iptv iptv
@@ -1275,7 +1275,7 @@ mkdir -p etc
 if [ -f $ETC/oscam.check ]
   then  echo "Oscam is already installed"
 else
-apt-get -y install libssl-dev libcrypto++-dev pcscd subversion libpcsclite-dev libusb-1.0-0-dev
+apt -y install libssl-dev libcrypto++-dev pcscd subversion libpcsclite-dev libusb-1.0-0-dev
 cp -rf $REPO/oscam.tar.gz /$ETC/
 cd $ETC
 tar -zxvf oscam.tar.gz
@@ -1754,7 +1754,7 @@ case $yourch in
 
 a)
 clear
-apt-get -y install software-properties-common pkg-config
+apt -y install software-properties-common pkg-config
 
 clear
     dialog --title "   ** KODI **   " --infobox "
@@ -1768,8 +1768,8 @@ clear
     read yourch
     case $yourch in
 
-a)   clear; add-apt-repository ppa:team-xbmc/ppa; apt-get update; apt-get -y install kodi; apt-get -y install kodi-pvr-iptvsimple; apt-get install kodi-pvr-vdr-vnsi; apt-mark hold kodi;;
-b)   clear; add-apt-repository ppa:team-xbmc/unstable; apt-get update;  apt-get -y install kodi; apt-get -y install kodi-pvr-iptvsimple; apt-get install kodi-pvr-vdr-vnsi; apt-mark hold kodi;;
+a)   clear; add-apt-repository ppa:team-xbmc/ppa; apt update; apt -y install kodi; apt -y install kodi-pvr-iptvsimple; apt install kodi-pvr-vdr-vnsi; apt-mark hold kodi;;
+b)   clear; add-apt-repository ppa:team-xbmc/unstable; apt update;  apt -y install kodi; apt -y install kodi-pvr-iptvsimple; apt install kodi-pvr-vdr-vnsi; apt-mark hold kodi;;
 esac
 #
 
@@ -1839,8 +1839,8 @@ b)
 clear
 echo "                    Remove KODI"
 sleep 3
-apt-get remove kodi*
-apt-get purge kodi*
+apt remove kodi*
+apt purge kodi*
 rm -rf ~/.kodi/
 rm -rf /home/`logname`/.kodi/*
 rm -rf /usr/share/kodi

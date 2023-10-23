@@ -267,11 +267,13 @@ else
   
 cd Vdr_repo 
 
-if [ -e $REPO/ffmpeg-5.1.tar.bz2 ]; then
+#if [ -e $REPO/ffmpeg-5.1.tar.bz2 ]; then
+if [ -e $REPO/ffmpeg-4.4.1.tar.bz2 ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    wget https://ffmpeg.org/releases/ffmpeg-5.1.tar.bz2
+#    wget https://ffmpeg.org/releases/ffmpeg-5.1.tar.bz2
+    wget https://ffmpeg.org/releases/ffmpeg-4.4.1.tar.bz2    
 fi
 
 if [ -e $REPO/eventlircd ]; then
@@ -364,7 +366,8 @@ git clone https://github.com/intel/intel-vaapi-driver.git
 
 echo "                    Downloading libs - progs & patch for Vdr on local repo "
 
-wget https://ffmpeg.org/releases/ffmpeg-5.1.tar.bz2
+#wget https://ffmpeg.org/releases/ffmpeg-5.1.tar.bz2
+wget https://ffmpeg.org/releases/ffmpeg-4.4.1.tar.bz2
 git clone https://github.com/OpenELEC/eventlircd.git
 git clone --branch stable/2.6 git://git.tvdr.de/vdr.git vdr-2.6.4
 git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git
@@ -452,10 +455,14 @@ apt-get -y install libpciaccess-dev xorg-dev libpulse-dev libx265-dev
 
     echo "                    Wait for a few seconds ..."
 cd $SRC/ffmpeg_sources
-cp -rf $REPO/ffmpeg-5.1.tar.bz2 $SRC/ffmpeg_sources/
-tar xjvf ffmpeg-5.1.tar.bz2
-mv ffmpeg-5.1 ffmpeg
-rm -rf ffmpeg-5.1.tar.bz2
+#cp -rf $REPO/ffmpeg-5.1.tar.bz2 $SRC/ffmpeg_sources/
+#tar xjvf ffmpeg-5.1.tar.bz2
+#mv ffmpeg-5.1 ffmpeg
+#rm -rf ffmpeg-5.1.tar.bz2
+cp -rf $REPO/ffmpeg-4.4.1.tar.bz2 $SRC/ffmpeg_sources/
+tar xjvf ffmpeg-4.4.1.tar.bz2
+mv ffmpeg-4.4.1 ffmpeg
+rm -rf ffmpeg-4.4.1.tar.bz2
 cd ffmpeg
 ./configure --extra-libs="-ldl" --enable-gpl --enable-libfreetype --enable-libmp3lame --enable-openssl --enable-libxcb --disable-libopus --enable-libtheora --enable-libvorbis --enable-libx265 --enable-cuvid --enable-nonfree --enable-libxvid --enable-opengl --enable-vdpau --enable-vaapi --enable-pic --enable-shared  --disable-doc --enable-swresample --disable-cuda-sdk --enable-libpulse
 # --enable-nvenc
@@ -622,6 +629,7 @@ chmod 777 start-eventlircd.sh
 echo "                    Eventlircd is now installed"
 sleep 2
 fi;;
+esac;;
 #
 c)
 clear
@@ -673,7 +681,6 @@ make -j4 install
 echo "Intel Graphics-drivers are now installed"; sleep 2
 fi;;
 #
-esac;;
 #############################################################
 #
 a1)
@@ -799,8 +806,8 @@ b)
 clear
 echo "                    Removing VDR-2.6.4"
 sleep 1
-dpkg -r vdr
-dpkg --purge vdr
+#dpkg -r vdr
+#dpkg --purge vdr
 rm -rf /etc/vdr
 rm -rf /usr/share/vdr
 rm -rf /usr/lib/vdr

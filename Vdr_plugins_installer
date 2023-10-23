@@ -127,12 +127,12 @@ a)
 clear
 echo "        ***                Installing Vdr-Plugin-Softhddevice              ***"; sleep 2
 cd $VDRSRC
-apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev
-apt-get -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev
-apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libxext6 libxext-dev
-apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0
-apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
-apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev
+apt -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev
+apt -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev
+apt -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libxext6 libxext-dev
+apt -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0
+apt -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
+apt -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev
 #
 if [ -f softhddevice/Makefile ]
 then echo "Vdr-Plugin-Softhddevice $Remind5"
@@ -233,12 +233,12 @@ b)
 clear
 echo "        ***       Installing Vdr-Plugin-Softhdcuvid / Softhdvaapi       ***"; sleep 2
 
-apt-get -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev
-apt-get -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev
-apt-get -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libxext6
-apt-get -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxext-dev
-apt-get -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
-apt-get -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev libplacebo-dev
+apt -y install libx11-xcb-dev libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev
+apt -y install libxcb-screensaver0-dev libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev
+apt -y install libxcb-icccm4-dev libxcb-keysyms1-dev libxcb-ewmh-dev libasound2-dev libxext6
+apt -y install libglm-dev libglew-dev freeglut3-dev libc6-dev libogg0 libxext-dev
+apt -y install libvdpau1 libvdpau-dev libavcodec-dev libavformat-dev libswresample-dev libswscale-dev
+apt -y install libxcb-ewmh-dev libglu1-mesa-dev libgl1-mesa-dev libplacebo-dev
 cd $VDRSRC
 if [ -f softhdcuvid/Makefile ]
 then echo "Vdr-Plugin-Softhdcuvid $Remind5"
@@ -318,7 +318,7 @@ echo "                    Press Enter to continue ...               "; read ente
 c)
 clear
 echo "        ***                Installing Vdr-Plugin-Xineliboutput               ***"; sleep 2
-apt-get -y install autopoint libxine2-dev libxrender-dev libextractor-dev libxrandr-dev libxine2-ffmpeg mjpegtools
+apt -y install autopoint libxine2-dev libxrender-dev libextractor-dev libxrandr-dev libxine2-ffmpeg mjpegtools
 cd $VDRSRC
 if [ -f $PACKAGES/libxine2*.deb ]
 then echo "Xine-lib $Remind"
@@ -415,8 +415,8 @@ echo "                    Press Enter to continue ...               "; read ente
 d)
 clear
 echo "        ***                Installing Sothddevice-drm            ***"; sleep 2
-apt-get -y install libglm-dev libxcb-screensaver0-dev libxcb-dpms0-dev 
-apt-get -y install libxcb-ewmh-dev libva-dev libx265-dev libasound2-dev 
+apt -y install libglm-dev libxcb-screensaver0-dev libxcb-dpms0-dev 
+apt -y install libxcb-ewmh-dev libva-dev libx265-dev libasound2-dev 
 cd $VDRSRC
 if [ -f softhddevice-drm/Makefile ]
 then echo "Vdr-Plugin-Sothddevice-drm $Remind5"
@@ -467,10 +467,10 @@ echo "                    Press Enter to continue ...               "; read ente
 e)
 clear
 echo "        ***                Installing Vdr-Plugin-Sothddevice-drm-gles            ***"; sleep 2
-apt-get -y install libglm-dev libxcb-screensaver0-dev libxcb-dpms0-dev 
-apt-get -y install libxcb-ewmh-dev libva-dev libx265-dev libasound2-dev
-apt-get -y install libgles2-mesa libgles2-mesa-dev libegl-mesa0
-apt-get -y install libgbm-dev libglm-dev libpng-dev
+apt -y install libglm-dev libxcb-screensaver0-dev libxcb-dpms0-dev 
+apt -y install libxcb-ewmh-dev libva-dev libx265-dev libasound2-dev
+apt -y install libgles2-mesa libgles2-mesa-dev libegl-mesa0
+apt -y install libgbm-dev libglm-dev libpng-dev
 cd $VDRSRC
 if [ -f softhddevice-drm-gles/Makefile ]
 then echo "Vdr-Plugin-Sothddevice-drm-gles $Remind5"
@@ -620,11 +620,11 @@ case $yourch in
 a)
 clear
 echo "        ***                Installing SkinNopacity               ***"; sleep 2
-apt-get -y install graphicsmagick-libmagick-dev-compat
-apt-get -y install libc6-dev libfontconfig1-dev
-apt-get -y install zlib1g zlib1g-dev
-apt-get -y install libglib2.0-0 libpcre3 libpcre3-dev
-apt-get -y install libexpat1 libexpat1-dev
+apt -y install graphicsmagick-libmagick-dev-compat
+apt -y install libc6-dev libfontconfig1-dev
+apt -y install zlib1g zlib1g-dev
+apt -y install libglib2.0-0 libpcre3 libpcre3-dev
+apt -y install libexpat1 libexpat1-dev
 cd $VDRSRC
 if [ -f SkinNopacity/Makefile ]
 then  echo "SkinNopacity $Remind"
@@ -677,7 +677,7 @@ echo "                    Press Enter to continue ...               "; read ente
 b)
 clear
 echo "        ***                Installing Skindesigner               ***"; sleep 2
-apt-get -y install libcurl4 librsvg2-dev libxml2-dev libcairo2-dev lm-sensors
+apt -y install libcurl4 librsvg2-dev libxml2-dev libcairo2-dev lm-sensors
 cd $VDRSRC
 if [ -f skindesigner/Makefile ]
 then  echo "Skindesigner $Remind"
@@ -796,7 +796,7 @@ d)
 clear
 echo "        ***                Installing Vdr-Plugin-Osd2web               ***"; sleep 2
 cd $SRC
-apt-get -y install cmake
+apt -y install cmake
 if [ -f $SRC/libwebsockets ]
 then  echo "Libwebsockets $Remind"
 else
@@ -810,7 +810,7 @@ make install
 fi
 #
 cd $VDRSRC
-apt-get -y install libtinyxml2-dev libexif-dev libjansson-dev
+apt -y install libtinyxml2-dev libexif-dev libjansson-dev
 if [ -f osd2web/Makefile ]
 then  echo "Vdr-Plugin-Osd2web $Remind"
 sleep 2	
@@ -866,7 +866,7 @@ echo "                    Press Enter to continue ...               "; read ente
 e)
 clear
 echo "        ***                Installing Skinflatplus               ***"; sleep 2
-apt-get -y install libfreetype6-dev graphicsmagick-libmagick-dev-compat lm-sensors
+apt -y install libfreetype6-dev graphicsmagick-libmagick-dev-compat lm-sensors
 cd $VDRSRC
 if [ -f /skinflatplus/Makefile ]
 then  echo "Skinflatplus $Remind"
@@ -980,7 +980,7 @@ g)
 clear
 echo "        ***                Installing Text2Skin-NarrowHD              ***"; sleep 2
 
-apt-get -y install libgraphicsmagick++1-dev
+apt -y install libgraphicsmagick++1-dev
 #
 cd $VDRSRC
 if [ -f text2skin/Makefile ]
@@ -1083,7 +1083,7 @@ case $yourch in
 a)
 clear
 echo "        ***                Installing Vdr-Plugin-Epgsearch               ***"; sleep 2
-apt-get -y install libc6 libgcc1 libstdc++6
+apt -y install libc6 libgcc1 libstdc++6
 cd $VDRSRC
 if [ -f epgsearch/Makefile ]
 then  echo "Vdr-Plugin-Epgsearch $Remind"
@@ -1138,8 +1138,8 @@ make plugins install
 b)
 clear
 echo "        ***                Installing Vdr-Plugin-Epg2vdr               ***"; sleep 2
-apt-get -y install libmariadbclient-dev libmariadb3 libmariadb-dev
-apt-get -y install  uuid-dev libimlib2 libimlib2-dev libtinyxml2-dev
+apt -y install libmariadbclient-dev libmariadb3 libmariadb-dev
+apt -y install  uuid-dev libimlib2 libimlib2-dev libtinyxml2-dev
 cd $VDRSRC
 if [ -f epg2vdr/Makefile ]
 then  echo "Vdr-Plugin-Epg2vdr $Remind"
@@ -1243,7 +1243,7 @@ echo "                    Press Enter to continue ...               "; read ente
 d)
 clear
 echo "        ***                Installing TvGuide               ***"; sleep 2
-apt-get -y install gettext graphicsmagick-libmagick-dev-compat
+apt -y install gettext graphicsmagick-libmagick-dev-compat
 cd $VDRSRC
 if [ -f tvguide/Makefile ]
 then  echo "TvGuide $Remind"
@@ -1294,7 +1294,7 @@ make plugins install
 e)
 clear
 echo "        ***                Installing TvGuideng               ***"; sleep 2
-apt-get -y install libstdc++6 libgcc1 libc6 librsvg2-dev
+apt -y install libstdc++6 libgcc1 libc6 librsvg2-dev
 cd $VDRSRC
 if [ -f tvguideng/Makefile ]
 then  echo "TvGuideng $Remind"
@@ -1346,10 +1346,10 @@ echo "                    Press Enter to continue ...               "; read ente
 #f)
 #clear
 #echo "        ***                Installing Vdr-Plugin-TvScraper               ***"; sleep 2
-#apt-get -y install libmariadbclient-dev libmariadb3 libmariadb-dev uuid-dev
-#apt-get -y install graphicsmagick-libmagick-dev-compat libmagick++-6.q16-dev
-#apt-get -y install libmysqlclient-dev libmysql++-dev libimlib2-dev libssl-dev
-#apt-get -y install libsqlite3-dev libcurl4-openssl-dev libxml2-dev libjansson-dev
+#apt -y install libmariadbclient-dev libmariadb3 libmariadb-dev uuid-dev
+#apt -y install graphicsmagick-libmagick-dev-compat libmagick++-6.q16-dev
+#apt -y install libmysqlclient-dev libmysql++-dev libimlib2-dev libssl-dev
+#apt -y install libsqlite3-dev libcurl4-openssl-dev libxml2-dev libjansson-dev
 
 #cd $VDRSRC
 #if [ -f scraper2vdr/Makefile ]
@@ -1411,7 +1411,7 @@ echo "                    Press Enter to continue ...               "; read ente
 g)
 clear
 echo "        ***                Installing Vdr-Plugin-Live               ***"; sleep 2
-apt-get -y install libcxxtools-dev libtntnet-dev libpcre3-dev libboost-dev openssl
+apt -y install libcxxtools-dev libtntnet-dev libpcre3-dev libboost-dev openssl
 cd $VDRSRC
 if [ -f live/Makefile ]
 then  echo "Vdr-Plugin-Live $Remind"
@@ -1504,7 +1504,7 @@ case $yourch in
 a)
 clear
 echo "        ***                Installing Vdr-Plugin-Iptv               ***"; sleep 2
-apt-get -y install libcurl4 libcurl4-gnutls-dev vlc
+apt -y install libcurl4 libcurl4-gnutls-dev vlc
 cd $VDRSRC
 if [ -f iptv/Makefile ]
 then  echo "Vdr-Plugin-Iptv $Remind"
@@ -1624,8 +1624,8 @@ echo "                    Press Enter to continue ...               "; read ente
 c)
 clear
 echo "        ***                Installing Vdr-Plugin-Mpv                     ***"; sleep 2
-apt-get -y install mpv libmpv-dev libmpv1 libxrandr-dev
-apt-get install libx11-xcb-dev
+apt -y install mpv libmpv-dev libmpv1 libxrandr-dev
+apt install libx11-xcb-dev
 cd $VDRSRC
 if [ -f mpv/Makefile ]
 then  echo "Vdr-Plugin-Mpv $Remind"
@@ -1703,7 +1703,7 @@ echo "                    Press Enter to continue ...               "; read ente
 d)
 clear
 echo "        ***                Installing Vdr-Plugin-Dvd                     ***"; sleep 2
- apt-get -y install libdvd-pkg libdvdnav-dev liba52-0.7.4-dev
+ apt -y install libdvd-pkg libdvdnav-dev liba52-0.7.4-dev
 cd $VDRSRC
 if [ -f dvd/Makefile ]
 then  echo "Vdr-Plugin-Dvd $Remind"
@@ -1754,7 +1754,7 @@ echo "                    Press Enter to continue ...               "; read ente
 e)
 clear
 echo "        ***                Installing Vdr-Plugin-Mp3                     ***"; sleep 2
-apt-get -y install libmad0-dev libid3tag0-dev libsndfile1-dev libvorbis-dev libvorbisfile3
+apt -y install libmad0-dev libid3tag0-dev libsndfile1-dev libvorbis-dev libvorbisfile3
 cd $VDRSRC
 if [ -f mp3/Makefile ]
 then  echo "Vdr-Plugin-Mp3 $Remind"
@@ -1861,7 +1861,7 @@ echo "                    Press Enter to continue ...               "; read ente
 g)
 clear
 echo "        ***                Installing Vdr-Plugin-Image               ***"; sleep 2
-apt-get -y install libexif12 libnetpbm9 libnetpbm9-dev
+apt -y install libexif12 libnetpbm9 libnetpbm9-dev
 cd $VDRSRC
 if [ -f image/Makefile ]
 then  echo "Vdr-Plugin-Image $Remind"
@@ -1945,7 +1945,7 @@ case $yourch in
 a)
 clear
 echo "        ***                Installing Vdr-Plugin-Dvbapi               ***"; sleep 2
-apt-get -y install libssl-dev libdvbcsa-dev
+apt -y install libssl-dev libdvbcsa-dev
 cd $VDRSRC
 if [ -f dvbapi/Makefile ]
 then  echo "Vdr-Plugin-Dvbapi $Remind"
@@ -2234,7 +2234,7 @@ echo "                    Press Enter to continue ...               "; read ente
 f)
 clear
 echo "        ***                Installing Vdr-Plugin-Osdteletext               ***"; sleep 2
-apt-get -y install git-core fonts-freefont-ttf
+apt -y install git-core fonts-freefont-ttf
 cd $VDRSRC
 if [ -f osdteletext/Makefile ]
 then  echo "Vdr-Plugin-Osdteletext $Remind"
@@ -2428,7 +2428,7 @@ case $yourch in
 a)
 clear
 echo "        ***                Installing Vdr-Plugin-Channellscan               ***"; sleep 2
-apt-get -y install libboost-iostreams-dev
+apt -y install libboost-iostreams-dev
 cd $VDRSRC
 if [ -f channelscan/Makefile ]
 then echo "Vdr-Plugin-Channellscan $Remind"
@@ -2536,7 +2536,7 @@ echo "                    Press Enter to continue ...               "; read ente
 c)
 clear
 echo "        ***                Installing Vdr-Plugin-Satip               ***"; sleep 2
-apt-get -y install libpugixml1 libpugixml-dev
+apt -y install libpugixml1 libpugixml-dev
 cd $VDRSRC
 if [ -f satip/Makefile ]
 then  echo "Vdr-Plugin-Satip $Remind"
@@ -2752,7 +2752,7 @@ make plugins install
 b)
 clear
 echo "        ***                Installing Vdr-Plugin-CecRemote               ***"; sleep 2
-apt-get -y install libcec-dev libpugixml1v5 libpugixml-dev cec-utils
+apt -y install libcec-dev libpugixml1v5 libpugixml-dev cec-utils
 cd $VDRSRC
 if [ -f cecremote/Makefile ]
 	then  echo "Vdr-Plugin-CecRemote $Remind"
@@ -2875,7 +2875,7 @@ make plugins install
 d)
 clear
 echo "        ***                Installing Vdr-Plugin-Menuorg               ***"; sleep 2
-apt-get -y install libxml++2.6-dev libglibmm-2.4-dev
+apt -y install libxml++2.6-dev libglibmm-2.4-dev
 cd $VDRSRC
 if [ -f menuorg/Makefile ]
 	then  echo "Menuorg $Remind"
@@ -3197,7 +3197,7 @@ case $yourch in
 a)
 clear
 echo "        ***                Installing Vdr-Plugin-Weatherforecast               ***"; sleep 2
-apt-get -y install libcurl4-openssl-dev libjansson-dev librsvg2-dev
+apt -y install libcurl4-openssl-dev libjansson-dev librsvg2-dev
 cd $VDRSRC
 if [ -f weatherforecast/Makefile ]
 	then  echo "Vdr-Plugin-Weatherforecast $Remind"
@@ -3254,7 +3254,7 @@ make plugins install
 b)
 clear
 echo "        ***                Installing Vdr-Plugin-Weatherng               ***"; sleep 2
-apt-get -y install libimlib2-dev
+apt -y install libimlib2-dev
 cd $VDRSRC
 if [ -f weatherng/Makefile ]
 	then  echo "Vdr-Plugin-Weatherng $Remind"
@@ -3308,7 +3308,7 @@ make plugins install
 c)
 clear
 echo "        ***                Installing Vdr-Plugin-Ciplus               ***"; sleep 2
-apt-get -y install libimlib2-dev
+apt -y install libimlib2-dev
 cd $VDRSRC
 if [ -f ciplus/Makefile ]
 	then  echo "Vdr-Plugin-Ciplus $Remind"

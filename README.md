@@ -4,11 +4,11 @@ Two scripts:
 - vdr_installer_2.6.4 installs Vdr on Ubuntu with essential plugins (in about 15 min)
 - vdr_plugins_installer installs others plugins 
   
-# Script name: vdr_installer_2.6.4
-A script for installing Vdr (stand alone) and Vdr Server (frontend Kodi)
-tested on Ubuntu 20.04 - 22.04 Linux Mint 21 Debian 11
+# Script name: vdr_installer_2.6.6
+A script for installing Vdr 
+tested on Ubuntu 20.04 - 22.04 
 
-At first install the OS (Ubuntu 20.04 - 22.04 Linux Mint 21 Debian 11)
+At first install the OS (Ubuntu 20.04 - 22.04)
 then update the system (sudo apt update && sudo apt upgrade)
 
 sudo apt install tar git wget (if not installed)
@@ -48,11 +48,7 @@ Point 5)
   Pls note this point add the icons relating at Vdr Server (in this case Vdr will starts with only three plugins dvbapi radio iptv)
 * submenu b) you can reconfigure the system
 
-Point 6)
-* submenu a) Install Kodi (plus kodi-pvr-iptvsimple & kodi-pvr-vdr-vnsi needed for using kodi as frontend for Vdr)
-* submenu b) Uninstall Kodi
-
-Point 7) Exit
+Point 6) Exit
 
 * The "dark" is in /usr/local/etc
 * You can put your channells as usual in /etc/vdr

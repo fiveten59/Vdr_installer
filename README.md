@@ -58,7 +58,7 @@ If you'd like add others plugins you can use another script called Vdr_plugins i
     
 #    Script name: Vdr_plugins_installer
 Vdr version > 2.4.x  
-Tested on Ubuntu 20.04 - Mint 20.3 - Ubuntu 22.04
+Tested on Ubuntu 22.04
 chmod the script
 then load it simply typing: sudo ./Vdr_plugins_installer   
 

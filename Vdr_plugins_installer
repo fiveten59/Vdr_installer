@@ -1518,17 +1518,19 @@ cp -rf  $REPO/patch_iptv.tar.gz $VDRSRC/iptv
 cd iptv
 tar -zxvf patch_iptv.tar.gz
 rm -rf patch_iptv.tar.gz
-patch -p1 < iptv.patch
 patch -p1 < 10_iptv_protocolext.patch
 make
 cd ../../..
 make plugins
-mkdir -p /etc/vdr/plugins/iptv/channels
-cp -rf $REPO/iptv_conf.tar.gz $PLUGINS/iptv/vlcinput
-cd $PLUGINS/iptv/vlcinput
+cd $SRC/vdr
+make plugins install
+#
+cp -rf $REPO/iptv_conf.tar.gz /$PLUGINS/iptv/
+cd $PLUGINS/iptv/
+rm -rf vlc2iptv
 tar -zxvf iptv_conf.tar.gz
 rm -rf iptv_conf.tar.gz
-sed -i "s|-P'radio'|& -P'iptv'|" /usr/local/bin/vdrrun
+sed -i "s|-P'externalplayer'|& -P'iptv'|" /usr/local/bin/vdrrun
 echo "                    Vdr-Plugin-Radio installed"
 sleep 2	
 fi
@@ -1551,6 +1553,8 @@ sleep 2
 then rm -rf iptv
 cd $LIB
 rm -rf libvdr-iptv.*
+cd $PLUGINS
+rm -rf iptv
 sed -i "s|-P'iptv'||" /usr/local/bin/vdrrun
 echo "                    Vdr-Plugin-Iptv uninstalled"
 sleep 2

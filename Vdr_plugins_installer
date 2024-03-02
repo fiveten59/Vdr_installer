@@ -10,6 +10,8 @@
 #########################################################################################
 #
 REPO="/home/`logname`/Vdr_repo"
+USR=
+MPV="- b /home/`logname`/varie"
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
 SRCVDR=''$SRC'/vdr'
@@ -606,10 +608,11 @@ dialog --title "               ♦♦♦♦♦   Skin Plugins ♦♦♦♦♦   
         [a]    SkinNopacity ...............................  [a1]    SkinNopacity
         [b]    Skindesigner ...............................  [b1]    Skindesigner
         [c]    Skin-Lcarsng ...............................  [c1]    Skin-Lcarsng
-        [d]    Osd2web ....................................  [d1]    Osd2web
-        [e]    Skinflatplus ...............................  [e1]    Skinflatplus
-        [f]    Skin Elchi HD ..............................  [f1]    Skin Elchi HD
-        [g]    Text2skin ..................................  [g1]    Text2skin        
+        [d]    Skinsimple .................................  [d1]    Skinsimple        
+        [e]    Osd2web ....................................  [e1]    Osd2web
+        [f]    Skinflatplus ...............................  [f1]    Skinflatplus
+        [g]    Skin Elchi HD ..............................  [g1]    Skin Elchi HD
+        [h]    Text2skin ..................................  [h1]    Text2skin        
 
         [z]    Skip
    ----------------------------------------------------------------------------------------------------" 0 0
@@ -769,7 +772,7 @@ clear
 echo "        ***                Removing SkinLCARSNG               ***"; sleep 2
 cd $VDRSRC
 if [ -f skinlcarsng/Makefile ]
-echo "Vdr-Plugin-SkinLCARSNG $Remind1"
+echo "SkinLCARSNG $Remind1"
 sleep 2
 then rm -rf skinlcarsng
 cd $LIB
@@ -794,6 +797,57 @@ echo "                    Press Enter to continue ...               "; read ente
 ###########################################################################################################
 
 d)
+clear
+echo "        ***                Installing Skinsimple              ***"; sleep 2
+cd $VDRSRC
+if [ -f skinsimple/Makefile ]
+then  echo "Skinsimple $Remind"
+sleep 2	
+else git clone https://gitlab.com/kamel5/skinsimple.git
+cp -rf skinsimple $REPO/
+cd skinsimple
+make && make install
+sed -i "s|-P'iptv'|& -P'skinsimple'|" /usr/local/bin/vdrrun
+echo "                    Skinsimple installed"
+sleep 2
+fi
+#
+cd /home/`logname`
+chmod -R 777 Vdr_repo
+#
+cd $SRC/vdr
+make plugins install
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
+#                                 $$$$$$$$$$$$$$$$$$
+d1)
+clear
+echo "        ***                Removing Skinsimple               ***"; sleep 2
+cd $VDRSRC
+if [ -f skinsimple/Makefile ]
+echo "Skinsimple $Remind1"
+sleep 2
+then rm -rf skinsimple
+cd $LIB
+rm -rf libvdr-skinsimple.*
+sed -i "s|-P'skinsimple'||" /usr/local/bin/vdrrun
+echo "                    Skinsimple uninstalled"
+sleep 2	
+else echo "Skinsimple $Remind5"
+fi
+#
+cd /home/`logname`
+chmod -R 777 Vdr_repo
+#
+cd $SRC/vdr
+make plugins install
+#
+echo "                    Press Enter to continue ...               "; read enterKey;;
+
+
+###########################################################################################################
+
+e)
 clear
 echo "        ***                Installing Vdr-Plugin-Osd2web               ***"; sleep 2
 cd $SRC
@@ -837,7 +891,7 @@ make plugins install
 #
 echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
-d1)
+e1)
 clear
 echo "        ***                Removing Vdr-Plugin-Osd2web               ***"; sleep 2
 cd $VDRSRC
@@ -864,7 +918,7 @@ make plugins install
 echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
-e)
+f)
 clear
 echo "        ***                Installing Skinflatplus               ***"; sleep 2
 apt -y install libfreetype6-dev graphicsmagick-libmagick-dev-compat lm-sensors
@@ -899,7 +953,7 @@ make plugins install
 #
 echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
-e1)
+f1)
 clear
 echo "        ***                Removing Skinflatplus               ***"; sleep 2
 cd $VDRSRC
@@ -925,7 +979,7 @@ make plugins install
 echo "                    Press Enter to continue ...               "; read enterKey;;
 
 ###########################################################################################################
-f)
+g)
 clear
 echo "        ***                Installing Skin Elchi HD              ***"; sleep 2
 cd $VDRSRC
@@ -954,7 +1008,7 @@ make plugins install
 #
 echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
-f1)
+g1)
 clear
 echo "        ***                Removing SkinelchiHD              ***"; sleep 2
 cd $VDRSRC
@@ -977,7 +1031,7 @@ make plugins install
 #
 echo "                    Press Enter to continue ...               "; read enterKey;;
 ###########################################################################################################
-g)
+h)
 clear
 echo "        ***                Installing Text2Skin-NarrowHD              ***"; sleep 2
 
@@ -1025,7 +1079,7 @@ make plugins install
 #
 echo "                    Press Enter to continue ...               "; read enterKey;;
 #                                      $$$$$$$$$$$$$$$$$$
-g1)
+h1)
 clear
 echo "        ***                Removing Text2Skin-NarrowHD              ***"; sleep 2
 cd $VDRSRC
@@ -1658,23 +1712,19 @@ make plugins install
 ---------------------------------------------------
 ---------------------------------------------------
 
-	[a]    Nvidia Video Devices                 
-	[b]    Intel Video Devices
-	[c]    Raspberry Pi4	                  
+	[a]    Nvidia & Intel Video Devices                 
+	[b]    Raspberry Pi4	                  
 			                
 --------------------------------------------------- " 0 0
 
-echo -n "        Enter your menu choice  [a-c]:      "
+echo -n "        Enter your menu choice  [a-b]:      "
 read yourch
 case $yourch in
 #
-a) sed -i "s|-P'iptv'|& -P'mpv -a alsa -v gpu -h auto -b /media -l ita'|" /usr/local/bin/vdrrun
-echo "                    Mpv Nvidia Video Devices setup installed"
+a) sed -i "s|-P'iptv'|& -P'mpv -a alsa -v gpu -h auto -b / -l ita'|" /usr/local/bin/vdrrun
+echo "                    Mpv Nvidia & Intel Video Devices setup installed"
 sleep 2;;
-b) sed -i "s|-P'iptv'|& -P'mpv -a alsa -v gpu -h auto -b /media -l ita'|" /usr/local/bin/vdrrun
-echo "                    Mpv Intel Video Devices setup installed"
-sleep 2;;
-c) sed -i "s|-P'iptv'|& -P'mpv -a alsa -v gpu -h auto -c drm -b /media -l ita'|" /usr/local/bin/vdrrun
+b) sed -i "s|-P'iptv'|& -P'mpv -a alsa -v gpu -h auto -c drm -b / -l ita'|" /usr/local/bin/vdrrun
 echo "                    Mpv for Raspberry setup installed"
 sleep 2;;
 esac

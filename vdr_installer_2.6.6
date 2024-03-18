@@ -397,6 +397,8 @@ clear
 cd $SRC
 mkdir -p ffmpeg_sources
 #
+while :
+do
 clear
 dialog --title "   ** Install Intel / Nvidia & Common Libraries **   " --infobox "
 -------------------------------------------------------------------------------
@@ -693,8 +695,10 @@ rm -rf $SRC/ffmpeg_sources/intel-vaapi-driver
 rm -rf $PACKAGES/intel-vaapi*
 echo "Intel-vaapi-driver removed"; sleep 2;;
 #
-z);;
-esac;;
+z)
+break
+esac
+done;;
 #############################################################
 
 3)
@@ -1296,31 +1300,6 @@ rm -rf externalplayer.conf
 tar -zxvf externalplayer.conf.tar.gz
 rm -rf externalplayer.conf.tar.gz
 echo "Externalplayer configured"; sleep 2
-#
-echo "                    Oscam Setup"
-sleep 2
-cd /usr/local
-mkdir -p etc
-if [ -f $ETC/oscam.check ]
-  then  echo "Oscam config is already installed"
-else
-apt -y install libssl3 libssl-dev libcrypto++-dev pcscd libpcsclite-dev libusb-1.0-0-dev
-cp -rf $REPO/oscam.tar.gz /$ETC/
-cd $ETC
-tar -zxvf oscam.tar.gz
-rm -rf oscam.tar.gz
-fi
-#
-if [ -f $BIN/oscam ]
-  then  echo "Oscam binary is already installed"
-else
-cp -rf $REPO/oscam64.tar.gz /usr/local/bin
-cd /usr/local/bin
-tar -zxvf oscam64.tar.gz
-rm -rf oscam64.tar.gz
-chmod 777 oscam
-echo "Oscam installed"; sleep 2
-fi
 #
 echo "                    Create Oscam start & kill command line"
 sleep 2

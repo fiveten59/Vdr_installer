@@ -50,7 +50,6 @@ Point 5)
 
 Point 6) Exit
 
-* The "dark" is in /usr/local/etc
 * You can put your channells as usual in /etc/vdr
 * plugins libs are placed in /lib/vdr
 

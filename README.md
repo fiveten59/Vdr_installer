@@ -1,14 +1,14 @@
 A  special thanks goes to Klaus Schmidinger Vdr Developer & all plugin developers
 
 Two scripts: 
-- vdr_installer_2.6.4 installs Vdr on Ubuntu with essential plugins (in about 15 min)
+- vdr_installer_2.6.7 installs Vdr on Ubuntu with essential plugins (in about 15 min)
 - vdr_plugins_installer installs others plugins 
   
-# Script name: vdr_installer_2.6.6
+# Script name: vdr_installer_2.6.7
 A script for installing Vdr 
-tested on Ubuntu 20.04 - 22.04 
+tested on Ubuntu 22.04 - 24.04 
 
-At first install the OS (Ubuntu 20.04 - 22.04)
+At first install the OS (Ubuntu 22.04 - 24.04)
 then update the system (sudo apt update && sudo apt upgrade)
 
 sudo apt install tar git wget (if not installed)
@@ -31,8 +31,8 @@ Point 1)
 
 Point 2) 
 * submenu a) install ffmpeg
-* submenu b) Install Sat firmware
-* submenu c) install Infra-Red Remotes Control (choice between lirc or eventlircd)
+* submenu c) install Infra-Red Remotes Control (eventlircd)
+* submenu b) Install Sat firmware 
 * submenu d) ONLY FOR Intel Devices (Intel vaapi driver) in many case not needed
 
 Point 3) 
@@ -40,16 +40,14 @@ Point 3)
 * submenu b) Uninstall VDR-2.6.x
 
 Point 4) 
-* submenu a) Install Plugins (softhddevice dvbapi skinlcarsng radio iptv)
+* submenu a) Install Plugins (softhddevice dvbapi skinnopacity radio iptv vnsiserver)
 * submenu b) Uninstall Plugins
 
 Point 5) 
 * submenu a) Configure VDR and all the system creating icons and something else :-)
-  Pls note this point add the icons relating at Vdr Server (in this case Vdr will starts with only three plugins dvbapi radio iptv)
 * submenu b) you can reconfigure the system
 
 Point 6) Exit
-
 * You can put your channells as usual in /etc/vdr
 * plugins libs are placed in /lib/vdr
 

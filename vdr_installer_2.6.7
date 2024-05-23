@@ -27,6 +27,9 @@ Remind5='is not installed'
 ALLOWED="#
 # allowed_hosts.conf
 
+# Syntax:
+# IP-Address[/Netmask]
+
 127.0.0.1             # always accept localhost
 192.168.1.0/24        # any host on the local net
 192.168.0.0/24        # any host on the local net
@@ -53,8 +56,7 @@ S19.2E 11700 V  9750 t v W15 [E0 10 38 F8] W15 A W15 t
 S19.2E 99999 V 10600 t v W15 [E0 10 38 F9] W15 A W15 T
 S19.2E 11700 H  9750 t V W15 [E0 10 38 FA] W15 A W15 t
 S19.2E 99999 H 10600 t V W15 [E0 10 38 FB] W15 A W15 T
-#
-"
+#"
 DUAL="#
 # Full DiSEqC sequence:
 # 13 - 19.2E
@@ -67,8 +69,7 @@ S19.2E  11700 V  9750  t v W15 [E0 10 38 F4] W15 B W15 t
 S19.2E  99999 V 10600  t v W15 [E0 10 38 F5] W15 B W15 T
 S19.2E  11700 H  9750  t V W15 [E0 10 38 F6] W15 B W15 t
 S19.2E  99999 H 10600  t V W15 [E0 10 38 F7] W15 B W15 T
-#
-"
+#"
 MONO13="#
 # Full DiSEqC sequence:
 # Hotbird - 13.0°E
@@ -76,8 +77,7 @@ S13.0E 11700 V  9750  t v W15 [E0 10 38 F0] W15 A W15 t
 S13.0E 99999 V 10600  t v W15 [E0 10 38 F1] W15 A W15 T
 S13.0E 11700 H  9750  t V W15 [E0 10 38 F2] W15 A W15 t
 S13.0E 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
-#
-"
+#"
 MONO19="#
 # Full DiSEqC sequence:
 # Astra 19 - 19.2°E
@@ -85,14 +85,12 @@ S19.2E 11700 V  9750  t v W15 [E0 10 38 F0] W15 A W15 t
 S19.2E 99999 V 10600  t v W15 [E0 10 38 F1] W15 A W15 T
 S19.2E 11700 H  9750  t V W15 [E0 10 38 F2] W15 A W15 t
 S19.2E 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
-#
-"
+#"
 #
 apt -y install dialog git subversion wget pkg-config
 apt -y install checkinstall build-essential autoconf 
 apt -y install autopoint automake cmake libtool
 #
-#sudo useradd vdr -g video -d /home/vdr -s /bin/bash -m
 mkdir $SRC/packages
 mkdir -p $SRC/ffmpeg_sources
 mkdir -p /home/`logname`/.config/autostart
@@ -190,14 +188,14 @@ if [ -e $REPO/vdr-2.6.7 ]; then
 else
   echo "File not found ... Downloading it now ....."
     git clone --branch stable/2.6 git://git.tvdr.de/vdr.git vdr-2.6.7
-  fi
-  
+fi
+
 if [ -e $REPO/vdr-plugin-softhddevice ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
     git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git
-  fi  
+fi
 
 if [ -e $REPO/vdr-plugin-dvbapi ]; then
   echo " ..... File exists ..... "
@@ -211,7 +209,7 @@ if [ -e $REPO/vdr-plugin-iptv ]; then
 else
   echo "File not found ... Downloading it now ....."
     git clone https://github.com/rofafor/vdr-plugin-iptv.git
-  fi
+fi
 
 if [ -e $REPO/vdr-plugin-radio ]; then
   echo " ..... File exists ..... "
@@ -226,7 +224,6 @@ else
   echo "File not found ... Downloading it now ....."
     git clone https://github.com/vdr-projects/vdr-plugin-vnsiserver.git
 fi
-
 #
 echo "Downloading skins"
 sleep 2
@@ -236,7 +233,7 @@ if [ -e $REPO/SkinNopacity ]; then
 else
   echo "File not found ... Downloading it now ....."
     git clone https://gitlab.com/kamel5/SkinNopacity.git
-  fi
+fi
 
 echo "Downloading others"
 sleep 2
@@ -247,7 +244,7 @@ else
   echo "File not found ... Downloading it now ....."
     wget https://github.com/fiveten59/Logos/archive/refs/heads/master.zip
     unzip master.zip; rm -rf master.zip; mv -f Logos-master logos
-  fi
+fi
 #
 cd ..
 chmod -R 777 Vdr_repo;;
@@ -303,13 +300,13 @@ dialog --title "   ** Install Intel / Nvidia & Common Libraries **   " --infobox
 
         *****  Install  *****  .....................
 
-        [a]    FFmpeg        
+        [a]    FFmpeg
         [b]    Infra-Red Remotes Control (Eventlircd)
         [c]    Installing Sat firmware
 
-        *****     Install Intel drivers      *****                                        
-        [d]    ONLY FOR Intel Devices (Intel vaapi driver - OPTIONAL)        
-      
+        *****     Install Intel drivers      *****
+        [d]    ONLY FOR Intel Devices (Intel vaapi driver - OPTIONAL)
+
         *****  Remove  *****
 
         [a1]    FFMPEG
@@ -317,7 +314,7 @@ dialog --title "   ** Install Intel / Nvidia & Common Libraries **   " --infobox
 
                                 *****     Remove Intel Libs      *****
         [d1]    Remove Libva - Cmrt - Intel vaapi driver
-      
+
         [z]    Skip
 
 --------------------------------------------------------------------------------------------------
@@ -351,7 +348,7 @@ sleep 2
 if [ -d /usr/sbin/eventlircd ]
 then echo "Eventlircd is already installed"
 sleep 2
-else 
+else
 apt -y install gawk lirc evtest ir-keytable
 update-rc.d lirc remove
 cd $SRC
@@ -456,7 +453,7 @@ fi;;
 d)
 clear
 echo "                    Installing Ubuntu Intel-graphics-drivers"
-sleep 3
+sleep 2
 if [ -f /etc/apt/sources.list.d/oibaf-ubuntu-graphics-drivers-focal.list ]
   then echo "Intel Graphics-drivers already installed"
 else
@@ -467,7 +464,7 @@ apt -y dist-upgrade
 fi
 #
 echo "                    Installing Intel-Vaapi-driver"
-sleep 3
+sleep 2
 if [ -d $SRC/ffmpeg_sources/intel-vaapi-driver ]
 then echo "Intel-Vaapi-driver is already installed"
 else
@@ -482,7 +479,6 @@ echo "Intel Graphics-drivers are now installed"; sleep 2
 fi;;
 #
 #############################################################
-#
 a1)
 clear
 echo "                    Removing FFmpeg"
@@ -526,12 +522,12 @@ done;;
 clear
     dialog --title "   ** Install/Remove VDR-2.6.7   **   " --infobox "
 
-   ---------------------------------------------------------------------------------------------
+   ---------------------------------------------------------------
         [a]  Install VDR-2.6.7
         [b]  Remove VDR-2.6.*
 
         [z]  Skip
-   ---------------------------------------------------------------------------------------------" 0 0
+   ---------------------------------------------------------------" 0 0
 
     echo -n "        Enter your menu choice = Install [a] ~~ Remove [b] ~~ Skip [z]    "
     read yourch
@@ -541,7 +537,7 @@ a)
 clear
 echo "                    Installing VDR"
 sleep 2
-echo "Installing libraries"; sleep 3
+echo "Installing libraries"; sleep 2
 apt -y install libjpeg-dev libcap-dev libtinyxml-dev binutils libglibmm-2.4-dev g++
 apt -y install libfontconfig1-dev libfribidi-dev gettext
 apt -y install libncurses5-dev libncursesw5-dev
@@ -608,8 +604,6 @@ rm -rf $BIN/vdr-*
 rm -rf /usr/bin/vdr
 rm -rf /usr/local/share/vdr
 rm -rf $BIN/KillVdr
-rm -rf /home/`logname`/Scrivania/Vdr.desktop
-rm -rf /home/`logname`/Scrivania/KillVdr.desktop
 rm -rf /usr/share/applications/Vdr.desktop
 rm -rf /usr/share/applications/KillVdr.desktop
 rm -rf /home/`logname`/.config/autostart/vdr-autostart.desktop
@@ -792,13 +786,6 @@ echo "                    keymacros.conf setup"
 rm -rf /etc/vdr/keymacros.conf
 touch /etc/vdr/keymacros.conf
 echo "# Remote control key macros for VDR
-#
-# Format:
-#
-# macrokey  key1 key2 key3...
-# macrokey  @plugin key1 key2 key3...
-#
-# See man vdr(5)
 
 Red       Recordings
 Green     @channelscan
@@ -840,7 +827,7 @@ clear
    ----------------------------------------------
 
         [a]    Hot Bird 13°E
-        [b]    Dual 13, 19.2°E        
+        [b]    Dual 13, 19.2°E
         [c]    Trial 9, 13, 19.2°E
         [d]    Astra 19.2°E
         [e]    Kodi Frontend channels list
@@ -862,7 +849,8 @@ rm -rf channels.conf.trial.tar.gz
 echo "                    Channell MONO13 list installed"
 sleep 2;;
 #
-b) clear
+b)
+clear
 echo "$DUAL" >> /etc/vdr/diseqc.conf
 cd /etc/vdr/
 cp -rf $REPO/channels.conf.dual.tar.gz /etc/vdr/
@@ -871,7 +859,8 @@ rm -rf channels.conf.dual.tar.gz
 echo "                    Channell DUAL list installed"
 sleep 2;;
 #
-c) clear
+c)
+clear
 echo "$TRIAL" >> /etc/vdr/diseqc.conf
 cd /etc/vdr/
 cp -rf $REPO/channels.conf.trial.tar.gz /etc/vdr/
@@ -880,7 +869,7 @@ rm -rf channels.conf.trial.tar.gz
 echo "                    Channell TRIAL list installed"
 sleep 2;;
 #
-d) 
+d)
 clear
 echo "$MONO19" >> /etc/vdr/diseqc.conf
 cd /etc/vdr/
@@ -904,7 +893,7 @@ sleep 2;;
 z);;
 esac
 #
-sleep 1
+sleep 2
 clear
 echo "                    Setup remote"
 cp -rf $REPO/eventlircd-remote.conf.tar.gz /etc/vdr
@@ -915,7 +904,7 @@ echo "Setup remote installed"
 sleep 2
 #
 echo "                    Install default Skin for Vdr"
-sleep 1
+sleep 2
 if [ -f /etc/vdr/themes/checklcars ]
 then echo "Default Skin is already installed"
 else cp -rf $REPO/lcars_pack.tar.gz /etc/vdr/themes
@@ -947,13 +936,12 @@ echo "                    Iptv configured"; sleep 2
 fi
 #
 echo "                    Configuring Vnsiserver"
-sleep 1
+sleep 2
 cp -rf $VDRSRC/vnsiserver/vnsiserver/allowed_hosts.conf /$PLUGINS/vnsiserver
 echo "Vnsiserver configured"; sleep 2
 #
-#
 echo "                    Create Vdr Power Off"
-sleep 1
+sleep 2
 rm -rf $BIN/vdrpoweroff
 touch $BIN/vdrpoweroff
 echo '#!/bin/sh
@@ -964,7 +952,7 @@ chmod 777 $BIN/vdrpoweroff
 echo "Vdr Power Off created"; sleep 2
 #
 echo "                    Create Vdr Systemvdrpoweroff"
-sleep 1
+sleep 2
 rm -rf $BIN/systemvdrpoweroff
 touch $BIN/systemvdrpoweroff
 echo '#!/bin/sh
@@ -986,12 +974,12 @@ echo '#!/bin/bash
 /usr/bin/vdr -c /etc/vdr -E /var/vdr -l 3 -u root '$PLUGIN' -s /usr/local/bin/systemvdrpoweroff
 
 # check system with "aplay -l"
-# for hdmi nvidia audio -P softhddevice -a hw:1,n -f 
+# for hdmi nvidia audio -P softhddevice -a hw:1,n -f
 # for hdmi intel audio -P softhddevice -a hw:0,n -f' >> $BIN/vdrrun
 chmod a+x $BIN/vdrrun
 #
 echo "                    Create init.d Vdr"
-sleep 1
+sleep 2
 rm -rf /etc/init.d/vdr
 touch /etc/init.d/vdr
 echo '#!/bin/sh
@@ -1007,7 +995,7 @@ case "$1" in
         echo -n "Stop VDR "
 
         killall -9 vlc & killall -9 vdr & killall -9 mpv
-        
+
         # Remember status and be verbose
         ;;
     restart)
@@ -1027,7 +1015,6 @@ chmod 777 /etc/init.d/vdr
 #
 echo "                    Setup Vdr icons"
 sleep 2
-rm -rf /home/`logname`/Scrivania/Vdr.desktop
 rm -rf /usr/share/applications/Vdr.desktop
 touch /usr/share/applications/Vdr.desktop
 chmod 777 /usr/share/applications/Vdr.desktop
@@ -1043,8 +1030,7 @@ Exec=sudo /etc/init.d/vdr start
 chmod 777 /usr/share/applications/Vdr.desktop
 #
 echo "                    Setup Kill Vdr icon"
-sleep 1
-rm -rf /home/`logname`/Scrivania/KillVdr.desktop
+sleep 2
 rm -rf /usr/share/applications/KillVdr.desktop
 touch /usr/share/applications/KillVdr.desktop
 chmod 777 /usr/share/applications/KillVdr.desktop
@@ -1060,10 +1046,10 @@ chmod 777 /usr/share/applications/KillVdr.desktop
 echo "Vdr start command line created"; sleep 2
 #
 echo "                    Configuring Frontend"
-sleep 3
+sleep 2
 lspci | grep VGA > /tmp/videocard
 if cat /tmp/videocard | grep "Intel Corporation HD Graphics "
-then 
+then
 sed -i "s|-P'dvbapi'|& -P'softhddevice -v cpu-glx -f'|" $BIN/vdrrun
 else 
 sed -i "s|-P'dvbapi'|& -P'softhddevice -v nvdec -f'|" $BIN/vdrrun
@@ -1109,7 +1095,7 @@ clear
    ----------------------------------------------
 
         [a]    Vdr
-        [b]    No auto starting	
+        [b]    No auto starting
 
    ---------------------------------------------- " 0 0
 echo -n "        Enter your menu choice  [a-b]:      "
@@ -1142,9 +1128,9 @@ echo "                    *** Change User !!!***"
 sleep 3
 ;;
 #############################################################
-6)                                        #########################################
-                                          #                Exit/Stop              #
-                                          #########################################
+6)        #########################################
+          #                Exit/Stop              #
+          #########################################
 
 
     clear
@@ -1199,7 +1185,6 @@ sleep 3
     echo "                                                               "
     echo ""
     exit 0
-
 ;;
 *) ;;
 esac

@@ -11,7 +11,7 @@
 #
 clear
 REPO="/home/`logname`/Vdr_repo"
-PLUGIN="--lirc -P'dvbapi' -P'skinnopacity -l /etc/vdr/logos/' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/rtextUnten-kleo2.mpg' -P'externalplayer' -P'vnsiserver'"
+PLUGIN="--lirc -P'dvbapi' -P'skinnopacity -l /etc/vdr/logos/' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/rtextUnten-kleo2.mpg'"
 BIN="/usr/local/bin"
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
@@ -175,13 +175,6 @@ fi
 
 cd Vdr_repo
 
-if [ -e $REPO/ffmpeg-7.0.tar.bz2 ]; then
-  echo " ..... File exists ....."
-else
-  echo "File not found ... Downloading it now ....."
-    wget https://ffmpeg.org/releases/ffmpeg-7.0.tar.bz2   
-fi
-
 if [ -e $REPO/eventlircd ]; then
   echo " ..... File exists ....."
 else
@@ -234,13 +227,6 @@ else
     git clone https://github.com/vdr-projects/vdr-plugin-vnsiserver.git
 fi
 
-if [ -e $REPO/vdr-externalplayer-0.3.5.tgz ]; then
-  echo " ..... File exists ..... "
-else
-  echo "File not found ... Downloading it now ....."
-    wget https://www.uli-eckhardt.de/vdr/download/vdr-externalplayer-0.4.0.tgz
-fi
-
 #
 echo "Downloading skins"
 sleep 2
@@ -283,15 +269,13 @@ git clone https://github.com/intel/intel-vaapi-driver.git
 
 echo "                    Downloading Vdr and Plugins on local repo"
 
-wget https://ffmpeg.org/releases/ffmpeg-7.0.tar.bz2
 git clone https://github.com/Libreelec/eventlircd.git
-git clone --branch stable/2.6 git://git.tvdr.de/vdr.git vdr-2.6.6
+git clone --branch stable/2.6 git://git.tvdr.de/vdr.git vdr-2.6.7
 git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git
 git clone https://github.com/manio/vdr-plugin-dvbapi.git
 git clone https://github.com/siricco/vdr-plugin-radio.git
 git clone https://github.com/rofafor/vdr-plugin-iptv.git
 git clone https://github.com/vdr-projects/vdr-plugin-vnsiserver.git
-wget https://www.uli-eckhardt.de/vdr/download/vdr-externalplayer-0.4.0.tgz
 
 echo "                    Downloading skins"
 
@@ -368,7 +352,7 @@ if [ -d /usr/sbin/eventlircd ]
 then echo "Eventlircd is already installed"
 sleep 2
 else 
-apt -y install gawk libudev-dev lirc evtest ir-keytable
+apt -y install gawk lirc evtest ir-keytable
 update-rc.d lirc remove
 cd $SRC
 cp -rf $REPO/eventlircd $SRC
@@ -559,7 +543,7 @@ echo "                    Installing VDR"
 sleep 2
 echo "Installing libraries"; sleep 3
 apt -y install libjpeg-dev libcap-dev libtinyxml-dev binutils libglibmm-2.4-dev g++
-apt -y install libfreetype6-dev libfontconfig1-dev libfribidi-dev gettext
+apt -y install libfontconfig1-dev libfribidi-dev gettext
 apt -y install libncurses5-dev libncursesw5-dev
 #
 cd $SRC
@@ -668,8 +652,7 @@ echo "                    Installing Softhddevice"
 sleep 2
 apt -y install libx11-xcb-dev libc6-dev libogg0 libegl-dev
 apt -y install libxcb-ewmh-dev libasound2-dev libxext6 libxext-dev
-apt -y install libvdpau1 libavcodec-dev libavformat-dev libswresample-dev 
-apt -y install libglu1-mesa-dev libgl1-mesa-dev libswscale-dev libavfilter-dev
+apt -y install libvdpau1 libglu1-mesa-dev libgl1-mesa-dev
 apt -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev
 apt -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
 cd $VDRSRC
@@ -680,7 +663,7 @@ make && make install
 #
 echo "                    Installing Dvbapi"
 sleep 2
-apt -y install libssl-dev libdvbcsa-dev
+apt -y install libdvbcsa-dev
 cd $VDRSRC
 cp -rf $REPO/vdr-plugin-dvbapi /$VDRSRC/
 mv vdr-plugin-dvbapi dvbapi
@@ -692,10 +675,8 @@ make plugins
 echo "                    Installing SkinNopacity"
 sleep 2
 apt -y install graphicsmagick-libmagick-dev-compat
-apt -y install libc6-dev libfontconfig1-dev
-apt -y install zlib1g zlib1g-dev
+apt -y install zlib1g zlib1g-dev libexpat1 libexpat1-dev
 apt -y install libglib2.0-0 libpcre3 libpcre3-dev
-apt -y install libexpat1 libexpat1-dev
 cd $VDRSRC
 cp -rf $REPO/SkinNopacity /$VDRSRC
 cd SkinNopacity
@@ -733,19 +714,6 @@ cp -rf $REPO/radio_scripts.tar.gz /$PLUGINS/radio/
 tar -zxvf radio_scripts.tar.gz
 rm -rf radio_scripts.tar.gz
 #
-echo "                    Installing Externalplayer"
-sleep 2
-cd $VDRSRC
-cp -rf $REPO/vdr-externalplayer-0.4.0.tgz /$VDRSRC
-tar zxvf vdr-externalplayer-0.4.0.tgz
-rm -rf vdr-externalplayer-0.4.0.tgz
-mv externalplayer-0.4.0 externalplayer
-cd externalplayer
-cp -rf /$SRC/traduzioni/external_it_IT.po /$VDRSRC/externalplayer/po/
-cd po
-mv external_it_IT.po it_IT.po
-cd ..
-make && make install
 #
 echo "                    Installing Vnsiserver"
 sleep 2
@@ -777,7 +745,6 @@ rm -rf iptv
 rm -rf radio
 rm -rf vnsiserver
 rm -rf dvbapi
-rm -rf externalplayer
 cd $LIB
 rm -rf libvdr-softhddevice.*
 rm -rf libvdr-skinnopacity.*
@@ -785,7 +752,6 @@ rm -rf libvdr-iptv.*
 rm -rf libvdr-radio.*
 rm -rf libvdr-vnsiserver.*
 rm -rf libvdr-dvbapi.*
-rm -rf libvdr-externalplayer.*
 echo "VDR-2.6.7 plugins removed"; sleep 2;;
 z);;
 #
@@ -877,11 +843,12 @@ clear
         [b]    Dual 13, 19.2°E        
         [c]    Trial 9, 13, 19.2°E
         [d]    Astra 19.2°E
+        [e]    Kodi Frontend channels list
 
         [z]    Skip
 
    ---------------------------------------------- " 0 0
-echo -n "        Enter your menu choice = Install [a-d] ~~ Skip [z]    "
+echo -n "        Enter your menu choice = Install [a-e] ~~ Skip [z]    "
 read yourch
 case $yourch in
 
@@ -921,6 +888,17 @@ cp -rf $REPO/channels-w_scan2-Astra_19.conf.tar.gz /etc/vdr/
 tar -zxvf channels-w_scan2-Astra_19.conf.tar.gz
 rm -rf channels-w_scan2-Astra_19.conf.tar.gz
 echo "                    Channell MONO19 list installed"
+sleep 2;;
+#
+e)
+clear
+echo "                    Kodi Frontend channels list"
+sleep 2
+cd /etc/vdr/
+cp -rf $REPO/Kodi_Frontend_channels.tar.gz /etc/vdr/
+tar -zxvf Kodi_Frontend_channels.tar.gz
+rm -rf vdr/Kodi_Frontend_channels.tar.gz
+echo "                    Kodi Frontend channels list installed"
 sleep 2;;
 #
 z);;
@@ -967,14 +945,6 @@ tar -zxvf iptv_conf.tar.gz
 rm -rf iptv_conf.tar.gz
 echo "                    Iptv configured"; sleep 2
 fi
-#
-echo "                    Configuring Externalplayer"
-cp -rf $REPO/externalplayer.conf.tar.gz /etc/vdr/plugins/externalplayer		
-cd /etc/vdr/plugins/externalplayer
-rm -rf externalplayer.conf
-tar -zxvf externalplayer.conf.tar.gz
-rm -rf externalplayer.conf.tar.gz
-echo "Externalplayer configured"; sleep 2
 #
 echo "                    Configuring Vnsiserver"
 sleep 1
@@ -1096,7 +1066,7 @@ if cat /tmp/videocard | grep "Intel Corporation HD Graphics "
 then 
 sed -i "s|-P'dvbapi'|& -P'softhddevice -v cpu-glx -f'|" $BIN/vdrrun
 else 
-sed -i "s|-P'dvbapi'|& -P'softhddevice -v cuvid -f'|" $BIN/vdrrun
+sed -i "s|-P'dvbapi'|& -P'softhddevice -v nvdec -f'|" $BIN/vdrrun
 rm -rf /tmp/videocard
 fi
 #

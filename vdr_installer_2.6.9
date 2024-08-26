@@ -1,12 +1,10 @@
 #!/bin/bash
 ################################## !!! README !!! #######################################
-#
-# Script name: vdr_installer_2.6.7
+# Script name: vdr_installer_2.6.9
 # Version: Git Repository Master (https://github.com/fiveten59/Vdr_installer)
 # Tested on Ubuntu 22.04 - 24.04
 # chmod the script
-# then load it simply typing: sudo ./vdr_installer_2.6.7
-#
+# then load it simply typing: sudo ./vdr_installer_2.6.9
 #########################################################################################
 #
 clear
@@ -17,7 +15,7 @@ ETC='/usr/local/etc'
 SRC='/usr/local/src'
 VDRSRC=''$SRC'/vdr/PLUGINS/src'
 LIB='/usr/lib/vdr'
-VDR='vdr-2.6.7'
+VDR='vdr-2.6.9'
 TEMP='/tmp'
 SHARE='/usr/share/vdr/plugins'
 PLUGINS='/etc/vdr/plugins'
@@ -35,10 +33,9 @@ ALLOWED="#
 192.168.0.0/24        # any host on the local net
 #204.152.189.113      # a specific host
 #0.0.0.0/0            # any host on any net (USE THIS WITH CARE!)
+#"
 #
-"
 #               Disecq
-
 TRIAL="
 # Full DiSEqC sequence:
 # 9 - 13 - 19.2E
@@ -95,49 +92,48 @@ mkdir $SRC/packages
 mkdir -p $SRC/ffmpeg_sources
 mkdir -p /home/`logname`/.config/autostart
 #
-dialog --title " VDR 2.6.7 Installer " --infobox "
+dialog --title " VDR 2.6.9 Installer " --infobox "
 
     A special thanks goes to Klaus Schmidinger Vdr Developer
 
-    Script name: vdr_installer_2.6.7
-    Version: 2.6.7
+    Script name: vdr_installer_2.6.9
+    Version: 2.6.9
     Tested on Ubuntu Ubuntu 22.04 - 24.04
-    chmod the script 'vdr_installer_2.6.7'
-    then load it simply typing: sudo ./vdr_installer_2.6.7" 0 0
+    chmod the script 'vdr_installer_2.6.9'
+    then load it simply typing: sudo ./vdr_installer_2.6.9" 0 0
 
 
 echo "                    Press Enter to continue ..."
 sleep 2
 read enterKey
 
-#############################################################
+#
 
 clear
 while :
 do
 clear
 echo ""
-dialog --title "   *****   VDR 2.6.7 Version Installer Script - Libraries & Codec  *****   " --infobox "
+dialog --title "   *****   VDR 2.6.9 Version Installer   *****   " --infobox "
 
-
-	   =======================================================================================	
+	   ================================================================	
            [1]	Download & Upgrade Local Repository
 	   [Submenu] ~~  Local Repository Directory ~ Install - Upgrade
-	   =======================================================================================
+	   ================================================================
 	   [2]	FFMPEG & Infrared Control & Sat Firmware
 	   [Submenu] ~~  Install & Uninstall
-	   =======================================================================================
+	   ================================================================
 	   [3]	VDR
 	   [Submenu] ~~  Install & Uninstall
-	   =======================================================================================			
+	   ================================================================			
 	   [4]	Vdr Plugins
 	   [Submenu] ~~  Install & Uninstall
-	   =======================================================================================
+	   ================================================================
 	   [5]	Final configuration
 	   [Submenu] ~~  Vdr (Stand alone)
-	   =======================================================================================
+	   ================================================================
 	   [6]	Exit Setup Menu
-	   ======================================================================================= " 0 0
+	   ================================================================" 0 0
 
 echo -n "              Enter your menu choice = Submenu [1~5] -- Exit [6]    "
 read yourch
@@ -147,14 +143,14 @@ case $yourch in
 cd /home/`logname`
 clear
 dialog --title "   ** Download & Upgrade Local Repository **   " --infobox "
-   ---------------------------------------------------------------------------------------------
+   ------------------------------------------------------------------------
        Install ~ Upgrade ~ Remove ~ Local Repository
-   ---------------------------------------------------------------------------------------------
+   ------------------------------------------------------------------------
         [a]  Download libs - progs & patch for Vdr
         [b]  Remove & Upgrade all
 
         [z]  Skip
-   ---------------------------------------------------------------------------------------------" 0 0
+   ------------------------------------------------------------------------" 0 0
 echo -n "     Enter your menu choice = Install [a] ~~ Remove & Upgrade [b] ~~ Skip [z]    "
 read yourch
 case $yourch in
@@ -183,12 +179,12 @@ fi
 echo "Downloading Vdr and Plugins on local folder"
 sleep 2
 
-if [ -e $REPO/vdr-2.6.7 ]; then
+if [ -e $REPO/vdr-2.6.9 ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    git clone --branch stable/2.6 git://git.tvdr.de/vdr.git vdr-2.6.7
-fi
+    git clone --branch stable/2.6 git://git.tvdr.de/vdr.git vdr-2.6.9
+  fi
 
 if [ -e $REPO/vdr-plugin-softhddevice ]; then
   echo " ..... File exists ..... "
@@ -208,7 +204,7 @@ if [ -e $REPO/vdr-plugin-iptv ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    git clone https://github.com/rofafor/vdr-plugin-iptv.git
+    git clone https://github.com/Zabrimus/vdr-plugin-iptv.git
 fi
 
 if [ -e $REPO/vdr-plugin-radio ]; then
@@ -228,15 +224,22 @@ fi
 echo "Downloading skins"
 sleep 2
 
-if [ -e $REPO/SkinNopacity ]; then
+if [ -e $REPO/skinflatplus ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    git clone https://gitlab.com/kamel5/SkinNopacity.git
+    git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git
 fi
 
 echo "Downloading others"
 sleep 2
+
+if [ -e $REPO/ffmpeg-7.0.tar.bz2 ]; then
+  echo " ..... File exists ....."
+else
+  echo "File not found ... Downloading it now ....."
+    wget https://ffmpeg.org/releases/ffmpeg-7.0.tar.bz2   
+fi
 
 if [ -e $REPO/logos ]; then
   echo " ..... File exists ....."
@@ -248,9 +251,7 @@ fi
 #
 cd ..
 chmod -R 777 Vdr_repo;;
-
-#############################################################
-
+#
 b)
 clear
 cd /home/`logname`/
@@ -267,19 +268,20 @@ git clone https://github.com/intel/intel-vaapi-driver.git
 echo "                    Downloading Vdr and Plugins on local repo"
 
 git clone https://github.com/Libreelec/eventlircd.git
-git clone --branch stable/2.6 git://git.tvdr.de/vdr.git vdr-2.6.7
+git clone --branch stable/2.6 git://git.tvdr.de/vdr.git vdr-2.6.9
 git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git
 git clone https://github.com/manio/vdr-plugin-dvbapi.git
 git clone https://github.com/siricco/vdr-plugin-radio.git
-git clone https://github.com/rofafor/vdr-plugin-iptv.git
+git clone https://github.com/Zabrimus/vdr-plugin-iptv.git
 git clone https://github.com/vdr-projects/vdr-plugin-vnsiserver.git
 
 echo "                    Downloading skins"
 
-git clone https://gitlab.com/kamel5/SkinNopacity.git
+git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git
 
 echo "                    Downloading others"
 
+wget https://ffmpeg.org/releases/ffmpeg-7.0.tar.bz2
 wget https://github.com/fiveten59/Logos/archive/refs/heads/master.zip
 unzip master.zip; rm -rf master.zip; mv -f Logos-master logos
 #
@@ -288,7 +290,7 @@ chmod -R 777 Vdr_repo;;
 z) ;;
 esac ;;
 
-#############################################################
+#
 
 2)
 clear
@@ -297,29 +299,23 @@ do
 clear
 dialog --title "   ** Install Intel / Nvidia & Common Libraries **   " --infobox "
 -------------------------------------------------------------------------------
-
-        *****  Install  *****  .....................
-
+        *****  Install  *****
         [a]    FFmpeg
         [b]    Infra-Red Remotes Control (Eventlircd)
         [c]    Installing Sat firmware
 
-        *****     Install Intel drivers      *****
+        *****  Install Intel drivers  *****
         [d]    ONLY FOR Intel Devices (Intel vaapi driver - OPTIONAL)
 
         *****  Remove  *****
-
         [a1]    FFMPEG
         [b1]    Eventlircd
 
-                                *****     Remove Intel Libs      *****
+        *****  Remove Intel Libs  *****
         [d1]    Remove Libva - Cmrt - Intel vaapi driver
 
         [z]    Skip
-
---------------------------------------------------------------------------------------------------
-
-" 0 0
+-------------------------------------------------------------------------------" 0 0
 
 echo -n "        Enter your menu choice = Install [a-d] ~~ Remove [a1-d1] ~~ Exit [z]:      "
 read yourch
@@ -327,19 +323,59 @@ case $yourch in
 #
 a)
 clear
+echo "                    Installing Nv-Codec"
+sleep 2
+cd $SRC/ffmpeg_sources/
+rm -rf nv-codec-headers
+git clone https://github.com/FFmpeg/nv-codec-headers
+cd nv-codec-headers
+make && make install
+clear
 echo "                    Installing Ffmpeg"
 sleep 2
-
 apt -y install libavfilter-dev libx265-dev libx264-dev libavcodec-dev libass-dev 
 apt -y install libavformat-dev libswresample-dev libswscale-dev libudev-dev
 apt -y install libfreetype6-dev libmp3lame-dev libtheora-dev libvorbis-dev
 apt -y install libxvidcore-dev freeglut3-dev libssl-dev libvdpau-dev libdrm-dev
 apt -y install libglew-dev libglm-dev mesa-common-dev libogg-dev libva-dev
 apt -y install libpciaccess-dev xorg-dev libpulse-dev libnuma1 libnuma-dev
-apt install ffmpeg
+apt -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev 
+apt -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
+apt -y install libshine-dev libfontconfig1-dev zlib1g-dev libvulkan-dev libaom-dev
+apt -y install libfdk-aac-dev libsvtav1-dev libdav1d-dev libbluray-dev libbs2b-dev
+apt -y install libcaca-dev libcodec2-dev libfribidi-dev libgme-dev libgsm1-dev libxavs2-dev
+apt -y install libmysofa-dev libopenh264-dev libopenmpt-dev librsvg2-dev libsnappy-dev
+apt -y install libsoxr-dev libspeex-dev libtwolame-dev libvidstab-dev libvpx-dev
+apt -y install libssh-dev libwebp-dev libzvbi-dev libopenal-dev libopus-dev
+apt -y install liblilv-dev libopenjp2-7-dev libsvtav1enc-dev libffmpeg-nvenc-dev libjack-dev
+
+#configuration: --prefix=HOME/ffmpeg_build --enable-static --enable-shared --enable-pic --prefix=/root/ffmpeg_build --pkg-config-flags=--static --extra-cflags=-I/root/ffmpeg_build/include --extra-ldflags=-L/root/ffmpeg_build/lib --extra-libs='-lpthread -lm' --ld=g++ --bindir=/root/bin
+echo "                    Installing Ffmpeg"
+sleep 2
+if [ -d $SRC/ffmpeg_sources/ffmpeg2 ]
+then echo "Ffmpeg is already installed"; sleep 3
+else
+    echo "                    Wait for a few seconds ..."
+cd $SRC/ffmpeg_sources
+cp -rf $REPO/ffmpeg-7.0.tar.bz2 $SRC/ffmpeg_sources/
+tar xjvf ffmpeg-7.0.tar.bz2
+mv ffmpeg-7.0 ffmpeg
+rm -rf ffmpeg-7.0.tar.bz2
+cd ffmpeg
+./configure --extra-libs="-ldl" --enable-static --ld=g++ --enable-gpl --enable-libfreetype --enable-libmp3lame --enable-openssl --enable-libxcb --enable-libopus --enable-libtheora --enable-libvorbis --enable-cuvid --enable-nonfree --enable-libxvid --enable-opengl --enable-vdpau --enable-vaapi --enable-pic --enable-shared --disable-doc --enable-swresample --disable-cuda-sdk --enable-libpulse --enable-libx264 --enable-libx265 --enable-libass --enable-libshine --enable-zlib --disable-vulkan --enable-libaom --enable-libfdk-aac --enable-libsvtav1 --enable-libdav1d --enable-libfontconfig --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcodec2 --enable-libfribidi --enable-libgme --enable-libgsm --enable-libxavs2 --enable-libmysofa --enable-libopenh264 --enable-libopenmpt --enable-librsvg --enable-libsnappy --enable-libdrm --enable-libsoxr --enable-libspeex --enable-libtwolame --enable-libvidstab --enable-libvpx --enable-libssh --enable-libwebp --enable-libzvbi --enable-openal  --enable-version3  --enable-libjack --enable-libopenjpeg --enable-libxml2 --enable-lv2 --enable-xlib
+
+# per rpi4 --enable-libv4l2 
+
+    echo "                    Press Enter to continue ..."
+    read enterKey
+make -j10
+make install
+apt-mark hold ffmpeg
+# or
+#apt install ffmpeg
 #
 echo "                    FFmpeg installed"; sleep 2
-;;
+fi ;;
 #
 b)
 clear
@@ -478,7 +514,6 @@ make -j4 install
 echo "Intel Graphics-drivers are now installed"; sleep 2
 fi;;
 #
-#############################################################
 a1)
 clear
 echo "                    Removing FFmpeg"
@@ -516,22 +551,21 @@ z)
 break
 esac
 done;;
-#############################################################
-
+#
 3)
 clear
-    dialog --title "   ** Install/Remove VDR-2.6.7   **   " --infobox "
+dialog --title "   ** Install/Remove VDR-2.6.9   **   " --infobox "
 
    ---------------------------------------------------------------
-        [a]  Install VDR-2.6.7
+        [a]  Install VDR-2.6.9
         [b]  Remove VDR-2.6.*
 
         [z]  Skip
    ---------------------------------------------------------------" 0 0
 
-    echo -n "        Enter your menu choice = Install [a] ~~ Remove [b] ~~ Skip [z]    "
-    read yourch
-    case $yourch in
+echo -n "        Enter your menu choice = Install [a] ~~ Remove [b] ~~ Skip [z]    "
+read yourch
+case $yourch in
 
 a)
 clear
@@ -543,23 +577,21 @@ apt -y install libfontconfig1-dev libfribidi-dev gettext
 apt -y install libncurses5-dev libncursesw5-dev
 #
 cd $SRC
-cp -rf $REPO/vdr-2.6.7 $SRC
+cp -rf $REPO/vdr-2.6.9 $SRC
 ln -s $VDR vdr
 #
 echo "Patching VDR"
 sleep 2
 cd vdr
-cp -rf $REPO/vdr-patches.2.6.7.tar.gz $SRC/vdr/
-tar -zxvf vdr-patches.2.6.7.tar.gz
-rm -rf vdr-patches.2.6.7.tar.gz
+cp -rf $REPO/vdr-patches.2.6.9.tar.gz $SRC/vdr/
+tar -zxvf vdr-patches.2.6.9.tar.gz
+rm -rf vdr-patches.2.6.9.tar.gz
 sleep 2
 #
 echo "                    Patching avcdescriptor"
 patch -p1 < vdr_avcdescriptor.patch
 echo "                    Patching config"
 patch -p1 < vdr_config.patch
-echo "                    Patching dvb power saving feature"
-patch -p1 < vdr_dvb_power_saving_feature.patch
 echo "                    Patching maxdevice"
 patch -p1 < vdr_maxdevice.patch
 echo "                    Patching vdr_menuorg"
@@ -568,10 +600,6 @@ echo "                    Patching menuselection"
 patch -p1 < vdr_menuselection.patch
 echo "                    Patching svdrphosts"
 patch -p1 < vdr_svdrphosts.patch
-#echo "                    Patching ttxtsub"
-#patch -p1 < vdr_ttxtsub.patch
-#echo "                    Patching ttxtsub"
-#patch -p1 < patch_ttxtsubs.patch
 echo "                    Patching wareagleicon"
 patch -p1 < vdr_wareagleicon.patch
 echo "                    Patching channellscan"
@@ -587,7 +615,7 @@ make install
 cp *.conf /etc/vdr
 #
 apt-mark hold vdr
-echo "                    VDR-2.6.7 installed"; sleep 2;;
+echo "                    VDR-2.6.9 installed"; sleep 2;;
 #
 b)
 clear
@@ -598,7 +626,7 @@ rm -rf /usr/share/vdr
 rm -rf /usr/lib/vdr
 rm -rf /var/cache/vdr
 rm -rf $BIN/vdrpoweroff
-rm -rf $BIN/systemvdrpoweroff
+rm -rf $BIN/systempoweroff
 rm -rf $BIN/vdrrun
 rm -rf $BIN/vdr-*
 rm -rf /usr/bin/vdr
@@ -614,24 +642,19 @@ echo "VDR-2.6.x removed"; sleep 2;;
 #
 z);;
 esac;;
-##############################################################################
-
+#
 4)
 clear
-    dialog --title "   ** Install/Remove VDR-Plugins   **   " --infobox "
-
-   ---------------------------------------------------------------------------------------------
-
+dialog --title "   ** Install/Remove VDR-Plugins   **   " --infobox "
+   -----------------------------------------------------------
         [a]  Install Vdr Plugins
         [b]  Remove Vdr Plugins
 
         [z]  Skip
-
-   ---------------------------------------------------------------------------------------------" 0 0
-
-    echo -n "        Enter your menu choice = Install [a] ~~ Remove [b] ~~ Skip [z]    "
-    read yourch
-    case $yourch in
+   -----------------------------------------------------------" 0 0
+echo -n "        Enter your menu choice = Install [a] ~~ Remove [b] ~~ Skip [z]    "
+read yourch
+case $yourch in
 a)
 clear
 cd $SRC
@@ -666,15 +689,14 @@ make
 cd ../../..
 make plugins
 #
-echo "                    Installing SkinNopacity"
+echo "                    Installing Skinflatplus"
 sleep 2
-apt -y install graphicsmagick-libmagick-dev-compat
-apt -y install zlib1g zlib1g-dev libexpat1 libexpat1-dev
-apt -y install libglib2.0-0 libpcre3 libpcre3-dev
+apt -y install graphicsmagick-libmagick-dev-compat lm-sensors jq
 cd $VDRSRC
-cp -rf $REPO/SkinNopacity /$VDRSRC
-cd SkinNopacity
-make clean && make && make install
+cp -rf $REPO/vdr-plugin-skinflatplus /$VDRSRC
+mv -f vdr-plugin-skinflatplus
+cd skinflatplus
+make && make install
 #
 echo "                    Installing Iptv"
 sleep 2
@@ -683,13 +705,7 @@ cd $VDRSRC
 cp -rf $REPO/vdr-plugin-iptv /$VDRSRC
 mv vdr-plugin-iptv iptv
 cd iptv
-cp -rf $REPO/patch_iptv.tar.gz /$VDRSRC/iptv
-tar -zxvf patch_iptv.tar.gz
-rm -rf patch_iptv.tar.gz
-patch -p1 < 10_iptv_protocolext.patch
-make
-cd ../../..
-make plugins
+make & make install
 #
 echo "                    Installing Radio"
 sleep 2
@@ -697,6 +713,10 @@ cd $VDRSRC
 cp -rf $REPO/vdr-plugin-radio /$VDRSRC
 mv vdr-plugin-radio radio
 cd radio
+cp -rf $REPO/patch_radio.tar.gz $VDRSRC/radio
+tar -zxvf patch_radio.tar.gz
+patch -p1 < fix_radio_segfault.patch
+rm -rf patch_radio.tar.gz
 make
 cd ../../..
 make plugins
@@ -722,36 +742,35 @@ make plugins install
 #
 cd $REPO
 chmod -R 777 *
-echo "                    VDR-2.6.7 plugins installed"; sleep 2
+echo "                    VDR-2.6.9 plugins installed"; sleep 2
 echo "
-============================================================================================================
+========================================================================================
 For more Vdr plugins pls visit https://github.com/fiveten59/Vdr_installer and download Vdr_plugins_installer
-============================================================================================================
+========================================================================================
 "; sleep 5;;
 #
 b)
 clear
-echo "                    Removing VDR-2.6.7 plugins"
+echo "                    Removing VDR-2.6.9 plugins"
 cd $VDRSRC
 rm -rf softhddevice
-rm -rf skinnopacity
+rm -rf skinflatplus
 rm -rf iptv
 rm -rf radio
 rm -rf vnsiserver
 rm -rf dvbapi
 cd $LIB
 rm -rf libvdr-softhddevice.*
-rm -rf libvdr-skinnopacity.*
+rm -rf libvdr-skinflatplus.*
 rm -rf libvdr-iptv.*
 rm -rf libvdr-radio.*
 rm -rf libvdr-vnsiserver.*
 rm -rf libvdr-dvbapi.*
-echo "VDR-2.6.7 plugins removed"; sleep 2;;
+echo "VDR-2.6.9 plugins removed"; sleep 2;;
 z);;
 #
 esac;;
-#############################################################
-
+#
 5)
 clear
 #
@@ -821,11 +840,8 @@ sleep 2
 rm -rf /etc/vdr/diseqc.conf
 rm -rf /etc/vdr/channels.conf
 clear
-    dialog --title "   ** diseqc.conf setup **   " --infobox "
+dialog --title "   ** diseqc.conf setup **   " --infobox "
    ----------------------------------------------
-                Diseqc setup
-   ----------------------------------------------
-
         [a]    Hot Bird 13°E
         [b]    Dual 13, 19.2°E
         [c]    Trial 9, 13, 19.2°E
@@ -833,7 +849,6 @@ clear
         [e]    Kodi Frontend channels list
 
         [z]    Skip
-
    ---------------------------------------------- " 0 0
 echo -n "        Enter your menu choice = Install [a-e] ~~ Skip [z]    "
 read yourch
@@ -843,9 +858,9 @@ a)
 clear
 echo "$MONO13" >> /etc/vdr/diseqc.conf
 cd /etc/vdr/
-cp -rf $REPO/channels.conf.trial.tar.gz /etc/vdr/
-tar -zxvf channels.conf.trial.tar.gz
-rm -rf channels.conf.trial.tar.gz
+cp -rf $REPO/channels.conf.mono_hotbird.tar.gz /etc/vdr/
+tar -zxvf channels.conf.mono_hotbird.tar.gz
+rm -rf channels.conf.mono_hotbird.tar.gz
 echo "                    Channell MONO13 list installed"
 sleep 2;;
 #
@@ -888,6 +903,25 @@ cp -rf $REPO/Kodi_Frontend_channels.tar.gz /etc/vdr/
 tar -zxvf Kodi_Frontend_channels.tar.gz
 rm -rf vdr/Kodi_Frontend_channels.tar.gz
 echo "                    Kodi Frontend channels list installed"
+sleep 2
+dialog --title "   ** Diseqc setup for Kodi frontend **   " --infobox "
+   ----------------------------------------------
+        [1]    Hot Bird 13°E
+        [2]    Dual 13, 19.2°E
+        [3]    Trial 9, 13, 19.2°E
+        [4]    Astra 19.2°E
+
+        [z]    Skip
+   ---------------------------------------------- " 0 0
+echo -n "        Enter your menu choice = Install [1-4] ~~ Skip [z]    "
+read yourch
+case $yourch in
+
+1) clear; echo "$MONO13" >> /etc/vdr/diseqc.conf;;
+2) clear; echo "$DUAL" >> /etc/vdr/diseqc.conf;;
+3) clear; echo "$TRIAL" >> /etc/vdr/diseqc.conf;;
+4) clear; echo "$MONO19" >> /etc/vdr/diseqc.conf;;
+esac
 sleep 2;;
 #
 z);;
@@ -951,16 +985,16 @@ sudo /etc/init.d/vdr stop'  >> $BIN/vdrpoweroff
 chmod 777 $BIN/vdrpoweroff
 echo "Vdr Power Off created"; sleep 2
 #
-echo "                    Create Vdr Systemvdrpoweroff"
+echo "                    Create Vdr System Power Off"
 sleep 2
-rm -rf $BIN/systemvdrpoweroff
-touch $BIN/systemvdrpoweroff
+rm -rf $BIN/systempoweroff
+touch $BIN/systempoweroff
 echo '#!/bin/sh
-# File name: systemvdrpoweroff
+# File name: systempoweroff
 
-killall -9 vdr & killall -9 vlc & killall mpv & killall -9 oscam & shutdown -h now'  >> $BIN/systemvdrpoweroff
-chmod 777 $BIN/systemvdrpoweroff
-echo "Systemvdrpoweroff created"; sleep 2
+killall -9 vdr & killall -9 vlc & killall mpv & killall -9 oscam & shutdown -h now'  >> $BIN/systempoweroff
+chmod 777 $BIN/systempoweroff
+echo "systempoweroff created"; sleep 2
 #
 echo "                    Configuring VDR"
 sleep 2
@@ -971,7 +1005,7 @@ touch $BIN/vdrrun
 echo '#!/bin/bash
 # File name: vdrrun
 
-/usr/bin/vdr -c /etc/vdr -E /var/vdr -l 3 -u root '$PLUGIN' -s /usr/local/bin/systemvdrpoweroff
+/usr/bin/vdr -c /etc/vdr -E /var/vdr -l 3 -u root '$PLUGIN' -s /usr/local/bin/systempoweroff
 
 # check system with "aplay -l"
 # for hdmi nvidia audio -P softhddevice -a hw:1,n -f
@@ -1052,7 +1086,7 @@ if cat /tmp/videocard | grep "Intel Corporation HD Graphics "
 then
 sed -i "s|-P'dvbapi'|& -P'softhddevice -v cpu-glx -f'|" $BIN/vdrrun
 else 
-sed -i "s|-P'dvbapi'|& -P'softhddevice -v nvdec -f'|" $BIN/vdrrun
+sed -i "s|-P'dvbapi'|& -P'softhddevice -v cpu-glx -f'|" $BIN/vdrrun
 rm -rf /tmp/videocard
 fi
 #
@@ -1089,14 +1123,12 @@ fi
 echo "Eventlircd start command line created"; sleep 2
 #
 clear
-    dialog --title "   ** Vdr Automatic start  **   " --infobox "
+dialog --title "   ** Vdr Automatic start  **   " --infobox "
    ----------------------------------------------
         Configuring Vdr Automatic start at boot
    ----------------------------------------------
-
         [a]    Vdr
         [b]    No auto starting
-
    ---------------------------------------------- " 0 0
 echo -n "        Enter your menu choice  [a-b]:      "
 read yourch
@@ -1128,63 +1160,9 @@ echo "                    *** Change User !!!***"
 sleep 3
 ;;
 #############################################################
-6)        #########################################
-          #                Exit/Stop              #
-          #########################################
-
-
-    clear
-    echo ""
-    echo ""
-    echo ""
-    echo ""
-    echo "                                             .-----,        ,.----."
-    echo "                                      .-----'       '------'       ',"
-    echo "                                    ,'  First ed. by mona66 ® 2010   ',"
-    echo "                                    '     Updated and Revision        '"
-    echo "                                    ',  by fiveten_59 ® and knap ®    ,'"
-    echo "                                     ,'   2013 ~ 2014 ~ 2015 ~ 2016      ',"
-    echo "                                   '           vdr_installer           '"
-    echo "                                    ',        by fiveten_59 ®         '"
-    echo "                                    ',               2024           ,'"
-    echo "                                      '----,      ,----,       ,----'"
-    echo "                                            '----'      '-----'"
-    echo "                                                      O"
-    echo "                                                      o "
-    echo "                                                        o  "
-    echo "                                                       °"
-    echo "                                                        °"
-    echo "                                                      .88888888:.          "
-    echo "                                                    88888888.88888.          "
-    echo "                                                  .8888888888888888.          "
-    echo "                                                  888888888888888888          "
-    echo "                                                  88'..'888'..'88888          "
-    echo "                                                  88'  '888'  '88888          "
-    echo "                                                  88'..':::'..':8888          "
-    echo "                                                  88:::,::,:::::8888          "
-    echo "                                                  88':::::::::''8888          "
-    echo "                                                 .88  '::::'    8:88.          "
-    echo "                                                8888            '8:888.          "
-    echo "                                              .8888'             '888888.          "
-    echo "                                             .8888:..  .::.  ...:'8888888:.          "
-    echo "                                            .8888.'     :'     ''::'88:88888          "
-    echo "                                           .8888        '         '.888:8888.          "
-    echo "                                          888:8         .           888:88888          "
-    echo "                                        .888:88        .:           888:88888:          "
-    echo "                                        8888888.       ::           88:888888          "
-    echo "                                        '.::.888.      ::          .88888888          "
-    echo "                                       .::::::.888.    ::         :::'8888'.:.          "
-    echo "                                      ::::::::::.888   '         .::::::::::::          "
-    echo "                                      ::::::::::::.8    '      .:8::::::::::::.          "
-    echo "                                    .::::::::::::::.        .:888:::::::::::::          "
-    echo "                                    :::::::::::::::88:.__..:88888:::::::::::'          "
-    echo "                                     ''.:::::::::::88888888888.88:::::::::'          "
-    echo "                                           '':::_:' -- '' -'-' '':_::::''          "
-    echo ""
-    echo "                                           Thanks to all and Have fun :-)"
-    echo "                                                               "
-    echo ""
-    exit 0
+6)
+clear
+exit 0
 ;;
 *) ;;
 esac

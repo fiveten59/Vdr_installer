@@ -1,10 +1,10 @@
 A  special thanks goes to Klaus Schmidinger Vdr Developer & all plugin developers
 
 Two scripts: 
-- vdr_installer_2.6.7 installs Vdr on Ubuntu with essential plugins (in about 15 min)
+- vdr_installer_2.6.9 installs Vdr on Ubuntu with essential plugins (in about 15 min)
 - vdr_plugins_installer installs others plugins 
   
-# Script name: vdr_installer_2.6.7
+# Script name: vdr_installer_2.6.9
 A script for installing Vdr 
 tested on Ubuntu 22.04 - 24.04 
 
@@ -26,7 +26,7 @@ At first the script install some libraries
 Then follow the script  ...
 
 Point 1) 
-* submenu a) the script creates a local repository folder (Vdr_repo) downloading FFmpeg 5.0.1 - Vdr 2.6.x - some basic plugins (softhddevice dvbapi skinlcarsng radio iptv) + other files needed by vdr
+* submenu a) the script creates a local repository folder (Vdr_repo) downloading FFmpeg 5.0.1 - Vdr 2.6.x - some basic plugins (softhddevice dvbapi skinflatplus radio iptv) + other files needed by vdr
 * submenu b) reinstall all
 
 Point 2) 
@@ -40,11 +40,11 @@ Point 3)
 * submenu b) Uninstall VDR-2.6.x
 
 Point 4) 
-* submenu a) Install Plugins (softhddevice dvbapi skinnopacity radio iptv vnsiserver)
+* submenu a) Install Plugins (softhddevice dvbapi skinflatplus radio iptv vnsiserver)
 * submenu b) Uninstall Plugins
 
 Point 5) 
-* submenu a) Configure VDR and all the system creating icons and something else :-)
+* submenu a) Configure VDR and all the system
 * submenu b) you can reconfigure the system
 
 Point 6) Exit
@@ -54,8 +54,8 @@ Point 6) Exit
 If you'd like add others plugins you can use another script called Vdr_plugins installer in the same github repo
     
 #    Script name: Vdr_plugins_installer
-Vdr version > 2.4.x  
-Tested on Ubuntu 22.04
+Vdr version > 2.6.x  
+Tested on Ubuntu 22.04 - 24.04
 chmod the script
 then load it simply typing: sudo ./Vdr_plugins_installer   
 

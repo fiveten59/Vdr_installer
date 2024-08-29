@@ -9,7 +9,7 @@
 #
 clear
 REPO="/home/`logname`/Vdr_repo"
-PLUGIN="--lirc -P'dvbapi' -P'skinnopacity -l /etc/vdr/logos/' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/rtextUnten-kleo2.mpg'"
+PLUGIN="--lirc -P'dvbapi' -P'skinflatplus -l /etc/vdr/logos/' -P'iptv' -P'radio -l /etc/vdr/plugins/radio/rtextUnten-kleo2.mpg'"
 BIN="/usr/local/bin"
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
@@ -694,7 +694,7 @@ sleep 2
 apt -y install graphicsmagick-libmagick-dev-compat lm-sensors jq
 cd $VDRSRC
 cp -rf $REPO/vdr-plugin-skinflatplus /$VDRSRC
-mv -f vdr-plugin-skinflatplus
+mv -f vdr-plugin-skinflatplus skinflatplus
 cd skinflatplus
 make && make install
 #

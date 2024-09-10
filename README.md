@@ -26,7 +26,7 @@ At first the script install some libraries
 Then follow the script  ...
 
 Point 1) 
-* submenu a) the script creates a local repository folder (Vdr_repo) downloading FFmpeg 5.0.1 - Vdr 2.6.x - some basic plugins (softhddevice dvbapi skinflatplus radio iptv) + other files needed by vdr
+* submenu a) the script creates a local repository folder (Vdr_repo) downloading FFmpeg 7.0.0 - Vdr 2.6.x - some basic plugins (softhddevice dvbapi skinflatplus radio iptv) + other files needed by vdr
 * submenu b) reinstall all
 
 Point 2) 

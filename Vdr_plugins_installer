@@ -1,6 +1,6 @@
 #!/bin/bash
 ################################################################################# 
-# Script name : Vdr_plugins_installer (only for vdr = or > 2.6.x
+# Script name : Vdr_plugins_installer (only for vdr = or > 2.7.1
 # Version: Github Repository Master (https://github.com/fiveten59/Vdr_installer)
 # chmod the script 'Vdr_plugins_installer'
 # then load it simply typing: sudo ./Vdr_plugins_installer
@@ -379,10 +379,6 @@ fi
 #
 echo "                  Press Enter to continue ..."; read enterKey;;
 #
-
-#
-echo "                    Press Enter to continue ..."; read enterKey;;
-#
 z);;
 esac;;
 #
@@ -538,9 +534,8 @@ if [ -f tvguide/Makefile ]
 then  echo "TvGuide $Remind"
 sleep 2
 else git clone https://gitlab.com/kamel5/tvguide.git
-cp -rf tvguide $REPO/
 cd tvguide
-make
+make & make install
 cd ../../..
 make plugins
 cp -rf $VDRSRC/tvguide/themes/* /etc/vdr/themes/
@@ -578,9 +573,7 @@ sleep 2
 else git clone https://gitlab.com/kamel5/tvguideng.git
 cp -rf tvguideng $REPO/
 cd tvguideng
-make
-cd ../../..
-make plugins
+make & make install
 sed -i "s|-P'iptv'|& -P'tvguideng'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-TvGuideng installed"
 sleep 2
@@ -666,17 +659,14 @@ else git clone https://github.com/MarkusEh/vdr-plugin-live.git
 cp -rf vdr-plugin-live $REPO/
 mv -f vdr-plugin-live live
 cd live
-make
-cd ../../..
-make plugins
-cd $PLUGINS
-mkdir -p live
-cp -a $VDRSRC/live/live/* /etc/vdr/plugins/live/
-cp -rf $REPO/live-themes.tar.gz /etc/vdr/plugins/live/themes
-cd /etc/vdr/plugins/live/themes
-tar -zxvf live-themes.tar.gz
-rm -rf live-themes.tar.gz
-sed -i "s|-P'iptv'|& -P'live'|" /usr/local/bin/vdrrun
+make & make install
+#cd $PLUGINS
+#cp -a $VDRSRC/live/live/* /etc/vdr/plugins/live/
+#cp -rf $REPO/live-themes.tar.gz /etc/vdr/plugins/live/themes
+#cd /etc/vdr/plugins/live/themes
+#tar -zxvf live-themes.tar.gz
+#rm -rf live-themes.tar.gz
+sed -i "s|-P'iptv'|& -P'live -p 8008 --chanlogos=/etc/vdr/logos/'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Live installed"
 sleep 2
 fi
@@ -788,7 +778,7 @@ case $yourch in
 a)
 clear
 echo "                  Installing Vdr-Plugin-Iptv"; sleep 2
-apt -y install libcurl4 libcurl4-gnutls-dev #vlc
+apt -y install libcurl4 libcurl4-gnutls-dev libssl-dev #vlc
 cd $VDRSRC
 if [ -f iptv/Makefile ]
 then  echo "Vdr-Plugin-Iptv $Remind"
@@ -881,7 +871,7 @@ mv -f vdr-plugin-radio radio
 cd radio
 cp -rf $REPO/patch_radio.tar.gz $VDRSRC/radio
 tar -zxvf patch_radio.tar.gz
-patch -p1 < fix_radio_segfault.patch
+patch -p1 < vdr-2.7.1_compat.patch
 rm -rf patch_radio.tar.gz
 make && make install
 cd $PLUGINS
@@ -1233,14 +1223,16 @@ echo -n "        Enter your menu choice = Install [a-b]     "
 read yourch
 case $yourch in
 a)
-make;;
+clear
+make && make install;;
 b)
+clear
 make LIBDVBCSA=1
 make LIBDVBCSA=1 install;;
 esac
 #
 cd ../../..
-make plugins
+make plugins install
 sed -i "s|--lirc|& -P'dvbapi'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Dvbapi installed"
 sleep 2
@@ -1601,8 +1593,6 @@ echo "Vdr-Plugin-Channellscan uninstalled"
 sleep 2
 else echo "Vdr-Plugin-Channellscan $Remind5"
 fi
-echo "                  Press Enter to continue ..."; read enterKey;;
-#
 echo "                  Press Enter to continue ..."; read enterKey;;
 #
 z);;

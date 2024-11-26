@@ -1,21 +1,21 @@
 #!/bin/bash
 ################################## !!! README !!! #######################################
-# Script name: vdr_installer_2.7.2
+# Script name: vdr_installer_2.7.3
 # Version: Git Repository Master (https://github.com/fiveten59/Vdr_installer)
 # Tested on Ubuntu 22.04 - 24.04
 # chmod the script
-# then load it simply typing: sudo ./vdr_installer_2.7.2
+# then load it simply typing: sudo ./vdr_installer_2.7.3
 #########################################################################################
 #
 clear
 REPO="/home/`logname`/Vdr_repo"
-PLUGIN="--lirc -P'dvbapi' -P'skinflatplus -l /etc/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp'  -P'radio -l /etc/vdr/plugins/radio/rtextUnten-kleo2.mpg'"
+PLUGIN="--lirc -P'dvbapi' -P'skinnopacity -l /etc/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio -l /etc/vdr/plugins/radio/rtextUnten-kleo2.mpg'"
 BIN="/usr/local/bin"
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
 VDRSRC=''$SRC'/vdr/PLUGINS/src'
 LIB='/usr/lib/vdr'
-VDR='vdr-2.7.2'
+VDR='vdr-2.7.3'
 TEMP='/tmp'
 SHARE='/usr/share/vdr/plugins'
 PLUGINS='/etc/vdr/plugins'
@@ -92,15 +92,15 @@ mkdir $SRC/packages
 mkdir -p $SRC/ffmpeg_sources
 mkdir -p /home/`logname`/.config/autostart
 #
-dialog --title " VDR 2.7.2 Installer " --infobox "
+dialog --title " VDR 2.7.3 Installer " --infobox "
 
     A special thanks goes to Klaus Schmidinger Vdr Developer
 
-    Script name: vdr_installer_2.7.2
-    Version: 2.7.2
+    Script name: vdr_installer_2.7.3
+    Version: 2.7.3
     Tested on Ubuntu Ubuntu 22.04 - 24.04
-    chmod the script 'vdr_installer_2.7.2'
-    then load it simply typing: sudo ./vdr_installer_2.7.2" 0 0
+    chmod the script 'vdr_installer_2.7.3'
+    then load it simply typing: sudo ./vdr_installer_2.7.3" 0 0
 
 
 echo "                    Press Enter to continue ..."
@@ -112,7 +112,7 @@ while :
 do
 clear
 echo ""
-dialog --title "   *****   VDR 2.7.2 Version Installer   *****   " --infobox "
+dialog --title "   *****   VDR 2.7.3 Version Installer   *****   " --infobox "
 
 	   ================================================================	
            [1]	Download & Upgrade Local Repository
@@ -177,13 +177,13 @@ fi
 echo "Downloading Vdr and Plugins on local folder"
 sleep 2
 
-if [ -e $REPO/vdr-2.7.2 ]; then
+if [ -e $REPO/vdr-2.7.3 ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.7.2
+    git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.7.3
   fi
-  
+
 if [ -e $REPO/vdr-plugin-softhddevice ]; then
   echo " ..... File exists ..... "
 else
@@ -222,11 +222,11 @@ fi
 echo "Downloading skins"
 sleep 2
 
-if [ -e $REPO/vdr-plugin-skinflatplus ]; then
+if [ -e $REPO/vdr-plugin-skinnopacity ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git
+    git clone https://gitlab.com/kamel5/SkinNopacity.git
 fi
 
 echo "Downloading others"
@@ -272,7 +272,7 @@ git clone https://github.com/intel/intel-vaapi-driver.git
 echo "                    Downloading Vdr and Plugins on local repo"
 
 git clone https://github.com/Libreelec/eventlircd.git
-git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.7.2
+git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.7.3
 git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git
 git clone https://github.com/manio/vdr-plugin-dvbapi.git
 git clone https://github.com/siricco/vdr-plugin-radio.git
@@ -281,7 +281,7 @@ git clone https://github.com/vdr-projects/vdr-plugin-vnsiserver.git
 
 echo "                    Downloading skins"
 
-git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git
+git clone https://gitlab.com/kamel5/SkinNopacity.git
 
 echo "                    Downloading others"
 
@@ -325,25 +325,6 @@ read yourch
 case $yourch in
 #
 a)
-while :
-do
-clear
-dialog --title "   ** FFmpeg**   " --infobox "
-   -------------------------------------------------------------------
-
-        [1]  FFmpeg (Ubuntu version)
-        [2]  FFmpeg (git version)
-
-        [z]  Skip
-   -------------------------------------------------------------------" 0 0
-echo -n "     Enter your menu choice = Install [1-2] ~~ Skip [z]    "
-read yourch
-case $yourch in
-1)
-apt install ffmpeg
-;;
-#
-2)
 clear
 echo "                    Installing Nv-Codec"
 sleep 2
@@ -374,7 +355,7 @@ apt -y install liblilv-dev libopenjp2-7-dev libsvtav1enc-dev libffmpeg-nvenc-dev
 #configuration: --prefix=HOME/ffmpeg_build --enable-static --enable-shared --enable-pic --prefix=/root/ffmpeg_build --pkg-config-flags=--static --extra-cflags=-I/root/ffmpeg_build/include --extra-ldflags=-L/root/ffmpeg_build/lib --extra-libs='-lpthread -lm' --ld=g++ --bindir=/root/bin
 echo "                    Installing Ffmpeg"
 sleep 2
-if [ -d $SRC/ffmpeg_sources/ffmpeg2 ]
+if [ -d $SRC/ffmpeg_sources/ffmpeg ]
 then echo "Ffmpeg is already installed"; sleep 3
 else
     echo "                    Wait for a few seconds ..."
@@ -397,11 +378,7 @@ apt-mark hold ffmpeg
 #apt install ffmpeg
 #
 echo "                    FFmpeg installed"; sleep 2
-fi;;
-z) 
-break
-esac
-done;;
+fi ;;
 #
 b)
 clear
@@ -579,10 +556,10 @@ done;;
 #
 3)
 clear
-dialog --title "   ** Install/Remove VDR-2.7.2   **   " --infobox "
+dialog --title "   ** Install/Remove VDR-2.7.3   **   " --infobox "
 
    ---------------------------------------------------------------
-        [a]  Install VDR-2.7.2
+        [a]  Install VDR-2.7.3
         [b]  Remove VDR-2.*.*
 
         [z]  Skip
@@ -601,15 +578,15 @@ apt -y install libfontconfig1-dev libfribidi-dev gettext
 apt -y install libncurses5-dev libncursesw5-dev
 #
 cd $SRC
-cp -rf $REPO/vdr-2.7.2 $SRC
+cp -rf $REPO/vdr-2.7.3 $SRC
 ln -s $VDR vdr
 #
 echo "Patching VDR"
 sleep 2
 cd vdr
-cp -rf $REPO/vdr-patches.2.7.2.tar.gz $SRC/vdr/
-tar -zxvf vdr-patches.2.7.2.tar.gz
-rm -rf vdr-patches.2.7.2.tar.gz
+cp -rf $REPO/vdr-patches.2.7.3.tar.gz $SRC/vdr/
+tar -zxvf vdr-patches.2.7.3.tar.gz
+rm -rf vdr-patches.2.7.3.tar.gz
 sleep 2
 #
 echo "                    Patching avcdescriptor"
@@ -639,7 +616,7 @@ make install
 cp *.conf /etc/vdr
 #
 apt-mark hold vdr
-echo "                    VDR-2.7.2 installed"; sleep 2;;
+echo "                    VDR-2.7.3 installed"; sleep 2;;
 #
 b)
 clear
@@ -713,23 +690,22 @@ mv vdr-plugin-dvbapi dvbapi
 cd dvbapi
 make && make install
 #
-echo "                    Installing Skinflatplus"
-sleep 2
-apt -y install graphicsmagick-libmagick-dev-compat lm-sensors jq
+echo "                    Installing SkinNopacity"; sleep 2
+apt -y install graphicsmagick-libmagick-dev-compat
+apt -y install zlib1g zlib1g-dev libexpat1 libexpat1-dev
+apt -y install libglib2.0-0 libpcre3 libpcre3-dev
 cd $VDRSRC
-cp -rf $REPO/vdr-plugin-skinflatplus /$VDRSRC
-mv -f vdr-plugin-skinflatplus skinflatplus
-cd skinflatplus
-make && make install
+cp -rf $REPO/SkinNopacity /$VDRSRC
+cd SkinNopacity
+make clean && make && make install
 #
 echo "                    Installing Iptv"
 sleep 2
 apt -y install vlc libcurl4 libcurl4-gnutls-dev libssl-dev
-cp -rf $REPO/yt-dlp /$BIN
-chmod 755 /$BIN/yt-dlp
 cd $VDRSRC
 cp -rf $REPO/vdr-plugin-iptv /$VDRSRC
-mv vdr-plugin-iptv iptv
+mv -f vdr-plugin-iptv iptv
+cp -rf $REPO/patch_iptv.tar.gz /$VDRSRC/iptv
 cd iptv
 make & make install
 #
@@ -741,7 +717,7 @@ mv vdr-plugin-radio radio
 cd radio
 cp -rf $REPO/patch_radio.tar.gz $VDRSRC/radio
 tar -zxvf patch_radio.tar.gz
-patch -p1 < vdr-2.7.1_compat.patch
+patch -p1 < fix_radio.patch
 rm -rf patch_radio.tar.gz
 make && make install
 cd ../../..
@@ -767,7 +743,7 @@ make plugins install
 #
 cd $REPO
 chmod -R 777 *
-echo "                    VDR-2.7.2 plugins installed"; sleep 2
+echo "                    VDR-2.7.3 plugins installed"; sleep 2
 echo "
 ========================================================================================
 For more Vdr plugins pls visit https://github.com/fiveten59/Vdr_installer and download Vdr_plugins_installer
@@ -779,19 +755,19 @@ clear
 echo "                    Removing VDR-2.x.* plugins"
 cd $VDRSRC
 rm -rf softhddevice
-rm -rf skinflatplus
+rm -rf SkinNopacity
 rm -rf iptv
 rm -rf radio
 rm -rf vnsiserver
 rm -rf dvbapi
 cd $LIB
 rm -rf libvdr-softhddevice.*
-rm -rf libvdr-skinflatplus.*
+rm -rf libvdr-skinnopacity.*
 rm -rf libvdr-iptv.*
 rm -rf libvdr-radio.*
 rm -rf libvdr-vnsiserver.*
 rm -rf libvdr-dvbapi.*
-echo "VDR-2.7.2 plugins removed"; sleep 2;;
+echo "VDR-2.7.3 plugins removed"; sleep 2;;
 z);;
 #
 esac;;
@@ -989,6 +965,12 @@ cd $PLUGINS/iptv/
 rm -rf vlc2iptv
 tar -zxvf iptv_conf.tar.gz
 rm -rf iptv_conf.tar.gz
+fi
+if [ -f /$BIN/yt-dlp ]
+then echo "yt-dlp $Remind3"
+else
+cp -rf $REPO/yt-dlp /$BIN
+chmod 755 /$BIN/yt-dlp
 echo "                    Iptv configured"; sleep 2
 fi
 #
@@ -1104,14 +1086,7 @@ echo "Vdr start command line created"; sleep 2
 #
 echo "                    Configuring Frontend"
 sleep 2
-lspci | grep VGA > /tmp/videocard
-if cat /tmp/videocard | grep "Intel Corporation HD Graphics "
-then
 sed -i "s|-P'dvbapi'|& -P'softhddevice -v cpu-glx -f'|" $BIN/vdrrun
-else 
-sed -i "s|-P'dvbapi'|& -P'softhddevice -v cpu-glx -f'|" $BIN/vdrrun
-rm -rf /tmp/videocard
-fi
 #
 cp -rf $REPO/setup16_softhddevice.tar.gz /etc/vdr
 cd /etc/vdr/

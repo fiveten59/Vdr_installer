@@ -50,7 +50,7 @@ Point 5)
 Point 6) Exit
 
 Info:
-* You can put your channells as usual in /etc/vdr
+* You can put your channells list as usual in /etc/vdr
 * plugins libs are placed in /lib/vdr
 
 If you'd like add others plugins you can use another script called Vdr_plugins_installer in the same github repo

@@ -61,4 +61,5 @@ Tested on Ubuntu 22.04 - 24.04
 chmod the script
 then load it simply typing: sudo ./Vdr_plugins_installer   
 
-*     Have fun!
+
+Have fun

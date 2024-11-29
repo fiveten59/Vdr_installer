@@ -48,13 +48,15 @@ Point 5)
 * submenu b) you can reconfigure the system
 
 Point 6) Exit
+
+Info:
 * You can put your channells as usual in /etc/vdr
 * plugins libs are placed in /lib/vdr
 
 If you'd like add others plugins you can use another script called Vdr_plugins_installer in the same github repo
     
 #    Script name: Vdr_plugins_installer
-Vdr version > 2.6.x  
+Vdr version > 2.7.x  
 Tested on Ubuntu 22.04 - 24.04
 chmod the script
 then load it simply typing: sudo ./Vdr_plugins_installer   

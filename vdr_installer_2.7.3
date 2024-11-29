@@ -607,6 +607,8 @@ echo "                    Patching channellscan"
 patch -p1 < vdr-dvbchan.patch
 echo "                    Patching zapcockpit"
 patch -p1 < vdr_zapcockpit.patch
+echo "                    Patching graphtftng"
+patch -p1 < opt-50_graphtftng.patch
 #
 make && make plugins
 clear

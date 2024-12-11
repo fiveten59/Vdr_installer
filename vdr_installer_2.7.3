@@ -9,7 +9,7 @@
 #
 clear
 REPO="/home/`logname`/Vdr_repo"
-PLUGIN="--lirc -P'dvbapi' -P'skinnopacity -l /etc/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio -l /etc/vdr/plugins/radio/rtextUnten-kleo2.mpg'"
+PLUGIN="--lirc -P'dvbapi' -P'softhddevice -v cpu-glx -f' -P'skinnopacity -l /etc/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio -l /etc/vdr/plugins/radio/rtextUnten-kleo2.mpg'"
 BIN="/usr/local/bin"
 ETC='/usr/local/etc'
 SRC='/usr/local/src'
@@ -86,7 +86,7 @@ S19.2E 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
 #
 apt -y install dialog git subversion wget pkg-config
 apt -y install checkinstall build-essential autoconf 
-apt -y install autopoint automake cmake libtool
+apt -y install autopoint automake cmake libtool unzip
 #
 mkdir $SRC/packages
 mkdir -p $SRC/ffmpeg_sources
@@ -112,9 +112,9 @@ while :
 do
 clear
 echo ""
-dialog --title "   *****   VDR 2.7.3 Version Installer   *****   " --infobox "
+dialog --title "   *****   VDR 2.7.3 Installer   *****   " --infobox "
 
-	   ================================================================	
+	   ================================================================
            [1]	Download & Upgrade Local Repository
 	   [Submenu] ~~  Local Repository Directory ~ Install - Upgrade
 	   ================================================================
@@ -123,7 +123,7 @@ dialog --title "   *****   VDR 2.7.3 Version Installer   *****   " --infobox "
 	   ================================================================
 	   [3]	VDR
 	   [Submenu] ~~  Install & Uninstall
-	   ================================================================			
+	   ================================================================
 	   [4]	Vdr Plugins
 	   [Submenu] ~~  Install & Uninstall
 	   ================================================================
@@ -232,11 +232,11 @@ fi
 echo "Downloading others"
 sleep 2
 
-if [ -e $REPO/ffmpeg-7.0.tar.bz2 ]; then
+if [ -e $REPO/ffmpeg-7.1.tar.bz2 ]; then
   echo " ..... File exists ....."
 else
   echo "File not found ... Downloading it now ....."
-    wget https://ffmpeg.org/releases/ffmpeg-7.0.tar.bz2   
+    wget https://ffmpeg.org/releases/ffmpeg-7.1.tar.bz2
 fi
 
 if [ -e $REPO/yt-dlp ]; then
@@ -285,7 +285,7 @@ git clone https://gitlab.com/kamel5/SkinNopacity.git
 
 echo "                    Downloading others"
 
-wget https://ffmpeg.org/releases/ffmpeg-7.0.tar.bz2
+wget https://ffmpeg.org/releases/ffmpeg-7.1.tar.bz2
 wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
 wget https://github.com/fiveten59/Logos/archive/refs/heads/master.zip
 unzip master.zip; rm -rf master.zip; mv -f Logos-master logos
@@ -303,19 +303,20 @@ clear
 dialog --title "   ** Install Intel / Nvidia & Common Libraries **   " --infobox "
 -------------------------------------------------------------------------------
         *****  Install  *****
-        [a]    FFmpeg
-        [b]    Infra-Red Remotes Control (Eventlircd)
-        [c]    Installing Sat firmware
+        [a]    FFmpeg OS Repo
+        [b]    FFmpeg (last version)
+        [c]    Infra-Red Remotes Control (Eventlircd)
+        [d]    Installing Sat firmware
 
         *****  Install Intel drivers  *****
-        [d]    ONLY FOR Intel Devices (Intel vaapi driver - OPTIONAL)
+        [e]    ONLY FOR Intel Devices (Intel vaapi driver - OPTIONAL)
 
         *****  Remove  *****
-        [a1]    FFMPEG
-        [b1]    Eventlircd
+        [b1]    FFMPEG
+        [c1]    Eventlircd
 
         *****  Remove Intel Libs  *****
-        [d1]    Remove Libva - Cmrt - Intel vaapi driver
+        [e1]    Remove Libva - Cmrt - Intel vaapi driver
 
         [z]    Skip
 -------------------------------------------------------------------------------" 0 0
@@ -324,19 +325,29 @@ echo -n "        Enter your menu choice = Install [a-d] ~~ Remove [a1-d1] ~~ Exi
 read yourch
 case $yourch in
 #
-a)
+a) 
+clear
+apt install ffmpeg;;
+#
+b)
 clear
 echo "                    Installing Nv-Codec"
 sleep 2
+if [ -f /usr/local/lib/pkgconfig/ffnvcodec.pc ]
+then echo "Nv-Codec are already installed"
+sleep 2
+else
 cd $SRC/ffmpeg_sources/
 rm -rf nv-codec-headers
 git clone https://github.com/FFmpeg/nv-codec-headers
 cd nv-codec-headers
 make && make install
+fi
+#
 clear
 echo "                    Installing Ffmpeg"
 sleep 2
-apt -y install libavfilter-dev libx265-dev libx264-dev libavcodec-dev libass-dev 
+apt -y install libavfilter-dev libx265-dev libx264-dev libavcodec-dev libass-dev nasm
 apt -y install libavformat-dev libswresample-dev libswscale-dev libudev-dev
 apt -y install libfreetype6-dev libmp3lame-dev libtheora-dev libvorbis-dev
 apt -y install libxvidcore-dev freeglut3-dev libssl-dev libvdpau-dev libdrm-dev
@@ -360,10 +371,10 @@ then echo "Ffmpeg is already installed"; sleep 3
 else
     echo "                    Wait for a few seconds ..."
 cd $SRC/ffmpeg_sources
-cp -rf $REPO/ffmpeg-7.0.tar.bz2 $SRC/ffmpeg_sources/
-tar xjvf ffmpeg-7.0.tar.bz2
-mv ffmpeg-7.0 ffmpeg
-rm -rf ffmpeg-7.0.tar.bz2
+cp -rf $REPO/ffmpeg-7.1.tar.bz2 $SRC/ffmpeg_sources/
+tar xjvf ffmpeg-7.1.tar.bz2
+mv ffmpeg-7.1 ffmpeg
+rm -rf ffmpeg-7.1.tar.bz2
 cd ffmpeg
 ./configure --extra-libs="-ldl" --enable-static --ld=g++ --enable-gpl --enable-libfreetype --enable-libmp3lame --enable-openssl --enable-libxcb --enable-libopus --enable-libtheora --enable-libvorbis --enable-cuvid --enable-nonfree --enable-libxvid --enable-opengl --enable-vdpau --enable-vaapi --enable-pic --enable-shared --disable-doc --enable-swresample --disable-cuda-sdk --enable-libpulse --enable-libx264 --enable-libx265 --enable-libass --enable-libshine --enable-zlib --disable-vulkan --enable-libaom --enable-libfdk-aac --enable-libsvtav1 --enable-libdav1d --enable-libfontconfig --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcodec2 --enable-libfribidi --enable-libgme --enable-libgsm --enable-libxavs2 --enable-libmysofa --enable-libopenh264 --enable-libopenmpt --enable-librsvg --enable-libsnappy --enable-libdrm --enable-libsoxr --enable-libspeex --enable-libtwolame --enable-libvidstab --enable-libvpx --enable-libssh --enable-libwebp --enable-libzvbi --enable-openal  --enable-version3  --enable-libjack --enable-libopenjpeg --enable-libxml2 --enable-lv2 --enable-xlib
 
@@ -380,7 +391,7 @@ apt-mark hold ffmpeg
 echo "                    FFmpeg installed"; sleep 2
 fi ;;
 #
-b)
+c)
 clear
 echo "                    Installing Infra-Red Remotes Control (Eventlircd) "
 sleep 2
@@ -466,7 +477,7 @@ chmod 777 eventlircd
 echo "                    Eventlircd is now installed"; sleep 2
 fi;;
 #
-c)
+d)
 clear
 echo "                    Installing Sat firmware"
 sleep 2
@@ -481,14 +492,10 @@ cd driver_dvb
 cp -rf *.fw /lib/firmware/
 cd dvbsky-firmware
 cp -rf *.fw /lib/firmware/
-cd ../Hauppuage
-#dd if=hcw88bda.sys of=/lib/firmware/dvb-fe-cx24116-1.26.90.0.fw bs=1 skip=105768 count=32290
-#ln -s /lib/firmware/dvb-fe-cx24116-1.26.90.0.fw /lib/firmware/dvb-fe-cx24116.fw
-cp -rf dvb-fe-cx24116.fw /lib/firmware/
 echo "Sat firmwares & drivers are now installed"; sleep 2
 fi;;
 #
-d)
+e)
 clear
 echo "                    Installing Ubuntu Intel-graphics-drivers"
 sleep 2
@@ -516,7 +523,7 @@ make -j4 install
 echo "Intel Graphics-drivers are now installed"; sleep 2
 fi;;
 #
-a1)
+b1)
 clear
 echo "                    Removing FFmpeg"
 sleep 2
@@ -524,9 +531,10 @@ rm -rf $BIN/ffmpeg
 rm -rf $BIN/ffprob
 rm -rf /usr/local/share/ffmpeg
 rm -rf /usr/share/doc/ffmpeg
+rm -rf /usr/local/src/ffmpeg_sources/ffmpeg
 echo "FFmpeg removed"; sleep 2;;
 #
-b1)
+c1)
 clear
 echo "                    Removing Eventlircd"
 cd /etc/init.d
@@ -607,8 +615,6 @@ echo "                    Patching channellscan"
 patch -p1 < vdr-dvbchan.patch
 echo "                    Patching zapcockpit"
 patch -p1 < vdr_zapcockpit.patch
-echo "                    Patching graphtftng"
-patch -p1 < opt-50_graphtftng.patch
 #
 make && make plugins
 clear
@@ -747,9 +753,9 @@ cd $REPO
 chmod -R 777 *
 echo "                    VDR-2.7.3 plugins installed"; sleep 2
 echo "
-========================================================================================
+============================================================================================================
 For more Vdr plugins pls visit https://github.com/fiveten59/Vdr_installer and download Vdr_plugins_installer
-========================================================================================"
+============================================================================================================"
 sleep 5;;
 #
 b)
@@ -838,12 +844,45 @@ cp -rf $REPO/logos /etc/vdr/
 echo "Channels logos installed"; sleep 2
 fi
 #
-echo "                    Diseqc & Channells setup"
+echo "                    Configuring Frontend"
 sleep 2
-rm -rf /etc/vdr/diseqc.conf
-rm -rf /etc/vdr/channels.conf
+cp -rf $REPO/setup16_softhddevice.tar.gz /etc/vdr
+cd /etc/vdr/
+tar -zxvf setup16_softhddevice.tar.gz
+rm -rf setup16_softhddevice.tar.gz
+echo "Frontend configured"; sleep 2
+#
+echo "                    Configuring Iptv"
+sleep 2
+sed -i 's/geteuid/getppid/' /usr/bin/vlc
+if [ -f /$PLUGINS/iptv/channels/Y100.conf ]
+then echo "Iptv $Remind3"
+else
+cp -rf $REPO/iptv_conf.tar.gz /$PLUGINS/iptv/
+cd $PLUGINS/iptv/
+rm -rf vlc2iptv
+tar -zxvf iptv_conf.tar.gz
+rm -rf iptv_conf.tar.gz
+fi
+if [ -f /$BIN/yt-dlp ]
+then echo "yt-dlp $Remind3"
+else
+cp -rf $REPO/yt-dlp /$BIN
+chmod 755 /$BIN/yt-dlp
+echo "                    Iptv configured"; sleep 2
+fi
+#
+echo "                    Configuring Vnsiserver"
+sleep 2
+cp -rf $VDRSRC/vnsiserver/vnsiserver/allowed_hosts.conf /$PLUGINS/vnsiserver
+echo "Vnsiserver configured"; sleep 2
+#
+echo "                    Channels setup"
+sleep 2
+cd /etc/vdr
+rm -rf channels.conf
 clear
-dialog --title "   ** diseqc.conf setup **   " --infobox "
+dialog --title "   ** Channells list **   " --infobox "
    ----------------------------------------------
         [a]    Hot Bird 13°E
         [b]    Dual 13, 19.2°E
@@ -858,8 +897,6 @@ read yourch
 case $yourch in
 a) 
 clear
-echo "$MONO13" >> /etc/vdr/diseqc.conf
-cd /etc/vdr/
 cp -rf $REPO/channels.conf.mono_hotbird.tar.gz /etc/vdr/
 tar -zxvf channels.conf.mono_hotbird.tar.gz
 rm -rf channels.conf.mono_hotbird.tar.gz
@@ -868,8 +905,6 @@ sleep 2;;
 #
 b)
 clear
-echo "$DUAL" >> /etc/vdr/diseqc.conf
-cd /etc/vdr/
 cp -rf $REPO/channels.conf.dual.tar.gz /etc/vdr/
 tar -zxvf channels.conf.dual.tar.gz
 rm -rf channels.conf.dual.tar.gz
@@ -878,8 +913,6 @@ sleep 2;;
 #
 c)
 clear
-echo "$TRIAL" >> /etc/vdr/diseqc.conf
-cd /etc/vdr/
 cp -rf $REPO/channels.conf.trial.tar.gz /etc/vdr/
 tar -zxvf channels.conf.trial.tar.gz
 rm -rf channels.conf.trial.tar.gz
@@ -888,8 +921,6 @@ sleep 2;;
 #
 d)
 clear
-echo "$MONO19" >> /etc/vdr/diseqc.conf
-cd /etc/vdr/
 cp -rf $REPO/channels-w_scan2-Astra_19.conf.tar.gz /etc/vdr/
 tar -zxvf channels-w_scan2-Astra_19.conf.tar.gz
 rm -rf channels-w_scan2-Astra_19.conf.tar.gz
@@ -898,14 +929,17 @@ sleep 2;;
 #
 e)
 clear
-echo "                    Kodi Frontend channels list"
-sleep 2
-cd /etc/vdr/
 cp -rf $REPO/Kodi_Frontend_channels.tar.gz /etc/vdr/
 tar -zxvf Kodi_Frontend_channels.tar.gz
 rm -rf vdr/Kodi_Frontend_channels.tar.gz
 echo "                    Kodi Frontend channels list installed"
-sleep 2
+sleep 2;;
+z);;
+esac
+#
+clear
+cd /etc/vdr/
+rm -rf diseqc.conf
 dialog --title "   ** Diseqc setup for Kodi frontend **   " --infobox "
    ----------------------------------------------
         [1]    Hot Bird 13°E
@@ -918,13 +952,11 @@ dialog --title "   ** Diseqc setup for Kodi frontend **   " --infobox "
 echo -n "        Enter your menu choice = Install [1-4] ~~ Skip [z]    "
 read yourch
 case $yourch in
-1) clear; echo "$MONO13" >> /etc/vdr/diseqc.conf;;
-2) clear; echo "$DUAL" >> /etc/vdr/diseqc.conf;;
-3) clear; echo "$TRIAL" >> /etc/vdr/diseqc.conf;;
-4) clear; echo "$MONO19" >> /etc/vdr/diseqc.conf;;
-esac
-sleep 2;;
-#
+
+1) echo "$MONO13" >> /etc/vdr/diseqc.conf && sed -i "s|DiSEqC = 1|DiSEqC = 0|" /etc/vdr/setup.conf;;
+2) echo "$DUAL" >> /etc/vdr/diseqc.conf;;
+3) echo "$TRIAL" >> /etc/vdr/diseqc.conf;;
+4) echo "$MONO19" >> /etc/vdr/diseqc.conf;;
 z);;
 esac
 #
@@ -955,31 +987,6 @@ cp -rf $REPO/commands.tar.gz /etc/vdr
 cd /etc/vdr
 tar -zxvf commands.tar.gz
 rm -rf commands.tar.gz
-#
-echo "                    Configuring Iptv"
-sleep 2
-sed -i 's/geteuid/getppid/' /usr/bin/vlc
-if [ -f /$PLUGINS/iptv/channels/Y100.conf ]
-then echo "Iptv $Remind3"
-else
-cp -rf $REPO/iptv_conf.tar.gz /$PLUGINS/iptv/
-cd $PLUGINS/iptv/
-rm -rf vlc2iptv
-tar -zxvf iptv_conf.tar.gz
-rm -rf iptv_conf.tar.gz
-fi
-if [ -f /$BIN/yt-dlp ]
-then echo "yt-dlp $Remind3"
-else
-cp -rf $REPO/yt-dlp /$BIN
-chmod 755 /$BIN/yt-dlp
-echo "                    Iptv configured"; sleep 2
-fi
-#
-echo "                    Configuring Vnsiserver"
-sleep 2
-cp -rf $VDRSRC/vnsiserver/vnsiserver/allowed_hosts.conf /$PLUGINS/vnsiserver
-echo "Vnsiserver configured"; sleep 2
 #
 echo "                    Create Vdr Power Off"
 sleep 2
@@ -1085,16 +1092,6 @@ Icon=/usr/local/src/icone/killvdr.png
 Exec=sudo /etc/init.d/vdr stop" >> /usr/share/applications/KillVdr.desktop
 chmod 777 /usr/share/applications/KillVdr.desktop
 echo "Vdr start command line created"; sleep 2
-#
-echo "                    Configuring Frontend"
-sleep 2
-sed -i "s|-P'dvbapi'|& -P'softhddevice -v cpu-glx -f'|" $BIN/vdrrun
-#
-cp -rf $REPO/setup16_softhddevice.tar.gz /etc/vdr
-cd /etc/vdr/
-tar -zxvf setup16_softhddevice.tar.gz
-rm -rf setup16_softhddevice.tar.gz
-echo "Frontend configured"; sleep 2
 #
 echo "                    Permissions to execute Eventlircd - Vdr"
 sleep 2

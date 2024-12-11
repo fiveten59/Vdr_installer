@@ -66,10 +66,12 @@ dialog --title "               ♦♦♦♦♦   Vdr-Plugin Installer  ♦♦♦
              -------------------------------------------------------
              [8]    +[Submenu] ~~  Others Plugins
              -------------------------------------------------------
-             [9]     Exit
+             [9]    +[Submenu] ~~  Skin             
+             -------------------------------------------------------
+             [10]     Exit
           ===========================================================" 0 0
 
-echo -n "Enter your menu choice = Submenu [1~8] -- Exit [9] :        "
+echo -n "Enter your menu choice = Submenu [1~9] -- Exit [10] :        "
 read yourch
 case $yourch in
 #
@@ -85,11 +87,12 @@ dialog --title "               ♦♦♦♦♦   Frontend Plugins ♦♦♦♦�
         [b]    Softhdcuvid / Softhdvaapi ..........  [b1]    Softhdcuvid / Softhdvaapi
         [c]    Xineliboutput ......................  [c1]    Xineliboutput
         [d]    Softhddevice-drm-gles (Raspberry) ..  [d1]    Softhddevice-drm-gles (Raspberry)
+        [e]    Graphtftng .........................  [e1]    Graphtftng       
 
         [z]    Skip
 ----------------------------------------------------------------------------------------" 0 0
 
-echo -n "Enter your menu choice = Install [a-d] ~~ Remove [a1-d1] ~~ Skip [z]:      "
+echo -n "Enter your menu choice = Install [a-e] ~~ Remove [a1-e1] ~~ Skip [z]:      "
 read yourch
 case $yourch in
 #
@@ -379,6 +382,56 @@ fi
 #
 echo "                  Press Enter to continue ..."; read enterKey;;
 #
+e)
+clear
+echo "                  Installing Vdr-Plugin-Graphtftng"; sleep 2
+apt -y install libimlib2-dev libgtop2-dev
+cd $VDRSRC
+if [ -f graphtftng/Makefile ]
+then echo "Vdr-Plugin-Graphtftng $Remind"
+sleep 2
+#else git clone https://github.com/vdr-projects/vdr-plugin-graphtftng.git
+else cp -rf $REPO/vdr-plugin-graphtftng-0.6.16c.tar.gz /$VDRSRC
+tar -zxvf vdr-plugin-graphtftng-0.6.16c.tar.gz
+rm -rf vdr-plugin-graphtftng-0.6.16c.tar.gz
+mv -f vdr-plugin-graphtftng-0.6.16c graphtftng
+cd $VDRSRC/graphtftng
+make && make install
+#cp -rf $REPO/graphtftng_conf.tar.gz /usr/share/
+#cd /usr/share/
+#tar -zxvf graphtftng_conf.tar.gz
+#rm -rf graphtftng_conf.tar.gz
+#cd $PLUGINS
+#mkdir -p graphtftng/themes/
+#mkdir -p graphtftng/fonts/
+#ln -s /usr/share/vdr-tftng-anthraize/anthraize.theme /etc/vdr/plugins/graphtftng/themes/anthraize 
+#ln -s /usr/share/vdr-tftng-standard/standard.theme /etc/vdr/plugins/graphtftng/themes/standard
+#ln -s /usr/share/ttf-bitstream-vera/Vera.ttf /etc/vdr/plugins/graphtftng/fonts/Vera.ttf
+#sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'graphtftng'|" /usr/local/bin/vdrrun
+#echo "Vdr-Plugin-Graphtftng installed"
+sleep 2
+fi
+#
+echo "                  Press Enter to continue ..."; read enterKey;;
+#
+e1)
+clear
+echo "                  Removing Vdr-Plugin-Graphtftng"; sleep 2
+cd $VDRSRC
+if [ -f  graphtftng/Makefile ]
+then rm -rf graphtftng
+rm -rf /usr/share/vdr-tftng-standard
+rm -rf /usr/share/vdr-tftng-anthraize
+rm -rf $PLUGINS/graphtftng
+rm -rf $LIB/libvdr-graphtftng.*
+sed -i "s|-P'graphtftng'||" /usr/local/bin/vdrrun
+echo "Vdr-Plugin-Graphtftng uninstalled"
+sleep 2
+else echo "Vdr-Plugin-Graphtftng $Remind5"
+fi
+#
+echo "                  Press Enter to continue ..."; read enterKey;;
+#
 z);;
 esac;;
 #
@@ -426,7 +479,7 @@ patch -p1 < 11_epgsearch_menue.patch
 patch -p1 < 12_epgsearch_README.patch
 cd ../../..
 make plugins
-sed -i "s|-P'iptv'|& -P'epgsearch'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'epgsearch'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Epgsearch installed"
 sleep 2
 fi
@@ -463,7 +516,7 @@ cp -rf vdr-plugin-epg2vdr $REPO/
 mv -f vdr-plugin-epg2vdr epg2vdr
 cd ../..
 make plugins
-sed -i "s|-P'iptv'|& -P'epg2vdr'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'epg2vdr'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Epg2vdr installed"
 sleep 2
 fi
@@ -502,7 +555,7 @@ tar -zxvf patch_neutrinoepg.tar.gz
 rm -rf patch_neutrinoepg.tar.gz
 cd ../../..
 make plugins
-sed -i "s|-P'iptv'|& -P'neutrinoepg'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'neutrinoepg'|" /usr/local/bin/vdrrun
 echo "                  Vdr-Plugin-Neutrinoepg installed"
 sleep 2
 fi
@@ -539,7 +592,7 @@ make & make install
 cd ../../..
 make plugins
 cp -rf $VDRSRC/tvguide/themes/* /etc/vdr/themes/
-sed -i "s|-P'iptv'|& -P'tvguide'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'tvguide'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-TvGuide installed"
 sleep 2
 fi
@@ -574,7 +627,7 @@ else git clone https://gitlab.com/kamel5/tvguideng.git
 cp -rf tvguideng $REPO/
 cd tvguideng
 make & make install
-sed -i "s|-P'iptv'|& -P'tvguideng'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'tvguideng'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-TvGuideng installed"
 sleep 2
 fi
@@ -666,7 +719,7 @@ make & make install
 #cd /etc/vdr/plugins/live/themes
 #tar -zxvf live-themes.tar.gz
 #rm -rf live-themes.tar.gz
-sed -i "s|-P'iptv'|& -P'live -p 8008 --chanlogos=/etc/vdr/logos/'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'live -p 8008 --chanlogos=/etc/vdr/logos/'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Live installed"
 sleep 2
 fi
@@ -697,7 +750,7 @@ echo "                  Installing Vdr-Plugin-Osd2web"; sleep 2
 cd $SRC
 apt -y install cmake
 if [ -f $SRC/libwebsockets ]
-then  echo "Libwebsockets neede by Osd2web $Remind"
+then  echo "Libwebsockets needed by Osd2web $Remind"
 else
 git clone https://github.com/warmcat/libwebsockets.git
 cd libwebsockets
@@ -722,7 +775,7 @@ cd osd2web
 make & make install
 cd ../../..
 make plugins
-sed -i "s|-P'iptv'|& -P'osd2web -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'osd2web -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Osd2web installed"
 sleep 2
 fi
@@ -832,7 +885,7 @@ cp -rf vdr-plugin-webbridge $REPO/
 mv -f vdr-plugin-webbridge webbridge
 cd webbridge
 make & make install
-sed -i "s|-P'dvbapi'|& -P'webbridge'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'webbridge'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Webbridge installed"
 sleep 2
 fi
@@ -881,7 +934,7 @@ cp -rf $VDRSRC/radio/config/mpegstill/* /$PLUGINS/radio/
 cp -rf $REPO/radio_scripts.tar.gz /$PLUGINS/radio/
 tar -zxvf radio_scripts.tar.gz
 rm -rf radio_scripts.tar.gz
-sed -i "s|-P'iptv'|& -P'radio'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'radio -l /etc/vdr/plugins/radio/rtextUnten-kleo2.mpg'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Radio installed"
 sleep 2
 fi
@@ -897,7 +950,7 @@ then rm -rf radio
 rm -rf $REPO/vdr-plugin-radio
 rm -rf $LIB/libvdr-radio.*
 rm -rf $PLUGINS/radio
-sed -i "s|-P'radio'||" /usr/local/bin/vdrrun
+sed -i "s|-P'radio -l /etc/vdr/plugins/radio/rtextUnten-kleo2.mpg'||" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Radio uninstalled"
 sleep 2
 else echo "Vdr-Plugin-Radio $Remind5"
@@ -933,10 +986,10 @@ echo -n "Enter your menu choice  [a-b]:      "
 read yourch
 case $yourch in
 #
-a) sed -i "s|-P'iptv'|& -P'mpv -a alsa -v gpu -h auto -b / -l ita'|" /usr/local/bin/vdrrun
+a) sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'mpv -a alsa -v gpu -h auto -b / -l ita'|" /usr/local/bin/vdrrun
 echo "                  Mpv Nvidia & Intel Video Devices setup installed"
 sleep 2;;
-b) sed -i "s|-P'iptv'|& -P'mpv -a alsa -v gpu -h auto -c drm -e /dev/dri/card0 -b / -l ita'|" /usr/local/bin/vdrrun
+b) sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'mpv -a alsa -v gpu -h auto -c drm -e /dev/dri/card0 -b / -l ita'|" /usr/local/bin/vdrrun
 echo "Mpv for Raspberry setup installed"
 sleep 2;;
 esac
@@ -989,7 +1042,7 @@ else git clone https://github.com/ua0lnj/vdr-plugin-hbbtvng.git
 mv -f vdr-plugin-hbbtvng hbbtvng
 cd hbbtvng
 make && make install
-sed -i "s|-P'iptv'|& -P'dsmcc'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'dsmcc'|" /usr/local/bin/vdrrun
 sed -i "s|-P'dsmcc'|& -P'hbbtvng -b /usr/bin/chromium-browser'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-HbbTvNg installed"
 sleep 2
@@ -1030,7 +1083,7 @@ cp -rf vdr-plugin-dvd $REPO/
 mv -f vdr-plugin-dvd dvd
 cd dvd
 make install
-sed -i "s|-P'iptv'|& -P'dvd'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'dvd'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Dvd installed"
 sleep 2
 fi
@@ -1066,7 +1119,7 @@ cp -rf vdr-plugin-mp3 $REPO/
 mv -f vdr-plugin-mp3 mp3
 cd mp3
 make & make install
-sed -i "s|-P'iptv'|& -P'mp3'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'mp3'|" /usr/local/bin/vdrrun
 cp -rf $VDRSRC/mp3/examples/mp3sources.conf.example /etc/vdr/plugins/
 cd /etc/vdr/plugins/
 mv -f mp3sources.conf.example mp3sources.conf
@@ -1106,7 +1159,7 @@ else git clone https://github.com/Zabrimus/vdr-plugin-hbbtv.git
 mv -f vdr-plugin-hbbtv hbbtv
 cd hbbtv
 make && make install
-sed -i "s|-P'iptv'|& -P'hbbtv'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'hbbtv'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-HbbTv installed"
 sleep 2
 fi
@@ -1144,7 +1197,7 @@ cd image
 make & make install
 cp -rf $VDRSRC/image/scripts/imageplugin.sh /usr/local/bin/
 cp -rf $VDRSRC/image/scripts/magickplugin.sh /usr/local/bin/
-sed -i "s|-P'iptv'|& -P'image -c /etc/vdr/plugins'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'image -c /etc/vdr/plugins'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Image installed"
 sleep 2
 fi
@@ -1280,7 +1333,7 @@ cd /etc/vdr/plugins/externalplayer
 rm -rf externalplayer.conf
 tar -zxvf externalplayer.conf.tar.gz
 rm -rf externalplayer.conf.tar.gz
-sed -i "s|-P'iptv'|& -P'externalplayer'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'externalplayer'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-ExternalPlayer installed"
 sleep 2
 fi
@@ -1318,7 +1371,7 @@ cd systeminfo
 make & make install
 cd scripts
 cp -rf systeminfo.sh /usr/local/bin
-sed -i "s|-P'iptv'|& -P'systeminfo'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'systeminfo'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Systeminfo installed"
 sleep 2
 fi
@@ -1354,7 +1407,7 @@ cp -rf vdr-plugin-femon $REPO/
 mv vdr-plugin-femon femon
 cd femon
 make & make install
-sed -i "s|-P'iptv'|& -P'femon'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'femon'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Femon installed"
 sleep 2
 fi
@@ -1388,7 +1441,7 @@ else git clone https://gitlab.com/kamel5/devstatus.git
 cp -rf devstatus $REPO/
 cd devstatus
 make & make install
-sed -i "s|-P'iptv'|& -P'devstatus'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'devstatus'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Devstatus installed"
 sleep 2
 fi
@@ -1424,7 +1477,7 @@ cp -rf vdr-plugin-osdteletext $REPO/
 mv -f vdr-plugin-osdteletext osdteletext
 cd ../..
 make plugins
-sed -i "s|-P'iptv'|& -P'osdteletext'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'osdteletext'|" /usr/local/bin/vdrrun
 cd /var/cache/vdr
 mkdir -p vtx
 echo "Vdr-Plugin-Osdteletext installed"
@@ -1468,7 +1521,7 @@ cd ttxtsubs
 #cd ../../..
 make
 make plugins
-sed -i "s|-P'iptv'|& -P'ttxtsubs'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'ttxtsubs'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Ttxtsubs installed"
 sleep 2
 fi
@@ -1509,7 +1562,7 @@ rm -rf patch_suspendoutput.tar.gz
 patch -p1 < suspendoutput_nooutput.patch
 patch -p1 < suspendoutput_compile.patch
 make & make install
-sed -i "s|-P'iptv'|& -P'suspendoutput -l'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'suspendoutput -l'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Suspendoutput installed"
 sleep 2
 fi
@@ -1574,7 +1627,7 @@ cp -rf $REPO/satellite_pack.tar.gz $PLUGINS/transponders
 cd transponders
 tar -zxvf satellite_pack.tar.gz
 rm -rf satellite_pack.tar.gz
-sed -i "s|-P'iptv'|& -P'channelscan'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'channelscan'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Channellscan installed"
 sleep 2
 fi
@@ -1637,7 +1690,7 @@ cd vdrmanager
 make && make install
 echo "*** vdrmanager.conf setup ***"
 cp -rf $VDRSRC/vdrmanager/vdr-vdrmanager/examples/*.conf $PLUGINS/
-sed -i "s|-P'iptv'|& -P'vdrmanager -p 6420 -P change'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'vdrmanager -p 6420 -P change'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Vdrmanager installed"
 sleep 2
 fi
@@ -1675,7 +1728,7 @@ cp -rf vdr-plugin-cecremote $REPO/
 mv -f vdr-plugin-cecremote cecremote
 cd ../..
 make plugins
-sed -i "s|-P'iptv'|& -P'cecremote'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'cecremote'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-CecRemote installed"
 sleep 2
 fi
@@ -1777,7 +1830,7 @@ cp -rf $REPO/menuorg.tar.gz /etc/vdr/plugins
 cd /etc/vdr/plugins
 tar xzvf menuorg.tar.gz
 rm -rf menuorg.tar.gz
-sed -i "s|-P'iptv'|& -P'menuorg'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'menuorg'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Menuorg installed"
 sleep 2
 fi
@@ -1812,7 +1865,7 @@ cp -rf vdr-plugin-chanman $REPO/
 mv -f vdr-plugin-chanman chanman
 cd chanman
 make
-sed -i "s|-P'iptv'|& -P'chanman'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'chanman'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Chanman installed"
 sleep 2
 fi
@@ -1847,7 +1900,7 @@ cp -rf vdr-plugin-channellists $REPO/
 mv -f vdr-plugin-channellists channellists
 cd channellists
 make
-sed -i "s|-P'iptv'|& -P'channellists'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'channellists'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Channellists installed"
 sleep 2
 fi
@@ -1913,7 +1966,7 @@ echo "*** streamdevhosts.conf setup ***"
 rm -rf $PLUGINS/streamdev-server/streamdevhosts.conf
 touch $PLUGINS/streamdev-server/streamdevhosts.conf
 echo "$ALLOWED" >> $PLUGINS/streamdev-server/streamdevhosts.conf
-sed -i "s|-P'iptv'|& -P'streamdev-server'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'streamdev-server'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-StreamDev installed"
 sleep 2
 fi
@@ -1951,7 +2004,7 @@ cp -rf vdr-plugin-vnsiserver $REPO/
 mv -f vdr-plugin-vnsiserver vnsiserver
 cd vnsiserver
 make && make install
-sed -i "s|-P'iptv'|& -P'vnsiserver'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'vnsiserver'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Vnsiserver installed"
 sleep 2
 fi
@@ -2018,7 +2071,7 @@ patch -p1 < 10_weatherforecast_debug.patch
 patch -p1 < 11_weatherforecast_i18n-it.patch
 cd ../../..
 make plugins
-sed -i "s|-P'iptv'|& -P'weatherforecast'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'weatherforecast'|" /usr/local/bin/vdrrun
 echo "Vdr-Plugin-Weatherforecast installed"
 sleep 2
 fi
@@ -2054,7 +2107,7 @@ cp -rf vdr-plugin-weatherng $REPO/
 mv -f vdr-plugin-weatherng weatherng
 cd weatherng
 make
-sed -i "s|-P'iptv'|& -P'weatherng'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'weatherng'|" /usr/local/bin/vdrrun
 cp -rf $VDRSRC/weatherng/weatherng /etc/vdr/plugins/
 fi
 cp -rf $VDRSRC/weatherng/weatherng/* /etc/vdr/plugins/weatherng/
@@ -2092,7 +2145,7 @@ cp -rf vdr-plugin-ciplus $REPO/
 mv vdr-plugin-ciplus ciplus
 cd ciplus
 make & make install 
-sed -i "s|-P'iptv'|& -P'ciplus'|" /usr/local/bin/vdrrun
+sed -i "s|-P'iptv -y /usr/local/bin/yt-dlp'|& -P'ciplus'|" /usr/local/bin/vdrrun
 fi
 echo "Vdr-Plugin-Ciplus installed"
 sleep 2
@@ -2118,6 +2171,411 @@ z);;
 esac;;
 #
 9)
+clear
+echo "                  Skin installer"; sleep 2
+clear
+echo ""
+while :
+do
+dialog --title "            ♦♦♦♦♦   Skins installer Script  ♦♦♦♦♦                    " --infobox "
+
+    ==========================================================================
+
+    *****  Install  *****                        *****  Remove  *****
+
+    [a]    SkinNopacity ....................... [a1]   SkinNopacity
+    [b]    Skindesigner ....................... [b1]   Skindesigner
+    [c]    Skinflatplus ....................... [c1]   Skinflatplus
+    [d]    Skin Elchi Hd ...................... [d1]   Skin Elchi
+    [e]    Skinsimple ......................... [e1]   Skinsimple
+    [f]    Text2Skin-NarrowHD ................. [d1]   Text2Skin-NarrowHD
+    [g]    SkinLCARSNG ........................ [g1]   SkinLCARSNG
+
+    [z]   Exit
+    ==========================================================================" 0 0
+
+echo -n "              Enter your menu choice = Submenu [a~g] -- Exit [z] :        "
+read yourch
+case $yourch in
+#
+a)
+clear
+echo "                    Installing SkinNopacity"; sleep 2
+apt -y install graphicsmagick-libmagick-dev-compat
+apt -y install zlib1g zlib1g-dev libexpat1 libexpat1-dev
+apt -y install libglib2.0-0 libpcre3 libpcre3-dev
+cd $VDRSRC
+if [ -f skin-nopacity/Makefile ]
+then  echo "SkinNopacity is already installed"
+else git clone https://gitlab.com/kamel5/SkinNopacity.git
+cp -rf SkinNopacity /home/`logname`/Vdr_repo/
+cd SkinNopacity
+make clean && make && make install
+sed -i "s|-P'dvbapi'|& -P'skinnopacity -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
+echo "SkinNopacity installed"
+sleep 2
+fi;;
+#
+a1)
+clear
+echo "                    Removing SkinNopacity"; sleep 2
+cd $VDRSRC
+if [ -f SkinNopacity/Makefile ]
+then rm -rf SkinNopacity
+rm -rf $REPO/SkinNopacity
+rm -rf $LIB/libvdr-skinnopacity.*
+sed -i "s|-P'skinnopacity -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun
+echo "SkinNopacity removed"
+sleep 2
+else echo "SkinNopacity ia not intalled"
+sleep 2
+fi;;
+#
+b) 
+clear
+echo "                    Installing Skindesigner";  sleep 2
+cd $VDRSRC
+apt-get -y install libcurl4 libcurl4-gnutls-dev librsvg2-dev libxml2-dev libcairo2-dev
+if [ -f skindesigner/Makefile ]
+then  echo "Skindesigner  is already installed"
+sleep 2
+else git clone https://gitlab.com/kamel5/skindesigner.git
+cp -rf skindesigner /home/`logname`/Vdr_repo/
+cd skindesigner
+make && make install
+cd /$LIB/skindesigner/scripts/
+ln -s temperatures.default temperatures
+ln -s vdrstats.default vdrstats
+sed -i "s|-P'dvbapi'|& -P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/'|" /usr/local/bin/vdrrun
+echo "Skindesigner installed"
+sleep 2
+fi
+#
+dialog --title "            ♦♦♦♦♦   Install Skindesigner Skins  ♦♦♦♦♦                    " --infobox "
+
+    =====================================
+
+    [1]    ShadyKISSPb
+    [2]    Blackhole
+    [3]    Blackhole Frodo
+    [4]    Holo
+    [5]    Bluestyle
+    [6]    SkinElchi
+    [7]    Reufer
+    [8]    Simplex
+    [9]    Tryouts
+
+    [z]   Exit
+    =====================================" 0 0
+
+echo -n "              Enter your menu choice = Submenu [1~9] -- Exit [z] :        "
+read yourch
+case $yourch in
+#
+1)
+clear
+echo "                    Installing ShadyKISSPb skin"
+sleep 2
+cd /etc/vdr/plugins/skindesigner/skins
+git clone https://gitlab.com/kamel5/shady_KISSpb.git
+cp -rf shady_KISSpb /home/`logname`/Vdr_repo/
+cd shady_KISSpb
+find -name *.theme  -exec mv -f {} /etc/vdr/themes/ \;;;
+2)
+clear
+echo "                    Installing Blackhole skin"
+cd /etc/vdr/plugins/skindesigner/skins
+git clone https://github.com/louisbraun/blackhole.git
+cp -rf blackhole /home/`logname`/Vdr_repo/
+cd blackhole
+find -name *.theme  -exec mv -f {} /etc/vdr/themes/ \;;;
+3)
+clear
+echo "                    Installing Blackhole Frodo skin"
+cd /etc/vdr/plugins/skindesigner/skins
+git clone https://github.com/FrodoVDR/blackholefrodo.git
+cp -rf blackholefrodo /home/`logname`/Vdr_repo/
+cd blackholefrodo
+find -name *.theme  -exec mv -f {} /etc/vdr/themes/ \;;;
+4)
+clear
+echo "                    Installing Holo skin"
+cd /etc/vdr/plugins/skindesigner/skins
+git clone https://github.com/CReimer/Holo.git
+cp -rf Holo /home/`logname`/Vdr_repo/
+cd Holo
+find -name *.theme  -exec mv -f {} /etc/vdr/themes/ \;;;
+5)
+clear
+echo "                    Installing Bluestyle skin"
+cd /etc/vdr/plugins/skindesigner/skins
+git clone https://github.com/mat130780/bluestyle.git
+cp -rf bluestyle /home/`logname`/Vdr_repo/
+cd bluestyle
+find -name *.theme  -exec mv -f {} /etc/vdr/themes/ \;;;
+6)
+clear
+echo "                    Installing SkinElchi skin"
+cd /etc/vdr/plugins/skindesigner/skins
+git clone https://github.com/CReimer/skinElchi.git
+cp -rf skinElchi /home/`logname`/Vdr_repo/
+cd skinElchi
+find -name *.theme  -exec mv -f {} /etc/vdr/themes/ \;;;
+7)
+clear
+echo "                    Installing Reufer skin"
+cd /etc/vdr/plugins/skindesigner/skins
+wget http://www.reufer.ch/vdr/skin-reufer/reufer.zip
+unzip reufer.zip
+mv -f reufer.zip /home/`logname`/Vdr_repo/
+cd reufer
+find -name *.theme  -exec mv -f {} /etc/vdr/themes/ \;;;
+8)
+clear
+echo "                    Installing Simplex skin"
+cd /etc/vdr/plugins/skindesigner/skins
+git clone https://github.com/louisbraun/simplex.git
+cp -rf simplex /home/`logname`/Vdr_repo/
+cd simplex
+find -name *.theme  -exec mv -f {} /etc/vdr/themes/ \;;;
+9)
+clear
+echo "                    Installing Tryouts skin"
+cd /etc/vdr/plugins/skindesigner/skins
+git clone https://github.com/BooStars/tryouts.git
+cp -rf tryouts /home/`logname`/Vdr_repo/
+cd tryouts
+find -name *.theme  -exec mv -f {} /etc/vdr/themes/ \;;;
+z);;
+esac;;
+#
+b1)
+clear
+echo "                    Removing Skindesigner";  sleep 2
+cd $VDRSRC
+if [ -f skindesigner/Makefile ]
+then rm -rf skindesigner
+cd $PLUGINS
+rm -rf skindesigner
+rm -rf $REPO/skindesigner
+rm -rf $LIB/libvdr-skindesigner.*
+rm -rf $LIB/skindesigner
+sed -i "s|-P'skindesigner -l /etc/vdr/logos/ -i /etc/vdr/plugins/skindesigner/skins/'||" /usr/local/bin/vdrrun
+echo "Skindesigner removed"
+sleep 2
+else echo "Skindesigner is not installed"
+sleep 2 
+fi;;
+#
+c)
+clear
+echo "                    Installing Skinflatplus"; sleep 2
+cd $VDRSRC
+apt -y install graphicsmagick-libmagick-dev-compat lm-sensors
+#apt -y install imagemagick libmagick++-6.q16-dev 
+if [ -f skin-flatplus/Makefile ]
+then  echo "Skinflatplus  is already installed"
+else git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git
+cp -rf vdr-plugin-skinflatplus /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-skinflatplus skinflatplus
+cd skinflatplus
+make install
+sed -i "s|-P'dvbapi'|& -P'skinflatplus -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
+cd $VDRSRC/skinflatplus/contrib/Fonts 
+cp -rf * /usr/share/fonts
+cd /lib/vdr/skinflatplus/widgets/temperatures/
+ln -s temperatures.default temperatures
+cd ../system_information
+ln -s system_information.ubuntu system_information
+cd ../weather/
+cp update_weather.conf.dist update_weather.conf
+echo "Skinflatplus installed"
+sleep 2
+fi;;
+#
+c1)
+clear
+echo "                    Removing Skinflatplus"; sleep 2
+cd $VDRSRC
+if [ -f skinflatplus/Makefile ]
+then rm -rf skinflatplus
+rm -rf $REPO/vdr-plugin-skinflatplus
+rm -rf $LIB/libvdr-skinflatplus.*
+rm -rf $LIB/skinflatplus
+sed -i "s|-P'skinflatplus -l /etc/vdr/logos'||" /usr/local/bin/vdrrun
+echo "Skinflatplus removed"
+sleep 2
+fi;;
+d)
+clear
+echo "                    Installing Skin Elchi HD"; sleep 2
+cd $VDRSRC
+apt -y install graphicsmagick-libmagick-dev-compat
+if [ -f skinelchi/Makefile ]
+then  echo "SkinElchi HD is already installed"
+else git clone https://github.com/FireFlyVDR/vdr-plugin-skinelchihd.git
+cp -rf -f vdr-plugin-skinelchihd /home/`logname`/Vdr_repo/
+mv -f vdr-plugin-skinelchihd skinelchihd
+cp -rf skinelchihd/themes/* /etc/vdr/themes/
+cd skinelchihd
+make IMAGELIB=graphicsmagick
+cd ../../..
+make plugins
+sed -i "s|-P'dvbapi'|& -P'skinelchihd -l /etc/vdr/logos/'|" /usr/local/bin/vdrrun
+echo "Skin Elchi HD installed"
+sleep 2
+fi;;
+#
+d1)
+clear
+echo "                    Removing Skin Elchi HD"; sleep 2
+cd $VDRSRC
+if [ -f skinelchihd/Makefile ]
+then rm -rf skinelchihd
+rm -rf $REPO/vdr-plugin-skinelchihd
+rm -rf $LIB/libvdr-skinelchihd.*
+sed -i "s|-P'skinelchihd -l /etc/vdr/logos/'||" /usr/local/bin/vdrrun
+echo "Skin Elchi HD removed"
+sleep 2
+else echo "Skin Elchi HD is not installed"
+sleep 2
+fi;;
+#
+e)
+clear
+echo "                    Installing Skinsimple"; sleep 2
+cd $VDRSRC
+apt -y install libgraphicsmagick++1-dev
+if [ -f skinsimple/Makefile ]
+then  echo "Skinsimple is already installed"
+else git clone https://gitlab.com/kamel5/skinsimple.git
+cp -rf skinsimple /home/`logname`/Vdr_repo/
+cd skinsimple
+make && make install
+sed -i "s|-P'dvbapi'|& -P'skinsimple'|" /usr/local/bin/vdrrun
+echo "Skinsimple installed"
+sleep 2
+fi
+#
+cd /home/`logname`/Vdr_repo/
+chmod -R 777 *
+cd $SRC/vdr
+make plugins install;;
+e1)
+clear
+echo "                    Removing Skinsimple"; sleep 2
+cd $VDRSRC
+if [ -f skinsimple/Makefile ]
+then rm -rf skinsimple
+rm -rf $REPO/skinsimple
+rm -rf $LIB/libvdr-skinsimple.*
+sed -i "s|-P'skinsimple'||" /usr/local/bin/vdrrun
+echo "Skinsimple removed"
+sleep 2
+else echo "Skinsimple is not installed"
+sleep 2
+fi;;
+#
+f)
+clear
+echo "                    Installing Text2Skin-NarrowHD"; sleep 2
+apt -y install libgraphicsmagick++1-dev
+cd $VDRSRC
+if [ -f text2skin/Makefile ]
+then  echo "Text2Skin-NarrowHD is already installed"
+sleep 2
+else git clone https://github.com/vdr-projects/vdr-plugin-text2skin.git
+cp -rf vdr-plugin-text2skin $REPO/
+mv vdr-plugin-text2skin text2skin
+cp -rf $REPO/patch_text2skin.tar.gz $VDRSRC/text2skin
+cd text2skin
+tar -zxvf patch_text2skin.tar.gz
+rm -r patch_text2skin.tar.gz
+patch -p1 < text2skin_livebuffer.patch
+patch -p1 < text2skin_render.patch
+patch -p1 < text2skin_graphicsmagick.patch
+make
+cd ../../..
+make plugins install
+cd $VDRSRC
+git clone https://github.com/vdr-projects/text2skin-narrowhd.git
+cp -rf text2skin-narrowhd $REPO/
+cp -rf $REPO/NarrowHD_skin.patch.tar.gz $VDRSRC/text2skin-narrowhd
+cd text2skin-narrowhd
+tar -zxvf NarrowHD_skin.patch.tar.gz
+rm -r NarrowHD_skin.patch.tar.gz
+patch -p1 < NarrowHD_skin.patch
+make install
+#cd $TEXT2SKIN/NarrowHD
+#rm -r logos
+# sudo ln -s /etc/vdr/logos /etc/vdr/plugins/text2skin/NarrowHD/
+sed -i "s|-P'dvbapi'|& -P'text2skin'|" /usr/local/bin/vdrrun
+echo "Vdr-Plugin-Text2skin & NarrowHD skin installed"
+sleep 2
+fi;;
+#
+f1)
+clear
+echo "                    Removing Text2Skin-NarrowHD"; sleep 2
+cd $VDRSRC
+if [ -f text2skin/Makefile ]; then
+rm -rf text2skin
+rm -rf text2skin-narrowhd
+rm -rf $REPO/vdr-plugin-text2skin
+rm -rf $LIB/libvdr-text2skin.*
+rm -rf $PLUGINS/text2skin
+rm -rf /etc/vdr/themes/NarrowHD-default.theme
+sed -i "s|-P'text2skin'||" /usr/local/bin/vdrrun
+echo "Text2Skin-NarrowHD removed"
+sleep 2
+else echo "Text2Skin-NarrowHD ia not intalled"
+sleep 2
+fi;;
+#
+g)
+clear
+echo "                    Installing SkinLCARSNG"; sleep 2
+cd $VDRSRC
+if [ -f skinlcarsng/Makefile ]
+then  echo "SkinLCARSNG is already installed"
+sleep 2
+else git clone https://gitlab.com/kamel5/skinlcarsng.git
+cp -rf skinlcarsng $REPO/
+cd skinlcarsng
+make && make install
+sed -i "s|-P'dvbapi'|& -P'skinlcarsng'|" /usr/local/bin/vdrrun
+cd /etc/vdr/themes
+ln -s lcars-BlueGlass.theme lcarsng-Bluegass.theme
+ln -s lcars-390Lb.theme lcarsng-390Lb.theme
+ln -s lcars-LbSense.theme lcarsng-LbSense.theme
+echo "SkinLCARSNG installed"
+sleep 2
+fi;;
+#
+g1)
+clear
+echo "                    Removing SkinLCARSNG"; sleep 2
+cd $VDRSRC
+if [ -f skinlcarsng/Makefile ]
+then rm -rf skinlcarsng
+rm -rf $REPO/skinlcarsng
+rm -rf $LIB/libvdr-skinlcarsng.*
+rm -rf ln lcars-BlueGlass.theme lcarsng-Bluegass.theme
+rm -rf ln lcars-390Lb.theme lcarsng-390Lb.theme
+rm -rf ln lcars-LbSense.theme lcarsng-LbSense.theme
+sed -i "s|-P'skinlcarsng'||" /usr/local/bin/vdrrun
+echo "SkinLCARSNG removed"
+sleep 2
+else echo "SkinLCARSNG ia not intalled"
+sleep 2
+fi;;
+#
+z)
+break
+esac
+done;;
+#
+10)
 clear
 cd /home/`logname`
 chmod -R 777 Vdr_repo

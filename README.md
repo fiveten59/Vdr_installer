@@ -4,7 +4,7 @@ Two scripts:
 - vdr_installer_2.7.3 installs Vdr on Ubuntu with essential plugins (in about 15 min)
 - vdr_plugins_installer installs others plugins 
   
-# Script name: vdr_installer_2.7.3
+# Script name: vdr_installer_2.7.5
 A script for installing Vdr 
 tested on Ubuntu 22.04 - 24.04 
 
@@ -26,21 +26,22 @@ At first the script install some libraries
 Then follow the script  ...
 
 Point 1) 
-* submenu a) the script creates a local repository folder (Vdr_repo) downloading FFmpeg 7.0.0 - Vdr 2.7.x - some basic plugins (softhddevice dvbapi nopacity radio iptv) + other files needed by vdr
-* submenu b) reinstall all
+* submenu a) the script creates a local repository folder (Vdr_repo) downloading FFmpeg 7.1 - Vdr 2.7.x - some basic plugins (softhddevice dvbapi skinflatplus radio iptv vnsiserver) + other files needed by vdr
+* submenu b) update all
 
 Point 2) 
-* submenu a) install ffmpeg
-* submenu c) install Infra-Red Remotes Control (eventlircd)
-* submenu b) Install Sat firmware 
-* submenu d) ONLY FOR Intel Devices (Intel vaapi driver) in many case not needed
+* submenu a) install ffmpeg (ubuntu repo)
+* submenu b) install ffmpeg (7.1)
+* submenu c) install Lirc (Only Ubuntu 24.04 manually)
+* submenu d) install Infra-Red Remotes Control (eventlircd) 
+* submenu e) Install Sat firmware 
 
 Point 3) 
 * submenu a) Install VDR-2.7.x
 * submenu b) Uninstall VDR-2.7.x
 
 Point 4) 
-* submenu a) Install Plugins (softhddevice dvbapi skinnopacity radio iptv vnsiserver)
+* submenu a) Install Plugins (softhddevice dvbapi skinflatplus radio iptv vnsiserver)
 * submenu b) Uninstall Plugins
 
 Point 5) 
@@ -51,7 +52,7 @@ Point 6) Exit
 
 Info:
 * You can put your channells list as usual in /etc/vdr
-* plugins libs are placed in /lib/vdr
+* plugins libs are placed in /usr/local/lib/vdr
 
 If you'd like add others plugins you can use another script called Vdr_plugins_installer in the same github repo
     

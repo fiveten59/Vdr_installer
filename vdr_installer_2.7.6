@@ -1,23 +1,24 @@
 #!/bin/bash
 ################################## !!! README !!! #######################################
-# Script name: vdr_installer_2.7.5
+# Script name: vdr_installer_2.7.6
 # Version: Git Repository Master (https://github.com/fiveten59/Vdr_installer)
 # Tested on Ubuntu 22.04 - 24.04
 # chmod the script
-# then load it simply typing: sudo ./vdr_installer_2.7.5
+# then load it simply typing: sudo ./vdr_installer_2.7.6
 #########################################################################################
 #
 clear
 REPO="/home/`logname`/Vdr_repo"
-PLUGIN="--lirc -P'dvbapi' -P'softhddevice -a hw:0,0 -v cpu-glx -f' -P'skinflatplus -l /etc/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio -l /etc/vdr/plugins/radio/rtextUnten-kleo2.mpg'"
+PLUGIN="--lirc -P'dvbapi' -P'softhddevice -a hw:0,0 -v cpu-glx -f' -P'skinflatplus -l /var/lib/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio -l /var/lib/vdr/plugins/radio/rtextUnten-kleo2.mpg'"
 BIN="/usr/local/bin"
 SRC='/usr/local/src'
 VDRSRC=''$SRC'/vdr/PLUGINS/src'
 LIBCONF='/usr/local/lib/vdr'
 VDRCONF='/var/lib/vdr'
-VDR='vdr-2.7.5'
+VDR='vdr-2.7.6'
 TEMP='/tmp'
-SHARE='/usr/share/vdr/plugins'
+SHARE='/usr/local/share/vdr/plugins'
+FONTS='/usr/share/fonts'
 Remind3='is already installed'
 Remind4='are already installed'
 Remind5='is not installed'
@@ -77,15 +78,15 @@ apt -y install autopoint automake cmake libtool unzip
 mkdir -p $SRC/ffmpeg_sources
 mkdir -p /home/`logname`/.config/autostart
 #
-dialog --title " VDR 2.7.5 Installer " --infobox "
+dialog --title " VDR 2.7.6 Installer " --infobox "
 
     A special thanks goes to Klaus Schmidinger Vdr Developer
 
-    Script name: vdr_installer_2.7.5
-    Version: 2.7.5
+    Script name: vdr_installer_2.7.6
+    Version: 2.7.6
     Tested on Ubuntu Ubuntu 22.04 - 24.04
-    chmod 755 the script 'vdr_installer_2.7.5'
-    then load it simply typing: sudo ./vdr_installer_2.7.5" 0 0
+    chmod 755 the script 'vdr_installer_2.7.6'
+    then load it simply typing: sudo ./vdr_installer_2.7.6" 0 0
 
 echo "                    Press Enter to continue ..."
 sleep 1
@@ -96,7 +97,7 @@ while :
 do
 clear
 echo ""
-dialog --title "   *****   VDR 2.7.5 Installer   *****   " --infobox "
+dialog --title "   *****   VDR 2.7.6 Installer   *****   " --infobox "
 
 	   ================================================================
            [1]	Download & Upgrade Local Repository
@@ -154,11 +155,11 @@ cd Vdr_repo
 echo "Downloading Vdr and Plugins on local folder"
 sleep 1
 
-if [ -e $REPO/vdr-2.7.5 ]; then
+if [ -e $REPO/vdr-2.7.6 ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.7.5
+    git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.7.6
   fi
 
 if [ -e $REPO/vdr-plugin-softhddevice ]; then
@@ -216,11 +217,11 @@ else
     git clone https://github.com/LibreELEC/eventlircd.git
 fi
 
-if [ -e $REPO/ffmpeg-7.1.tar.bz2 ]; then
+if [ -e $REPO/ffmpeg-7.1.1.tar.bz2 ]; then
   echo " ..... File exists ....."
 else
   echo "File not found ... Downloading it now ....."
-    wget https://ffmpeg.org/releases/ffmpeg-7.1.tar.bz2
+    wget https://ffmpeg.org/releases/ffmpeg-7.1.1.tar.bz2
 fi
 
 if [ -e $REPO/yt-dlp ]; then
@@ -251,7 +252,7 @@ cd Vdr_repo
 
 echo "                    Downloading Vdr and Plugins on local repo"
 
-git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.7.5
+git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.7.6
 git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git
 git clone https://github.com/manio/vdr-plugin-dvbapi.git
 git clone https://github.com/siricco/vdr-plugin-radio.git
@@ -265,7 +266,7 @@ git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git
 echo "                    Downloading others"
 
 git clone https://github.com/Libreelec/eventlircd.git
-wget https://ffmpeg.org/releases/ffmpeg-7.1.tar.bz2
+wget https://ffmpeg.org/releases/ffmpeg-7.1.1.tar.bz2
 wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
 wget https://github.com/fiveten59/Logos/archive/refs/heads/master.zip
 unzip master.zip; rm -rf master.zip; mv -f Logos-master logos
@@ -339,7 +340,6 @@ apt -y install libsoxr-dev libspeex-dev libtwolame-dev libvidstab-dev libvpx-dev
 apt -y install libssh-dev libwebp-dev libzvbi-dev libopenal-dev libopus-dev
 apt -y install liblilv-dev libopenjp2-7-dev libsvtav1enc-dev libffmpeg-nvenc-dev libjack-dev
 
-#configuration: --prefix=HOME/ffmpeg_build --enable-static --enable-shared --enable-pic --prefix=/root/ffmpeg_build --pkg-config-flags=--static --extra-cflags=-I/root/ffmpeg_build/include --extra-ldflags=-L/root/ffmpeg_build/lib --extra-libs='-lpthread -lm' --ld=g++ --bindir=/root/bin
 echo "                    Installing Ffmpeg"
 sleep 1
 if [ -d $SRC/ffmpeg_sources/ffmpeg ]
@@ -347,10 +347,10 @@ then echo "Ffmpeg is already installed"; sleep 3
 else
     echo "                    Wait for a few seconds ..."
 cd $SRC/ffmpeg_sources
-cp -rf $REPO/ffmpeg-7.1.tar.bz2 $SRC/ffmpeg_sources/
-tar xjvf ffmpeg-7.1.tar.bz2
-mv ffmpeg-7.1 ffmpeg
-rm -rf ffmpeg-7.1.tar.bz2
+cp -rf $REPO/ffmpeg-7.1.1.tar.bz2 $SRC/ffmpeg_sources/
+tar xjvf ffmpeg-7.1.1.tar.bz2
+mv ffmpeg-7.1.1 ffmpeg
+rm -rf ffmpeg-7.1.1.tar.bz2
 cd ffmpeg
 ./configure --extra-libs="-ldl" --enable-static --ld=g++ --enable-gpl --enable-libfreetype --enable-libmp3lame --enable-openssl --enable-libxcb --enable-libopus --enable-libtheora --enable-libvorbis --enable-cuvid --enable-nonfree --enable-libxvid --enable-opengl --enable-vdpau --enable-vaapi --enable-pic --enable-shared --disable-doc --enable-swresample --disable-cuda-sdk --enable-libpulse --enable-libx264 --enable-libx265 --enable-libass --enable-libshine --enable-zlib --disable-vulkan --enable-libaom --enable-libfdk-aac --enable-libsvtav1 --enable-libdav1d --enable-libfontconfig --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcodec2 --enable-libfribidi --enable-libgme --enable-libgsm --enable-libxavs2 --enable-libmysofa --enable-libopenh264 --enable-libopenmpt --enable-librsvg --enable-libsnappy --enable-libdrm --enable-libsoxr --enable-libspeex --enable-libtwolame --enable-libvidstab --enable-libvpx --enable-libssh --enable-libwebp --enable-libzvbi --enable-openal  --enable-version3  --enable-libjack --enable-libopenjpeg --enable-libxml2 --enable-lv2 --enable-xlib
 
@@ -556,10 +556,10 @@ done;;
 #
 3)
 clear
-dialog --title "   ** Install/Remove VDR-2.7.5   **   " --infobox "
+dialog --title "   ** Install/Remove VDR-2.7.6   **   " --infobox "
 
    ---------------------------------------------------------------
-        [a]  Install VDR-2.7.5
+        [a]  Install VDR-2.7.6
         [b]  Remove VDR-2.*.*
 
         [z]  Skip
@@ -578,37 +578,37 @@ apt -y install libfontconfig1-dev libfribidi-dev gettext
 apt -y install libncurses5-dev libncursesw5-dev
 #
 cd $SRC
-cp -rf $REPO/vdr-2.7.5 $SRC
+cp -rf $REPO/vdr-2.7.6 $SRC
 ln -s $VDR vdr
 #
 echo "Patching VDR"
 sleep 1
 cd vdr
-cp -rf $REPO/vdr-patches.2.7.5.tar.gz $SRC/vdr/
-tar -zxvf vdr-patches.2.7.5.tar.gz
-rm -rf vdr-patches.2.7.5.tar.gz
+cp -rf $REPO/vdr-patches.2.7.6.tar.gz $SRC/vdr/
+tar -zxvf vdr-patches.2.7.6.tar.gz
+rm -rf vdr-patches.2.7.6.tar.gz
 sleep 1
 #
 echo "                    Patching channellscan"
 patch -p1 < vdr-dvbchan.patch
 echo "                    Patching zapcockpit"
-patch -p1 < vdr-2.7.5-zapcockpit.patch
+patch -p1 < zapcockpit.patch
 echo "                    Patching svdrphosts"
 patch -p1 < vdr_svdrphosts.patch
-echo "                    Fix plugins"
-patch -p1 < vdr-2.7.5_fix_plugins.patch
+echo "                    Fix vnsiserver"
+patch -p0 < fix_vnsiserver.patch
 echo "                    Undelete patch"
-patch -p1 < vdr-2.7.5-undelete.patch
+patch -p1 < undelete.patch
 
 #
 make && make install
 echo "                    Final compilation"
 sleep 1
-cp *.conf /etc/vdr
+#cp *.conf /etc/vdr
 #
 apt-mark hold vdr
 sleep 2
-echo "                    VDR-2.7.5 installed"; sleep 1;;
+echo "                    VDR-2.7.6 installed"; sleep 1;;
 #
 b)
 clear
@@ -696,9 +696,9 @@ cd skinflatplus
 make
 cd ../../..
 make install
-cd /usr/local/lib/vdr/skinflatplus/widgets/temperatures/
+cd $LIBCONF/skinflatplus/widgets/temperatures/
 ln -s temperatures.default temperatures
-cd ../system_information
+cd $LIBCONF/skinflatplus/widgets/system_information
 ln -s system_information.ubuntu system_information
 echo "
 
@@ -712,6 +712,10 @@ cd $VDRSRC
 cp -rf $REPO/vdr-plugin-iptv /$VDRSRC
 mv -f vdr-plugin-iptv iptv
 cd iptv
+cp -rf $REPO/patch_iptv.tar.gz /$VDRSRC/iptv
+tar -zxvf patch_iptv.tar.gz
+rm -rf patch_iptv.tar.gz
+patch -p1 < vlc2iptv.patch
 make & make install
 echo "
                     Vdr-Plugin-Iptv installed"; sleep 1
@@ -721,15 +725,13 @@ echo "
 sleep 1
 cd $VDRSRC
 cp -rf $REPO/vdr-plugin-radio /$VDRSRC
-mv vdr-plugin-radio radio
+mv -f vdr-plugin-radio radio
 cd radio
 cp -rf $REPO/patch_radio.tar.gz $VDRSRC/radio
 tar -zxvf patch_radio.tar.gz
 patch -p1 < fix_radio.patch
 rm -rf patch_radio.tar.gz
 make && make install
-cd ../../..
-make plugins install
 echo "
                     Vdr-Plugin-Radio installed"; sleep 1
 #
@@ -740,7 +742,7 @@ cd $VDRSRC
 cp -rf $REPO/vdr-plugin-vnsiserver /$VDRSRC/
 mv vdr-plugin-vnsiserver vnsiserver
 cd vnsiserver
-make && make install
+make && make install LIBDIR=/usr/local/lib/vdr
 #
 echo " 
                    Installing Vdr-Plugin-Dvbapi" sleep 1
@@ -751,7 +753,6 @@ mv vdr-plugin-dvbapi dvbapi
 cd dvbapi
 make && make install
 echo "
-
                     Vdr-Plugin-Dvbapi installed"; sleep 1
 #
 cd $SRC/vdr
@@ -760,7 +761,7 @@ echo "
                     Vdr-Plugin-Vnsiserver installed"; sleep 1
 #
 echo "                    
-                    VDR-2.7.5 plugins installed"; sleep 1
+                    VDR-2.7.6 plugins installed"; sleep 1
 echo "
 ============================================================================================================
 For more Vdr plugins pls visit https://github.com/fiveten59/Vdr_installer and download Vdr_plugins_installer
@@ -778,24 +779,42 @@ rm -rf radio
 rm -rf vnsiserver
 rm -rf dvbapi
 cd $LIBCONF
+rm -rf libvdr-skinflatplus.*
 rm -rf libvdr-softhddevice.*
 rm -rf libvdr-skinflatplus.*
 rm -rf libvdr-iptv.*
 rm -rf libvdr-radio.*
 rm -rf libvdr-vnsiserver.*
 rm -rf libvdr-dvbapi.*
+cd $VDRCONF/plugins
+rm -rf skinflatplus
+rm -rf iptv
+rm -rf radio
+cd $SHARE
+rm -rf skinflatplus
+cd $FONTS
+rm -rf skinflatplus
+rm -rf iptv
+rm -rf dvbapi
+rm -rf radio
+rm -rf softhddevice
+rm -rf vnsiserver
+rm -rf temperatures
+rm -rf system_information
 echo "VDR-2.x.* plugins removed"; sleep 1;;
 z);;
 #
 esac;;
 #
 5)
+#cd /etc/vdr
+#mkdir -p plugins
 clear
 dialog --title "   ** Final configuration   " --infobox "
 ----------------------------------------------------------------------------------
         [a]    Install (icons fonts channells diseqc start-scripts & others)
 
-        [z]    Skip 
+        [z]    Skip
 ---------------------------------------------------------------------------------- " 0 0
 echo -n "        Enter your menu choice  = Install [a]  ~~ Skip [z]    "
 read yourch
@@ -832,15 +851,15 @@ echo "Translations installed"; sleep 1
 fi
 #
 echo "                    keymacros.conf setup"
-rm -rf /var/lib/vdr/keymacros.conf
-touch /var/lib/vdr/keymacros.conf
+rm -rf  $VDRCONF/keymacros.conf
+touch  $VDRCONF/keymacros.conf
 echo "# Remote control key macros for VDR
 
 Red       Recordings
 Green     @channelscan
 Yellow    Info
 Blue      @tvguide
-Ok        Channels" >> /var/lib/vdr/keymacros.conf
+Ok        Channels" >> $VDRCONF/keymacros.conf
 echo "keymacros installed"; sleep 1
 #
 echo "                    Installing True Type Fonts"
@@ -859,16 +878,16 @@ fi
 #
 echo "                    Install Channels logos"
 sleep 1
-if [ -f /var/lib/vdr/logos/2be.png ]
+if [ -f $VDRCONF/logos/2be.png ]
 then echo "Logos are already installed"
 else
-cp -rf $REPO/logos /var/lib/vdr/
+cp -rf $REPO/logos $VDRCONF
 echo "Channels logos installed"; sleep 1
 fi
 #
 echo "                    Channels setup"
 sleep 1
-cd /var/lib/vdr/
+cd $VDRCONF
 rm -rf channels.conf
 clear
 dialog --title "   ** Channells list **   " --infobox "
@@ -886,7 +905,7 @@ read yourch
 case $yourch in
 a) 
 clear
-cp -rf $REPO/channels.conf.mono_hotbird.tar.gz /var/lib/vdr/
+cp -rf $REPO/channels.conf.mono_hotbird.tar.gz $VDRCONF
 tar -zxvf channels.conf.mono_hotbird.tar.gz
 rm -rf channels.conf.mono_hotbird.tar.gz
 echo "                    Channell MONO13 list installed"
@@ -894,7 +913,7 @@ sleep 1;;
 #
 b)
 clear
-cp -rf $REPO/channels.conf.dual.tar.gz /var/lib/vdr/
+cp -rf $REPO/channels.conf.dual.tar.gz $VDRCONF
 tar -zxvf channels.conf.dual.tar.gz
 rm -rf channels.conf.dual.tar.gz
 echo "                    Channell DUAL list installed"
@@ -902,7 +921,7 @@ sleep 1;;
 #
 c)
 clear
-cp -rf $REPO/channels.conf.trial.tar.gz /var/lib/vdr/
+cp -rf $REPO/channels.conf.trial.tar.gz $VDRCONF
 tar -zxvf channels.conf.trial.tar.gz
 rm -rf channels.conf.trial.tar.gz
 echo "                    Channell TRIAL list installed"
@@ -910,7 +929,7 @@ sleep 1;;
 #
 d)
 clear
-cp -rf $REPO/channels-w_scan2-Astra_19.conf.tar.gz /var/lib/vdr/
+cp -rf $REPO/channels-w_scan2-Astra_19.conf.tar.gz $VDRCONF
 tar -zxvf channels-w_scan2-Astra_19.conf.tar.gz
 rm -rf channels-w_scan2-Astra_19.conf.tar.gz
 echo "                    Channell MONO19 list installed"
@@ -918,7 +937,7 @@ sleep 1;;
 #
 e)
 clear
-cp -rf $REPO/Kodi_Frontend_channels.tar.gz /var/lib/vdr/
+cp -rf $REPO/Kodi_Frontend_channels.tar.gz $VDRCONF
 tar -zxvf Kodi_Frontend_channels.tar.gz
 rm -rf Kodi_Frontend_channels.tar.gz
 echo "                    Kodi Frontend channels list installed"
@@ -944,22 +963,22 @@ case $yourch in
 #
 1) 
 clear
-echo "$MONO13" >> /var/lib/vdr/diseqc.conf
+echo "$MONO13" >> $VDRCONF/diseqc.conf
 echo "                    Hotbird Diseqc installed"
 sleep 1;;
 2)
 clear
-echo "$DUAL" >> /var/lib/vdr/diseqc.conf
+echo "$DUAL" >>  $VDRCONF/diseqc.conf
 echo "                    Dual Diseqc installed"
 sleep 1;;
 3)
 clear
-echo "$TRIAL" >> /var/lib/vdr/diseqc.conf
+echo "$TRIAL" >>  $VDRCONF/diseqc.conf
 echo "                    Trial Diseqc installed"
 sleep 1;;
 4)
 clear
-echo "$MONO19" >> /var/lib/vdr/diseqc.conf
+echo "$MONO19" >>  $VDRCONF/diseqc.conf
 echo "                    Astra Diseqc installed"
 sleep 1;;
 z);;
@@ -968,12 +987,11 @@ esac
 echo "                    Configuring Iptv"
 sleep 1
 sed -i 's/geteuid/getppid/' /usr/bin/vlc
-if [ -f /$VDRCONF/iptv/channels/Y100.conf ]
-then echo "Iptv $Remind3"
+if [ -f  $VDRCONF/plugins/iptv/channels/Y100.conf ]
+then echo "Iptv already configured"; sleep 1
 else
-cp -rf $REPO/iptv_conf.tar.gz /$VDRCONF/plugins/iptv/
-cd /$VDRCONF/plugins/iptv/
-rm -rf vlc2iptv
+cp -rf $REPO/iptv_conf.tar.gz $VDRCONF/plugins/iptv
+cd  $VDRCONF/plugins/iptv
 tar -zxvf iptv_conf.tar.gz
 rm -rf iptv_conf.tar.gz
 cd channels
@@ -981,34 +999,44 @@ sudo chmod 777 *
 fi
 if [ -f /$BIN/yt-dlp ]
 then echo "yt-dlp $Remind3"
+sleep 1
 else
 cp -rf $REPO/yt-dlp /$BIN
 chmod 755 /$BIN/yt-dlp
 echo "Iptv configured"; sleep 1
 fi
 #
+echo "                    Configuring Vnsiserver"
+sleep 1
+if [ -f  $VDRCONF/plugins/allowed_hosts.conf ]
+then echo "Vnsiserver already configured"
+sleep 1
+else
+cp -rf $VDRSRC/vnsiserver/vnsiserver/allowed_hosts.conf /$VDRCONF/plugins/
+echo "Vnsiserver configured"; sleep 1
+fi
+#
 echo "                    Configuring Radio"
 sleep 1
-cd /$VDRCONF/plugins/
+if [ -f  $VDRCONF/plugins/radio/radioinfo-0-256 ]
+then echo "Radio already configured"
+else
+cd $VDRCONF/plugins
 mkdir -p radio
 cd radio
-cp -rf $VDRSRC/radio/config/mpegstill/* /$VDRCONF/plugins/radio/
-cp -rf $REPO/radio_scripts.tar.gz /$VDRCONF/plugins/radio/
+cp -rf $VDRSRC/radio/config/mpegstill/* $VDRCONF/plugins/radio/
+cp -rf $REPO/radio_scripts.tar.gz $VDRCONF/plugins/radio/
 tar -zxvf radio_scripts.tar.gz
 rm -rf radio_scripts.tar.gz
 echo "Radio configured"; sleep 1
-#
-echo "                    Configuring Vnsiserver"
-sleep 1
-cp -rf $VDRSRC/vnsiserver/vnsiserver/allowed_hosts.conf /$VDRCONF/plugins/vnsiserver
-echo "Vnsiserver configured"; sleep 1
+fi
 #
 echo "                    Install default Skin for Vdr"
 sleep 1
-if [ -f /var/lib/vdr/themes/checklcars ]
+if [ -f  $VDRCONF/themes/checklcars ]
 then echo "Default Skin is already installed"
-else cp -rf $REPO/lcars_pack.tar.gz /var/lib/vdr/themes
-cd /var/lib/vdr/themes
+else cp -rf $REPO/lcars_pack.tar.gz $VDRCONF/themes
+cd  $VDRCONF/themes
 tar -zxvf lcars_pack.tar.gz
 rm -rf lcars_pack.tar.gz
 echo "Default Skin installed"
@@ -1072,7 +1100,7 @@ touch $BIN/vdrrun
 echo '#!/bin/bash
 # File name: vdrrun
 
-/usr/local/bin/vdr -c /etc/vdr -l 3 -u root '$PLUGIN' -s /usr/local/bin/systempoweroff
+/usr/local/bin/vdr -l 3 -u root '$PLUGIN' -s /usr/local/bin/systempoweroff
 
 # check system with "aplay -l"
 # for hdmi nvidia audio -P softhddevice -a hw:1,n -f
@@ -1128,7 +1156,7 @@ Type=Application
 Name=Vdr
 Description=Start of Vdr
 Icon=/usr/local/src/icone/vdr.png
-Exec=sudo /etc/init.d/vdr start
+Exec=sudo /etc/init.d/vdr start > /dev/null 2>&1
 " >> /usr/share/applications/Vdr.desktop
 chmod 755 /usr/share/applications/Vdr.desktop
 #
@@ -1141,14 +1169,12 @@ Type=Application
 Name=KillVdr
 Description=Kill Vdr
 Icon=/usr/local/src/icone/killvdr.png
-Exec=sudo /etc/init.d/vdr stop" >> /usr/share/applications/KillVdr.desktop
+Exec=sudo /etc/init.d/vdr stop > /dev/null 2>&1" >> /usr/share/applications/KillVdr.desktop
 chmod 755 /usr/share/applications/KillVdr.desktop
 echo "Vdr start & kill icons created"; sleep 1
 #
 cd /home/`logname`
 chmod -R 777 Vdr_repo
-cd /var/lib/vdr
-cp -rf * /etc/vdr
 chmod 777 /srv/vdr/video
 ln -s /usr/local/bin/vdrrun /home/`logname`/vdrrun
 chmod 777 /home/`logname`/vdrrun

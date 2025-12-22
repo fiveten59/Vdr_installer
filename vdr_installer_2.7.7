@@ -9,7 +9,7 @@
 #
 clear
 REPO="/home/`logname`/Vdr_repo"
-PLUGIN="--lirc -P'dvbapi' -P'softhddevice -a hw:0,0 -v cpu-glx -f' -P'skinflatplus -l /var/lib/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio -l /var/lib/vdr/plugins/radio/rtextUnten-kleo2.mpg'"
+PLUGIN="--lirc -P'dvbapi' -P'softhddevice -a hw:0,0 -v cpu-glx -f' -P'skinflatplus -l /var/lib/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'mpv -a alsa/front:CARD=PCH,DEV=0 -v gpu -h auto -b / -l ita' -P'radio -l /var/lib/vdr/plugins/radio/rtextUnten-kleo2.mpg' -P'tvguide'"
 BIN="/usr/local/bin"
 SRC='/usr/local/src'
 VDRSRC=''$SRC'/vdr/PLUGINS/src'
@@ -100,7 +100,7 @@ echo ""
 dialog --title "   *****   VDR 2.7.7 Installer   *****   " --infobox "
 
 	   ================================================================
-           [1]	Download & Upgrade Local Repository
+	   [1]	Download & Upgrade Local Repository
 	   [Submenu] ~~  Local Repository Directory ~ Install - Upgrade
 	   ================================================================
 	   [2]	FFMPEG & Infrared Control & Sat Firmware
@@ -289,7 +289,7 @@ unzip master.zip; rm -rf master.zip; mv -f Logos-master logos
 #
 cd ..
 chmod -R 777 Vdr_repo;;
-z) ;;
+z) clear;;
 esac ;;
 #
 2)
@@ -498,7 +498,6 @@ sleep 1
 cd /home/`logname`/.config/autostart
 rm -rf eventlircd-autostart.desktop
 touch eventlircd-autostart.desktop
-
 echo '[Desktop Entry]
 Type=Application
 Name[it]=Eventlircd
@@ -570,7 +569,7 @@ rm -rf /etc/sudoers.d/eventlircd
 rm -rf $SRC/eventlircd
 echo "Eventlircd removed"; sleep 1;;
 #
-z)
+z) clear
 break
 esac
 done;;
@@ -616,8 +615,6 @@ echo "                    Patching zapcockpit"
 patch -p1 < zapcockpit.patch
 echo "                    Patching svdrphosts"
 patch -p1 < vdr_svdrphosts.patch
-echo "                    Undelete patch"
-patch -p1 < undelete.patch
 echo "                    Menuorg patch"
 patch -p1 < menuorg.patch
 echo "                    Mainmenuhook patch"
@@ -674,7 +671,7 @@ rm -rf /usr/local/lib/pkgconfig/vdr.pc
 #
 echo "VDR-2.x.* removed"; sleep 1;;
 #
-z);;
+z) clear;;
 esac;;
 #
 4)
@@ -820,8 +817,8 @@ rm -rf iptv
 rm -rf radio
 rm -rf vnsiserver
 rm -rf dvbapi
-rm -rf tvguide
 rm -rf mpv
+rm -rf tvguide
 cd $LIBCONF
 rm -rf libvdr-skinflatplus.*
 rm -rf libvdr-softhddevice.*
@@ -830,8 +827,8 @@ rm -rf libvdr-iptv.*
 rm -rf libvdr-radio.*
 rm -rf libvdr-vnsiserver.*
 rm -rf libvdr-dvbapi.*
-rm -rf libvdr-tvguide.*
 rm -rf libvdr-mpv.*
+rm -rf libvdr-tvguide.*
 cd $VDRCONF/plugins
 rm -rf skinflatplus
 rm -rf iptv
@@ -842,7 +839,7 @@ cd $SHARE
 rm -rf skinflatplus
 #
 echo "VDR-2.x.* plugins removed"; sleep 1;;
-z);;
+z) clear;;
 #
 esac;;
 #
@@ -916,12 +913,10 @@ fi
 #
 echo "                    Install Channels logos"
 sleep 1
-if [ -f $VDRCONF/logos/2be.png ]
-then echo "Logos are already installed"
-else
+cd $VDRCONF
+rm -rf logos
 cp -rf $REPO/logos $VDRCONF
 echo "Channels logos installed"; sleep 1
-fi
 #
 echo "                    Channels setup"
 sleep 1
@@ -934,7 +929,7 @@ dialog --title "   ** Channells list **   " --infobox "
         [b]    Dual 13, 19.2°E
         [c]    Trial 9, 13, 19.2°E
         [d]    Astra 19.2°E
-        [e]    Kodi Frontend channels list
+        [e]    Channels list + Tv Iptv
 
         [z]    Skip
    ---------------------------------------------- " 0 0
@@ -975,18 +970,18 @@ sleep 1;;
 #
 e)
 clear
-cp -rf $REPO/Kodi_Frontend_channels.tar.gz $VDRCONF
-tar -zxvf Kodi_Frontend_channels.tar.gz
-rm -rf Kodi_Frontend_channels.tar.gz
-echo "                    Kodi Frontend channels list installed"
+cp -rf $REPO/tv_iptv_channels.tar.gz $VDRCONF
+tar -zxvf tv_iptv_channels.tar.gz
+rm -rf tv_iptv_channels.tar.gz
+echo "                    Channels list + Tv Iptv installed"
 sleep 1;;
-z);;
+z) clear;;
 esac
 #
 clear
 cd /var/lib/vdr/
 rm -rf diseqc.conf
-dialog --title "   ** Diseqc setup for Kodi frontend **   " --infobox "
+dialog --title "   ** Diseqc setup**   " --infobox "
    ----------------------------------------------
         [1]    Hot Bird 13°E
         [2]    Dual 13, 19.2°E
@@ -1019,22 +1014,20 @@ clear
 echo "$MONO19" >>  $VDRCONF/diseqc.conf
 echo "                    Astra Diseqc installed"
 sleep 1;;
-z);;
+z) clear;;
 esac
 #
 echo "                    Configuring Iptv"
 sleep 1
 sed -i 's/geteuid/getppid/' /usr/bin/vlc
-if [ -f  $VDRCONF/plugins/iptv/channels/Y100.conf ]
-then echo "Iptv already configured"; sleep 1
-else
+cd $VDRCONF/plugins/iptv/
+rm -rf channels
 cp -rf $REPO/iptv_conf.tar.gz $VDRCONF/plugins/iptv
 cd  $VDRCONF/plugins/iptv
 tar -zxvf iptv_conf.tar.gz
 rm -rf iptv_conf.tar.gz
 cd channels
 sudo chmod 777 *
-fi
 if [ -f /$BIN/yt-dlp ]
 then echo "yt-dlp $Remind3"
 sleep 1
@@ -1247,7 +1240,7 @@ echo "Automatic start Vdr installed"
 chmod 755 /home/`logname`/.config/autostart/vdr-autostart.desktop
 sleep 1;;
 b) clear;;
-z);;
+z) clear;;
 esac
 #
 echo "                    *** Done! ***"

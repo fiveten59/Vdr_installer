@@ -146,8 +146,8 @@ cd /home/`logname`/
 if [ -d /home/`logname`/Vdr_repo ]; then
   echo " ..... Folder exists ..... "
 else
-   wget https://github.com/fiveten59/Vdr_repo/archive/refs/heads/main.zip
-   unzip main.zip; rm -rf main.zip; mv -f Vdr_repo-main Vdr_repo
+   wget https://github.com/fiveten59/Vdr_repo/archive/refs/heads/master.zip
+   unzip master.zip; rm -rf master.zip; mv -f Vdr_repo-master Vdr_repo
 fi
 
 cd Vdr_repo
@@ -350,7 +350,7 @@ apt -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screens
 apt -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcbl-keysyms1-dev
 apt -y install libshine-dev libfontconfig1-dev zlib1g-dev libvulkan-dev libaom-dev
 apt -y install libfdk-aac-dev libdav1d-dev libbluray-dev libbs2b-dev
-apt -y install libcaca-dev libcodec2-dev libfribidi-dev libgme-dev libgsm1-dev libxavs2-dev
+apt -y install libcaca-dev libcodec2-dev libfribidi-dev libgme-dev libgsm1-dev
 apt -y install libmysofa-dev libopenh264-dev libopenmpt-dev librsvg2-dev libsnappy-dev
 apt -y install libsoxr-dev libspeex-dev libtwolame-dev libvidstab-dev libvpx-dev
 apt -y install libssh-dev libwebp-dev libzvbi-dev libopenal-dev libopus-dev
@@ -370,7 +370,7 @@ tar xjvf ffmpeg-7.1.1.tar.bz2
 mv ffmpeg-7.1.1 ffmpeg
 rm -rf ffmpeg-7.1.1.tar.bz2
 cd ffmpeg
-./configure --extra-libs="-ldl" --enable-static --ld=g++ --enable-gpl --enable-libfreetype --enable-libmp3lame --enable-openssl --enable-libxcb --enable-libopus --enable-libtheora --enable-libvorbis --enable-cuvid --enable-nonfree --enable-libxvid --enable-opengl --enable-vdpau --enable-vaapi --enable-pic --enable-shared --disable-doc --enable-swresample --disable-cuda-sdk --enable-libpulse --enable-libx264 --enable-libx265 --enable-libass --enable-libshine --enable-zlib --disable-vulkan --enable-libaom --enable-libfdk-aac --enable-libsvtav1 --enable-libdav1d --enable-libfontconfig --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcodec2 --enable-libfribidi --enable-libgme --enable-libgsm --enable-libxavs2 --enable-libmysofa --enable-libopenh264 --enable-libopenmpt --enable-librsvg --enable-libsnappy --enable-libdrm --enable-libsoxr --enable-libspeex --enable-libtwolame --enable-libvidstab --enable-libvpx --enable-libssh --enable-libwebp --enable-libzvbi --enable-openal  --enable-version3  --enable-libjack --enable-libopenjpeg --enable-libxml2 --enable-lv2 --enable-xlib
+./configure --extra-libs="-ldl" --enable-static --ld=g++ --enable-gpl --enable-libfreetype --enable-libmp3lame --enable-openssl --enable-libxcb --enable-libopus --enable-libtheora --enable-libvorbis --enable-cuvid --enable-nonfree --enable-libxvid --enable-opengl --enable-vdpau --enable-vaapi --enable-pic --enable-shared --disable-doc --enable-swresample --disable-cuda-sdk --enable-libpulse --enable-libx264 --enable-libx265 --enable-libass --enable-libshine --enable-zlib --disable-vulkan --enable-libaom --enable-libfdk-aac --enable-libsvtav1 --enable-libdav1d --enable-libfontconfig --enable-libbluray --enable-libbs2b --enable-libcaca --enable-libcodec2 --enable-libfribidi --enable-libgme --enable-libgsm --enable-libmysofa --enable-libopenh264 --enable-libopenmpt --enable-librsvg --enable-libsnappy --enable-libdrm --enable-libsoxr --enable-libspeex --enable-libtwolame --enable-libvidstab --enable-libvpx --enable-libssh --enable-libwebp --enable-libzvbi --enable-openal  --enable-version3  --enable-libjack --enable-libopenjpeg --enable-libxml2 --enable-lv2 --enable-xlib
 
 echo "                    Press Enter to continue ..."
 read enterKey
@@ -913,10 +913,12 @@ fi
 #
 echo "                    Install Channels logos"
 sleep 1
-cd $VDRCONF
-rm -rf logos
+if [ -f $VDRCONF/logos/2be.png ]
+then echo "Logos are already installed"
+else
 cp -rf $REPO/logos $VDRCONF
 echo "Channels logos installed"; sleep 1
+fi
 #
 echo "                    Channels setup"
 sleep 1
@@ -929,7 +931,7 @@ dialog --title "   ** Channells list **   " --infobox "
         [b]    Dual 13, 19.2°E
         [c]    Trial 9, 13, 19.2°E
         [d]    Astra 19.2°E
-        [e]    Channels list + Tv Iptv
+        [e]    Channels list + Iptv
 
         [z]    Skip
    ---------------------------------------------- " 0 0
@@ -973,7 +975,7 @@ clear
 cp -rf $REPO/tv_iptv_channels.tar.gz $VDRCONF
 tar -zxvf tv_iptv_channels.tar.gz
 rm -rf tv_iptv_channels.tar.gz
-echo "                    Channels list + Tv Iptv installed"
+echo "                    Channels list + Iptv installed"
 sleep 1;;
 z) clear;;
 esac
@@ -981,7 +983,7 @@ esac
 clear
 cd /var/lib/vdr/
 rm -rf diseqc.conf
-dialog --title "   ** Diseqc setup**   " --infobox "
+dialog --title "   ** Diseqc setup for Kodi frontend **   " --infobox "
    ----------------------------------------------
         [1]    Hot Bird 13°E
         [2]    Dual 13, 19.2°E
@@ -1020,14 +1022,18 @@ esac
 echo "                    Configuring Iptv"
 sleep 1
 sed -i 's/geteuid/getppid/' /usr/bin/vlc
-cd $VDRCONF/plugins/iptv/
+#if [ -f  $VDRCONF/plugins/iptv/channels/Y100.conf ]
+#then echo "Iptv already configured"; sleep 1
+#else
+cd $VDRCONF/plugins/iptv
 rm -rf channels
+mkdir -p channels
 cp -rf $REPO/iptv_conf.tar.gz $VDRCONF/plugins/iptv
-cd  $VDRCONF/plugins/iptv
+cd channels
 tar -zxvf iptv_conf.tar.gz
 rm -rf iptv_conf.tar.gz
-cd channels
 sudo chmod 777 *
+#fi
 if [ -f /$BIN/yt-dlp ]
 then echo "yt-dlp $Remind3"
 sleep 1

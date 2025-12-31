@@ -9,7 +9,7 @@
 #
 clear
 REPO="/home/`logname`/Vdr_repo"
-PLUGIN="--lirc -P'dvbapi' -P'softhddevice -a hw:0,0 -v cpu-glx -f' -P'skinflatplus -l /var/lib/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio -l /var/lib/vdr/plugins/radio/rtextUnten-kleo2.mpg'"
+PLUGIN="--lirc -P'dvbapi' -P'softhddevice -a hw:0,0 -v cpu-glx -f' -P'skinnopacity -l /var/lib/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio -l /var/lib/vdr/plugins/radio/rtextUnten-kleo2.mpg'"
 BIN="/usr/local/bin"
 SRC="/usr/local/src"
 VDRSRC=""$SRC"/vdr/PLUGINS/src"
@@ -183,13 +183,6 @@ else
     git clone https://github.com/Zabrimus/vdr-plugin-iptv.git
 fi
 
-if [ -e $REPO/vdr-plugin-radio ]; then
-  echo " ..... File exists ..... "
-else
-  echo "File not found ... Downloading it now ....."
-    git clone https://github.com/siricco/vdr-plugin-radio.git
-fi
-
 if [ -e $REPO/vdr-plugin-vnsiserver ]; then
   echo " ..... File exists ..... "
 else
@@ -204,23 +197,30 @@ else
     git clone https://gitlab.com/kamel5/tvguide.git
 fi
 
+if [ -e $REPO/vdr-plugin-radio ]; then
+  echo " ..... File exists ..... "
+else
+  echo "File not found ... Downloading it now ....."  
+   git clone https://github.com/vdr-projects/vdr-plugin-radio.git
+  fi
+
  if [ -e $REPO/vdr-plugin-mpv ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
     git clone https://github.com/ua0lnj/vdr-plugin-mpv.git
 fi
-#
+
 echo "Downloading skins"
 sleep 1
 
-if [ -e $REPO/vdr-plugin-skinflatplus ]; then
+if [ -e $REPO/SkinNopacity ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git
-  fi
-  
+    git clone https://gitlab.com/kamel5/SkinNopacity.git
+fi
+
 echo "Downloading others"
 sleep 1
 
@@ -262,7 +262,7 @@ echo "                    Downloading Vdr and Plugins on local repo"
 git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.7.7
 git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git
 git clone https://github.com/manio/vdr-plugin-dvbapi.git
-git clone https://github.com/siricco/vdr-plugin-radio.git
+git clone https://github.com/vdr-projects/vdr-plugin-radio.git
 git clone https://github.com/Zabrimus/vdr-plugin-iptv.git
 git clone https://github.com/vdr-projects/vdr-plugin-vnsiserver.git
 git clone https://gitlab.com/kamel5/tvguide.git
@@ -270,7 +270,7 @@ git clone https://github.com/ua0lnj/vdr-plugin-mpv.git
 
 echo "                    Downloading skins"
 
-git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git
+git clone https://gitlab.com/kamel5/SkinNopacity.git
 
 echo "                    Downloading others"
 
@@ -281,7 +281,7 @@ unzip master.zip; rm -rf master.zip; mv -f Logos-master logos
 #
 cd ..
 chmod -R 777 Vdr_repo;;
-z) ;;
+z) clear;;
 esac ;;
 #
 2)
@@ -493,7 +493,7 @@ rm -rf /etc/sudoers.d/eventlircd
 rm -rf $SRC/eventlircd
 echo "Eventlircd removed"; sleep 1;;
 #
-z)
+z) clear
 break
 esac
 done;;
@@ -539,8 +539,6 @@ echo "                    Patching zapcockpit"
 patch -p1 < zapcockpit.patch
 echo "                    Patching svdrphosts"
 patch -p1 < vdr_svdrphosts.patch
-echo "                    Undelete patch"
-patch -p1 < undelete.patch
 echo "                    Menuorg patch"
 patch -p1 < menuorg.patch
 echo "                    Mainmenuhook patch"
@@ -597,7 +595,7 @@ rm -rf /usr/local/lib/pkgconfig/vdr.pc
 #
 echo "VDR-2.x.* removed"; sleep 1;;
 #
-z);;
+z) clear;;
 esac;;
 #
 4)
@@ -632,22 +630,18 @@ echo "
 
                     Vdr-Plugin-Softhddevice installed"; sleep 1
 #
-echo "                    
-                    Installing Skinflatplus"
+echo "
+                    Installing SkinNopacity"
 sleep 2
 dnf -y install GraphicsMagick-c++-devel lm_sensors
 cd $VDRSRC
-cp -rf $REPO/vdr-plugin-skinflatplus $VDRSRC
-mv -f vdr-plugin-skinflatplus skinflatplus
-cd skinflatplus
-make & make install
-#cd $LIBCONF/skinflatplus/widgets/temperatures/
-#ln -s temperatures.default temperatures
-#cd $LIBCONF/skinflatplus/widgets/system_information
-#ln -s system_information.ubuntu system_information
+cp -rf $REPO/SkinNopacity $VDRSRC
+cd SkinNopacity
+make clean && make && make install
+
 echo "
 
-                    Skinflatplus installed"; sleep 1
+                    SkinNopacity installed"; sleep 1
 #
 echo "
                     Installing Vdr-Plugin-Iptv"

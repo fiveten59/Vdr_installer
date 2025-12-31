@@ -9,7 +9,7 @@
 #
 clear
 REPO="/home/`logname`/Vdr_repo"
-PLUGIN="--lirc -P'dvbapi' -P'softhddevice -a hw:0,0 -v cpu-glx -f' -P'skinflatplus -l /var/lib/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'mpv -a alsa/front:CARD=PCH,DEV=0 -v gpu -h auto -b / -l ita' -P'radio -l /var/lib/vdr/plugins/radio/rtextUnten-kleo2.mpg' -P'tvguide'"
+PLUGIN="--lirc -P'dvbapi' -P'softhddevice -a hw:0,0 -v cpu-glx -f' -P'skinnopacity -l /var/lib/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'mpv -a alsa/front:CARD=PCH,DEV=0 -v gpu -h auto -b / -l ita' -P'radio -l /var/lib/vdr/plugins/radio/rtextUnten-kleo2.mpg' -P'tvguide'"
 BIN="/usr/local/bin"
 SRC='/usr/local/src'
 VDRSRC=''$SRC'/vdr/PLUGINS/src'
@@ -183,13 +183,6 @@ else
     git clone https://github.com/Zabrimus/vdr-plugin-iptv.git
 fi
 
-if [ -e $REPO/vdr-plugin-radio ]; then
-  echo " ..... File exists ..... "
-else
-  echo "File not found ... Downloading it now ....."
-    git clone https://github.com/siricco/vdr-plugin-radio.git
-fi
-
 if [ -e $REPO/vdr-plugin-vnsiserver ]; then
   echo " ..... File exists ..... "
 else
@@ -204,21 +197,28 @@ else
     git clone https://gitlab.com/kamel5/tvguide.git
 fi
 
+if [ -e $REPO/vdr-plugin-radio ]; then
+  echo " ..... File exists ..... "
+else
+  echo "File not found ... Downloading it now ....."  
+   git clone https://github.com/vdr-projects/vdr-plugin-radio.git
+  fi
+
  if [ -e $REPO/vdr-plugin-mpv ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
     git clone https://github.com/ua0lnj/vdr-plugin-mpv.git
 fi
-#
+
 echo "Downloading skins"
 sleep 1
 
-if [ -e $REPO/vdr-plugin-skinflatplus ]; then
+if [ -e $REPO/SkinNopacity ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git
+    git clone https://gitlab.com/kamel5/SkinNopacity.git
 fi
 
 echo "Downloading others"
@@ -269,7 +269,7 @@ echo "                    Downloading Vdr and Plugins on local repo"
 git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.7.7
 git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git
 git clone https://github.com/manio/vdr-plugin-dvbapi.git
-git clone https://github.com/siricco/vdr-plugin-radio.git
+git clone https://github.com/vdr-projects/vdr-plugin-radio.git
 git clone https://github.com/Zabrimus/vdr-plugin-iptv.git
 git clone https://github.com/vdr-projects/vdr-plugin-vnsiserver.git
 git clone https://gitlab.com/kamel5/tvguide.git
@@ -277,7 +277,7 @@ git clone https://github.com/ua0lnj/vdr-plugin-mpv.git
 
 echo "                    Downloading skins"
 
-git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git
+git clone https://gitlab.com/kamel5/SkinNopacity.git
 
 echo "                    Downloading others"
 
@@ -707,21 +707,19 @@ echo "
                     Vdr-Plugin-Softhddevice installed"; sleep 1
 #
 echo "
-                    Installing Skinflatplus"
+                    Installing SkinNopacity"
 sleep 2
-apt -y install libfreetype6-dev graphicsmagick-libmagick-dev-compat lm-sensors
+apt -y install graphicsmagick-libmagick-dev-compat
+apt -y install zlib1g zlib1g-dev libexpat1 libexpat1-dev
+apt -y install libglib2.0-0 libpcre2-dev
 cd $VDRSRC
-cp -rf $REPO/vdr-plugin-skinflatplus $VDRSRC
-mv -f vdr-plugin-skinflatplus skinflatplus
-cd skinflatplus
-make & make install
-#cd $LIBCONF/skinflatplus/widgets/temperatures/
-#ln -s temperatures.default temperatures
-#cd $LIBCONF/skinflatplus/widgets/system_information
-#ln -s system_information.ubuntu system_information
+cp -rf $REPO/SkinNopacity $VDRSRC
+cd SkinNopacity
+make clean && make && make install
+
 echo "
 
-                    Skinflatplus installed"; sleep 1
+                    SkinNopacity installed"; sleep 1
 #
 echo "
                     Installing Vdr-Plugin-Iptv"
@@ -746,10 +744,6 @@ cd $VDRSRC
 cp -rf $REPO/vdr-plugin-radio $VDRSRC
 mv -f vdr-plugin-radio radio
 cd radio
-cp -rf $REPO/patch_radio.tar.gz $VDRSRC/radio
-tar -zxvf patch_radio.tar.gz
-patch -p1 < fix_radio.patch
-rm -rf patch_radio.tar.gz
 make && make install
 echo "
                     Vdr-Plugin-Radio installed"; sleep 1
@@ -761,7 +755,7 @@ cd $VDRSRC
 cp -rf $REPO/vdr-plugin-vnsiserver $VDRSRC
 mv -f vdr-plugin-vnsiserver vnsiserver
 cd vnsiserver
-make && make install LIBDIR=/usr/local/lib/vdr
+make && make install
 echo "
                     Vdr-Plugin-Vnsiserver installed"; sleep 1
 #
@@ -812,7 +806,7 @@ clear
 echo "                    Removing VDR-2.x.* plugins"
 cd $VDRSRC
 rm -rf softhddevice
-rm -rf skinflatplus
+rm -rf SkinNopacity
 rm -rf iptv
 rm -rf radio
 rm -rf vnsiserver
@@ -820,9 +814,8 @@ rm -rf dvbapi
 rm -rf mpv
 rm -rf tvguide
 cd $LIBCONF
-rm -rf libvdr-skinflatplus.*
+rm -rf libvdr-skinnopacity.*
 rm -rf libvdr-softhddevice.*
-rm -rf libvdr-skinflatplus.*
 rm -rf libvdr-iptv.*
 rm -rf libvdr-radio.*
 rm -rf libvdr-vnsiserver.*
@@ -830,13 +823,16 @@ rm -rf libvdr-dvbapi.*
 rm -rf libvdr-mpv.*
 rm -rf libvdr-tvguide.*
 cd $VDRCONF/plugins
-rm -rf skinflatplus
+rm -rf skinnopacity
 rm -rf iptv
 rm -rf radio
 rm -rf mpv
 rm -rf allowed_hosts
 cd $SHARE
-rm -rf skinflatplus
+rm -rf skinnopacity
+rm -rf iptv
+rm -rf radio
+
 #
 echo "VDR-2.x.* plugins removed"; sleep 1;;
 z) clear;;
@@ -1026,10 +1022,7 @@ sed -i 's/geteuid/getppid/' /usr/bin/vlc
 #then echo "Iptv already configured"; sleep 1
 #else
 cd $VDRCONF/plugins/iptv
-rm -rf channels
-mkdir -p channels
 cp -rf $REPO/iptv_conf.tar.gz $VDRCONF/plugins/iptv
-cd channels
 tar -zxvf iptv_conf.tar.gz
 rm -rf iptv_conf.tar.gz
 sudo chmod 777 *

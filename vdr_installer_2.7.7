@@ -259,8 +259,8 @@ b)
 clear
 cd /home/`logname`/
 rm -rf Vdr_repo
-wget https://github.com/fiveten59/Vdr_repo/archive/refs/heads/main.zip
-unzip main.zip; rm -rf main.zip; mv -f Vdr_repo-main Vdr_repo
+wget https://github.com/fiveten59/Vdr_repo/archive/refs/heads/master.zip
+unzip master.zip; rm -rf master.zip; mv -f Vdr_repo-master Vdr_repo
 
 cd Vdr_repo
 
@@ -909,12 +909,10 @@ fi
 #
 echo "                    Install Channels logos"
 sleep 1
-if [ -f $VDRCONF/logos/2be.png ]
-then echo "Logos are already installed"
-else
+cd $VDRCONF
+rm -rf logos
 cp -rf $REPO/logos $VDRCONF
 echo "Channels logos installed"; sleep 1
-fi
 #
 echo "                    Channels setup"
 sleep 1
@@ -927,7 +925,7 @@ dialog --title "   ** Channells list **   " --infobox "
         [b]    Dual 13, 19.2°E
         [c]    Trial 9, 13, 19.2°E
         [d]    Astra 19.2°E
-        [e]    Channels list + Iptv
+        [e]    Channels list + Tv Iptv
 
         [z]    Skip
    ---------------------------------------------- " 0 0
@@ -971,7 +969,7 @@ clear
 cp -rf $REPO/tv_iptv_channels.tar.gz $VDRCONF
 tar -zxvf tv_iptv_channels.tar.gz
 rm -rf tv_iptv_channels.tar.gz
-echo "                    Channels list + Iptv installed"
+echo "                    Channels list + Tv Iptv installed"
 sleep 1;;
 z) clear;;
 esac
@@ -979,7 +977,7 @@ esac
 clear
 cd /var/lib/vdr/
 rm -rf diseqc.conf
-dialog --title "   ** Diseqc setup for Kodi frontend **   " --infobox "
+dialog --title "   ** Diseqc setup**   " --infobox "
    ----------------------------------------------
         [1]    Hot Bird 13°E
         [2]    Dual 13, 19.2°E
@@ -1018,15 +1016,14 @@ esac
 echo "                    Configuring Iptv"
 sleep 1
 sed -i 's/geteuid/getppid/' /usr/bin/vlc
-#if [ -f  $VDRCONF/plugins/iptv/channels/Y100.conf ]
-#then echo "Iptv already configured"; sleep 1
-#else
-cd $VDRCONF/plugins/iptv
+cd $VDRCONF/plugins/iptv/
+rm -rf channels
 cp -rf $REPO/iptv_conf.tar.gz $VDRCONF/plugins/iptv
+cd  $VDRCONF/plugins/iptv
 tar -zxvf iptv_conf.tar.gz
 rm -rf iptv_conf.tar.gz
+cd channels
 sudo chmod 777 *
-#fi
 if [ -f /$BIN/yt-dlp ]
 then echo "yt-dlp $Remind3"
 sleep 1

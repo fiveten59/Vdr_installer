@@ -9,7 +9,7 @@
 #
 clear
 REPO="/home/`logname`/Vdr_repo"
-PLUGIN="--lirc -P'dvbapi' -P'softhddevice -a hw:0,0 -v cpu-glx -f' -P'skinnopacity -l /var/lib/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio -l /var/lib/vdr/plugins/radio/rtextUnten-kleo2.mpg'"
+PLUGIN="--lirc -P'dvbapi' -P'softhddevice -a hw:0,0 -v cpu-glx -f' -P'skinflatplus -l /var/lib/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'mpv -a alsa/front:CARD=PCH,DEV=0 -v gpu -h auto -b / -l ita' -P'radio -l /var/lib/vdr/plugins/radio/rtextUnten-kleo2.mpg' -P'tvguide'"
 BIN="/usr/local/bin"
 SRC="/usr/local/src"
 VDRSRC=""$SRC"/vdr/PLUGINS/src"
@@ -100,7 +100,7 @@ echo ""
 dialog --title "   *****   VDR 2.7.7 Installer   *****   " --infobox "
 
 	   ================================================================
-           [1]	Download & Upgrade Local Repository
+	   [1]	Download & Upgrade Local Repository
 	   [Submenu] ~~  Local Repository Directory ~ Install - Upgrade
 	   ================================================================
 	   [2]	FFMPEG & Infrared Control & Sat Firmware
@@ -252,8 +252,8 @@ b)
 clear
 cd /home/`logname`/
 rm -rf Vdr_repo
-wget https://github.com/fiveten59/Vdr_repo/archive/refs/heads/main.zip
-unzip main.zip; rm -rf main.zip; mv -f Vdr_repo-main Vdr_repo
+wget https://github.com/fiveten59/Vdr_repo/archive/refs/heads/master.zip
+unzip master.zip; rm -rf master.zip; mv -f Vdr_repo-master Vdr_repo
 
 cd Vdr_repo
 
@@ -362,7 +362,7 @@ make && make install
 #
 echo 'uinput
 i2c-dev
-ir-kbd-i2c' >> /etc/modules
+ir-kbd-i2c' >> /etc/modules-load.d/modules.conf
 cd $SRC
 cp -rf $REPO/eventlircd_conf.tar.gz $SRC
 tar -zxvf eventlircd_conf.tar.gz
@@ -633,7 +633,9 @@ echo "
 echo "
                     Installing SkinNopacity"
 sleep 2
-dnf -y install GraphicsMagick-c++-devel lm_sensors
+dnf -y install GraphicsMagick-c++-devel
+dnf -y install zlibrary-devel expat-devel
+dnf -y install pcre-devel # libglib2.0-0
 cd $VDRSRC
 cp -rf $REPO/SkinNopacity $VDRSRC
 cd SkinNopacity
@@ -666,10 +668,6 @@ cd $VDRSRC
 cp -rf $REPO/vdr-plugin-radio $VDRSRC
 mv -f vdr-plugin-radio radio
 cd radio
-cp -rf $REPO/patch_radio.tar.gz $VDRSRC/radio
-tar -zxvf patch_radio.tar.gz
-patch -p1 < fix_radio.patch
-rm -rf patch_radio.tar.gz
 make && make install
 echo "
                     Vdr-Plugin-Radio installed"; sleep 1
@@ -678,13 +676,12 @@ echo "
                     Installing Vdr-Plugin-Vnsiserver"
 sleep 1
 cd $VDRSRC
-cp -rf $REPO/vdr-plugin-vnsiserver $VDRSRC/
-mv vdr-plugin-vnsiserver vnsiserver
+cp -rf $REPO/vdr-plugin-vnsiserver $VDRSRC
+mv -f vdr-plugin-vnsiserver vnsiserver
 cd vnsiserver
-make && make install LIBDIR=/usr/local/lib/vdr
+make && make install
 echo "
                     Vdr-Plugin-Vnsiserver installed"; sleep 1
-
 #
 echo "
                     Installing TvGuide"
@@ -695,7 +692,7 @@ cd tvguide
 make && make install
 cp -rf $VDRSRC/tvguide/themes/* /var/lib/vdr/themes/
 echo "
-                    TvGuide installed"; sleep
+                    TvGuide installed"; sleep 1
 #
 echo "
                     Installing Vdr-Plugin-Mpv"
@@ -709,18 +706,18 @@ make && make install
 echo "
                     Vdr-Plugin-Mpv installed"; sleep
 #
-echo " 
+echo "
                    Installing Vdr-Plugin-Dvbapi" sleep 1
 dnf -y install libdvbcsa-devel
 cd $VDRSRC
 cp -rf $REPO/vdr-plugin-dvbapi $VDRSRC
-mv vdr-plugin-dvbapi dvbapi
+mv -f vdr-plugin-dvbapi dvbapi
 cd dvbapi
 make && make install
 echo "
                     Vdr-Plugin-Dvbapi installed"; sleep 1
 #
-echo "                    
+echo "
                     VDR-2.7.7 plugins installed"; sleep 1
 echo "
 ============================================================================================================
@@ -733,36 +730,36 @@ clear
 echo "                    Removing VDR-2.x.* plugins"
 cd $VDRSRC
 rm -rf softhddevice
-rm -rf skinflatplus
+rm -rf SkinNopacity
 rm -rf iptv
 rm -rf radio
 rm -rf vnsiserver
 rm -rf dvbapi
+rm -rf mpv
+rm -rf tvguide
 cd $LIBCONF
-rm -rf libvdr-skinflatplus.*
+rm -rf libvdr-skinnopacity.*
 rm -rf libvdr-softhddevice.*
-rm -rf libvdr-skinflatplus.*
 rm -rf libvdr-iptv.*
 rm -rf libvdr-radio.*
 rm -rf libvdr-vnsiserver.*
 rm -rf libvdr-dvbapi.*
+rm -rf libvdr-mpv.*
+rm -rf libvdr-tvguide.*
 cd $VDRCONF/plugins
-rm -rf skinflatplus
+rm -rf skinnopacity
 rm -rf iptv
 rm -rf radio
+rm -rf mpv
+rm -rf allowed_hosts
 cd $SHARE
-rm -rf skinflatplus
-cd $FONTS
-rm -rf skinflatplus
+rm -rf skinnopacity
 rm -rf iptv
-rm -rf dvbapi
 rm -rf radio
-rm -rf softhddevice
-rm -rf vnsiserver
-rm -rf temperatures
-rm -rf system_information
+
+#
 echo "VDR-2.x.* plugins removed"; sleep 1;;
-z);;
+z) clear;;
 #
 esac;;
 #
@@ -855,14 +852,14 @@ dialog --title "   ** Channells list **   " --infobox "
         [b]    Dual 13, 19.2°E
         [c]    Trial 9, 13, 19.2°E
         [d]    Astra 19.2°E
-        [e]    Kodi Frontend channels list
+        [e]    Channels list + Iptv
 
         [z]    Skip
    ---------------------------------------------- " 0 0
 echo -n "        Enter your menu choice = Install [a-e] ~~ Skip [z]    "
 read yourch
 case $yourch in
-a) 
+a)
 clear
 cp -rf $REPO/channels.conf.mono_hotbird.tar.gz $VDRCONF
 tar -zxvf channels.conf.mono_hotbird.tar.gz
@@ -896,12 +893,12 @@ sleep 1;;
 #
 e)
 clear
-cp -rf $REPO/Kodi_Frontend_channels.tar.gz $VDRCONF
-tar -zxvf Kodi_Frontend_channels.tar.gz
-rm -rf Kodi_Frontend_channels.tar.gz
-echo "                    Kodi Frontend channels list installed"
+cp -rf $REPO/tv_iptv_channels.tar.gz $VDRCONF
+tar -zxvf tv_iptv_channels.tar.gz
+rm -rf tv_iptv_channels.tar.gz
+echo "                    Channels list + Iptv installed"
 sleep 1;;
-z);;
+z) clear;;
 esac
 #
 clear
@@ -920,7 +917,7 @@ echo -n "        Enter your menu choice = Install [1-4] ~~ Skip [z]    "
 read yourch
 case $yourch in
 #
-1) 
+1)
 clear
 echo "$MONO13" >> $VDRCONF/diseqc.conf
 echo "                    Hotbird Diseqc installed"
@@ -940,7 +937,7 @@ clear
 echo "$MONO19" >>  $VDRCONF/diseqc.conf
 echo "                    Astra Diseqc installed"
 sleep 1;;
-z);;
+z) clear;;
 esac
 #
 echo "                    Configuring Iptv"
@@ -1023,7 +1020,7 @@ case "$1" in
         echo -n "Stop VDR "
 
         /usr/local/bin/vdrpoweroff & killall -9 vlc
-        
+
         # Remember status and be verbose
         ;;
     restart)
@@ -1084,7 +1081,7 @@ touch $BIN/systempoweroff
 echo '#!/bin/sh
 # File name: systempoweroff
 
-killall -9 vdr & killall -9 vlc & killall -9 oscam & shutdown -h now'  >> $BIN/systempoweroff
+killall -9 vdr & killall -9 vlc & killall -9 oscam & shutdown -h now' >> $BIN/systempoweroff
 chmod 755 $BIN/systempoweroff
 echo "Systempoweroff installed"
 sleep 1
@@ -1092,7 +1089,7 @@ sleep 1
 echo "                    Installing Commands"
 sleep 1
 cd /var/lib/vdr
-rm -rf commands.conf 
+rm -rf commands.conf
 touch commands.conf
 echo 'Kill Vdr: /etc/rc.d/init.d/vdr stop > /dev/null 2>&1
 Kodi Frontend: /usr/local/bin/Kodi_frontend > /dev/null 2>&1 
@@ -1148,7 +1145,7 @@ dialog --title "   ** Vdr Automatic start  **   " --infobox "
    ----------------------------------------------
         [a]    Vdr auto start
         [b]    No auto start
-        
+
         [z]    exit
    ---------------------------------------------- " 0 0
 echo -n "        Enter your menu choice  [a-b]:      "
@@ -1171,7 +1168,7 @@ echo "Automatic start Vdr installed"
 chmod 755 /home/`logname`/.config/autostart/vdr-autostart.desktop
 sleep 1;;
 b) clear;;
-z);;
+z) clear;;
 esac
 #
 echo "                    *** Done! ***"

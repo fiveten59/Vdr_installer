@@ -632,7 +632,9 @@ echo "
 echo "
                     Installing SkinNopacity"
 sleep 2
-dnf -y install GraphicsMagick-c++-devel lm_sensors
+dnf -y install GraphicsMagick-c++-devel
+dnf -y install zlibrary-devel expat-devel
+dnf -y install pcre-devel # libglib2.0-0
 cd $VDRSRC
 cp -rf $REPO/SkinNopacity $VDRSRC
 cd SkinNopacity

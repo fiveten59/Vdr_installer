@@ -108,8 +108,8 @@ b)
 clear
 cd /home/`logname`/
 rm -rf $REPO
-wget https://github.com/fiveten59/Vdr_repo/archive/refs/heads/main.zip
-unzip main.zip; rm -rf main.zip; mv -f Vdr_repo-main Vdr_repo
+wget https://github.com/fiveten59/Vdr_repo/archive/refs/heads/master.zip
+unzip master.zip; rm -rf master.zip; mv -f Vdr_repo-master Vdr_repo
 cd $REPO
 git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.7.7
 git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git
@@ -403,43 +403,6 @@ echo "                  Installing Vdr-Plugin-Sothddevice-drm-gles"; sleep 2
 apt -y install libglm-dev libxcb-screensaver0-dev libxcb-dpms0-dev
 apt -y install libxcb-ewmh-dev libva-dev libx265-dev libasound2-dev
 apt -y install libgles2-mesa libgles2-mesa-dev libegl-mesa0 libpng-dev libgbm-dev
-
-if [ -f softhddevice/Makefile ]
-then echo "Vdr-Plugin-Softhddevice $Remind"
-else
-dialog --title "   ** Setup Softhddevice **   " --infobox "
----------------------------------------------------------------
-
-                          Video Devices
-[a]    Old version
-[b]    Last version
-
-[c]    Skip
-
---------------------------------------------------------------- " 0 0
-echo -n "Enter your menu choice  [a-c]:      "
-read yourch
-case $yourch in
-#
-a)
-clear
-cd $VDRSRC
-if [ -f softhddevicedrmgles/Makefile ]
-then echo "Vdr-Plugin-Sothddevice-drm-gles $Remind"
-sleep 2
-cp -rf $REPO/vdr-plugin-softhddevice-drm-gles.tar.gz $VDRSRC
-tar -zxvf vdr-plugin-softhddevice-drm-gles.tar.gz
-rm -rf vdr-plugin-softhddevice-drm-gles.tar.gz
-mv -f vdr-plugin-softhddevice-drm-gles softhddevicedrmgles
-cd softhddevicedrmgles
-make && make install
-sed -i "s|-P'dvbapi'|& -P'softhddevice-drm-gles'|" /usr/local/bin/vdrrun
-echo "Vdr-Plugin-Sothddevice-drm-gles old version installed"
-sleep 2
-fi;;
-#
-b)
-clear
 cd $VDRSRC
 if [ -f softhddevicedrmgles/Makefile ]
 then echo "Vdr-Plugin-Sothddevice-drm-gles $Remind"
@@ -450,11 +413,7 @@ mv -f vdr-plugin-softhddevice-drm-gles softhddevicedrmgles
 cd softhddevicedrmgles
 make && make install
 sed -i "s|-P'dvbapi'|& -P'softhddevice-drm-gles'|" /usr/local/bin/vdrrun
-echo "Vdr-Plugin-Sothddevice-drm-gles latest version installed"
-sleep 2
-fi;;
-c) clear;;
-esac
+echo "Vdr-Plugin-Sothddevice-drm-gles installed"
 sleep 2
 fi
 #
@@ -2413,10 +2372,6 @@ sleep 2
 else git clone https://gitlab.com/kamel5/skindesigner.git
 cp -rf skindesigner /home/`logname`/Vdr_repo/
 cd skindesigner
-cp -rf /home/`logname`/Vdr_repo/patch_skindesigner.tar.gz $VDRSRC/skindesigner
-tar -zxvf patch_skindesigner.tar.gz
-rm -rf patch_skindesigner.tar.gz
-patch -p1 < skindesigner_VDR271.patch
 make && make install
 cd /$LIBCONF/skindesigner/scripts/
 ln -s temperatures.default temperatures

@@ -9,7 +9,7 @@
 #
 clear
 REPO="/home/`logname`/Vdr_repo"
-PLUGIN="--lirc -P'dvbapi' -P'softhddevice -a hw:0,0 -v cpu-glx -f' -P'skinnopacity -l /var/lib/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'mpv -a alsa/front:CARD=PCH,DEV=0 -v gpu -h auto -b / -l ita' -P'radio -l /var/lib/vdr/plugins/radio/rtextUnten-kleo2.mpg' -P'tvguide'"
+PLUGIN="--lirc -P'dvbapi' -P'softhddevice -a hw:0,0 -v cpu-glx -f' -P'skinflatplus -l /var/lib/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'mpv -a alsa/front:CARD=PCH,DEV=0 -v gpu -h auto -b / -l ita' -P'radio -l /var/lib/vdr/plugins/radio/rtextUnten-kleo2.mpg' -P'tvguide'"
 BIN="/usr/local/bin"
 SRC="/usr/local/src"
 VDRSRC=""$SRC"/vdr/PLUGINS/src"
@@ -73,7 +73,6 @@ S19.2E 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
 #
 dnf -y install dialog git subversion wget pkg-config patch
 dnf -y install autopoint autoconf automake cmake libtool unzip
-sleep 1
 #
 mkdir -p $SRC/ffmpeg_sources
 mkdir -p /home/`logname`/.config/autostart
@@ -633,9 +632,7 @@ echo "
 echo "
                     Installing SkinNopacity"
 sleep 2
-dnf -y install GraphicsMagick-c++-devel
-dnf -y install zlibrary-devel expat-devel
-dnf -y install pcre-devel # libglib2.0-0
+dnf -y install GraphicsMagick-c++-devel lm_sensors
 cd $VDRSRC
 cp -rf $REPO/SkinNopacity $VDRSRC
 cd SkinNopacity
@@ -704,7 +701,7 @@ mv -f vdr-plugin-mpv mpv
 cd mpv
 make && make install
 echo "
-                    Vdr-Plugin-Mpv installed"; sleep
+                    Vdr-Plugin-Mpv installed"; sleep 1
 #
 echo "
                    Installing Vdr-Plugin-Dvbapi" sleep 1
@@ -834,12 +831,10 @@ fi
 #
 echo "                    Install Channels logos"
 sleep 1
-if [ -f $VDRCONF/logos/2be.png ]
-then echo "Logos are already installed"
-else
+cd $VDRCONF
+rm -rf logos
 cp -rf $REPO/logos $VDRCONF
 echo "Channels logos installed"; sleep 1
-fi
 #
 echo "                    Channels setup"
 sleep 1
@@ -852,7 +847,7 @@ dialog --title "   ** Channells list **   " --infobox "
         [b]    Dual 13, 19.2°E
         [c]    Trial 9, 13, 19.2°E
         [d]    Astra 19.2°E
-        [e]    Channels list + Iptv
+        [e]    Channels list + Tv Iptv
 
         [z]    Skip
    ---------------------------------------------- " 0 0
@@ -896,7 +891,7 @@ clear
 cp -rf $REPO/tv_iptv_channels.tar.gz $VDRCONF
 tar -zxvf tv_iptv_channels.tar.gz
 rm -rf tv_iptv_channels.tar.gz
-echo "                    Channels list + Iptv installed"
+echo "                    Channels list + Tv Iptv installed"
 sleep 1;;
 z) clear;;
 esac
@@ -904,7 +899,7 @@ esac
 clear
 cd /var/lib/vdr/
 rm -rf diseqc.conf
-dialog --title "   ** Diseqc setup for Kodi frontend **   " --infobox "
+dialog --title "   ** Diseqc setup**   " --infobox "
    ----------------------------------------------
         [1]    Hot Bird 13°E
         [2]    Dual 13, 19.2°E
@@ -943,16 +938,14 @@ esac
 echo "                    Configuring Iptv"
 sleep 1
 sed -i 's/geteuid/getppid/' /usr/bin/vlc
-if [ -f  $VDRCONF/plugins/iptv/channels/Y100.conf ]
-then echo "Iptv already configured"; sleep 1
-else
+cd $VDRCONF/plugins/iptv/
+rm -rf channels
 cp -rf $REPO/iptv_conf.tar.gz $VDRCONF/plugins/iptv
 cd  $VDRCONF/plugins/iptv
 tar -zxvf iptv_conf.tar.gz
 rm -rf iptv_conf.tar.gz
 cd channels
 sudo chmod 777 *
-fi
 if [ -f /$BIN/yt-dlp ]
 then echo "yt-dlp $Remind3"
 sleep 1

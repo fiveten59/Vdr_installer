@@ -1,21 +1,21 @@
 #!/bin/bash
 ################################## !!! README !!! #######################################
-# Script name: vdr_installer_2.7.7
+# Script name: vdr_installer_2.7.8
 # Version: Git Repository Master (https://github.com/fiveten59/Vdr_installer)
 # Tested on (K)Ubuntu 22.04 - 24.04 - Debian 13 (Trixie)
 # chmod the script
-# then load it simply typing: sudo ./vdr_installer_2.7.7
+# then load it simply typing: sudo ./vdr_installer_2.7.8
 #########################################################################################
 #
 clear
 REPO="/home/`logname`/Vdr_repo"
-PLUGIN="--lirc -P'dvbapi' -P'softhddevice -a hw:0,0 -v cpu-glx -f' -P'skinnopacity -l /var/lib/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'mpv -a alsa/front:CARD=PCH,DEV=0 -v gpu -h auto -b / -l ita' -P'radio -l /var/lib/vdr/plugins/radio/rtextUnten-kleo2.mpg' -P'tvguide'"
+PLUGIN="--lirc -P'dvbapi' -P'softhddevice -a hw:0,0 -v cpu-glx -f' -P'skinnopacity -l /var/lib/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio -l /var/lib/vdr/plugins/radio/rtextUnten-kleo2.mpg' -P'tvguide'"
 BIN="/usr/local/bin"
 SRC='/usr/local/src'
 VDRSRC=''$SRC'/vdr/PLUGINS/src'
 LIBCONF='/usr/local/lib/vdr'
 VDRCONF='/var/lib/vdr'
-VDR='vdr-2.7.7'
+VDR='vdr-2.7.8'
 TEMP='/tmp'
 SHARE='/usr/local/share/vdr/plugins'
 FONTS='/usr/share/fonts'
@@ -78,15 +78,15 @@ apt -y install autopoint automake cmake libtool unzip
 mkdir -p $SRC/ffmpeg_sources
 mkdir -p /home/`logname`/.config/autostart
 #
-dialog --title " VDR 2.7.7 Installer " --infobox "
+dialog --title " VDR 2.7.8 Installer " --infobox "
 
     A special thanks goes to Klaus Schmidinger Vdr Developer
 
-    Script name: vdr_installer_2.7.7
-    Version: 2.7.7
+    Script name: vdr_installer_2.7.8
+    Version: 2.7.8
     Tested on (K)Ubuntu 22.04 - 24.04 - Debian 13 (Trixie)
-    chmod 755 the script 'vdr_installer_2.7.7'
-    then load it simply typing: sudo ./vdr_installer_2.7.7" 0 0
+    chmod 755 the script 'vdr_installer_2.7.8'
+    then load it simply typing: sudo ./vdr_installer_2.7.8" 0 0
 
 echo "                    Press Enter to continue ..."
 sleep 1
@@ -97,7 +97,7 @@ while :
 do
 clear
 echo ""
-dialog --title "   *****   VDR 2.7.7 Installer   *****   " --infobox "
+dialog --title "   *****   VDR 2.7.8 Installer   *****   " --infobox "
 
 	   ================================================================
 	   [1]	Download & Upgrade Local Repository
@@ -155,11 +155,11 @@ cd Vdr_repo
 echo "Downloading Vdr and Plugins on local folder"
 sleep 1
 
-if [ -e $REPO/vdr-2.7.7 ]; then
+if [ -e $REPO/vdr-2.7.8 ]; then
   echo " ..... File exists ..... "
 else
   echo "File not found ... Downloading it now ....."
-    git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.7.7
+    git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.7.8
   fi
 
 if [ -e $REPO/vdr-plugin-softhddevice ]; then
@@ -203,13 +203,6 @@ else
   echo "File not found ... Downloading it now ....."  
    git clone https://github.com/vdr-projects/vdr-plugin-radio.git
   fi
-
- if [ -e $REPO/vdr-plugin-mpv ]; then
-  echo " ..... File exists ..... "
-else
-  echo "File not found ... Downloading it now ....."
-    git clone https://github.com/ua0lnj/vdr-plugin-mpv.git
-fi
 
 echo "Downloading skins"
 sleep 1
@@ -266,14 +259,13 @@ cd Vdr_repo
 
 echo "                    Downloading Vdr and Plugins on local repo"
 
-git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.7.7
+git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.7.8
 git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git
 git clone https://github.com/manio/vdr-plugin-dvbapi.git
 git clone https://github.com/vdr-projects/vdr-plugin-radio.git
 git clone https://github.com/Zabrimus/vdr-plugin-iptv.git
 git clone https://github.com/vdr-projects/vdr-plugin-vnsiserver.git
 git clone https://gitlab.com/kamel5/tvguide.git
-git clone https://github.com/ua0lnj/vdr-plugin-mpv.git
 
 echo "                    Downloading skins"
 
@@ -576,10 +568,10 @@ done;;
 #
 3)
 clear
-dialog --title "   ** Install/Remove VDR-2.7.7   **   " --infobox "
+dialog --title "   ** Install/Remove VDR-2.7.8   **   " --infobox "
 
    ---------------------------------------------------------------
-        [a]  Install VDR-2.7.7
+        [a]  Install VDR-2.7.8
         [b]  Remove VDR-2.*.*
 
         [z]  Skip
@@ -598,15 +590,15 @@ apt -y install libfontconfig1-dev libfribidi-dev gettext
 apt -y install libncurses5-dev libncursesw5-dev
 #
 cd $SRC
-cp -rf $REPO/vdr-2.7.7 $SRC
+cp -rf $REPO/vdr-2.7.8 $SRC
 ln -s $VDR vdr
 #
 echo "Patching VDR"
 sleep 1
 cd vdr
-cp -rf $REPO/vdr-patches.2.7.7.tar.gz $SRC/vdr/
-tar -zxvf vdr-patches.2.7.7.tar.gz
-rm -rf vdr-patches.2.7.7.tar.gz
+cp -rf $REPO/vdr-patches.2.7.8.tar.gz $SRC/vdr/
+tar -zxvf vdr-patches.2.7.8.tar.gz
+rm -rf vdr-patches.2.7.8.tar.gz
 sleep 1
 #
 echo "                    Patching channellscan"
@@ -615,11 +607,11 @@ echo "                    Patching zapcockpit"
 patch -p1 < zapcockpit.patch
 echo "                    Patching svdrphosts"
 patch -p1 < vdr_svdrphosts.patch
-#echo "                    Menuorg patch"
+echo "                    Menuorg patch"
 #patch -p1 < menuorg.patch
-#echo "                    Mainmenuhook patch"
+echo "                    Mainmenuhook patch"
 #patch -p1 < mainmenuhook.patch
-#echo "                    Menuselection patch"
+echo "                    Menuselection patch"
 #patch -p1 < menuselection.patch
 #
 make && make install
@@ -629,7 +621,7 @@ sleep 1
 #
 apt-mark hold vdr
 sleep 2
-echo "                    VDR-2.7.7 installed"; sleep 1;;
+echo "                    VDR-2.7.8 installed"; sleep 1;;
 #
 b)
 clear
@@ -771,18 +763,6 @@ echo "
                     TvGuide installed"; sleep 1
 #
 echo "
-                    Installing Vdr-Plugin-Mpv"
-sleep 1
-apt -y install mpv libmpv-dev libxrandr-dev
-cd $VDRSRC
-cp -rf $REPO/vdr-plugin-mpv $VDRSRC/
-mv -f vdr-plugin-mpv mpv
-cd mpv
-make && make install
-echo "
-                    Vdr-Plugin-Mpv installed"; sleep 1
-#
-echo "
                    Installing Vdr-Plugin-Dvbapi" sleep 1
 apt -y install libdvbcsa-dev
 cd $VDRSRC
@@ -794,7 +774,7 @@ echo "
                     Vdr-Plugin-Dvbapi installed"; sleep 1
 #
 echo "
-                    VDR-2.7.7 plugins installed"; sleep 1
+                    VDR-2.7.8 plugins installed"; sleep 1
 echo "
 ============================================================================================================
 For more Vdr plugins pls visit https://github.com/fiveten59/Vdr_installer and download Vdr_plugins_installer
@@ -811,7 +791,6 @@ rm -rf iptv
 rm -rf radio
 rm -rf vnsiserver
 rm -rf dvbapi
-rm -rf mpv
 rm -rf tvguide
 cd $LIBCONF
 rm -rf libvdr-skinnopacity.*
@@ -820,13 +799,11 @@ rm -rf libvdr-iptv.*
 rm -rf libvdr-radio.*
 rm -rf libvdr-vnsiserver.*
 rm -rf libvdr-dvbapi.*
-rm -rf libvdr-mpv.*
 rm -rf libvdr-tvguide.*
 cd $VDRCONF/plugins
 rm -rf skinnopacity
 rm -rf iptv
 rm -rf radio
-rm -rf mpv
 rm -rf allowed_hosts
 cd $SHARE
 rm -rf skinnopacity
@@ -1016,6 +993,8 @@ esac
 echo "                    Configuring Iptv"
 sleep 1
 sed -i 's/geteuid/getppid/' /usr/bin/vlc
+touch /tmp/vlc.log
+chmod 777 /tmp/vlc.log
 cd $VDRCONF/plugins/iptv/
 rm -rf channels
 cp -rf $REPO/iptv_conf.tar.gz $VDRCONF/plugins/iptv
@@ -1023,7 +1002,7 @@ cd  $VDRCONF/plugins/iptv
 tar -zxvf iptv_conf.tar.gz
 rm -rf iptv_conf.tar.gz
 cd channels
-sudo chmod 777 *
+chmod 777 *
 if [ -f /$BIN/yt-dlp ]
 then echo "yt-dlp $Remind3"
 sleep 1
@@ -1127,6 +1106,7 @@ touch $BIN/vdrrun
 echo '#!/bin/bash
 # File name: vdrrun
 
+sleep 4
 /usr/local/bin/vdr -l 3 -u root '$PLUGIN' -s /usr/local/bin/systempoweroff
 
 # -P'tvguide' -P'mpv -a alsa -v gpu -h gpu -b / -l ita'

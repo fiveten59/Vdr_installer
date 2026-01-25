@@ -1,0 +1,1332 @@
+#!/bin/bash
+################################## !!! README !!! #######################################
+# Script name: vdr_installer_2.7.8
+# Version: Git Repository Master (https://github.com/fiveten59/Vdr_installer)
+# Tested on Raspberry Trixie
+# chmod the script
+# then load it simply typing: sudo ./vdr_installer_2.7.8_rpi
+#########################################################################################
+#
+clear
+REPO="/home/`logname`/Vdr_repo"
+PLUGIN_DESKTOP="--lirc -P'dvbapi' -P'softhddevice-drm-gles -a hw:CARD=sndrpihifiberry,0 -d 1920x1080@50' -P'skinnopacity -l /var/lib/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio' -P'tvguide'"
+PLUGIN_LITE="--lirc -P'dvbapi' -P'softhddevice-drm-gles -a hw:CARD=sndrpihifiberry,0 -d 1920x1080@50' -P'skinnopacity -l /var/lib/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio' -P'tvguide'"
+BIN="/usr/local/bin"
+SRC='/usr/local/src'
+VDRSRC=''$SRC'/vdr/PLUGINS/src'
+LIBCONF='/usr/local/lib/vdr'
+VDRCONF='/var/lib/vdr'
+VDR='vdr-2.7.8'
+SHARE='/usr/local/share/vdr/plugins'
+FONTS='/usr/share/fonts'
+Remind3='is already installed'
+Remind4='are already installed'
+Remind5='is already configured'
+#               Disecq
+TRIAL="
+# Full DiSEqC sequence:
+# 9 - 13 - 19.2E
+S9E  11700 V  9750 t v W15 [E0 10 38 F0] W15 A W15 T
+S9E  99999 V 10600 t v W15 [E0 10 38 F1] W15 A W15 T
+S9E  11700 H  9750 t V W15 [E0 10 38 F2] W15 A W15 T
+S9E  99999 H 10600 t V W15 [E0 10 38 F3] W15 A W15 T
+
+S13.0E 11700 V  9750 t v W15 [E0 10 38 F4] W15 B W15 t
+S13.0E 99999 V 10600 t v W15 [E0 10 38 F5] W15 B W15 T
+S13.0E 11700 H  9750 t V W15 [E0 10 38 F6] W15 B W15 t
+S13.0E 99999 H 10600 t V W15 [E0 10 38 F7] W15 B W15 T
+
+S19.2E 11700 V  9750 t v W15 [E0 10 38 F8] W15 A W15 t
+S19.2E 99999 V 10600 t v W15 [E0 10 38 F9] W15 A W15 T
+S19.2E 11700 H  9750 t V W15 [E0 10 38 FA] W15 A W15 t
+S19.2E 99999 H 10600 t V W15 [E0 10 38 FB] W15 A W15 T
+#"
+DUAL="#
+# Full DiSEqC sequence:
+# 13 - 19.2E
+S13.0E 11700 V  9750  t v W15 [E0 10 38 F0] W15 A W15 t
+S13.0E 99999 V 10600  t v W15 [E0 10 38 F1] W15 A W15 T
+S13.0E 11700 H  9750  t V W15 [E0 10 38 F2] W15 A W15 t
+S13.0E 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
+
+S19.2E  11700 V  9750  t v W15 [E0 10 38 F4] W15 B W15 t
+S19.2E  99999 V 10600  t v W15 [E0 10 38 F5] W15 B W15 T
+S19.2E  11700 H  9750  t V W15 [E0 10 38 F6] W15 B W15 t
+S19.2E  99999 H 10600  t V W15 [E0 10 38 F7] W15 B W15 T
+#"
+MONO13="#
+# Full DiSEqC sequence:
+# Hotbird - 13.0°E
+S13.0E 11700 V  9750  t v W15 [E0 10 38 F0] W15 A W15 t
+S13.0E 99999 V 10600  t v W15 [E0 10 38 F1] W15 A W15 T
+S13.0E 11700 H  9750  t V W15 [E0 10 38 F2] W15 A W15 t
+S13.0E 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
+#"
+MONO19="#
+# Full DiSEqC sequence:
+# Astra 19 - 19.2°E
+S19.2E 11700 V  9750  t v W15 [E0 10 38 F0] W15 A W15 t
+S19.2E 99999 V 10600  t v W15 [E0 10 38 F1] W15 A W15 T
+S19.2E 11700 H  9750  t V W15 [E0 10 38 F2] W15 A W15 t
+S19.2E 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T
+#"
+#
+apt -y install dialog git subversion wget pkg-config
+apt -y install checkinstall build-essential autoconf rpd-plym-splash
+apt -y install autopoint automake cmake libtool unzip
+#
+mkdir -p $SRC/ffmpeg_sources
+mkdir -p /home/`logname`/.config/autostart
+#
+dialog --title " VDR 2.7.8 Installer Raspberry Pi 4-5" --infobox "
+
+    A special thanks goes to Klaus Schmidinger Vdr Developer
+
+    Script name: vdr_installer_2.7.8_rpi
+    Version: 2.7.8
+    Tested on Raspberry Pi 4-5 - Os: Debian Trixie 13 Desktop & Lite version 64 bit
+    chmod 755 the script 'vdr_installer_2.7.8_rpi'
+    then load it simply typing: sudo ./vdr_installer_2.7.8_rpi" 0 0
+
+echo "                    Press Enter to continue ..."
+sleep 1
+read enterKey
+#
+clear
+while :
+do
+clear
+echo ""
+dialog --title "   *****   VDR 2.7.8 Rpi Installer   *****   " --infobox "
+
+	   ============================================================================
+           [1]	Download & Upgrade Local Repository
+	   [Submenu] ~~  Local Repository Directory ~ Install - Upgrade
+	   ============================================================================
+	   [2]	Config Rpi & FFMPEG & Infrared Control & Sat Firmware
+	   [Submenu] ~~  Install & Uninstall
+	   ============================================================================
+	   [3]	VDR
+	   [Submenu] ~~  Install & Uninstall
+	   ============================================================================
+	   [4]	Vdr Plugins
+	   [Submenu] ~~  Install & Uninstall
+	   ============================================================================
+	   [5]	Shared parts
+	   [Submenu] ~~  Install (icons fonts channells diseqc start-scripts & others)
+	   ============================================================================
+	   [6]	Final VDR Setup
+	   [Submenu] ~~  Desktop / Lite Version
+	   ============================================================================
+	   [7]	Exit Setup Menu
+	   ============================================================================" 0 0
+
+echo -n "              Enter your menu choice = Submenu [1~6] -- Exit [7]    "
+read yourch
+case $yourch in
+#
+1)
+cd /home/`logname`
+clear
+dialog --title "   ** Download & Upgrade Local Repository **   " --infobox "
+   ------------------------------------------------------------------------
+       Install ~ Upgrade ~ Remove ~ Local Repository
+   ------------------------------------------------------------------------
+        [a]  Download libs - progs & patch for Vdr
+        [b]  Remove & Upgrade all
+
+        [z]  Skip
+   ------------------------------------------------------------------------" 0 0
+echo -n "     Enter your menu choice = Install [a] ~~ Remove & Upgrade [b] ~~ Skip [z]    "
+read yourch
+case $yourch in
+#
+a) clear
+echo "Downloading libs - progs & patch for Vdr on local folder"
+sleep 1
+
+cd /home/`logname`/
+if [ -d /home/`logname`/Vdr_repo ]; then
+  echo " ..... Folder exists ..... "
+else
+   wget https://github.com/fiveten59/Vdr_repo/archive/refs/heads/master.zip
+   unzip master.zip; rm -rf master.zip; mv -f Vdr_repo-master Vdr_repo
+fi
+
+cd Vdr_repo
+
+echo "Downloading Vdr and Plugins on local folder"
+sleep 1
+
+if [ -e $REPO/vdr-2.7.8 ]; then
+  echo " ..... File exists ..... "
+else
+  echo "File not found ... Downloading it now ....."
+    git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.7.8
+  fi
+
+if [ -e $REPO/vdr-plugin-softhddevice-drm-gles ]; then
+  echo " ..... File exists ..... "
+else
+  echo "File not found ... Downloading it now ....."
+    git clone https://github.com/rellla/vdr-plugin-softhddevice-drm-gles.git
+fi
+
+if [ -e $REPO/vdr-plugin-dvbapi ]; then
+  echo " ..... File exists ..... "
+else
+  echo "File not found ... Downloading it now ....."
+    git clone https://github.com/manio/vdr-plugin-dvbapi.git
+fi
+
+if [ -e $REPO/vdr-plugin-iptv ]; then
+  echo " ..... File exists ..... "
+else
+  echo "File not found ... Downloading it now ....."
+    git clone https://github.com/Zabrimus/vdr-plugin-iptv.git
+fi
+
+if [ -e $REPO/vdr-plugin-vnsiserver ]; then
+  echo " ..... File exists ..... "
+else
+  echo "File not found ... Downloading it now ....."
+    git clone https://github.com/vdr-projects/vdr-plugin-vnsiserver.git
+fi
+
+if [ -e $REPO/tvguide ]; then
+  echo " ..... File exists ..... "
+else
+  echo "File not found ... Downloading it now ....."
+    git clone https://gitlab.com/kamel5/tvguide.git
+fi
+
+if [ -e $REPO/vdr-plugin-radio ]; then
+  echo " ..... File exists ..... "
+else
+  echo "File not found ... Downloading it now ....."  
+   git clone https://github.com/vdr-projects/vdr-plugin-radio.git
+  fi
+
+echo "Downloading skins"
+sleep 1
+
+if [ -e $REPO/SkinNopacity ]; then
+  echo " ..... File exists ..... "
+else
+  echo "File not found ... Downloading it now ....."
+    git clone https://gitlab.com/kamel5/SkinNopacity.git
+fi
+
+echo "Downloading others"
+sleep 1
+
+if [ -e $REPO/eventlircd ]; then
+  echo " ..... File exists ....."
+else
+  echo "File not found ... Downloading it now ....."
+    git clone https://github.com/LibreELEC/eventlircd.git
+fi
+
+if [ -e $REPO/rpi_import_1.zip ]; then
+  echo " ..... File exists ....."
+else
+  echo "File not found ... Downloading it now ....."
+    wget https://github.com/jc-kynesim/rpi-ffmpeg/archive/refs/heads/test/7.1.2/main.zip
+    unzip main.zip; mv rpi-ffmpeg-test-7.1.2-main rpi-ffmpeg; rm -rf main.zip
+    fi
+
+if [ -e $REPO/yt-dlp ]; then
+  echo " ..... File exists ....."
+else
+    wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
+fi
+
+if [ -e $REPO/logos ]; then
+  echo " ..... File exists ....."
+else
+  echo "File not found ... Downloading it now ....."
+    wget https://github.com/fiveten59/Logos/archive/refs/heads/master.zip
+    unzip master.zip; rm -rf master.zip; mv -f Logos-master logos
+fi
+#
+cd ..
+chmod -R 777 Vdr_repo;;
+#
+b)
+clear
+cd /home/`logname`/
+rm -rf Vdr_repo
+wget https://github.com/fiveten59/Vdr_repo/archive/refs/heads/master.zip
+unzip master.zip; rm -rf master.zip; mv -f Vdr_repo-master Vdr_repo
+
+cd Vdr_repo
+
+echo "                    Downloading Vdr and Plugins on local repo"
+
+git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.7.8
+git clone https://github.com/rellla/vdr-plugin-softhddevice-drm-gles.git
+git clone https://github.com/manio/vdr-plugin-dvbapi.git
+git clone https://github.com/vdr-projects/vdr-plugin-radio.git
+git clone https://github.com/Zabrimus/vdr-plugin-iptv.git
+git clone https://github.com/vdr-projects/vdr-plugin-vnsiserver.git
+git clone https://gitlab.com/kamel5/tvguide.git
+
+echo "                    Downloading skins"
+
+git clone https://gitlab.com/kamel5/SkinNopacity.git
+
+echo "                    Downloading others"
+
+git clone https://github.com/Libreelec/eventlircd.git
+wget https://github.com/jc-kynesim/rpi-ffmpeg/archive/refs/heads/test/7.1.2/main.zip
+wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
+wget https://github.com/fiveten59/Logos/archive/refs/heads/master.zip
+unzip master.zip; rm -rf master.zip; mv -f Logos-master logos
+#
+cd ..
+chmod -R 777 Vdr_repo;;
+z) clear;;
+esac ;;
+#
+2)
+clear
+while :
+do
+clear
+dialog --title " Common Libs (Ffmpeg) & Infra-Red Remotes Control (Eventlircd)" --infobox "
+----------------------------------------------------------------------------------------
+        *****  Install  *****  .....................
+        [a]    Configuring Boot Raspberry Pi 4/5 - Bookworm Desktop Version
+        [b]    Configuring Boot Raspberry Pi 4/5 - Bookworm Lite Version
+        [c]    FFmpeg
+        [d]    Eventlircd
+        [e]    Installing Sat firmware
+
+        *****  Remove  *****
+        [a1]   FFmpeg        
+        [b1]   Eventlircd
+
+        [z]    Skip
+        
+Important: In raspios Bookworm/Trixie Desktop version you do remove preinstalled FFmpeg before !!!
+----------------------------------------------------------------------------------------- " 0 0
+echo -n "        Enter your menu choice  = Install [a-d] ~~ Remove [a1] ~~ Skip [z]    "
+read yourch
+case $yourch in
+#
+a)
+clear
+echo "                    Configuring Raspberry Pi 4/5 - Config Boot Bookworm Desktop Version"
+sleep 1
+#echo "deb http://www.deb-multimedia.org trixie main" >> /etc/apt/sources.list
+#apt update -oAcquire::AllowInsecureRepositories=true
+#apt install -y deb-multimedia-keyring
+#apt update
+#
+echo "dtoverlay=disable-bt" >> /boot/firmware/config.txt
+echo "dtoverlay=hifiberry-dac" >> /boot/firmware/config.txt
+echo "dtoverlay=allo-boss-dac-pcm512x-audio" >> /boot/firmware/config.txt
+sed -i 's|dtparam=audio=on|# dtparam=audio=on|' /boot/firmware/config.txt
+sed -i 's|camera_auto_detect=1|# camera_auto_detect=1|' /boot/firmware/config.txt
+sed -i 's|dtoverlay=vc4-kms-v3d|dtoverlay=vc4-kms-v3d,cma-512|' /boot/firmware/config.txt;;
+#
+b)
+clear
+echo "                    Configuring Raspberry Pi 4/5 - Config Boot Bookworm Lite Version"
+sleep 1
+echo "dtoverlay=disable-bt" >> /boot/firmware/config.txt
+echo "dtoverlay=allo-boss-dac-pcm512x-audio" >> /boot/firmware/config.txt
+sed -i 's|dtoverlay=vc4-kms-v3d|dtoverlay=vc4-kms-v3d,cma-512|' /boot/firmware/config.txt
+sed -i 's|dtparam=audio=on|# dtparam=audio=on|' /boot/firmware/config.txt
+sed -i 's|camera_auto_detect=1|#camera_auto_detect=1|' /boot/firmware/config.txt
+sed -i 's|display_auto_detect=1|#display_auto_detect=1|' /boot/firmware/config.txt
+sed -i -e 's/$/ splash quiet plymouth.ignore-serial-consoles logo.nologo vt.global_cursor_default=0/' /boot/firmware/cmdline.txt;;
+#
+c)
+clear
+echo "                    Installing Rpi-FFmpeg"
+sleep 1
+apt -y install libavfilter-dev libx265-dev libx264-dev libavcodec-dev libass-dev nasm
+apt -y install libavformat-dev libswresample-dev libswscale-dev libudev-dev
+apt -y install libfreetype6-dev libmp3lame-dev libtheora-dev libvorbis-dev
+apt -y install libxvidcore-dev freeglut3-dev libssl-dev libvdpau-dev libdrm-dev
+apt -y install libglew-dev libglm-dev mesa-common-dev libogg-dev libva-dev
+apt -y install libpciaccess-dev xorg-dev libpulse-dev libnuma1 libnuma-dev
+apt -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev 
+apt -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
+apt -y install libshine-dev libfontconfig1-dev zlib1g-dev libvulkan-dev libaom-dev
+apt -y install libfdk-aac-dev libbluray-dev libbs2b-dev
+apt -y install libcaca-dev libcodec2-dev libfribidi-dev libgme-dev libgsm1-dev
+apt -y install libmysofa-dev libopenh264-dev libopenmpt-dev librsvg2-dev libsnappy-dev
+apt -y install libsoxr-dev libspeex-dev libtwolame-dev libvidstab-dev libvpx-dev
+apt -y install libssh-dev libwebp-dev libzvbi-dev libopenal-dev libopus-dev
+apt -y install liblilv-dev libopenjp2-7-dev libffmpeg-nvenc-dev libjack-dev
+apt -y install libchromaprint-dev frei0r-plugins-dev libgnutls28-dev ladspa-sdk
+#
+if [ -d $SRC/ffmpeg_sources/rpi-ffmpeg ]
+then echo "Rpi-FFmpeg is already installed"; sleep 3
+else
+    echo "                    Wait for a few seconds ..."
+cp -rf $REPO/rpi-ffmpeg $SRC/ffmpeg_sources
+cd $SRC/ffmpeg_sources/rpi-ffmpeg
+./configure --extra-libs="-ldl" --arch=arm64  --enable-sand --enable-v4l2_m2m --enable-v4l2-request --enable-vout-drm --enable-libudev --enable-libdrm --enable-libx265 --enable-libx264 --enable-gpl --enable-pic --enable-avfilter --enable-nonfree --enable-gpl --enable-iconv --enable-network --enable-pthreads --disable-vdpau --disable-vaapi --enable-version3 --enable-shared --enable-libfreetype --enable-avcodec --enable-libmp3lame --enable-libopus --enable-libtheora --enable-libvorbis --enable-swresample --enable-libpulse --enable-libass --enable-libbluray --enable-libaom --enable-libfdk-aac --enable-libcodec2 --enable-libtwolame --enable-libmysofa --enable-libopenh264 --enable-libopenmpt --enable-librsvg --enable-libsnappy --enable-libsoxr --enable-libspeex --enable-libvpx --enable-opengl  --enable-libshine --enable-zlib --disable-vulkan --enable-libfontconfig --enable-libbs2b --enable-libcaca --enable-libfribidi --enable-libgme --enable-libgsm --enable-libssh --enable-libwebp --enable-libzvbi --enable-openal --enable-libjack --enable-libopenjpeg --enable-libxml2 --enable-lv2 --enable-xlib  --enable-openssl --enable-libxcb --enable-libxvid  --disable-doc --disable-cuda-sdk
+echo "                    Press Enter to continue ..."
+read enterKey
+make -j4
+make install
+apt-mark hold ffmpeg
+fi
+echo "                    FFmpeg installed"; sleep 1;;
+#
+d)
+clear
+echo "                    Installing Infra-Red Remotes Control (Eventlircd) "
+sleep 1
+if [ -d /usr/sbin/eventlircd ]
+then echo "Eventlircd is already installed"
+sleep 1
+else
+apt -y install gawk libudev-dev lirc evtest ir-keytable
+update-rc.d lirc remove
+cd $SRC
+cp -rf $REPO/eventlircd $SRC
+cd eventlircd
+cp -rf $REPO/patch_eventlircd.tar.gz $SRC/eventlircd
+tar -zxvf patch_eventlircd.tar.gz
+rm -rf patch_eventlircd.tar.gz
+patch -p1 < eventlircd_makefile.patch
+patch -p1 < eventlircd_configure.patch
+patch -p1 < eventlircd_version.patch
+autoreconf -fi
+./configure --sysconfdir=/etc --with-evmap-dir=/etc/eventlircd.d --with-udev-dir=/lib/udev --with-lircd-socket=/var/run/lirc/lircd
+make && make install
+#
+echo 'uinput
+i2c-dev
+ir-kbd-i2c' >> /etc/modules
+cd $SRC
+cp -rf $REPO/eventlircd_conf.tar.gz $SRC
+tar -zxvf eventlircd_conf.tar.gz
+rm -rf eventlircd_conf.tar.gz
+mv -f evmap.tar.gz /etc/eventlircd.d
+mv -f rules.tar.gz /lib/udev/rules.d
+rm -rf /lib/udev/rc_keymaps
+mv -f rc_keymaps /lib/udev/
+cd /lib/udev/rc_keymaps
+chmod 0644 *
+cd /etc/eventlircd.d
+tar -zxvf evmap.tar.gz
+rm -rf evmap.tar.gz
+chmod 0644 *
+cd /lib/udev/rules.d
+#rm -rf 98-eventlircd.rules.disabled
+#rm -rf 98-lircd.rules.disabled
+tar -zxvf rules.tar.gz
+rm -rf rules.tar.gz
+chmod 0644 *
+sleep 1
+#
+echo "
+                    Create Eventircd start command line (if installed)"
+sleep 1
+cd /etc/init.d/
+rm -rf eventlircd
+touch eventlircd
+echo '#!/bin/sh
+
+#File name: eventlircd
+
+echo "Eventlircd init.d script using: $1" >> /var/log/eventlircd.log &
+case "$1" in
+    start)
+        echo -n "Start Eventlircd"
+        rm -rf /var/run/lirc/lircd
+	mkdir -p /var/run/lirc
+        /usr/sbin/eventlircd -e /etc/eventlircd.d
+        # Remember status and be verbose
+        ;;
+    stop)
+        echo -n "Kill Eventlircd"
+        killall -9 eventlircd
+        # Remember status and be verbose
+        ;;
+    restart)
+        echo -n "Restart Eventlircd"
+        $0 stop
+        $0 start
+
+        # Remember status and be quiet
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+        ;;
+esac
+exit 0' >> eventlircd
+chmod 777 eventlircd
+#
+echo "                    Permissions to execute Eventlircd"
+sleep 1
+rm -rf /etc/sudoers.d/eventlircd
+touch /etc/sudoers.d/eventlircd
+echo "eventlircd ALL=(ALL) ALL" >> /etc/sudoers.d/eventlircd
+echo "%`logname` ALL=NOPASSWD: /etc/init.d/eventlircd" >> /etc/sudoers.d/eventlircd
+echo "Permissions to execute Eventlircd created"
+sleep 1
+echo "                    Eventlircd is now installed"; sleep 1
+fi;;
+#
+e)
+clear
+echo "                    Installing Sat firmware"
+sleep 1
+if [ -f $SRC/driver_dvb/check ]
+then echo "Sat firmwares are already installed"; sleep 1
+else
+cp -rf $REPO/driver_dvb.tar.gz $SRC
+cd $SRC
+tar -zxvf driver_dvb.tar.gz
+rm -rf driver_dvb.tar.gz
+cd driver_dvb
+cp -rf *.fw /lib/firmware/
+cd dvbsky-firmware
+cp -rf *.fw /lib/firmware/
+echo "Sat firmwares & drivers are now installed"; sleep 1
+fi;;
+#
+a1)
+clear
+echo "                    Removing FFmpeg"
+sleep 1
+rm -rf $BIN/ffmpeg
+rm -rf $BIN/ffprob
+rm -rf /usr/local/share/ffmpeg
+rm -rf /usr/share/doc/ffmpeg
+rm -rf /usr/local/src/ffmpeg_sources/rpi-ffmpeg
+rm -rf /usr/local/src/ffmpeg_sources/ffmpeg
+echo "FFmpeg removed"; sleep 1;;
+#
+b1)
+clear
+echo "                    Removing Eventlircd"
+sleep 1
+cd /etc/init.d
+update-rc.d eventlircd remove
+rm -rf /home/`logname`/.config/autostart/Eventlircd_autostart.desktop
+rm -rf /etc/modules
+rm -rf /etc/init.d/eventlircd
+rm -rf /etc/eventlircd.d
+rm -rf /usr/sbin/eventlircd
+rm -rf /etc/sudoers.d/eventlircd
+rm -rf $SRC/eventlircd
+echo "Eventlircd removed"; sleep 1;;
+#
+z) clear
+break
+esac
+done;;
+#
+3)
+clear
+dialog --title "   ** Install/Remove VDR-2.7.8   **   " --infobox "
+
+   ---------------------------------------------------------------
+        [a]  Install VDR-2.7.8
+        [b]  Remove VDR-2.*.*
+
+        [z]  Skip
+   ---------------------------------------------------------------" 0 0
+
+echo -n "        Enter your menu choice = Install [a] ~~ Remove [b] ~~ Skip [z]    "
+read yourch
+case $yourch in
+a)
+clear
+echo "                    Installing VDR"
+sleep 1
+echo "Installing libraries"; sleep 1
+apt -y install libjpeg-dev libcap-dev libtinyxml-dev binutils libglibmm-2.4-dev g++
+apt -y install libfontconfig1-dev libfribidi-dev gettext
+apt -y install libncurses5-dev libncursesw5-dev
+#
+cd $SRC
+cp -rf $REPO/vdr-2.7.8 $SRC
+ln -s $VDR vdr
+#
+echo "Patching VDR"
+sleep 1
+cd vdr
+cp -rf $REPO/vdr-patches.2.7.8.tar.gz $SRC/vdr/
+tar -zxvf vdr-patches.2.7.8.tar.gz
+rm -rf vdr-patches.2.7.8.tar.gz
+sleep 1
+#
+
+echo "                    Patching zapcockpit"
+patch -p1 < zapcockpit.patch
+echo "                    Patching svdrphosts"
+patch -p1 < vdr_svdrphosts.patch
+echo "                    Menuorg patch"
+patch -p1 < menuorg.patch
+echo "                    Mainmenuhook patch"
+patch -p1 < mainmenuhook.patch
+echo "                    Menuselection patch"
+patch -p1 < menuselection.patch
+echo "                    Undelete patch"
+patch -p1 < undelete.patch
+#
+make && make install
+echo "                    Final compilation"
+sleep 1
+#cp *.conf /etc/vdr
+#
+apt-mark hold vdr
+sleep 2
+echo "                    VDR-2.7.8 installed"; sleep 1;;
+#
+b)
+clear
+echo "                    Removing VDR-2.x.*"
+sleep 1
+rm -rf /etc/vdr
+rm -rf /srv/vdr
+rm -rf /etc/init.d/vdr
+rm -rf $BIN/vdrpoweroff
+rm -rf $BIN/systempoweroff
+rm -rf $BIN/vdrrun
+rm -rf $BIN/KillVdr
+rm -rf $BIN/vdr
+rm -rf $BIN/svdrpsend
+rm -rf /usr/local/include/vdr
+rm -rf /usr/local/share/vdr
+rm -rf /usr/local/man/vdr
+rm -rf /usr/local/lib/vdr
+rm -rf /usr/local/pkgconfig/vdr
+rm -rf /usr/include/vdr
+rm -rf /var/lib/vdr
+rm -rf /var/cache/vdr
+rm -rf /home/`logname`/vdrrun
+rm -rf /etc/svdrpsend
+rm -rf /usr/share/applications/Vdr.desktop
+rm -rf /usr/share/applications/KillVdr.desktop
+rm -rf /home/`logname`/vdrrun
+rm -rf /home/`logname`/Desktop/Vdr.desktop
+rm -rf /home/`logname`/Desktop/KillVdr.desktop
+rm -rf /home/`logname`/Vdr.desktop
+rm -rf /home/`logname`/KillVdr.desktop
+rm -rf /home/`logname`/.config/autostart/vdr-autostart.desktop
+rm -rf /etc/sudoers.d/vdr
+rm -rf /usr/local/src/vdr
+rm -rf /usr/local/src/vdr-*
+rm -rf /var/log/vdr.log
+rm -rf /lib/pkgconfig/vdr.pc
+rm -rf /usr/local/lib/pkgconfig/vdr.pc
+#
+echo "VDR-2.x.* removed"; sleep 1;;
+#
+z) clear;;
+esac;;
+#
+4)
+clear
+dialog --title "   ** Install/Remove VDR-Plugins   **   " --infobox "
+   -----------------------------------------------------------
+        [a]  Install Vdr Plugins
+        [b]  Remove Vdr Plugins
+
+        [z]  Skip
+   -----------------------------------------------------------" 0 0
+echo -n "        Enter your menu choice = Install [a] ~~ Remove [b] ~~ Skip [z]    "
+read yourch
+case $yourch in
+a)
+clear
+cd $SRC
+mkdir -p $VDRCONF/themes
+#
+echo "
+                    Installing Vdr-Plugin-Softhddevice-drm-gles"
+sleep 1
+apt -y install libxcb-ewmh-dev libasound2-dev libpng-dev
+apt -y install libgles-dev libgles2-mesa-dev
+apt -y install libegl-dev libegl1-mesa-dev 
+apt -y install libgbm-dev libglm-dev libfreetype-dev
+apt -y install libavfilter-dev libx265-dev libx264-dev libavcodec-dev libass-dev
+apt -y install libavformat-dev libswresample-dev libswscale-dev libudev-dev
+apt -y install libfreetype6-dev libmp3lame-dev libtheora-dev libvorbis-dev
+apt -y install libxvidcore-dev freeglut3-dev libssl-dev libvdpau-dev libdrm-dev
+apt -y install libglew-dev libglm-dev mesa-common-dev libogg-dev libva-dev
+apt -y install libpciaccess-dev xorg-dev libpulse-dev libnuma1 libnuma-dev
+apt -y install libxcb-dpms0-dev libxcb-glx0-dev libxcb-randr0-dev libxcb-screensaver0-dev 
+apt -y install libxcb-xv0-dev libxcb-image0-dev libxcb-util0-dev libxcb-icccm4-dev libxcb-keysyms1-dev
+
+#
+cd $VDRSRC
+cp -rf $REPO/vdr-plugin-softhddevice-drm-gles $VDRSRC
+mv -f vdr-plugin-softhddevice-drm-gles softhddevicedrmgles
+cd softhddevicedrmgles
+make && make install
+echo "
+
+                    Vdr-Plugin-Softhddevice-drm-gles installed"; sleep 1
+#
+echo "
+                    Installing SkinNopacity"
+sleep 2
+apt -y install graphicsmagick-libmagick-dev-compat
+apt -y install zlib1g zlib1g-dev libexpat1 libexpat1-dev
+apt -y install libglib2.0-0 libpcre2-dev
+cd $VDRSRC
+cp -rf $REPO/SkinNopacity $VDRSRC
+cd SkinNopacity
+make clean && make && make install
+
+echo "
+
+                    SkinNopacity installed"; sleep 1
+#
+echo "
+                    Installing Vdr-Plugin-Iptv"
+sleep 1
+apt -y install vlc libcurl4 libcurl4-gnutls-dev libssl-dev
+cd $VDRSRC
+cp -rf $REPO/vdr-plugin-iptv /$VDRSRC
+mv -f vdr-plugin-iptv iptv
+cd iptv
+cp -rf $REPO/patch_iptv.tar.gz $VDRSRC/iptv
+tar -zxvf patch_iptv.tar.gz
+rm -rf patch_iptv.tar.gz
+patch -p1 < vlc2iptv.patch
+make & make install
+echo "
+                    Vdr-Plugin-Iptv installed"; sleep 1
+#
+echo "
+                    Installing Vdr-Plugin-Radio"
+sleep 1
+cd $VDRSRC
+cp -rf $REPO/vdr-plugin-radio $VDRSRC
+mv -f vdr-plugin-radio radio
+cd radio
+make && make install
+echo "
+                    Vdr-Plugin-Radio installed"; sleep 1
+#
+echo "
+                    Installing Vdr-Plugin-Vnsiserver"
+sleep 1
+cd $VDRSRC
+cp -rf $REPO/vdr-plugin-vnsiserver $VDRSRC
+mv -f vdr-plugin-vnsiserver vnsiserver
+cd vnsiserver
+make && make install
+echo "
+                    Vdr-Plugin-Vnsiserver installed"; sleep 1
+#
+echo "
+                    Installing TvGuide"
+sleep 1
+cd $VDRSRC
+cp -rf $REPO/tvguide $VDRSRC/
+cd tvguide
+make && make install
+cp -rf $VDRSRC/tvguide/themes/* /var/lib/vdr/themes/
+echo "
+                    TvGuide installed"; sleep 1
+#
+echo "
+                    Installing Vdr-Plugin-Dvbapi"
+sleep 1
+cd $VDRSRC
+apt -y install libssl-dev libdvbcsa-dev
+cp -rf $REPO/vdr-plugin-dvbapi /$VDRSRC/
+mv vdr-plugin-dvbapi dvbapi
+cd dvbapi
+make LIBDVBCSA=1
+make LIBDVBCSA=1 install
+echo "
+                    Vdr-Plugin-Dvbapi installed"; sleep 1
+#
+echo "
+                    VDR-2.7.8 plugins installed"; sleep 1
+echo "
+============================================================================================================
+For more Vdr plugins pls visit https://github.com/fiveten59/Vdr_installer and download Vdr_plugins_installer
+============================================================================================================"
+sleep 5;;
+#
+b)
+clear
+echo "                    Removing VDR-2.x.* plugins"
+cd $VDRSRC
+rm -rf softhddevicedrmgles
+rm -rf SkinNopacity
+rm -rf iptv
+rm -rf radio
+rm -rf vnsiserver
+rm -rf dvbapi
+rm -rf tvguide
+cd $LIBCONF
+rm -rf libvdr-skinnopacity.*
+rm -rf libvdr-softhddevice-drm-gles.*
+rm -rf libvdr-iptv.*
+rm -rf libvdr-radio.*
+rm -rf libvdr-vnsiserver.*
+rm -rf libvdr-dvbapi.*
+rm -rf libvdr-tvguide.*
+cd $VDRCONF/plugins
+rm -rf skinnopacity
+rm -rf iptv
+rm -rf radio
+rm -rf allowed_hosts
+cd $SHARE
+rm -rf skinnopacity
+rm -rf iptv
+rm -rf radio
+
+#
+echo "VDR-2.x.* plugins removed"; sleep 1;;
+z) clear;;
+#
+esac;;
+#
+5)
+clear
+dialog --title "   ** Install Shared parts   " --infobox "
+----------------------------------------------------------------------------------
+        [a]    Install (icons fonts channells diseqc start-scripts & others)
+
+        [z]    Skip
+---------------------------------------------------------------------------------- " 0 0
+echo -n "        Enter your menu choice  = Install [a]  ~~ Skip [z]    "
+read yourch
+case $yourch in
+#
+a)
+clear
+echo "                    Installing Icons"
+sleep 1
+if [ -f /usr/local/src/icone/vdr.png ]
+then echo "Icons $Remind4"
+sleep 1
+else cd $SRC
+cp -rf $REPO/icone.tar.gz $SRC
+tar -zxvf icone.tar.gz
+rm -rf icone.tar.gz
+cd icone
+chmod 755 *
+echo "Icons installed"; sleep 1
+fi
+#
+echo "                    Installing Italian translation for some plugins"
+sleep 1
+if [ -f $SRC/traduzioni/Skin_it_IT.po ]
+then echo "Translations $Remind4"
+sleep 1
+else cd $SRC
+mkdir -p traduzioni
+cd traduzioni
+cp $REPO/traduzioni.tar.gz /$SRC/traduzioni/
+tar -zxvf traduzioni.tar.gz
+rm -rf traduzioni.tar.gz
+echo "Translations installed"; sleep 1
+fi
+#
+echo "                    keymacros.conf setup"
+rm -rf  $VDRCONF/keymacros.conf
+touch  $VDRCONF/keymacros.conf
+echo "# Remote control key macros for VDR
+
+Red       Recordings
+Green     @channelscan
+Yellow    Info
+Blue      @tvguide
+Ok        Channels" >> $VDRCONF/keymacros.conf
+echo "keymacros installed"; sleep 1
+#
+echo "                    Installing True Type Fonts"
+sleep 1
+if [ -d /usr/share/fonts/truetype/vdrsymbols ];
+then echo "True Type Fonts $Remind4"
+sleep 1
+else cp -rf $REPO/vdrsymbols.tar.gz /usr/share/fonts/truetype/
+cd /usr/share/fonts/truetype/
+tar -zxvf vdrsymbols.tar.gz
+rm -rf vdrsymbols.tar.gz
+apt install -y ttf-mscorefonts-installer
+fc-cache -fv
+echo "True Type Fonts installed"; sleep 1
+fi
+#
+echo "                    Install Channels logos"
+sleep 1
+cd $VDRCONF
+rm -rf logos
+cp -rf $REPO/logos $VDRCONF
+echo "Channels logos installed"; sleep 1
+#
+echo "                    Channels setup"
+sleep 1
+cd $VDRCONF
+rm -rf channels.conf
+clear
+dialog --title "   ** Channells list **   " --infobox "
+   ----------------------------------------------
+        [a]    Hot Bird 13°E
+        [b]    Dual 13, 19.2°E
+        [c]    Trial 9, 13, 19.2°E
+        [d]    Astra 19.2°E
+        [e]    Channels list + Tv Iptv
+
+        [z]    Skip
+   ---------------------------------------------- " 0 0
+echo -n "        Enter your menu choice = Install [a-e] ~~ Skip [z]    "
+read yourch
+case $yourch in
+a)
+clear
+cp -rf $REPO/channels.conf.mono_hotbird.tar.gz $VDRCONF
+tar -zxvf channels.conf.mono_hotbird.tar.gz
+rm -rf channels.conf.mono_hotbird.tar.gz
+echo "                    Channell MONO13 list installed"
+sleep 1;;
+#
+b)
+clear
+cp -rf $REPO/channels.conf.dual.tar.gz $VDRCONF
+tar -zxvf channels.conf.dual.tar.gz
+rm -rf channels.conf.dual.tar.gz
+echo "                    Channell DUAL list installed"
+sleep 1;;
+#
+c)
+clear
+cp -rf $REPO/channels.conf.trial.tar.gz $VDRCONF
+tar -zxvf channels.conf.trial.tar.gz
+rm -rf channels.conf.trial.tar.gz
+echo "                    Channell TRIAL list installed"
+sleep 1;;
+#
+d)
+clear
+cp -rf $REPO/channels-w_scan2-Astra_19.conf.tar.gz $VDRCONF
+tar -zxvf channels-w_scan2-Astra_19.conf.tar.gz
+rm -rf channels-w_scan2-Astra_19.conf.tar.gz
+echo "                    Channell MONO19 list installed"
+sleep 1;;
+#
+e)
+clear
+cp -rf $REPO/tv_iptv_channels.tar.gz $VDRCONF
+tar -zxvf tv_iptv_channels.tar.gz
+rm -rf tv_iptv_channels.tar.gz
+echo "                    Channels list + Tv Iptv installed"
+sleep 1;;
+z) clear;;
+esac
+#
+clear
+cd /var/lib/vdr/
+rm -rf diseqc.conf
+dialog --title "   ** Diseqc setup**   " --infobox "
+   ----------------------------------------------
+        [1]    Hot Bird 13°E
+        [2]    Dual 13, 19.2°E
+        [3]    Trial 9, 13, 19.2°E
+        [4]    Astra 19.2°E
+
+        [z]    Skip
+   ---------------------------------------------- " 0 0
+echo -n "        Enter your menu choice = Install [1-4] ~~ Skip [z]    "
+read yourch
+case $yourch in
+#
+1)
+clear
+echo "$MONO13" >> $VDRCONF/diseqc.conf
+echo "                    Hotbird Diseqc installed"
+sleep 1;;
+2)
+clear
+echo "$DUAL" >>  $VDRCONF/diseqc.conf
+echo "                    Dual Diseqc installed"
+sleep 1;;
+3)
+clear
+echo "$TRIAL" >>  $VDRCONF/diseqc.conf
+echo "                    Trial Diseqc installed"
+sleep 1;;
+4)
+clear
+echo "$MONO19" >>  $VDRCONF/diseqc.conf
+echo "                    Astra Diseqc installed"
+sleep 1;;
+z) clear;;
+esac
+#
+echo "                    Configuring Iptv"
+sleep 1
+sed -i 's/geteuid/getppid/' /usr/bin/vlc
+cd $VDRCONF/plugins/iptv/
+rm -rf channels
+cp -rf $REPO/iptv_conf.tar.gz $VDRCONF/plugins/iptv
+cd  $VDRCONF/plugins/iptv
+tar -zxvf iptv_conf.tar.gz
+rm -rf iptv_conf.tar.gz
+cd channels
+sudo chmod 777 *
+if [ -f /$BIN/yt-dlp ]
+then echo "yt-dlp $Remind3"
+sleep 1
+else
+cp -rf $REPO/yt-dlp /$BIN
+chmod 755 /$BIN/yt-dlp
+echo "Iptv configured"; sleep 1
+fi
+#
+echo "                    Configuring Vnsiserver"
+sleep 1
+if [ -f  $VDRCONF/plugins/allowed_hosts.conf ]
+then echo "Vnsiserver already configured"
+sleep 1
+else
+cp -rf $VDRSRC/vnsiserver/vnsiserver/allowed_hosts.conf /$VDRCONF/plugins/
+echo "Vnsiserver configured"; sleep 1
+fi
+#
+echo "                    Configuring Radio"
+sleep 1
+if [ -f  $VDRCONF/plugins/radio/radioinfo-0-256 ]
+then echo "Radio already configured"
+else
+cd $VDRCONF/plugins
+mkdir -p radio
+cd radio
+cp -rf $VDRSRC/radio/config/mpegstill/* $VDRCONF/plugins/radio/
+cp -rf $REPO/radio_scripts.tar.gz $VDRCONF/plugins/radio/
+tar -zxvf radio_scripts.tar.gz
+rm -rf radio_scripts.tar.gz
+echo "Radio configured"; sleep 1
+fi
+#
+echo "                    Install default Skin for Vdr"
+sleep 1
+if [ -f  $VDRCONF/themes/checklcars ]
+then echo "Default Skin is already installed"
+else cp -rf $REPO/lcars_pack.tar.gz $VDRCONF/themes
+cd  $VDRCONF/themes
+tar -zxvf lcars_pack.tar.gz
+rm -rf lcars_pack.tar.gz
+echo "Default Skin installed"
+sleep 1
+fi
+#
+echo "                    Create Vdr Start & Stop"
+sleep 1
+echo "                    Create init.d Vdr"
+sleep 1
+rm -rf /etc/init.d/vdr
+touch /etc/init.d/vdr
+echo '#!/bin/sh
+
+#File name: vdr
+
+echo "Vdr init.d script using: $1" >> /var/log/vdr.log &
+case "$1" in
+    start)
+        echo -n "Start VDR "
+        /usr/local/bin/vdrrun &
+        # Remember status and be verbose
+        ;;
+    stop)
+        echo -n "Stop VDR "
+
+        /usr/local/bin/vdrpoweroff & killall -9 vlc
+
+        # Remember status and be verbose
+        ;;
+    restart)
+        echo -n "Restart VDR "
+        $0 stop
+        $0 start
+
+        # Remember status and be quiet
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|restart}"
+        exit 1
+        ;;
+esac
+exit 0
+' >> /etc/init.d/vdr
+chmod 755 /etc/init.d/vdr
+echo "Vdr Start & Stop installed"
+sleep 1
+#
+echo "                    Permissions to execute Vdr"
+sleep 1
+rm -rf /etc/sudoers.d/vdr
+touch /etc/sudoers.d/vdr
+echo "vdr ALL=(ALL) ALL" >> /etc/sudoers.d/vdr
+echo "%`logname` ALL=NOPASSWD: /etc/init.d/vdr start" >> /etc/sudoers.d/vdr
+echo "Permissions to execute Vdr created"
+sleep 1;;
+#
+z);;
+esac;;
+#
+6)
+clear
+cd /home/`logname`
+chmod -R 777 Vdr_repo
+chmod 777 /srv/vdr/video
+#
+clear
+dialog --title "   ** Final setup   " --infobox "
+   -------------------------------------------------------------------------
+        [a]    Desktop OS version
+        [b]    Lite OS version
+
+        [z]    Skip
+   ------------------------------------------------------------------------- " 0 0
+echo -n "        Enter your menu choice  = Install [a-b]  ~~ Skip [z]    "
+read yourch
+case $yourch in
+a)
+clear
+echo "                    Final setup Desktop OS version"
+sleep 1
+echo "                    Eventlircd Automatic start"
+sleep 1
+cd /home/`logname`/.config/autostart
+rm -rf Eventlircd_autostart.desktop
+touch Eventlircd_autostart.desktop
+echo '[Desktop Entry]
+Type=Application
+Name[it]=Eventlircd
+Exec=sudo /etc/init.d/eventlircd start
+NoDisplay=false
+Name[it_IT]=Eventlircd_autostart.desktop' >> /home/`logname`/.config/autostart/Eventlircd_autostart.desktop
+echo "Automatic start Eventlircd installed"
+sleep 1
+chmod 777 /home/`logname`/.config/autostart/*
+#
+echo "                    Create Vdr start command line"
+sleep 1
+rm -rf $BIN/vdrrun
+touch $BIN/vdrrun
+echo '#!/bin/bash
+# File name: vdrrun
+
+sudo chvt 1  && sleep 2 && /usr/local/bin/vdr -l 3 --no-kbd -u root '$PLUGIN_DESKTOP' -s /usr/local/bin/vdrpoweroff
+
+# -a hw:CARD=sndrpihifiberry,0 
+# -a hw:CARD=BossDAC,0' >> $BIN/vdrrun
+chmod 755 $BIN/vdrrun
+echo "Vdr start installed"
+#
+echo "                    Create Vdr Power Off"
+sleep 1
+rm -rf $BIN/vdrpoweroff
+touch $BIN/vdrpoweroff
+echo '#!/bin/sh
+# File name: vdrpoweroff
+
+killall -9 vdr
+sleep 1
+sudo chvt 7' >> $BIN/vdrpoweroff
+chmod 755 $BIN/vdrpoweroff
+echo "Vdr Power Off created"; sleep 1
+#
+echo "                    Create Vdr System Power Off"
+sleep 1
+rm -rf $BIN/systempoweroff
+touch $BIN/systempoweroff
+echo '#!/bin/sh
+# File name: systempoweroff
+
+killall -9 vdr & killall -9 oscam & shutdown -h now' >> $BIN/systempoweroff
+chmod 755 $BIN/systempoweroff
+echo "Systempoweroff installed"
+sleep 1
+#
+echo "                    Setup icons for Rpi 4/5 Desktop"
+sleep 1
+rm -rf /usr/share/applications/Vdr.desktop
+touch /usr/share/applications/Vdr.desktop
+echo "[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Name=Vdr
+Description=Start of Vdr
+Icon=/usr/local/src/icone/vdr.png
+Exec=sudo /etc/init.d/vdr start > /dev/null 2>&1
+" >> /usr/share/applications/Vdr.desktop
+chmod 755 /usr/share/applications/Vdr.desktop
+#
+rm -rf /usr/share/applications/KillVdr.desktop
+touch /usr/share/applications/KillVdr.desktop
+echo "[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Name=KillVdr
+Description=Kill Vdr
+Icon=/usr/local/src/icone/killvdr.png
+Exec=sudo /etc/init.d/vdr stop > /dev/null 2>&1" >> /usr/share/applications/KillVdr.desktop
+chmod 755 /usr/share/applications/KillVdr.desktop
+echo "Vdr start & kill command line created"; sleep 1
+#
+echo "Setup icons for Rpi 4/5 Desktop installed"
+sleep 1
+#
+clear
+dialog --title "   ** Vdr Automatic start  **   " --infobox "
+   ----------------------------------------------
+        Configuring Vdr Automatic start at boot
+   ----------------------------------------------
+        [a]    Vdr auto start
+        [b]    No auto start
+
+        [z]    exit
+   ---------------------------------------------- " 0 0
+echo -n "        Enter your menu choice  [a-b]:      "
+read yourch
+case $yourch in
+a)
+clear
+echo "                    Automatic start Vdr"
+sleep 1
+cd /home/`logname`/.config/autostart
+rm -rf vdr-autostart.desktop
+touch vdr-autostart.desktop
+echo '[Desktop Entry]
+Type=Application
+Name[it]=Vdr
+Exec=/etc/init.d/vdr start > /dev/null 2>&1 
+NoDisplay=false
+Name[it_IT]=vdr-autostart.desktop' >> /home/`logname`/.config/autostart/vdr-autostart.desktop
+echo "Automatic start Vdr installed"
+sleep 1
+chmod 777 /home/`logname`/.config/autostart/*;;
+b) clear;;
+z) clear;;
+esac
+#
+sleep 1
+echo "                    Installing Commands"
+sleep 1
+cd  $VDRCONF
+rm -rf commands.conf 
+touch commands.conf
+echo 'Kill Vdr: /etc/init.d/vdr stop > /dev/null 2>&1
+Kodi Frontend: /usr/local/bin/Kodi_frontend > /dev/null 2>&1 
+Restart system: sudo reboot > /dev/null 2>&1
+Shutdown system: /usr/local/bin/systempoweroff > /dev/null 2>&1
+Start Oscam: sudo /etc/init.d/oscam start > /dev/null 2>&1 
+Kill Oscam: sudo /etc/init.d/oscam stop  > /dev/null 2>&1
+Oscam Log: tail -n 40 /var/log/oscam.log' >> commands.conf
+echo "Commands installed"
+sleep 1
+#
+ln -s /usr/local/bin/vdrrun /home/`logname`/vdrrun
+chmod 777 /home/`logname`/vdrrun
+#
+echo "                    *** Done! ***"
+sleep 1
+echo "                    *** CHANGE USER!!!!!! ***"
+sleep 5
+echo "                    *** Installation completed! ***"
+sleep 1;;
+#
+b)
+clear
+echo "                    Final setup Rpi4/5 Lite OS version"
+sleep 1
+cp -rf $SRC/icone/splash.png /usr/share/plymouth/themes/pix/
+plymouth-set-default-theme --rebuild-initrd pix
+echo "                    Changed Raspberry Lite version system icon"
+sleep 1
+echo "                    Create Vdr start"
+sleep 1
+rm -rf $BIN/vdrrun
+touch $BIN/vdrrun
+echo '#!/bin/bash
+# file name vdrrun
+
+/usr/local/bin/vdr --no-kbd -u root '$PLUGIN_LITE' -s /usr/local/bin/systempoweroff
+
+# -a hw:CARD=sndrpihifiberry,0 
+# -a hw:CARD=BossDAC,0' >> $BIN/vdrrun
+chmod 777 $BIN/vdrrun
+#
+echo "                    Create Vdr Vdrpoweroff"
+sleep 1
+rm -rf $BIN/vdrpoweroff
+touch $BIN/vdrpoweroff
+echo '#!/bin/sh
+#file name: vdrpoweroff
+
+killall -9 vdr' >> $BIN/vdrpoweroff
+chmod 777 $BIN/vdrpoweroff
+echo "Vdr Vdrpoweroff installed"
+sleep 1
+#
+echo "                    Create Vdr systempoweroff"
+sleep 1
+rm -rf $BIN/systempoweroff
+touch $BIN/systempoweroff
+echo '#!/bin/sh
+#file name: systempoweroff
+
+killall -9 vdr & killall -9 oscam & shutdown -h now' >> $BIN/systempoweroff
+chmod 777 $BIN/systempoweroff
+echo "Vdr start & stop installed"
+sleep 1
+#
+echo "                    Automatic start Eventlircd - Vdr"
+sleep 1
+cd /etc
+rm -rf rc.local
+cp -rf $REPO/rpi_rc.local.tar.gz /etc
+tar -zxvf rpi_rc.local.tar.gz
+rm -rf rpi_rc.local.tar.gz
+echo "                    Automatic start Eventlircd - Vdr installed"
+sleep 1
+#
+sleep 1
+echo "                    Installing Commands"
+sleep 1
+cd $VDRCONF
+rm -rf commands.conf 
+touch commands.conf
+echo 'Kill Vdr: /etc/init.d/vdr stop > /dev/null 2>&1
+Kodi Frontend: /usr/local/bin/Kodi_frontend > /dev/null 2>&1 
+Restart system: sudo reboot > /dev/null 2>&1
+Shutdown system: /usr/local/bin/systempoweroff > /dev/null 2>&1
+Start Oscam: sudo /etc/init.d/oscam start > /dev/null 2>&1 
+Kill Oscam: sudo /etc/init.d/oscam stop  > /dev/null 2>&1
+Oscam Log: tail -n 40 /var/log/oscam.log' >> commands.conf
+echo "Commands installed"
+sleep 1
+#
+#unlink /home/`logname`/vdrrun
+ln -s /usr/local/bin/vdrrun /home/`logname`/vdrrun
+chmod 777 /home/`logname`/vdrrun
+#
+echo "                    *** Done! ***"
+sleep 3
+echo "                    *** Installation completed! ***"
+sleep 3
+echo "                    *** Change User !!!***"
+sleep 3
+esac;;
+#
+7)
+clear
+exit 0
+;;
+*) ;;
+esac
+done

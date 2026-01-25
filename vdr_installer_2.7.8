@@ -601,18 +601,19 @@ tar -zxvf vdr-patches.2.7.8.tar.gz
 rm -rf vdr-patches.2.7.8.tar.gz
 sleep 1
 #
-echo "                    Patching channellscan"
-patch -p1 < vdr-dvbchan.patch
+
 echo "                    Patching zapcockpit"
 patch -p1 < zapcockpit.patch
 echo "                    Patching svdrphosts"
 patch -p1 < vdr_svdrphosts.patch
 echo "                    Menuorg patch"
-#patch -p1 < menuorg.patch
+patch -p1 < menuorg.patch
 echo "                    Mainmenuhook patch"
-#patch -p1 < mainmenuhook.patch
+patch -p1 < mainmenuhook.patch
 echo "                    Menuselection patch"
-#patch -p1 < menuselection.patch
+patch -p1 < menuselection.patch
+echo "                    Undelete patch"
+patch -p1 < undelete.patch
 #
 make && make install
 echo "                    Final compilation"
@@ -763,7 +764,7 @@ echo "
                     TvGuide installed"; sleep 1
 #
 echo "
-                   Installing Vdr-Plugin-Dvbapi" sleep 1
+                   Installing Vdr-Plugin-Dvbapi"; sleep 1
 apt -y install libdvbcsa-dev
 cd $VDRSRC
 cp -rf $REPO/vdr-plugin-dvbapi $VDRSRC

@@ -279,6 +279,7 @@ echo "                    Downloading others"
 
 git clone https://github.com/Libreelec/eventlircd.git
 wget https://github.com/jc-kynesim/rpi-ffmpeg/archive/refs/heads/test/7.1.2/main.zip
+unzip main.zip; mv rpi-ffmpeg-test-7.1.2-main rpi-ffmpeg; rm -rf main.zip
 wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
 wget https://github.com/fiveten59/Logos/archive/refs/heads/master.zip
 unzip master.zip; rm -rf master.zip; mv -f Logos-master logos

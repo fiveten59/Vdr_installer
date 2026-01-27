@@ -601,6 +601,8 @@ tar -zxvf vdr-patches.2.7.8.tar.gz
 rm -rf vdr-patches.2.7.8.tar.gz
 sleep 1
 #
+echo "                    Undelete patch"
+patch -p1 < undelete.patch
 echo "                    Patching channellscan"
 patch -p1 < vdr-dvbchan.patch
 echo "                    Patching zapcockpit"
@@ -611,8 +613,6 @@ echo "                    Mainmenuhook patch"
 patch -p1 < MainMenuHooks.patch
 echo "                    Menuselection patch"
 patch -p1 < menuselection.patch
-#echo "                    Undelete patch"
-#patch -p1 < undelete.patch
 #
 make && make install
 echo "                    Final compilation"

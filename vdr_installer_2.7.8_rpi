@@ -547,8 +547,7 @@ echo "                    Installing VDR"
 sleep 1
 echo "Installing libraries"; sleep 1
 apt -y install libjpeg-dev libcap-dev libtinyxml-dev binutils libglibmm-2.4-dev g++
-apt -y install libfontconfig1-dev libfribidi-dev gettext
-apt -y install libncurses5-dev libncursesw5-dev
+apt -y install libfontconfig1-dev libfribidi-dev gettext libncurses-dev
 #
 cd $SRC
 cp -rf $REPO/vdr-2.7.8 $SRC

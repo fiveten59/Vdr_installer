@@ -1,8 +1,11 @@
 A  special thanks goes to Klaus Schmidinger Vdr Developer & all plugin developers
 
-Two scripts: 
-- vdr_installer_2.7.8 installs Vdr on Ubuntu with essential plugins (in about 15 min)
-- vdr_plugins_installer installs others plugins 
+Five scripts: 
+- vdr_installer_2.7.8 installs Vdr on Ubuntu - Debian system with essential plugins
+- fedora_vdr_installer_2.7.8 installs Vdr on Fedora system with essential plugins
+- vdr_installer_2.7.8_rpi installs Vdr on Raspberry pi4-5 with essential plugins
+- vdr_plugins_installer installs others plugins (Ubuntu - Debian - Raspberry systems)
+- fedora_vdr_plugins_installer installs others plugins (Fedora system)
   
 # Script name: vdr_installer_2.7.8
 A script for installing Vdr 

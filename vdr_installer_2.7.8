@@ -9,7 +9,7 @@
 #
 clear
 REPO="/home/`logname`/Vdr_repo"
-PLUGIN="--lirc -P'dvbapi' -P'softhddevice -a hw:0,0 -v cpu-glx -f' -P'skinnopacity -l /var/lib/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio -l /var/lib/vdr/plugins/radio/rtextUnten-kleo2.mpg' -P'tvguide'"
+PLUGIN="--lirc -P'dvbapi' -P'softhddevice -v cpu-glx -f' -P'skinnopacity -l /var/lib/vdr/logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio -l /var/lib/vdr/plugins/radio/radio-Red1080.mpg' -P'tvguide'"
 BIN="/usr/local/bin"
 SRC='/usr/local/src'
 VDRSRC=''$SRC'/vdr/PLUGINS/src'
@@ -895,61 +895,11 @@ echo "                    Channels setup"
 sleep 1
 cd $VDRCONF
 rm -rf channels.conf
-clear
-dialog --title "   ** Channells list **   " --infobox "
-   ----------------------------------------------
-        [a]    Hot Bird 13°E
-        [b]    Dual 13, 19.2°E
-        [c]    Trial 9, 13, 19.2°E
-        [d]    Astra 19.2°E
-        [e]    Channels list + Tv Iptv
-
-        [z]    Skip
-   ---------------------------------------------- " 0 0
-echo -n "        Enter your menu choice = Install [a-e] ~~ Skip [z]    "
-read yourch
-case $yourch in
-a)
-clear
-cp -rf $REPO/channels.conf.mono_hotbird.tar.gz $VDRCONF
-tar -zxvf channels.conf.mono_hotbird.tar.gz
-rm -rf channels.conf.mono_hotbird.tar.gz
-echo "                    Channell MONO13 list installed"
-sleep 1;;
-#
-b)
-clear
-cp -rf $REPO/channels.conf.dual.tar.gz $VDRCONF
-tar -zxvf channels.conf.dual.tar.gz
-rm -rf channels.conf.dual.tar.gz
-echo "                    Channell DUAL list installed"
-sleep 1;;
-#
-c)
-clear
-cp -rf $REPO/channels.conf.trial.tar.gz $VDRCONF
-tar -zxvf channels.conf.trial.tar.gz
-rm -rf channels.conf.trial.tar.gz
-echo "                    Channell TRIAL list installed"
-sleep 1;;
-#
-d)
-clear
-cp -rf $REPO/channels-w_scan2-Astra_19.conf.tar.gz $VDRCONF
-tar -zxvf channels-w_scan2-Astra_19.conf.tar.gz
-rm -rf channels-w_scan2-Astra_19.conf.tar.gz
-echo "                    Channell MONO19 list installed"
-sleep 1;;
-#
-e)
-clear
 cp -rf $REPO/tv_iptv_channels.tar.gz $VDRCONF
 tar -zxvf tv_iptv_channels.tar.gz
 rm -rf tv_iptv_channels.tar.gz
 echo "                    Channels list + Tv Iptv installed"
-sleep 1;;
-z) clear;;
-esac
+sleep 1
 #
 clear
 cd /var/lib/vdr/
@@ -995,14 +945,25 @@ sleep 1
 sed -i 's/geteuid/getppid/' /usr/bin/vlc
 touch /tmp/vlc.log
 chmod 777 /tmp/vlc.log
-cd $VDRCONF/plugins/iptv/
-rm -rf channels
-cp -rf $REPO/iptv_conf.tar.gz $VDRCONF/plugins/iptv
-cd  $VDRCONF/plugins/iptv
+touch /tmp/mpv.log
+chmod 777 /tmp/mpv.log
+#
+cp -rf $REPO/iptv_conf.tar.gz $SRC
+cd $SRC
 tar -zxvf iptv_conf.tar.gz
 rm -rf iptv_conf.tar.gz
+mv -f vlc_channels.tar.gz $VDRCONF/plugins/iptv/
+mv -f mpv_channels.tar.gz $SHARE/iptv/
+cd $VDRCONF/plugins/iptv
+rm -rf channels
+tar -zxvf vlc_channels.tar.gz
+rm -rf vlc_channels.tar.gz
 cd channels
 chmod 777 *
+cd $SHARE/iptv
+tar -zxvf mpv_channels.tar.gz
+rm -rf mpv_channels.tar.gz
+#
 if [ -f /$BIN/yt-dlp ]
 then echo "yt-dlp $Remind3"
 sleep 1
@@ -1069,7 +1030,7 @@ case "$1" in
     stop)
         echo -n "Stop VDR "
 
-        /usr/local/bin/vdrpoweroff & killall -9 vlc
+        /usr/local/bin/vdrpoweroff & killall -9 vlc & killall -9 mpv
 
         # Remember status and be verbose
         ;;

@@ -231,8 +231,8 @@ if [ -e $REPO/rpi_import_1.zip ]; then
   echo " ..... File exists ....."
 else
   echo "File not found ... Downloading it now ....."
-    wget https://github.com/jc-kynesim/rpi-ffmpeg/archive/refs/heads/test/7.1.2/main.zip
-    unzip main.zip; mv rpi-ffmpeg-test-7.1.2-main rpi-ffmpeg; rm -rf main.zip
+    wget https://github.com/jc-kynesim/rpi-ffmpeg/archive/refs/heads/test/8.0.1/main.zip
+    unzip main.zip; mv rpi-ffmpeg-test-8.0.1-main rpi-ffmpeg; rm -rf main.zip
     fi
 
 if [ -e $REPO/yt-dlp ]; then

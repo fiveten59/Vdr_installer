@@ -1,0 +1,1316 @@
+#!/bin/bash
+################################## !!! README !!! #######################################
+# Script name: cross_vdr_installer_2.8.2
+# Version: Git Repository Master (https://github.com/fiveten59/Vdr_installer)
+# Tested on (K)Ubuntu 26.04 - Debian 13 (Trixie) - Fedora 44 - Raspberry 64 bit
+# EndeavourOS (Arch) - openSUSE_Tumbleweed
+# Cross platform version
+# chmod 755 the script
+# then load it simply typing: sudo ./cross_vdr_installer_2.8.2
+#########################################################################################
+#
+set -e
+#
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root (sudo ./cross_vdr_installer_2.8.2)"
+   exit 1
+   fi
+#
+clear
+LOGNAME_USER=$(logname)
+CONFIG="/boot/firmware/config.txt"
+REPO="/home/$LOGNAME_USER/Vdr_repo"
+BIN="/usr/local/bin"
+SRC="/usr/local/src"
+VDRSRC="$SRC/vdr/PLUGINS/src"
+LIBCONF="/usr/local/lib/vdr"
+VDRCONF="/var/lib/vdr"
+VDR="vdr-2.8.2"
+SHARE="/usr/local/share/vdr/plugins"
+FONTS="/usr/share/fonts"
+CONFIG="${CONFIG:-/boot/config.txt}"
+Remind3="is already installed"
+Remind4="are already installed"
+
+# String Plugin
+PLUGIN="--lirc -P'dvbapi' -P'softhddevice -a hw:0,0 -v va-api-egl -f' -P'skinflatplus -l /var/lib/vdr/Logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio -l /var/lib/vdr/plugins/radio/radio-Red1080.mpg' -P'tvguide -l /var/lib/vdr/Logos/'"
+
+PLUGINRPI="--lirc -P'dvbapi' -P'softhddevice-drm-gles -a hw:CARD=sndrpihifiberry,0 -d 1920x1080@50' -P'skinflatplus -l /var/lib/vdr/Logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio -l /var/lib/vdr/plugins/radio/radio-Red1080.mpg' -P'tvguide -l /var/lib/vdr/Logos/'"
+
+# Debian base libs
+DEBIANPACK=(dialog git subversion wget pkg-config build-essential autopoint autoconf automake cmake libtool unzip gawk libudev-dev liblirc-dev evtest ir-keytable at socat)
+
+# Fedora base libs
+FEDORAPACK=(autopoint autoconf automake cmake libtool unzip gawk evtest ir-keytable systemd-devel lirc-devel libudev-devel at socat newt git dialog patch)
+
+# Arch base libs
+ARCHPACK=(dialog git subversion wget pkgconf base-devel cmake libtool unzip gawk evtest v4l-utils at socat intel-media-driver xorg-xhost dos2unix)
+
+# Suse base libs
+SUSEPACK=(dialog git subversion wget pkg-config-or-pkgconf patterns-devel-base-devel_basis autopoint autoconf automake cmake libtool unzip gawk libudev-devel lirc-devel evtest v4l-utils at socat patch)
+
+# Debian FFmpeg libs
+DEBIAN_FFMPEGPACK=(nasm libavcodec-dev libavfilter-dev libavformat-dev libswresample-dev libswscale-dev libpostproc-dev libx264-dev libx265-dev libdav1d-dev libfdk-aac-dev libmp3lame-dev libopus-dev libass-dev libva-dev libvdpau-dev libdrm-dev libpulse-dev libudev-dev libfreetype6-dev libfontconfig1-dev libssl-dev libvorbis-dev libtheora-dev libvpx-dev libaom-dev libsvtav1enc-dev libxcb1-dev libxcb-shm0-dev libxcb-xfixes0-dev zlib1g-dev)
+
+# Arch/EndeavourOS FFmpeg libs
+ARCH_FFMPEGPACK=(nasm x264 x265 dav1d libfdk-aac lame opus libass libva libvdpau libdrm libpulse systemd freetype2 fontconfig openssl libvorbis libtheora libvpx aom svt-av1 libxcb zlib)
+
+# FFmpeg 7 comfig from sources
+FFMPEG_CONF="--extra-libs=-ldl --ld=g++ --enable-gpl --enable-version3 --enable-nonfree --enable-shared --enable-pic --disable-doc --enable-openssl --enable-avdevice --enable-libx264 --enable-libx265 --enable-libdav1d --enable-libvpx --enable-libaom --enable-libsvtav1 --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libtheora --enable-libass --enable-libfreetype --enable-libfontconfig --enable-libpulse --enable-libdrm --enable-libxcb --enable-zlib"
+
+# FFmpeg 7 comfig from sources (nvdia)
+DEBIAN_FFMPEG_CONF="--extra-libs=-ldl  --enable-gpl --enable-version3 --enable-nonfree --enable-shared --enable-pic --disable-doc --enable-openssl --enable-avdevice --enable-libx264 --enable-libx265 --enable-libdav1d --enable-libvpx --enable-libaom --enable-libsvtav1 --enable-libfdk-aac --enable-libmp3lame --enable-libopus --enable-libvorbis --enable-libtheora --enable-libass --enable-libfreetype --enable-libfontconfig --enable-libpulse --enable-libdrm --enable-libxcb --enable-zlib --enable-postproc --enable-ffnvcodec --enable-nvenc --enable-cuvid"
+
+# Debian Vdr libs
+DEBIAN_VDRLIB=(libjpeg-dev libcap-dev libtinyxml-dev libglibmm-2.4-dev libfontconfig1-dev libfribidi-dev libfreetype6-dev libncurses-dev libsystemd-dev libncursesw5-dev gettext)
+
+# Fedora Vdr libs
+FEDORA_VDRLIB=(install tinyxml binutils glibmm2.4 g++ fontconfig fribidi gettext ncurses-devel fontconfig-devel libjpeg-turbo-devel libcap-devel)
+
+# Arch/EndeavourOS Vdr libs
+ARCH_VDRLIB=(libjpeg-turbo libcap tinyxml glibmm fontconfig fribidi freetype2 ncurses systemd gettext gcc)
+
+# Suse Vdr libs
+SUSE_VDRLIB=(libjpeg-turbo-devel libcap-devel tinyxml-devel glibmm24-devel fontconfig-devel fribidi-devel freetype2-devel ncurses-devel systemd-devel gettext-runtime gettext-tools gcc-c++)
+
+# Debian/Ubuntu Vdr plugins libs
+DEBIAN_PLUGLIB=(zlib1g-dev libexpat1-dev libglib2.0-dev libpcre2-dev  libasound2-dev libvdpau-dev libva-dev libgl1-mesa-dev libx11-xcb-dev libxcb1-dev libxcb-xv0-dev libxcb-ewmh-dev libxcb-keysyms1-dev libxcb-icccm4-dev libxcb-dpms0-dev libxcb-randr0-dev libxcb-util-dev libxcb-image0-dev libxcb-xtest0-dev libxcb-shape0-dev libxcb-shm0-dev libxcb-xfixes0-dev libxcb-render0-dev libxcb-screensaver0-dev vlc libcurl4 libcurl4-gnutls-dev libssl-dev libdvbcsa-dev libdrm-dev libgbm-dev libegl1-mesa-dev libavcodec-dev libavfilter-dev libavformat-dev libswresample-dev libswscale-dev libavutil-dev libglm-dev libglvnd-dev libglu1-mesa-dev libxi-dev libxrandr-dev libxrender-dev libxext-dev libxxf86vm-dev lm-sensors)
+
+# Ubuntu Vdr plugins lib
+UBU_PLUGLIB=(zlib1g-dev libexpat1-dev libglib2.0-dev libpcre2-dev libasound2-dev libvdpau-dev libva-dev libgl1-mesa-dev libx11-xcb-dev libxcb1-dev libxcb-xv0-dev libxcb-ewmh-dev libxcb-keysyms1-dev libxcb-icccm4-dev libxcb-dpms0-dev libxcb-randr0-dev libxcb-util-dev libxcb-image0-dev libxcb-xtest0-dev libxcb-shape0-dev libxcb-shm0-dev libxcb-xfixes0-dev libxcb-render0-dev libxcb-screensaver0-dev vlc libcurl4-gnutls-dev libssl-dev libdvbcsa-dev libdrm-dev libgbm-dev libegl1-mesa-dev libavcodec-dev libavfilter-dev libavformat-dev libswresample-dev libswscale-dev libavutil-dev libglm-dev libglvnd-dev libglu1-mesa-dev libxi-dev libxrandr-dev libxrender-dev libxext-dev libxxf86vm-dev lm-sensors)
+
+# Fedora Vdr plugins libs
+FEDORA_PLUGLIB=(xcb-util-image-devel xcb-util-keysyms-devel xcb-util-renderutil-devel libxcb-devel libxcb libva-devel egl-wayland-devel mesa-libEGL-devel mesa-libGLU-devel libogg-devel mesa-libGL-devel  libsoundio libass-devel libXext-devel freetype-devel libepoxy-devel glm-devel freeglut-devel glew-devel libplacebo-devel libglvnd-devel libdrm-devel libXi-devel libXrandr-devel libXrender-devel libXxf86vm-devel libvdpau-devel alsa-lib-devel mesa-libGLES-devel libX11-devel xcb-util-wm-devel x264-devel x265-devel GraphicsMagick-devel GraphicsMagick-c++-devel pcre-devel zlib-devel expat-devel openssl-devel libcurl-devel vlc lm_sensors)
+# libvdpau-va-gl
+
+# Arch Vdr/EndeavourOS plugins libs
+ARCH_PLUGLIB=(graphicsmagick zlib expat glib2 pcre2 alsa-lib libvdpau libva mesa libx11 libxcb xcb-util xcb-util-wm xcb-util-keysyms xcb-util-image vlc vlc-plugins-all curl openssl libdrm glm libglvnd glu libxi libxrandr libxrender libxext libxxf86vm lm_sensors)
+
+# Suse Vdr plugins libs
+SUSE_PLUGLIB=(zlib-devel libexpat-devel glib2-devel pcre2-devel alsa-devel libvdpau-devel libva-devel Mesa-libGL-devel libX11-devel libxcb-devel xcb-util-devel xcb-util-wm-devel xcb-util-keysyms-devel xcb-util-image-devel vlc vlc-codecs libcurl-devel libopenssl-devel libdvbcsa-devel libdrm-devel Mesa-libgbm-devel Mesa-libEGL-devel libavcodec-devel libavfilter-devel libavformat-dev libswresample-devel libswscale-devel libavutil-devel glm-devel libglvnd-devel mesa-libGLU-devel libXi-devel libXrandr-devel libXrender-devel libXext-devel libXxf86vm-devel lm_sensors GraphicsMagick-devel GraphicsMagick-c++-devel)
+
+# Disecq templates
+TRIAL=" 9 - 13 - 19.2E\nS9E  11700 V  9750 t v W15 [E0 10 38 F0] W15 A W15 T\nS9E  99999 V 10600 t v W15 [E0 10 38 F1] W15 A W15 T\nS9E  11700 H  9750 t V W15 [E0 10 38 F2] W15 A W15 T\nS9E  99999 H 10600 t V W15 [E0 10 38 F3] W15 A W15 T\n \nS13.0E 11700 V  9750 t v W15 [E0 10 38 F4] W15 B W15 t\nS13.0E 99999 V 10600 t v W15 [E0 10 38 F5] W15 B W15 T\nS13.0E 11700 H  9750 t V W15 [E0 10 38 F6] W15 B W15 t\nS13.0E 99999 H 10600 t V W15 [E0 10 38 F7] W15 B W15 T\n \nS19.2E 11700 V  9750 t v W15 [E0 10 38 F8] W15 A W15 t\nS19.2E 99999 V 10600 t v W15 [E0 10 38 F9] W15 A W15 T\nS19.2E 11700 H  9750 t V W15 [E0 10 38 FA] W15 A W15 t\nS19.2E 99999 H 10600 t V W15 [E0 10 38 FB] W15 A W15 T"
+#
+DUAL="# 13 - 19.2E\nS13.0E 11700 V  9750  t v W15 [E0 10 38 F0] W15 A W15 t\nS13.0E 99999 V 10600  t v W15 [E0 10 38 F1] W15 A W15 T\nS13.0E 11700 H  9750  t V W15 [E0 10 38 F2] W15 A W15 t\nS13.0E 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T\n \nS19.2E  11700 V  9750  t v W15 [E0 10 38 F4] W15 B W15 t\nS19.2E  99999 V 10600  t v W15 [E0 10 38 F5] W15 B W15 T\nS19.2E  11700 H  9750  t V W15 [E0 10 38 F6] W15 B W15 t\nS19.2E  99999 H 10600  t V W15 [E0 10 38 F7] W15 B W15 T"
+#
+MONO13="# Hotbird 13.0E\nS13.0E 11700 V 9750 t v W15 [E0 10 38 F0] W15 A W15 t\nS13.0E 99999 V 10600 t v W15 [E0 10 38 F1] W15 A W15 T\nS13.0E 11700 H 9750 t V W15 [E0 10 38 F2] W15 A W15 t\nS13.0E 99999 H 10600 t V W15 [E0 10 38 F3] W15 A W15 T"
+#
+MONO19="# Astra 19 - 19.2°E\nS19.2E 11700 V  9750  t v W15 [E0 10 38 F0] W15 A W15 t\nS19.2E 99999 V 10600  t v W15 [E0 10 38 F1] W15 A W15 T\nS19.2E 11700 H  9750  t V W15 [E0 10 38 F2] W15 A W15 t\nS19.2E 99999 H 10600  t V W15 [E0 10 38 F3] W15 A W15 T"
+#
+export NEWT_COLORS='root=,magenta window=white,magenta border=white,magenta shadow=black,lightgray button=white,magenta actbutton=black,lightgray title=white,magenta textbox=white,magenta acttextbox=black,lightgray listbox=white,magenta actlistbox=white,black label=lightgray,magenta'
+#
+usermod -aG audio,video,input,render "$LOGNAME_USER"
+#
+whiptail --title " VDR 2.8.2 Installer " --msgbox "
+    A special thanks goes to Klaus Schmidinger & all Vdr Developers
+
+    Script name: cross_vdr_installer_2.8.2
+    Version: 2.8.2
+    Tested on (K)Ubuntu 26.04 - Debian 13 (Trixie) - Fedora 44 - Rpi 64 bit
+    Cross platform version
+    chmod 755 the script 'cross_vdr_installer_2.8.2'
+    load it simply typing: sudo ./cross_vdr_installer_2.8.2" 16 95
+#
+clear
+while true; do
+yourch=$(whiptail --title " Vdr 2.8.2 Installer " \
+--menu "Use the arrows to navigate and Enter to select:" 20 70 10 \
+           "A"  "Checking System" \
+           "B"  "Download & Upgrade Local Repository" \
+           "C"  "FFMPEG & Infrared Control & Sat Firmware" \
+           "D"  "VDR" \
+           "E"  "Vdr Plugins" \
+           "F"  "Install shared parts Desktop/Server systems" \
+           "G"  "Desktop Os Final configuration" \
+           "H"  "Server Os - Working in progress" \
+           "X"  "Exit" \
+        3>&1 1>&2 2>&3) || break
+
+case $yourch in
+#
+A)
+while true; do
+subch=$(whiptail --title "Checking System" \
+--menu "Use the arrows to navigate and Enter to select:" 20 70 10 \
+           "a"  "Check System & install needed Libraries (ONLY FIRST USE)" \
+           "S"  "Skip" \
+        3>&1 1>&2 2>&3) || break
+
+case $subch in
+a) clear
+echo "Check System & install needed libraries (ONLY FIRST USE)"
+sleep 1
+. /etc/os-release
+
+if [ "$ID" = "debian" ] && [ "$ID" != "raspbian" ] && ! grep -q "Raspberry Pi" /proc/device-tree/model 2>/dev/null; then
+
+    echo "Debian PC found ... updating sources"; sleep 1
+#
+if [ ! -f "/etc/apt/sources.list.d/dmo.sources" ]; then
+
+wget https://www.deb-multimedia.org/pool/main/d/deb-multimedia-keyring/deb-multimedia-keyring_2024.9.1_all.deb
+dpkg -i deb-multimedia-keyring_2024.9.1_all.deb
+rm -rf deb-multimedia-keyring_2024.9.1_all.deb
+
+cat <<EOF > /etc/apt/sources.list.d/dmo.sources
+Enabled: yes
+Types: deb deb-src
+URIs: http://www.deb-multimedia.org
+Suites: trixie
+Components: main non-free
+Architectures: amd64
+Signed-By: /usr/share/keyrings/deb-multimedia-keyring.pgp
+EOF
+else
+echo "Debian multimedia $Remind4"
+fi
+#
+    cat <<EOF > /etc/apt/preferences.d/deb-multimedia-pin
+Package: *
+Pin: Release o=Unofficial Multimedia Packages
+Pin-Priority: 50
+
+Package: vdr vdr-* softhddevice softhddevice-* vdr-plugin-mpv libmpv* ffmpeg libavcodec* libavformat* libavutil* libswresample* libswscale*
+Pin: Release o=Unofficial Multimedia Packages
+Pin-Priority: 900
+EOF
+#
+sudo sed -i 's/non-free-firmware/non-free-firmware contrib/g' /etc/apt/sources.list
+apt update && apt -y upgrade
+fi
+#
+. /etc/os-release
+
+if [[ "$ID" == "fedora" ]]; then
+    echo "Configuring Fedora..."
+    dnf update
+    dnf install -y "${FEDORAPACK[@]}" "${FEDORA_VDRLIB[@]}" "${FEDORA_PLUGLIB[@]}"
+    sleep 2
+
+  elif [[ "$ID" == "debian" || "$ID" == "ubuntu" || "$ID" == "raspbian" || "$ID_LIKE" == *"debian"* ]]; then
+    echo "Configuring Debian/Ubuntu/Raspberry..."
+    apt update
+    if [ "$ID" == "ubuntu" ]; then
+        GM_PACKAGES=(libgraphicsmagick1-dev libgraphicsmagick++1-dev)
+        DEBIAN_FFMPEGPACK=("${DEBIAN_FFMPEGPACK[@]/libpostproc-dev/}")
+    else
+        GM_PACKAGES=(graphicsmagick-libmagick-dev-compat)
+    fi
+    apt install -y "${DEBIANPACK[@]}" "${DEBIAN_FFMPEGPACK[@]}" "${DEBIAN_VDRLIB[@]}" "${DEBIAN_PLUGLIB[@]}" "${GM_PACKAGES[@]}"
+    sleep 2
+    echo "Configuring Open-Source Video Drivers for Intel/VDR..."
+    if apt-cache show intel-media-va-driver >/dev/null 2>&1; then
+        apt install -y intel-media-va-driver
+    elif apt-cache show i965-va-driver >/dev/null 2>&1; then
+        apt install -y i965-va-driver
+    else
+        echo "Warning: No specific Intel Media driver found in repositories, skipping."
+    fi
+
+  elif [[ "$ID" == "endeavouros" || "$ID_LIKE" == *"arch"* ]]; then
+    echo "Configuring Arch/EndeavourOS..."
+    pacman -Syu --noconfirm --needed "${ARCHPACK[@]}" "${ARCH_FFMPEGPACK[@]}" "${ARCH_VDRLIB[@]}" "${ARCH_PLUGLIB[@]}"
+        if [ ! -f /usr/local/lib/libdvbcsa.so ] && [ ! -f /usr/lib/libdvbcsa.so ]; then
+    echo "Installing libdvbcsa from source..."
+    pacman -S --noconfirm --needed libtool
+    cd "$SRC"
+    rm -rf libdvbcsa
+    git clone https://code.videolan.org/videolan/libdvbcsa.git
+    cd libdvbcsa
+    ./bootstrap && ./configure --enable-shared --enable-pic
+    make -j$(nproc) && make install
+fi
+    sleep 2
+
+#  elif [[ "$ID" == "opensuse-tumbleweed" || "$ID_LIKE" == *"suse"* ]]; then
+#    echo "Configuring openSUSE Tumbleweed..."
+#     zypper ar -cfp 90 https://ftp.gwdg.de/pub/linux/misc/packman/suse/openSUSE_Tumbleweed/ packman
+à     zypper --gpg-auto-import-keys ref
+#     zypper dup --from packman --allow-vendor-change -y
+#     zypper in -y "${SUSEPACK[@]}" "${SUSE_VDRLIB[@]}" "${SUSE_PLUGLIB[@]}"
+#  sleep 2
+
+else
+    echo "Error: Distribution '$ID' not supported by script."
+    exit 1
+fi
+#
+. /etc/os-release
+
+if [ -f /proc/device-tree/model ] && grep -iq "raspberry" /proc/device-tree/model; then
+    echo "Raspberry Pi found ..."
+    sleep 1
+
+    add_line() {
+        local LINE="$1"
+        touch "$CONFIG"
+        grep -qFx "$LINE" "$CONFIG" || echo "$LINE" >> "$CONFIG"
+    }
+
+    echo " Preparing Raspberry $CONFIG ..."
+
+    add_line "dtoverlay=disable-bt"
+    add_line "dtoverlay=hifiberry-dac"
+    add_line "# dtoverlay=allo-boss-dac-pcm512x-audio"
+
+    if [ -f "$CONFIG" ]; then
+        sed -i 's/^dtparam=audio=on/# dtparam=audio=on/' "$CONFIG"
+        sed -i 's/^camera_auto_detect=1/# camera_auto_detect=1/' "$CONFIG"
+
+        if ! grep -q "cma-512" "$CONFIG"; then
+            sed -i 's/dtoverlay=vc4-kms-v3d/dtoverlay=vc4-kms-v3d,cma-512/' "$CONFIG"
+        fi
+    fi
+fi
+#
+mkdir -p /home/$LOGNAME_USER/.config/autostart
+#
+whiptail --msgbox "Libraries installed" 8 45
+break
+;;
+#
+S) break;;
+esac
+done;;
+#
+B)
+cd /home/"$LOGNAME_USER"
+while true; do
+subch=$(whiptail --title " Downloading libs - progs & patch for Vdr on local folder " \
+--menu "Use the arrows to navigate and Enter to select:" 20 70 10 \
+           "a"  "Download Local Repository" \
+           "b"  "Remove & Upgrade Local Repository" \
+           "S"  "Skip" \
+        3>&1 1>&2 2>&3) || break
+
+case $subch in
+a) clear
+echo "Downloading libs - progs & patch for Vdr on local folder"
+sleep 1
+cd /home/"$LOGNAME_USER"/
+if [ ! -d "Vdr_repo" ]; then wget https://github.com/fiveten59/Vdr_repo/archive/refs/heads/master.zip; unzip master.zip; rm -rf master.zip; mv -f Vdr_repo-master Vdr_repo; fi
+
+cd Vdr_repo
+if [ ! -f "patch_femon.tar.gz" ]; then wget https://github.com/fiveten59/Vdr_plugins_repo/archive/refs/heads/main.zip; unzip main.zip;
+rm -rf main.zip; mv -f Vdr_plugins_repo-main Vdr_plugins_repo; cp -rf "$REPO"/Vdr_plugins_repo/* "$REPO"; rm -rf "$REPO"/Vdr_plugins_repo;
+chown -R "$LOGNAME_USER":"$LOGNAME_USER" "$REPO"; fi
+
+echo "Downloading Vdr and Plugins on local folder"
+sleep 1
+if [ ! -d "vdr-2.8.2" ]; then git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.8.2; fi
+if [ ! -d "vdr-plugin-dvbapi" ]; then git clone https://github.com/manio/vdr-plugin-dvbapi.git; fi
+if [ ! -d "vdr-plugin-iptv" ]; then git clone https://github.com/Zabrimus/vdr-plugin-iptv.git; fi
+if [ ! -d "tvguide" ]; then git clone https://gitlab.com/kamel5/tvguide.git; fi
+if [ ! -d "vdr-plugin-radio" ]; then git clone https://github.com/vdr-projects/vdr-plugin-radio.git; fi
+
+echo "Downloading skins"
+sleep 1
+if [ ! -d "skinflatplus" ]; then git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git; fi
+
+echo "Downloading others"
+sleep 1
+if [ ! -e "yt-dlp" ]; then wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp; fi
+if [ ! -d "Logos" ]; then git clone https://github.com/fiveten59/Logos.git; fi
+
+#
+chown -R "$LOGNAME_USER":"$LOGNAME_USER" "$REPO"
+whiptail --msgbox "Local Repository Downloaded" 8 45
+break
+;;
+#
+b)
+clear
+rm -rf "$REPO"
+wget https://github.com/fiveten59/Vdr_repo/archive/refs/heads/master.zip
+unzip master.zip; rm -rf master.zip; mv -f Vdr_repo-master Vdr_repo
+
+cd Vdr_repo
+
+echo "                    Downloading Vdr and Plugins on local repo"
+
+git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.8.2
+git clone https://github.com/manio/vdr-plugin-dvbapi.git
+git clone https://github.com/vdr-projects/vdr-plugin-radio.git
+git clone https://github.com/Zabrimus/vdr-plugin-iptv.git
+git clone https://gitlab.com/kamel5/tvguide.git
+
+echo "                    Downloading skins"
+
+git clone https://github.com/MegaV0lt/vdr-plugin-skinflatplus.git
+
+echo "                    Downloading others"
+
+wget https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
+git clone https://github.com/fiveten59/Logos.git
+
+chown -R "$LOGNAME_USER":"$LOGNAME_USER" "$REPO"
+whiptail --msgbox "Local Repository Removed & Upgraded" 8 45
+break;;
+#
+S) break;;
+esac
+done;;
+#
+C)
+while true; do
+subch=$(whiptail --title " FFMPEG & Infrared Control & Sat Firmware " \
+--menu "Use the arrows to navigate and Enter to select:" 20 70 10 \
+           "a"  "FFmpeg" \
+           "b"  "Infra-red remotes (inputlirc)" \
+           "c"  "Installing SAT firmware" \
+           "d"  "Remove FFmpeg" \
+           "e"  "Remove inputlirc" \
+           "S"  "Skip" \
+        3>&1 1>&2 2>&3) || break
+
+case $subch in
+a)
+clear
+#
+. /etc/os-release
+
+if [[ "$ID" == "fedora"  ]]; then
+    echo "Fedora Os found ..."
+    dnf -y install https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm
+    dnf -y install https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    dnf -y install ffmpeg --allowerasing
+    dnf -y install ffmpeg-devel ffmpeg-libs
+
+ elif [ -f /proc/device-tree/model ] && grep -iq "raspberry" /proc/device-tree/model; then
+    echo "Raspberry Pi Hardware found (FFmpeg Build 8.0.1)..."
+    apt update && apt install -y "${FFMPEGPACKAGES[@]}"
+    cd "$SRC"
+    wget https://github.com/jc-kynesim/rpi-ffmpeg/archive/refs/heads/test/8.0.1/main.zip
+    unzip -o main.zip; mv rpi-ffmpeg-test-8.0.1-main ffmpeg; rm -rf main.zip
+    cd ffmpeg || exit 1
+    FFMPEG_CONF_CLEAN=$(echo "$FFMPEG_CONF" | sed -e 's/--ld=g++//g' -e 's/--extra-libs=-ldl//g')
+    read -r -a FFMPEG_ARGS <<< "$FFMPEG_CONF_CLEAN"
+    FFMPEG_ARGS+=(--enable-v4l2-m2m --enable-libdrm)
+    EXTRA_LIBS="-ldl" ./configure "${FFMPEG_ARGS[@]}"
+    make -j$(nproc) && make install && ldconfig
+
+elif [[ "$ID" == "debian" || "$ID_LIKE" == *"debian"* || "$ID" == "ubuntu" ]]; then
+    echo "Debian/Ubuntu Os found (FFmpeg Build 7.1.5)..."
+        if [ "$ID" == "ubuntu" ]; then
+        FFMPEGPACKAGES=("${FFMPEGPACKAGES[@]/libpostproc-dev/}")
+    fi
+    apt update && apt install -y "${FFMPEGPACKAGES[@]}"
+    cd "$SRC"
+    wget https://ffmpeg.org/releases/ffmpeg-7.1.5.tar.bz2
+    tar xjvf ffmpeg-7.1.5.tar.bz2; mv ffmpeg-7.1.5 ffmpeg; rm -rf ffmpeg-7.1.5.tar.bz2
+    cd ffmpeg || exit 1
+    DEBIAN_FFMPEG_CONF_CLEAN=$(echo "$FFMPEG_CONF" | sed -e 's/--ld=g++//g' -e 's/--extra-libs=-ldl//g')
+    read -r -a FFMPEG_ARGS <<< "$DEBIAN_FFMPEG_CONF_CLEAN"
+
+    if lspci | grep -iq "nvidia"; then
+        echo "NVIDIA Hardware found: installing Nv-codec..."
+        echo "                    Installing Nv-Codec"
+        sleep 1
+
+        if [ -f /usr/local/lib/pkgconfig/ffnvcodec.pc ]; then
+            echo "Nv-Codec are already installed"
+            sleep 1
+        else
+            (
+                cd "$SRC"
+                rm -rf nv-codec-headers
+                git clone https://github.com/FFmpeg/nv-codec-headers
+                cd nv-codec-headers || exit 1
+                make && make install
+            ) || { echo "Error installing nv-codec-headers..."; exit 1; }
+        fi
+
+        FFMPEG_ARGS+=(--enable-ffnvcodec --enable-nvenc --enable-cuvid)
+    else
+        echo "Intel/AMD Hardware found: configuring VAAPI/VDPAU..."
+        # Appendiamo i flag Intel/AMD all'array
+        FFMPEG_ARGS+=(--enable-vaapi --enable-vdpau)
+    fi
+
+    EXTRA_LIBS="-ldl" ./configure "${FFMPEG_ARGS[@]}"
+
+    if [ $? -eq 0 ]; then
+        echo "Ok, starting compilation..."
+        make -j$(nproc)
+        make install || { echo "Error during make install..."; exit 1; }
+        ldconfig
+        apt-mark hold ffmpeg 2>/dev/null
+        echo "FFmpeg successful installed!"
+        sleep 3
+    fi
+
+#elif [[ "$ID" == "endeavouros" || "$ID_LIKE" == *"arch"* ]]; then
+#    echo "Arch/EndeavourOS Os found (FFmpeg Build 7.1.5)..."
+#
+#    pacman -Syu --noconfirm --needed "${ARCH_FFMPEGPACKAGES[@]}" ffnvcodec-headers 2>/dev/null || pacman -Syu --noconfirm --needed "${ARCH_FFMPEGPACKAGES[@]}"
+#
+#    cd "$SRC"
+#    wget https://ffmpeg.org/releases/ffmpeg-7.1.5.tar.bz2
+#    tar xjvf ffmpeg-7.1.5.tar.bz2; mv ffmpeg-7.1.5 ffmpeg; rm -rf ffmpeg-7.1.5.tar.bz2
+#    cd ffmpeg || exit 1
+#
+#    ARCH_FFMPEG_CONF_CLEAN=$(echo "$FFMPEG_CONF" | sed -e 's/--ld=g++//g' -e 's/--extra-libs=-ldl//g')
+#    read -r -a FFMPEG_ARGS <<< "$ARCH_FFMPEG_CONF_CLEAN"
+#
+#    if lspci | grep -iq "nvidia"; then
+#        echo "NVIDIA Hardware found: enabling Nv-codec flags..."
+#        FFMPEG_ARGS+=(--enable-ffnvcodec --enable-nvenc --enable-cuvid)
+#    else
+#        echo "Intel/AMD Hardware found: configuring VAAPI/VDPAU..."
+#        FFMPEG_ARGS+=(--enable-vaapi --enable-vdpau)
+#    fi
+#
+#    EXTRA_LIBS="-ldl" ./configure "${FFMPEG_ARGS[@]}"
+#
+#    if [ $? -eq 0 ]; then
+#        echo "Ok, starting compilation..."
+#        make -j$(nproc)
+#        make install || { echo "Error during make install..."; exit 1; }
+#        echo -e "/usr/local/lib\n/usr/local/lib64" > /etc/ld.so.conf.d/local.conf
+#        ldconfig
+#        echo "FFmpeg successful installed!"
+#                sleep 3
+#
+#    else
+#        echo "FFmpeg configure error!"
+#        exit 1
+#    fi
+
+# AGGIUNGERE SUSE
+
+#    sudo zypper in -y ffmpeg libavcodec-devel libavformat-devel libavutil-devel libswresample-devel
+#    echo "FFmpeg and development headers successfully installed via Packman!"
+# sleep 3
+
+else
+    echo "System not supported!"
+    exit 1
+fi;;
+#
+b)
+clear
+echo "                    Installing Infra-Red Remotes Control (Inputlirc) "
+sleep 1
+cd "$SRC"
+
+if [ -f /usr/sbin/inputlircd ] || [ -f /usr/local/sbin/inputlircd ]; then
+    echo "Inputlirc is already installed"
+    sleep 1
+else
+
+            echo "Installing inputlirc ..."
+            git clone https://github.com/gsliepen/inputlirc.git
+            cd inputlirc
+            make && make install
+fi
+
+echo "Configuration service ..."; sleep 1
+export PATH="/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:$PATH"
+INPUTLIRC_BIN=$(command -v inputlircd)
+
+# check cat /proc/bus/input/devices or ls /dev/input/by-id/
+cat << EOF > /etc/systemd/system/inputlirc.service
+[Unit]
+Description=Inputlirc for VDR
+After=network.target
+
+[Service]
+Type=simple
+RuntimeDirectory=lirc
+ExecStart=$INPUTLIRC_BIN -g -f -c -r 250  /dev/input/by-id/usb-Philips_eHome_Infrared_Transceiver_*
+#ExecStart=$INPUTLIRC_BIN -g -m 0 -r 250 -c /dev/input/by-id/*-event-*
+#ExecStart=/bin/sh -c 'exec $INPUTLIRC_BIN -g -f -c -r 250 \$(ls /dev/input/by-id/*event* /dev/input/event* 2>/dev/null | grep -vE "kbd|mouse|touchpad")'
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+systemctl unmask inputlirc.service
+systemctl daemon-reload
+systemctl enable inputlirc.service
+systemctl start inputlirc.service
+
+whiptail --msgbox "Inputlirc installed" 8 45
+;;
+#
+c)
+clear
+echo "                    Installing Sat firmware"
+sleep 1
+if [ -f $SRC/driver_dvb/check ]; then echo "Sat firmwares are already installed"; sleep 1;
+else
+cp -rf "$REPO/driver_dvb.tar.gz" "$SRC"
+cd $SRC
+tar -zxvf driver_dvb.tar.gz
+rm -rf driver_dvb.tar.gz
+cd driver_dvb
+cp -rf *.fw /lib/firmware/
+cd dvbsky-firmware
+cp -rf *.fw /lib/firmware/
+whiptail --msgbox "Sat firmwares & drivers installed" 8 45
+fi;;
+#
+d)
+clear
+echo "                    Removing FFmpeg"
+sleep 1
+rm -rf $BIN/ffmpeg
+rm -rf $BIN/ffprobe
+rm -rf /usr/local/share/ffmpeg
+rm -rf /usr/share/doc/ffmpeg
+rm -rf /usr/local/src/ffmpeg
+whiptail --msgbox "FFmpeg removed" 8 45;;
+#
+e)
+clear
+echo "                    Removing Inputlirc"
+sleep 1
+echo "Removing Inputlirc and personal configuration..."
+sleep 1
+systemctl stop inputlirc.service 2>/dev/null
+systemctl disable inputlirc.service 2>/dev/null
+rm -rf /etc/systemd/system/inputlirc.service
+rm -f /lib/systemd/system/inputlirc.service
+systemctl daemon-reload
+systemctl reset-failed 2>/dev/null
+#
+whiptail --msgbox "Inputlirc removed" 8 45 ;;
+#
+S) break
+esac
+done;;
+#
+D)
+clear
+while true; do
+subch=$(whiptail --title " Install/Remove VDR-2.8.2 " \
+--menu "Use the arrows to navigate and Enter to select:" 20 70 10 \
+    "a" "Install VDR-2.8.2" \
+    "b" "Remove VDR-2.*.*" \
+    "S" "Skip" \
+        3>&1 1>&2 2>&3) || break
+
+case $subch in
+a)
+echo "                    Installing VDR"
+sleep 1
+
+cd "$SRC"
+cp -rf "$REPO/vdr-2.8.2" "$SRC/"
+ln -sf vdr-2.8.2 vdr
+#
+echo "Patching VDR"
+sleep 1
+cd vdr
+cp -rf "$REPO"/vdr-patches.2.8.2.tar.gz $SRC/vdr/
+tar zxvf vdr-patches.2.8.2.tar.gz
+rm -rf vdr-patches.2.8.2.tar.gz
+sleep 1
+#
+echo "                    Patching channellscan"
+patch -p1 < vdr-dvbchan.patch
+echo "                    Patching zapcockpit"
+patch -p1 < zapcockpit.patch
+echo "                    Menuorg patch"
+patch -p1 < menuorg.patch
+echo "                    Mainmenuhook patch"
+patch -p1 < MainMenuHooks.patch
+echo "                    Menuselection patch"
+patch -p1 < menuselection.patch
+#
+make
+make install || { echo "Error ..."; exit 1; }
+echo "                    Final compilation"
+sleep 1
+#cp *.conf /etc/vdr
+#
+if [[ "$ID" == "debian" || "$ID" == "ubuntu" || "$ID" == "raspbian" || "$ID_LIKE" == *"debian"* ]]; then
+    apt-mark hold vdr 2>/dev/null
+fi
+sleep 2
+whiptail --msgbox "VDR-2.8.2 installed" 8 45
+break
+;;
+#
+b)
+clear
+echo "                    Removing VDR-2.x.*"
+sleep 1
+rm -rf /etc/vdr
+rm -rf /srv/vdr
+rm -rf /etc/init.d/vdr
+rm -rf $BIN/vdrpoweroff
+rm -rf $BIN/systempoweroff
+rm -rf $BIN/vdrrun
+rm -rf $BIN/KillVdr
+rm -rf $BIN/vdr
+rm -rf $BIN/svdrpsend
+rm -rf /usr/local/include/vdr
+rm -rf /usr/local/share/vdr
+rm -rf /usr/local/man/vdr
+rm -rf /usr/local/lib/vdr
+rm -rf /usr/local/pkgconfig/vdr
+rm -rf /usr/include/vdr
+rm -rf /var/lib/vdr
+rm -rf /var/cache/vdr
+rm -rf /home/"$LOGNAME_USER"/vdrrun
+rm -rf /etc/svdrpsend
+rm -rf /usr/share/applications/Vdr.desktop
+rm -rf /usr/share/applications/KillVdr.desktop
+rm -rf /home/"$LOGNAME_USER"/.config/autostart/xhost-vdr.desktop
+rm -rf /etc/sudoers.d/vdr
+rm -rf /usr/local/src/vdr
+rm -rf /usr/local/src/vdr-*
+rm -rf /var/log/vdr.log
+rm -rf /lib/pkgconfig/vdr.pc
+rm -rf /usr/local/lib/pkgconfig/vdr.pc
+#
+whiptail --msgbox "VDR-2.x.* removed" 8 45
+break;;
+#
+S) break
+esac
+done;;
+#
+E)
+clear
+while true; do
+subch=$(whiptail --title " Install/Remove VDR-Plugins " \
+--menu "Use the arrows to navigate and Enter to select:" 20 70 10 \
+    "a" "Install Vdr Plugins" \
+    "b" "Remove Vdr Plugins" \
+    "S" "Skip" \
+        3>&1 1>&2 2>&3) || break
+
+case $subch in
+a)
+clear
+echo "
+                    Installing vdr-plugin-skinflatplus"
+sleep 1
+cd "$VDRSRC"
+cp -rf "$REPO/vdr-plugin-skinflatplus" "$VDRSRC"
+mv -f vdr-plugin-skinflatplus skinflatplus
+cd skinflatplus
+make
+make install || { echo "Error ..."; exit 1; }
+cd "$VDRSRC"/skinflatplus/contrib/Fonts
+cp -rf * /usr/share/fonts
+cd "$LIBCONF"/skinflatplus/widgets/temperatures/
+ln -s temperatures.default temperatures
+cd ../system_information
+ln -s system_information.ubuntu system_information
+cd ../weather/
+cp update_weather.conf.dist update_weather.conf
+echo "
+
+                    Skinflatplus installed"; sleep 1
+#
+echo "
+                    Installing Vdr-Plugin-Iptv"
+sleep 1
+cd $VDRSRC
+cp -rf "$REPO/vdr-plugin-iptv" "$VDRSRC/iptv"
+cd iptv
+cp -rf "$REPO/patch_iptv.tar.gz" "$VDRSRC/iptv/"
+tar -zxvf patch_iptv.tar.gz
+rm -rf patch_iptv.tar.gz
+patch -p1 < vlc2iptv.patch
+make
+make install || { echo "Error ..."; exit 1; }
+echo "
+                    Vdr-Plugin-Iptv installed"; sleep 1
+#
+echo "
+                    Installing Vdr-Plugin-Radio"
+sleep 1
+cd $VDRSRC
+cp -rf "$REPO/vdr-plugin-radio" "$VDRSRC/radio"
+cd radio && make
+make install || { echo "Error ..."; exit 1; }
+echo "
+                    Vdr-Plugin-Radio installed"; sleep 1
+#
+echo "
+                    Installing TvGuide"
+sleep 1
+cd $VDRSRC
+cp -rf "$REPO/tvguide" "$VDRSRC/tvguide"
+cd tvguide  && make
+make install || { echo "Error ..."; exit 1; }
+cp -rf $VDRSRC/tvguide/themes/* /var/lib/vdr/themes/
+echo "
+                    TvGuide installed"; sleep 1
+
+# fine sezione comune
+#
+if [[ -f /proc/device-tree/model ]] && grep -q "Raspberry Pi" /proc/device-tree/model; then
+echo "Hardware Raspberry Pi installing vdr-plugin-softhddevice-drm-gles..."
+sleep 1
+cd $VDRSRC
+git clone https://github.com/rellla/vdr-plugin-softhddevice-drm-gles.git
+cp -rf "$VDRSRC/vdr-plugin-softhddevice-drm-gles" "$REPO/vdr-plugin-softhddevice-drm-gles"
+mv -f vdr-plugin-softhddevice-drm-gles softhddevicedrmgles
+cd softhddevicedrmgles && make
+make install || { echo "Error ..."; exit 1; }
+echo "
+
+                    Vdr-Plugin-Softhddevice-drm-gles installed"; sleep 1
+
+echo "
+                   Installing Vdr-Plugin-Dvbapi"; sleep 1
+# apt -y install libssl-dev libdvbcsa-dev
+cd $VDRSRC
+cp -rf "$REPO/vdr-plugin-dvbapi" "$VDRSRC/dvbapi"
+cd dvbapi
+make LIBDVBCSA=1
+make LIBDVBCSA=1 install || { echo "Error ..."; exit 1; }
+echo "
+                    Vdr-Plugin-Dvbapi installed"; sleep 1
+
+else
+
+echo "Fedora/Debian/Arch/Suse Os ... installing vdr-plugin-softhddevice..."; sleep 1
+cd $VDRSRC
+git clone https://github.com/ua0lnj/vdr-plugin-softhddevice.git
+cp -rf "$VDRSRC/vdr-plugin-softhddevice" "$REPO/vdr-plugin-softhddevice"
+mv -f vdr-plugin-softhddevice softhddevice
+cd softhddevice
+make && make install || { echo "Error ..."; exit 1; }
+#fi
+echo "
+
+                    Vdr-Plugin-Softhddevice installed"; sleep 1
+#
+echo "
+                   Installing Vdr-Plugin-Dvbapi"; sleep 1
+cd $VDRSRC
+cp -rf "$REPO/vdr-plugin-dvbapi" "$VDRSRC/dvbapi"
+cd dvbapi && make
+make install || { echo "Error ..."; exit 1; }
+echo "
+                    Vdr-Plugin-Dvbapi installed"; sleep 1
+
+fi
+#
+echo "
+============================================================================================================
+For more Vdr plugins pls visit https://github.com/fiveten59/Vdr_installer and download Vdr_plugins_installer
+============================================================================================================"
+sleep 5
+whiptail --msgbox "VDR-2.8.2 plugins installed" 8 45 ;;
+#
+b)
+clear
+echo "                    Removing VDR-2.x.* plugins"
+cd $VDRSRC  || true
+rm -rf softhddevice || true
+rm -rf softhddevicedrmgles || true
+rm -rf skinflatplus
+rm -rf iptv
+rm -rf radio
+rm -rf dvbapi
+rm -rf tvguide
+cd $LIBCONF  || true
+rm -rf libvdr-softhddevice.* || true
+rm -rf libvdr-softhddevice-drm-gles.* || true
+rm -rf libvdr-skinflatplus.*
+rm -rf skinflatplus
+rm -rf libvdr-iptv.*
+rm -rf libvdr-radio.*
+rm -rf libvdr-dvbapi.*
+rm -rf libvdr-tvguide.*
+cd $VDRCONF/plugins || true
+rm -rf skinflatplus
+rm -rf iptv
+rm -rf radio
+rm -rf allowed_hosts || true
+cd $SHARE  || true
+rm -rf skinflatplus
+rm -rf iptv
+rm -rf radio
+#
+whiptail --msgbox "VDR-2.x.* plugins removed" 8 45 ;;
+#
+S) break
+esac
+done;;
+#
+F)
+clear
+while true; do
+subch=$(whiptail --title "Shared parts configuration" \
+--menu "Use the arrows to navigate and Enter to select:" 20 70 10 \
+           "a"  "Install Shared parts" \
+           "S"  "Skip" \
+        3>&1 1>&2 2>&3) || break
+
+case $subch in
+a)
+clear
+echo "                    Installing Italian translation for some plugins"
+sleep 1
+if [ -f $SRC/traduzioni/Skin_it_IT.po ]
+then echo "Translations $Remind4"; sleep 1
+else
+mkdir -p $SRC/traduzioni
+cd $SRC/traduzioni
+cp -rf "$REPO/traduzioni.tar.gz" "$SRC/traduzioni/"
+tar -zxvf traduzioni.tar.gz
+rm -rf traduzioni.tar.gz
+echo "Translations installed"; sleep 1
+fi
+#
+echo "                    keymacros.conf setup"
+rm -rf  $VDRCONF/keymacros.conf
+cat << EOF > $VDRCONF/keymacros.conf
+# Remote control key macros for VDR
+
+Red       Menu 8 1
+Green     Menu 7 9
+Yellow    Info
+Blue      @tvguide
+Ok        Channels
+EOF
+chmod 0644 $VDRCONF/keymacros.conf
+echo "keymacros installed"; sleep 1
+#
+echo "                    Installing True Type Fonts"
+sleep 1
+. /etc/os-release
+
+if [[ "$ID" == "fedora" ]]; then
+    echo "Fedora System ($VERSION_ID). ..."
+    if [ -f /usr/share/fonts/vdrsymbols/ViconBd.ttf ]; then
+echo "True Type Fonts $Remind4"; sleep 1
+else
+cp -rf "$REPO/vdrsymbols.tar.gz" "$FONTS"
+cd "$FONTS"
+tar -zxvf vdrsymbols.tar.gz
+rm -rf vdrsymbols.tar.gz
+dnf -y install curl cabextract xorg-x11-font-utils fontconfig
+rpm -y -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
+fc-cache -fv
+echo "True Type Fonts installed"; sleep 1
+fi
+    elif [[ "$ID" == "debian" || "$ID" == "ubuntu" || "$ID" == "raspbian" || "$ID_LIKE" == *"debian"* ]]; then
+    echo "Debian/Ubuntu/Raspberry System..."
+    if [ -d /usr/share/fonts/truetype/vdrsymbols ]; then echo "True Type Fonts $Remind4"; sleep 1
+else
+cp -rf "$REPO/vdrsymbols.tar.gz" "$FONTS"
+cd "$FONTS"
+tar -zxvf vdrsymbols.tar.gz
+rm -rf vdrsymbols.tar.gz
+echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections
+DEBIAN_FRONTEND=noninteractive apt install -y ttf-mscorefonts-installer
+apt install -y ttf-mscorefonts-installer
+fc-cache -fv
+echo "True Type Fonts installed"; sleep 1
+fi
+    elif [[ "$ID" == "endeavouros" || "$ID_LIKE" == *"arch"* ]]; then
+echo "EndeavourOS/Arch system found..."; sleep 1
+    if [ -d /usr/share/fonts/TTF/vdrsymbols ]; then
+echo "True Type Fonts $Remind4"; sleep 1
+else
+cp -rf "$REPO/vdrsymbols.tar.gz" "$FONTS/TTF"
+cd "$FONTS/TTF"
+tar -zxvf vdrsymbols.tar.gz
+rm -rf vdrsymbols.tar.gz
+sudo -u "${SUDO_USER:-$(logname)}" yay -S --noconfirm ttf-ms-fonts
+fc-cache -fv
+echo "True Type Fonts installed"; sleep 1
+fi
+# inserire suse  e verificare cartella truetype e installare ttf-ms-fonts
+    elif [[ "$ID" == "opensuse-tumbleweed" || "$ID_LIKE" == *"suse"* ]]; then
+echo "Configuring openSUSE Tumbleweed..."
+    if [ -d /usr/share/fonts/TTF/vdrsymbols ]; then
+echo "True Type Fonts $Remind4"; sleep 1
+else
+cp -rf "$REPO/vdrsymbols.tar.gz" "$FONTS/TTF"
+cd "$FONTS/TTF"
+tar -zxvf vdrsymbols.tar.gz
+rm -rf vdrsymbols.tar.gz
+zypper install fetchmsttfonts cabextract
+fi
+fi
+#
+echo "                    Install Channels logos"
+sleep 1
+rm -rf $VDRCONF/Logos
+cp -rf "$REPO/Logos" "$VDRCONF"
+echo "Channels logos installed"; sleep 1
+chmod 777 $VDRCONF/Logos
+#
+echo "                    Channels setup"
+sleep 1
+rm -rf $VDRCONF/channels.conf
+cp -rf "$REPO/tv_iptv_channels.tar.gz" "$VDRCONF"
+cd $VDRCONF
+tar zxvf tv_iptv_channels.tar.gz
+rm -rf tv_iptv_channels.tar.gz
+echo "                    Channels list + Tv Iptv installed"
+sleep 1
+#
+clear
+cd /var/lib/vdr/
+rm -rf diseqc.conf
+itemch=$(whiptail --title " Diseqc setup " --menu "Select option:" 15 60 4 \
+    "a" "Hot Bird 13°E" \
+    "b" "Dual 13, 19.2°E" \
+    "c" "Trial 9, 13, 19.2°E" \
+    "d" "Astra 19.2°E" \
+    "S" "Skip" \
+    3>&1 1>&2 2>&3) || break
+
+case $itemch in
+#
+a)
+clear
+echo -e "$MONO13" >> $VDRCONF/diseqc.conf
+echo "                    Hotbird Diseqc installed"
+whiptail --msgbox "Hotbird Diseqc installed" 8 45 ;;
+b)
+clear
+echo -e "$DUAL" >>  $VDRCONF/diseqc.conf
+echo "                    Dual Diseqc installed"
+whiptail --msgbox "Dual Diseqc installed" 8 45 ;;
+c)
+clear
+echo -e "$TRIAL" >>  $VDRCONF/diseqc.conf
+whiptail --msgbox "Trial Diseqc installed" 8 45 ;;
+d)
+clear
+echo -e "$MONO19" >>  $VDRCONF/diseqc.conf
+whiptail --msgbox "Astra Diseqc installed" 8 45 ;;
+S) clear;;
+esac
+#
+echo "                    Configuring Iptv"
+sleep 1
+if [ -f /usr/bin/vlc ]; then sed -i 's/geteuid/getppid/g' /usr/bin/vlc; fi
+touch /tmp/vlc.log
+chmod 777 /tmp/vlc.log
+touch /tmp/ffmpeg_radio.log
+chmod 777 /tmp/ffmpeg_radio.log
+#
+cp -rf "$REPO/iptv_conf.tar.gz" "$SRC"
+cd $SRC
+tar zxvf iptv_conf.tar.gz
+mv -f ffmpeg2iptv "$SHARE/iptv"
+mv -f vlc_channels.tar.gz "$VDRCONF/plugins/iptv"
+rm -rf iptv_conf.tar.gz
+cd $VDRCONF/plugins/iptv
+rm -rf channels
+tar zxvf vlc_channels.tar.gz
+rm -rf vlc_channels.tar.gz
+cd channels
+chmod 755 *
+#
+if [ -f /$BIN/yt-dlp ]; then echo "yt-dlp $Remind3"; sleep 1
+else
+cp -rf "$REPO/yt-dlp" "$BIN"
+chmod 755 /$BIN/yt-dlp
+echo "Iptv configured"; sleep 1
+fi
+#
+echo "                    Configuring Radio"
+sleep 1
+cd $VDRCONF/plugins
+mkdir -p radio
+cd radio
+rm -rf *
+cp -rf $VDRSRC/radio/config/mpegstill/* $VDRCONF/plugins/radio/
+cp -rf "$REPO/radio_scripts.tar.gz" "$VDRCONF/plugins/radio/"
+tar -zxvf radio_scripts.tar.gz
+rm -rf radio_scripts.tar.gz
+echo "Radio configured"; sleep 1
+#
+echo "                    Install default Skin for Vdr"
+sleep 1
+if [ -f  $VDRCONF/themes/checklcars ];then echo "Default Skin is already installed"; sleep 1;
+else
+cd $VDRCONF
+cp -rf "$REPO/lcars_pack.tar.gz" "$VDRCONF/themes"
+cd themes
+tar -zxvf lcars_pack.tar.gz
+rm -rf lcars_pack.tar.gz
+echo "Default Skin installed"
+sleep 1
+fi
+#
+echo "                    Create Vdr Start & Stop"
+sleep 1
+rm -rf /etc/rc.d/init.d/vdr || true
+echo "Creating systemd service..."
+sleep 1
+#
+rm -rf /home/"$LOGNAME_USER"/.config/autostart/xhost-vdr.desktop
+cat << EOF > /home/"$LOGNAME_USER"/.config/autostart/xhost-vdr.desktop
+[Desktop Entry]
+Type=Application
+Name=Vdr
+Exec=sh -c "xhost +SI:localuser:$LOGNAME_USER && xhost +SI:localuser:root && sudo systemctl restart vdr.service"
+Comment=Enable graphical permissions for VDR
+Terminal=false
+Hidden=false
+NoDisplay=false
+EOF
+chmod +x /home/"$LOGNAME_USER"/.config/autostart/xhost-vdr.desktop
+chown $LOGNAME_USER:$LOGNAME_USER /home/"$LOGNAME_USER"/.config/autostart/xhost-vdr.desktop
+#
+echo "Creating Vdr service..."
+cat << EOF > /etc/systemd/system/vdr.service
+[Unit]
+Description=VDR Video Disk Recorder
+After=network-online.target sound.target
+Wants=graphical.target
+
+[Service]
+TimeoutStopSec=4
+KillMode=mixed
+User=root
+Group=root
+Type=simple
+Environment=DISPLAY=:0
+ExecStartPre=/usr/bin/sleep 6
+ExecStart=/usr/local/bin/vdrrun
+#Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
+EOF
+#
+echo "Enabling service..."
+systemctl daemon-reload
+#systemctl enable vdr
+#systemctl start vdr
+sleep 1
+#
+echo "                    Permissions to execute Vdr"
+sleep 1
+rm -rf /etc/sudoers.d/vdr
+cat << EOF > /etc/sudoers.d/vdr
+
+vdr ALL=(ALL) ALL
+EOF
+#
+echo "$LOGNAME_USER ALL=NOPASSWD: /usr/bin/systemctl start vdr, /usr/bin/systemctl stop vdr, /usr/bin/systemctl restart vdr, /usr/bin/sudo /usr/sbin/poweroff -f" >> /etc/sudoers.d/vdr
+#
+chmod 0440 /etc/sudoers.d/vdr
+echo "Permissions created"; sleep 1
+#
+echo "Create Fedora/Debian/Rpi systems commands"; sleep 1
+rm -rf $BIN/systempoweroff
+cat << EOF > $BIN/systempoweroff
+#!/bin/sh
+# File name: systempoweroff
+
+/usr/bin/sudo /usr/bin/systemctl stop vdr
+/usr/bin/sudo killall -9 vdr
+sleep 2
+/usr/bin/sudo /usr/sbin/poweroff
+EOF
+chmod a+x $BIN/systempoweroff
+echo "Systempoweroff command installed"; sleep 1
+#
+echo "Installing Restart Vdr"; sleep 1
+rm -rf $BIN/restart_vdr
+cat << EOF > $BIN/restart_vdr
+#!/bin/sh
+# File name: restart_vdr
+
+/usr/bin/sudo /usr/bin/systemctl stop vdr
+/usr/bin/sudo /usr/bin/systemctl start vdr
+EOF
+chmod a+x $BIN/restart_vdr
+echo "Restart Vdr command installed"; sleep 1
+#
+echo "                    Installing All Commands"
+sleep 1
+rm -rf $VDRCONF/commands.conf
+cat << EOF > $VDRCONF/commands.conf
+Kill Vdr: echo "/usr/local/bin/vdrpoweroff" | at now > /dev/null 2>&1
+Restart Vdr: echo "/usr/local/bin/restart_vdr"  | at now > /dev/null 2>&1
+Shutdown system: echo "/usr/local/bin/systempoweroff" | at now > /dev/null 2>&1
+Restart system: sudo reboot > /dev/null 2>&1
+EOF
+echo "Commands installed"
+sleep 1
+#
+cd /home/"$LOGNAME_USER"
+chmod -R 777 Vdr_repo
+chmod 777 /srv/vdr/video
+;;
+#
+S) break
+esac
+done;;
+G)
+clear
+while true; do
+subch=$(whiptail --title "Desktop Os Final configuration" \
+--menu "Use the arrows to navigate and Enter to select:" 20 70 10 \
+           "a"  "Install Desktop commands & icons" \
+           "S"  "Skip" \
+        3>&1 1>&2 2>&3) || break
+
+case $subch in
+#
+a)
+clear
+if grep -qiE 'arch|endeavouros' /etc/os-release; then
+    echo "Aech system: daemon AT enabled..."
+    systemctl enable --now atd
+fi
+echo "                    Installing Icons"
+sleep 1
+if [ -f /usr/local/src/icone/vdr.png ]
+then echo "Icons $Remind4"
+sleep 1
+else cd $SRC
+cp -rf "$REPO/icone.tar.gz" "$SRC"
+tar -zxvf icone.tar.gz
+rm -rf icone.tar.gz
+cd icone
+chmod 755 *
+echo "Icons installed"; sleep 1
+fi
+#
+echo "                    Setup Vdr icons"
+sleep 1
+rm -rf /usr/share/applications/Vdr.desktop
+cat << EOF > /usr/share/applications/Vdr.desktop
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Name=Start Vdr
+Description=Start of Vdr
+Icon=/usr/local/src/icone/vdr.png
+Exec=sudo systemctl start vdr > /dev/null 2>&1
+EOF
+chmod 777 /usr/share/applications/Vdr.desktop
+#
+rm -rf /usr/share/applications/KillVdr.desktop
+cat << EOF > /usr/share/applications/KillVdr.desktop
+[Desktop Entry]
+Version=1.0
+Encoding=UTF-8
+Type=Application
+Name=Kill Vdr
+Description=Kill Vdr
+Icon=/usr/local/src/icone/killvdr.png
+Exec=sudo sh -c "systemctl stop vdr; killall -9 vlc" > /dev/null 2>&1
+EOF
+chmod 777 /usr/share/applications/KillVdr.desktop
+echo "Vdr start & kill icons created"; sleep 1
+#
+echo "                    Create Vdr commands lines"
+sleep 1
+echo "Creating systemd service..."
+sleep 1
+#
+. /etc/os-release
+
+
+# Start & stop command Raspberry
+if [ -f /proc/device-tree/model ] && grep -iq "raspberry" /proc/device-tree/model; then
+    echo "Raspberry Pi found ..."; sleep 1
+
+echo "Create Raspberry command line"; sleep 1
+rm -rf $BIN/vdrrun
+cat << EOF > $BIN/vdrrun
+#!/bin/bash
+#File name: vdrrun
+
+sudo chvt 8  && sleep 2 && /usr/local/bin/vdr -u camper -t /dev/tty8 $PLUGINRPI -s $BIN/vdrpoweroff
+
+# -a hw:CARD=sndrpihifiberry,0
+# -a hw:CARD=BossDAC,0'EOF
+chmod 755 $BIN/vdrrun
+echo "Start Vdr command created"; sleep 1
+#
+echo "Create Raspberry Stop Vdr"; sleep 1
+rm -rf $BIN/vdrpoweroff
+cat << EOF > $BIN/vdrpoweroff
+#!/bin/sh
+# File name: vdrpoweroff
+
+sudo /usr/bin/systemctl stop vdr && killall -9 vdr && killall -9 vlc && chvt 7
+EOF
+chmod 777 $BIN/vdrpoweroff
+echo "Stop Vdr command created"; sleep 1
+
+# Start & stop p command Fedora Debian Arch
+elif [[ "$ID" == "debian" || "$ID_LIKE" == *"debian"* || "$ID" == "ubuntu" || "$ID" == "endeavouros" || "$ID_LIKE" == *"arch"* || "$ID"  == "fedora" ]]; then
+
+    echo "Fedora/Debian/Arch systems found..."; sleep 1
+
+echo "Create Fedora/Debian/Arch systems command Start Vdr"; sleep 1
+rm -rf $BIN/vdrrun
+cat << EOF > $BIN/vdrrun
+#!/bin/bash
+#File name: vdrrun
+
+/usr/local/bin/vdr -u root $PLUGIN -s $BIN/systempoweroff
+
+## -P'mpv -a alsa -v gpu -h gpu -b / -l ita'
+EOF
+chmod 777 $BIN/vdrrun
+echo "Start Vdr command created"; sleep 1
+#
+echo "Create Fedora/Debian/Arch systems command Stop Vdr"; sleep 1
+rm -rf $BIN/vdrpoweroff
+cat << EOF > $BIN/vdrpoweroff
+#!/bin/sh
+# File name: vdrpoweroff
+
+sudo /usr/bin/systemctl stop vdr && /usr/bin/sudo killall -9 vdr && killall -9 vlc
+EOF
+chmod 777 $BIN/vdrpoweroff
+echo "Stop Vdr command created"; sleep 1
+#
+elif [[ "$ID" == "endeavouros" || "$ID_LIKE" == *"arch"* ]]; then
+    echo "Endeavourod/Arch system found..."; sleep 1
+
+fi
+#
+ln -s /usr/local/bin/vdrrun /home/"$LOGNAME_USER"/vdrrun || { echo "Error ..."; true; }
+chmod 777 /home/"$LOGNAME_USER"/vdrrun
+#
+clear
+subch=$(whiptail --title "Vdr Automatic start" --menu "Select option:" 15 60 3 \
+    "a" "Vdr auto start" \
+    "b" "No auto start" \
+    3>&1 1>&2 2>&3) || break
+case $subch in
+a)
+clear
+echo "                    Automatic start Vdr"
+rm -rf vdr-autostart.desktop
+systemctl enable vdr
+whiptail --msgbox "Automatic start Vdr installed" 8 45 ;;
+#
+esac
+#
+echo "                    *** All things Done! ***"
+sleep 3
+whiptail --msgbox "Installation completed!" 8 45
+break;;
+#
+S)
+clear
+break;;
+esac
+done;;
+#
+X)
+clear
+exit 0
+;;
+*) ;;
+esac
+done

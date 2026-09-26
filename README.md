@@ -55,8 +55,8 @@ Point F)
 Point G)
 * Install Desktop Os Final configuration
 
-Point G)
+Point H)
 * Under construction
 
-Point H)
+Point X)
 * Exit the script

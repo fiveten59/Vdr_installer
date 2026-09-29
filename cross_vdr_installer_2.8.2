@@ -80,11 +80,11 @@ DEBIAN_PLUGLIB=(zlib1g-dev libexpat1-dev libglib2.0-dev libpcre2-dev  libasound2
 UBU_PLUGLIB=(zlib1g-dev libexpat1-dev libglib2.0-dev libpcre2-dev libasound2-dev libvdpau-dev libva-dev libgl1-mesa-dev libx11-xcb-dev libxcb1-dev libxcb-xv0-dev libxcb-ewmh-dev libxcb-keysyms1-dev libxcb-icccm4-dev libxcb-dpms0-dev libxcb-randr0-dev libxcb-util-dev libxcb-image0-dev libxcb-xtest0-dev libxcb-shape0-dev libxcb-shm0-dev libxcb-xfixes0-dev libxcb-render0-dev libxcb-screensaver0-dev vlc libcurl4-gnutls-dev libssl-dev libdvbcsa-dev libdrm-dev libgbm-dev libegl1-mesa-dev libavcodec-dev libavfilter-dev libavformat-dev libswresample-dev libswscale-dev libavutil-dev libglm-dev libglvnd-dev libglu1-mesa-dev libxi-dev libxrandr-dev libxrender-dev libxext-dev libxxf86vm-dev lm-sensors)
 
 # Fedora Vdr plugins libs
-FEDORA_PLUGLIB=(xcb-util-image-devel xcb-util-keysyms-devel xcb-util-renderutil-devel libxcb-devel libxcb libva-devel egl-wayland-devel mesa-libEGL-devel mesa-libGLU-devel libogg-devel mesa-libGL-devel  libsoundio libass-devel libXext-devel freetype-devel libepoxy-devel glm-devel freeglut-devel glew-devel libplacebo-devel libglvnd-devel libdrm-devel libXi-devel libXrandr-devel libXrender-devel libXxf86vm-devel libvdpau-devel alsa-lib-devel mesa-libGLES-devel libX11-devel xcb-util-wm-devel x264-devel x265-devel GraphicsMagick-devel GraphicsMagick-c++-devel pcre-devel zlib-devel expat-devel openssl-devel libcurl-devel vlc lm_sensors)
+FEDORA_PLUGLIB=(xcb-util-image-devel xcb-util-keysyms-devel xcb-util-renderutil-devel libxcb-devel libxcb libva-devel egl-wayland-devel mesa-libEGL-devel mesa-libGLU-devel libogg-devel mesa-libGL-devel  libsoundio libass-devel libXext-devel freetype-devel libepoxy-devel glm-devel freeglut-devel glew-devel libplacebo-devel libglvnd-devel libdrm-devel libXi-devel libXrandr-devel libXrender-devel libXxf86vm-devel libvdpau-devel alsa-lib-devel mesa-libGLES-devel libX11-devel xcb-util-wm-devel x264-devel x265-devel GraphicsMagick-devel GraphicsMagick-c++-devel pcre-devel zlib-devel expat-devel openssl-devel libcurl-devel vlc lm_sensors alsa-firmware alsa-sof-firmware)
 # libvdpau-va-gl
 
 # Arch Vdr/EndeavourOS plugins libs
-ARCH_PLUGLIB=(graphicsmagick zlib expat glib2 pcre2 alsa-lib libvdpau libva mesa libx11 libxcb xcb-util xcb-util-wm xcb-util-keysyms xcb-util-image vlc vlc-plugins-all curl openssl libdrm glm libglvnd glu libxi libxrandr libxrender libxext libxxf86vm lm_sensors)
+ARCH_PLUGLIB=(graphicsmagick zlib expat glib2 pcre2 alsa-lib libvdpau libva mesa libx11 libxcb xcb-util xcb-util-wm xcb-util-keysyms xcb-util-image vlc vlc-plugins-all curl openssl libdrm glm libglvnd glu libxi libxrandr libxrender libxext libxxf86vm lm_sensors alsa-firmware)
 
 # Suse Vdr plugins libs
 SUSE_PLUGLIB=(zlib-devel libexpat-devel glib2-devel pcre2-devel alsa-devel libvdpau-devel libva-devel Mesa-libGL-devel libX11-devel libxcb-devel xcb-util-devel xcb-util-wm-devel xcb-util-keysyms-devel xcb-util-image-devel vlc vlc-codecs libcurl-devel libopenssl-devel libdvbcsa-devel libdrm-devel Mesa-libgbm-devel Mesa-libEGL-devel libavcodec-devel libavfilter-devel libavformat-dev libswresample-devel libswscale-devel libavutil-devel glm-devel libglvnd-devel mesa-libGLU-devel libXi-devel libXrandr-devel libXrender-devel libXext-devel libXxf86vm-devel lm_sensors GraphicsMagick-devel GraphicsMagick-c++-devel)
@@ -376,6 +376,7 @@ if [[ "$ID" == "fedora"  ]]; then
     dnf -y install https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
     dnf -y install ffmpeg --allowerasing
     dnf -y install ffmpeg-devel ffmpeg-libs
+    dnf -y install rpmfusion-free-release-tainted
 
  elif [ -f /proc/device-tree/model ] && grep -iq "raspberry" /proc/device-tree/model; then
     echo "Raspberry Pi Hardware found (FFmpeg Build 8.0.1)..."
@@ -715,10 +716,6 @@ sleep 1
 cd $VDRSRC
 cp -rf "$REPO/vdr-plugin-iptv" "$VDRSRC/iptv"
 cd iptv
-cp -rf "$REPO/patch_iptv.tar.gz" "$VDRSRC/iptv/"
-tar -zxvf patch_iptv.tar.gz
-rm -rf patch_iptv.tar.gz
-patch -p1 < vlc2iptv.patch
 make
 make install || { echo "Error ..."; exit 1; }
 echo "
@@ -991,21 +988,21 @@ esac
 echo "                    Configuring Iptv"
 sleep 1
 if [ -f /usr/bin/vlc ]; then sed -i 's/geteuid/getppid/g' /usr/bin/vlc; fi
-touch /tmp/vlc.log
-chmod 777 /tmp/vlc.log
+touch /tmp/vlc_radio.log
+chmod 777 /tmp/vlc_radio.log
 touch /tmp/ffmpeg_radio.log
 chmod 777 /tmp/ffmpeg_radio.log
 #
-cp -rf "$REPO/iptv_conf.tar.gz" "$SRC"
-cd $SRC
-tar zxvf iptv_conf.tar.gz
-mv -f ffmpeg2iptv "$SHARE/iptv"
-mv -f vlc_channels.tar.gz "$VDRCONF/plugins/iptv"
-rm -rf iptv_conf.tar.gz
-cd $VDRCONF/plugins/iptv
+cp -rf "$REPO/iptv_ext.tar.gz" "$SHARE/iptv"
+cd "$SHARE/iptv"
+tar zxvf iptv_ext.tar.gz
+rm -rf iptv_ext.tar.gz
+#
+cd "$VDRCONF/plugins/iptv"
 rm -rf channels
-tar zxvf vlc_channels.tar.gz
-rm -rf vlc_channels.tar.gz
+cp -rf "$REPO/iptv_channels.tar.gz" "$VDRCONF/plugins/iptv"
+tar zxvf iptv_channels.tar.gz
+rm -rf iptv_channels.tar.gz
 cd channels
 chmod 755 *
 #
@@ -1022,7 +1019,7 @@ cd $VDRCONF/plugins
 mkdir -p radio
 cd radio
 rm -rf *
-cp -rf $VDRSRC/radio/config/mpegstill/* $VDRCONF/plugins/radio/
+cp -rf "$VDRSRC/radio/config/mpegstill/"* "$VDRCONF/plugins/radio/"
 cp -rf "$REPO/radio_scripts.tar.gz" "$VDRCONF/plugins/radio/"
 tar -zxvf radio_scripts.tar.gz
 rm -rf radio_scripts.tar.gz
@@ -1097,7 +1094,7 @@ cat << EOF > /etc/sudoers.d/vdr
 vdr ALL=(ALL) ALL
 EOF
 #
-echo "$LOGNAME_USER ALL=NOPASSWD: /usr/bin/systemctl start vdr, /usr/bin/systemctl stop vdr, /usr/bin/systemctl restart vdr, /usr/bin/sudo /usr/sbin/poweroff -f" >> /etc/sudoers.d/vdr
+echo "$LOGNAME_USER ALL=NOPASSWD: /usr/bin/systemctl start vdr, /usr/bin/systemctl stop vdr, /usr/bin/systemctl restart vdr, /usr/local/bin/vdrpoweroff, /usr/bin/sudo /usr/sbin/poweroff -f" >> /etc/sudoers.d/vdr
 #
 chmod 0440 /etc/sudoers.d/vdr
 echo "Permissions created"; sleep 1
@@ -1162,7 +1159,7 @@ case $subch in
 a)
 clear
 if grep -qiE 'arch|endeavouros' /etc/os-release; then
-    echo "Aech system: daemon AT enabled..."
+    echo "Endeavouros/Arch system: daemon AT enabled..."
     systemctl enable --now atd
 fi
 echo "                    Installing Icons"
@@ -1192,7 +1189,7 @@ Description=Start of Vdr
 Icon=/usr/local/src/icone/vdr.png
 Exec=sudo systemctl start vdr > /dev/null 2>&1
 EOF
-chmod 777 /usr/share/applications/Vdr.desktop
+chmod 755 /usr/share/applications/Vdr.desktop
 #
 rm -rf /usr/share/applications/KillVdr.desktop
 cat << EOF > /usr/share/applications/KillVdr.desktop
@@ -1203,9 +1200,10 @@ Type=Application
 Name=Kill Vdr
 Description=Kill Vdr
 Icon=/usr/local/src/icone/killvdr.png
-Exec=sudo sh -c "systemctl stop vdr; killall -9 vlc" > /dev/null 2>&1
+#Exec=sudo sh -c "systemctl stop vdr; killall -9 vlc" > /dev/null 2>&1
+Exec=/usr/local/bin/vdrpoweroff
 EOF
-chmod 777 /usr/share/applications/KillVdr.desktop
+chmod 755 /usr/share/applications/KillVdr.desktop
 echo "Vdr start & kill icons created"; sleep 1
 #
 echo "                    Create Vdr commands lines"
@@ -1214,8 +1212,7 @@ echo "Creating systemd service..."
 sleep 1
 #
 . /etc/os-release
-
-
+#
 # Start & stop command Raspberry
 if [ -f /proc/device-tree/model ] && grep -iq "raspberry" /proc/device-tree/model; then
     echo "Raspberry Pi found ..."; sleep 1
@@ -1230,8 +1227,9 @@ sudo chvt 8  && sleep 2 && /usr/local/bin/vdr -u camper -t /dev/tty8 $PLUGINRPI 
 
 # -a hw:CARD=sndrpihifiberry,0
 # -a hw:CARD=BossDAC,0'EOF
+EOF
 chmod 755 $BIN/vdrrun
-echo "Start Vdr command created"; sleep 1
+echo "Raspberry Start Vdr command created"; sleep 1
 #
 echo "Create Raspberry Stop Vdr"; sleep 1
 rm -rf $BIN/vdrpoweroff
@@ -1241,10 +1239,9 @@ cat << EOF > $BIN/vdrpoweroff
 
 sudo /usr/bin/systemctl stop vdr && killall -9 vdr && killall -9 vlc && chvt 7
 EOF
-chmod 777 $BIN/vdrpoweroff
-echo "Stop Vdr command created"; sleep 1
+chmod 755 $BIN/vdrpoweroff
+echo "Raspberry Stop Vdr command created"; sleep 1
 
-# Start & stop p command Fedora Debian Arch
 elif [[ "$ID" == "debian" || "$ID_LIKE" == *"debian"* || "$ID" == "ubuntu" || "$ID" == "endeavouros" || "$ID_LIKE" == *"arch"* || "$ID"  == "fedora" ]]; then
 
     echo "Fedora/Debian/Arch systems found..."; sleep 1
@@ -1259,23 +1256,42 @@ cat << EOF > $BIN/vdrrun
 
 ## -P'mpv -a alsa -v gpu -h gpu -b / -l ita'
 EOF
-chmod 777 $BIN/vdrrun
+chmod 755 $BIN/vdrrun
 echo "Start Vdr command created"; sleep 1
+fi
 #
-echo "Create Fedora/Debian/Arch systems command Stop Vdr"; sleep 1
+. /etc/os-release
+
+if [[ "$ID" == "debian" || "$ID" == "ubuntu" ]]; then
+
+echo "Create Debian systems command Vdr Power off"; sleep 1
 rm -rf $BIN/vdrpoweroff
 cat << EOF > $BIN/vdrpoweroff
 #!/bin/sh
 # File name: vdrpoweroff
 
-sudo /usr/bin/systemctl stop vdr && /usr/bin/sudo killall -9 vdr && killall -9 vlc
+sudo systemctl stop vdr --timeout=2s 2>/dev/null || sudo killall -9 vdr 2>/dev/null
+killall -9 vlc 2>/dev/null
 EOF
-chmod 777 $BIN/vdrpoweroff
-echo "Stop Vdr command created"; sleep 1
-#
-elif [[ "$ID" == "endeavouros" || "$ID_LIKE" == *"arch"* ]]; then
-    echo "Endeavourod/Arch system found..."; sleep 1
+chmod 755 $BIN/vdrpoweroff
+echo "Vdr Power off command created"; sleep 1
 
+elif [[ "$ID" == "endeavouros" || "$ID_LIKE" == *"arch"* || "$ID"  == "fedora" ]]; then
+   echo "Endeavourod/Arch/Fedora system found..."; sleep 1
+echo "Create Endeavourod/Arch/Fedora systems command Vdr Power off"; sleep 1
+rm -rf $BIN/vdrpoweroff
+cat << EOF > $BIN/vdrpoweroff
+#!/bin/sh
+# File name: vdrpoweroff
+
+sudo systemctl stop vdr --timeout=2s 2>/dev/null || sudo killall -9 vdr 2>/dev/null
+killall -9 vlc 2>/dev/null
+sleep 2
+export XDG_RUNTIME_DIR=/run/user/1000
+systemctl --user restart pipewire wireplumber
+EOF
+chmod 755 $BIN/vdrpoweroff
+echo "Vdr Power off command created"; sleep 1
 fi
 #
 ln -s /usr/local/bin/vdrrun /home/"$LOGNAME_USER"/vdrrun || { echo "Error ..."; true; }

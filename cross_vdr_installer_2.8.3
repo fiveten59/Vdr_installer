@@ -1,18 +1,18 @@
 #!/bin/bash
 ################################## !!! README !!! #######################################
-# Script name: cross_vdr_installer_2.8.2
+# Script name: cross_vdr_installer_2.8.3
 # Version: Git Repository Master (https://github.com/fiveten59/Vdr_installer)
 # Tested on (K)Ubuntu 26.04 - Debian 13 (Trixie) - Fedora 44 - Raspberry 64 bit
-# EndeavourOS (Arch) - openSUSE_Tumbleweed
+# EndeavourOS (Arch) - openSUSE_Tumbleweed(work in progress)
 # Cross platform version
 # chmod 755 the script
-# then load it simply typing: sudo ./cross_vdr_installer_2.8.2
+# then load it simply typing: sudo ./cross_vdr_installer_2.8.3
 #########################################################################################
 #
 set -e
 #
 if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root (sudo ./cross_vdr_installer_2.8.2)"
+   echo "This script must be run as root (sudo ./cross_vdr_installer_2.8.3)"
    exit 1
    fi
 #
@@ -25,7 +25,7 @@ SRC="/usr/local/src"
 VDRSRC="$SRC/vdr/PLUGINS/src"
 LIBCONF="/usr/local/lib/vdr"
 VDRCONF="/var/lib/vdr"
-VDR="vdr-2.8.2"
+VDR="vdr-2.8.3"
 SHARE="/usr/local/share/vdr/plugins"
 FONTS="/usr/share/fonts"
 CONFIG="${CONFIG:-/boot/config.txt}"
@@ -102,19 +102,19 @@ export NEWT_COLORS='root=,magenta window=white,magenta border=white,magenta shad
 #
 usermod -aG audio,video,input,render "$LOGNAME_USER"
 #
-whiptail --title " VDR 2.8.2 Installer " --msgbox "
+whiptail --title " VDR 2.8.3 Installer " --msgbox "
     A special thanks goes to Klaus Schmidinger & all Vdr Developers
 
-    Script name: cross_vdr_installer_2.8.2
-    Version: 2.8.2
+    Script name: cross_vdr_installer_2.8.3
+    Version: 2.8.3
     Tested on (K)Ubuntu 26.04 - Debian 13 (Trixie) - Fedora 44 - Rpi 64 bit
     Cross platform version
-    chmod 755 the script 'cross_vdr_installer_2.8.2'
-    load it simply typing: sudo ./cross_vdr_installer_2.8.2" 16 95
+    chmod 755 the script 'cross_vdr_installer_2.8.3'
+    load it simply typing: sudo ./cross_vdr_installer_2.8.3" 16 95
 #
 clear
 while true; do
-yourch=$(whiptail --title " Vdr 2.8.2 Installer " \
+yourch=$(whiptail --title " Vdr 2.8.3 Installer " \
 --menu "Use the arrows to navigate and Enter to select:" 20 70 10 \
            "A"  "Checking System" \
            "B"  "Download & Upgrade Local Repository" \
@@ -298,7 +298,7 @@ chown -R "$LOGNAME_USER":"$LOGNAME_USER" "$REPO"; fi
 
 echo "Downloading Vdr and Plugins on local folder"
 sleep 1
-if [ ! -d "vdr-2.8.2" ]; then git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.8.2; fi
+if [ ! -d "vdr-2.8.3" ]; then git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.8.3; fi
 if [ ! -d "vdr-plugin-dvbapi" ]; then git clone https://github.com/manio/vdr-plugin-dvbapi.git; fi
 if [ ! -d "vdr-plugin-iptv" ]; then git clone https://github.com/Zabrimus/vdr-plugin-iptv.git; fi
 if [ ! -d "tvguide" ]; then git clone https://gitlab.com/kamel5/tvguide.git; fi
@@ -329,7 +329,7 @@ cd Vdr_repo
 
 echo "                    Downloading Vdr and Plugins on local repo"
 
-git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.8.2
+git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.8.3
 git clone https://github.com/manio/vdr-plugin-dvbapi.git
 git clone https://github.com/vdr-projects/vdr-plugin-radio.git
 git clone https://github.com/Zabrimus/vdr-plugin-iptv.git
@@ -545,7 +545,7 @@ if [ -f $SRC/driver_dvb/check ]; then echo "Sat firmwares are already installed"
 else
 cp -rf "$REPO/driver_dvb.tar.gz" "$SRC"
 cd $SRC
-tar -zxvf driver_dvb.tar.gz
+tar --no-xattrs -zxvf driver_dvb.tar.gz
 rm -rf driver_dvb.tar.gz
 cd driver_dvb
 cp -rf *.fw /lib/firmware/
@@ -587,9 +587,9 @@ done;;
 D)
 clear
 while true; do
-subch=$(whiptail --title " Install/Remove VDR-2.8.2 " \
+subch=$(whiptail --title " Install/Remove VDR-2.8.3 " \
 --menu "Use the arrows to navigate and Enter to select:" 20 70 10 \
-    "a" "Install VDR-2.8.2" \
+    "a" "Install VDR-2.8.3" \
     "b" "Remove VDR-2.*.*" \
     "S" "Skip" \
         3>&1 1>&2 2>&3) || break
@@ -600,19 +600,19 @@ echo "                    Installing VDR"
 sleep 1
 
 cd "$SRC"
-cp -rf "$REPO/vdr-2.8.2" "$SRC/"
-ln -sf vdr-2.8.2 vdr
+cp -rf "$REPO/vdr-2.8.3" "$SRC/"
+ln -sf vdr-2.8.3 vdr
 #
 echo "Patching VDR"
 sleep 1
 cd vdr
-cp -rf "$REPO"/vdr-patches.2.8.2.tar.gz $SRC/vdr/
-tar zxvf vdr-patches.2.8.2.tar.gz
-rm -rf vdr-patches.2.8.2.tar.gz
+cp -rf "$REPO"/vdr-patches.2.8.3.tar.gz $SRC/vdr/
+tar --no-xattrs -zxvf vdr-patches.2.8.3.tar.gz
+rm -rf vdr-patches.2.8.3.tar.gz
 sleep 1
 #
-echo "                    Patching channellscan"
-patch -p1 < vdr-dvbchan.patch
+echo "                    Patching channell"
+patch -p1 < killtwin.patch
 echo "                    Patching zapcockpit"
 patch -p1 < zapcockpit.patch
 echo "                    Menuorg patch"
@@ -632,7 +632,7 @@ if [[ "$ID" == "debian" || "$ID" == "ubuntu" || "$ID" == "raspbian" || "$ID_LIKE
     apt-mark hold vdr 2>/dev/null
 fi
 sleep 2
-whiptail --msgbox "VDR-2.8.2 installed" 8 45
+whiptail --msgbox "VDR-2.8.3 installed" 8 45
 break
 ;;
 #
@@ -798,7 +798,7 @@ echo "
 For more Vdr plugins pls visit https://github.com/fiveten59/Vdr_installer and download Vdr_plugins_installer
 ============================================================================================================"
 sleep 5
-whiptail --msgbox "VDR-2.8.2 plugins installed" 8 45 ;;
+whiptail --msgbox "VDR-2.8.3 plugins installed" 8 45 ;;
 #
 b)
 clear
@@ -856,7 +856,7 @@ else
 mkdir -p $SRC/traduzioni
 cd $SRC/traduzioni
 cp -rf "$REPO/traduzioni.tar.gz" "$SRC/traduzioni/"
-tar -zxvf traduzioni.tar.gz
+tar --no-xattrs -zxvf traduzioni.tar.gz
 rm -rf traduzioni.tar.gz
 echo "Translations installed"; sleep 1
 fi
@@ -886,7 +886,7 @@ echo "True Type Fonts $Remind4"; sleep 1
 else
 cp -rf "$REPO/vdrsymbols.tar.gz" "$FONTS"
 cd "$FONTS"
-tar -zxvf vdrsymbols.tar.gz
+tar --no-xattrs -zxvf vdrsymbols.tar.gz
 rm -rf vdrsymbols.tar.gz
 dnf -y install curl cabextract xorg-x11-font-utils fontconfig
 rpm -y -i https://downloads.sourceforge.net/project/mscorefonts2/rpms/msttcore-fonts-installer-2.6-1.noarch.rpm
@@ -899,7 +899,7 @@ fi
 else
 cp -rf "$REPO/vdrsymbols.tar.gz" "$FONTS"
 cd "$FONTS"
-tar -zxvf vdrsymbols.tar.gz
+tar --no-xattrs -zxvf vdrsymbols.tar.gz
 rm -rf vdrsymbols.tar.gz
 echo "ttf-mscorefonts-installer msttcorefonts/accepted-mscorefonts-eula select true" | debconf-set-selections
 DEBIAN_FRONTEND=noninteractive apt install -y ttf-mscorefonts-installer
@@ -914,7 +914,7 @@ echo "True Type Fonts $Remind4"; sleep 1
 else
 cp -rf "$REPO/vdrsymbols.tar.gz" "$FONTS/TTF"
 cd "$FONTS/TTF"
-tar -zxvf vdrsymbols.tar.gz
+tar --no-xattrs -zxvf vdrsymbols.tar.gz
 rm -rf vdrsymbols.tar.gz
 sudo -u "${SUDO_USER:-$(logname)}" yay -S --noconfirm ttf-ms-fonts
 fc-cache -fv
@@ -928,7 +928,7 @@ echo "True Type Fonts $Remind4"; sleep 1
 else
 cp -rf "$REPO/vdrsymbols.tar.gz" "$FONTS/TTF"
 cd "$FONTS/TTF"
-tar -zxvf vdrsymbols.tar.gz
+tar --no-xattrs -zxvf vdrsymbols.tar.gz
 rm -rf vdrsymbols.tar.gz
 zypper install fetchmsttfonts cabextract
 fi
@@ -1021,7 +1021,7 @@ cd radio
 rm -rf *
 cp -rf "$VDRSRC/radio/config/mpegstill/"* "$VDRCONF/plugins/radio/"
 cp -rf "$REPO/radio_scripts.tar.gz" "$VDRCONF/plugins/radio/"
-tar -zxvf radio_scripts.tar.gz
+tar --no-xattrs -zxvf radio_scripts.tar.gz
 rm -rf radio_scripts.tar.gz
 echo "Radio configured"; sleep 1
 #
@@ -1032,7 +1032,7 @@ else
 cd $VDRCONF
 cp -rf "$REPO/lcars_pack.tar.gz" "$VDRCONF/themes"
 cd themes
-tar -zxvf lcars_pack.tar.gz
+tar --no-xattrs -zxvf lcars_pack.tar.gz
 rm -rf lcars_pack.tar.gz
 echo "Default Skin installed"
 sleep 1
@@ -1169,42 +1169,12 @@ then echo "Icons $Remind4"
 sleep 1
 else cd $SRC
 cp -rf "$REPO/icone.tar.gz" "$SRC"
-tar -zxvf icone.tar.gz
+tar --no-xattrs -zxvf icone.tar.gz
 rm -rf icone.tar.gz
 cd icone
 chmod 755 *
 echo "Icons installed"; sleep 1
 fi
-#
-echo "                    Setup Vdr icons"
-sleep 1
-rm -rf /usr/share/applications/Vdr.desktop
-cat << EOF > /usr/share/applications/Vdr.desktop
-[Desktop Entry]
-Version=1.0
-Encoding=UTF-8
-Type=Application
-Name=Start Vdr
-Description=Start of Vdr
-Icon=/usr/local/src/icone/vdr.png
-Exec=sudo systemctl start vdr > /dev/null 2>&1
-EOF
-chmod 755 /usr/share/applications/Vdr.desktop
-#
-rm -rf /usr/share/applications/KillVdr.desktop
-cat << EOF > /usr/share/applications/KillVdr.desktop
-[Desktop Entry]
-Version=1.0
-Encoding=UTF-8
-Type=Application
-Name=Kill Vdr
-Description=Kill Vdr
-Icon=/usr/local/src/icone/killvdr.png
-#Exec=sudo sh -c "systemctl stop vdr; killall -9 vlc" > /dev/null 2>&1
-Exec=/usr/local/bin/vdrpoweroff
-EOF
-chmod 755 /usr/share/applications/KillVdr.desktop
-echo "Vdr start & kill icons created"; sleep 1
 #
 echo "                    Create Vdr commands lines"
 sleep 1
@@ -1273,7 +1243,7 @@ cat << EOF > $BIN/vdrpoweroff
 sudo systemctl stop vdr --timeout=2s 2>/dev/null || sudo killall -9 vdr 2>/dev/null
 killall -9 vlc 2>/dev/null
 EOF
-chmod 755 $BIN/vdrpoweroff
+chmod +x $BIN/vdrpoweroff
 echo "Vdr Power off command created"; sleep 1
 
 elif [[ "$ID" == "endeavouros" || "$ID_LIKE" == *"arch"* || "$ID"  == "fedora" ]]; then
@@ -1290,9 +1260,40 @@ sleep 2
 export XDG_RUNTIME_DIR=/run/user/1000
 systemctl --user restart pipewire wireplumber
 EOF
-chmod 755 $BIN/vdrpoweroff
+chmod +x $BIN/vdrpoweroff
 echo "Vdr Power off command created"; sleep 1
 fi
+#
+#
+echo "                    Setup Vdr icons"
+sleep 1
+rm -f /usr/share/applications/Vdr.desktop
+cat << 'EOF' > /usr/share/applications/Vdr.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Start Vdr
+Comment=Start of Vdr
+Icon=/usr/local/src/icone/vdr.png
+Exec=sudo systemctl start vdr
+Terminal=false
+EOF
+chmod 755 /usr/share/applications/Vdr.desktop
+
+#
+rm -f /usr/share/applications/KillVdr.desktop
+cat << 'EOF' > /usr/share/applications/KillVdr.desktop
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Kill Vdr
+Comment=Kill Vdr
+Icon=/usr/local/src/icone/killvdr.png
+Exec=/usr/local/bin/vdrpoweroff
+Terminal=false
+EOF
+chmod 755 /usr/share/applications/KillVdr.desktop
+echo "Vdr start & kill icons created"; sleep 1
 #
 ln -s /usr/local/bin/vdrrun /home/"$LOGNAME_USER"/vdrrun || { echo "Error ..."; true; }
 chmod 777 /home/"$LOGNAME_USER"/vdrrun

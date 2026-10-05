@@ -1232,7 +1232,7 @@ fi
 #
 . /etc/os-release
 
-if [[ "$ID" == "debian" || "$ID" == "ubuntu" ]]; then
+if [[ "$ID" == "debian" || "$ID_LIKE" == *"debian"* || "$ID" == "ubuntu" ]]; then
 
 echo "Create Debian systems command Vdr Power off"; sleep 1
 rm -rf $BIN/vdrpoweroff

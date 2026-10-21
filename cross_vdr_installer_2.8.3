@@ -35,7 +35,7 @@ Remind4="are already installed"
 # String Plugin
 PLUGIN="--lirc -P'dvbapi' -P'softhddevice -a hw:0,0 -v va-api-egl -f' -P'skinflatplus -l /var/lib/vdr/Logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio -l /var/lib/vdr/plugins/radio/radio-Red1080.mpg' -P'tvguide -l /var/lib/vdr/Logos/'"
 
-PLUGINRPI="--lirc -P'dvbapi' -P'softhddevice-drm-gles -a hw:CARD=sndrpihifiberry,0 -d 1920x1080@50' -P'skinflatplus -l /var/lib/vdr/Logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio -l /var/lib/vdr/plugins/radio/radio-Red1080.mpg' -P'tvguide -l /var/lib/vdr/Logos/'"
+PLUGINRPI="--lirc -P'dvbapi' -P'drmdevice -a hw:CARD=sndrpihifiberry,0 -d 1920x1080@50' -P'skinflatplus -l /var/lib/vdr/Logos/' -P'iptv -y /usr/local/bin/yt-dlp' -P'radio -l /var/lib/vdr/plugins/radio/radio-Red1080.mpg' -P'tvguide -l /var/lib/vdr/Logos/'"
 
 # Debian base libs
 DEBIANPACK=(dialog git subversion wget pkg-config build-essential autopoint autoconf automake cmake libtool unzip gawk libudev-dev liblirc-dev evtest ir-keytable at socat)
@@ -65,7 +65,7 @@ DEBIAN_FFMPEG_CONF="--extra-libs=-ldl  --enable-gpl --enable-version3 --enable-n
 DEBIAN_VDRLIB=(libjpeg-dev libcap-dev libtinyxml-dev libglibmm-2.4-dev libfontconfig1-dev libfribidi-dev libfreetype6-dev libncurses-dev libsystemd-dev libncursesw5-dev gettext)
 
 # Fedora Vdr libs
-FEDORA_VDRLIB=(install tinyxml binutils glibmm2.4 g++ fontconfig fribidi gettext ncurses-devel fontconfig-devel libjpeg-turbo-devel libcap-devel)
+FEDORA_VDRLIB=(tinyxml binutils glibmm2.4 g++ fontconfig fribidi gettext ncurses-devel fontconfig-devel libjpeg-turbo-devel libcap-devel)
 
 # Arch/EndeavourOS Vdr libs
 ARCH_VDRLIB=(libjpeg-turbo libcap tinyxml glibmm fontconfig fribidi freetype2 ncurses systemd gettext gcc)
@@ -200,13 +200,19 @@ if [[ "$ID" == "fedora" ]]; then
     apt install -y "${DEBIANPACK[@]}" "${DEBIAN_FFMPEGPACK[@]}" "${DEBIAN_VDRLIB[@]}" "${DEBIAN_PLUGLIB[@]}" "${GM_PACKAGES[@]}"
     sleep 2
     echo "Configuring Open-Source Video Drivers for Intel/VDR..."
-    if apt-cache show intel-media-va-driver >/dev/null 2>&1; then
-        apt install -y intel-media-va-driver
-    elif apt-cache show i965-va-driver >/dev/null 2>&1; then
-        apt install -y i965-va-driver
+
+    if [[ "$(dpkg --print-architecture 2>/dev/null)" =~ ^(amd64|i386)$ ]]; then
+        echo "Configuring Open-Source Video Drivers for Intel/VDR..."
+        if apt-cache show intel-media-va-driver >/dev/null 2>&1; then
+            apt install -y intel-media-va-driver
+        elif apt-cache show i965-va-driver >/dev/null 2>&1; then
+            apt install -y i965-va-driver
+        else
+            echo "Warning: No specific Intel Media driver found in repositories, skipping."
+        fi
     else
-        echo "Warning: No specific Intel Media driver found in repositories, skipping."
-    fi
+        echo "Architecture is not x86 (Intel), skipping Intel Media Drivers."
+    fi 
 
   elif [[ "$ID" == "endeavouros" || "$ID_LIKE" == *"arch"* ]]; then
     echo "Configuring Arch/EndeavourOS..."
@@ -742,20 +748,19 @@ cp -rf $VDRSRC/tvguide/themes/* /var/lib/vdr/themes/
 echo "
                     TvGuide installed"; sleep 1
 
-# fine sezione comune
 #
 if [[ -f /proc/device-tree/model ]] && grep -q "Raspberry Pi" /proc/device-tree/model; then
-echo "Hardware Raspberry Pi installing vdr-plugin-softhddevice-drm-gles..."
+echo "Hardware Raspberry Pi installing vdr-plugin-drmdevice..."
 sleep 1
 cd $VDRSRC
-git clone https://github.com/rellla/vdr-plugin-softhddevice-drm-gles.git
-cp -rf "$VDRSRC/vdr-plugin-softhddevice-drm-gles" "$REPO/vdr-plugin-softhddevice-drm-gles"
-mv -f vdr-plugin-softhddevice-drm-gles softhddevicedrmgles
-cd softhddevicedrmgles && make
+git clone https://github.com/rellla/vdr-plugin-drmdevice.git
+cp -rf "$VDRSRC/vdr-plugin-drmdevice" "$REPO/vdr-plugin-drmdevice"
+mv -f vdr-plugin-drmdevice drmdevice
+cd drmdevice && make
 make install || { echo "Error ..."; exit 1; }
 echo "
 
-                    Vdr-Plugin-Softhddevice-drm-gles installed"; sleep 1
+                    Vdr-Plugin-Drmdevice installed"; sleep 1
 
 echo "
                    Installing Vdr-Plugin-Dvbapi"; sleep 1
@@ -813,7 +818,7 @@ rm -rf dvbapi
 rm -rf tvguide
 cd $LIBCONF  || true
 rm -rf libvdr-softhddevice.* || true
-rm -rf libvdr-softhddevice-drm-gles.* || true
+rm -rf libvdr-drmdevice.* || true
 rm -rf libvdr-skinflatplus.*
 rm -rf skinflatplus
 rm -rf libvdr-iptv.*
@@ -1183,36 +1188,7 @@ sleep 1
 #
 . /etc/os-release
 #
-# Start & stop command Raspberry
-if [ -f /proc/device-tree/model ] && grep -iq "raspberry" /proc/device-tree/model; then
-    echo "Raspberry Pi found ..."; sleep 1
-
-echo "Create Raspberry command line"; sleep 1
-rm -rf $BIN/vdrrun
-cat << EOF > $BIN/vdrrun
-#!/bin/bash
-#File name: vdrrun
-
-sudo chvt 8  && sleep 2 && /usr/local/bin/vdr -u camper -t /dev/tty8 $PLUGINRPI -s $BIN/vdrpoweroff
-
-# -a hw:CARD=sndrpihifiberry,0
-# -a hw:CARD=BossDAC,0'EOF
-EOF
-chmod 755 $BIN/vdrrun
-echo "Raspberry Start Vdr command created"; sleep 1
-#
-echo "Create Raspberry Stop Vdr"; sleep 1
-rm -rf $BIN/vdrpoweroff
-cat << EOF > $BIN/vdrpoweroff
-#!/bin/sh
-# File name: vdrpoweroff
-
-sudo /usr/bin/systemctl stop vdr && killall -9 vdr && killall -9 vlc && chvt 7
-EOF
-chmod 755 $BIN/vdrpoweroff
-echo "Raspberry Stop Vdr command created"; sleep 1
-
-elif [[ "$ID" == "debian" || "$ID_LIKE" == *"debian"* || "$ID" == "ubuntu" || "$ID" == "endeavouros" || "$ID_LIKE" == *"arch"* || "$ID"  == "fedora" ]]; then
+if [[ "$ID" == "debian" || "$ID_LIKE" == *"debian"* || "$ID" == "ubuntu" || "$ID" == "endeavouros" || "$ID_LIKE" == *"arch"* || "$ID"  == "fedora" ]]; then
 
     echo "Fedora/Debian/Arch systems found..."; sleep 1
 
@@ -1263,7 +1239,37 @@ EOF
 chmod +x $BIN/vdrpoweroff
 echo "Vdr Power off command created"; sleep 1
 fi
+# Start & stop command Raspberry
+if [ -f /proc/device-tree/model ] && grep -iq "raspberry" /proc/device-tree/model; then
+    echo "Raspberry Pi found ..."; sleep 1
+
+echo "Create Raspberry command line"; sleep 1
+rm -rf $BIN/vdrrun
+cat << EOF > $BIN/vdrrun
+#!/bin/bash
+#File name: vdrrun
+
+sudo chvt 8 && sleep 2 && /usr/local/bin/vdr -u root -t /dev/tty8 $PLUGINRPI -s $BIN/vdrpoweroff
+
+# -a hw:CARD=sndrpihifiberry,0
+# -a hw:CARD=BossDAC,0
+EOF
+chmod 755 $BIN/vdrrun
+echo "Raspberry Start Vdr command created"; sleep 1
 #
+echo "Create Raspberry Stop Vdr"; sleep 1
+rm -rf $BIN/vdrpoweroff
+cat << EOF > $BIN/vdrpoweroff
+#!/bin/sh
+# File name: vdrpoweroff
+
+sudo /usr/bin/systemctl stop vdr
+killall -9 vlc
+sudo chvt 7
+EOF
+chmod 755 $BIN/vdrpoweroff
+echo "Raspberry Stop Vdr command created"; sleep 1
+fi
 #
 echo "                    Setup Vdr icons"
 sleep 1

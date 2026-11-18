@@ -1,18 +1,18 @@
 #!/bin/bash
 ################################## !!! README !!! #######################################
-# Script name: cross_vdr_installer_2.8.3
+# Script name: cross_vdr_installer_2.8.4
 # Version: Git Repository Master (https://github.com/fiveten59/Vdr_installer)
 # Tested on (K)Ubuntu 26.04 - Debian 13 (Trixie) - Fedora 44 - Raspberry 64 bit
 # EndeavourOS (Arch) - openSUSE_Tumbleweed(work in progress)
 # Cross platform version
 # chmod 755 the script
-# then load it simply typing: sudo ./cross_vdr_installer_2.8.3
+# then load it simply typing: sudo ./cross_vdr_installer_2.8.4
 #########################################################################################
 #
 set -e
 #
 if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root (sudo ./cross_vdr_installer_2.8.3)"
+   echo "This script must be run as root (sudo ./cross_vdr_installer_2.8.4)"
    exit 1
    fi
 #
@@ -25,7 +25,7 @@ SRC="/usr/local/src"
 VDRSRC="$SRC/vdr/PLUGINS/src"
 LIBCONF="/usr/local/lib/vdr"
 VDRCONF="/var/lib/vdr"
-VDR="vdr-2.8.3"
+VDR="vdr-2.8.4"
 SHARE="/usr/local/share/vdr/plugins"
 FONTS="/usr/share/fonts"
 CONFIG="${CONFIG:-/boot/config.txt}"
@@ -102,19 +102,19 @@ export NEWT_COLORS='root=,magenta window=white,magenta border=white,magenta shad
 #
 usermod -aG audio,video,input,render "$LOGNAME_USER"
 #
-whiptail --title " VDR 2.8.3 Installer " --msgbox "
+whiptail --title " VDR 2.8.4 Installer " --msgbox "
     A special thanks goes to Klaus Schmidinger & all Vdr Developers
 
-    Script name: cross_vdr_installer_2.8.3
-    Version: 2.8.3
+    Script name: cross_vdr_installer_2.8.4
+    Version: 2.8.4
     Tested on (K)Ubuntu 26.04 - Debian 13 (Trixie) - Fedora 44 - Rpi 64 bit
     Cross platform version
-    chmod 755 the script 'cross_vdr_installer_2.8.3'
-    load it simply typing: sudo ./cross_vdr_installer_2.8.3" 16 95
+    chmod 755 the script 'cross_vdr_installer_2.8.4'
+    load it simply typing: sudo ./cross_vdr_installer_2.8.4" 16 95
 #
 clear
 while true; do
-yourch=$(whiptail --title " Vdr 2.8.3 Installer " \
+yourch=$(whiptail --title " Vdr 2.8.4 Installer " \
 --menu "Use the arrows to navigate and Enter to select:" 20 70 10 \
            "A"  "Checking System" \
            "B"  "Download & Upgrade Local Repository" \
@@ -123,7 +123,6 @@ yourch=$(whiptail --title " Vdr 2.8.3 Installer " \
            "E"  "Vdr Plugins" \
            "F"  "Install shared parts Desktop/Server systems" \
            "G"  "Desktop Os Final configuration" \
-           "H"  "Server Os - Working in progress" \
            "X"  "Exit" \
         3>&1 1>&2 2>&3) || break
 
@@ -304,7 +303,7 @@ chown -R "$LOGNAME_USER":"$LOGNAME_USER" "$REPO"; fi
 
 echo "Downloading Vdr and Plugins on local folder"
 sleep 1
-if [ ! -d "vdr-2.8.3" ]; then git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.8.3; fi
+if [ ! -d "vdr-2.8.4" ]; then git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.8.4; fi
 if [ ! -d "vdr-plugin-dvbapi" ]; then git clone https://github.com/manio/vdr-plugin-dvbapi.git; fi
 if [ ! -d "vdr-plugin-iptv" ]; then git clone https://github.com/Zabrimus/vdr-plugin-iptv.git; fi
 if [ ! -d "tvguide" ]; then git clone https://gitlab.com/kamel5/tvguide.git; fi
@@ -335,7 +334,7 @@ cd Vdr_repo
 
 echo "                    Downloading Vdr and Plugins on local repo"
 
-git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.8.3
+git clone --branch stable/latest git://git.tvdr.de/vdr.git vdr-2.8.4
 git clone https://github.com/manio/vdr-plugin-dvbapi.git
 git clone https://github.com/vdr-projects/vdr-plugin-radio.git
 git clone https://github.com/Zabrimus/vdr-plugin-iptv.git
@@ -593,9 +592,9 @@ done;;
 D)
 clear
 while true; do
-subch=$(whiptail --title " Install/Remove VDR-2.8.3 " \
+subch=$(whiptail --title " Install/Remove VDR-2.8.4 " \
 --menu "Use the arrows to navigate and Enter to select:" 20 70 10 \
-    "a" "Install VDR-2.8.3" \
+    "a" "Install VDR-2.8.4" \
     "b" "Remove VDR-2.*.*" \
     "S" "Skip" \
         3>&1 1>&2 2>&3) || break
@@ -606,15 +605,15 @@ echo "                    Installing VDR"
 sleep 1
 
 cd "$SRC"
-cp -rf "$REPO/vdr-2.8.3" "$SRC/"
-ln -sf vdr-2.8.3 vdr
+cp -rf "$REPO/vdr-2.8.4" "$SRC/"
+ln -sf vdr-2.8.4 vdr
 #
 echo "Patching VDR"
 sleep 1
 cd vdr
-cp -rf "$REPO"/vdr-patches.2.8.3.tar.gz $SRC/vdr/
-tar --no-xattrs -zxvf vdr-patches.2.8.3.tar.gz
-rm -rf vdr-patches.2.8.3.tar.gz
+cp -rf "$REPO"/vdr-patches.2.8.4.tar.gz $SRC/vdr/
+tar --no-xattrs -zxvf vdr-patches.2.8.4.tar.gz
+rm -rf vdr-patches.2.8.4.tar.gz
 sleep 1
 #
 echo "                    Patching channell"
@@ -638,7 +637,7 @@ if [[ "$ID" == "debian" || "$ID" == "ubuntu" || "$ID" == "raspbian" || "$ID_LIKE
     apt-mark hold vdr 2>/dev/null
 fi
 sleep 2
-whiptail --msgbox "VDR-2.8.3 installed" 8 45
+whiptail --msgbox "VDR-2.8.4 installed" 8 45
 break
 ;;
 #
@@ -695,6 +694,22 @@ subch=$(whiptail --title " Install/Remove VDR-Plugins " \
 case $subch in
 a)
 clear
+#
+echo "
+                    Installing Vdr-Plugin-Iptv"
+sleep 1
+cd $VDRSRC
+cp -rf "$REPO/vdr-plugin-iptv" "$VDRSRC/iptv"
+cd iptv
+if grep -qiE 'ID(_LIKE)?=.*arch' /etc/os-release; then
+    sed -i -E 's/(CXXFLAGS *\??=)/\1 -fpermissive -Wno-deprecated-declarations /g' Makefile
+fi
+sed -i 's/CXXFLAGS *=/CXXFLAGS = -fpermissive -Wno-deprecated-declarations /g' Makefile
+make -j$(nproc)
+make install || { echo "Error ..."; exit 1; }
+echo "
+                    Vdr-Plugin-Iptv installed"; sleep 1
+#
 echo "
                     Installing vdr-plugin-skinflatplus"
 sleep 1
@@ -715,17 +730,6 @@ cp update_weather.conf.dist update_weather.conf
 echo "
 
                     Skinflatplus installed"; sleep 1
-#
-echo "
-                    Installing Vdr-Plugin-Iptv"
-sleep 1
-cd $VDRSRC
-cp -rf "$REPO/vdr-plugin-iptv" "$VDRSRC/iptv"
-cd iptv
-make
-make install || { echo "Error ..."; exit 1; }
-echo "
-                    Vdr-Plugin-Iptv installed"; sleep 1
 #
 echo "
                     Installing Vdr-Plugin-Radio"
@@ -803,7 +807,7 @@ echo "
 For more Vdr plugins pls visit https://github.com/fiveten59/Vdr_installer and download Vdr_plugins_installer
 ============================================================================================================"
 sleep 5
-whiptail --msgbox "VDR-2.8.3 plugins installed" 8 45 ;;
+whiptail --msgbox "VDR-2.8.4 plugins installed" 8 45 ;;
 #
 b)
 clear
